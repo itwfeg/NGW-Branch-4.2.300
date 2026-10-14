@@ -1,0 +1,16 @@
+-- The CXX compiler identification is GNU 4.9.3
+-- The C compiler identification is GNU 4.9.3
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /opt/hb6mxd_combo/toolchain/bin/armv7l-timesys-linux-gnueabihf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /opt/hb6mxd_combo/toolchain/bin/armv7l-timesys-linux-gnueabihf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hobart/Source/Hobart/hobart-build/rfid-control/build
+

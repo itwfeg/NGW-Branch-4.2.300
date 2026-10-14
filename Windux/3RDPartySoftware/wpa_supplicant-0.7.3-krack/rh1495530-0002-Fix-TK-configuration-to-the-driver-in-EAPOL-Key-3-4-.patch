@@ -1,0 +1,69 @@
+From ad00d64e7d8827b3cebd665a0ceb08adabf15e1e Mon Sep 17 00:00:00 2001
+Message-Id: <ad00d64e7d8827b3cebd665a0ceb08adabf15e1e.1507149265.git.dcaratti@redhat.com>
+From: Jouni Malinen <jouni@qca.qualcomm.com>
+Date: Thu, 1 Oct 2015 18:51:04 +0300
+Subject: [PATCH] Fix TK configuration to the driver in EAPOL-Key 3/4 retry
+ case
+
+Commit 7d711541dced759b34313477d5d163e65c5b0131 ('Clear TK part of PTK
+after driver key configuration') started clearing TK from memory
+immediately after having configured it to the driver when processing
+EAPOL-Key message 3/4. While this covered the most common case, it did
+not take into account the possibility of the authenticator having to
+retry EAPOL-Key message 3/4 in case the first EAPOL-Key message 4/4
+response is lost. That case ended up trying to reinstall the same TK to
+the driver, but the key was not available anymore.
+
+Fix the EAPOL-Key message 3/4 retry case by configuring TK to the driver
+only once. There was no need to try to set the same key after each
+EAPOL-Key message 3/4 since TK could not change. If actual PTK rekeying
+is used, the new TK will be configured once when processing the new
+EAPOL-Key message 3/4 for the first time.
+
+Signed-off-by: Jouni Malinen <jouni@qca.qualcomm.com>
+---
+ src/rsn_supp/wpa.c   | 8 ++++++++
+ src/rsn_supp/wpa_i.h | 1 +
+ 2 files changed, 9 insertions(+)
+
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -427,6 +427,7 @@ static void wpa_supplicant_process_1_of_
+ 	os_memcpy(ptk->u.auth.tx_mic_key, ptk->u.auth.rx_mic_key, 8);
+ 	os_memcpy(ptk->u.auth.rx_mic_key, buf, 8);
+ 	sm->tptk_set = 1;
++	sm->tk_to_set = 1;
+ 
+ 	if (wpa_supplicant_send_2_of_4(sm, sm->bssid, key, ver, sm->snonce,
+ 				       sm->assoc_wpa_ie, sm->assoc_wpa_ie_len,
+@@ -507,6 +508,12 @@ static int wpa_supplicant_install_ptk(st
+ 	const u8 *key_rsc;
+ 	u8 null_rsc[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+ 
++	if (!sm->tk_to_set) {
++		wpa_printf(MSG_DEBUG,
++			   "WPA: Do not re-install same PTK to the driver");
++		return 0;
++	}
++
+ 	wpa_printf(MSG_DEBUG, "WPA: Installing PTK to the driver.");
+ 
+ 	switch (sm->pairwise_cipher) {
+@@ -548,6 +555,7 @@ static int wpa_supplicant_install_ptk(st
+ 	/* TK is not needed anymore in supplicant */
+ 	os_memset(sm->ptk.tk1, 0, sizeof(sm->ptk.tk1));
+ 	os_memset(sm->ptk.u.tk2, 0, sizeof(sm->ptk.u.tk2));
++	sm->tk_to_set = 0;
+ 
+ 	if (sm->wpa_ptk_rekey) {
+ 		eloop_cancel_timeout(wpa_sm_rekey_ptk, sm, NULL);
+--- a/src/rsn_supp/wpa_i.h
++++ b/src/rsn_supp/wpa_i.h
+@@ -28,6 +28,7 @@ struct wpa_sm {
+ 	size_t pmk_len;
+ 	struct wpa_ptk ptk, tptk;
+ 	int ptk_set, tptk_set;
++	unsigned int tk_to_set:1;
+ 	u8 snonce[WPA_NONCE_LEN];
+ 	u8 anonce[WPA_NONCE_LEN]; /* ANonce from the last 1/4 msg */
+ 	int renew_snonce;

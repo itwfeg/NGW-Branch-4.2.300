@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{81CDF3FB-98B4-4763-9D6A-F65793491486}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ScaleApp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>ScaleApp_$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>ScaleApp_$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_OS;_WIN32_WINNT= 0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\MetrologicallySignificant;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Wtsapi32.lib;Userenv.lib;SensApi.lib;IphlpApi.lib;ws2_32.lib;version.lib;..\..\..\3rdPartySoftware\fbwf\fbwflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>ScaleApp.manifest</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WIN32_OS;_WIN32_WINNT= 0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\MetrologicallySignificant;..\..\source\HFC;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Wtsapi32.lib;Userenv.lib;SensApi.lib;IphlpApi.lib;ws2_32.lib;version.lib;..\..\..\3rdPartySoftware\fbwf\fbwflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;EVOL_NDEBUG;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\HFC;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Wtsapi32.lib;Userenv.lib;SensApi.lib;IphlpApi.lib;ws2_32.lib;version.lib;..\..\..\3rdPartySoftware\fbwf\fbwflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>ScaleApp.manifest</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;EVOL_NDEBUG;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\MetrologicallySignificant;..\..\source\HFC;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Wtsapi32.lib;Userenv.lib;SensApi.lib;IphlpApi.lib;ws2_32.lib;version.lib;..\..\..\3rdPartySoftware\fbwf\fbwflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ScaleApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\3rdPartySoftware\zlib\Ziplib.vcxproj">
+      <Project>{745dec58-ebb3-47a9-a9b8-4c6627c01bf8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HobartCustomerHook\HobartCustomerHook.vcxproj">
+      <Project>{f4fbc53e-d407-4400-a431-d4e60b02217f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\comm\Comm.vcxproj">
+      <Project>{7ef4d90b-c0ec-4b56-a8c6-a54205da6b1a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\core\Core.vcxproj">
+      <Project>{2a1914d2-fcce-4fad-8253-dd5f28023be5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\db\DB.vcxproj">
+      <Project>{081593c3-6134-45a3-a1ea-07292a009dba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EvolutionRTC\EvolutionRTC.vcxproj">
+      <Project>{6be8b728-a66c-4711-9f8c-21576c8f6d5d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\EvolutionRTC\MessageCenter\MessageCenter.vcxproj">
+      <Project>{30e67d74-813f-4705-858f-ef887d2f5e68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\HFC\HFC.vcxproj">
+      <Project>{b37d8eb8-4b06-44f3-8906-e73280225d89}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MetrologicallySignificant\MetrologicallySignificant.vcxproj">
+      <Project>{4d76d4ef-23f0-4b10-ad2e-b9904aa13935}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\util\Util.vcxproj">
+      <Project>{d99b5e5a-7a01-44aa-851e-c582b50944e8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\util\UtilWin.vcxproj">
+      <Project>{6cb1f58a-543f-4b18-94ac-08890a355c5e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Application.vcxproj">
+      <Project>{0ae8de4f-4d42-45c2-8422-1609df6ffde4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

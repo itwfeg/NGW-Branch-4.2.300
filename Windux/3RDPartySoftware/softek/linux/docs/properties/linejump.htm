@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">LineJump</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When the OCX scans an image for a barcode string it does not scan every line of 
+			the image. The LineJump setting controls how many scan lines are missed between 
+			checks for a barcode. A LineJump value of 1 means that every scan line in the 
+			image will be checked. A lower value for LineJump will impact the performance 
+			of the OCX but may be useful for poor quality images.
+		</P>
+		<P>Default value = 9
+		</P>
+		<P>void STSetParameter(hBarcode, ST_LINE_JUMP,&nbsp;uint32 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_LINE_JUMP,&nbsp;uint32 *value) ;</P>
+		<P>e.g</P>
+		<P>// Scan every line of an image<BR>
+			#include "barcode.h"<BR>
+			uint32 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_LINE_JUMP,&nbsp;&amp;value) ;</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{081593C3-6134-45A3-A1EA-07292A009DBA}</ProjectGuid>
+    <RootNamespace>DB</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db;..\..\source\util\Inc;..\..\source\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\MetrologicallySignificant;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\db\util;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\db\sqlite\adapter;..\..\source\HFC;..\..\source\app;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DB_EXPORTS;USE_ACCOUNTANT;CBDB_NDEBUG;SQLITE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db;..\..\source\util\Inc;..\..\source\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\MetrologicallySignificant;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\db\util;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\db\sqlite\adapter;..\..\source\HFC;..\..\source\app;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;_DEBUG;_WINDOWS;_USRDLL;DB_EXPORTS;USE_ACCOUNTANT;CBDB_NDEBUG;SQLITE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db;..\..\source\util\Inc;..\..\source\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\MetrologicallySignificant;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\db\util;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\db\sqlite\adapter;..\..\source\HFC;..\..\source\app;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;NDEBUG;EVOL_NDEBUG;_WINDOWS;_USRDLL;DB_EXPORTS;CBDB_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db;..\..\source\util\Inc;..\..\source\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\MetrologicallySignificant;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\db\util;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\db\sqlite\adapter;..\..\source\HFC;..\..\source\app;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;NDEBUG;EVOL_NDEBUG;_WINDOWS;_USRDLL;DB_EXPORTS;CBDB_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="DBBarcodeScanner.h" />
+    <ClInclude Include="DBBarcodeScannersRM.h" />
+    <ClInclude Include="DBDept.h" />
+    <ClInclude Include="DBDeptsRM.h" />
+    <ClInclude Include="dbd\dbbarcodescanneri.h" />
+    <ClInclude Include="dbd\dbbarcodescannersrmi.h" />
+    <ClInclude Include="dbd\dbdepti.h" />
+    <ClInclude Include="dbd\dbdeptsrmi.h" />
+    <ClInclude Include="dbd\dbexpirationlabeli.h" />
+    <ClInclude Include="dbd\dbproducttextcfgi.h" />
+    <ClInclude Include="dbd\dbproducttextcfgsrmi.h" />
+    <ClInclude Include="dbd\dbproducttexticfg.h" />
+    <ClInclude Include="DBProductTextCfg.h" />
+    <ClInclude Include="DBProductTextCfgsRM.h" />
+    <ClInclude Include="sqlite\adapter\sqlitebarcodescanner.h" />
+    <ClInclude Include="sqlite\adapter\sqlitebarcodescannersrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitedept.h" />
+    <ClInclude Include="sqlite\adapter\sqlitedeptsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproducttextcfg.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproducttextcfgsrm.h" />
+    <ClInclude Include="util\accountant\accountant.h" />
+    <ClInclude Include="util\accountant\accountanti.h" />
+    <ClInclude Include="util\checksums\checksum.h" />
+    <ClInclude Include="util\cloptions\cloptions.h" />
+    <ClInclude Include="util\time\date.h" />
+    <ClInclude Include="util\time\datetime.h" />
+    <ClInclude Include="dbaccessentity.h" />
+    <ClInclude Include="dbbatch.h" />
+    <ClInclude Include="dbbatchesrm.h" />
+    <ClInclude Include="dbd\dbbatchesrmi.h" />
+    <ClInclude Include="dbd\dbbatchi.h" />
+    <ClInclude Include="dbcategoriesrm.h" />
+    <ClInclude Include="dbd\dbcategoriesrmi.h" />
+    <ClInclude Include="dbcategory.h" />
+    <ClInclude Include="dbcategorydetailedstatistic.h" />
+    <ClInclude Include="dbd\dbcategorydetailedstatistici.h" />
+    <ClInclude Include="dbcategorydetailedstatisticsrm.h" />
+    <ClInclude Include="dbd\dbcategorydetailedstatisticsrmi.h" />
+    <ClInclude Include="dbd\dbcategoryi.h" />
+    <ClInclude Include="dbcategorystatistic.h" />
+    <ClInclude Include="dbd\dbcategorystatistici.h" />
+    <ClInclude Include="dbcategorystatisticsrm.h" />
+    <ClInclude Include="dbd\dbcategorystatisticsrmi.h" />
+    <ClInclude Include="dbclass.h" />
+    <ClInclude Include="dbclassesrm.h" />
+    <ClInclude Include="dbd\dbclassesrmi.h" />
+    <ClInclude Include="dbd\dbclassi.h" />
+    <ClInclude Include="dbclasstotal.h" />
+    <ClInclude Include="dbd\dbclasstotali.h" />
+    <ClInclude Include="dbclasstotalsrm.h" />
+    <ClInclude Include="dbd\dbclasstotalsrmi.h" />
+    <ClInclude Include="dbconfiguration.h" />
+    <ClInclude Include="dbd\dbconfigurationi.h" />
+    <ClInclude Include="dbconfigurationsrm.h" />
+    <ClInclude Include="dbd\dbconfigurationsrmi.h" />
+    <ClInclude Include="dbcoolcategoriesrm.h" />
+    <ClInclude Include="dbd\dbcoolcategoriesrmi.h" />
+    <ClInclude Include="dbcoolcategory.h" />
+    <ClInclude Include="dbcoolcategorycountriesrm.h" />
+    <ClInclude Include="dbd\dbcoolcategorycountriesrmi.h" />
+    <ClInclude Include="dbcoolcategorycountry.h" />
+    <ClInclude Include="dbd\dbcoolcategorycountryi.h" />
+    <ClInclude Include="dbd\dbcoolcategoryi.h" />
+    <ClInclude Include="dbcoolcategorypretext.h" />
+    <ClInclude Include="dbd\dbcoolcategorypretexti.h" />
+    <ClInclude Include="dbcoolcategorypretextsrm.h" />
+    <ClInclude Include="dbd\dbcoolcategorypretextsrmi.h" />
+    <ClInclude Include="dbcoolcategoryproductionstep.h" />
+    <ClInclude Include="dbd\dbcoolcategoryproductionstepi.h" />
+    <ClInclude Include="dbcoolcategoryproductionstepsrm.h" />
+    <ClInclude Include="dbd\dbcoolcategoryproductionstepsrmi.h" />
+    <ClInclude Include="dbcoolcountriesrm.h" />
+    <ClInclude Include="dbd\dbcoolcountriesrmi.h" />
+    <ClInclude Include="dbcoolcountry.h" />
+    <ClInclude Include="dbd\dbcoolcountryi.h" />
+    <ClInclude Include="dbcoollist.h" />
+    <ClInclude Include="dbd\dbcoollisti.h" />
+    <ClInclude Include="dbcoollistsrm.h" />
+    <ClInclude Include="dbd\dbcoollistsrmi.h" />
+    <ClInclude Include="dbcoollisttext.h" />
+    <ClInclude Include="dbd\dbcoollisttexti.h" />
+    <ClInclude Include="dbcoollisttextsrm.h" />
+    <ClInclude Include="dbd\dbcoollisttextsrmi.h" />
+    <ClInclude Include="dbcoolpretext.h" />
+    <ClInclude Include="dbd\dbcoolpretexti.h" />
+    <ClInclude Include="dbcoolpretextsrm.h" />
+    <ClInclude Include="dbd\dbcoolpretextsrmi.h" />
+    <ClInclude Include="dbcoolproductionstep.h" />
+    <ClInclude Include="dbd\dbcoolproductionstepi.h" />
+    <ClInclude Include="dbcoolproductionstepsrm.h" />
+    <ClInclude Include="dbd\dbcoolproductionstepsrmi.h" />
+    <ClInclude Include="dbcooltext.h" />
+    <ClInclude Include="dbd\dbcooltexti.h" />
+    <ClInclude Include="dbcooltextsrm.h" />
+    <ClInclude Include="dbd\dbcooltextsrmi.h" />
+    <ClInclude Include="dbcooltotal.h" />
+    <ClInclude Include="dbd\dbcooltotali.h" />
+    <ClInclude Include="dbcooltotalsrm.h" />
+    <ClInclude Include="dbd\dbcooltotalsrmi.h" />
+    <ClInclude Include="dbcuttingtest.h" />
+    <ClInclude Include="dbd\dbcuttingtesti.h" />
+    <ClInclude Include="dbcuttingtestsrm.h" />
+    <ClInclude Include="dbd\dbcuttingtestsrmi.h" />
+    <ClInclude Include="dbm\dbdatabasei.h" />
+    <ClInclude Include="dbdevice.h" />
+    <ClInclude Include="dbd\dbdevicei.h" />
+    <ClInclude Include="dbdevicesrm.h" />
+    <ClInclude Include="dbd\dbdevicesrmi.h" />
+    <ClInclude Include="dbemailalert.h" />
+    <ClInclude Include="dbd\dbemailalerti.h" />
+    <ClInclude Include="dbemailalertsrm.h" />
+    <ClInclude Include="dbd\dbemailalertsrmi.h" />
+    <ClInclude Include="dbexception.h" />
+    <ClInclude Include="dbexpirationlabel.h" />
+    <ClInclude Include="dbexpirationlabelsrm.h" />
+    <ClInclude Include="dbd\dbexpirationlabelsrmi.h" />
+    <ClInclude Include="dbm\dbfactory.h" />
+    <ClInclude Include="dbm\dbfactoryi.h" />
+    <ClInclude Include="dbflashfile.h" />
+    <ClInclude Include="dbd\dbflashfilei.h" />
+    <ClInclude Include="dbflashfilesrm.h" />
+    <ClInclude Include="dbd\dbflashfilesrmi.h" />
+    <ClInclude Include="dbhourlytotal.h" />
+    <ClInclude Include="dbd\dbhourlytotali.h" />
+    <ClInclude Include="dbhourlytotalsrm.h" />
+    <ClInclude Include="dbd\dbhourlytotalsrmi.h" />
+    <ClInclude Include="dbd\dbignorewordi.h" />
+    <ClInclude Include="dbd\dbignorewordsrmi.h" />
+    <ClInclude Include="dbknifetimehistory.h" />
+    <ClInclude Include="dbd\dbknifetimehistoryi.h" />
+    <ClInclude Include="dbknifetimehistoryrm.h" />
+    <ClInclude Include="dbd\dbknifetimehistoryrmi.h" />
+    <ClInclude Include="dblabel.h" />
+    <ClInclude Include="dbd\dblabeli.h" />
+    <ClInclude Include="dblabelsrm.h" />
+    <ClInclude Include="dbd\dblabelsrmi.h" />
+    <ClInclude Include="dblabeltext.h" />
+    <ClInclude Include="dbd\dblabeltexti.h" />
+    <ClInclude Include="dblabeltextsrm.h" />
+    <ClInclude Include="dbd\dblabeltextsrmi.h" />
+    <ClInclude Include="dbmanager.h" />
+    <ClInclude Include="dbm\dbmanageri.h" />
+    <ClInclude Include="dbnetworkerror.h" />
+    <ClInclude Include="dbd\dbnetworkerrori.h" />
+    <ClInclude Include="dbnetworkerrorsrm.h" />
+    <ClInclude Include="dbd\dbnetworkerrorsrmi.h" />
+    <ClInclude Include="dbnutrition.h" />
+    <ClInclude Include="dbd\dbnutritioni.h" />
+    <ClInclude Include="dbnutritionsrm.h" />
+    <ClInclude Include="dbd\dbnutritionsrmi.h" />
+    <ClInclude Include="dboperator.h" />
+    <ClInclude Include="dboperatorchange.h" />
+    <ClInclude Include="dbd\dboperatorchangei.h" />
+    <ClInclude Include="dboperatorchangesrm.h" />
+    <ClInclude Include="dbd\dboperatorchangesrmi.h" />
+    <ClInclude Include="dbd\dboperatori.h" />
+    <ClInclude Include="dboperatornote.h" />
+    <ClInclude Include="dbd\dboperatornotei.h" />
+    <ClInclude Include="dboperatornotesrm.h" />
+    <ClInclude Include="dbd\dboperatornotesrmi.h" />
+    <ClInclude Include="dboperatorsrm.h" />
+    <ClInclude Include="dbd\dboperatorsrmi.h" />
+    <ClInclude Include="dboperatortotal.h" />
+    <ClInclude Include="dbd\dboperatortotali.h" />
+    <ClInclude Include="dboperatortotalsrm.h" />
+    <ClInclude Include="dbd\dboperatortotalsrmi.h" />
+    <ClInclude Include="dbpresentationmethod.h" />
+    <ClInclude Include="dbpresentationmethoddetailedstatistic.h" />
+    <ClInclude Include="dbd\dbpresentationmethoddetailedstatistici.h" />
+    <ClInclude Include="dbpresentationmethoddetailedstatisticsrm.h" />
+    <ClInclude Include="dbd\dbpresentationmethoddetailedstatisticsrmi.h" />
+    <ClInclude Include="dbd\dbpresentationmethodi.h" />
+    <ClInclude Include="dbpresentationmethodsrm.h" />
+    <ClInclude Include="dbd\dbpresentationmethodsrmi.h" />
+    <ClInclude Include="dbpresentationmethodstatistic.h" />
+    <ClInclude Include="dbd\dbpresentationmethodstatistici.h" />
+    <ClInclude Include="dbpresentationmethodstatisticsrm.h" />
+    <ClInclude Include="dbd\dbpresentationmethodstatisticsrmi.h" />
+    <ClInclude Include="dbproduct.h" />
+    <ClInclude Include="dbproductdefault.h" />
+    <ClInclude Include="dbd\dbproductdefaulti.h" />
+    <ClInclude Include="dbproductdefaultsrm.h" />
+    <ClInclude Include="dbd\dbproductdefaultsrmi.h" />
+    <ClInclude Include="dbproductdetailedstatistic.h" />
+    <ClInclude Include="dbd\dbproductdetailedstatistici.h" />
+    <ClInclude Include="dbproductdetailedstatisticsrm.h" />
+    <ClInclude Include="dbd\dbproductdetailedstatisticsrmi.h" />
+    <ClInclude Include="dbd\dbproducti.h" />
+    <ClInclude Include="dbd\dbproductsequencei.h" />
+    <ClInclude Include="dbd\dbproductsequencesrmi.h" />
+    <ClInclude Include="dbproductsrm.h" />
+    <ClInclude Include="dbd\dbproductsrmi.h" />
+    <ClInclude Include="dbproductstatistic.h" />
+    <ClInclude Include="dbd\dbproductstatistici.h" />
+    <ClInclude Include="dbproductstatisticsrm.h" />
+    <ClInclude Include="dbd\dbproductstatisticsrmi.h" />
+    <ClInclude Include="DBProductText.h" />
+    <ClInclude Include="dbd\dbproducttexti.h" />
+    <ClInclude Include="DBProductTextsRM.h" />
+    <ClInclude Include="dbd\dbproducttextsrmi.h" />
+    <ClInclude Include="dbproducttotal.h" />
+    <ClInclude Include="dbd\dbproducttotali.h" />
+    <ClInclude Include="dbproducttotalsrm.h" />
+    <ClInclude Include="dbd\dbproducttotalsrmi.h" />
+    <ClInclude Include="dbquery.h" />
+    <ClInclude Include="dbd\dbqueryi.h" />
+    <ClInclude Include="DBRecall.h" />
+    <ClInclude Include="dbd\dbrecalli.h" />
+    <ClInclude Include="DBRecallsRM.h" />
+    <ClInclude Include="dbd\dbrecallsrmi.h" />
+    <ClInclude Include="dbrecordmanager.h" />
+    <ClInclude Include="dbromlabel.h" />
+    <ClInclude Include="dbd\dbromlabeli.h" />
+    <ClInclude Include="dbromlabelsrm.h" />
+    <ClInclude Include="dbd\dbromlabelsrmi.h" />
+    <ClInclude Include="dbscale.h" />
+    <ClInclude Include="dbd\dbscalei.h" />
+    <ClInclude Include="dbscalesrm.h" />
+    <ClInclude Include="dbd\dbscalesrmi.h" />
+    <ClInclude Include="dbsoftkey.h" />
+    <ClInclude Include="dbsoftkeyfeature.h" />
+    <ClInclude Include="dbd\dbsoftkeyfeaturei.h" />
+    <ClInclude Include="dbsoftkeyfeaturesrm.h" />
+    <ClInclude Include="dbd\dbsoftkeyfeaturesrmi.h" />
+    <ClInclude Include="dbsoftkeygroup.h" />
+    <ClInclude Include="dbd\dbsoftkeygroupi.h" />
+    <ClInclude Include="dbsoftkeygroupsrm.h" />
+    <ClInclude Include="dbd\dbsoftkeygroupsrmi.h" />
+    <ClInclude Include="dbd\dbsoftkeyi.h" />
+    <ClInclude Include="dbsoftkeysrm.h" />
+    <ClInclude Include="dbd\dbsoftkeysrmi.h" />
+    <ClInclude Include="dbsoftkeystyle.h" />
+    <ClInclude Include="dbd\dbsoftkeystylei.h" />
+    <ClInclude Include="dbsoftkeystylesrm.h" />
+    <ClInclude Include="dbd\dbsoftkeystylesrmi.h" />
+    <ClInclude Include="dbspecialprogram.h" />
+    <ClInclude Include="dbd\dbspecialprogrami.h" />
+    <ClInclude Include="dbspecialprogramsrm.h" />
+    <ClInclude Include="dbd\dbspecialprogramsrmi.h" />
+    <ClInclude Include="dbstatus.h" />
+    <ClInclude Include="dbd\dbstatusi.h" />
+    <ClInclude Include="dbstatusrm.h" />
+    <ClInclude Include="dbd\dbstatusrmi.h" />
+    <ClInclude Include="dbd\dbstatusstorage.h" />
+    <ClInclude Include="dbd\dbstatusstoragerm.h" />
+    <ClInclude Include="dbstreaminggraphic.h" />
+    <ClInclude Include="dbd\dbstreaminggraphici.h" />
+    <ClInclude Include="dbstreaminggraphicsrm.h" />
+    <ClInclude Include="dbd\dbstreaminggraphicsrmi.h" />
+    <ClInclude Include="dbsynchronizationchange.h" />
+    <ClInclude Include="dbd\dbsynchronizationchangei.h" />
+    <ClInclude Include="dbsynchronizationchangesrm.h" />
+    <ClInclude Include="dbd\dbsynchronizationchangesrmi.h" />
+    <ClInclude Include="util\time\dbtime.h" />
+    <ClInclude Include="dbtransaction.h" />
+    <ClInclude Include="dbd\dbtransactioni.h" />
+    <ClInclude Include="dbtransactionsrm.h" />
+    <ClInclude Include="dbd\dbtransactionsrmi.h" />
+    <ClInclude Include="dbtransactiontype.h" />
+    <ClInclude Include="dbd\dbtransactiontypei.h" />
+    <ClInclude Include="dbtransactiontypesrm.h" />
+    <ClInclude Include="dbd\dbtransactiontypesrmi.h" />
+    <ClInclude Include="dbwrappererrorhistory.h" />
+    <ClInclude Include="dbd\dbwrappererrorhistoryi.h" />
+    <ClInclude Include="dbwrappererrorhistoryrm.h" />
+    <ClInclude Include="dbd\dbwrappererrorhistoryrmi.h" />
+    <ClInclude Include="util\debug\debug.h" />
+    <ClInclude Include="util\filesys\directory.h" />
+    <ClInclude Include="driver2.h" />
+    <ClInclude Include="edb.h" />
+    <ClInclude Include="util\e_exception\exception.h" />
+    <ClInclude Include="util\filesys\file.h" />
+    <ClInclude Include="util\filesys\filename.h" />
+    <ClInclude Include="util\thread\lock.h" />
+    <ClInclude Include="util\thread\mutex.h" />
+    <ClInclude Include="util\nibble\nibble.h" />
+    <ClInclude Include="util\platform\platform.h" />
+    <ClInclude Include="util\properties\properties.h" />
+    <ClInclude Include="util\properties\propertiestree.h" />
+    <ClInclude Include="util\ptr\ptr.h" />
+    <ClInclude Include="util\containers\Registry.h" />
+    <ClInclude Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3.h" />
+    <ClInclude Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3ext.h" />
+    <ClInclude Include="sqlite\adapter\sqliteautoincrementsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitebatch.h" />
+    <ClInclude Include="sqlite\adapter\sqlitebatchesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategoriesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategory.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategorydetailedstatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategorydetailedstatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategorystatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecategorystatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteclass.h" />
+    <ClInclude Include="sqlite\adapter\sqliteclassesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteconfiguration.h" />
+    <ClInclude Include="sqlite\adapter\sqliteconfigurationsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoriesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategory.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorycountriesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorycountry.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorypretext.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorypretextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoryproductionstep.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoryproductionstepsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcountriesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolcountry.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoollist.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoollistsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoollisttext.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoollisttextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolpretext.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolpretextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolproductionstep.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecoolproductionstepsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecooltext.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecooltextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecuttingtest.h" />
+    <ClInclude Include="sqlite\adapter\sqlitecuttingtestsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitedatabase.h" />
+    <ClInclude Include="sqlite\adapter\sqlitedevice.h" />
+    <ClInclude Include="sqlite\adapter\sqlitedevicesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteemailalert.h" />
+    <ClInclude Include="sqlite\adapter\sqliteemailalertsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteexpirationlabel.h" />
+    <ClInclude Include="sqlite\adapter\sqliteexpirationlabelsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitefactory.h" />
+    <ClInclude Include="sqlite\adapter\sqlitefield.h" />
+    <ClInclude Include="sqlite\adapter\sqliteflashfile.h" />
+    <ClInclude Include="sqlite\adapter\sqliteflashfilesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteignoreword.h" />
+    <ClInclude Include="sqlite\adapter\sqliteignorewordsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteknifetimehistory.h" />
+    <ClInclude Include="sqlite\adapter\sqliteknifetimehistoryrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitelabel.h" />
+    <ClInclude Include="sqlite\adapter\sqlitelabelsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitelabeltext.h" />
+    <ClInclude Include="sqlite\adapter\sqlitelabeltextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitenetworkerror.h" />
+    <ClInclude Include="sqlite\adapter\sqlitenetworkerrorsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitenutrition.h" />
+    <ClInclude Include="sqlite\adapter\sqlitenutritionsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteoperator.h" />
+    <ClInclude Include="sqlite\adapter\sqliteoperatornote.h" />
+    <ClInclude Include="sqlite\adapter\sqliteoperatornotesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteoperatorsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethod.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethoddetailedstatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethoddetailedstatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodstatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodstatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproduct.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductdefault.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductdefaultsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductdetailedstatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductdetailedstatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductproductsequence.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductproductsequencequery.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductsequence.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductsequencesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductstatistic.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproductstatisticsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproducttext.h" />
+    <ClInclude Include="sqlite\adapter\sqliteproducttextsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitequery.h" />
+    <ClInclude Include="sqlite\adapter\sqliterecall.h" />
+    <ClInclude Include="sqlite\adapter\sqliterecallsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliterecord.h" />
+    <ClInclude Include="sqlite\adapter\sqliteRecordKey.h" />
+    <ClInclude Include="sqlite\adapter\sqliterecordmanager.h" />
+    <ClInclude Include="sqlite\adapter\sqliteromlabel.h" />
+    <ClInclude Include="sqlite\adapter\sqliteromlabelsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitescale.h" />
+    <ClInclude Include="sqlite\adapter\sqlitescalesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkey.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeyfeature.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeyfeaturesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeygroup.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeygroupsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeysrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeystyle.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeystylesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitespecialprogram.h" />
+    <ClInclude Include="sqlite\adapter\sqlitespecialprogramsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitestreaminggraphic.h" />
+    <ClInclude Include="sqlite\adapter\sqlitestreaminggraphicsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesynchronizationchange.h" />
+    <ClInclude Include="sqlite\adapter\sqlitesynchronizationchangesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitetransaction.h" />
+    <ClInclude Include="sqlite\adapter\sqlitetransactionsrm.h" />
+    <ClInclude Include="sqlite\adapter\sqlitetransactiontype.h" />
+    <ClInclude Include="sqlite\adapter\sqlitetransactiontypesrm.h" />
+    <ClInclude Include="sqlite\adapter\sqliteview.h" />
+    <ClInclude Include="sqlite\adapter\sqlitewrappererrorhistory.h" />
+    <ClInclude Include="sqlite\adapter\sqlitewrappererrorhistoryrm.h" />
+    <ClInclude Include="std\access\stdfile.h" />
+    <ClInclude Include="std\access\stdindex.h" />
+    <ClInclude Include="std\access\stdrecord.h" />
+    <ClInclude Include="util\thread\thread.h" />
+    <ClInclude Include="util\debug\trace.h" />
+    <ClInclude Include="util\types.h" />
+    <ClInclude Include="util\e_string\utilstring.h" />
+    <ClInclude Include="util\platform\win32.h" />
+    <ClInclude Include="util\thread\win32threads.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dbd\dbbarcodescanner.cpp" />
+    <ClCompile Include="dbd\dbbarcodescannersrm.cpp" />
+    <ClCompile Include="dbd\dbdept.cpp" />
+    <ClCompile Include="dbd\dbdeptsrm.cpp" />
+    <ClCompile Include="dbd\dbproducttextcfg.cpp" />
+    <ClCompile Include="dbd\dbproducttextcfgsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitebarcodescanner.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitebarcodescannersrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitedept.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitedeptsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproducttextcfg.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproducttextcfgsrm.cpp" />
+    <ClCompile Include="util\accountant\accountant.cpp" />
+    <ClCompile Include="util\checksums\checksum.cpp" />
+    <ClCompile Include="util\cloptions\cloptions.cpp" />
+    <ClCompile Include="util\time\date.cpp" />
+    <ClCompile Include="util\time\datetime.cpp" />
+    <ClCompile Include="dbd\dbbatch.cpp" />
+    <ClCompile Include="dbd\dbbatchesrm.cpp" />
+    <ClCompile Include="dbd\dbcategoriesrm.cpp" />
+    <ClCompile Include="dbd\dbcategory.cpp" />
+    <ClCompile Include="dbd\dbcategorydetailedstatistic.cpp" />
+    <ClCompile Include="dbd\dbcategorydetailedstatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbcategorystatistic.cpp" />
+    <ClCompile Include="dbd\dbcategorystatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbclass.cpp" />
+    <ClCompile Include="dbd\dbclassesrm.cpp" />
+    <ClCompile Include="dbd\dbconfiguration.cpp" />
+    <ClCompile Include="dbd\dbconfigurationsrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcategoriesrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcategory.cpp" />
+    <ClCompile Include="dbd\dbcoolcategorycountriesrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcategorycountry.cpp" />
+    <ClCompile Include="dbd\dbcoolcategorypretext.cpp" />
+    <ClCompile Include="dbd\dbcoolcategorypretextsrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcategoryproductionstep.cpp" />
+    <ClCompile Include="dbd\dbcoolcategoryproductionstepsrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcountriesrm.cpp" />
+    <ClCompile Include="dbd\dbcoolcountry.cpp" />
+    <ClCompile Include="dbd\dbcoollist.cpp" />
+    <ClCompile Include="dbd\dbcoollistsrm.cpp" />
+    <ClCompile Include="dbd\dbcoollisttext.cpp" />
+    <ClCompile Include="dbd\dbcoollisttextsrm.cpp" />
+    <ClCompile Include="dbd\dbcoolpretext.cpp" />
+    <ClCompile Include="dbd\dbcoolpretextsrm.cpp" />
+    <ClCompile Include="dbd\dbcoolproductionstep.cpp" />
+    <ClCompile Include="dbd\dbcoolproductionstepsrm.cpp" />
+    <ClCompile Include="dbd\dbcooltext.cpp" />
+    <ClCompile Include="dbd\dbcooltextsrm.cpp" />
+    <ClCompile Include="dbd\dbcuttingtest.cpp" />
+    <ClCompile Include="dbd\dbcuttingtestsrm.cpp" />
+    <ClCompile Include="dbd\dbdevice.cpp" />
+    <ClCompile Include="dbd\dbdevicesrm.cpp" />
+    <ClCompile Include="dbd\dbemailalert.cpp" />
+    <ClCompile Include="dbd\dbemailalertsrm.cpp" />
+    <ClCompile Include="dbm\dbexception.cpp" />
+    <ClCompile Include="dbd\dbexpirationlabel.cpp" />
+    <ClCompile Include="dbd\dbexpirationlabelsrm.cpp" />
+    <ClCompile Include="dbm\dbfactory.cpp" />
+    <ClCompile Include="dbd\dbflashfile.cpp" />
+    <ClCompile Include="dbd\dbflashfilesrm.cpp" />
+    <ClCompile Include="dbd\dbknifetimehistory.cpp" />
+    <ClCompile Include="dbd\dbknifetimehistoryrm.cpp" />
+    <ClCompile Include="dbd\dblabel.cpp" />
+    <ClCompile Include="dbd\dblabelsrm.cpp" />
+    <ClCompile Include="dbd\dblabeltext.cpp" />
+    <ClCompile Include="dbd\dblabeltextsrm.cpp" />
+    <ClCompile Include="dbm\dbmanager.cpp" />
+    <ClCompile Include="dbd\dbnetworkerror.cpp" />
+    <ClCompile Include="dbd\dbnetworkerrorsrm.cpp" />
+    <ClCompile Include="dbd\dbnutrition.cpp" />
+    <ClCompile Include="dbd\dbnutritionsrm.cpp" />
+    <ClCompile Include="dbd\dboperator.cpp" />
+    <ClCompile Include="dbd\dboperatornote.cpp" />
+    <ClCompile Include="dbd\dboperatornotesrm.cpp" />
+    <ClCompile Include="dbd\dboperatorsrm.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethod.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethoddetailedstatistic.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethoddetailedstatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethodsrm.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethodstatistic.cpp" />
+    <ClCompile Include="dbd\dbpresentationmethodstatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbproduct.cpp" />
+    <ClCompile Include="dbd\dbproductdefault.cpp" />
+    <ClCompile Include="dbd\dbproductdefaultsrm.cpp" />
+    <ClCompile Include="dbd\dbproductdetailedstatistic.cpp" />
+    <ClCompile Include="dbd\dbproductdetailedstatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbproductsrm.cpp" />
+    <ClCompile Include="dbd\dbproductstatistic.cpp" />
+    <ClCompile Include="dbd\dbproductstatisticsrm.cpp" />
+    <ClCompile Include="dbd\dbproducttext.cpp" />
+    <ClCompile Include="dbd\dbproducttextsrm.cpp" />
+    <ClCompile Include="dbd\dbrecall.cpp" />
+    <ClCompile Include="dbd\dbrecallsrm.cpp" />
+    <ClCompile Include="dbd\dbromlabel.cpp" />
+    <ClCompile Include="dbd\dbromlabelsrm.cpp" />
+    <ClCompile Include="dbd\dbscale.cpp" />
+    <ClCompile Include="dbd\dbscalesrm.cpp" />
+    <ClCompile Include="dbd\dbsoftkey.cpp" />
+    <ClCompile Include="dbd\dbsoftkeyfeature.cpp" />
+    <ClCompile Include="dbd\dbsoftkeyfeaturesrm.cpp" />
+    <ClCompile Include="dbd\dbsoftkeygroup.cpp" />
+    <ClCompile Include="dbd\dbsoftkeygroupsrm.cpp" />
+    <ClCompile Include="dbd\dbsoftkeysrm.cpp" />
+    <ClCompile Include="dbd\dbsoftkeystyle.cpp" />
+    <ClCompile Include="dbd\dbsoftkeystylesrm.cpp" />
+    <ClCompile Include="dbd\dbspecialprogram.cpp" />
+    <ClCompile Include="dbd\dbspecialprogramsrm.cpp" />
+    <ClCompile Include="dbd\dbstatus.cpp" />
+    <ClCompile Include="dbd\dbstatusrm.cpp" />
+    <ClCompile Include="dbd\dbstatusstorage.cpp" />
+    <ClCompile Include="dbd\dbstatusstoragerm.cpp" />
+    <ClCompile Include="dbd\dbstreaminggraphic.cpp" />
+    <ClCompile Include="dbd\dbstreaminggraphicsrm.cpp" />
+    <ClCompile Include="dbd\dbsynchronizationchange.cpp" />
+    <ClCompile Include="dbd\dbsynchronizationchangesrm.cpp" />
+    <ClCompile Include="util\time\dbtime.cpp" />
+    <ClCompile Include="dbd\dbtransaction.cpp" />
+    <ClCompile Include="dbd\dbtransactionsrm.cpp" />
+    <ClCompile Include="dbd\dbtransactiontype.cpp" />
+    <ClCompile Include="dbd\dbtransactiontypesrm.cpp" />
+    <ClCompile Include="dbd\dbwrappererrorhistory.cpp" />
+    <ClCompile Include="dbd\dbwrappererrorhistoryrm.cpp" />
+    <ClCompile Include="util\filesys\directory.cpp" />
+    <ClCompile Include="driver2.cpp" />
+    <ClCompile Include="util\e_exception\exception.cpp" />
+    <ClCompile Include="util\filesys\file.cpp" />
+    <ClCompile Include="util\filesys\filename.cpp" />
+    <ClCompile Include="util\nibble\nibble.cpp" />
+    <ClCompile Include="util\platform\platform.cpp" />
+    <ClCompile Include="util\properties\properties.cpp" />
+    <ClCompile Include="util\properties\propertiestree.cpp" />
+    <ClCompile Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3.c" />
+    <ClCompile Include="sqlite\adapter\sqliteautoincrementsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitebatch.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitebatchesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategoriesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategory.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategorydetailedstatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategorydetailedstatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategorystatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecategorystatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteclass.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteclassesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteconfiguration.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteconfigurationsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoriesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategory.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorycountriesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorycountry.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorypretext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorypretextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoryproductionstep.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoryproductionstepsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcountriesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolcountry.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoollist.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoollistsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoollisttext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoollisttextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolpretext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolpretextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolproductionstep.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecoolproductionstepsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecooltext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecooltextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecuttingtest.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitecuttingtestsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitedatabase.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitedevice.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitedevicesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteemailalert.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteemailalertsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteexpirationlabel.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteexpirationlabelsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitefactory.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitefield.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteflashfile.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteflashfilesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteignoreword.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteignorewordsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteknifetimehistory.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteknifetimehistoryrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitelabel.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitelabelsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitelabeltext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitelabeltextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitenetworkerror.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitenetworkerrorsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitenutrition.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitenutritionsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteoperator.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteoperatornote.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteoperatornotesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteoperatorsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethod.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethoddetailedstatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethoddetailedstatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodstatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodstatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproduct.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductdefault.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductdefaultsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductdetailedstatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductdetailedstatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductproductsequencequery.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductsequence.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductsequencesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductstatistic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproductstatisticsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproducttext.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteproducttextsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliterecall.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliterecallsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliterecord.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliterecordmanager.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteromlabel.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteromlabelsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitescale.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitescalesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkey.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeyfeature.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeyfeaturesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeygroup.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeygroupsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeysrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeystyle.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeystylesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitespecialprogram.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitespecialprogramsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitestreaminggraphic.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitestreaminggraphicsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesynchronizationchange.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitesynchronizationchangesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitetransaction.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitetransactionsrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitetransactiontype.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitetransactiontypesrm.cpp" />
+    <ClCompile Include="sqlite\adapter\sqliteview.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitewrappererrorhistory.cpp" />
+    <ClCompile Include="sqlite\adapter\sqlitewrappererrorhistoryrm.cpp" />
+    <ClCompile Include="std\access\stdfile.cpp" />
+    <ClCompile Include="std\access\stdindex.cpp" />
+    <ClCompile Include="std\access\stdrecord.cpp" />
+    <ClCompile Include="util\debug\trace.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="util\e_string\utilstring.cpp" />
+    <ClCompile Include="util\platform\win32.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

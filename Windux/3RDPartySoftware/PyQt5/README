@@ -1,0 +1,50 @@
+pyqt 5.5.1 build instructions
+-----------------------------
+
+* Ubuntu 20.04
+* PyQt-gpl-5.5.1.tar.gz
+* sip-4.18.tar.gz
+
+pyqtdeploy is only used to generate the config files, use version version 1.3.2 if necessary (and remove PyQt_Desktop_OpenGL)
+
+to do a python3 build, all the same, except replace 2.7 with 3 in all the commands above
+
+note that you'll need the correct version python header files in your /opt/
+
+extract the sip and PyQt tarballs
+    
+build and install the x86_64 native sip:
+
+    python3 configure.py && make && sudo make install
+
+make target directories:
+
+    mkdir -p ~/Source/Local/armv7l/downloads
+    mkdir -p ~/Source/Local/armv7l/root
+
+copy the sip and pyqt tarballs into downloads and extract
+
+copy sip-linux.cfg into the sip folder
+
+copy timesys-linux-g++ to sip-4.18/specs
+
+copy pyqt5-linux.cfg into the pyqt5 folder
+
+in the sip folder:
+
+    ~/buildARA.sh
+    python3 configure.py --sysroot=/opt/hb6mxd_combo/toolchain/usr --no-tools --configuration=sip-linux.cfg --platform=timesys-linux-g++ --bindir=/home/hobart/Source/Local/armv7l/root/usr/bin --destdir=/home/hobart/Source/Local/armv7l/root/usr/lib/python2.7/dist-packages --sipdir=/home/hobart/Source/Local/armv7l/root/usr/share/sip --incdir=/home/hobart/Source/Local/armv7l/root/usr/include/python2.7 --target-py-version=2.7
+    make
+    make install
+
+in the pyqt5 folder:
+
+    ~/buildARA.sh
+    python3 ./configure.py --sysroot=/opt/hb6mxd_combo/toolchain/usr --assume-shared --no-tools -no-qsci-api --no-designer-plugin --no-qml-plugin --configuration=./pyqt5-linux.cfg --qmake=/opt/hb6mxd_combo/toolchain/bin/qmake --bindir=/home/hobart/Source/Local/armv7l/root/usr/bin --target-py-version=2.7 --sip=/bin/sip --bindir=/home/hobart/Source/Local/armv7l/root/usr/bin --destdir=/home/hobart/Source/Local/armv7l/root/usr/lib/python2.7/dist-packages --sipdir=/home/hobart/Source/Local/armv7l/root/usr/share/sip/PyQt5 --sip-incdir=/home/hobart/Source/Local/armv7l/root/usr/include/python2.7/
+    make -j8
+    make install
+    sudo make install
+
+copy the contents of ~/Source/Local/armv7l/root/ to your 3RDPartySoftware/PyQt/debian folder and then do a ./make-deb.sh
+
+check the resulting .deb file to make sure the directory hierarchy looks correct

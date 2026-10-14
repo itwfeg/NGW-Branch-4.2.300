@@ -1,0 +1,16 @@
+Need to install Qt5 and PyQt5 on Pi:
+sudo apt-get update
+sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools
+
+# Install desktop icon file
+/bin/cp acrBoardProgrammer.desktop /home/pi/Desktop
+
+Barcode scanner that is compatible and tested with this software is a Honeywell Xenon XP 1950g
+
+Honeywell Barcode scanner with Linux info
+https://support.honeywellaidc.com/s/article/Do-Honeywell-hand-held-scanners-interface-with-Linux
+You must scan the board codes in the file in the docs folder to get the scanner
+configure to scan via serial port and to add a CR suffix at end of stream of encoded data
+
+/usr/bin/sqlite3 -header -csv board_test_server.sqlite "select * from BoardInformation;" > board_test_server_data.csv
+

@@ -1,0 +1,124 @@
+#!/bin/bash
+# Enables core dumps if enable is passed in "enablecore enabled" else disables core dumps "enablecore disable"
+# modified FHA 5/2011 from original release from bsquare.
+# Added more user information and consolidated like tests together
+#
+if [ $(id -u) -eq '0' ]; then	# if user is root
+	echo
+	#
+	#Whether enabling or disabling remove any occurance of ulimit for
+	#core_dump from the limits.conf file this is useful if enable is
+	#run more than one time.
+	#
+	sysctl_file=/etc/sysctl.conf
+	limits_file=/etc/security/limits.conf
+	sysctl_bkup=/etc/_sysctl.conf_
+	limits_bkup=/etc/security/_limits.conf_
+#	dump_dir=/var/log/hobart/dumps
+	dump_dir=/home/Hobart/AccessScale/dumps
+	core_np=$dump_dir/%e-%p-%t-%s.core
+
+	sed -e "/* soft core/d" $limits_file > $limits_bkup
+	if [ $? -ne 0 ]; then
+		echo "Unable to unpdate limits.conf file by removing refrence to '*soft core unlimited' or '*soft core 250000'."
+		echo "Please manually update it and run script again."	
+		exit 3
+	else
+		mv $limits_bkup $limits_file
+		if [ $? -ne 0 ]; then
+			echo "Unable to update limits.conf file by removing reference to '* soft core unlimited' or '* soft core 250000'."
+			echo "Please manually update it, and run script again"
+			exit 3
+		fi
+	fi
+	echo "/etc/security/limits.conf has been updated by removing any old references to core dumps"
+
+	#
+	#Whether enabling or disabling remove any occurance of a core dump pattern
+	#from the sysctl.conf file, this is useful if enable is
+	#run more than one time.
+	#
+	sed -e "/kernel.core_pattern=/d" $sysctl_file > $sysctl_bkup
+	if [ $? -ne 0 ]; then
+		echo "Unable to unpdate sysctl.conf file by removing reference to 'kernal.core_pattern'."
+		echo "Please manually update it, and run script again."
+		exit 3
+	else
+		mv $sysctl_bkup $sysctl_file
+		if [ $? -ne 0 ]; then
+			echo "Unable to update sysctl.conf file by removing reference to 'kernal.core_pattern'."
+			echo "Please manually update it, and run script again."
+			exit 3
+		fi
+	fi
+	echo "/etc/stsctl.conf has been updated by removing any old references to core dumps"
+
+	if [ $1 = "enable" ]; then	#enable passed into script
+		echo "Attempting to enable core dumps."
+		#
+		#set a particular directory for the dump files and update the core dump file
+		#name to include exe name and pid.  This way we can easly make out our file
+		#in that directory.
+		#
+		if [ ! -d $dump_dir ]; then
+			mkdir $dump_dir
+			if [ $? -ne 0 ]; then
+				echo "Failed to create $dump_dir.  Directory must exist for core dump to be created."	
+				echoi "Terminating script"
+				exit 2
+			fi
+			echo "Created $dump_dir directory.  All core dumps will be found here."
+			echo
+		fi
+		#
+		#Assumes the core dump directory exists.
+		#Set the directory & file permissions
+		#
+		chmod -R 1777 $dump_dir
+		if [ $? -ne 0 ]; then	#chmod command failed
+			echo "Failed to properly set the directory and file permissions on the directory $dump_dir."
+			echo "Core dumps cannot be made to this directory without proper permissions being set."
+			echo "Terminating script"
+			exit 2
+		fi
+
+		#
+		#We want to enable core dump immidately and we also want to make sure that 
+		#from here all it remains enabled even after reboots
+		#
+		ulimit -Sc 250000 
+		ulimit -a
+		if [ $( ulimit -c ) -ne "250000" ]; then 
+			echo "Unable to enable core dump."
+			echo "Reboot scale after script completes and try running script again."
+		fi
+		#
+		#Set the file pattern for the core dump to
+		# /var/log/hobart/dumps/<executable filename><PID of dumped process><time of dump><signal causing dump>
+		#	NOTE: time of dump expressed in seconds from 00:00h, 1 Jan 1970, UTC
+		#
+		sysctl -w kernel.core_pattern=$core_np
+		if [ $? -ne 0 ]; then 
+			echo "Unable to set the core dump file pattern."
+		fi
+		echo "* soft core 250000" >> /etc/security/limits.conf
+		echo "kernel.core_pattern=$core_np" >> $sysctl_file
+		echo "Operation complete."
+	else
+		#
+		#Disable core dump immidiately and make sure no dumps are created
+		#from here even after reboots
+		#
+		echo "Disabling core dump."
+			ulimit -Sc 0 
+			if [ $(ulimit -c) -ne "0" ]; then 
+				echo "Unable to disable core dump."
+				echo "Reboot the scale and the script again."
+			fi
+	echo "Operation complete."
+	fi
+	echo
+else
+	echo "Must be root to execute this script."
+	echo
+fi

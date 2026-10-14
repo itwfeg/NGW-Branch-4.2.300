@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<LINK REL="StyleSheet" HREF="..\style.css" TYPE="text/css">
+	</head>
+	<body>
+		<p>
+			<font face="Verdana, Geneva, Arial, Helvetica" size="5">SaveResults</font>&nbsp;
+		</p>
+		<p>
+			<b>Overview </b>
+		</p>
+		<P><STRONG>int STSaveResults (void *hBarcode,&nbsp;char *outputFilePath)&nbsp; </STRONG>
+		</P>
+		<P><STRONG>hBarcode</STRONG> is a handle to a barcode session<STRONG>.<BR>
+				outputFilePath</STRONG> is the path to the output CXV or XML file&nbsp;that 
+			will&nbsp;receive the results.<STRONG>&nbsp;&nbsp;
+				<BR>
+			</STRONG>
+		</P>
+		<P>SaveResults saves the current set of results to an XML or CSV file.
+		</P>
+		<P>The outputFile format is determined by the file extension (csv or xml).</P>
+		<P>The CSV fields are as follows:</P>
+		<P>Folder - location of image file<BR>
+			File Name<BR>
+			Count - number of barcodes found in image<BR>
+			Index - Index for this bar code (1,2,3 etc or -1 is no barcode found).<BR>
+			Error - Error number<BR>
+			ID - as specified in an xml input file for image or folder (see <A href="processxml.htm">
+				ProcessXML</A> )<BR>
+			Value - value of barcode<BR>
+			Type - type of barcode<BR>
+			Hits - hit count for this barcode<BR>
+			Page - page number in image<BR>
+			Direction - ScanDirection mask value for this barcode<BR>
+			TopLeftX - x position for top left<BR>
+			TopLeftY - y position for top left<BR>
+			BottomRightX - x position for bottom right<BR>
+			BottomRightY - y position for bottom right</P>
+		<P>The XML output format contains the same information as the CSV format, but 
+			arranged in the following way:</P>
+		<P>&lt;xml version='1.0' encoding='iso-8859-1'&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Result&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Folder&gt;<EM>location of 
+				image file</EM>&lt;/Folder&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;FileName&gt;<EM>name of file</EM>&lt;/FileName&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Count&gt;<EM>number of 
+				barcodes</EM>&lt;/Count&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Error&gt;<EM>error number</EM>&lt;/Error&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ID&gt;<EM>id as specified in 
+				an xml input file for image or folder (see <A href="processxml.htm">ProcessXML</A>)</EM>&lt;/ID&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <EM>Repeated for each barcode 
+				found in image</EM><BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Barcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &lt;Value&gt;<EM>value 
+				of barcode</EM>&lt;/Value&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&lt;Type&gt;<EM>type 
+				of barcode</EM>&lt;/Type&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Hits&gt;<EM>hit 
+				count</EM>&lt;/Hits&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Page&gt;<EM>page 
+				number</EM>&lt;/Page&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;Direction&gt;<EM>ScanDirection mask value for this barcode</EM>&lt;/Direction&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;TopLeftX&gt;<EM>x position for top left</EM>&lt;/TopLeftX&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;TopLeftY&gt;<EM>y position for top left</EM>&lt;/TopLeftY&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;BottomRightX&gt;<EM>x position for bottom right</EM>&lt;/BottomRightX&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;BottomRightY&gt;<EM>y position for bottom right</EM>&lt;/BottomRightY&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Barcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Result&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>
+			<b>Return Value</b>
+		</P>
+		<p>1 on success and 0 on failure.</p>
+	</body>
+</html>

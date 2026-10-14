@@ -1,0 +1,12 @@
+diff -Naur xrdp.old/bootstrap xrdp/bootstrap
+--- xrdp.old/bootstrap	2016-10-10 10:50:14.023779314 -0400
++++ xrdp/bootstrap	2016-10-10 10:52:52.659170585 -0400
+@@ -14,7 +14,7 @@
+   exit 1
+ fi
+ 
+-which libtool
++which libtoolize
+ if ! test $? -eq 0
+ then
+   echo "error, install libtool"

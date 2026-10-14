@@ -1,0 +1,2439 @@
+diff --git a/Buildfile b/Buildfile
+index 5d52ef1..8b746ec 100644
+--- a/Buildfile
++++ b/Buildfile
+@@ -117,7 +117,7 @@ var msvcPragmaHeader = srcDir + "/shared/msvcpragmas.h";
+ var autInstrumentationLoader = undefined;
+ 
+ var stdIncs = [ topBuildDir, srcBuildDir, topSrcDir, srcDir ];
+-if (qt4 && !pureQt4)
++//if (qt4 && !pureQt4)
+     stdIncs.push( srcDir + "/qt4compat" );
+ stdIncs = stdIncs.concat( config["QTINC"] );
+ stdIncs.push( incDir );
+diff --git a/configure.cos b/configure.cos
+index c9f53be..0f4f79c 100644
+--- a/configure.cos
++++ b/configure.cos
+@@ -75,6 +75,8 @@ knownWithOpts["qt-extra-lflags"] = ["{flags}", "Extra linker flags for linking a
+ knownWithOpts["tclconfig"] = ["{dir}", "Directory where Tcl's tclConfig.sh file is installed"];
+ knownWithOpts["pydir"] = ["{dir}", "Directory where Python 2 is installed"];
+ knownWithOpts["python"] = ["{path}", "Filename (with full path) of Python 2 interpreter"];
++knownWithOpts["python-lib"] = ["{path}", "Filename (with full path) of Python library"];
++knownWithOpts["python-includedir"] = ["{dir}", "Directory where Python includes are installed"];
+ knownWithOpts["tkconfig"] = ["{dir}", "Directory where Tcl/Tk's tkConfig.sh file is installed"];
+ knownWithOpts["docbookxml"] = ["{dir}", "Directory where DocBook XML DTDs are installed"];
+ knownWithOpts["docbookxsl"] = ["{dir}", "Directory where DocBook XSL stylesheets are installed"];
+@@ -2117,7 +2119,6 @@ function checkPureQt4()
+ 	config["PURE_QT4"] = "1";
+         buildIDE = false;
+         buildIDEUtils = false;
+-        buildRunner = false;
+ 	msgResult( "yes" );
+     } else {
+ 	msgResult( "no" );
+@@ -2150,10 +2151,11 @@ function checkCompilerWorks()
+         if ( execWorked ) {
+             msgResult( 'yes' );
+         } else {
+-            cleanupCompileArtefacts( target.name );
+-            msgError( 'no, please check your compiler setup.\n' +
+-                      'For cross-compiling and embedded-device support\n' +
+-                      'please contact <support@froglogic.com>.' );
++            msgResult( 'no' );
++//            cleanupCompileArtefacts( target.name );
++//            msgError( 'no, please check your compiler setup.\n' +
++//                      'For cross-compiling and embedded-device support\n' +
++//                      'please contact <support@froglogic.com>.' );
+         }
+     }
+ 
+@@ -5007,8 +5009,19 @@ function checkPython( pythonBinary )
+     }
+     msgResult( "yes" );
+ 
+-    if ( pythonBinary ) {
+-        checkPythonWorks( pythonBinary );
++    var pyinc = withOption[ "python-includedir" ];
++    var pylib = withOption[ "python-lib" ];
++
++    if (( pyinc != "" ) && ( pylib != "" )) {
++        msgLog( "Using passed in Python options." );
++
++        defines["HAVE_PYTHON"] = 1;
++        config["PYINC"] = [pyinc];
++        config["LIBPYTHON"] = [pylib];
++    } else {
++        if ( pythonBinary ) {
++            checkPythonWorks( pythonBinary );
++    }
+     }
+ }
+ 
+@@ -8286,10 +8299,9 @@ if( gQmakePath ) {
+ }
+ 
+ if ( qtver >= 500 ) {
+-    msgWarn( "Detected Qt 5 or newer (pure-qt4 build, disabling runner, classicide, explorer, java wrapper, mac wrapper and ide tools)" );
++    msgWarn( "Detected Qt 5 or newer (pure-qt4 build, disabling classicide, explorer, java wrapper, mac wrapper and ide tools)" );
+     pureQt4 = true;
+     config["PURE_QT4"] = "1";
+-    buildRunner = false;
+     buildIDE = false;
+     buildMac = false;
+     buildExplorer = false;
+diff --git a/src/interpreter/debugger.cpp b/src/interpreter/debugger.cpp
+index a7f7ddf..97f8204 100644
+--- a/src/interpreter/debugger.cpp
++++ b/src/interpreter/debugger.cpp
+@@ -110,7 +110,7 @@ VariableWatcher::VariableBindings VariableWatcher::variableBindings( const QStri
+         // by the Gherkin BDT Debugger.
+         // TODO: Do not rely on extension, needs better integration of
+         // script and bdt debugger instances.
+-        const bool isInFeatureFile = QFileInfo( Debugger::currentFile() ).extension() == "feature";
++        const bool isInFeatureFile = QFileInfo( Debugger::currentFile() ).completeSuffix() == "feature";
+ 
+         return isInFeatureFile
+             ? VariableWatcher::VariableBindings()
+@@ -128,7 +128,7 @@ VariableWatcher::VariableBindings VariableWatcher::variableBindings( const QStri
+     if ( knownSquishObjects.contains( object ) )
+ 	return squishObjectBindings( knownSquishObjects[ object ], object );
+ 
+-    qWarning( "VariableWatcher::variableBindings: Cannot handle object '%s'.\n", object.latin1() );
++    qWarning( "VariableWatcher::variableBindings: Cannot handle object '%s'.\n", qPrintable(object) );
+     return VariableWatcher::VariableBindings();
+ }
+ 
+@@ -168,9 +168,9 @@ VariableWatcher::VariableBindings VariableWatcher::squishObjectBindings( Object:
+     for ( it = components.begin(); it != end; ++it, ++propId ) {
+         const QString s = *it;
+ 
+-	const int sep = s.find( '=' );
++        const int sep = s.indexOf( '=' );
+ 
+-	const int hash = s.find( '#' );
++        const int hash = s.indexOf( '#' );
+ 
+ 	QString propType = s.left( hash );
+ 	QString propName = s.mid( hash + 1, sep - hash - 1 );
+@@ -470,7 +470,7 @@ void Debugger::prompt()
+     // in our codebase as transport encoding for strings. Since some commands may
+     // contain content from the AUT which is not representable in a local 8bit encoding
+     // using utf-8 here is the only viable option.
+-    DbgCommand cmd = parseCommand( QString::fromUtf8( buf ).simplifyWhiteSpace() );
++    DbgCommand cmd = parseCommand( QString::fromUtf8( buf ).simplified() );
+ 
+     switch ( cmd.cmd ) {
+     case CNext:
+@@ -534,7 +534,7 @@ void Debugger::prompt()
+         if ( sid == -1 ) {
+             fprintf( stderr, "%sdelete error: unknown source file %s\n"
+                     , outputPrefix
+-                    , realFileName.latin1() );
++                    , qPrintable( realFileName ) );
+             fflush( stderr );
+             break;
+         } else {
+@@ -542,7 +542,7 @@ void Debugger::prompt()
+             if ( !hasBreakPoint( lineNumber, sid ) ) {
+                 fprintf( stderr, "%sdelete error: No break point set at %s:%d\n"
+                         , outputPrefix
+-                        , c.filename.latin1()
++                        , qPrintable( c.filename )
+                         , lineNumber );
+                 fflush( stderr );
+                 break;
+@@ -550,7 +550,7 @@ void Debugger::prompt()
+             setBreakPoint( lineNumber, sid, false );
+             fprintf( stdout, "%sdelete ok: Deleted break point %s:%d\n"
+                     , outputPrefix
+-                    , verbose ? c.filename.latin1() : c.filename.utf8().operator const char*()
++                    , verbose ? qPrintable( c.filename ) : c.filename.toUtf8().operator const char*()
+                     , lineNumber );
+             fflush( stdout );
+         }
+@@ -578,7 +578,7 @@ void Debugger::prompt()
+             initVariableWatcher();
+             QStringList bt = getCurrentBacktrace();
+             for( int i = int(bt.count()) - 1; i >= 0; i-- ) {
+-                fprintf( stdout, "%s%s\n", outputPrefix, verbose ? bt[i].latin1() : bt[i].utf8().operator const char*() );
++                fprintf( stdout, "%s%s\n", outputPrefix, verbose ? qPrintable(bt[i]) : bt[i].toUtf8().operator const char*() );
+             }
+             break;
+         }
+@@ -586,7 +586,7 @@ void Debugger::prompt()
+ 	if ( cmd.args[0] == "line" ) {
+ 	    fprintf( stdout, "%s@line %d\n", outputPrefix, currentLine() );
+ 	} else if ( cmd.args[0] == "file" ) {
+-	    fprintf( stdout, "%s@file %s\n", outputPrefix, verbose ? findSourceId( currentSourceId() ).latin1() : findSourceId( currentSourceId() ).utf8().operator const char*() );
++            fprintf( stdout, "%s@file %s\n", outputPrefix, verbose ? qPrintable(findSourceId( currentSourceId() )) : findSourceId( currentSourceId() ).toUtf8().operator const char*() );
+ 	} else if ( cmd.args[0] == "variables" ) {
+             QString str = outputPrefix;
+             str += "symb";
+@@ -612,7 +612,7 @@ void Debugger::prompt()
+                 }
+ 	    }
+             str += "}";
+-            fprintf( stdout, "%s\n", str.utf8().data() );
++            fprintf( stdout, "%s\n", str.toUtf8().data() );
+ 	}
+ 	fflush( stdout );
+ 	break;
+@@ -644,17 +644,16 @@ void Debugger::prompt()
+             break;
+         }
+ 
+-        QString s = cmd.args[0];
+-        QUrl::decode( s );
++        QString s = QUrl::fromPercentEncoding(cmd.args[0].toLatin1());
+         DbgMode currentDbgMode = debuggerMode();
+         setDebuggerMode( DbgInactive );
+         ip->evaluate( s, /*file*/QString(),
+                       /*instrument*/ false, /*ignore_errors*/ true );
+         s = ip->resultMessage();
+         setDebuggerMode( currentDbgMode );
+-        QUrl::encode( s );
++        QByteArray s2 = QUrl::toPercentEncoding(s);
+         fprintf( stdout,  "%seval%s\n", outputPrefix,
+-                                        s.isEmpty() ? "" : s.ascii() );
++                                        s2.isEmpty() ? "" : s2.constData() );
+ 	fflush( stdout );
+ 	break;
+     }
+@@ -742,13 +741,13 @@ QString Debugger::scriptLine( int sid, int l ) const
+     int pos = l == 0 ? 0 : -1;
+     int line = 0;
+     while ( line < l ) {
+-	pos = code.find( '\n', pos+1 );
++        pos = code.indexOf( '\n', pos+1 );
+ 	assert( pos != -1 );
+ 	pos++;
+ 	line++;
+     }
+ 
+-    int end = code.find( '\n', pos );
++    int end = code.indexOf( '\n', pos );
+     if ( end == -1 )
+ 	end = code.length();
+ 
+@@ -760,7 +759,7 @@ Debugger::DbgCommand Debugger::parseCommand( const QString &str ) const
+     if ( str.isEmpty() )
+ 	return DbgCommand( CIgnore );
+ 
+-    QStringList l = QStringList::split( ' ', str );
++    QStringList l = str.split( ' ', QString::SkipEmptyParts );
+     QString c = l[0];
+ 
+     DbgCommand cmd;
+@@ -799,7 +798,7 @@ Debugger::DbgCommand Debugger::parseCommand( const QString &str ) const
+     else
+ 	cmd.cmd = CUnknown;
+ 
+-    l.remove( l.begin() );
++    l.removeFirst();
+     cmd.args = l;
+ 
+     return cmd;
+@@ -918,14 +917,14 @@ Debugger::Code Debugger::printLine( int sid, int l, int c, bool verbose_, char e
+     if ( verbose_ ) {
+         if ( objectName.isEmpty() )
+             fprintf( stdout, "%s%cline %d, column %d, %s:\n",
+-                    outputPrefix, extra, l, c, verbose ? code.filename.latin1() : code.filename.utf8().operator const char*() );
++                    outputPrefix, extra, l, c, verbose ? qPrintable(code.filename) : code.filename.toUtf8().operator const char*() );
+         else {
+             if ( errorMessage.isEmpty() )
+                 fprintf( stdout, "%s%cobjLookupError %d\t%d\t%s\t%s\n",
+-                    outputPrefix, extra, l, c, verbose ? code.filename.latin1() : code.filename.utf8().operator const char*(), escapeForVariablePrinting( objectName ).utf8().data() );
++                    outputPrefix, extra, l, c, verbose ? qPrintable(code.filename) : code.filename.toUtf8().operator const char*(), escapeForVariablePrinting( objectName ).toUtf8().data() );
+              else
+                 fprintf( stdout, "%s%cobjLookupError %d\t%d\t%s\t%s\t%s\n",
+-                    outputPrefix, extra, l, c, verbose ? code.filename.latin1() : code.filename.utf8().operator const char*(), escapeForVariablePrinting( objectName ).utf8().data(), stringEscape( errorMessage ).data() );
++                    outputPrefix, extra, l, c, verbose ? qPrintable(code.filename) : code.filename.toUtf8().operator const char*(), escapeForVariablePrinting( objectName ).toUtf8().data(), stringEscape( errorMessage ).data() );
+         }
+         fflush( stdout );
+     }
+@@ -935,11 +934,11 @@ Debugger::Code Debugger::printLine( int sid, int l, int c, bool verbose_, char e
+ 
+     QString sl = scriptLine( sid, l );
+     sl = sl.replace ( '\t', ' ' );
+-    fprintf( stdout, "%s\n", sl.latin1() );
++    fprintf( stdout, "%s\n", qPrintable(sl) );
+     QString cs;
+     cs.fill( ' ', c );
+     cs += '^';
+-    fprintf( stdout, "%s\n", cs.latin1() );
++    fprintf( stdout, "%s\n", qPrintable(cs) );
+ 
+     return code;
+ }
+diff --git a/src/interpreter/generic.cpp b/src/interpreter/generic.cpp
+index ccdcf42..64aef15 100644
+--- a/src/interpreter/generic.cpp
++++ b/src/interpreter/generic.cpp
+@@ -163,7 +163,7 @@ void ScriptContext::notImplemented( ScriptContext *ctx )
+     if ( li.isEmpty() )
+         li = "?";
+     fprintf( stderr, "%s() not implemented, yet (%s)\n",
+-             ctx->currentFunction().latin1(), li.latin1() );
++             qPrintable(ctx->currentFunction()), qPrintable(li) );
+ }
+ 
+ static void snooze( ScriptContext *ctx )
+@@ -583,7 +583,7 @@ Object::Ptr Squish::readGestureByName( const QString& name, QString* err )
+     if ( !FFile::open( file, FFile::ReadOnly ) ) {
+         QString cf;
+         if ( QDir::isRelativePath( Debugger::self()->currentFile() ) )
+-            cf = QFileInfo( Interpreter::self()->runnerInterface()->currentTestCase() ).dirPath( true )
++            cf = QFileInfo( Interpreter::self()->runnerInterface()->currentTestCase() ).absolutePath()
+                 + QDir::separator()
+                 + Debugger::self()->currentFile();
+         dir = QDir( FDir::cleanDirPath( cf ) + "/gestures" );
+@@ -893,7 +893,7 @@ static void source( ScriptContext *ctx )
+ 
+     QString fn = ctx->argument( 0 )->toString();
+     QFile f( fn );
+-    if ( !f.open( IO_ReadOnly ) ) {
++    if ( !f.open( QIODevice::ReadOnly ) ) {
+ 	QString msg = "Couldn't open file " + fn;
+         ctx->setError( msg );
+         return;
+@@ -1056,7 +1056,7 @@ static QImage variantToImage(const QVariant& v)
+ #if QT_VERSION < 0x040000
+         QByteArray pngData = v.toByteArray();
+ #else
+-        QByteArray pngData = qVariantValue<QByteArray>( v );
++        QByteArray pngData = v.toByteArray();
+ #endif
+         QImage img;
+         img.loadFromData( pngData, "PNG" );
+@@ -1065,7 +1065,7 @@ static QImage variantToImage(const QVariant& v)
+ #if QT_VERSION < 0x040000
+     return v.toImage();
+ #else
+-    return qVariantValue<QImage>( v );
++    return v.value<QImage>();
+ #endif
+ }
+ 
+@@ -1079,13 +1079,13 @@ static QImage variantToImage(const QVariant& v)
+     }
+ 
+     QString fname = ctx->argument( 0 )->toString();
+-    int dot = fname.findRev( '.' );
++    int dot = fname.lastIndexOf( '.' );
+     if ( dot < 0 ) {
+         ctx->setError( "Cannot deduce image format for screenshot to be "
+                        "saved. Specify a suffix like .png" );
+         return;
+     }
+-    QString format = fname.mid( dot + 1 ).upper();
++    QString format = fname.mid( dot + 1 ).toUpper();
+ 
+     FList<QVariant> vl;
+     QVariant v = Inspector::self()->call( "desktopScreenshot", vl );
+@@ -1097,7 +1097,7 @@ static QImage variantToImage(const QVariant& v)
+         return;
+     }
+ 
+-    if ( !img.save( fname, format.latin1() ) ) {
++    if ( !img.save( fname, qPrintable(format) ) ) {
+         ctx->setError( QString( "Invalid file path \"%1\" or unknown image format \"%2\"" )
+                 .arg( fname )
+                 .arg( format ) );
+@@ -1941,7 +1941,7 @@ static void testDataPut( ScriptContext *ctx )
+ 	return;
+     }
+     QFile f( file );
+-    f.open( IO_ReadOnly );
++    f.open( QIODevice::ReadOnly );
+     FList<QVariant> l;
+     l << arg;
+     QByteArray ba = f.readAll();
+@@ -1978,8 +1978,8 @@ static void testDataPut( ScriptContext *ctx )
+ 
+     TestData::checkAndMakeDir( arg );
+     QFile f( arg );
+-    f.open( IO_WriteOnly );
+-    f.writeBlock( v.toByteArray() );
++    f.open( QIODevice::WriteOnly );
++    f.write( v.toByteArray() );
+ }
+ 
+ // testData::exists()
+@@ -2038,12 +2038,12 @@ static void testDataCreate( ScriptContext *ctx )
+ 
+     if ( where == "local" ) {
+ 	TestData::checkAndMakeDir( "testdata", false );
+-	QString path = QFileInfo( "testdata/" + name ).absFilePath();
++        QString path = QFileInfo( "testdata/" + name ).absoluteFilePath();
+ 	ctx->setStringResult( path );
+     } else if ( where == "shared" ) {
+ 	TestData::checkAndMakeDir( "../shared/testdata", false );
+ 	QString path = QFileInfo( "../shared/testdata/" +
+-                                  name ).absFilePath();
++                                  name ).absoluteFilePath();
+ 	ctx->setStringResult( path );
+     } else {
+ 	ctx->setError( "First argument of testData create"
+@@ -2425,8 +2425,8 @@ static void currentTestCase( ScriptContext *ctx )
+         return;
+     }
+ 
+-    QString s = QDir::cleanDirPath( rif->currentTestCase() );
+-    s = s.left( s.findRev( '/' ) );
++    QString s = QDir::cleanPath( rif->currentTestCase() );
++    s = s.left( s.lastIndexOf( '/' ) );
+     s.replace( '/', QDir::separator() );
+     ctx->setStringResult( s );
+ }
+@@ -2493,7 +2493,7 @@ static void currentResultDir( ScriptContext *ctx )
+         return;
+     }
+ 
+-    QString s = QDir::cleanDirPath( rif->resultDirectory() );
++    QString s = QDir::cleanPath( rif->resultDirectory() );
+     s.replace( '/', QDir::separator() );
+     ctx->setStringResult( s );
+ }
+diff --git a/src/interpreter/interpreter.cpp b/src/interpreter/interpreter.cpp
+index d71054f..efec461 100644
+--- a/src/interpreter/interpreter.cpp
++++ b/src/interpreter/interpreter.cpp
+@@ -112,7 +112,7 @@ Interpreter* Interpreter::guessLanguage( const QString & /*script*/,
+ //			      "unknown" };
+ 
+     if ( !fileName.isEmpty() ) {
+-	QString name = fileName.lower();
++        QString name = fileName.toLower();
+ 	if ( fileName.endsWith( ".tcl" ) )
+ 	    lang = Tcl;
+ 	else if ( fileName.endsWith( ".py" ) )
+diff --git a/src/interpreter/python/Buildsub b/src/interpreter/python/Buildsub
+index 7e14815..20744b7 100644
+--- a/src/interpreter/python/Buildsub
++++ b/src/interpreter/python/Buildsub
+@@ -51,6 +51,9 @@ function setupPythonPlugin()
+     var target = sharedLibrary( "squishpython", sources, stdIncs );
+     target.enabled = havePython || havePython3;
+ 
++    var defines = [
++        "QT3_SUPPORT"
++    ];
+     addExtras( target, havePython3
+             ? config['PYTHON3LIBS']
+             : config['LIBPYTHON'] );
+diff --git a/src/interpreter/python/pydebugger.cpp b/src/interpreter/python/pydebugger.cpp
+index ed3a70b..2416885 100644
+--- a/src/interpreter/python/pydebugger.cpp
++++ b/src/interpreter/python/pydebugger.cpp
+@@ -343,10 +343,9 @@ int PyDebugger::sourceIdFromFrame( PyFrameObject *frame )
+                     // register content with debugger
+                     if ( realfilename.endsWith( ".py" ) ) { // ### casing on Windows
+                         QFile f( realfilename );
+-                        if ( f.open( IO_ReadOnly | IO_Translate ) ) {
++                        if ( f.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+                             QTextStream ts( &f );
+-                            ts.setEncoding( QTextStream::UnicodeUTF8 );
+-                            QString code = ts.read();
++                            QString code = ts.readAll();
+                             sid = nextSourceId();
+                             setCode( sid, code, realfilename );
+                         } else {
+@@ -491,7 +490,7 @@ void PyVariableWatcher::streamObject( PyObject *o, QString name,
+ 	return;
+     }
+ 
+-    if ( strListContains( hiddenObjects, name.latin1() ) ) {
++    if ( strListContains( hiddenObjects, name.toLatin1() ) ) {
+ 	return;
+     }
+ 
+diff --git a/src/interpreter/python/pyeventrecorder.cpp b/src/interpreter/python/pyeventrecorder.cpp
+index 18ca89a..ccc7e57 100644
+--- a/src/interpreter/python/pyeventrecorder.cpp
++++ b/src/interpreter/python/pyeventrecorder.cpp
+@@ -208,7 +208,7 @@ void PyEventRecorder::recordEvent( const EventData &eventData )
+ 	break;
+     }
+     case EventData::TComment: {
+-        QStringList sl = QStringList::split( "\n", eventData.objectId() );
++        QStringList sl = eventData.objectId().split( "\n", QString::SkipEmptyParts );
+         for ( QStringList::ConstIterator it = sl.begin(); it != sl.end(); ++it)
+             cd += "    # " + *it + "\n";
+ 	break;
+@@ -271,7 +271,7 @@ QString PyEventRecorder::createArgument( const EventDataArg &arg,
+ 	if ( arg.primitiveType == Inspector::PChar )
+ 	    return escapeString( arg.primitive );
+ 	else if ( arg.primitiveType == Inspector::PBool )
+-	    return arg.primitive[0].upper() + arg.primitive.mid( 1 );
++            return arg.primitive[0].toUpper() + arg.primitive.mid( 1 );
+ 	else
+ 	    return arg.primitive;
+ 	break;
+diff --git a/src/interpreter/python/pyinterpreter.cpp b/src/interpreter/python/pyinterpreter.cpp
+index 2cb9217..4088993 100644
+--- a/src/interpreter/python/pyinterpreter.cpp
++++ b/src/interpreter/python/pyinterpreter.cpp
+@@ -321,7 +321,7 @@ PyObject *PyInterpreter::execfile( const QString &code, const QString &fileName,
+         debugger()->setDebuggerMode( Debugger::DbgInactive );
+     }
+ 
+-    QCString c8 = code.utf8();
++    QCString c8 = code.toUtf8();
+     c8.append( "\n" ); // required for Py_file_input
+ 
+     if ( instrument && debugger() ) {
+@@ -343,8 +343,8 @@ PyObject *PyInterpreter::execfile( const QString &code, const QString &fileName,
+ 
+     // Make sure to use the real path here so we'll find the buffered breakpoint that also used
+     // realPath to set up.
+-    QFileInfo tmpfi( QDir::cleanDirPath( fileName ) );
+-    QCString fileName2 = QFile::encodeName( realPath( tmpfi.absFilePath() ) );
++    QFileInfo tmpfi( QDir::cleanPath( fileName ) );
++    QCString fileName2 = QFile::encodeName( realPath( tmpfi.absoluteFilePath() ) );
+     if (ignore_errors) {
+          // first we try to evaluate an expression
+          retObj = PyRun_String( c8.data(), Py_eval_input, dict, locals );
+@@ -402,7 +402,7 @@ bool PyInterpreter::call( const QString &func, const ObjectList &args )
+ {
+     clearError();
+     // is there a symbol of this name ?
+-    QCString n8 = func.utf8();
++    QCString n8 = func.toUtf8();
+     PyObject *fobj = PyDict_GetItemString( squishNamespace(), n8.data() );
+     if ( !fobj ) {
+         QMap<QString, PyObject *>::ConstIterator it = callBackMap.find( func );
+@@ -443,7 +443,7 @@ bool PyInterpreter::call( const QString &func, const ObjectList &args )
+ bool PyInterpreter::hasFunction( const QString &name ) const
+ {
+     // look up function name
+-    QCString n8 = name.utf8();
++    QCString n8 = name.toUtf8();
+     PyObject *item = PyDict_GetItemString( squishNamespace(), n8.data() );
+ 
+     // function name found and type correct ?
+@@ -666,8 +666,8 @@ QString PyInterpreter::errorFile( const QString &fallback ) const
+     }
+     // make path absolute
+     if ( runnerInterface() && QDir::isRelativePath( fn ) ) {
+-        fn = QDir::cleanDirPath( QFileInfo( runnerInterface()
+-                                            ->currentTestCase() ).dirPath( true )
++        fn = QDir::cleanPath( QFileInfo( runnerInterface()
++                                            ->currentTestCase() ).absolutePath()
+                                  + QDir::separator()
+                                  + fn );
+     }
+@@ -762,7 +762,7 @@ void PyInterpreter::registerClass( const Class *c )
+                 PyEval_GetGlobals(), PyEval_GetLocals(), NULL );
+         Py_DECREF( m );
+ 
+-        PyDict_SetItemString( squishNamespace(), c->className().latin1(), pyType );
++        PyDict_SetItemString( squishNamespace(), c->className().toLatin1(), pyType );
+     }
+ }
+ 
+diff --git a/src/interpreter/python/pyobject.cpp b/src/interpreter/python/pyobject.cpp
+index 5bdb91b..03a5517 100644
+--- a/src/interpreter/python/pyobject.cpp
++++ b/src/interpreter/python/pyobject.cpp
+@@ -256,7 +256,7 @@ static int findMatch( PyObject *args,
+ 			 sigs[i]->toString() + "\n";
+         QString msg = "No matching '" + name + givenSig + "' overload found: "
+                       "Following overloads are available:\n" + overloads;
+-        PyErr_SetString( PyExc_SyntaxError, msg.latin1() );
++        PyErr_SetString( PyExc_SyntaxError, msg.toLatin1() );
+ 	return -1;
+     }
+ 
+@@ -328,7 +328,7 @@ static int findMatch( PyObject *args,
+ 	if ( !same && !sameTypeDifferentOpts ) {
+             QString msg = "Ambiguous overload '" + name + givenSig +
+                           "'. Candidates:\n" + overloads;
+-	    PyErr_SetString( PyExc_SyntaxError, msg.latin1() );
++            PyErr_SetString( PyExc_SyntaxError, msg.toLatin1() );
+ 	    return -1;
+ 	}
+ 
+@@ -669,7 +669,7 @@ static int sq_setattr( PyObject *so, char *name, PyObject *value )
+     if ( !valObj ) {
+ 	// conversion error
+ 	QString msg = "Failed to convert value to " + ptype->className();
+-	PyErr_SetString( PyExc_ValueError, msg.latin1() );
++        PyErr_SetString( PyExc_ValueError, msg.toLatin1() );
+ 	return -1;
+     }
+     const Class *otype = valObj->type();
+@@ -1668,7 +1668,7 @@ static PyObject* createModuleForNamespace( const Namespace* ns, QString* dottedN
+ PyObject *Squish::registerClassAsPyType( const Class *c )
+ {
+     QString ns;
+-    QCString cname = c->className().latin1();
++    QCString cname = c->className().toLatin1();
+ 
+     PyObject *targetMod = 0;
+     if( c->nameSpace() == 0 || c->nameSpace()->name().isEmpty() ) {
+@@ -1757,14 +1757,14 @@ void Squish::initObjectType( bool refresh )
+             const Enum *en = glob->enumerator( j );
+             for ( int k = 0; k < en->count(); ++k )
+                 PyModule_AddIntConstant( g_squishModule,
+-                                         const_cast<char*>(en->key( k ).latin1()),
++                                         const_cast<char*>(en->key( k ).toLatin1().constData()),
+                                          en->value( k ) );
+         }
+ 
+         // global properties
+         for ( int pi = 0; pi < glob->numProperties(); ++pi ) {
+             const Property *p = glob->property( pi );
+-            char *pname = const_cast<char*>(p->name().latin1());
++            char *pname = const_cast<char*>(p->name().toLatin1().constData());
+             PyModule_AddObject( g_squishModule, pname, newPlaceholder( p ) );
+         }
+     }
+@@ -1805,7 +1805,7 @@ void Squish::initObjectType( bool refresh )
+         int numGlobMethods = glob->numMethods();
+         PyObject *mdict = PyModule_GetDict( g_squishModule );
+         for ( int m = 0; m < numGlobMethods; ++m ) {
+-            char *fname = const_cast<char*>(glob->method( m )->name().latin1());
++            char *fname = const_cast<char*>(glob->method( m )->name().toLatin1().constData());
+             // filter out duplicated names due that stem from overloads
+             if ( PyDict_GetItemString( mdict, fname ) == 0 ) {
+                 // we'll pass the function name as 1st parameter to the function
+diff --git a/src/interpreter/python/pyscriptcontext.cpp b/src/interpreter/python/pyscriptcontext.cpp
+index 5303b6f..c64d205 100644
+--- a/src/interpreter/python/pyscriptcontext.cpp
++++ b/src/interpreter/python/pyscriptcontext.cpp
+@@ -112,7 +112,7 @@ Gherkin::LookupAndExecuteStepResult PyGherkinDriverScriptActions::lookupAndExecu
+     Gherkin::LookupAndExecuteStepResult result;
+ 
+     // lookup function
+-    QCString functionName = m_executeFnName.utf8();
++    QCString functionName = qPrintable( m_executeFnName );
+     PyObject *fobj = PyDict_GetItemString( PyHelper::globalNamespace(), functionName.data() );
+     if ( !fobj ) {
+         result.type = Gherkin::LookupAndExecuteStepResult::InternalErrorResult;
+@@ -134,7 +134,7 @@ Gherkin::LookupAndExecuteStepResult PyGherkinDriverScriptActions::lookupAndExecu
+     if ( !res ) {
+         QString errorString = fetchError( &result.location );
+         result.type = Gherkin::LookupAndExecuteStepResult::InternalErrorResult;
+-        result.message = std::string( "Failed to execute step: " ) + errorString.utf8().data();
++        result.message = std::string( "Failed to execute step: " ) + qPrintable( errorString );
+ 
+ 	PyErr_Clear();
+         return result;
+@@ -206,7 +206,7 @@ Gherkin::ExecuteHookResult PyGherkinDriverScriptActions::executeHook( Gherkin::H
+             result.type = Gherkin::ExecuteHookResult::AbortExecution;
+         } else {
+             result.type = Gherkin::ExecuteHookResult::ScriptCodeFailedResult;
+-            result.message = std::string( errorString.utf8().data() );
++            result.message = std::string( qPrintable( errorString ) );
+         }
+ 
+         PyErr_Clear();
+@@ -456,7 +456,7 @@ void PyScriptContext::setObjectPropertiesResult( Object::Ptr o )
+         PyObject *key = toPythonValue( p->name() );
+         Object::Ptr vo = p->get( o );
+         if ( !vo ) {
+-            qWarning( "Error reading %s property.", p->name().latin1() );
++            qWarning( "Error reading %s property.", qPrintable( p->name() ) );
+             continue;
+         }
+         PyObject *val = natifyObject( vo );
+@@ -529,7 +529,7 @@ bool PyScriptContext::catchException( const ScriptArgument *arg )
+     QString s = QStrFromObj( val );
+ 
+     // run code in local scope. PyEval_Get*() not documented ...
+-    PyObject *retObj = PyRun_String( const_cast<char*>(s.utf8().data()),
++    PyObject *retObj = PyRun_String( qPrintable( s ),
+                                      Py_file_input,
+                                      PyEval_GetGlobals(),
+                                      PyEval_GetLocals() );
+diff --git a/src/interpreter/python/pysquishmodule.cpp b/src/interpreter/python/pysquishmodule.cpp
+index 0d2accc..8f7e74d 100644
+--- a/src/interpreter/python/pysquishmodule.cpp
++++ b/src/interpreter/python/pysquishmodule.cpp
+@@ -505,9 +505,9 @@ static PyObject *squish_source( PyObject *, PyObject *args )
+         return 0;
+     }
+ 
+-    QCString name = QFile::encodeName( QDir::cleanDirPath( arg ) );
++    QCString name = QFile::encodeName( QDir::cleanPath( arg ) );
+     QFile f( arg );
+-    if ( !f.open( IO_ReadOnly ) ) {
++    if ( !f.open( QIODevice::ReadOnly ) ) {
+         setQStringError( PyExc_IOError, "Couldn't open file " + arg );
+         return 0;
+     }
+diff --git a/src/interpreter/python/pytestdata.cpp b/src/interpreter/python/pytestdata.cpp
+index 29b4e2b..f82a066 100644
+--- a/src/interpreter/python/pytestdata.cpp
++++ b/src/interpreter/python/pytestdata.cpp
+@@ -52,7 +52,7 @@ static PyObject *dataPutPy( PyObject *, PyObject *args )
+         return 0;
+     }
+     QFile f( file );
+-    f.open( IO_ReadOnly );
++    f.open( QIODevice::ReadOnly );
+     FList<QVariant> l;
+     l << arg;
+     QByteArray ba = f.readAll();
+@@ -127,12 +127,12 @@ static PyObject *dataCreatePy( PyObject *, PyObject *args )
+ 
+     if ( where == "local" ) {
+         TestData::checkAndMakeDir( "testdata", false );
+-        QString path = QFileInfo( "testdata/" + name ).absFilePath();
++        QString path = QFileInfo( "testdata/" + name ).absoluteFilePath();
+         return toPythonValue( path );
+     } else if ( where == "shared" ) {
+         TestData::checkAndMakeDir( "../shared/testdata", false );
+         QString path = QFileInfo( "../shared/testdata/" +
+-                                  name ).absFilePath();
++                                  name ).absoluteFilePath();
+         return toPythonValue( path );
+     } else {
+         PyErr_SetString( PyExc_IOError, "First argument of testData create "
+@@ -301,9 +301,9 @@ static PyObject *dataFieldPy( PyObject *, PyObject *args )
+             return 0;
+         }
+         if ( idx < 0 || idx >= r->dataSet()->header()->count() ) {
+-            QCString msg;
++            QString msg;
+             msg.sprintf( "Invalid field index %d ", idx );
+-            PyErr_SetString( PyExc_IndexError, msg );
++            PyErr_SetString( PyExc_IndexError, msg.toLatin1().constData() );
+             return 0;
+         }
+     }
+diff --git a/src/interpreter/scripttestcase.cpp b/src/interpreter/scripttestcase.cpp
+index 310e70f..3e6b26b 100644
+--- a/src/interpreter/scripttestcase.cpp
++++ b/src/interpreter/scripttestcase.cpp
+@@ -198,7 +198,7 @@ bool ScriptTestCase::initWrapper( const QString &wrapper, TestResult *testResult
+     // substitute placeholder
+     dir.replace( "@(SQUISH_PREFIX)", squishPrefix() );
+ 
+-    QStringList ext = QStringList::split( ',', s.readStringEntry( "/Wrappers/" + wrapper + "/ExtensionScripts" ) );
++    QStringList ext = s.readStringEntry( "/Wrappers/" + wrapper + "/ExtensionScripts" ).split( ',', QString::SkipEmptyParts );
+ 
+     QString code;
+     QString lang;
+@@ -206,26 +206,24 @@ bool ScriptTestCase::initWrapper( const QString &wrapper, TestResult *testResult
+         QString file = *it;
+         file.replace( "@(SQUISH_PREFIX)", squishPrefix() );
+     	QFile f( file );
+-    	if ( !f.open( IO_ReadOnly | IO_Translate ) )
++        if ( !f.open( QIODevice::ReadOnly | QIODevice::Text ) )
+     	    continue;
+-      	lang = QFileInfo( file ).extension();
+-     	QTextStream ts( &f );
+-     	ts.setEncoding( QTextStream::UnicodeUTF8 );
+-     	code += ts.read() + "\n";
++        lang = QFileInfo( file ).suffix();
++        QTextStream ts( &f );
++        code += ts.readAll() + "\n";
+     }
+ 
+     if ( !code.isEmpty() )
+ 	Inspector::self()->setExtensionCode( code,  lang );
+ 
+-    const QStringList l = QStringList::split( ',',
+-            s.readStringEntry( "/Wrappers/" + wrapper + "/InitScripts" ) );
++    const QStringList l = s.readStringEntry( "/Wrappers/" + wrapper + "/InitScripts" ).split( ',', QString::SkipEmptyParts );
+ 
+     for ( QStringList::ConstIterator sit = l.begin(); sit != l.end(); ++sit ) {
+ 	QString script = *sit;
+ 	if ( QFileInfo( script ).isRelative() )
+ 	    script.prepend( dir + '/' );
+ 	QFile f( script );
+-	if ( !f.open( IO_ReadOnly | IO_Translate ) ) {
++        if ( !f.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+ #if QT_VERSION < 0x030200
+             testResult->addResult( TestResult::Fatal, "Error opening init script",
+                     QString( "Init script '%1' could not be opened" )
+@@ -238,8 +236,7 @@ bool ScriptTestCase::initWrapper( const QString &wrapper, TestResult *testResult
+ 	    return false;
+ 	}
+  	QTextStream ts( &f );
+- 	ts.setEncoding( QTextStream::UnicodeUTF8 );
+- 	QString code = ts.read();
++        QString code = ts.readAll();
+ 	Interpreter *tmpip = Interpreter::guessLanguage( code, script, runnerIface );
+ 	if ( tmpip ) {
+ 	    tmpip->initTestFunctions( testResult );
+diff --git a/src/qt4compat/qcstring.h b/src/qt4compat/qcstring.h
+index 439c446..2e33c2b 100644
+--- a/src/qt4compat/qcstring.h
++++ b/src/qt4compat/qcstring.h
+@@ -1,7 +1,7 @@
+ #ifndef SQUISHCOMPAT_QCSTRING
+ #define SQUISHCOMPAT_QCSTRING
+ 
+-#include <q3cstring.h>
+-#define QCString Q3CString
++#include <QByteArray>
++#define QCString QByteArray
+ 
+ #endif
+diff --git a/src/qt4compat/qdict.h b/src/qt4compat/qdict.h
+index 8fbd969..0bc4cda 100644
+--- a/src/qt4compat/qdict.h
++++ b/src/qt4compat/qdict.h
+@@ -1,8 +1,19 @@
+ #ifndef SQUISHCOMPAT_QDICT
+ #define SQUISHCOMPAT_QDICT
+ 
+-#include <q3dict.h>
+-#define QDict Q3Dict
+-#define QDictIterator Q3DictIterator
++#include <QHash>
++#include <QScopedPointer>
++
++template <typename T>
++class QDict : public QHash<QString, T*>
++{
++public:
++    ~QDict() {
++        while (!QHash<QString, T*>::isEmpty()) {
++            QString key = QHash<QString, T*>::keys().first();
++            delete QHash<QString, T*>::take(key);
++        }
++    }
++};
+ 
+ #endif
+diff --git a/src/qt4compat/qintdict.h b/src/qt4compat/qintdict.h
+index d987dad..b4fc6fb 100644
+--- a/src/qt4compat/qintdict.h
++++ b/src/qt4compat/qintdict.h
+@@ -1,8 +1,20 @@
+ #ifndef SQUISHCOMPAT_QINTDICT
+ #define SQUISHCOMPAT_QINTDICT
+ 
+-#include <q3intdict.h>
+-#define QIntDict Q3IntDict
+-#define QIntDictIterator Q3IntDictIterator
++#include <QHash>
++#include <QScopedPointer>
++
++template <typename T>
++class QIntDict : public QHash<int, T*>
++{
++public:
++    ~QIntDict() {
++        while (!QHash<int, T*>::isEmpty()) {
++            int key = QHash<int, T*>::keys().first();
++            delete QHash<int, T*>::take(key);
++        }
++    }
++
++};
+ 
+ #endif
+diff --git a/src/qt4compat/qprocess.h b/src/qt4compat/qprocess.h
+index cfb6274..6c33c6a 100644
+--- a/src/qt4compat/qprocess.h
++++ b/src/qt4compat/qprocess.h
+@@ -1,7 +1,8 @@
+ #ifndef SQUISHCOMPAT_QPROCESS
+ #define SQUISHCOMPAT_QPROCESS
+ 
+-#include <q3process.h>
+-#define QProcess Q3Process
++//#include <q3process.h>
++//#define QProcess Q3Process
++#include <QProcess>
+ 
+ #endif
+diff --git a/src/qt4compat/qvaluelist.h b/src/qt4compat/qvaluelist.h
+index 24f1437..9c11e45 100644
+--- a/src/qt4compat/qvaluelist.h
++++ b/src/qt4compat/qvaluelist.h
+@@ -1,7 +1,9 @@
+ #ifndef SQUISHCOMPAT_QVALUELIST
+ #define SQUISHCOMPAT_QVALUELIST
+ 
+-#include <q3valuelist.h>
+-#define QValueList Q3ValueList
++//#include <q3valuelist.h>
++//#define QValueList Q3ValueList
++#include <QList>
++#define QValueList QList
+ 
+ #endif
+diff --git a/src/qt4compat/qvaluestack.h b/src/qt4compat/qvaluestack.h
+index a3b2547..01cd688 100644
+--- a/src/qt4compat/qvaluestack.h
++++ b/src/qt4compat/qvaluestack.h
+@@ -1,7 +1,9 @@
+ #ifndef SQUISHCOMPAT_QVALUESTACK
+ #define SQUISHCOMPAT_QVALUESTACK
+ 
+-#include <q3valuestack.h>
+-#define QValueStack Q3ValueStack
++//#include <q3valuestack.h>
++//#define QValueStack Q3ValueStack
++#include <QStack>
++#define QValueStack QStack
+ 
+ #endif
+diff --git a/src/qt4compat/qvaluevector.h b/src/qt4compat/qvaluevector.h
+index 933df28..a991e09 100644
+--- a/src/qt4compat/qvaluevector.h
++++ b/src/qt4compat/qvaluevector.h
+@@ -1,7 +1,7 @@
+ #ifndef SQUISHCOMPAT_QVALUEVECTOR
+ #define SQUISHCOMPAT_QVALUEVECTOR
+ 
+-#include <q3valuevector.h>
+-#define QValueVector Q3ValueVector
++#include <QVector>
++#define QValueVector QVector
+ 
+ #endif
+diff --git a/src/runner/Buildsub b/src/runner/Buildsub
+index 22c88ca..d2526ea 100644
+--- a/src/runner/Buildsub
++++ b/src/runner/Buildsub
+@@ -67,7 +67,7 @@ findTarget( replaceSuffix( "runnerlib.cpp", config.objectSuffix ) ).
+     disableOptimization = true;
+ 
+ if ( qt4 )
+-    setDefines( runnerLib, [ "QT3_SUPPORT", "RUNNERLIB_MAKEDLL" ] );
++    setDefines( runnerLib, [ "QT3_SUPPORT", "RUNNERLIB_MAKEDLL", "QT_DISABLE_DEPRECATED_BEFORE=0" ] );
+ else
+     setDefines( runnerLib, [ "RUNNERLIB_MAKEDLL" ] );
+ 
+diff --git a/src/runner/appinspector.cpp b/src/runner/appinspector.cpp
+index e18d809..6f105c8 100644
+--- a/src/runner/appinspector.cpp
++++ b/src/runner/appinspector.cpp
+@@ -213,7 +213,7 @@ void AppInspector::executeCommand()
+         } else if ( cmd.args[1] == "methods" ) {
+             listMethods( cmd.args.size() > 2 ? cmd.args[2] : QString() );
+         } else {
+-            fprint( stderr, "Error list: unknown option %s", cmd.args[1].latin1() );
++            fprint( stderr, "Error list: unknown option %s", qPrintable(cmd.args[1]) );
+             fflush( stderr );
+         }
+         break;
+@@ -223,7 +223,7 @@ void AppInspector::executeCommand()
+             loadFilters();
+         } else {
+             fprint( stderr, "Error filter: unknown option %s",
+-                     cmd.args[1].latin1() );
++                     qPrintable(cmd.args[1]) );
+             fflush( stderr );
+         }
+         break;
+@@ -267,9 +267,9 @@ void AppInspector::executeCommand()
+             fflush( stderr );
+             break;
+         }
+-        cmd.args.remove( cmd.args.begin() );
++        cmd.args.removeFirst();
+         QString obj = cmd.args[0];
+-        cmd.args.remove( cmd.args.begin() );
++        cmd.args.removeFirst();
+         retrieve( obj, cmd.args );
+         break;
+     }
+@@ -470,7 +470,7 @@ void AppInspector::objectPicked( const QString &s )
+         qs = qs.replace( "\\\\", "\\" );
+         o = Inspector::self()->findObject( qs );
+         while ( !o && qs.length() > 0 ) {
+-            int p = qs.findRev( '.' );
++            int p = qs.lastIndexOf( '.' );
+             if ( p == -1 ) {
+                 return;
+             }
+@@ -497,7 +497,7 @@ void AppInspector::objectPicked( const QString &s )
+ 
+     qs.prepend( "+" );
+     fprint( stdout, "@picked: %s\t%s",
+-             stringEscape( qs ).data(), o->className().latin1() );
++             stringEscape( qs ).data(), qPrintable(o->className()) );
+     fflush( stdout );
+ 
+     ArgumentList l;
+@@ -569,7 +569,7 @@ void AppInspector::printSpyObject( const SpyObject &so ) const
+     QString s = so.objectName();
+     s.replace( QChar( '.' ), QString( "\\." ) );
+ 
+-    if ( s.stripWhiteSpace().isEmpty() ||
++    if ( s.trimmed().isEmpty() ||
+             matchFilter( s + ":" + so.className(), FTObject ) ) {
+         return;
+     }
+@@ -665,7 +665,7 @@ void AppInspector::printProperties( const Class *c, Object::Ptr o )
+     QString outputPrefix = "SSPY:";
+     for ( i = c->numProperties() - 1; i >=0 ; --i ) {
+         const Property *p = c->property( i );
+-        if ( printed.find( p->name() ) != printed.end() )
++        if ( printed.contains( p->name() ) )
+             continue;
+         printed.append( p->name() );
+         if ( AppInspector::matchFilter( qualifiedName( p ), FTProperty ) )
+@@ -688,7 +688,7 @@ void AppInspector::printProperties( const Class *c, Object::Ptr o )
+     }
+ 
+     if ( !propbuf.isEmpty() ) {
+-        fprintf( stdout, "%s", propbuf.utf8().operator const char*() );
++        fprintf( stdout, "%s", propbuf.toUtf8().operator const char*() );
+         fflush( stdout );
+     }
+ }
+@@ -715,14 +715,14 @@ void AppInspector::listProperties( const QString &obj, const QString &prop )
+         fprint( stdout, "@end \"%s\"",
+                  stringEscape( obj ).data() );
+     } else {
+-        const QStringList props = QStringList::split( '.', prop );
++        const QStringList props = prop.split( '.', QString::SkipEmptyParts );
+         const Property *p = 0;
+         for ( QStringList::ConstIterator it = props.begin();
+               it != props.end(); ++it ) {
+             p = c->property( *it );
+             if ( !p ) {
+                 fprint( stderr, "Error list properties: No such property '%s'",
+-                         prop.latin1() );
++                         qPrintable(prop) );
+                 fflush( stderr );
+                 return;
+             }
+@@ -733,15 +733,15 @@ void AppInspector::listProperties( const QString &obj, const QString &prop )
+         }
+         if ( !o ) {
+             fprint( stderr, "Error list properties: Null property value '%s'",
+-                     prop.latin1() );
++                     qPrintable(prop) );
+             fflush( stderr );
+             return;
+         }
+         fprint( stdout, "@startprop \"%s\" \"%s\"",
+-                 stringEscape( obj ).data(), prop.latin1() );
++                 stringEscape( obj ).data(), qPrintable(prop) );
+         printProperties( c, o );
+         fprint( stdout, "@end \"%s\" \"%s\"",
+-                 stringEscape( obj ).data(), prop.latin1() );
++                 stringEscape( obj ).data(), qPrintable(prop) );
+     }
+     fflush( stdout );
+ }
+@@ -836,7 +836,7 @@ void AppInspector::listMethods( const QString &obj )
+                 if ( m->isStatic() )
+                     s.prepend( "static " );
+ 
+-                if ( seenMethodSignatures.find( s ) != seenMethodSignatures.end() )
++                if ( seenMethodSignatures.contains( s ) )
+                     continue;
+                 seenMethodSignatures.append( s );
+ 
+@@ -929,7 +929,7 @@ void AppInspector::listProperty( Object::Ptr o, const Property *p,
+     o = p->get( o );
+     if ( !o ) {
+         fprint( stderr, "Error listProperty: Null property value '%s'",
+-                 p->name().latin1() );
++                 qPrintable(p->name()) );
+         fflush( stderr );
+         return;
+     }
+@@ -951,8 +951,8 @@ void AppInspector::listProperty( Object::Ptr o, const Property *p,
+              canConvertTo( Inspector::self()->type( Inspector::PChar ),
+                            false, true ) ) {
+             fprint( stdout, "%s%s=%s\t%s",
+-                     prefix.latin1(), p->name().latin1(),
+-                     stringEscape( s ).data(), p->type().type->className().latin1() );
++                     qPrintable(prefix), qPrintable(p->name()),
++                     stringEscape( s ).data(), qPrintable(p->type().type->className()) );
+         }
+     }
+ }
+@@ -975,7 +975,7 @@ void AppInspector::retrieve( const QString &object, const QStringList &args )
+     for ( QStringList::ConstIterator it = args.begin();
+           it != args.end(); ++it ) {
+ 
+-        const QStringList props = QStringList::split( '.', *it );
++        const QStringList props = (*it).split( '.', QString::SkipEmptyParts );
+         const Class *c = o->type();
+         const Property *p = 0;
+ 
+@@ -994,7 +994,7 @@ void AppInspector::retrieve( const QString &object, const QStringList &args )
+ 
+         if ( !p ) {
+             fprint( stderr, "Warning retrieve: No property '%s' in type '%s'",
+-                     (*it).latin1(), o->className().latin1() );
++                     qPrintable(*it), qPrintable(o->className()) );
+             fflush( stderr );
+             continue;
+         }
+@@ -1005,9 +1005,9 @@ void AppInspector::retrieve( const QString &object, const QStringList &args )
+              canConvertTo( Inspector::self()->type( Inspector::PChar ),
+                            false, true ) ) {
+             fprint( stdout, "%s=%s\t%s\n",
+-                    (*it).latin1(),
++                    qPrintable(*it),
+                     stringEscape( propertyValue( p, o, false ) ).data(),
+-                    p->type().type->className().latin1() );
++                    qPrintable(p->type().type->className()) );
+         }
+ 
+         if ( p->type().type->numProperties() )
+diff --git a/src/runner/appstarter.cpp b/src/runner/appstarter.cpp
+index 659e02c..1a1efa5 100644
+--- a/src/runner/appstarter.cpp
++++ b/src/runner/appstarter.cpp
+@@ -139,7 +139,7 @@ void AppStarter::prompt()
+         const size_t l = strlen( buf );
+         if ( l > 0 && buf[l-1] == '\n' )
+             buf[l-1] = '\0';
+-        AppStarterCommand cmd = parseCommand( QString( buf ).simplifyWhiteSpace() );
++        AppStarterCommand cmd = parseCommand( QString( buf ).simplified() );
+         switch( cmd.type ) {
+             case AppStarterCommand::CExit: {
+                 exitQtAppNow(0);
+diff --git a/src/runner/filter.cpp b/src/runner/filter.cpp
+index ad86447..6d31f9c 100644
+--- a/src/runner/filter.cpp
++++ b/src/runner/filter.cpp
+@@ -34,12 +34,12 @@ namespace Squish
+ void Filter::setRule( const QString& r, bool wildcard )
+ {
+     ruleStr = r;
+-    regexp = QRegExp( r, true, wildcard );
++    regexp = QRegExp( r, Qt::CaseSensitive, wildcard ? QRegExp::Wildcard : QRegExp::RegExp );
+ }
+ 
+ static bool strToBool( const QString &str )
+ {
+-    return str.lower() == "true" ? true : false;
++    return str.toLower() == "true" ? true : false;
+ }
+ 
+ 
+diff --git a/src/runner/recorder.cpp b/src/runner/recorder.cpp
+index 9daa110..74e933c 100644
+--- a/src/runner/recorder.cpp
++++ b/src/runner/recorder.cpp
+@@ -48,7 +48,7 @@ void Recorder::start()
+     createEventRecorder();
+     if ( !recorder() ) {
+         fprintf( stderr, "Language '%s' isn't supported\n",
+-                 recordingLanguage().latin1() );
++                 qPrintable(recordingLanguage()) );
+         QApplication::exit( -2 );
+     }
+ 
+@@ -120,11 +120,11 @@ bool Recorder::enableRecordingForAut( int autid, bool isfirstctx, bool recordSta
+             QString file = TestSuite::findTestDataFile( *it, "testdata" );
+             if ( file.isEmpty() ) {
+                 printf( "Testdata File '%s' couldn't be found.\n",
+-                        file.latin1() );
++                        qPrintable(file) );
+                 QApplication::exit( -1 );
+             }
+             QFile f( file );
+-            f.open( IO_ReadOnly );
++            f.open( QIODevice::ReadOnly );
+             FList<QVariant> l;
+             l << *it;
+             QByteArray ba = f.readAll();
+@@ -240,7 +240,7 @@ void Recorder::prompt()
+         const size_t l = strlen( buf );
+         if ( l > 0 && buf[l-1] == '\n' )
+             buf[l-1] = '\0';
+-        RecorderCommand cmd = parseCommand( QString( buf ).simplifyWhiteSpace() );
++        RecorderCommand cmd = parseCommand( QString( buf ).simplified() );
+         switch( cmd.type ) {
+             case RecorderCommand::CExit: {
+                 stopRecord();
+@@ -295,11 +295,10 @@ void Recorder::finalize()
+         objectMap()->save();
+ 
+     QFile f( snippetFile() );
+-    if ( f.open( IO_WriteOnly ) ) {
++    if ( f.open( QIODevice::WriteOnly ) ) {
+         QString code = recorder()->createSource( false );
+         QString header = recorder()->headerCode();
+         QTextStream ts( &f );
+-        ts.setEncoding( QTextStream::UnicodeUTF8 );
+         ts << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+         ts << "<recording version=\"1.0\">\n";
+         ts << "<scriptHeader><![CDATA[";
+@@ -313,7 +312,7 @@ void Recorder::finalize()
+         const QMap<QString,QString>::ConstIterator e = gestures.end();
+         for ( QMap<QString,QString>::ConstIterator it = gestures.begin(); it != e; ++it ) {
+             ts << "<gesture name=\"" << it.key() << "\"><![CDATA[";
+-            ts << "<gestures version='1.0'>\n" << it.data() << "</gestures>\n";
++            ts << "<gestures version='1.0'>\n" << it.value() << "</gestures>\n";
+             ts << "]]></gesture>\n";
+         }
+         ts << "</recording>\n";
+diff --git a/src/runner/remoteinspector.cpp b/src/runner/remoteinspector.cpp
+index 3011570..d8b32bf 100644
+--- a/src/runner/remoteinspector.cpp
++++ b/src/runner/remoteinspector.cpp
+@@ -365,11 +365,11 @@ int RemoteInspector::registerNamespace( Namespace *ns ) const
+ 
+     RemoteInspectorInfo *info = infoForAppId( appid );
+ 
+-    assert( !info->namespaces.find( ns->id() ) );
++    assert( !info->namespaces.contains( ns->id() ) );
+     info->namespaces.insert( ns->id(), ns );
+ 
+ #ifndef NDEBUG
+-    const Namespace *prevNs = info->namespacesByName.find( ns->name() );
++    const Namespace *prevNs = info->namespacesByName.value( ns->name() );
+     if ( prevNs ) {
+         qWarning( "RemoteInspector(0x%p)::registerNamespace: "
+                 "Overwriting existing namespace %s (id %d) "
+@@ -408,11 +408,11 @@ int RemoteInspector::registerClass( const Class *cls ) const
+ 
+     RemoteInspectorInfo *info = infoForAppId( appid );
+ 
+-    assert( !info->classes.find( cls->id() ) );
++    assert( !info->classes.contains( cls->id() ) );
+     info->classes.insert( cls->id(), cls );
+ 
+ #ifndef NDEBUG
+-    const Class *prevCls = info->classesByName.find( cls->className() );
++    const Class *prevCls = info->classesByName.value( cls->className() );
+     if ( prevCls ) {
+         qWarning( "RemoteInspector(0x%p)::registerClass: "
+                 "Overwriting existing class %s (id %d) "
+@@ -700,7 +700,7 @@ RemoteInspector::createRemoteObjectFromVariant( const QVariant &v, int appCtxId
+     }
+ 
+     QString s = v.toString();
+-    int comma = s.find( ',' );
++    int comma = s.indexOf( ',' );
+     if ( comma <= 0 ) {
+ 	runner->error( SQUISHERR_RO_COMMUNICATION_FAILURE );
+ 	return 0;
+@@ -718,7 +718,7 @@ RemoteInspector::createRemoteObjectFromVariant( const QVariant &v, int appCtxId
+         return Object::zombie();
+     }
+     RemoteInspectorInfo *info = infoForAppId( appCtxId );
+-    RemoteObject *o = info->remoteObjects.find( objid );
++    RemoteObject *o = info->remoteObjects.value( objid );
+     /* Don't check against Inspector::self()->type( "Dead" ) here since that
+      * might return null due to the RemoteInspector object switching contexts
+      * after the application exited.
+@@ -762,8 +762,8 @@ void RemoteInspector::invalidateRemoteObjects( int appCtxId )
+             "Marking objectmodel as dead, "
+             << TRACELIB_VALUE( appCtxId ) );
+ 
+-    for ( QIntDictIterator<RemoteObject> it = (*inf)->remoteObjects; it.current(); ++it ) {
+-	it.current()->invalidate();
++    for ( QHash<int, RemoteObject*>::iterator it = (*inf)->remoteObjects.begin(); it != (*inf)->remoteObjects.end(); ++it ) {
++        (*it)->invalidate();
+     }
+     (*inf)->markAsDead();
+ }
+@@ -785,14 +785,13 @@ bool RemoteInspector::requestAllClasses( int appid )
+     if ( bav.isNull() ) {
+         return false;
+     }
+-    assert( bav.type() == QVariant::ByteArray ||
+-	    bav.type() == QVariant::CString );
++    assert( bav.type() == QVariant::ByteArray );
+ 
+     QByteArray c = bav.toByteArray();
+ #if QT_VERSION < 0x040000
+     QDataStream stream( c, IO_ReadOnly );
+ #else
+-    QDataStream stream( &c, IO_ReadOnly );
++    QDataStream stream( &c, QIODevice::ReadOnly );
+ #endif
+     stream.setVersion( 3 );
+ 
+@@ -829,7 +828,7 @@ bool RemoteInspector::requestAllClasses( int appid )
+ #if QT_VERSION < 0x040000
+     QDataStream stream2( c, IO_ReadOnly );
+ #else
+-    QDataStream stream2( &c, IO_ReadOnly );
++    QDataStream stream2( &c, QIODevice::ReadOnly );
+ #endif
+     stream2.setVersion( 3 );
+ 
+@@ -943,7 +942,7 @@ void RemoteInspector::addClasses( int appid, QByteArray &c )
+ #if QT_VERSION < 0x040000
+     QDataStream stream( c, IO_ReadOnly );
+ #else
+-    QDataStream stream( &c, IO_ReadOnly );
++    QDataStream stream( &c, QIODevice::ReadOnly );
+ #endif
+     stream.setVersion( 3 );
+ 
+@@ -970,7 +969,7 @@ void RemoteInspector::addClasses( int appid, QByteArray &c )
+ #if QT_VERSION < 0x040000
+     QDataStream stream2( c, IO_ReadOnly );
+ #else
+-    QDataStream stream2( &c, IO_ReadOnly );
++    QDataStream stream2( &c, QIODevice::ReadOnly );
+ #endif
+     stream2.setVersion( 3 );
+     RemoteClass::readContents = true;
+@@ -1021,14 +1020,13 @@ bool RemoteInspector::requestAllNamespaces( int appid )
+     if ( bav.isNull() ) {
+         return false;
+     }
+-    assert( bav.type() == QVariant::ByteArray ||
+-	    bav.type() == QVariant::CString );
++    assert( bav.type() == QVariant::ByteArray );
+ 
+     QByteArray c = bav.toByteArray();
+ #if QT_VERSION < 0x040000
+     QDataStream stream( c, IO_ReadOnly );
+ #else
+-    QDataStream stream( &c, IO_ReadOnly );
++    QDataStream stream( &c, QIODevice::ReadOnly );
+ #endif
+     stream.setVersion( 3 );
+ 
+@@ -1284,16 +1282,16 @@ void RemoteInspector::scheduleForFree( int id )
+ 
+ 
+ RemoteInspectorInfo::RemoteInspectorInfo()
+-    : classes( 1031 ), classesByName( 1031 ),
+-      namespaces( 1031 ), namespacesByName( 1031 ),
+-      remoteObjects( 1031 /* ### that might be too small ### */ ),
+-      nClasses( -1 ),
++    : nClasses( -1 ),
+       nNamespaces( -1 ),
+       requestedAllClasses( false ),
+       requestedAllNamespaces( false )
+ {
+-    classes.setAutoDelete( true );
+-    namespaces.setAutoDelete( true );
++    classes.reserve(1031);
++    classesByName.reserve(1031);
++    namespaces.reserve(1031);
++    namespacesByName.reserve(1031);
++    remoteObjects.reserve(1031);
+ }
+ 
+ RemoteInspectorInfo::~RemoteInspectorInfo()
+@@ -1307,7 +1305,7 @@ QMap<QString,QStringList> RemoteInspector::unmatchedProperties() const
+     QMap<QString,QVariant> map = runner->call( runner->applicationContext().appid, "getUnmatchedProperties", l ).toMap();
+     QMap<QString,QVariant>::const_iterator it = map.begin();
+     for( ; it != map.end(); ++it ) {
+-        props[ it.key() ] = it.data().toStringList();
++        props[ it.key() ] = it.value().toStringList();
+     }
+     return props;
+ }
+diff --git a/src/runner/remoteobject.cpp b/src/runner/remoteobject.cpp
+index bec1f9a..49e9fe8 100644
+--- a/src/runner/remoteobject.cpp
++++ b/src/runner/remoteobject.cpp
+@@ -211,7 +211,7 @@ ObjectAttribute RemoteObject::objectAttribute() const
+ #if QT_VERSION < 0x040000
+     QDataStream stream( ba, IO_ReadOnly );
+ #else
+-    QDataStream stream( &ba, IO_ReadOnly );
++    QDataStream stream( &ba, QIODevice::ReadOnly );
+ #endif
+     stream.setVersion( 3 );
+     ObjectAttribute oa;
+@@ -533,7 +533,7 @@ bool RemoteClass::setProperty( int id, Object::Ptr obj, Object::Ptr value, const
+     RemoteObject *robj = static_cast<RemoteObject*>(obj.data());
+     if ( !p->isWritable() ) {
+ 	qWarning( "RemoteClass::setProperty: property %s is not writable",
+-		  p->name().latin1() );
++                  qPrintable(p->name()) );
+ 	return 0;
+     }
+     if ( !robj && (!p || !p->isStatic()) ) {
+@@ -576,7 +576,7 @@ Object::Ptr RemoteClass::getProperty( int id, Object::Ptr obj, const Property *p
+     assert( !robj || robj->isValid() );
+     if ( !p->isReadable() ) {
+ 	qWarning( "RemoteClass::getProperty: property %s is not readable",
+-		  p->name().latin1() );
++                  qPrintable(p->name()) );
+ 	return 0;
+     }
+     if ( !robj && !p->isStatic() ) {
+diff --git a/src/runner/runner.cpp b/src/runner/runner.cpp
+index d4b6983..0f5f257 100644
+--- a/src/runner/runner.cpp
++++ b/src/runner/runner.cpp
+@@ -240,7 +240,7 @@ static Runner *selfPtr = 0;
+ static QByteArray readFile( const QString &fn )
+ {
+     QFile f( fn );
+-    if ( !f.open( IO_ReadOnly ) )
++    if ( !f.open( QIODevice::ReadOnly ) )
+         return QByteArray();
+     return f.readAll();
+ }
+@@ -638,7 +638,7 @@ static TestResult *createTestResult( const QStringList &reportGen,
+                                      TestReportGenerator::TestType mode,
+                                      const QDir &dir )
+ {
+-    return createTestResult( reportGen, suiteName, resultsDir, mode, dir.absPath() );
++    return createTestResult( reportGen, suiteName, resultsDir, mode, dir.absolutePath() );
+ }
+ 
+ Runner *Runner::self()
+@@ -708,9 +708,9 @@ Runner::Runner( const QStringList &reportGenerator, const QString &tstSuite,
+     mdbg = memdebugger;
+     checkMemDebugger();
+     QDir dir( testSuite );
+-    suiteCaseName = dir.absPath().section( "/", -1 );
++    suiteCaseName = dir.absolutePath().section( "/", -1 );
+     QTimer::singleShot( 0, this, SLOT( executeTestSuite() ) );
+-    squishSetEnv( "SQUISH_TESTSUITE_NAME", suiteCaseName.latin1() );
++    squishSetEnv( "SQUISH_TESTSUITE_NAME", qPrintable(suiteCaseName) );
+ }
+ 
+ Runner::Runner( const QString &tstSuite, const QString &tstCase,
+@@ -728,9 +728,9 @@ Runner::Runner( const QString &tstSuite, const QString &tstCase,
+     mdbg = memdebugger;
+     checkMemDebugger();
+     QDir dir( testSuite + "/" + testCase );
+-    suiteCaseName = dir.absPath().section( "/", -1 );
++    suiteCaseName = dir.absolutePath().section( "/", -1 );
+     QTimer::singleShot( 0, this, SLOT( executeTestSuite() ) );
+-    squishSetEnv( "SQUISH_TESTSUITE_NAME", suiteCaseName.latin1() );
++    squishSetEnv( "SQUISH_TESTSUITE_NAME", qPrintable(suiteCaseName) );
+ }
+ 
+ Runner::Runner( const QStringList &reportGenerator, const QString &tstCase,
+@@ -750,8 +750,8 @@ Runner::Runner( const QStringList &reportGenerator, const QString &tstCase,
+     init();
+     mdbg = memdebugger;
+     checkMemDebugger();
+-    QDir dir( QFileInfo( testCase ).dirPath( true ) );
+-    suiteCaseName = dir.absPath().section( "/", -1 );
++    QDir dir( QFileInfo( testCase ).absolutePath() );
++    suiteCaseName = dir.absolutePath().section( "/", -1 );
+ }
+ 
+ Runner::Runner( RunnerMode m, const QString &testsuite, bool tstverif,
+@@ -807,7 +807,7 @@ Runner::Runner( RunnerMode m, const QStringList &cfgs )
+ 
+ void Runner::checkForWebSpecialAUT()
+ {
+-    if ( sut.isEmpty() && m_defaultWrappers.find( "Web" ) != m_defaultWrappers.end() ) {
++    if ( sut.isEmpty() && m_defaultWrappers.contains( "Web" ) ) {
+         sut = "__squish__webhook";
+     }
+ }
+@@ -958,7 +958,7 @@ void Runner::checkMemDebugger()
+ {
+     if ( mdbg.contains( "valgrind" ) ) {
+ 	valgrind = true;
+-	int i = mdbg.find( "," );
++        int i = mdbg.indexOf( "," );
+ 	if ( i == -1 ) // add default options
+ 	    mdbg += ",callstack=20,leakCheck";
+     }
+@@ -1499,7 +1499,7 @@ ArgumentList Runner::getAttachToApplicationArguments( int runnerId,
+ 
+     l << "--testsuitename" << suite_name();
+     l << "--testcasename" << suiteCaseName;
+-    l << "--testcasedir" << QDir::currentDirPath();
++    l << "--testcasedir" << QDir::currentPath();
+ 
+     if ( QFile::exists( envVarFileName ) ) {
+ 	ConfParser parser( envVarFileName, false );
+@@ -1512,7 +1512,7 @@ ArgumentList Runner::getAttachToApplicationArguments( int runnerId,
+ 	    }
+ 	} else {
+ 	    qWarning( "Couldn't parse %s for environment variables\n\t%s",
+-		      envVarFileName.latin1(), parser.error().latin1() );
++                      qPrintable(envVarFileName), qPrintable(parser.error()) );
+ 	}
+     }
+     for ( QStringList::ConstIterator vit = envVarList.begin();
+@@ -1584,7 +1584,7 @@ ArgumentList Runner::getRunApplicationArguments( int runnerId,
+ 	createEventRecorder();
+ 	if ( !recorder() ) {
+ 	    fprintf( stderr, "Language '%s' isn't supported\n",
+-                     lang.latin1() );
++                     qPrintable(lang) );
+             shuttingDown = true;
+ 	    QApplication::exit( 0 );
+ 	}
+@@ -1659,7 +1659,7 @@ void Runner::printContextSwitch()
+     if ( runnerMode != MEmbedded && ( true || ideMode ) ) { // ### not set during recording
+         RunnerSocket *rs = (RunnerSocket *)currAppContext.socket;
+         fprintf( stdout, "AUTID: %d\n", currAppContext.appid );
+-        fprintf( stdout, "AUTHOST: %s\n", rs->peerAddress().toString().latin1() );
++        fprintf( stdout, "AUTHOST: %s\n", qPrintable(rs->peerAddress().toString()) );
+         fprintf( stdout, "AUTPORT: %d\n", rs->peerPort() );
+         fprintf( stdout, "RUNNERID: %d\n",  mainAppContext == currAppContext ? rs->appId() : -1 );
+         fflush( stdout );
+@@ -1932,7 +1932,7 @@ QString Runner::currentTestCase() const
+ {
+     if ( testCase.isEmpty() )
+ 	return QString();
+-    return QDir::currentDirPath() + QDir::separator() + testCase;
++    return QDir::currentPath() + QDir::separator() + testCase;
+ }
+ 
+ bool Runner::setApplicationContext( const ApplicationContext &ac )
+@@ -2038,7 +2038,7 @@ void Runner::removeApplicationContext( int appId )
+ 	  it != m_applicationContextList.end(); ++it ) {
+ 	if ( (*it).appid == appId ) {
+ 	    RunnerSocket *runnerSocket = (RunnerSocket*)(*it).socket;
+-	    retiredSockets.replace( appId, runnerSocket );
++            retiredSockets[appId] = runnerSocket;
+             updateContextPid( *it, -1 );
+ 
+             if ( mRemoteObjectModelHolderCount > 0 ) {
+@@ -2882,11 +2882,11 @@ void Runner::processSend( const QString &func, const ArgumentList &args,
+ 	break;
+     case F_StdOut:
+ 	assert( args.count() == 1 );
+-	stdOut( args[0].toCString() );
++        stdOut( args[0].toByteArray() );
+ 	break;
+     case F_StdErr:
+ 	assert( args.count() == 1 );
+-	stdErr( args[0].toCString() );
++        stdErr( args[0].toByteArray() );
+ 	break;
+     case F_Ping:
+ 	ping();
+@@ -2961,7 +2961,7 @@ void Runner::processSend( const QString &func, const ArgumentList &args,
+ #if QT_VERSION < 0x040000
+         QDataStream stream( ba, IO_ReadOnly );
+ #else
+-        QDataStream stream( &ba, IO_ReadOnly );
++        QDataStream stream( &ba, QIODevice::ReadOnly );
+ #endif
+         stream.setVersion( 3 );
+ 
+@@ -2984,7 +2984,7 @@ void Runner::processSend( const QString &func, const ArgumentList &args,
+ #if QT_VERSION < 0x040000
+         QDataStream stream( ba, IO_ReadOnly );
+ #else
+-        QDataStream stream( &ba, IO_ReadOnly );
++        QDataStream stream( &ba, QIODevice::ReadOnly );
+ #endif
+         stream.setVersion( 3 );
+ 
+@@ -2999,7 +2999,7 @@ void Runner::processSend( const QString &func, const ArgumentList &args,
+ #if QT_VERSION < 0x040000
+         QDataStream stream( ba, IO_ReadOnly );
+ #else
+-        QDataStream stream( &ba, IO_ReadOnly );
++        QDataStream stream( &ba, QIODevice::ReadOnly );
+ #endif
+         stream.setVersion( 3 );
+ 
+@@ -3052,7 +3052,7 @@ void Runner::processSend( const QString &func, const ArgumentList &args,
+         break;
+     }
+     default:
+-	qWarning( "unknown function %s", func.latin1() );
++        qWarning( "unknown function %s", qPrintable(func) );
+ 	break;
+     }
+ }
+@@ -3111,7 +3111,7 @@ void Runner::applicationRegistered( const QString &name, int appId, RunnerSocket
+         const std::string encodedName = FUrl::toPercentEncoding( name );
+ 
+         fprintf(stdout, "application registered server: %s %d aut: %s %d\n"
+-                , rs->peerAddress().toString().latin1()
++                , qPrintable( rs->peerAddress().toString() )
+                 , rs->peerPort()
+                 , encodedName.c_str()
+                 , appId );
+@@ -3136,7 +3136,7 @@ void Runner::recordEvent( const QByteArray &eventData, RunnerSocket *s )
+ #if QT_VERSION < 0x040000
+     QDataStream stream( ba, IO_ReadOnly );
+ #else
+-    QDataStream stream( &ba, IO_ReadOnly );
++    QDataStream stream( &ba, QIODevice::ReadOnly );
+ #endif
+     stream.setVersion( 3 );
+     ed.readObject( stream );
+@@ -3174,7 +3174,7 @@ void Runner::exportUiCoverageResults( int appid )
+     const QDir dir( resultDirectory() );
+     const QString fileName = "coverage_" + QString::number( appid ) + ".xml";
+     QFile file( FDir::absFilePath( dir, fileName ) );
+-    if ( !file.open( IO_WriteOnly ) ) {
++    if ( !file.open( QIODevice::WriteOnly ) ) {
+         qWarning( "Failed to open file '%s': %s",
+             FRawString( FFile::name( file ) ).utf8(),
+             FRawString( file.errorString() ).utf8() );
+@@ -3238,13 +3238,13 @@ void Runner::finalizeConnectionClosed( int /*appid*/ )
+                 findSourceId( scriptTestCase->interpreter()->
+                         debugger()->currentSourceId() );
+         QFile f( testCase );
+-        if ( f.open( insertRecordedScript ? IO_ReadWrite : IO_WriteOnly ) ) {
++        if ( f.open( insertRecordedScript ? QIODevice::ReadWrite : QIODevice::WriteOnly ) ) {
+             QDir dir( FFileInfo::dirPath( QFileInfo( f ) ) );
+             if ( gestures.size() > 0 )
+                 dir.mkdir( "gestures" );
+             if ( dir.exists( "gestures" ) && dir.cd( "gestures" ) ) {
+                 if ( withMain ) {
+-                    QStringList old = dir.entryList( "*.gesture" );
++                    QStringList old = dir.entryList( QStringList() << "*.gesture" );
+                     for ( QStringList::size_type i = 0; i < old.size(); ++i )
+                         dir.remove( old[i] );
+                 }
+@@ -3269,7 +3269,7 @@ void Runner::finalizeConnectionClosed( int /*appid*/ )
+                     file.writeBlock( tag, tag.length() );
+ #else
+                     file.open( QIODevice::WriteOnly );
+-                    QByteArray ba = it.data().toUtf8();
++                    QByteArray ba = it.value().toUtf8();
+                     file.write( "<gestures version='1.0'>\n" );
+                     file.write( ba.constData(), ba.size() );
+                     file.write( "</gestures>\n" );
+@@ -3279,7 +3279,6 @@ void Runner::finalizeConnectionClosed( int /*appid*/ )
+             }
+ 
+             QTextStream ts( &f );
+-            ts.setEncoding( QTextStream::UnicodeUTF8 );
+             int l;
+             if ( insertRecordedScript &&
+                     (l = scriptTestCase->interpreter()->debugger()->currentLine()) != -1 ) {
+@@ -3291,11 +3290,10 @@ void Runner::finalizeConnectionClosed( int /*appid*/ )
+                     else
+                         postbuffer += ts.readLine() + "\n";
+                 }
+-                ts.unsetDevice();
++                ts.setDevice(0);
+                 f.close();
+-                f.open( IO_WriteOnly | IO_Truncate );
++                f.open( QIODevice::WriteOnly | QIODevice::Truncate );
+                 ts.setDevice( &f );
+-                ts.setEncoding( QTextStream::UnicodeUTF8 ); // was lost above
+                 ts << prebuffer << code << postbuffer;
+             } else {
+                 ts << code;
+@@ -3303,7 +3301,7 @@ void Runner::finalizeConnectionClosed( int /*appid*/ )
+             f.close();
+             // undocumented hook for VZ at customer #35
+             if ( getenv( "SQUISH_RECORD_POST_COMMAND" ) ) {
+-                squishSetEnv( "SQUISH_TEST_SCRIPT_FILE", testCase );
++                squishSetEnv( "SQUISH_TEST_SCRIPT_FILE", qPrintable(testCase) );
+                 system( getenv( "SQUISH_RECORD_POST_COMMAND" ) );
+             }
+         }
+@@ -3435,7 +3433,7 @@ void Runner::stdOut( const FCString &data )
+     if ( currentTestResult() )
+         currentTestResult()->addResult( TestResult::Log, "stdout", data );
+     else
+-        printf( "%s: %s\n", sut.latin1(), data.data() );
++        printf( "%s: %s\n", qPrintable(sut), data.data() );
+ }
+ 
+ void Runner::stdErr( const FCString &data )
+@@ -3443,7 +3441,7 @@ void Runner::stdErr( const FCString &data )
+     if ( currentTestResult() )
+         currentTestResult()->addResult( TestResult::Log, "stderr", data );
+     else
+-        fprintf( stderr, "%s: %s\n", sut.latin1(), data.data() );
++        fprintf( stderr, "%s: %s\n", qPrintable(sut), data.data() );
+ }
+ 
+ void Runner::ping()
+@@ -3609,7 +3607,7 @@ void Runner::requestDescriptorData( int appId, const QString &wrapperName )
+ QVariant Runner::processCall( const QString &func, const ArgumentList& /*args*/,
+ 			      RunnerSocket * /*s*/ )
+ {
+-    qWarning( "unknown function %s", func.latin1() );
++    qWarning( "unknown function %s", qPrintable(func) );
+     return QVariant();
+ }
+ 
+@@ -3640,12 +3638,12 @@ void Runner::executeTestCase()
+ 		QString file = TestSuite::findTestDataFile( *it, "testdata" );
+ 		if ( file.isEmpty() ) {
+ 		    printf( "Testdata File '%s' couldn't be found.\n",
+-			    file.latin1() );
++                            qPrintable(file) );
+                     shuttingDown = true;
+ 		    QApplication::exit( -1 );
+ 		}
+ 		QFile f( file );
+-		f.open( IO_ReadOnly );
++                f.open( QIODevice::ReadOnly );
+ 		FList<QVariant> l;
+ 		l << *it;
+                 QByteArray ba = f.readAll();
+@@ -3666,7 +3664,7 @@ void Runner::executeTestCase()
+     scriptTestCase = new ScriptTestCase( testResult, QDir::current(), this,
+             m_scriptArguments );
+     QFile f( testCase );
+-    if ( snippetFile().isEmpty() && !f.open( IO_ReadOnly | IO_Translate ) ) {
++    if ( snippetFile().isEmpty() && !f.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+ 	testResult->addResult( TestResult::Fatal, "Test could not be opened",
+ 			       "Test '" + testCase + "' could not be opened" );
+ 	ok = false;
+@@ -3677,8 +3675,7 @@ void Runner::executeTestCase()
+ 	QString script;
+ 	if ( snippetFile().isEmpty() ) {
+ 	    QTextStream ts( &f );
+-	    ts.setEncoding( QTextStream::UnicodeUTF8 );
+-	    script = ts.read();
++            script = ts.readAll();
+ 	} else {
+             script = scriptLanguage->emptyTestCaseContents() + "\n";
+ 	}
+@@ -4033,7 +4030,7 @@ void Runner::startTimedOut()
+         QString msg = "Starting application timed out after " +
+             autTimeout() + "s. Could not hook into the AUT. ";
+         // give this hint only if the Qt library is involved (Qt or Tq mode)
+-        if ( m_defaultWrappers.find( "Qt" ) != m_defaultWrappers.end() )
++        if ( m_defaultWrappers.contains( "Qt" ) )
+             msg += "The application is probably linked against an incompatible "
+                 "Qt library. ";
+         msg += "You may have to exit the AUT manually.";
+@@ -4080,10 +4077,10 @@ void Runner::record( bool disableEvCompression, bool disableTSync,
+ 	((RunnerSocket*)currAppContext.socket)->readFromSocket();
+ #if QT_VERSION < 0x040000
+ 	qApp->eventLoop()->processEvents( QEventLoop::AllEvents |
+-					  QEventLoop::WaitForMore, 100 );
++                                          QEventLoop::WaitForMore, 100 );
+ #else
+ 	QApplication::processEvents( QEventLoop::AllEvents |
+-				     QEventLoop::WaitForMore, 100 );
++                                     QEventLoop::WaitForMoreEvents, 100 );
+ #endif
+         usleep( 10000 );
+ 
+@@ -4135,10 +4132,10 @@ QValueList<QByteArray> Runner::loadObjectDescriptorData( int appid, const QStrin
+         QStringList wrppers = wrappersForApplication( appName );
+         QStringList::ConstIterator it, end = wrppers.end();
+         for ( it = wrppers.begin(); it != end; ++it ) {
+-            readObjectDescriptorData( ( *it ).lower(), data) ;
++            readObjectDescriptorData( ( *it ).toLower(), data) ;
+         }
+     } else {
+-        readObjectDescriptorData( wrapper.lower(), data );
++        readObjectDescriptorData( wrapper.toLower(), data );
+     }
+     return data;
+ }
+diff --git a/src/runner/runnerlib.cpp b/src/runner/runnerlib.cpp
+index 57cad2d..c18bd4f 100644
+--- a/src/runner/runnerlib.cpp
++++ b/src/runner/runnerlib.cpp
+@@ -84,27 +84,27 @@ extern "C" {
+ 	QString msg = "Start '" + caseOrSuite + "'";
+ 	QString detail = "Test '" + caseOrSuite + "' started";
+ 	printf( "%s\t%-10s\t%-30s\t%s\n",
+-		dt.toString( f ).ascii(),
++                qPrintable(dt.toString( f )),
+ 		"START",
+-		msg.ascii(),
+-		detail.ascii() );
++                qPrintable(msg),
++                qPrintable(detail) );
+ 	detail.sprintf( "Signal %d", sig );
+         const char *signalMsg = "squishrunner crashed";
+         if ( sig == SIGABRT )
+             signalMsg = "squishrunner aborted";
+ 	printf( "%s\t%-10s\t%-30s\t%s\n",
+-		dt.toString( f ).ascii(),
++                qPrintable(dt.toString( f )),
+ 		"FATAL",
+                 signalMsg,
+ 		// #### would be great to display a backtrace here
+-		detail.ascii() );
++                qPrintable(detail) );
+ 	msg = "End '" + caseOrSuite + "'";
+ 	detail = "End of test '" + caseOrSuite + "'";
+ 	printf( "%s\t%-10s\t%-30s\t%s\n",
+-		dt.toString( f ).ascii(),
++                qPrintable(dt.toString( f )),
+ 		"END",
+-		msg.ascii(),
+-		detail.ascii() );
++                qPrintable(msg),
++                qPrintable(detail) );
+ 	abort();
+     }
+ 
+@@ -797,16 +797,16 @@ static int testSuite( QTextStream &dts )
+ 
+     QDir suiteDir( testsuite );
+     caseOrSuite = testsuite;
+-    suiteDir.convertToAbs();
++    suiteDir.makeAbsolute();
+     QString suite = suiteDir.dirName();
+     if ( !suiteDir.exists() ) {
+ 	fprintf( stderr, "squishrunner: Suite %s doesn't exist\n",
+-		 suite.latin1() );
++                 qPrintable(suite) );
+ 	if ( debug_dump )
+ 	    dts << "squishrunner: Suite " << suite << " doesn't exist" << endl;
+ 	return failureExitCode;
+     }
+-    QDir::setCurrent( suiteDir.absPath() );
++    QDir::setCurrent( suiteDir.absolutePath() );
+     bool rgSpecified = !reportGenList.isEmpty();
+     bool record = !rtestCase.isEmpty();
+ 
+@@ -833,7 +833,7 @@ static int testSuite( QTextStream &dts )
+ 	QDir caseDir( *it );
+ 	if ( !caseDir.exists() ) {
+ 	    fprintf( stderr, "squishrunner: Test Case %s doesn't exist\n",
+-		     (*it).latin1() );
++                     qPrintable((*it)) );
+ 	    if ( debug_dump )
+ 		dts << "squishrunner: Test Case " << *it << " doesn't exist" << endl;
+ 	    return failureExitCode;
+@@ -1049,7 +1049,7 @@ static int testCase( QTextStream &dts )
+     if ( snippetFile.isEmpty() ) {
+ 	if ( !QDir( testcase ).exists() ) {
+ 	    fprintf( stderr, "squishrunner: Test Case %s doesn't exist\n",
+-		    testcase.latin1() );
++                    qPrintable(testcase) );
+ 	    if ( debug_dump )
+ 		dts << "squishrunner: Test Case " << testcase << " doesn't exist" << endl;
+ 	    return failureExitCode;
+@@ -1067,10 +1067,10 @@ static int testCase( QTextStream &dts )
+ 	 */
+ 	if ( !record ) {
+ 	    QDir dir = QDir::current();
+-	    QStringList tests = dir.entryList( "test.*" );
++	    QStringList tests = dir.entryList( QStringList() << "test.*" );
+ 	    if ( tests.count() == 0 ) {
+ 		fprintf( stderr, "squishrunner: No test script found in "
+-			"test case directory '%s'\n", testcase.latin1() );
++                        "test case directory '%s'\n", qPrintable(testcase) );
+ 		return failureExitCode;
+ 	    }
+ 
+@@ -1090,7 +1090,7 @@ static int testCase( QTextStream &dts )
+ 
+                     if ( tests.count() > 1 ) {
+                         fprintf( stderr, "squishrunner: Found multiple test scripts "
+-                                         "in directory '%s': (%s); Will use '%s' to execute the test.\n", testcase.latin1(), tests.join(",").latin1(), testcaseScriptFileName.latin1() );
++                                         "in directory '%s': (%s); Will use '%s' to execute the test.\n", qPrintable(testcase), qPrintable(tests.join(",")), qPrintable(testcaseScriptFileName) );
+                     }
+ 		    break;
+ 		}
+@@ -1261,10 +1261,10 @@ static int config( QTextStream &dts )
+ 	    QString key = cmd.key;
+ 	    QString value = cmd.value;
+ 	    for ( int i = offset + 1; i < int(cfgs.size()); ++i ) {
+-		QCString placeholder;
++                QString placeholder;
+ 		placeholder.sprintf( "%%%d", i - offset );
+-		key = key.replace( placeholder.data(), cfgs[i] );
+-		value = value.replace( placeholder.data(), cfgs[i] );
++                key = key.replace( placeholder, cfgs[i] );
++                value = value.replace( placeholder, cfgs[i] );
+ 	    }
+             GlobalSettings s;
+ 	    if ( value[0] == '=' ) {
+@@ -1272,8 +1272,8 @@ static int config( QTextStream &dts )
+ 		    s.writeEntry( key, value.mid( 1 ) );
+ 	    } else {
+ 		QString v = s.readStringEntry( key );
+-		QStringList l = QStringList::split( ',', v );
+-		if ( l.find( value.mid( 1 ) ) == l.end() )
++                QStringList l = v.split( ',', QString::SkipEmptyParts );
++                if ( !l.contains( value.mid( 1 ) ) )
+ 		    l << value.mid( 1 );
+ 		if ( !debug_dump )
+ 		    s.writeEntry( key, l.join( "," ) );
+@@ -1286,7 +1286,7 @@ static int config( QTextStream &dts )
+ 	fprintf( stderr, "squishrunner: Missing command\n" );
+     else
+ 	fprintf( stderr, "squishrunner: Unknown command: %s\n",
+-		 command.latin1() );
++                 qPrintable(command) );
+     if ( debug_dump )
+ 	dts << "squishrunner: Unknown command: " << command << endl;
+     printUsage( dts );
+@@ -1613,7 +1613,7 @@ static int info( QTextStream &dts )
+         QStringList infos = FString::split(',', what[0] );
+         for ( int i = 0; i < infos.size(); ++i ) {
+             if ( !serverInformantType( QStringList( infos[i] ), &whatType, &arg ) ) {
+-                fprintf( stderr, "squishrunner: Unknown info: %s\n", what[0].latin1() );
++                fprintf( stderr, "squishrunner: Unknown info: %s\n", qPrintable( what[0] ) );
+                 if ( debug_dump )
+                     dts << "squishrunner: Unknown info: " << what[0] << endl;
+                 return -1;
+@@ -1636,14 +1636,14 @@ static int info( QTextStream &dts )
+ 	fprintf( stderr,
+ 		 "squishrunner: Error while retrieving information: %s\n"
+ 		 "              %s\n",
+-		 what[0].latin1(),
+-		 informant.errorString().latin1() );
++                 qPrintable(what[0]),
++                 qPrintable(informant.errorString()) );
+ 	if ( debug_dump )
+ 	    dts << "squishrunner: Error while retrieving information: " << what[0] << endl;
+ 	return -1;
+     }
+     if ( !out.isEmpty() )
+-	fprintf( stdout, "%s\n", out.join( "\n" ).utf8().operator const char*() );
++        fprintf( stdout, "%s\n", out.join( "\n" ).toUtf8().operator const char*() );
+     return 0;
+ 
+ }
+@@ -1701,7 +1701,7 @@ static int spy( QTextStream &dts )
+ 		dts << "squishrunner: --spy specified with --testsuite and --autid\n" << endl;
+ 	    return -1;
+ 	}
+-	testsuite = QDir( testsuite ).absPath();
++        testsuite = QDir( testsuite ).absolutePath();
+ 	QDir::setCurrent( testsuite );
+ 	Runner r( Runner::MSpy, testsuite, testverification, envvars, envVarList );
+ 	return r.exec();
+@@ -1803,7 +1803,7 @@ int runnerMain( int argc, char **argv )
+     QFile ddf( "debugdump.log" );
+     QTextStream dts;
+     if ( debug_dump ) {
+-	ddf.open( IO_WriteOnly );
++        ddf.open( QIODevice::WriteOnly );
+ 	dts.setDevice( &ddf );
+ 	unsetenv( "SQUISH_DEBUG_DUMP" );
+     }
+@@ -1862,7 +1862,7 @@ int runnerMain( int argc, char **argv )
+ 
+     if ( !host.isNull() ) {
+ 	Runner::setServerHost( host );
+-	setenv( "SQUISHRUNNER_HOST", host.ascii(), true );
++        setenv( "SQUISHRUNNER_HOST", qPrintable(host), true );
+     } else {
+ 	const char *h = getenv( "SQUISHRUNNER_HOST" );
+ 	if ( h && strlen( h ) )
+@@ -1873,7 +1873,7 @@ int runnerMain( int argc, char **argv )
+ 
+     if ( !port.isNull() ) {
+ 	Runner::setServerPort( port.toUInt() );
+-	setenv( "SQUISHRUNNER_PORT", port.ascii(), true );
++        setenv( "SQUISHRUNNER_PORT", qPrintable(port), true );
+     } else {
+ 	const char *p = getenv( "SQUISHRUNNER_PORT" );
+ 	if ( p && strlen( p ) )
+@@ -1884,7 +1884,7 @@ int runnerMain( int argc, char **argv )
+ 
+     if ( !debugLog.isNull() ) {
+         Runner::setDebugLogOptions( debugLog );
+-        setenv( "SQUISHRUNNER_DEBUGLOG", debugLog.ascii(), true );
++        setenv( "SQUISHRUNNER_DEBUGLOG", qPrintable(debugLog), true );
+     } else {
+ 	const char *p = getenv( "SQUISHRUNNER_DEBUGLOG" );
+ 	if ( p && strlen( p ) )
+diff --git a/src/runner/serverinformant.cpp b/src/runner/serverinformant.cpp
+index 5cc6ddc..f6602e4 100644
+--- a/src/runner/serverinformant.cpp
++++ b/src/runner/serverinformant.cpp
+@@ -156,26 +156,26 @@ QStringList ServerInformant::getInformation( InfoType what,
+         int editionFlags = getEditionFlags();
+         if ( !(editionFlags & LicenseKey::SquishQtKey) &&
+              !(editionFlags & LicenseKey::Squish4JSKey) )
+-            ret.remove( "Qt" );
++            ret.removeAll( "Qt" );
+         if ( !(editionFlags & LicenseKey::SquishWeb0Key) &&
+              !(editionFlags & LicenseKey::SquishWeb1Key) &&
+              !(editionFlags & LicenseKey::SquishWeb2Key) )
+-            ret.remove( "Web" );
++            ret.removeAll( "Web" );
+         if ( !(editionFlags & LicenseKey::SquishTkKey) )
+-            ret.remove( "Tk" );
++            ret.removeAll( "Tk" );
+         if ( !(editionFlags & LicenseKey::SquishXViewKey) )
+-            ret.remove( "XView" );
++            ret.removeAll( "XView" );
+         if ( !(editionFlags & LicenseKey::SquishJavaKey) ) {
+-            ret.remove( "Java" );
++            ret.removeAll( "Java" );
+         }
+         if ( !(editionFlags & LicenseKey::SquishMacKey) )
+-            ret.remove( "Mac" );
++            ret.removeAll( "Mac" );
+         if ( !(editionFlags & LicenseKey::SquishIPhoneKey) )
+-            ret.remove( "iOS" );
++            ret.removeAll( "iOS" );
+         if ( !(editionFlags & LicenseKey::SquishWindowsKey) )
+-            ret.remove( "Windows" );
++            ret.removeAll( "Windows" );
+         if ( !(editionFlags & LicenseKey::SquishAndroidKey) )
+-            ret.remove( "Android" );
++            ret.removeAll( "Android" );
+     }
+     return ret;
+ }
+@@ -209,7 +209,7 @@ QString ServerInformant::getInformationAsXmlList( const QString &indent,
+         // sub-values)
+         switch ( what ) {
+             case Applications: {
+-                QStringList subItems = QStringList::split( "\t", item, FALSE );
++                QStringList subItems = item.split( "\t", QString::SkipEmptyParts);
+                 xml += " executableName='" + escapeXmlAttribute(subItems[0], true) + "'";
+                 xml += " executablePath='" + escapeXmlAttribute(subItems[1], true) + "'";
+                 xml += " mappedOrViaAUTPaths='" + escapeXmlAttribute(subItems[2], true) + "'";
+@@ -234,13 +234,13 @@ QString ServerInformant::getInformationAsXmlList( const QString &indent,
+             case PauseHotkey:
+                 break;
+             case AttachableApplications: {
+-                QStringList subItems = QStringList::split( "\t", item, FALSE );
++                QStringList subItems = item.split( "\t", QString::SkipEmptyParts );
+                 xml += " name='" + escapeXmlAttribute(subItems[0], true) + "'";
+                 xml += " hostAndPort='" + escapeXmlAttribute(subItems[1], true) + "'";
+                 break;
+             }
+             case WebBrowsers: {
+-                QStringList subItems = QStringList::split( "\t", item, FALSE );
++                QStringList subItems = item.split( "\t", QString::SkipEmptyParts );
+                 xml += " browserShortname='" + escapeXmlAttribute(subItems[0], true) + "'";
+                 xml += " browserName='" + escapeXmlAttribute(subItems[1], true) + "'";
+                 if( subItems.count() > 2 ) {
+@@ -260,7 +260,7 @@ QString ServerInformant::getInformationAsXmlList( const QString &indent,
+             case AndroidDevices:
+                 break;
+             case AndroidInstrumentation:
+-                QStringList subItems = QStringList::split( "\t", item, FALSE );
++                QStringList subItems = item.split( "\t", QString::SkipEmptyParts );
+                 xml += " device='" + escapeXmlAttribute(subItems[0], true) + "'";
+                 xml += " package='" + escapeXmlAttribute(subItems[1], true) + "'";
+                 xml += " target='" + escapeXmlAttribute(subItems[2], true) + "'";
+diff --git a/src/runner/spy.cpp b/src/runner/spy.cpp
+index 276369d..9a69dfc 100644
+--- a/src/runner/spy.cpp
++++ b/src/runner/spy.cpp
+@@ -236,7 +236,7 @@ void Spy::prompt()
+             } else if ( cmd.args[1] == "methods" ) {
+                 listMethods( cmd.args.size() > 2 ? cmd.args[2] : QString() );
+             } else {
+-                fprint( stderr, "Error list: unknown option %s", cmd.args[1].latin1() );
++                fprint( stderr, "Error list: unknown option %s", qPrintable(cmd.args[1]) );
+                 fflush( stderr );
+             }
+             break;
+@@ -246,7 +246,7 @@ void Spy::prompt()
+                 loadFilters();
+             } else {
+                 fprint( stderr, "Error filter: unknown option %s",
+-                         cmd.args[1].latin1() );
++                         qPrintable(cmd.args[1]) );
+                 fflush( stderr );
+             }
+             break;
+@@ -270,9 +270,9 @@ void Spy::prompt()
+                 fflush( stderr );
+                 break;
+             }
+-            cmd.args.remove( cmd.args.begin() );
++            cmd.args.removeFirst();
+             QString obj = cmd.args[0];
+-            cmd.args.remove( cmd.args.begin() );
++            cmd.args.removeFirst();
+             retrieve( obj, cmd.args );
+             break;
+         }
+@@ -446,7 +446,7 @@ void Spy::objectPicked( const QString &s )
+         qs = qs.replace( "\\\\", "\\" );
+         o = Inspector::self()->findObject( qs );
+         while ( !o && qs.length() > 0 ) {
+-            int p = qs.findRev( '.' );
++            int p = qs.lastIndexOf( '.' );
+             if ( p == -1 ) {
+                 stop();
+                 return;
+@@ -461,7 +461,7 @@ void Spy::objectPicked( const QString &s )
+     }
+     qs.prepend( "+" );
+     fprint( stdout, "@picked: %s\t%s",
+-	     stringEscape( qs ).data(), o->type()->fullyQualifiedClassName().latin1() );
++             stringEscape( qs ).data(), qPrintable(o->type()->fullyQualifiedClassName()) );
+     fflush( stdout );
+     stop();
+ }
+@@ -475,7 +475,7 @@ void Spy::processEvents()
+ 					  QEventLoop::WaitForMore, 100 );
+ #else
+ 	QApplication::processEvents( QEventLoop::AllEvents |
+-				     QEventLoop::WaitForMore, 100 );
++                                     QEventLoop::WaitForMoreEvents, 100 );
+ #endif
+         usleep( 5000 );
+     }
+@@ -504,7 +504,7 @@ void Spy::listObjects( const QString &obj )
+ 	Object::Ptr o = l.at(i);
+ 	QString s = o->name();
+ 	s = s.replace( '.', "\\." );
+-	if ( s.stripWhiteSpace().isEmpty() ||
++        if ( s.trimmed().isEmpty() ||
+ 		matchFilter( s + ":" + o->className(), FTObject ) )
+ 	    continue;
+ 	s.prepend( QChar( '+' ) );
+@@ -570,7 +570,7 @@ void Spy::printProperties( const Class *c, Object::Ptr o,
+     QStringList printed;
+     for ( i = c->numProperties() - 1; i >=0 ; --i ) {
+ 	const Property *p = c->property( i );
+-	if ( printed.find( p->name() ) != printed.end() )
++        if ( printed.contains( p->name() ) )
+ 	    continue;
+         printed.append( p->name() );
+ 	if ( Spy::matchFilter( qualifiedName( p ), FTProperty ) )
+@@ -591,7 +591,7 @@ void Spy::printProperties( const Class *c, Object::Ptr o,
+     }
+ 
+     if ( !propbuf.isEmpty() ) {
+-	fprintf( stdout, "%s", propbuf.latin1() );
++        fprintf( stdout, "%s", qPrintable(propbuf) );
+ 	fflush( stdout );
+     }
+ }
+@@ -618,14 +618,14 @@ void Spy::listProperties( const QString &obj, const QString &prop )
+ 	fprint( stdout, "@end \"%s\"",
+                  stringEscape( obj ).data() );
+     } else {
+-	const QStringList props = QStringList::split( '.', prop );
++        const QStringList props = prop.split( '.', QString::SkipEmptyParts );
+ 	const Property *p = 0;
+ 	for ( QStringList::ConstIterator it = props.begin();
+ 	      it != props.end(); ++it ) {
+ 	    p = c->property( *it );
+ 	    if ( !p ) {
+ 		fprint( stderr, "Error list properties: No such property '%s'",
+-			 prop.latin1() );
++                         qPrintable(prop) );
+ 		fflush( stderr );
+ 		return;
+ 	    }
+@@ -636,16 +636,16 @@ void Spy::listProperties( const QString &obj, const QString &prop )
+ 	}
+ 	if ( !o && p->isReadable() ) {
+ 	    fprint( stderr, "Error list properties: Null property value '%s'",
+-		     prop.latin1() );
++                     qPrintable(prop) );
+ 	    fflush( stderr );
+ 	    return;
+ 	}
+ 	fprint( stdout, "@startprop \"%s\" \"%s\"",
+-		 stringEscape( obj ).data(), prop.latin1() );
++                 stringEscape( obj ).data(), qPrintable(prop) );
+         if ( o )
+             printProperties( c, o, outputPrefix );
+ 	fprint( stdout, "@end \"%s\" \"%s\"",
+-		 stringEscape( obj ).data(), prop.latin1() );
++                 stringEscape( obj ).data(), qPrintable(prop) );
+     }
+     fflush( stdout );
+ }
+@@ -677,7 +677,7 @@ void Spy::listMethods( const QString &obj )
+ 	QString s = m->toString();
+ 	if ( m->isStatic() )
+ 	    s.prepend( "static " );
+-	if ( printed.find( s ) != printed.end() )
++        if ( printed.contains( s ) )
+ 	    continue;
+         printed.append( s );
+ 	if ( matchFilter( qualifiedName( m ), FTMethod ) )
+@@ -716,7 +716,7 @@ void Spy::listProperty( Object::Ptr o, const Property *p,
+     o = p->get( o );
+     if ( !o ) {
+ 	fprint( stderr, "Error listProperty: Null property value '%s'",
+-		 p->name().latin1() );
++                 qPrintable(p->name()) );
+ 	fflush( stderr );
+ 	return;
+     }
+@@ -738,8 +738,8 @@ void Spy::listProperty( Object::Ptr o, const Property *p,
+ 	     canConvertTo( Inspector::self()->type( Inspector::PChar ),
+ 			   false, true ) ) {
+ 	    fprint( stdout, "%s%s=%s\t%s",
+-		     prefix.latin1(), p->name().latin1(),
+-		     stringEscape( s ).data(), p->type().type->className().latin1() );
++                     qPrintable(prefix), qPrintable(p->name()),
++                     stringEscape( s ).data(), qPrintable(p->type().type->className()) );
+ 	}
+     }
+ }
+@@ -760,7 +760,7 @@ void Spy::retrieve( const QString &object, const QStringList &args )
+ 	const Property *p = o->type()->property( *it );
+ 	if ( !p ) {
+ 	    fprint( stderr, "Warning retrieve: No property '%s' in type '%s'",
+-		     (*it).latin1(), o->type()->fullyQualifiedClassName().latin1() );
++                     qPrintable((*it)), qPrintable(o->type()->fullyQualifiedClassName()) );
+ 	    fflush( stderr );
+ 	    continue;
+ 	}
+@@ -771,9 +771,9 @@ void Spy::retrieve( const QString &object, const QStringList &args )
+ 	     canConvertTo( Inspector::self()->type( Inspector::PChar ),
+ 			   false, true ) ) {
+ 	    fprint( stdout, "%s=%s\t%s\n",
+-		    p->name().latin1(),
++                    qPrintable(p->name()),
+ 		    stringEscape( propertyValue( p, o, false ) ).data(),
+-		    p->type().type->className().latin1() );
++                    qPrintable(p->type().type->className()) );
+ 	}
+ 
+ 	if ( p->type().type->numProperties() )
+diff --git a/src/shared/imagemask.cpp b/src/shared/imagemask.cpp
+index 5e75aa5..76b6d95 100644
+--- a/src/shared/imagemask.cpp
++++ b/src/shared/imagemask.cpp
+@@ -205,7 +205,7 @@ void ImageMask::fillRect( const QRect &r, QImage *img ) const
+     *img = img->convertToFormat( QImage::Format_RGB32 );
+ #endif
+ 
+-    QImage fillDataImg( QSize(clippedMaskRect.width(), 1), 32 );
++    QImage fillDataImg( QSize(clippedMaskRect.width(), 1), QImage::Format_RGB32 );
+     fillDataImg.fill( qRgb( 0, 1, 2 ) );
+     void* fillData = fillDataImg.scanLine( 0 );
+     int fillDataSize = 4 * clippedMaskRect.width();
+diff --git a/src/shared/scriptlanguage.cpp b/src/shared/scriptlanguage.cpp
+index a0ea931..d4ec57b 100644
+--- a/src/shared/scriptlanguage.cpp
++++ b/src/shared/scriptlanguage.cpp
+@@ -169,7 +169,7 @@ ScriptLanguageFactory::scriptLanguage( const QString &extensionOrName ) const
+ const ScriptLanguage *
+ ScriptLanguageFactory::languageByFile( const QString &fn )
+ {
+-    QString ext = QFileInfo( fn ).extension();
++    QString ext = QFileInfo( fn ).suffix();
+ 
+     return factory()->scriptLanguage( ext );
+ }
+diff --git a/src/shared/vputils.cpp b/src/shared/vputils.cpp
+index 31204bd..6d275ff 100644
+--- a/src/shared/vputils.cpp
++++ b/src/shared/vputils.cpp
+@@ -37,7 +37,8 @@ QString decodeVPValue( const QDomElement& element, int version, bool* err )
+         QDomNodeList l = element.elementsByTagName("base64EncodedValue");
+         if( l.count() > 0 ) {
+             QString base64 = l.item(0).toElement().text();
+-            QByteArray tmp( base64.length() );
++            QByteArray tmp;
++            tmp.resize( base64.length() );
+             int len = Squish::from64tobits( tmp.data(), FRawString( base64 ).utf8() );
+             value = QString::fromUtf8( tmp.data(), len );
+         } else {
+@@ -51,7 +52,8 @@ QString encodeVPValue( const QString& value )
+ {
+     QByteArray tmp = FString::utf8( value );
+     ulong len = tmp.size();
+-    FCString base64( len * 2 );
++    FCString base64;
++    base64.resize( len * 2 );
+     // Using len -1 as we don't want the terminating \0 in the tmp bytearray in the final value
+     Squish::to64frombits( (uchar*)base64.data(), (uchar*)tmp.data(), len - 1 );
+     return QString::fromAscii( base64.data() );
+diff --git a/src/test/Buildsub b/src/test/Buildsub
+index f9091a7..906f399 100644
+--- a/src/test/Buildsub
++++ b/src/test/Buildsub
+@@ -83,7 +83,8 @@ installFiles(["eventrecorder.h", "testcase.h", "testdata.h", "tsvparser.h",
+ var testLibDefines = [ "SQUISH_TST_MAKEDLL",
+                        "CONF_EXPORT",
+                        "JSON_USE_EXCEPTION=0",
+-                       "TIXML_USE_STL" ];
++                       "TIXML_USE_STL",
++                       "QT_DISABLE_DEPRECATED_BEFORE=0"];
+ if (qt4)
+     testLibDefines.push("QT3_SUPPORT");
+ if ( qtProfessionalEdition ) {
+diff --git a/src/test/testvp.cpp b/src/test/testvp.cpp
+index 90e4b8c..6d8ec30 100644
+--- a/src/test/testvp.cpp
++++ b/src/test/testvp.cpp
+@@ -208,13 +208,14 @@ static QString imageToBase64( const QImage &img, const char* format )
+ #else
+     QBuffer buf( &ba );
+ #endif
+-    buf.open( IO_WriteOnly );
++    buf.open( QIODevice::WriteOnly );
+ 
+     img.save( &buf, format );
+     buf.close();
+ 
+     ulong len = ba.size();
+-    QCString base64( len * 2 );
++    QCString base64;
++    base64.resize( len * 2 );
+ 
+     to64frombits( (uchar*)base64.data(), (uchar*)ba.data(), len );
+ 
+@@ -223,8 +224,10 @@ static QString imageToBase64( const QImage &img, const char* format )
+ 
+ static QImage imageFromBase64( const QString &base64, const char* format )
+ {
+-    QByteArray ba( base64.length() );
+-    int len = from64tobits( ba.data(), base64.utf8().data() );
++    QByteArray ba;
++    ba.resize( base64.length() );
++
++    int len = from64tobits( ba.data(), base64.toUtf8().data() );
+ 
+     QImage img;
+     img.loadFromData( (const uchar*)ba.data(), len, format );
+@@ -267,9 +270,6 @@ static bool runImageComparisonTool( const QImage &imgNow, const QImage &imgExp,
+ {
+     QStringList arguments;
+ 
+-    // The first argument is comparator path.
+-    arguments.append(comparatorPath);
+-
+     // Save the images to compare.
+     QString imgPath1(Squish::tempFile().c_str());
+     imgNow.save(imgPath1, "PNG");
+@@ -283,23 +283,22 @@ static bool runImageComparisonTool( const QImage &imgNow, const QImage &imgExp,
+ 
+     // Invoke comparator with arguments.
+     QProcess comparator;
+-    comparator.setArguments(arguments);
++    comparator.start(comparatorPath,arguments);
+ 
+-    if (!comparator.start()) {
++    if (!comparator.waitForStarted()) {
+         QFile::remove(imgPath1);
+         QFile::remove(imgPath2);
+         return false;
+     }
+ 
+     // Wait for the comparison completes.
+-    while (comparator.isRunning())
+-        sleep(1);
++    comparator.waitForFinished();
+ 
+-    if (comparator.normalExit())
++    if (QProcess::NormalExit == comparator.exitStatus())
+         *isIdentical = bool(comparator.exitStatus() == 0);
+ 
+     // Get the comparison details from the tool.
+-    *resultMsg = comparator.readLineStdout();
++    *resultMsg = comparator.readAllStandardOutput();
+ 
+     // Remove temporary image files.
+     QFile::remove(imgPath1);
+@@ -314,7 +313,7 @@ VPResult TestVP::verify( TestResult *res, const LineInfo &li, RunnerInterface *r
+     QDomDocument doc;
+     QFile f( m_vpFileInfo.filePath() );
+ 
+-    if ( !f.open( IO_ReadOnly ) ) {
++    if ( !f.open( QIODevice::ReadOnly ) ) {
+         return VPResult( VPResult::Error,
+                 QString( "Verification point file '%1' couldn't be found." ).arg( m_vpName ),
+                 QString() );
+@@ -363,7 +362,7 @@ VPResult TestVP::verify( TestResult *res, const LineInfo &li, RunnerInterface *r
+         }
+     }
+ 
+-    if ( modified && f.open( IO_WriteOnly) ) {
++    if ( modified && f.open( QIODevice::WriteOnly) ) {
+         QTextStream ts( &f );
+         doc.save( ts, 4 );
+         f.close();
+@@ -473,7 +472,7 @@ static QString desktopScreenshotDir(RunnerInterface *ri)
+ 
+     if (imgDir.isEmpty()) {
+         // Desktop screenshots default location.
+-        imgDir = QFileInfo(testCase).dirPath(true)
++        imgDir = QFileInfo(testCase).absolutePath()
+                  + QDir::separator()
+                  + failedImagesDirName
+                  + QDir::separator();
+@@ -675,9 +674,9 @@ bool TestVP::performPropertyVerification( const QDomElement &v, const TestDataRe
+     } else if ( type == "double" ) {
+         expectedValue = Inspector::self()->createPrimitive( value.toDouble() );
+     } else if ( type == "bool" ) {
+-        expectedValue = Inspector::self()->createPrimitive( value.lower() == "true" ? true : false );
++        expectedValue = Inspector::self()->createPrimitive( value.toLower() == "true" ? true : false );
+     } else {
+-        expectedValue = Inspector::self()->createPrimitive( value.utf8().data() );
++        expectedValue = Inspector::self()->createPrimitive( value.toUtf8().data() );
+     }
+ 
+     Object::Ptr o = resolveObjectNameOrLogError( ri, objName, res );
+@@ -685,7 +684,7 @@ bool TestVP::performPropertyVerification( const QDomElement &v, const TestDataRe
+         return false;
+     }
+ 
+-    QStringList props = QStringList::split( '.', property );
++    QStringList props = property.split( '.', QString::SkipEmptyParts );
+     QStringList::ConstIterator it, end = props.end();
+ 
+     for ( it = props.begin(); it != end; ++it ) {
+@@ -757,7 +756,7 @@ bool TestVP::performScreenshotVerification( QDomElement &v, int version, VPResul
+ 
+     QImage imgNowOrig = imgNow;
+ 
+-    QImage imgExp = imageFromBase64( base64, format.latin1() );
++    QImage imgExp = imageFromBase64( base64, qPrintable( format ) );
+ 
+     ImageMask mask = parseScreenshotMaskElement( v.firstChild().nextSibling().toElement() );
+ 
+@@ -766,8 +765,8 @@ bool TestVP::performScreenshotVerification( QDomElement &v, int version, VPResul
+     if (imgNow.size() != imgExp.size() && hasPositiveMask(mask)) {
+         // In case of positive mask, bring both images to the
+         // same size - the maximum of both images.
+-        int maxWidth = QMAX(imgNow.width(), imgExp.width());
+-        int maxHeight = QMAX(imgNow.height(), imgExp.height());
++        int maxWidth = qMax(imgNow.width(), imgExp.width());
++        int maxHeight = qMax(imgNow.height(), imgExp.height());
+ 
+         imgNow = imgNow.copy(0, 0, maxWidth, maxHeight);
+         imgExp = imgExp.copy(0, 0, maxWidth, maxHeight);
+diff --git a/src/wrappers/common/native.cpp b/src/wrappers/common/native.cpp
+index 1ac4483..241176e 100644
+--- a/src/wrappers/common/native.cpp
++++ b/src/wrappers/common/native.cpp
+@@ -60,6 +60,10 @@
+ #  endif
+ #endif
+ 
++// Hobart
++// Grab display from X11 directly instead of through Qt
++#include <X11/Xlib.h>
++
+ #if defined(SQUISH_NATIVE_WS_X11)
+ #  include <X11/Xlib.h>
+ #  include <X11/Xutil.h>
+@@ -631,21 +635,9 @@ static void typeX11KeyCombo( Display *dpy, Window w, QStringList sl )
+ static Display *x11Display()
+ {
+     if ( !display ) {
+-#if QT_VERSION >= 0x040000
+-# ifdef Q_WS_QPA
+-#  if QT_VERSION >= 0x050000
+-        display = static_cast<Display*>(
+-                QGuiApplication::platformNativeInterface()->nativeResourceForWindow( "display", 0 ) );
+-#  else
+-        display = static_cast<Display*>(
+-                QApplication::platformNativeInterface()->nativeResourceForWidget( "display", 0 ) );
+-#  endif
+-# else
+-        display = QX11Info::display();
+-# endif
+-#else
+-        display = qt_xdisplay();
+-#endif
++        // Hobart
++        // Grab display from X11 directly instead of through Qt
++        display = XOpenDisplay( qgetenv("DISPLAY") );
+     }
+     if ( !display ) {
+         fprintf( stderr, "Failed to get X11 Display\n" );
+diff --git a/src/wrappers/qt/qtwrapper.cpp b/src/wrappers/qt/qtwrapper.cpp
+index 2ce35b1..a96d453 100644
+--- a/src/wrappers/qt/qtwrapper.cpp
++++ b/src/wrappers/qt/qtwrapper.cpp
+@@ -5824,6 +5824,23 @@ bool Application::isSpontaneous( QEvent *e, QObject *o )
+     res |= e->type() == QEvent::MouseButtonRelease;
+ #endif
+ 
++    // fix for specific hobart events (i.e. record/playback workaround)
++    if ( QEvent::KeyPress == e->type() )
++    {
++        QKeyEvent *keyEvent( static_cast<QKeyEvent*>( e ) );
++
++        // alt+arrow
++        // swipe
++        if ( Qt::AltModifier == keyEvent->modifiers() )
++            if (( Qt::Key_Down == keyEvent->key() ) ||
++                ( Qt::Key_Left == keyEvent->key() ) ||
++                ( Qt::Key_Right == keyEvent->key() ) ||
++                ( Qt::Key_Up == keyEvent->key() ))
++            {
++                res = true;
++            }
++    }
++
+     return res;
+ }
+ 

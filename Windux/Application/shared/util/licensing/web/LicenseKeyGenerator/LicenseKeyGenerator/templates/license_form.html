@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Hobart License Key Generator
+        </title>
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.11.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+        <style>
+            html, body {
+               height: 100%
+            }
+
+            html {
+                /*background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.95) 100%);*/
+                display: table;
+                width: 100%;
+            }
+
+            body {
+/*                 background: linear-gradient(#3366FF, #003399); */
+                text-align: center;
+                vertical-align: middle;
+                width: 100%;
+            }
+
+            .container {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .column {
+                padding: 15px;
+                position: relative;
+                float: left;
+            }
+
+            .text_field_cell {
+                padding: 5px;
+            }
+
+            .char_field {
+                width: 200px;
+            }
+
+            #submit_button {
+                padding-left: 30%;
+                vertical-align: middle;
+                text-align: center;
+                margin: auto;
+                clear: both;
+            }
+            #submit_bar {
+                width: 85.7%;
+                font-size: 20px;
+                font-weight: bold;
+                vertical-align: middle;
+                text-align: center;
+                margin: auto;
+            }
+
+            #accordion {
+                margin: auto;
+                text-align: center;
+                vertical-align: middle;
+                width: 50%;
+            }
+
+            .accordion_section {
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            table {
+                margin: auto;
+            }
+
+            #id_hte_product_names {
+                font-size: 20px;
+            }
+
+            #id_scale_product_names {
+                font-size: 20px;
+                height: 105px;
+            }
+
+            #id_type {
+                font-size: 20px;
+            }
+
+            .errorlist {
+                position: relative;
+                list-style: none;
+                color: red;
+                font-weight: bold;
+                font-size: 15px;
+            }
+
+            /*.ui-accordion-header {
+                color: white;
+                background: linear-gradient(to bottom, rgba(174,188,191,1) 0%,rgba(110,119,116,1) 50%,rgba(10,14,10,1) 51%,rgba(10,8,9,1) 100%);
+            }*/
+
+            {% if form.usb_serial_number.errors %}
+                #id_usb_serial_number {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.csid.errors %}
+                #id_csid {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.contact_name.errors %}
+                #id_contact_name {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.company_name.errors %}
+                #id_company_name {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.company_address.errors %}
+                #id_company_address {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.hte_product_names.errors %}
+                #id_hte_product_names {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.scale_product_names.errors %}
+                #id_scale_product_names {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.email_address.errors %}
+                #id_email_address {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.phone_number.errors %}
+                #id_phone_number {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.sales_rep.errors %}
+                #id_sales_rep {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+
+            {% if form.purchase_order_number.errors %}
+                #id_purchase_order_number {
+                    border-style: solid;
+                    border-color: red;
+                }
+            {% endif %}
+        </style>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $("#id_type").change(function(){
+
+                    $( "#id_type option:selected").each(function() {
+
+                        if($(this).attr("value")=="HTE") {
+                            $("#id_allotment").prop("readonly", "True");
+                            $("#id_allotment").spinner("option", "max", 1);
+                            $("#id_allotment").spinner().val(1);
+
+                            $("#scale_serial_type_selection").hide();
+                            $("#hte_serial_type_selection").show();
+
+                            $("#hte_product_names").show();
+                            $("#scale_product_names").hide();
+                        }
+
+                        if($(this).attr("value")=="SCALE") {
+                            $("#id_allotment").removeAttr("readonly");
+                            $("#id_allotment").spinner("option", "max", 99999);
+
+                            $("#hte_serial_type_selection").hide();
+                            $("#scale_serial_type_selection").show();
+
+                            $("#hte_product_names").hide();
+                            $("#scale_product_names").show();
+                        }
+                    });
+                }).change();
+            });
+        </script>
+    </head>
+
+    <body>
+        {% include "header.html" %}
+
+        {% if form.errors %}
+        <h3 style="color: red;'">There were errors with your submission,
+            please double check all fields!
+        </h3>
+        <p style="color: red;">
+            {{ form.non_field_errors }}
+        </p>
+        {% endif%}
+
+        <form action='{% url "LicenseKeyGenerator.views.license_page" %}' method="post" id="main_form">
+            {% csrf_token %}
+
+            {% include "authorized_fields.html" %}
+
+            <input name="submitted" type="hidden" value="True" />
+
+            <div id="accordion">
+                <h3>License Details</h3>
+
+                <div class="accordion_section">
+                    <table>
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.contact_name.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.contact_name }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.contact_name.errors }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.fred_type.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.fred_type }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.fred_type.errors }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.company_name.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.company_name}}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.company_name.errors }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.company_address.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.company_address }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.company_address.errors }}
+                            </td>
+                         </tr>
+
+                         <tr>
+                             <td class="text_field_cell">
+                                {{ form.email_address.label_tag }}
+                             </td>
+
+                             <td class="text_field_cell">
+                                {{ form.email_address }}
+                             </td>
+
+                             <td class="text_field_cell">
+                                {{ form.email_address.errors }}
+                             </td>
+                         </tr>
+
+                         <tr>
+                            <td class="text_field_cell">
+                                {{ form.phone_number.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.phone_number }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.phone_number.errors }}
+                            </td>
+                         </tr>
+
+                         <tr>
+                            <td class="text_field_cell">
+                                {{ form.sales_rep.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.sales_rep }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.sales_rep.errors }}
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td class="text_field_cell">
+                                {{ form.sales_rep_email_address.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.sales_rep_email_address }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.sales_rep_email_address.errors }}
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td class="text_field_cell">
+                                {{ form.license_type.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.license_type}}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.license_type.errors }}
+                            </td>
+                          </tr>
+
+                          <tr id="purchase_order_row">
+                               <td class="text_field_cell">
+                                   {{ form.po_file_name.label_tag }}
+                               </td>
+
+                               <td class="text_field_cell">
+                                   {{ form.po_file_name }}
+                               </td>
+
+                               <td class="text_field_cell">
+                                   {{ form.po_file_name.errors }}
+                               </td>
+                          </tr>
+
+                          <tr id="purchase_order_row">
+                               <td class="text_field_cell">
+                                   {{ form.purchase_order_number.label_tag }}
+                               </td>
+
+                               <td class="text_field_cell">
+                                   {{ form.purchase_order_number }}
+                               </td>
+
+                               <td class="text_field_cell">
+                                   {{ form.purchase_order_number.errors }}
+                               </td>
+                          </tr>
+
+                          <tr>
+                              <td class="text_field_cell">
+                                  {{ form.login_name.label_tag }}
+                              </td>
+                              <td class="text_field_cell">
+                                  {{ form.login_name }}
+                              </td>
+                              <td class="text_field_cell">
+                                  {{ form.login_name.errors }}
+                              </td>
+                          </tr>
+
+                          <tr>
+                              <td class="text_field_cell">
+                                  {{ form.support_maintenance.label_tag }}
+                              </td>
+                              <td class="text_field_cell">
+                                  {{ form.support_maintenance }}
+                              </td>
+                              <td class="text_field_cell">
+                                  {{ form.support_maintenance.errors }}
+                              </td>
+                          </tr>
+
+                    </table>
+                </div>
+
+                <h3>License Features</h3>
+
+                <div id="submit_bar">
+                    {{ form.type.errors }}
+                    <br />
+                    {{ form.type.label_tag }} {{ form.type }}
+
+                    <br />
+                    <br />
+
+                    <div id="hte_product_names">
+                        {{ form.hte_product_names.errors }}
+
+                        <div class="label_align_top">
+                            {{ form.hte_product_names.label_tag }}
+                        </div>
+
+                        {{ form.hte_product_names }}
+
+                    </div>
+
+                    <div id="scale_product_names" style="display:none;">
+                        {{ form.scale_product_names.errors }}
+
+                        <div class="label_align_top">
+                            {{ form.scale_product_names.label_tag }}
+                        </div>
+
+                        {{ form.scale_product_names }}
+                    </div>
+                </div>
+
+                <h3 style="clear: left;">Key Generation Options</h3>
+
+                <div>
+                    <table>
+                        <tr id="scale_serial_number_row">
+                            <td class="text_field_cell" id="hte_serial_type_selection">
+                                {{ form.hte_serial_type }}
+                            </td>
+
+                            <td class="text_field_cell" id="scale_serial_type_selection">
+                                {{ form.scale_serial_type }}
+                            </td>
+
+                            <td class="text_field_cell" id="serial_number">
+                                {{ form.serial_number }}
+                            </td>
+
+                            <td class="text_field_cell" id="usb_serial_errors">
+                                {{ form.serial_number.errors }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.allotment.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                               {{ form.allotment }}
+                            </td>
+
+                            <td class="text_field_cell">
+                               {{ form.allotment.errors }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text_field_cell">
+                                {{ form.timeout.label_tag }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.timeout }}
+                            </td>
+
+                            <td class="text_field_cell">
+                                {{ form.timeout.errors }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $("#accordion").accordion();
+            </script>
+
+            {% if not submitted %}
+                <div class="column" id="submit_button">
+                    <input type="submit" value="Generate License" id="form_submit" />
+                </div>
+            {% endif %}
+
+        </form>
+
+        <script type="text/javascript">
+        jQuery.fn.ForceNumericOnly =
+        function()
+        {
+            return this.each(function()
+        {
+        $(this).keydown(function(e)
+        {
+            var key = e.charCode || e.keyCode || 0;
+            // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+            // home, end, period, and numpad decimal
+            return (
+                key == 8 ||
+                key == 9 ||
+                key == 13 ||
+                key == 46 ||
+                key == 110 ||
+                key == 190 ||
+                (key >= 35 && key <= 40) ||
+                (key >= 48 && key <= 57) ||
+                (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+        var allotment = $("#id_allotment");
+        var csid = $("#id_csid");
+        var submit = $("#form_submit");
+
+        submit.button();
+
+        var csid_tooltip = "The customer should provide this to you, otherwise";
+        csid_tooltip += " there is a standalone executable that retrieves it";
+
+        allotment.ForceNumericOnly();
+
+        {% if form.allotment.errors %}
+        allotment_spinner = allotment.spinner({min: 1});
+        allotment_spinner.parent().css("border", "solid 2px red");
+        {% else %}
+        allotment.spinner({min: 1});
+        {% endif %}
+
+        csid.tooltip({content: csid_tooltip, items: "#id_csid"});
+
+        $(document).ready(function() {
+            var timeout_select = document.getElementById("id_timeout");
+
+            if ($("#id_license_type option:selected").text() == "Customer Demo") {
+                $("#purchase_order_row").hide();
+
+                timeout_select.options.length = 0;
+
+                var option1 = document.createElement('option');
+                var option2 = document.createElement('option');
+                var option3 = document.createElement('option');
+
+                option1.value = 2;
+                option1.text = '30 Days';
+
+                option2.value = 3;
+                option2.text = '60 Days';
+
+                option3.value = 4;
+                option3.text = '90 Days';
+
+                timeout_select.add(option1);
+                timeout_select.add(option2);
+                timeout_select.add(option3);
+            }
+            else {
+                $("#purchase_order_row").show();
+
+                timeout_select.options.length = 0;
+                var option1 = document.createElement('option');
+
+                option1.value = 1;
+                option1.text = 'No Timeout'
+
+                timeout_select.add(option1);
+            }
+        });
+
+        $("#scale_id_type").change(function() {
+            $("#scale_id_type option:selected").each(function(){
+                 if($(this).attr("value") == "usb_serial") {
+                     $("#ip_address").hide();
+                     $("#ip_address_errors").hide();
+                     $("#usb_serial").show();
+                     $("#usb_serial_errors").show();
+                 }
+
+                 if($(this).attr("value") == "ip_address") {
+                     $("#ip_address").show();
+                     $("#ip_address_errors").show();
+                     $("#usb_serial").hide();
+                     $("#usb_serial_errors").hide();
+                 }
+            })
+        });
+
+        $("#id_license_type").change(function() {
+            var timeout_select = document.getElementById("id_timeout");
+
+            if ($("#id_license_type option:selected").text() == "Customer Demo") {
+                $("#purchase_order_row").hide();
+
+                timeout_select.options.length = 0;
+
+                var option1 = document.createElement('option');
+                var option2 = document.createElement('option');
+                var option3 = document.createElement('option');
+
+                option1.value = 2;
+                option1.text = '30 Days';
+
+                option2.value = 3;
+                option2.text = '60 Days';
+
+                option3.value = 4;
+                option3.text = '90 Days';
+
+                timeout_select.add(option1);
+                timeout_select.add(option2);
+                timeout_select.add(option3);
+            }
+            else {
+                if ($("#id_license_type option:selected").text() == "Customer Purchased") {
+                    $("#purchase_order_row").show();
+                }
+                else {
+                    $("#purchase_order_row").hide();
+                }
+
+                timeout_select.options.length = 0;
+                var option1 = document.createElement('option');
+
+                option1.value = 1;
+                option1.text = 'No Timeout'
+
+                timeout_select.add(option1);
+            }
+        });
+        </script>
+        {% if submitted %}
+            {% load staticfiles %}
+            <script src='{% static "Blob.js" %}'></script>
+            <script src='{% static "FileSaver.js" %}'></script>
+
+            <h2 style="clear: left;">Generated License:</h2>
+            <textarea rows="10" cols="65" style="font-size:20px;">{{ license_data }}
+            </textarea>
+            <br />
+            <label for="file_name_label">Filename:</label>
+            <input type="text" style="width: 200px;" id="file_name_input"/>
+
+            <button id="save_license">Save License</button>
+            <button id="email_license">Email License</button>
+
+            <br />
+
+            <form action='{% url "LicenseKeyGenerator.views.license_page" %}' method="POST" id="generate_new">
+                {% include "authorized_fields.html" %}
+                <input type="submit" id="generate_new_button" value="Generate New" />
+            </form>
+
+            <script type="text/javascript">
+            $("#save_license").button();
+            $("#save_license").click(function(){
+                var license_filename = $("#file_name_input").val();
+                if (license_filename.toLowerCase().indexOf(".lic") < 0) {
+                    license_filename += ".lic";
+                }
+
+                function htmlDecode(input){
+                  var e = document.createElement('div');
+                  e.innerHTML = input;
+                  return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+                }
+
+                var license_data = htmlDecode("{% filter escapejs %}{{ license_data }}{% endfilter %}");
+                console.log(license_data);
+                var blob = new Blob([license_data], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, license_filename);
+            })
+
+            var email_button = $("#email_license");
+            email_button.button();
+
+            email_button.click(function(){
+                var main_form = $("#main_form");
+                var email_address = $("#id_email_address").val();
+                alert('Email sent to ' + email_address);
+                main_form.attr("action", '{% url "LicenseKeyGenerator.views.send_email" %}');
+                main_form.submit();
+            })
+
+            $("#generate_new_button").button();
+
+            </script>
+        {% endif %}
+
+        {% if not submitted %}
+            <div style="padding:15px; position:relative; float: left;
+                        vertical-align: middle; text-align: center; margin: auto;">
+                <button id="import_request" style="float: left;">Import License Request File</button>
+            </div>
+        {% endif %}
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var import_button = $("#import_request");
+                import_button.button();
+
+                import_button.click(function(){
+                    $("#request_form").submit();
+                });
+            });
+        </script>
+
+        <form action='{% url "LicenseKeyGenerator.views.import_request" %}' method="POST" id="request_form">
+            {% csrf_token %}
+            {% include "authorized_fields.html" %}
+        </form>
+
+        <hr style="clear: left; width: 100%;" />
+
+        <div id="footer" style="clear: left;">
+            {% if version %}
+                <p>
+                    Version: {{ version }}
+                </p>
+            {% endif %}
+
+            {% if last_updated %}
+                <p>
+                    Last Updated: {{ last_updated }}
+                </p>
+            {% endif %}
+
+            <p>
+                Hobart Product Support Server. Copyright 2014.
+            </p>
+        </div>
+    </body>
+</html>

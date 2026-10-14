@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/backspaceIcon.png</file>
+        <file>res/capsLockIcon.png</file>
+        <file>res/clearIcon.png</file>
+        <file>res/dismissIcon.png</file>
+        <file>res/returnIcon.png</file>
+    </qresource>
+</RCC>

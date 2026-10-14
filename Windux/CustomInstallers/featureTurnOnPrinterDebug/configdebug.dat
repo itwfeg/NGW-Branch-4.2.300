@@ -1,0 +1,587 @@
+# Format of commands is 'parameterName=parameterValue'
+#
+# Comments begin with '#'.  Everything after the comment indicators is ignored.
+# Comments can be on their own line, or on the same line as a command.
+#
+
+#	NOTE: debugSetEnabled AND debugSetEnabledFile ARE MUTUALLY EXCLUSIVE !
+# 
+debugSetEnabled=T	# bool
+
+# for Windows, to send debug to a file, use the following format
+# debugSetEnabledFile=c:\\Hobart\\debug.out
+
+# for Linux, to send debug to a file, use either of the following example locations
+debugSetEnabledFile=/usr/local/hobart/debug.log
+# debugSetEnabledFile=/tmp/debug.log
+
+debug.appendFile=T
+
+# debug.traceLevel=50
+debug.showTiming=T
+# debug.enableTaskInfo=T
+# debug.traceAll=T
+# debug.startupDelay=30  # number of seconds to delay at startup to allow connecting a debugger
+
+# debugTraceCategories+=bypassShutdown
+# debugTraceCategories+=RendererManager.saveLabel
+
+# debugTraceCategories+=MonitorMemory
+# debugTraceCategories+=Accountant.showSortedCounters
+
+# debugTraceCategories+=Main,Main.send
+# debugTraceCategories+=language
+# debugTraceCategories+=Memory
+# debugTraceCategories+=Memory.receivedMsg
+# debugTraceCategories+=Memory.update1,Memory.update2
+# debugTraceCategories+=CTLSThread
+# debugTraceCategories+=CSmartCriticalSection
+# debugTraceCategories+=CEvolMsgReceiver
+# debugTraceCategories+=DBAccess
+debugTraceCategories+=DBAccess.exception
+# debugTraceCategories+=CfgInternal
+# debugTraceCategories+=CfgInternal.exception
+# debugTraceCategories+=CfgInternal.load
+# debugTraceCategories+=HfcObject.exception
+# debugTraceCategories+=SessionManager
+# debugTraceCategories+=SessionManager.SessionStarter
+# debugTraceCategories+=SessionManager.DailyTimers
+# debugTraceCategories+=SessionManager.download
+# debugTraceCategories+=ProcessDownloadedFiles
+# debugTraceCategories+=SessionManager.DBIntegrityCheck
+# debugTraceCategories+=PurgeOldRecords
+# debugTraceCategories+=AbstractSession.sleep
+# debugTraceCategories+=Session
+# debugTraceCategories+=Session.construct
+# debugTraceCategories+=Session.loop
+# debugTraceCategories+=Session.timeout
+# debugTraceCategories+=Session.exception
+# debugTraceCategories+=Session.send,Session.receive
+# debugTraceCategories+=Session.backupDb
+# debugTraceCategories+=SessionManager.DailyTimers
+# debugTraceCategories+=Session.DeleteAllFiles
+# debugTraceCategories+=Session.MessageTiming
+# debugTraceCategories+=Session.nomsg
+# debugTraceCategories+=Session.monitor
+# debugTraceCategories+=Session.WgSystem
+# debugTraceCategories+=Session.FlashFile
+# debugTraceCategories+=Session.MessageTiming
+# debugTraceCategories+=Session.timeout
+# debugTraceCategories+=Session.virtualKeyboard
+# debugTraceCategories+=Messenger.send,Messenger.receive
+# debugTraceCategories+=Messenger.consecutive
+# debugTraceCategories+=Messenger.msgTimer
+# debugTraceCategories+=Messenger
+# debugTraceCategories+=Messenger.void
+# debugTraceCategories+=Messenger.error
+# debugTraceCategories+=Messenger.timeout,Messenger.nomsg,Session.timeout
+# debugTraceCategories+=SessionMessage
+# debugTraceCategories+=SessionMessage.serialize
+# debugTraceCategories+=Socket
+# debugTraceCategories+=Socket.send
+# debugTraceCategories+=Socket.error
+# debugTraceCategories+=Socket.nummsgs
+# debugTraceCategories+=CMReaderWriter
+# debugTraceCategories+=CMReaderWriter.EvolTag
+# debugTraceCategories+=CMReaderWriter.EvolUI
+# debugTraceCategories+=CMFile
+# debugTraceCategories+=CMFile.nummsgs
+# debugTraceCategories+=CMFile.cmReceive
+# debugTraceCategories+=Browser,Browser.send
+# debugTraceCategories+=HfcObject
+# debugTraceCategories+=HfcObject.received
+# debugTraceCategories+=HfcObject.create
+# debugTraceCategories+=HfcObject.delete
+# debugTraceCategories+=HfcObject.error
+# debugTraceCategories+=HobString.fontSequence
+# debugTraceCategories+=HobTokenizer
+# debugTraceCategories+=EmailManager
+# debugTraceCategories+=Email.Manager
+# debugTraceCategories+=Email.SMTP
+# debugTraceCategories+=ReportManager
+# debugTraceCategories+=ReportManager.event
+# debugTraceCategories+=ConfigurationReport
+# debugTraceCategories+=ConfigurationReport.print
+# debugTraceCategories+=ConfigurationTags
+# debugTraceCategories+=PythonCall
+#
+# debugTraceCategories+=Session.rfid
+# debugTraceCategories+=RFIDManager
+# debugTraceCategories+=RFIDManager.processEvent
+# debugTraceCategories+=RFIDManager.Run
+# debugTraceCategories+=RFIDManager.Error
+#
+# debugTraceCategories+=GCD
+# debugTraceCategories+=GCDSession
+# debugTraceCategories+=GCD.Session
+# debugTraceCategories+=GCD.Startup
+#
+# debugTraceCategories+=ProcessDownloadedFiles
+#
+# RTC 
+#
+# RealTimeController.LabelApplierManager
+# RealTimeController.PrinterManager
+# RealTimeController.WeigherManager
+# RealTimeController.WrapperManager
+# RealTimeController.PrinterCommManager
+# debugTraceCategories+=EventManager
+# debugTraceCategories+=PrinterManager
+# debugTraceCategories+=PrinterStatus
+debugTraceCategories+=PrinterManager.new
+# debugTraceCategories+=PrinterManager.LabelWidth
+# debugTraceCategories+=PrinterManager.PostImageField
+# debugTraceCategories+=PrinterManager.PreImageField
+# debugTraceCategories+=PrinterManager.PrinterConfig
+# debugTraceCategories+=PrinterManager.PrinterImaging
+debugTraceCategories+=PrinterManager.PrinterStockMetrics
+# debugTraceCategories+=PrinterManager.PrinterInquire
+debugTraceCategories+=PrinterManager.PrinterSize
+# debugTraceCategories+=PrinterManager.PrinterStatus
+debugTraceCategories+=PrinterManager.StateMachine
+# debugTraceCategories+=PrinterManager.PrinterProbe
+debugTraceCategories+=PrinterManager.PrinterReset
+# debugTraceCategories+=PrinterCommManager.Error
+# debugTraceCategories+=FormRecord
+# debugTraceCategories+=RendererManager.Render
+# debugTraceCategories+=RendererManager.OpenSession
+# debugTraceCategories+=RendererManager.SetSource
+# debugTraceCategories+=RendererManager.SetDestination
+# debugTraceCategories+=RendererManager.CloseSession
+# debugTraceCategories+=Renderer
+# debugTraceCategories+=Renderer.Error
+# debugTraceCategories+=Renderer.renderField
+# debugTraceCategories+=Renderer.Rectangle
+# debugTraceCategories+=Renderer.text
+# debugTraceCategories+=Renderer.CreateFont
+# debugTraceCategories+=Renderer.stream
+# debugTraceCategories+=Renderer.BarCode
+# debugTraceCategories+=DrawingPrimitives.wordwrap
+
+# debugTraceCategories+=PrinterStockMetrics.initStatics
+# debugTraceCategories+=PrinterStockMetrics.getActualLabelLengthLines
+
+# debugTraceCategories+=TimerManager
+# debugTraceCategories+=Timer
+# debugTraceCategories+=Timer.show
+
+# debugTraceCategories+=HfcWeigherConfig
+# debugTraceCategories+=Weigher
+# debugTraceCategories+=Weigher.getWeight
+# debugTraceCategories+=WeigherStatus
+# debugTraceCategories+=WeigherManager.Message
+# debugTraceCategories+=WeigherManager.WeigherConfiguration
+# debugTraceCategories+=WeigherManager.WeigherInquire
+# debugTraceCategories+=WeigherManager.WeigherSystemInquire
+# debugTraceCategories+=WeigherManager.WeigherStatus
+# debugTraceCategories+=WeigherManager.Larry
+# debugTraceCategories+=LSMNCommManager.Weigher.WeigherStatus
+#
+# debugTraceCategories+=firmware.upgrade
+# debugTraceCategories+=UsbCodeUpdater
+# debugTraceCategories+=UsbManager.Attach
+# debugTraceCategories+=UsbManager.DeviceDescriptor
+# debugTraceCategories+=UsbManager.PowerUp
+# debugTraceCategories+=UsbManager.Bulk
+#
+# debugTraceCategories+=OperatingMode
+# debugTraceCategories+=OperatingMode.ChangeProduct
+# debugTraceCategories+=OperatingMode.changeProduct
+# debugTraceCategories+=OperatingMode.Product
+# 
+# debugTraceCategories+=ManualWeighMode
+# debugTraceCategories+=ManualWeighMode.StateMachine
+#
+# debugTraceCategories+=AccumulateItemsMode
+# debugTraceCategories+=AccumulateItemsMode.StateMachine
+# debugTraceCategories+=AccumulateItemsMode.Error
+# 
+# debugTraceCategories+=IlaWeighMode
+# debugTraceCategories+=IlaWeighMode.ChangeProduct
+# debugTraceCategories+=IlaWeighMode.ProductTransaction
+# debugTraceCategories+=IlaWeighMode.MissedProducts
+# debugTraceCategories+=IlaWeighMode.StateMachine
+
+# debugTraceCategories+=SemiWeighMode.StateMachine
+# debugTraceCategories+=SemiWeighMode.Error
+# debugTraceCategories+=SemiWeighMode.Product
+
+# debugTraceCategories+=AutoWeighMode
+# debugTraceCategories+=AutoWeighMode.StateMachine
+# debugTraceCategories+=AutoWeighMode.WeigherCachedStatus
+# debugTraceCategories+=AutoWeighMode.Error
+# debugTraceCategories+=AutoWeighMode.Product
+
+# debugTraceCategories+=ProductionEntryMode
+# debugTraceCategories+=ProductionEntryMode.StateMachine
+# debugTraceCategories+=ProductionEntryMode.Error
+
+# debugTraceCategories+=WrapperManager.ProbeWrapper
+# debugTraceCategories+=WrapperMode.GhostPackage
+# debugTraceCategories+=WrapperMode.StateMachine
+# debugTraceCategories+=WrapperMode.WeigherStatus
+# debugTraceCategories+=WrapperMode.WrapperError
+# debugTraceCategories+=WrapperMode.ProductUpdate
+# debugTraceCategories+=WrapperMode.WeigherCachedStatus
+
+# debugTraceCategories+=ResponseMessageManager.EvolWrapper
+# debugTraceCategories+=AutoWeighEvolWrapperMode
+# debugTraceCategories+=AutoWeighWrapperMode
+# debugTraceCategories+=AutoWeighWrapperMode.StateMachine
+
+# debugTraceCategories+=EvolWrapperConfiguration
+# debugTraceCategories+=EvolWrapperControl
+# debugTraceCategories+=EvolWrapperCommManager.Error
+# debugTraceCategories+=EvolWrapperCommManager.Message
+# debugTraceCategories+=EvolWrapperErrorInfo
+# debugTraceCategories+=EvolWrapperLoad
+# debugTraceCategories+=EvolWrapperSettings
+# debugTraceCategories+=EvolWrapperStatus
+# debugTraceCategories+=EvolWrapperStatusInfo
+# debugTraceCategories+=EvolWrapperWrap
+# debugTraceCategories+=EvolWrapperLoad
+
+# debugTraceCategories+=WrapperConfiguration
+# debugTraceCategories+=WrapperControl
+# debugTraceCategories+=WrapperCycle
+# debugTraceCategories+=WrapperErrorHistory
+# debugTraceCategories+=WrapperErrorInfo
+# debugTraceCategories+=WrapperIntakeMode
+# debugTraceCategories+=WrapperJog
+# debugTraceCategories+=WrapperLoad
+# debugTraceCategories+=WrapperManager.Message
+# debugTraceCategories+=WrapperManager.Error
+# debugTraceCategories+=WrapperManager.SystemMessage
+# debugTraceCategories+=WrapperManager.ProbeWrapper
+# debugTraceCategories+=WrapperMode
+# debugTraceCategories+=WrapperMode.WrapperError
+# debugTraceCategories+=WrapperMode.StateMachine
+# debugTraceCategories+=WrapperSettings
+# debugTraceCategories+=WrapperStatus
+# debugTraceCategories+=WrapperWrap
+
+# debugTraceCategories+=LabelApplierManager
+# debugTraceCategories+=LabelApplierManager.Message
+
+# debugTraceCategories+=RealTimeController.LabelApplierManager
+# debugTraceCategories+=RealTimeController.ProductChange 
+# debugTraceCategories+=RealTimeController.OpModeSupervisor
+# debugTraceCategories+=RealTimeController.OperatingMode
+# debugTraceCategories+=RealTimeController.WeigherManager
+# debugTraceCategories+=RealTimeController.PrinterManager
+# debugTraceCategories+=RealTimeController.PrinterManager
+# debugTraceCategories+=RealTimeController.PrinterManager
+# debugTraceCategories+=RealTimeController.LabelApplierManager
+# debugTraceCategories+=RealTimeController.WrapperManager
+# debugTraceCategories+=RealTimeController.PrinterCommManager
+# debugTraceCategories+=RealTimeController.Event
+# debugTraceCategories+=RealTimeController.Attach
+# debugTraceCategories+=RealTimeController.Remove
+#
+#
+# Java
+# debugTraceCategories+=MenuApplet
+# debugTraceCategories+=MenuStorage
+# debugTraceCategories+=fireMenuPropertyChanged
+# debugTraceCategories+=disablingMenuPropertyChanged
+# debugTraceCategories+=removingMenuPropertyChanged
+# debugTraceCategories+=actionPerformed
+# debugTraceCategories+=EvolutionMenuUI.paint
+# in FocusManager
+# debugTraceCategories+=focusPreviousComponent
+# debugTraceCategories+=getPreviousComponent
+# debugTraceCategories+=getDeepestLastComponent
+# debugTraceCategories+=identifyComponent
+#
+# debugTraceCategories+=Client
+# debugTraceCategories+=MenuApplet
+#
+#
+# HFC
+#
+# debugTraceCategories+=HobStringTestManager
+# debugTraceCategories+=Planogram
+# debugTraceCategories+=BackupRestoreManager
+# debugTraceCategories+=BackupRestoreReadAll
+# debugTraceCategories+=BackupRestoreManager.cool
+# debugTraceCategories+=BackupRestoreManager.Graphics
+# debugTraceCategories+=BackupRestoreManager.restore
+# debugTraceCategories+=BackupRestoreManager.exception
+# debugTraceCategories+=BadRecordScan
+# debugTraceCategories+=BatchManager
+# debugTraceCategories+=CategoryManager
+# debugTraceCategories+=Category
+# debugTraceCategories+=Class.find
+# debugTraceCategories+=CommHistory
+# debugTraceCategories+=Configuration
+# debugTraceCategories+=Configuration.license
+# debugTraceCategories+=Configuration.load
+# debugTraceCategories+=Configuration.save
+# debugTraceCategories+=Configuration.show
+# debugTraceCategories+=Configuration.format
+# debugTraceCategories+=Configuration.formatWeight
+# debugTraceCategories+=Configuration.CfgAll
+# debugTraceCategories+=Configuration.CfgNetwork
+# debugTraceCategories+=Configuration.CfgScale
+# debugTraceCategories+=Configuration.CfgEmail
+# debugTraceCategories+=Configuration.CfgGenericLabelText
+# debugTraceCategories+=Configuration.CfgFrequentShopper
+# debugTraceCategories+=Configuration.CfgSelfService
+# debugTraceCategories+=Configuration.format
+# debugTraceCategories+=Configuration.formatPrice
+# debugTraceCategories+=ConfigurationManager
+# debugTraceCategories+=ConfigurationManager.response
+# debugTraceCategories+=COOLManager
+# debugTraceCategories+=COOLCategory
+# debugTraceCategories+=COOLCategory.find
+# debugTraceCategories+=COOLCountry
+# debugTraceCategories+=COOLCountry.find
+# debugTraceCategories+=COOLManager.COOLProductionStep
+# debugTraceCategories+=COOLProductionStep
+# debugTraceCategories+=COOLProductionStep.find
+# debugTraceCategories+=COOLPretext
+# debugTraceCategories+=COOLPretext.find
+# debugTraceCategories+=COOLText
+# debugTraceCategories+=COOLText.find
+# debugTraceCategories+=DirectoryList
+# debugTraceCategories+=DevicesList
+# debugTraceCategories+=FrequentShopper
+# debugTraceCategories+=FrequentShopper.CalculatedValues
+# debugTraceCategories+=GenericLabelTextManager,GenericLabelText
+# debugTraceCategories+=HfcProductDescLookup
+# debugTraceCategories+=HobAllExpirationLabels
+# debugTraceCategories+=HobDateTime
+# debugTraceCategories+=HobDateTime.show
+# debugTraceCategories+=HobDateTime.convert
+# debugTraceCategories+=HobDateTime.vxworks
+# debugTraceCategories+=HobDateTime.readcmos
+# debugTraceCategories+=HobDateTime.readcmosA
+# debugTraceCategories+=HobDateTime.readcmosB
+# debugTraceCategories+=HobDateTime.initcmosB
+# debugTraceCategories+=HobDateTime.writecmos
+# debugTraceCategories+=HobList
+# debugTraceCategories+=FontManager
+# debugTraceCategories+=GenericLabelTextManager
+# debugTraceCategories+=LabelTypeManager
+# debugTraceCategories+=LabelType
+# debugTraceCategories+=LabelType.This
+# debugTraceCategories+=LabelType.LabelMediaError
+# debugTraceCategories+=LabelType.show
+# debugTraceCategories+=LabelType.convert
+# debugTraceCategories+=language
+# debugTraceCategories+=HobOperator
+# debugTraceCategories+=OperatorManager
+# debugTraceCategories+=OperatorManager.response
+# debugTraceCategories+=OperatorChange
+# debugTraceCategories+=OperatorNote
+# debugTraceCategories+=PeripheralManager
+# debugTraceCategories+=Peripheral
+# debugTraceCategories+=ProductManager
+# debugTraceCategories+=ProductManager.nutri
+# debugTraceCategories+=ProductManager.HandleProductComplete
+# debugTraceCategories+=New.ProductWriteCurrentTotalValues
+# debugTraceCategories+=ProductManager.HandleWeight
+# debugTraceCategories+=ProductManager.UpdateWeightAndNotify
+# debugTraceCategories+=ProductManager.printLabel
+# debugTraceCategories+=ProductTransaction
+# debugTraceCategories+=Product
+# debugTraceCategories+=Delete.Product
+# debugTraceCategories+=Product.updateField
+# debugTraceCategories+=Product.fixedWeight
+# debugTraceCategories+=Product.formatTare
+# debugTraceCategories+=ProductTransaction
+# debugTraceCategories+=Product.HfcError
+# debugTraceCategories+=Product.BarCode
+# debugTraceCategories+=Product.Graphic
+# debugTraceCategories+=Product.save
+# debugTraceCategories+=Product.priceDiv
+# debugTraceCategories+=Product.Class
+# debugTraceCategories+=Product.Smsg
+# debugTraceCategories+=Product.NutFac
+# debugTraceCategories+=Product.Extext
+# debugTraceCategories+=Product.Note
+# debugTraceCategories+=Product.Graphic
+# debugTraceCategories+=ProductDefault,Category
+# debugTraceCategories+=ProductNote
+# debugTraceCategories+=New.GenericHfcObject
+# debugTraceCategories+=New.Class,Delete.Class
+# debugTraceCategories+=New.ExpandedText,Delete.ExpandedText
+# debugTraceCategories+=New.SpecialMsg,Delete.SpecialMsg
+# debugTraceCategories+=New.Graphic,Delete.Graphic
+# debugTraceCategories+=New.LabelType,Delete.LabelType
+# debugTraceCategories+=New.Product,Delete.Product
+# debugTraceCategories+=New.ProductNote,Delete.ProductNote
+# debugTraceCategories+=New.NutFac,Delete.NutFac
+# debugTraceCategories+=New.ReadSoftKeyParams
+# debugTraceCategories+=ClassManager,Class
+# debugTraceCategories+=ExpandedTextManager,ExpandedText
+# debugTraceCategories+=SpecialMessage
+# debugTraceCategories+=GraphicManager,Graphic
+# debugTraceCategories+=GraphicManager.saveToFlash
+# debugTraceCategories+=ResponseMessageManager
+# debugTraceCategories+=ResponseMessageManager.add
+# debugTraceCategories+=ResponseMessageManager.remove
+# debugTraceCategories+=ResponseMessageManager.ss
+# debugTraceCategories+=ResponseMessageManager.weigher
+# debugTraceCategories+=ResponseMessageManager.printer
+# debugTraceCategories+=ResponseMessageManager.wrapper
+# debugTraceCategories+=ResponseMessageManager.opmode
+# debugTraceCategories+=ResponseMessageManager.show
+# debugTraceCategories+=ScaleManager
+# debugTraceCategories+=Session.BarcodeScannerDev
+# debugTraceCategories+=BarcodeScannerManager
+# debugTraceCategories+=HfcScannerProductRead
+# debugTraceCategories+=BarcodeScannerManager.handleRead
+# debugTraceCategories+=BarcodeScannerManager.handleReadScannedCode
+# debugTraceCategories+=ScannerManager
+# debugTraceCategories+=ScannerManagerMessages.serialize
+# debugTraceCategories+=ScannerManager.processEvent
+# debugTraceCategories+=ScannerManager.enableScanner
+# debugTraceCategories+=ScannerManager.disableScanner
+# debugTraceCategories+=ScannerManager.boop
+# debugTraceCategories+=ScannerManager.Run
+# debugTraceCategories+=ScannerProductRead
+# debugTraceCategories+=ScannerProductRead.show
+# debugTraceCategories+=ScannerProductRead.serialize
+# debugTraceCategories+=ScannerProductRead.serializedData
+# debugTraceCategories+=SoftKeyLists
+# debugTraceCategories+=SoftkeyManager
+# debugTraceCategories+=SoftkeyManager.Tare
+# debugTraceCategories+=SoftkeyStyle
+# debugTraceCategories+=SoftkeyFeature
+# debugTraceCategories+=Softkey.save
+# debugTraceCategories+=Softkey
+# debugTraceCategories+=Softkey.Tare
+# debugTraceCategories+=Special
+# debugTraceCategories+=Statistics
+# debugTraceCategories+=StreamingGraphicManager
+# debugTraceCategories+=StreamingGraphic
+# debugTraceCategories+=SynchronizationChangeManager
+# debugTraceCategories+=SystemFontConversionTable
+# debugTraceCategories+=Tags
+# debugTraceCategories+=TotalsManager
+# debugTraceCategories+=TotalType,TotalTypeManager
+# debugTraceCategories+=TouchScreen
+# debugTraceCategories+=New.TotalType,Delete.TotalType
+# debugTraceCategories+=WeigherCalibration
+# debugTraceCategories+=WeigherCalibration.State
+# debugTraceCategories+=WeigherConfiguration
+# debugTraceCategories+=WeigherConfiguration
+# debugTraceCategories+=WeigherInquire
+# debugTraceCategories+=Agent.RealTimeController
+# debugTraceCategories+=Agent.PrinterCommManager
+# debugTraceCategories+=PrSession
+# debugTraceCategories+=WSSession,WSSession.status,WSSession.hex,Weigher
+# debugTraceCategories+=LASession,LASession.hex,LabelApplier
+# debugTraceCategories+=NowServing
+# debugTraceCategories+=NowServing.script
+#
+# Synchronization
+#
+# debugTraceCategories+=SynchronizationManager.unitTester
+# debugTraceCategories+=SynchronizationManager
+# debugTraceCategories+=PrimarySynchronizationManager
+# debugTraceCategories+=PrimarySynchronizationManager.constructor
+# debugTraceCategories+=SecondarySynchronizationManager
+# debugTraceCategories+=SecondarySynchronizationManager.constructor
+# debugTraceCategories+=SynchronizationManagerProxy
+# debugTraceCategories+=QueueManager
+# debugTraceCategories+=CommSynchronizer
+# debugTraceCategories+=CommunicationSynchronizer
+# debugTraceCategories+=DBSynchronizer
+# debugTraceCategories+=CommSession
+# debugTraceCategories+=PrimaryCommSession
+# debugTraceCategories+=SecondaryCommSession
+# debugTraceCategories+=DBTester
+# debugTraceCategories+=NetworkConnectivityManager
+# debugTraceCategories+=NetworkConnectivityManager.processEvent
+# debugTraceCategories+=NetworkConnectivityManager.Run
+# debugTraceCategories+=HFCManagerContainer
+# debugTraceCategories+=HFCManagerContainer.exception
+#
+#
+# DB
+#
+# debugTraceCategories+=database.sql
+# debugTraceCategories+=database.sql.success
+# debugTraceCategories+=database.sql.finalize
+# debugTraceCategories+=database.exception
+# debugTraceCategories+=database.exception.dialog
+#
+# debugTraceCategories+=database.query
+# debugTraceCategories+=database.query.navigate
+# debugTraceCategories+=database.query.size
+# debugTraceCategories+=database.timing.query
+#
+# debugTraceCategories+=database.busy
+#
+# debugTraceCategories+=database.timing
+# debugTraceCategories+=database.timing.findSingleRecord
+# debugTraceCategories+=database.timing.findRecord
+# debugTraceCategories+=database.timing.createRecord
+# debugTraceCategories+=database.timing.saveRecord
+# debugTraceCategories+=database.timing.deleteRecord
+# debugTraceCategories+=database.timing.deleteAll
+# debugTraceCategories+=database.timing.countAll
+# debugTraceCategories+=database.timing.execute
+#
+# debugTraceCategories+=database
+# debugTraceCategories+=database.show
+# debugTraceCategories+=database.open
+# debugTraceCategories+=database.close
+# debugTraceCategories+=database.backup
+# debugTraceCategories+=database.check
+# debugTraceCategories+=database.compress
+# debugTraceCategories+=database.copy
+# debugTraceCategories+=database.findRecord
+# debugTraceCategories+=database.saveRecord
+# debugTraceCategories+=database.saveRecord.sequences
+# debugTraceCategories+=database.saveRecord.sequences.timing
+# debugTraceCategories+=database.saveRecord.localeEncoded
+# debugTraceCategories+=database.save
+# debugTraceCategories+=database.deleteRecord
+# debugTraceCategories+=database.deleteAll
+# debugTraceCategories+=database.countAll
+# debugTraceCategories+=database.averageSpace
+# debugTraceCategories+=database.search
+# debugTraceCategories+=database.delete
+# debugTraceCategories+=database.status
+# debugTraceCategories+=database.status.report
+# debugTraceCategories+=database.status.consecutiveBusies
+# debugTraceCategories+=database.addSequences
+# debugTraceCategories+=database.findSequence
+# debugTraceCategories+=database.removeSequences
+# debugTraceCategories+=database.products.timing
+# debugTraceCategories+=database.seekquery
+# debugTraceCategories+=database.seekquery.select
+# debugTraceCategories+=database.seekquery.first
+# debugTraceCategories+=database.seekquery.next
+# debugTraceCategories+=database.seekquery.previous
+# debugTraceCategories+=database.seekquery.last
+# debugTraceCategories+=database.seekquery.seek
+# debugTraceCategories+=database.seekquery.timing
+# debugTraceCategories+=database.table.create
+# debugTraceCategories+=database.table.open
+# debugTraceCategories+=database.table.close
+# debugTraceCategories+=database.table.destroy
+# debugTraceCategories+=database.createTable
+# debugTraceCategories+=database.destroyTable
+# debugTraceCategories+=database.construction
+# debugTraceCategories+=database.destruction
+# debugTraceCategories+=database.autoIncrement
+# debugTraceCategories+=database.fileLocking.openFile
+# debugTraceCategories+=database.fileLocking.read
+# debugTraceCategories+=database.fileLocking.write
+# debugTraceCategories+=database.fileLocking.lock
+# debugTraceCategories+=database.fileLocking.unlock
+# debugTraceCategories+=database.fileLocking.truncate
+# debugTraceCategories+=database.fileLocking.close
+# debugTraceCategories+=database.fileLocking.lockManager
+# debugTraceCategories+=database.fileLocking.lockManager.register
+# debugTraceCategories+=database.fileLocking.lockManager.lockFile
+# debugTraceCategories+=database.fileLocking.lockManager.unlockFile
+# debugTraceCategories+=database.fileLocking.lockManager.close
+# debugTraceCategories+=database.fileLocking.lockManager.report
+# debugTraceCategories+=database.fileLocking.lockManager.delete
+# debugTraceCategories+=database.record
+# debugTraceCategories+=database.timing

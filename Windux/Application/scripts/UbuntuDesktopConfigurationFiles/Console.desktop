@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Console
+Exec=/opt/tbupddlx/upddconsole
+Icon=/opt/tbupddlx/dcu.xpm
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility

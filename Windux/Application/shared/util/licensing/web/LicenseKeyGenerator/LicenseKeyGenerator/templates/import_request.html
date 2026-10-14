@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Hobart License Key Generator - Import License Request</title>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.11.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#submit_form").button();
+});
+</script>
+
+<style>
+table {
+    font-size:25px;
+    clear: left;
+    margin: auto;
+}
+
+body {
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+html, body {
+   height: 100%
+}
+
+html {
+    display: table;
+    width: 100%;
+}
+
+#file_selection {
+    padding-left: 12%;
+}
+</style>
+</head>
+<body>
+    {% include "header.html" %}
+
+    <form action='{% url "LicenseKeyGenerator.views.import_request" %}' method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include "authorized_fields.html" %}
+        <table>
+        <tr>
+        <td>
+            {{ form.request_file.label_tag }}
+        </td>
+        <td id="file_selection">
+            {{ form.request_file }}
+        </td>
+        <td>
+            {{ form.request_file.errors }}
+        </td>
+        </tr>
+        </table>
+
+        <input type="submit" value="Import" id="submit_form">
+    </form>
+</body>
+</html>

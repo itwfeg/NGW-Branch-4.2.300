@@ -1,0 +1,210 @@
+#include "edb.h"
+#include DBPRODUCTDEFAULT_INC
+
+
+#include <ostream>
+
+
+#ifndef NO_NAMESPACES
+namespace edb
+{
+	using namespace std;
+#endif
+
+
+
+DBProductDefault::DBProductDefault(edb_adapter::DBProductDefaultI* d)
+		: decorated_(d)
+{
+}
+
+
+DBProductDefault::DBProductDefault(const DBProductDefault& rec)
+		: decorated_(rec.decorated_->clone())
+{
+}
+
+
+DBProductDefault::~DBProductDefault()
+{
+	if ( decorated_ )
+		delete decorated_;
+}
+
+
+std::ostream& operator<<(std::ostream& os, const DBProductDefault& rec)
+{
+	os << "DBProductDefault Type " << rec.getType() << " (" << (rec.isRecordValid()?"valid":"not valid") << ") [";
+	if (!rec.isDeptNumberNull())
+		os << "Department: " << rec.getDeptNumber();
+	if ( !rec.isReportingClassNull() )
+		os << ", ReportingClass: " << rec.getReportingClass();
+	if ( !rec.isByCountNull() )
+		os << ", ByCount: " << rec.getByCount();
+	if ( !rec.isForceByCountNull() )
+		os << ", ForceByCount: " << rec.getForceByCount();
+	if ( !rec.isPriceNull() )
+		os << ", Price: " << rec.getPrice();
+	if ( !rec.isPriceFactorNull() )
+		os << ", PriceFactor: " << rec.getPriceFactor();
+	if ( !rec.isForcePriceNull() )
+		os << ", ForcePrice: " << rec.getForcePrice();
+	if ( !rec.isDiscountPrice1Null() )
+		os << ", DiscountPrice1: " << rec.getDiscountPrice1();
+	if ( !rec.isDiscountPrice2Null() )
+		os << ", DiscountPrice2: " << rec.getDiscountPrice2();
+	if ( !rec.isDiscountPrice3Null() )
+		os << ", DiscountPrice3: " << rec.getDiscountPrice3();
+	if ( !rec.isDiscountMethodNull() )
+		os << ", DiscountMethod: " << rec.getDiscountMethod();
+	if ( !rec.isExceptionPriceNull() )
+		os << ", ExceptionPrice: " << rec.getExceptionPrice();
+	if ( !rec.isDescriptionNull() )
+		os << ", Description: " << rec.getDescription();
+	if ( !rec.isName1Null() )
+		os << ", Name1: " << rec.getName1();
+	if ( !rec.isName2Null() )
+		os << ", Name2: " << rec.getName2();
+	if ( !rec.isUPCNumberSystemNull() )
+		os << ", UPC Number System: " << rec.getUPCNumberSystem();
+	if ( !rec.isEANFormatStringNull() )
+		os << ", EAN Format String: " << rec.getEANFormatString();
+	if ( !rec.isEAN128CFormatStringNull() )
+		os << ", EAN128C Format String: " << rec.getEAN128CFormatString();
+	if ( !rec.isGS1GTINFormatStringNull() )
+		os << ", GS1GTIN Format String: " << rec.getGS1GTINFormatString();
+	if ( !rec.isGS1AIFormatStringNull() )
+		os << ", GS1AI Format String: " << rec.getGS1AIFormatString();
+	if (!rec.isQRCodeFormatStringNull())
+		os << ", QRCode Format String: " << rec.getQRCodeFormatString();
+	if (!rec.isDataMatrixFormatStringNull())
+		os << ", DataMatrix Format String: " << rec.getDataMatrixFormatString();
+	if ( !rec.isEANPrefixNull() )
+		os << ", EAN Prefix: " << rec.getEANPrefix();
+	if ( !rec.isNetWeightNull() )
+		os << ", NetWeight: " << rec.getNetWeight();
+	if ( !rec.isShelfLifeDaysNull() )
+		os << ", ShelfLifeDays: " << rec.getShelfLifeDays();
+	if ( !rec.isShelfLifeHoursNull() )
+		os << ", ShelfLifeHours: " << rec.getShelfLifeHours();
+	if (!rec.isShelfLifeMinutesNull())
+		os << ", ShelfLifeMinutes: " << rec.getShelfLifeMinutes();
+	if ( !rec.isDontPrintShelfLifeNull() )
+		os << ", DontPrintShelfLife: " << rec.getDontPrintShelfLife();
+	if ( !rec.isProductLifeDaysNull() )
+		os << ", ProductLifeDays: " << rec.getProductLifeDays();
+	if ( !rec.isProductLifeHoursNull() )
+		os << ", ProductLifeHours: " << rec.getProductLifeHours();
+	if (!rec.isProductLifeMinutesNull())
+		os << ", ProductLifeMinutes: " << rec.getProductLifeMinutes();
+	if ( !rec.isDontPrintProductLifeNull() )
+		os << ", DontPrintProductLife: " << rec.getDontPrintProductLife();
+	if ( !rec.isDontPrintPackedOnNull() )
+		os << ", DontPrintPackedOn: " << rec.getDontPrintPackedOn();
+	if ( !rec.isSpecialMessageNull() )
+		os << ", SpecialMessage: " << rec.getSpecialMessage();
+	if ( !rec.isTextNull() )
+		os << ", Text: " << rec.getText();
+	if ( !rec.isMarqueeNull() )
+		os << ", Marquee: " << rec.getMarquee();
+	if ( !rec.isNutritionNull() )
+		os << ", Nutrition: " << rec.getNutrition();
+	if ( !rec.isNoteNull() )
+		os << ", Note: " << rec.getNote();
+	if ( !rec.isCategoryNull() )
+		os << ", Category: " << rec.getCategory();
+	if ( !rec.isGraphic1Null() )
+		os << ", Graphic1: " << rec.getGraphic1();
+	if ( !rec.isGraphic2Null() )
+		os << ", Graphic2: " << rec.getGraphic2();
+	if ( !rec.isGraphic3Null() )
+		os << ", Graphic3: " << rec.getGraphic3();
+	if ( !rec.isGraphic4Null() )
+		os << ", Graphic4: " << rec.getGraphic4();
+	if ( !rec.isImageNull() )
+		os << ", Image: " << rec.getImage();
+	if ( !rec.isLabel1Null() )
+		os << ", Label1: " << rec.getLabel1();
+	if ( !rec.isLabel1RotationNull() )
+		os << ", Label1Rotation: " << rec.getLabel1Rotation();
+	if ( !rec.isLabel1PlacementNull() )
+		os << ", Label1Placement: " << rec.getLabel1Placement();
+	if ( !rec.isLabel2Null() )
+		os << ", Label2: " << rec.getLabel2();
+	if ( !rec.isLabel2RotationNull() )
+		os << ", Label2Rotation: " << rec.getLabel2Rotation();
+	if ( !rec.isLabel2PlacementNull() )
+		os << ", Label2Placement: " << rec.getLabel2Placement();
+	if ( !rec.isLabel3Null() )
+		os << ", Label3: " << rec.getLabel3();
+	if ( !rec.isLabel3RotationNull() )
+		os << ", Label3Rotation: " << rec.getLabel3Rotation();
+	if ( !rec.isLabel3PlacementNull() )
+		os << ", Label3Placement: " << rec.getLabel3Placement();
+	if ( !rec.isProportionalTareNull() )
+		os << ", ProportionalTare: " << rec.getProportionalTare();
+	if ( !rec.isTareNull() )
+		os << ", Tare: " << rec.getTare();
+	if ( !rec.isForceTareNull() )
+		os << ", ForceTare: " << rec.getForceTare();
+	if ( !rec.isBonusPointsNull() )
+		os << ", BonusPoints: " << rec.getBonusPoints();
+	if ( !rec.isIntakeModeNull() )
+		os << " [IntakeMode: " << rec.getIntakeMode();
+	if ( !rec.isApplySecurityLabelNull() )
+		os << ", ApplySecurityLabel: " << (rec.getApplySecurityLabel()?'Y':'N');
+	if ( !rec.isSpecialTypeNull() )
+		os << " [SpecialType: " << rec.getSpecialType();
+	if ( !rec.isPortionsNull() )
+		os << ", Portions: " << rec.getPortions();
+	if ( !rec.isMealSideItemsGroupNumNull() )
+		os << ", MealSideItemsGroupNum: " << rec.getMealSideItemsGroupNum();
+	if ( !rec.isMealSideItemsAreFreeNull() )
+		os << ", MealSideItemsAreFree: " << rec.getMealSideItemsAreFree();
+	if ( !rec.isMealNumSidesIncludedNull() )
+		os << ", MealNumSidesIncluded: " << rec.getMealNumSidesIncluded();
+	if ( !rec.isCutTestMeatSpecSheetGroupNumNull() )
+		os << ", CutTestMeatSpecSheetGroupNum: " << rec.getCutTestMeatSpecSheetGroupNum();
+	if ( !rec.isTareBNull() )
+		os << ", TareB: " << rec.getTareB();
+	if (!rec.isManualLabelTypeNum1Null())
+		os << ", ManualLabelTypeNum1: " << rec.getManualLabelTypeNum1();
+	if (!rec.isManualLabelTypeNum2Null())
+		os << ", ManualLabelTypeNum2: " << rec.getManualLabelTypeNum2();
+	if (!rec.isManualLabelTypeNum3Null())
+		os << ", ManualLabelTypeNum3: " << rec.getManualLabelTypeNum3();
+	if (!rec.isPrepackLabelTypeNum1Null())
+		os << ", PrepackLabelTypeNum1: " << rec.getPrepackLabelTypeNum1();
+	if (!rec.isPrepackLabelTypeNum2Null())
+		os << ", PrepackLabelTypeNum2: " << rec.getPrepackLabelTypeNum2();
+	if (!rec.isPrepackLabelTypeNum3Null())
+		os << ", PrepackLabelTypeNum3: " << rec.getPrepackLabelTypeNum3();
+	if (!rec.isManualLabelTypeNum1Null())
+		os << ", ManualLabelTypeNum1: " << rec.getManualLabelTypeNum1();
+	if (!rec.isProdEntryLabelTypeNum1Null())
+		os << ", ProdEntryLabelTypeNum1: " << rec.getProdEntryLabelTypeNum1();
+	if (!rec.isProdEntryLabelTypeNum2Null())
+		os << ", ProdEntryLabelTypeNum2: " << rec.getProdEntryLabelTypeNum2();
+	if (!rec.isProdEntryLabelTypeNum3Null())
+		os << ", ProdEntryLabelTypeNum3: " << rec.getProdEntryLabelTypeNum3();
+	if (!rec.isSelfServLabelTypeNum1Null())
+		os << ", SelfServLabelTypeNum1: " << rec.getSelfServLabelTypeNum1();
+	if (!rec.isPick5LabelTypeNum1Null())
+		os << ", Pick5LabelTypeNum1: " << rec.getPick5LabelTypeNum1();
+	if (!rec.isPick5LabelTypeNum2Null())
+		os << ", Pick5LabelTypeNum2: " << rec.getPick5LabelTypeNum2();
+	if (!rec.isPick5LabelTypeNum3Null())
+		os << ", Pick5LabelTypeNum3: " << rec.getPick5LabelTypeNum3();
+	if (!rec.isOnlineOrderingLabelTypeNum1Null())
+		os << ", OnlineOrderingLabelTypeNum1: " << rec.getOnlineOrderingLabelTypeNum1();
+	if (!rec.isOnlineOrderingLabelTypeNum2Null())
+		os << ", OnlineOrderingLabelTypeNum2: " << rec.getOnlineOrderingLabelTypeNum2();
+	if (!rec.isOnlineOrderingLabelTypeNum3Null())
+		os << ", OnlineOrderingLabelTypeNum3: " << rec.getOnlineOrderingLabelTypeNum3();
+	return os << "]" << endl;
+}
+
+
+#ifndef NO_NAMESPACES
+} // namespace edb
+#endif

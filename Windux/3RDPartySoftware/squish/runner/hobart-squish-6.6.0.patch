@@ -1,0 +1,99 @@
+diff -Naur squish-6.6.0-qt-src.ORIG/configure.cos squish-6.6.0-qt-src/configure.cos
+--- squish-6.6.0-qt-src.ORIG/configure.cos	2020-06-23 06:56:14.000000000 -0400
++++ squish-6.6.0-qt-src/configure.cos	2020-07-20 10:23:10.702070880 -0400
+@@ -74,6 +74,8 @@
+ knownWithOpts["tclconfig"] = ["{dir}", "Directory where Tcl's tclConfig.sh file is installed"];
+ knownWithOpts["pydir"] = ["{dir}", "Directory where Python 2 is installed"];
+ knownWithOpts["python"] = ["{path}", "Filename (with full path) of Python 2 interpreter"];
++knownWithOpts["python-lib"] = ["{path}", "Filename (with full path) of Python library"];
++knownWithOpts["python-includedir"] = ["{dir}", "Directory where Python includes are installed"];
+ knownWithOpts["tkconfig"] = ["{dir}", "Directory where Tcl/Tk's tkConfig.sh file is installed"];
+ knownWithOpts["docbookxml"] = ["{dir}", "Directory where DocBook XML DTDs are installed"];
+ knownWithOpts["docbookxsl"] = ["{dir}", "Directory where DocBook XSL stylesheets are installed"];
+@@ -2821,11 +2823,11 @@
+ 
+         msgChecking( 'whether the simple C++ program works' );
+         var cap = loggedCaptureEx( '.' + dirSeparator() + executableName + ' 2>&1' );
+-        if ( cap.exitStatus != 0 ) {
+-            msgError( 'no, please check your compiler setup.\n' +
+-                      'For cross-compiling and embedded-device support\n' +
+-                      'please contact <support@froglogic.com>.' );
+-        }
++//        if ( cap.exitStatus != 0 ) {
++//            msgError( 'no, please check your compiler setup.\n' +
++//                      'For cross-compiling and embedded-device support\n' +
++//                      'please contact <support@froglogic.com>.' );
++//        }
+         msgResult( 'yes' );
+     }
+ 
+@@ -5949,8 +5951,31 @@
+ 
+     msgResult( "yes" );
+ 
+-    if ( pythonBinary ) {
+-        checkPythonWorks( pythonBinary );
++    var pyinc = withOption[ "python-includedir" ];
++    var pylib = withOption[ "python-lib" ];
++
++    if (( pyinc != "" ) && ( pylib != "" )) {
++        msgChecking( "Python 2 passed in options" );
++
++        if ( !checkPython2CompileAndLink( [ pyinc ], pylib ) ) {
++            msgResult( "failed. Build test failed" );
++            return; // non-working development files (arch/compiler mixup?)
++        }
++
++        config["PYTHON2INCS"] = [ pyinc ];
++        config["PYTHON2LIBS"] = [ pylib ];
++        
++        config.BUILD_PYTHON2 = 1;
++        config.PYTHON2VERSION = [ 2, 7 ];
++
++        addPathsIniLibraryPath( '/usr/lib' );
++        config.PYTHON2HOME = pathForPathsIni( '/usr' );
++
++        msgResult( "done" );
++    } else {
++        if ( pythonBinary ) {
++            checkPythonWorks( pythonBinary );
++        }
+     }
+ }
+ 
+@@ -10372,7 +10397,7 @@
+                 config[ "LFLAGS_LIB_SHARED" ] = " -shared";
+                 // TODO: use flags on more platforms, if supported
+                 if ( targetIsLinux() || targetIsAndroid() ) {
+-                    config[ "LFLAGS_LIB_NOUNDEF" ] = [ "-Wl,--no-undefined" ];
++                    config[ "LFLAGS_LIB_NOUNDEF" ] = []; //[ "-Wl,--no-undefined" ];
+                     config[ "LFLAGS_LIB_ALLOWUNDEF" ] = [];
+                 }
+             }
+diff -Naur squish-6.6.0-qt-src.ORIG/src/wrappers/qt/qtwrapper.cpp squish-6.6.0-qt-src/src/wrappers/qt/qtwrapper.cpp
+--- squish-6.6.0-qt-src.ORIG/src/wrappers/qt/qtwrapper.cpp	2020-06-23 06:56:14.000000000 -0400
++++ squish-6.6.0-qt-src/src/wrappers/qt/qtwrapper.cpp	2020-07-20 10:24:09.598565883 -0400
+@@ -5797,6 +5797,23 @@
+     res |= e->type() == QEvent::MouseButtonRelease;
+ #endif
+ 
++    // fix for specific hobart events (i.e. record/playback workaround)
++    if ( QEvent::KeyPress == e->type() )
++    {
++        QKeyEvent *keyEvent( static_cast<QKeyEvent*>( e ) );
++
++        // alt+arrow
++        // swipe
++        if ( Qt::AltModifier == keyEvent->modifiers() )
++            if (( Qt::Key_Down == keyEvent->key() ) ||
++                ( Qt::Key_Left == keyEvent->key() ) ||
++                ( Qt::Key_Right == keyEvent->key() ) ||
++                ( Qt::Key_Up == keyEvent->key() ))
++            {
++                res = true;
++            }
++    }
++
+     return res;
+ }
+ 

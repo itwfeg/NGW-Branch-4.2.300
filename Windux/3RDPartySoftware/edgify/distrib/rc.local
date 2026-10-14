@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Startup script for Edgify/Hobart installation.
+#
+
+# check for RPM existance
+rpmpkg=$(find /home/root -maxdepth 1 -name "edgify-*.noarch.rpm")
+
+if [ ! -f ${rpmpkg} ] || [ "${rpmpkg}" == "" ]; then
+    echo "Hobart services appear to be installed"
+else
+    # check for RPM already installed
+    rpm -qa >> /tmp/rpminstalled
+    grep -q "smbackend" /tmp/rpminstalled
+
+    if [ $? -eq 0 ]; then
+        echo "Hobart services appear to be installed, removing package"
+    else
+
+        # install RPM
+        rpm -i --nodeps ${rpmpkg}
+
+        if [ $? -ne 0 ]; then
+            echo "Hobart services failed to install!"
+            exit 1
+        fi
+    fi
+    
+    # remove installed RPM
+    rm ${rpmpkg}
+
+fi
+
+# done
+exit 0

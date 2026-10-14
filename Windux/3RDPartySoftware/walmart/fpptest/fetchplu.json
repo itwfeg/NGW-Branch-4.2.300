@@ -1,0 +1,1928 @@
+{
+	"removeProductsOnNotInList": false,
+	"deletePluList": [
+		145,
+		60785,
+		4,
+		989
+	],
+	"products": [
+		{
+			"productNbr": 989,
+			"productDescription": "FRENCH BREAD<BR>FRESH BAKED IN STORE",
+			"productType": "BY_COUNT",
+			"barCodeTypeNbr": 2,
+			"barCode": 989,
+			"reportingClass": 999999,
+			"isRemotePrintOnly": true,
+			"pricing": {
+				"byCount": 1,
+				"netWeight": 14,
+				"tareWeight": null,
+				"unitPrice": 1.49
+			},
+			"productLife": {
+				"shelfLifeDays": 3,
+				"shelfLifeHours": 0,
+				"productLifeDays": 0,
+				"productLifeHours": 0
+			},
+			"labeling": {
+				"labelPlacement": null,
+				"labelRotation": null,
+				"labelType1": 103,
+				"labelType2": 203,
+				"labelType3": null,
+				"graphic1": null,
+				"graphic2": null,
+				"graphic3": null,
+				"graphic4": null
+			},
+			"texts": {
+				"expandedText1": "INGREDIENTS: ENRICHED FLOUR (WHEAT FLOUR, MALTED BARLEY FLOUR, NIACIN, FERROUSSULFATE, THIAMINMONONITRATE, RIBOFLAVIN, FOLIC ACID), WATER, YEAST. CONTAINS 2% OR LESS OF: SALT, SUGAR, SOYBEANOIL, DATEM, CALCIUM SULFATE, ASCORBIC ACID, AMMONIUM SULFATE, ENZYMES, VITALWHEAT GLUTEN. CONTAINS WHEAT AND SOY.",
+				"expandedText2": null,
+				"specialMessage": null,
+				"productNote": null,
+				"productMarquee": null,
+				"recipe": null,
+				"cookingInstructions": null,
+				"suggestiveSelling": null,
+				"allergens": null
+			},
+			"cool": null,
+			"nutritionFacts": {
+				"servingSizeText": "1/8 OF LOAF",
+				"servingsPerContainerText": "8",
+				"nutriCommentText": null,
+				"servingsPerContainerQty": 80,
+				"totalFatQty": 10,
+				"totalFatPct": 10,
+				"betaCarotenePct": 0,
+				"biotinPct": 0,
+				"calciumQty": 0,
+				"calciumPct": 0,
+				"caloriesQty": 140,
+				"caloriesPct": 0,
+				"caloriesFromFatQty": 100,
+				"caloriesFromSaturatedFatQty": 0,
+				"carbohydrateQty": 280,
+				"carbohydratePct": 100,
+				"cholesterolQty": 0,
+				"cholesterolPct": 0,
+				"copperPct": 0,
+				"dietaryFiberQty": 10,
+				"dietaryFiberPct": 40,
+				"solubleFiberQty": 0,
+				"insolFiberQty": 0,
+				"folatePct": 0,
+				"iodinePct": 0,
+				"ironQty": 17,
+				"ironPct": 100,
+				"monousatFatQty": 0,
+				"magnesiumPct": 0,
+				"niacinPct": 0,
+				"otherCarboQty": 0,
+				"pantothenicPct": 0,
+				"phosphorusPct": 0,
+				"polyusatFatQty": 0,
+				"potassiumQty": 0,
+				"potassiumPct": 0,
+				"proteinQty": 50,
+				"proteinPct": 0,
+				"riboflavinPct": 0,
+				"saturatedFatQty": 0,
+				"saturatedFatPct": 0,
+				"sodiumQty": 2900,
+				"sodiumPct": 130,
+				"sugarQty": 10,
+				"sugarAlcoholQty": 0,
+				"addedSugarQty": 0,
+				"addedSugarPct": 0,
+				"thiaminPct": 0,
+				"transfatQty": 0,
+				"vitaminAPct": 0,
+				"vitaminB12Pct": 0,
+				"vitaminB6Pct": 0,
+				"vitaminCPct": 0,
+				"vitaminDQty": 0,
+				"vitaminDPct": 0,
+				"vitaminEPct": 0,
+				"zincPct": 0
+			}
+		}, {
+			"productNbr": 122,
+			"productDescription": "6CT BAVARIAN FILLED<BR>BISMARKS",
+			"productType": "FIXED_WEIGHT",
+			"barCodeTypeNbr": 2,
+			"barCode": 7874298122,
+			"reportingClass": 999999,
+			"isRemotePrintOnly": false,
+			"pricing": {
+				"byCount": 1,
+				"netWeight": 16,
+				"tareWeight": null,
+				"unitPrice": 2.97
+			},
+			"productLife": {
+				"shelfLifeDays": 2,
+				"shelfLifeHours": 0,
+				"productLifeDays": 0,
+				"productLifeHours": 0
+			},
+			"labeling": {
+				"labelPlacement": "RIGHT_SIDE",
+				"labelRotation": "ONE_EIGHTY",
+				"labelType1": 105,
+				"labelType2": null,
+				"labelType3": null,
+				"graphic1": null,
+				"graphic2": null,
+				"graphic3": null,
+				"graphic4": null
+			},
+			"texts": {
+				"expandedText1": "INGREDIENTS: DONUT: ENRICHED FLOUR (WHEAT FLOUR, MALTED BARLEY FLOUR, NIACIN, REDUCED IRON, THIAMINE MONONITRATE, RIBOFLAVIN, FOLIC ACID), WATER, PALM OIL, HIGH FRUCTOSE CORN SYRUP, SUGAR, DEXTROSE, CONTAINS 2% OR LESS OF SOY OIL, YEAST, MODIFIED CORNSTARCH, SALT, WHEY (MILK), MONO- AND DIGLYCERIDES, SODIUM ACID PYROPHOSPHATE, SODIUM BICARBONATE, SOY FLOUR, PRE-GELATINIZED WHEAT STARCH, SODIUM STEAROYL LACTYLATE, NATURAL AND ARTIFICIAL FLAVORS, PROPYLENE GLYCOL, XANTHAN GUM, PRESERVATIVES (SORBIC ACID, SODIUM BENZOATE), COLOR ADDED, EGG WHI TES, LACTIC ACID, CORN SYRUP, PHOSPHORIC ACID, GLYCERIN, YELLOW 5, YELLOW 6, EGGS, POLYSORBATE 60, SKIM MILK, EGG YOLKS, DATEM, CALCIUM STEAROYL-2-LACTYLATE, WHEAT GLUTEN, CALCIUM SULFATE, WHEAT STARCH, AMMONIUM SULFATE. ARTIFICIALLY FLAVORED CHOCOLATE ICING: SUGAR, WATER,CORN SYRUP, PALM OIL, COCOA PROCESSED  WITH ALKALI, CONTAINS 2% OR LESS OF SOYOIL, MONO- AND DIGLYCERIDES (WITH CITR IC ACID ADDED A PRESERVATIVE), POLYSORBATE 60, SALT, PRESERVATIVES (SODIUM PROPIONATE, SORBIC ACID), SOY LECITHIN, COLOR ADDED, NATURAL AND ARTIFICIAL FLAVOR, PROPYLENE GLYCOL, DEXTROSE, CORNSTARCH, XANTHAN GUM, CITRIC ACID. POWDERED SUGAR: SUGAR, MODIFIED CORNSTARCH. CONTAINS MILK, EGGS, WHEAT AND SOY. MAY CONTAIN TRACES OF COCONUT, PECANS, WALNUTSAND PEANUTS.",
+				"expandedText2": null,
+				"specialMessage": null,
+				"productNote": null,
+				"productMarquee": null,
+				"recipe": null,
+				"cookingInstructions": null,
+				"suggestiveSelling": null,
+				"allergens": null
+			},
+			"cool": null,
+			"nutritionFacts": null
+		}, {
+			"productNbr": 36302,
+			"productDescription": "LOBSTER TAILS<BR>FROZEN",
+			"productType": "RANDOM_WEIGHT",
+			"barCodeTypeNbr": 2,
+			"barCode": 36302,
+			"reportingClass": 999999,
+			"isRemotePrintOnly": false,
+			"pricing": {
+				"byCount": 1,
+				"netWeight": 16,
+				"tareWeight": null,
+				"unitPrice": 2.97
+			},
+			"productLife": {
+				"shelfLifeDays": 2,
+				"shelfLifeHours": 0,
+				"productLifeDays": 0,
+				"productLifeHours": 0
+			},
+			"labeling": {
+				"labelPlacement": "LEFT_SIDE",
+				"labelRotation": "NINETY",
+				"labelType1": 105,
+				"labelType2": null,
+				"labelType3": null,
+				"graphic1": null,
+				"graphic2": null,
+				"graphic3": null,
+				"graphic4": null
+			},
+			"texts": {
+				"expandedText1": "This is expanded text1",
+				"expandedText2": "This is expanded TEXT 2",
+				"specialMessage": "A Special Message",
+				"productNote": "Product note",
+				"productMarquee": "marquee marquee",
+				"recipe": "mix with lots of salt",
+				"cookingInstructions": "Cook at 350 until done",
+				"suggestiveSelling": "sell more product",
+				"allergens": "allergens"
+			},
+			"cool": {
+				"coolCategoryId": 9999,
+				"coolPretextid": null,
+				"defaultCoolTextId": 36302,
+				"currentCoolTextId": 36302,
+				"isForced": true,
+				"isRequired": true,
+				"coolTrackingNbrTxt": "36302",
+				"coolTexts": [
+					{
+						"coolTextNbr": 36302,
+						"coolTextSequenceNbr": 1
+					},{
+						"coolTextNbr": 36303,
+						"coolTextSequenceNbr": 2
+					}
+				]
+			},
+			"nutritionFacts": null
+		}
+	],
+	"cool": {
+		"coolCountries": [
+			{
+				"coolCountryId": 1,
+				"primaryName": "Afghanistan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 2,
+				"primaryName": "Albania",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 3,
+				"primaryName": "Algeria",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 4,
+				"primaryName": "American Samoa",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 5,
+				"primaryName": "Andorra",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 6,
+				"primaryName": "Angola",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 7,
+				"primaryName": "Anguilla",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 8,
+				"primaryName": "Antarctica",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 9,
+				"primaryName": "Antigua and Barbuda",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 10,
+				"primaryName": "Argentina",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 11,
+				"primaryName": "Armenia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 12,
+				"primaryName": "Aruba",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 13,
+				"primaryName": "Australia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 14,
+				"primaryName": "Austria",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 15,
+				"primaryName": "Azerbaijan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 16,
+				"primaryName": "Bahamas",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 17,
+				"primaryName": "Bahrain",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 18,
+				"primaryName": "Bangladesh",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 19,
+				"primaryName": "Barbados",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 20,
+				"primaryName": "Belarus",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 21,
+				"primaryName": "Belgium",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 22,
+				"primaryName": "Belize",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 23,
+				"primaryName": "Benin",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 24,
+				"primaryName": "Bermuda",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 25,
+				"primaryName": "Bhutan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 26,
+				"primaryName": "Bolivia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 27,
+				"primaryName": "Bosnia and Herzegovina",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 28,
+				"primaryName": "Botswana",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 29,
+				"primaryName": "Bouvet Island",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 30,
+				"primaryName": "Brazil",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 31,
+				"primaryName": "British Indian Ocean Territory",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 32,
+				"primaryName": "Brunei Darussalam",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 33,
+				"primaryName": "Bulgaria",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 34,
+				"primaryName": "Burkina Faso",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 35,
+				"primaryName": "Burundi",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 36,
+				"primaryName": "Cambodia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 37,
+				"primaryName": "Cameroon",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 38,
+				"primaryName": "Canada",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 39,
+				"primaryName": "Cape Verde",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 40,
+				"primaryName": "Cayman Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 41,
+				"primaryName": "Central African Republic",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 42,
+				"primaryName": "Chad",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 43,
+				"primaryName": "Chile",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 44,
+				"primaryName": "China",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 45,
+				"primaryName": "Christmas Island",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 46,
+				"primaryName": "Cocos (Keeling) Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 47,
+				"primaryName": "Colombia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 48,
+				"primaryName": "Comoros",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 49,
+				"primaryName": "Congo",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 50,
+				"primaryName": "Cook Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 51,
+				"primaryName": "Costa Rica",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 52,
+				"primaryName": "Croatia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 53,
+				"primaryName": "Cuba",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 54,
+				"primaryName": "Cyprus",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 55,
+				"primaryName": "Czech Republic",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 56,
+				"primaryName": "Denmark",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 57,
+				"primaryName": "Djibouti",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 58,
+				"primaryName": "Dominica",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 59,
+				"primaryName": "Dominican Republic",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 60,
+				"primaryName": "East Timor",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 61,
+				"primaryName": "Ecuador",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 62,
+				"primaryName": "Egypt",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 63,
+				"primaryName": "El Salvador",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 64,
+				"primaryName": "Equatorial Guinea",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 65,
+				"primaryName": "Eritrea",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 66,
+				"primaryName": "Estonia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 67,
+				"primaryName": "Ethiopia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 68,
+				"primaryName": "Falkland Islands (Malvinas)",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 69,
+				"primaryName": "Faroe Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 70,
+				"primaryName": "Fiji",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 71,
+				"primaryName": "Finland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 72,
+				"primaryName": "France",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 73,
+				"primaryName": "France, Metropolitan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 74,
+				"primaryName": "French Guiana",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 75,
+				"primaryName": "French Polynesia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 76,
+				"primaryName": "French Southern Territories",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 77,
+				"primaryName": "Gabon",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 78,
+				"primaryName": "Gambia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 79,
+				"primaryName": "Georgia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 80,
+				"primaryName": "Germany",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 81,
+				"primaryName": "Ghana",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 82,
+				"primaryName": "Gibraltar",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 83,
+				"primaryName": "Greece",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 84,
+				"primaryName": "Greenland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 85,
+				"primaryName": "Grenada",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 86,
+				"primaryName": "Guadeloupe",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 87,
+				"primaryName": "Guam",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 88,
+				"primaryName": "Guatemala",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 89,
+				"primaryName": "Guinea",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 90,
+				"primaryName": "Guinea-Bissau",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 91,
+				"primaryName": "Guyana",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 92,
+				"primaryName": "Haiti",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 93,
+				"primaryName": "Heard Island & McDonald Isl",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 94,
+				"primaryName": "Honduras",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 95,
+				"primaryName": "Hong Kong",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 96,
+				"primaryName": "Hungary",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 97,
+				"primaryName": "Iceland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 98,
+				"primaryName": "India",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 99,
+				"primaryName": "Indonesia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 100,
+				"primaryName": "Iran",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 101,
+				"primaryName": "Iraq",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 102,
+				"primaryName": "Ireland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 103,
+				"primaryName": "Israel",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 104,
+				"primaryName": "Italy",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 105,
+				"primaryName": "Ivory Coast",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 106,
+				"primaryName": "Jamaica",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 107,
+				"primaryName": "Japan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 108,
+				"primaryName": "Jordan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 109,
+				"primaryName": "Kazakhstan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 110,
+				"primaryName": "Kenya",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 111,
+				"primaryName": "Kiribati",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 112,
+				"primaryName": "Korea, North",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 113,
+				"primaryName": "Korea, South",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 114,
+				"primaryName": "Kuwait",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 115,
+				"primaryName": "Kyrgyzstan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 116,
+				"primaryName": "Laos",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 117,
+				"primaryName": "Latvia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 118,
+				"primaryName": "Lebanon",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 119,
+				"primaryName": "Lesotho",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 120,
+				"primaryName": "Liberia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 121,
+				"primaryName": "Libyan Arab Jamahiriya",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 122,
+				"primaryName": "Liechtenstein",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 123,
+				"primaryName": "Lithuania",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 124,
+				"primaryName": "Luxembourg",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 125,
+				"primaryName": "Macau",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 126,
+				"primaryName": "Macedonia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 127,
+				"primaryName": "Madagascar",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 128,
+				"primaryName": "Malawi",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 129,
+				"primaryName": "Malaysia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 130,
+				"primaryName": "Maldives",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 131,
+				"primaryName": "Mali",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 132,
+				"primaryName": "Malta",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 133,
+				"primaryName": "Marshall Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 134,
+				"primaryName": "Martinique",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 135,
+				"primaryName": "Mauritania",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 136,
+				"primaryName": "Mauritius",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 137,
+				"primaryName": "Mayotte",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 138,
+				"primaryName": "Mexico",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 139,
+				"primaryName": "Micronesia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 140,
+				"primaryName": "Moldova",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 141,
+				"primaryName": "Monaco",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 142,
+				"primaryName": "Mongolia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 143,
+				"primaryName": "Montserrat",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 144,
+				"primaryName": "Morocco",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 145,
+				"primaryName": "Mozambique",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 146,
+				"primaryName": "Myanmar",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 147,
+				"primaryName": "Namibia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 148,
+				"primaryName": "Nauru",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 149,
+				"primaryName": "Nepal",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 150,
+				"primaryName": "Netherlands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 151,
+				"primaryName": "Netherlands Antilles",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 152,
+				"primaryName": "New Caledonia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 153,
+				"primaryName": "New Zealand",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 154,
+				"primaryName": "Nicaragua",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 155,
+				"primaryName": "Niger",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 156,
+				"primaryName": "Nigeria",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 157,
+				"primaryName": "Niue",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 158,
+				"primaryName": "Norfolk Island",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 159,
+				"primaryName": "Northern Mariana Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 160,
+				"primaryName": "Norway",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 161,
+				"primaryName": "Oman",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 162,
+				"primaryName": "Pakistan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 163,
+				"primaryName": "Palau",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 164,
+				"primaryName": "Palestine",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 165,
+				"primaryName": "Panama",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 166,
+				"primaryName": "Papua New Guinea",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 167,
+				"primaryName": "Paraguay",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 168,
+				"primaryName": "Peru",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 169,
+				"primaryName": "Philippines",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 170,
+				"primaryName": "Pitcairn",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 171,
+				"primaryName": "Poland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 172,
+				"primaryName": "Portugal",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 173,
+				"primaryName": "Puerto Rico",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 174,
+				"primaryName": "Qatar",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 175,
+				"primaryName": "Republic of Congo",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 176,
+				"primaryName": "Reunion",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 177,
+				"primaryName": "Romania",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 178,
+				"primaryName": "Russian Federation",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 179,
+				"primaryName": "Rwanda",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 180,
+				"primaryName": "Saint Helena",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 181,
+				"primaryName": "Saint Kitts And Nevis",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 182,
+				"primaryName": "Saint Lucia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 183,
+				"primaryName": "Saint Pierre And Miquelon",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 184,
+				"primaryName": "Saint Vincent & the Grenadines",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 185,
+				"primaryName": "Samoa",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 186,
+				"primaryName": "San Marino",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 187,
+				"primaryName": "Sao Tome and Principe",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 188,
+				"primaryName": "Saudi Arabia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 189,
+				"primaryName": "Senegal",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 190,
+				"primaryName": "Seychelles",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 191,
+				"primaryName": "Sierra Leone",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 192,
+				"primaryName": "Singapore",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 193,
+				"primaryName": "Slovakia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 194,
+				"primaryName": "Slovenia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 195,
+				"primaryName": "Solomon Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 196,
+				"primaryName": "Somalia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 197,
+				"primaryName": "South Africa",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 198,
+				"primaryName": "South Georgia/So Sandwich Isl",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 199,
+				"primaryName": "Spain",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 200,
+				"primaryName": "Sri Lanka",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 201,
+				"primaryName": "Sudan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 202,
+				"primaryName": "Suriname",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 203,
+				"primaryName": "Svalbard and Jan Mayen",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 204,
+				"primaryName": "Swaziland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 205,
+				"primaryName": "Sweden",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 206,
+				"primaryName": "Switzerland",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 207,
+				"primaryName": "Syrian Arab Republic",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 208,
+				"primaryName": "Taiwan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 209,
+				"primaryName": "Tajikistan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 210,
+				"primaryName": "Tanzania",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 211,
+				"primaryName": "Thailand",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 212,
+				"primaryName": "Togo",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 213,
+				"primaryName": "Tokelau",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 214,
+				"primaryName": "Tonga",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 215,
+				"primaryName": "Trinidad and Tobago",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 216,
+				"primaryName": "Tunisia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 217,
+				"primaryName": "Turkey",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 218,
+				"primaryName": "Turkmenistan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 219,
+				"primaryName": "Turks and Caicos Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 220,
+				"primaryName": "Tuvalu",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 221,
+				"primaryName": "Uganda",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 222,
+				"primaryName": "Ukraine",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 223,
+				"primaryName": "United Arab Emirates",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 224,
+				"primaryName": "United Kingdom",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 225,
+				"primaryName": "United States",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 226,
+				"primaryName": "Uruguay",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 227,
+				"primaryName": "US Minor Outlying Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 228,
+				"primaryName": "Uzbekistan",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 229,
+				"primaryName": "Vanuatu",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 230,
+				"primaryName": "Vatican City State",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 231,
+				"primaryName": "Venezuela",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 232,
+				"primaryName": "Viet Nam",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 233,
+				"primaryName": "Virgin Islands (British)",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 234,
+				"primaryName": "Virgin Islands (U.S.)",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 235,
+				"primaryName": "Wallis and Futuna Islands",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 236,
+				"primaryName": "Western Sahara",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 237,
+				"primaryName": "Yemen",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 238,
+				"primaryName": "Yugoslavia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 239,
+				"primaryName": "Zambia",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolCountryId": 240,
+				"primaryName": "Zimbabwe",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}
+		],
+		"coolProductionSteps": [
+			{
+				"coolProductionStepId": 1,
+				"primaryName": "PRODUCT OF",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 2,
+				"primaryName": "PROCESSED IN",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 3,
+				"primaryName": "FARM RAISED",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 4,
+				"primaryName": "WILD CAUGHT",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 5,
+				"primaryName": "BORN IN",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 6,
+				"primaryName": "RAISED IN",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}, {
+				"coolProductionStepId": 7,
+				"primaryName": "HARVESTED IN",
+				"alternateName": null,
+				"isAllCategoriesEnabled": true
+			}
+		],
+		"coolPretexts": null,
+		"coolTexts": [
+			{
+				"coolTextId": 36302,
+				"coolTextName": "PRODUCT OF Bahamas, Belize, Brazil, Colombia, Costa Rica, Honduras, Nicaragua, Panama, WILD CAUGHT Bahamas, Belize, Brazil, Colombia, Costa Rica, Honduras, Nicaragua, Panama"
+			},{
+				"coolTextId": 36303,
+				"coolTextName": "PRODUCT OF Austrailia"
+			},{
+				"coolTextId": 36304,
+				"coolTextName": "PRODUCT OF Nicaragua, Panama"
+			}
+		],
+		"coolCategories": [
+			{
+				"coolCategoryId": 3703,
+				"primaryName": "Cool Category # 3703",
+				"alternateName": null,
+				"coolCategoryCountryIdList": [
+					10,
+					13,
+					30,
+					38,
+					43,
+					51,
+					106,
+					138,
+					153,
+					154,
+					165,
+					167,
+					168,
+					173,
+					225,
+					226,
+					231
+				],
+				"coolCategoryProductionStepIdList": [
+					5,
+					6,
+					7
+				],
+				"coolCategoryPretextIdList": null
+			}, {
+				"coolCategoryId": 7601,
+				"primaryName": "Cool Category # 7601",
+				"alternateName": null,
+				"coolCategoryCountryIdList": [
+					4,
+					10,
+					13,
+					16,
+					18,
+					22,
+					26,
+					30,
+					31,
+					38,
+					40,
+					43,
+					44,
+					47,
+					50,
+					51,
+					53,
+					56,
+					59,
+					61,
+					62,
+					63,
+					65,
+					68,
+					69,
+					70,
+					71,
+					72,
+					73,
+					75,
+					76,
+					84,
+					87,
+					88,
+					91,
+					92,
+					94,
+					95,
+					97,
+					98,
+					99,
+					102,
+					104,
+					106,
+					107,
+					109,
+					112,
+					113,
+					120,
+					123,
+					125,
+					127,
+					129,
+					133,
+					138,
+					139,
+					146,
+					147,
+					150,
+					153,
+					154,
+					159,
+					160,
+					161,
+					162,
+					165,
+					166,
+					168,
+					169,
+					178,
+					185,
+					187,
+					190,
+					192,
+					195,
+					197,
+					198,
+					199,
+					200,
+					201,
+					202,
+					205,
+					208,
+					211,
+					219,
+					221,
+					223,
+					224,
+					225,
+					226,
+					230,
+					231,
+					232,
+					233,
+					234,
+					237
+				],
+				"coolCategoryProductionStepIdList": [
+					1,
+					2,
+					3,
+					4
+				],
+				"coolCategoryPretextIdList": null
+			}, {
+				"coolCategoryId": 7602,
+				"primaryName": "Cool Category # 7602",
+				"alternateName": null,
+				"coolCategoryCountryIdList": [
+					10,
+					13,
+					30,
+					38,
+					43,
+					51,
+					106,
+					138,
+					153,
+					154,
+					165,
+					167,
+					168,
+					173,
+					225,
+					226,
+					231
+				],
+				"coolCategoryProductionStepIdList": [
+					1
+				],
+				"coolCategoryPretextIdList": null
+			}, {
+				"coolCategoryId": 7603,
+				"primaryName": "Cool Category # 7603",
+				"alternateName": null,
+				"coolCategoryCountryIdList": [
+					10,
+					13,
+					30,
+					38,
+					43,
+					51,
+					106,
+					138,
+					153,
+					154,
+					165,
+					167,
+					168,
+					173,
+					225,
+					226,
+					231
+				],
+				"coolCategoryProductionStepIdList": [
+					5,
+					6,
+					7
+				],
+				"coolCategoryPretextIdList": null
+			}, {
+				"coolCategoryId": 9999,
+				"primaryName": "Cool Category # 9999",
+				"alternateName": null,
+				"coolCategoryCountryIdList": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17,
+					18,
+					19,
+					20,
+					21,
+					22,
+					23,
+					24,
+					25,
+					26,
+					27,
+					28,
+					29,
+					30,
+					31,
+					32,
+					33,
+					34,
+					35,
+					36,
+					37,
+					38,
+					39,
+					40,
+					41,
+					42,
+					43,
+					44,
+					45,
+					46,
+					47,
+					48,
+					49,
+					50,
+					51,
+					52,
+					53,
+					54,
+					55,
+					56,
+					57,
+					58,
+					59,
+					60,
+					61,
+					62,
+					63,
+					64,
+					65,
+					66,
+					67,
+					68,
+					69,
+					70,
+					71,
+					72,
+					73,
+					74,
+					75,
+					76,
+					77,
+					78,
+					79,
+					80,
+					81,
+					82,
+					83,
+					84,
+					85,
+					86,
+					87,
+					88,
+					89,
+					90,
+					91,
+					92,
+					93,
+					94,
+					95,
+					96,
+					97,
+					98,
+					99,
+					100,
+					101,
+					102,
+					103,
+					104,
+					105,
+					106,
+					107,
+					108,
+					109,
+					110,
+					111,
+					112,
+					113,
+					114,
+					115,
+					116,
+					117,
+					118,
+					119,
+					120,
+					121,
+					122,
+					123,
+					124,
+					125,
+					126,
+					127,
+					128,
+					129,
+					130,
+					131,
+					132,
+					133,
+					134,
+					135,
+					136,
+					137,
+					138,
+					139,
+					140,
+					141,
+					142,
+					143,
+					144,
+					145,
+					146,
+					147,
+					148,
+					149,
+					150,
+					151,
+					152,
+					153,
+					154,
+					155,
+					156,
+					157,
+					158,
+					159,
+					160,
+					161,
+					162,
+					163,
+					164,
+					165,
+					166,
+					167,
+					168,
+					169,
+					170,
+					171,
+					172,
+					173,
+					174,
+					175,
+					176,
+					177,
+					178,
+					179,
+					180,
+					181,
+					182,
+					183,
+					184,
+					185,
+					186,
+					187,
+					188,
+					189,
+					190,
+					191,
+					192,
+					193,
+					194,
+					195,
+					196,
+					197,
+					198,
+					199,
+					200,
+					201,
+					202,
+					203,
+					204,
+					205,
+					206,
+					207,
+					208,
+					209,
+					210,
+					211,
+					212,
+					213,
+					214,
+					215,
+					216,
+					217,
+					218,
+					219,
+					220,
+					221,
+					222,
+					223,
+					224,
+					225,
+					226,
+					227,
+					228,
+					229,
+					230,
+					231,
+					232,
+					233,
+					234,
+					235,
+					236,
+					237,
+					238,
+					239,
+					240
+				],
+				"coolCategoryProductionStepIdList": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7
+				],
+				"coolCategoryPretextIdList": null
+			}
+		]
+	}
+}

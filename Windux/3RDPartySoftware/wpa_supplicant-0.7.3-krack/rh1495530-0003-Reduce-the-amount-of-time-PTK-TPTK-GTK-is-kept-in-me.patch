@@ -1,0 +1,120 @@
+From d2c33b91adb7f780b585c9c777362c608aac6167 Mon Sep 17 00:00:00 2001
+Message-Id: <d2c33b91adb7f780b585c9c777362c608aac6167.1507990127.git.davide.caratti@gmail.com>
+From: Jouni Malinen <j@w1.fi>
+Date: Wed, 16 Apr 2014 01:27:10 +0300
+Subject: [PATCH] Reduce the amount of time PTK/TPTK/GTK is kept in memory
+
+Some of the buffers used to keep a copy of PTK/TPTK/GTK in the
+supplicant implementation maintained a copy of the keys longer than
+necessary. Clear these buffers to zero when the key is not needed
+anymore to minimize the amount of time key material is kept in memory.
+
+Signed-off-by: Jouni Malinen <j@w1.fi>
+---
+ src/rsn_supp/wpa.c | 58 +++++++++++++++++++++++++++++++++---------------------
+ 1 file changed, 36 insertions(+), 22 deletions(-)
+
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -426,6 +426,7 @@ static void wpa_supplicant_process_1_of_
+ 	os_memcpy(buf, ptk->u.auth.tx_mic_key, 8);
+ 	os_memcpy(ptk->u.auth.tx_mic_key, ptk->u.auth.rx_mic_key, 8);
+ 	os_memcpy(ptk->u.auth.rx_mic_key, buf, 8);
++	os_memset(buf, 0, sizeof(buf));
+ 	sm->tptk_set = 1;
+ 	sm->tk_to_set = 1;
+ 
+@@ -657,6 +658,7 @@ static int wpa_supplicant_install_gtk(st
+ 				   _gtk, gd->gtk_len) < 0) {
+ 			wpa_printf(MSG_WARNING, "WPA: Failed to set "
+ 				   "GTK to the driver (Group only).");
++			os_memset(gtk_buf, 0, sizeof(gtk_buf));
+ 			return -1;
+ 		}
+ 	} else if (wpa_sm_set_key(sm, gd->alg,
+@@ -666,9 +668,10 @@ static int wpa_supplicant_install_gtk(st
+ 		wpa_printf(MSG_WARNING, "WPA: Failed to set GTK to "
+ 			   "the driver (alg=%d keylen=%d keyidx=%d)",
+ 			   gd->alg, gd->gtk_len, gd->keyidx);
++		os_memset(gtk_buf, 0, sizeof(gtk_buf));
+ 		return -1;
+ 	}
+-
++	os_memset(gtk_buf, 0, sizeof(gtk_buf));
+ 	return 0;
+ }
+ 
+@@ -727,8 +730,10 @@ static int wpa_supplicant_pairwise_gtk(s
+ 					      &gd.key_rsc_len, &gd.alg) ||
+ 	    wpa_supplicant_install_gtk(sm, &gd, key->key_rsc)) {
+ 		wpa_printf(MSG_DEBUG, "RSN: Failed to install GTK");
++		os_memset(&gd, 0, sizeof(gd));
+ 		return -1;
+ 	}
++	os_memset(&gd, 0, sizeof(gd));
+ 
+ 	wpa_supplicant_key_neg_complete(sm, sm->bssid,
+ 					key_info & WPA_KEY_INFO_SECURE);
+@@ -1222,7 +1227,6 @@ static int wpa_supplicant_process_1_of_2
+ 					     struct wpa_gtk_data *gd)
+ {
+ 	size_t maxkeylen;
+-	u8 ek[32];
+ 
+ 	gd->gtk_len = WPA_GET_BE16(key->key_length);
+ 	maxkeylen = keydatalen;
+@@ -1250,19 +1254,22 @@ static int wpa_supplicant_process_1_of_2
+ 	gd->keyidx = (key_info & WPA_KEY_INFO_KEY_INDEX_MASK) >>
+ 		WPA_KEY_INFO_KEY_INDEX_SHIFT;
+ 	if (ver == WPA_KEY_INFO_TYPE_HMAC_MD5_RC4) {
+-		os_memcpy(ek, key->key_iv, 16);
+-		os_memcpy(ek + 16, sm->ptk.kek, 16);
++		u8 ek[32];
+ 		if (keydatalen > sizeof(gd->gtk)) {
+ 			wpa_printf(MSG_WARNING, "WPA: RC4 key data "
+ 				   "too long (%lu)",
+ 				   (unsigned long) keydatalen);
+ 			return -1;
+ 		}
++		os_memcpy(ek, key->key_iv, 16);
++		os_memcpy(ek + 16, sm->ptk.kek, 16);
+ 		os_memcpy(gd->gtk, key + 1, keydatalen);
+ 		if (rc4_skip(ek, 32, 256, gd->gtk, keydatalen)) {
++			os_memset(ek, 0, sizeof(ek));
+ 			wpa_printf(MSG_ERROR, "WPA: RC4 failed");
+ 			return -1;
+ 		}
++		os_memset(ek, 0, sizeof(ek));
+ 	} else if (ver == WPA_KEY_INFO_TYPE_HMAC_SHA1_AES) {
+ 		if (keydatalen % 8) {
+ 			wpa_printf(MSG_WARNING, "WPA: Unsupported AES-WRAP "
+@@ -1405,6 +1412,7 @@ static int wpa_supplicant_verify_eapol_k
+ 			sm->tptk_set = 0;
+ 			sm->ptk_set = 1;
+ 			os_memcpy(&sm->ptk, &sm->tptk, sizeof(sm->ptk));
++			os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+ 		}
+ 	}
+ 
+@@ -1454,9 +1462,11 @@ static int wpa_supplicant_decrypt_key_da
+ 		os_memcpy(ek, key->key_iv, 16);
+ 		os_memcpy(ek + 16, sm->ptk.kek, 16);
+ 		if (rc4_skip(ek, 32, 256, (u8 *) (key + 1), keydatalen)) {
++			os_memset(ek, 0, sizeof(ek));
+ 			wpa_printf(MSG_ERROR, "WPA: RC4 failed");
+ 			return -1;
+ 		}
++		os_memset(ek, 0, sizeof(ek));
+ 	} else if (ver == WPA_KEY_INFO_TYPE_HMAC_SHA1_AES ||
+ 		   ver == WPA_KEY_INFO_TYPE_AES_128_CMAC) {
+ 		u8 *buf;
+@@ -2100,7 +2110,9 @@ void wpa_sm_notify_assoc(struct wpa_sm *
+ 		 */
+ 		wpa_printf(MSG_DEBUG, "WPA: Clear old PTK");
+ 		sm->ptk_set = 0;
++		os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+ 		sm->tptk_set = 0;
++		os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+ 	}
+ }
+ 

@@ -1,0 +1,13 @@
+We lock down the scale for security reasons.  The below steps will install software that disables some of this security.
+
+Take the attached file and place it on a USB thumb drive, plug it into the scale.
+On the scale, press the triangle button on the left hand side of the screen and select Supervisor Pages > ALL FUNCTIONS > Upgrade via USB
+Press the “choose upgrade” button and browse to the file and select it
+Press the “Upgrade firmware” button
+Screen should say firmware installed or some such message
+Reboot the scale via the physical button on the left hand side of the scale near the Ethernet port
+
+When scale comes back up…
+On the scale, press the triangle button on the left hand side of the screen and select Service Pages > Setup Utility
+Go to the “Network” tab
+Setup network as per your requirements then press “Save/Connect”, usually this is simply clicking “DHCP” and “Automatic DNS” radio buttons

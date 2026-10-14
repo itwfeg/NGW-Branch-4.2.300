@@ -1,0 +1,626 @@
+#***    HOBART.IDF - Image Definition File for Salsa project.
+#
+#1.     Functional Description.
+#       This file contains the script for GSMERGE to generate a BIOS32
+#       directory structure and any 32-bit linkages necessary by merging
+#       multiple binary images.
+#
+#       There are some special commenting conventions used below that should
+#       make changing the size of binaries simple.  To change the size of
+#       the binary, there are usually four blocks of code.  One block will
+#       be active.  The other three blocks will start with a comment such as
+#       #128k, #256k, #384 or #512k.  That comment indicates what size of file
+#       that version of the line is intended for.  To change binary sizes,
+#       comment out the current active portion of the code and replace the
+#       #xxxk with spaces in order to specify what size of binary you would like.
+#
+#       Also, sometimes there is commented out code for features that may or
+#       may not be supported by a particular adaptation.  If your adaptation
+#       does not have ACPI but you intend to add it, you would remove the
+#       #ACPI comment from the beginning of those lines that are marked as
+#       such.  #FB is short for Firmbase, #ACPI is short for ACPI, #BRWSR is
+#       short for the HTML files used with the integrated HTML browser, and
+#       #LUSB is short for Legacy USB. Note: Legacy USB requires Firmbase to
+#       be included also.
+#
+#2.     Modification history.
+#       K. C. Taylor    05/01/02.       #5.3, based on new template.
+#       R. Spiegel      05/06/08.       #5.3.3, enabled compress ACPI to flash.
+#       E. Khoruzhenko  05/07/14.       #5.3.3, use RTL8110 MAC driver.
+#       E. Khoruzhenko  05/09/22.       #5.3.3, add EHCI, remove TELNETD.
+#       D. T. Margell   06/03/24.       #5.3.3, use EHCI1 and USBHIDX3.
+#
+#3.     NOTICE: Copyright (C) 1999-2006 General Software, Inc.
+#
+
+################################################################################
+#       The following commands initialize the output binary image, and define  #
+#       where in the machine it will exist.                                    #
+################################################################################
+
+#128k   ImageDef $(PROJ).TMP, 128k, FFh # create 128k binary image.
+#128k   LocatePe    0E0000h             # the image starts at E0000h.
+
+#256k   ImageDef $(PROJ).TMP, 256k, FFh # create 256k binary image.
+#256k   LocatePe    0C0000h             # the image starts at C0000h.
+
+#384k   ImageDef $(PROJ).TMP, 384k, FFh # create 384k binary image.
+#384k   LocatePe    0A0000h             # the image starts at A0000h.
+
+        ImageDef $(PROJ).TMP, 512k, FFh # create 512k binary image.
+        LocatePe    080000h             # the image starts at 80000h.
+
+#1024k  ImageDef $(PROJ).TMP, 1024k, FFh # create 1024k binary image.
+#1024k  LocatePe    000000h             # the image starts at 00000h.
+
+#2048k  ImageDef $(PROJ).TMP, 2048k, FFh # create 2048k binary image.
+#2048k  LocatePe    000000h             # the first meg starts at 00000h.
+
+#4096k  ImageDef $(PROJ).TMP, 4096k, FFh # create 4096k binary image.
+#4096k  LocatePe    000000h             # the first meg starts at 00000h.
+
+################################################################################
+#       Load the actual BIOS binary file at the correct location in the        #
+#       output image when using a 192k .ABS file.                              #
+#                                                                              #
+#       In order to be x86 compatible, we must load the last 128k of the       #
+#       .ABS into the last 128k of the first megabyte of the Flash part. We    #
+#       must also load the last 256 bytes into the last 256 bytes of the       #
+#       flash, as well as into the last 256 bytes of the next to the last      #
+#       megabyte.  This takes care of the reset vector, in the case in         #
+#       which A20 is enabled and in the case in which it is disabled.          #
+#                                                                              #
+#       There may be systems that are exceptions to the above rule.  For       #
+#       example, there may be translation of the address space between the     #
+#       chipset and the Flash part.  The engineer must use their own           #
+#       judgement to determine the best way to combine binaries.               #
+#                                                                              #
+#       Note that this section should only be used if the .ABS file is 192k    #
+#       in size.  In that case, the low 64k must be included as a separate     #
+#       binary resource and low relocation should be enabled in the project    #
+#       include for the BIOS build.                                            #
+#                                                                              #
+#       When merging a 192k binary, the first 64k is normally loaded as a      #
+#       separate binary resource and the last 128k is included as a raw        #
+#       load that appears at 0E0000h-0FFFFFh and 0FFFE0000h-0FFFFFFFFh.        #
+################################################################################
+
+#       This version for a 128k image, if low segment relocation is enabled.
+
+#128k   At 0FFFF0000h                   # Depends on wrap, derived from 128k-192k).
+#128k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Define BIOS16 based on ABS map.
+#128k   At 0                            # Loading last 128k.
+
+#       This version for a 256k image, if low segment relocation is enabled.
+
+#256k   At 010000h                      # Offset is equivalent to 0:0 in map file.
+#256k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Define BIOS16 based on ABS map.
+#256k   At 020000h                      # Starting at 128k from end of target.
+
+#       This version for a 384k image, if low segment relocation is enabled.
+
+#384k   At 30000h                       # Offset is equivalent to 0:0 in map file.
+#384k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+#384k   At 60000h                       # Starting at 128k from end of target.
+
+#       This version for a 512k image, if low segment relocation is enabled.
+
+        At 50000h                       # Starting at byte 50000h of the image.
+        IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+        At 60000h                       # Starting at 128k from end of target.
+
+#       This version for a 1024k image, if low segment relocation is enabled.
+
+#1024k  At 0D0000h                      # Starting at byte 0D0000h of the image.
+#1024k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+#1024k  At 0E0000h                      # Starting at 128k from end of target.
+
+#       This version for a 2048k image, if low segment relocation is enabled.
+#       Note that some of this looks the same as for a 1MB image.  This is
+#       deliberate.  The whole .ABS file should land at the top of the first
+#       megabyte of the Flash part, because the system BIOS normally executes
+#       at the top of the first megabyte of the address space, and normally
+#       the address decoder passes straight through.  Only the reset vector
+#       executes at the top of the address space, and the first action it
+#       takes should be a jump to the top of the first megabyte.
+
+#2048k  At 01FFF00h                     # At 256 bytes from end of binary.
+#2048k  From 2FF00h                     # From ABS file offset 192k - 256 bytes.
+#2048k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#2048k  At 0D0000h                      # Starting at byte 0D0000h of the image.
+#2048k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Define BIOS16 based on ABS map.
+#2048k  At 0E0000h                      # Starting at 128k from end of target.
+
+#       This version for a 4096k image, if low segment relocation is enabled.
+#       We load the last 256 bytes into the top two megabytes to account for
+#       CPU resets with the A20 gate disabled.  Such CPU resets would wrap
+#       the next to the last megabyte into the last megabyte, hiding the top
+#       megabyte of the address space.
+
+#4096k  At 02FFF00h                     # At 256 bytes from end of next to last MB.
+#4096k  From 2FF00h                     # From ABS file offset 192k - 256 bytes.
+#4096k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#4096k  At 03FFF00h                     # At 256 bytes from end of last MB.
+#4096k  From 2FF00h                     # From ABS file offset 192k - 256 bytes.
+#4096k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#4096k  At 0D0000h                      # Starting at byte 0D0000h of the image.
+#4096k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Define BIOS16 based on ABS map.
+#4096k  At 0E0000h                      # Starting at 128k from end of target.
+
+#       This section is the same for all binaries, when using low relocation.
+
+        From 10000h                     # Load 64k into source, (192-64=128).
+        Load $(PROJ).ABS                # Load last 128k of .ABS file.
+
+################################################################################
+#       Load the actual BIOS binary file at the correct location in the        #
+#       output image when using a 128k .ABS file.                              #
+#                                                                              #
+#       In order to be x86 compatible, we must load the last 128k of the       #
+#       .ABS into the last 128k of the first megabyte of the Flash part. We    #
+#       must also load the last 256 bytes into the last 256 bytes of the       #
+#       flash, as well as into the last 256 bytes of the next to the last      #
+#       megabyte.  This takes care of the reset vector, in the case in         #
+#       which A20 is enabled and in the case in which it is disabled.          #
+#                                                                              #
+#       There may be systems that are exceptions to the above rule.  For       #
+#       example, there may be translation of the address space between the     #
+#       chipset and the Flash part.  The engineer must use their own best      #
+#       judgement to determine the best way to combine binaries.               #
+################################################################################
+
+#       This version for a 128k image.
+
+#128k   At 0                            # Depends on wrap, derived from 128k-192k).
+#128k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Define symbols based on map file.
+
+#       This version for a 256k image.
+
+#256k   At 20000h                       # Starting at 128k from end of target.
+#256k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This version for a 384k image.
+
+#384k   At 40000h                       # Starting at 128k from end of target.
+#384k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This version for a 512k image.
+
+#512k   At 60000h                       # Starting at 128k from end of target.
+#512k   IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This version for a 1024k image.
+
+#1024k  At 0E0000h                      # Starting at 128k from end of target.
+#1024k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This version for a 2048k image.
+#
+#       Note that some of this looks the same as for a 1MB image.  This is
+#       deliberate.  The whole .ABS file should land at the top of the first
+#       megabyte of the Flash part, because the system BIOS normally executes
+#       at the top of the first megabyte of the address space, and normally
+#       the address decoder passes straight through.  Only the reset vector
+#       executes at the top of the address space, and the first action it
+#       takes should be a jump to the top of the first megabyte.
+
+#2048k  At 01FFF00h                     # At 256 bytes from end of binary.
+#2048k  From 1FF00h                     # From ABS file offset 128k - 256 bytes.
+#2048k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#2048k  At 0E0000h                      # Starting at 128k from end of target.
+#2048k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This version for a 4096k image, if low segment relocation is enabled.
+#       We load the last 256 bytes into the top two megabytes to account for
+#       CPU resets with the A20 gate disabled.  Such CPU resets would wrap
+#       the next to the last megabyte into the last megabyte, hiding the top
+#       megabyte of the address space.
+
+#4096k  At 02FFF00h                     # At 256 bytes from end of next to last MB.
+#4096k  From 2FF00h                     # From ABS file offset 192k - 256 bytes.
+#4096k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#4096k  At 03FFF00h                     # At 256 bytes from end of next to last MB.
+#4096k  From 1FF00h                     # From ABS file offset 128k - 256 bytes.
+#4096k  Load $(PROJ).ABS                # Load last 256 bytes into target.
+#4096k  At 0E0000h                      # Starting at 128k from end of target.
+#4096k  IncludeMap 16bit, BIOS16, $(PROJ).MAP # Include the map file.
+
+#       This section is the same for all binaries.
+
+#        Load $(PROJ).ABS                # Load entire 128k .ABS file.
+
+#############################################################################
+#       The following section is for raw PCI binaries integrated into the   #
+#       system BIOS.                                                        #
+#                                                                           #
+#       Note that the actual offset within the binary is rarely equivalent  #
+#       to the low address at which the option ROM will be mapped.  Do not  #
+#       assume that an option ROM placed at offset 0 in a 256k binary will  #
+#       be magically become visible at 0C0000h.  This all depends on how    #
+#       the chipset decodes the address space.                              #
+#                                                                           #
+#       In most systems, the option ROM is initially visible at the top of  #
+#       the address space.  The system BIOS must be instructed to copy the  #
+#       option ROM into the low address space by using the PCI_ROM macro in #
+#       the project include file to generate a mapping table.               #
+#                                                                           #
+#       If the autocall package is included, it may also be possible to     #
+#       integrate option ROMs as data compressed binary resources.  This is #
+#       the preferred method.  This is not the place to load resources for  #
+#       autocall.  See the autocall package, if included, for details.      #
+#############################################################################
+
+#VGA    At 0                            # For 256k, equivalent to 0FFFC0000h.
+#VGA    Load $(GSPROJ)\VGA.BIN          # Load the VGA BIOS binary.
+
+################################################################################
+#       The following section defines all parts of the image that are unused   #
+#       and are free for general usage.                                        #
+################################################################################
+
+        At BIOS16:EndOfE000             # Start at the first unused byte.
+#128k   FreeTo      010000h             # Free to the end of the fill area.
+#256k   FreeTo      030000h             # Free to the end of the fill area.
+#384k   FreeTo      050000h             # Free to the end of the fill area.
+        FreeTo      070000h             # Free to the end of the fill area.
+#1024k  FreeTo      0F0000h             # Free to the end of the fill area.
+#2048k  FreeTo      0F0000h             # Free to the end of the fill area.
+#4096k  FreeTo      0F0000h             # Free to the end of the fill area.
+        At          BIOS16:FarRetF000   # Start at the last used byte.
+        Reserve     1                   # Skip to the first byte of filler.
+#128k   FreeTo      01FFFFh             # Free to the end of the BIOS.
+#256k   FreeTo      03FFFFh             # Free to the end of the BIOS.
+#384k   FreeTo      05FFFFh             # Free to the end of the BIOS.
+        FreeTo      07FFFFh             # Free to the end of the BIOS.
+#1024k  FreeTo      0FFFFFh             # Free to the end of the BIOS.
+#2048k  FreeTo      0FFFFFh             # Free to the end of the BIOS.
+#4096k  FreeTo      0FFFFFh             # Free to the end of the BIOS.
+        Include ..\resource\idf\meta.idf # Reserve used sections.
+
+#############################################################################
+#       Load the PCI32 services into some chunk of free space.              #
+#############################################################################
+
+#       The following block of code places the 32 bit PCI API in the E000h
+#       segment filler region.
+
+#       At BIOS16:EndOfE000             # Start at the first unused byte.
+#       Align       16                  # Align on a paragraph.
+
+#       The following block of code places the 32 bit PCI API in the F000h
+#       segment filler region.
+
+#       At          BIOS16:FarRetF000   # Start at the last used byte.
+#       Reserve     1                   # Skip to the first byte of filler.
+#       Align       16                  # Align on a paragraph.
+
+#       The following examples attempt to place the 32 bit PCI API in between
+#       known entry points in the F000h segment.  If this fails to build, try
+#       one of the other placement examples above.  One reason this may fail
+#       to build is if a modern Microsoft 32 bit linker is used to build
+#       PCIAPI32.DLL, as such linkers tend to pad code to the nearest
+#       4096 byte boundary for page alignment.
+
+#128k   At      01F070h                 # Large region of known entry points. (128k)
+#256k   At      03F070h                 # Large region of known entry points. (256k)
+#384k   At      05F070h                 # Large region of known entry points. (384k)
+        At      07F070h                 # Large region of known entry points. (512k)
+#1024k  At      0FF070h                 # Large region of known entry points. (1024k)
+#2048k  At      0FF070h                 # Large region of known entry points. (2048k)
+#4096k  At      0FF070h                 # Large region of known entry points. (4096k)
+
+#       The following code generates the 32 bit directory service entry and
+#       links the 32 bit PCI services into the BIOS.
+
+        PlaceDir32  128                 # Reserve 128 bytes for the directory.
+        IncludeMap  32bit, PCI32, $(GSPROJ)\PCIAPI32.MAP # Include the map.
+        LoadPe      $PCI, $(GSPROJ)\PCIAPI32.DLL # Include the service.
+
+        Include ..\system32\pci\pciapi32.idf # Patch the service binary.
+
+#############################################################################
+#       Include binary resources.  Note that headers will be appended and   #
+#       binary resources may be divided across free file sections, so do    #
+#       not load PCI ROM images here that must be free of distortion unless #
+#       you are using the autocall package.                                 #
+#                                                                           #
+#       Note that this code will not build unless the external resource     #
+#       manager is built into the BIOS binary.  If you disable the external #
+#       resource manager, you must also remove all of this code.            #
+#############################################################################
+
+        At BIOS16:ExtResListHead        # place the location at the list head.
+
+#       Understanding the proper value to use for LocateRes depends on
+#       understanding how the chipset presents the Flash part in the system
+#       address space.  The address specified represents the equivalent of
+#       the first byte of the output binary in the media address space. For
+#       designs that implement either BoardMapAddress in the board module or
+#       CsMapAddress in the chipset module, understanding the BIOS Media
+#       Control layer is critical.  For designs that expose the Flash through
+#       chipset specific programmable mapping registers, it is critical to
+#       understand how those mapping registers have been programmed.
+#
+#       Note that for 128k binaries, both 0E0000h and 0FFFE0000h are
+#       addresses that will work.  Either one can be selected.  Most chipsets
+#       map 0E0000h to 0FFFFFh and 0FFFE0000h to 0FFFFFFFFh to the same
+#       Flash part.  However, some chipsets fail to map the entire 128k, so
+#       your selection for either 0E0000h or 0FFFE0000h depends on how your
+#       chipset decodes the Flash part.
+#
+#       For the vast majority of chipsets, at most 128k of the system BIOS
+#       will be visible below the first megabyte.  For that reason, we do not
+#       present the alternative address below the first megabyte for binaries
+#       that are larger than 128k.
+
+#128k   LocateRes 0000E0000h            # look at 128k note above.
+#128k   LocateRes 0FFFE0000h            # look at 128k note above.
+#256k   LocateRes 0FFFC0000h            # location of starting media address.
+#384k   LocateRes 0FFFA0000h            # location of starting media address.
+        LocateRes 0FFF80000h            # location of starting media address.
+#1024k  LocateRes 0FFF00000h            # location of starting media address.
+#2048k  LocateRes 0FFE00000h            # location of starting media address.
+#4096k  LocateRes 0FFC00000h            # location of starting media address.
+
+        At 0                            # Begin loading at first available byte.
+
+#       Low Relocation Support.
+#
+#       The following lines data compress the first low segment being used by
+#       the BIOS, so that it doesn't take as much space in the Flash.  Only
+#       include these lines if some features have been relocated to
+#       segment 1000h so that the .ABS file is 196k in size.
+
+        CompressTo $(GSPROJ)\SEGL1000.CMP # define data compressed target.
+        To 10000h                       # load until we reach byte 10000h
+        Load $(PROJ).ABS                # load .ABS file into compressed file.
+
+#       Now we load the 1000 segment as a binary resource with a low segment
+#       specific class and an ID of 0.
+
+        LoadRes                         # Load segment L1000 as a resource.
+        BIOS16:RESOURCE_CLASS_BIOSSEGL1000 # class is BIOS L1000 segment.
+        0h,                             # the resource ID must be 0.
+        1,                              # indicate the binary is data compressed.
+        $(GSPROJ)\SEGL1000.CMP          # the actual compressed 1000 segment.
+
+#       Load Geode integrated video ROM binary.
+
+        CompressTo $(GSPROJ)\cstlvga.cmp
+        Load $(GSPROJ)\cstlvga.rom
+
+        LoadRes                         # load a resource into the image.
+        BIOS16:RESOURCE_CLASS_BINVGA,   # load a VGA BIOS binary.
+        0,                              # VGA binary has ID of 0 (first one).
+        1,                              # VGA binary IS data compressed.
+        $(GSPROJ)\cstlvga.cmp           # include VGA video ROM image.
+
+#       The following external resources are the Firmbase kernel and firmware
+#       applications that run in the Firmbase environment.
+
+        Include ..\resource\firmbase\kernel.idf
+        Include ..\resource\firmbase\ehci1.idf
+        Include ..\resource\firmbase\ohcix.idf
+
+#       Main USB driver.
+
+        CompressTo $(GSPROJ)\USBD.CMP
+        Load ..\RESOURCE\FIRMBASE\USBD.EXE
+
+        ResName USBD.EXE                # specify a ROMFS file name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # the class is an SMI handler binary.
+        1016h,                          # the resource ID must be unique.
+        1,                              # the binary is data compressed.
+        $(GSPROJ)\USBD.CMP              # location of Firmbase usbd binary.
+
+#       Legacy USB support.
+
+        CompressTo $(GSPROJ)\USBHID.CMP
+        Load ..\RESOURCE\FIRMBASE\USBHIDX3.EXE
+
+        ResName USBHID.EXE              # specify a ROMFS file name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # the class is an SMI handler binary.
+        1018h,                          # the resource ID must be unique.
+        1,                              # the binary is data compressed.
+        $(GSPROJ)\USBHID.CMP            # location of Firmbase usbhid binary.
+
+        Include ..\resource\firmbase\usbms.idf
+
+#       Miscellaneous Firmbase Application Resources.
+
+#        CompressTo $(GSPROJ)\DEMO.CMP
+#        Load ..\RESOURCE\FIRMBASE\DEMO.EXE
+
+#        ResName DEMO.EXE                # specify a ROMFS file name.
+#        LoadRes                         # load a resource into the BIOS image.
+#        BIOS16:RESOURCE_CLASS_SMI,      # the class is an SMI handler binary.
+#        1011h,                          # the resource ID must be unique.
+#        1,                              # the binary is data compressed.
+#        $(GSPROJ)\DEMO.CMP              # file location of firmware application.
+
+#       Load the Firmbase GX3 driver.
+
+        CompressTo $(GSPROJ)\gx3.cmp
+        Load ..\RESOURCE\FIRMBASE\gx31.exe
+
+        ResName gx3.exe                 # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        1100h,                          # The resource ID must be unique.
+        1,                              # The binary is data compressed.
+        $(GSPROJ)\gx3.cmp
+
+        CompressTo $(GSPROJ)\ata.cmp
+        Load ..\RESOURCE\FIRMBASE\ata.exe
+
+        ResName ata.exe                 # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        2001h,                          # The resource ID must be unique.
+        1,                              # The binary is data compressed.
+        $(GSPROJ)\ata.cmp
+
+        CompressTo $(GSPROJ)\fat.cmp
+        Load ..\RESOURCE\FIRMBASE\fat.exe
+
+        ResName fat.exe                 # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        2002h,                          # The resource ID must be unique.
+        1,                              # The binary is data compressed.
+        $(GSPROJ)\fat.cmp
+
+        CompressTo $(GSPROJ)\rtl8110.cmp
+        Load ..\RESOURCE\FIRMBASE\rtl8110.exe
+
+        ResName RTL8110.EXE             # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        1104h,                          # The resource ID must be unique.
+        1,                              # The binary is not data compressed.
+        $(GSPROJ)\rtl8110.cmp
+
+        CompressTo $(GSPROJ)\tcpip.cmp
+        Load ..\RESOURCE\FIRMBASE\tcpip.exe
+
+        ResName TCPIP.EXE               # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        1105h,                          # The resource ID must be unique.
+        1,                              # The binary is not data compressed.
+        $(GSPROJ)\tcpip.cmp
+
+#       CompressTo $(GSPROJ)\telnetd.cmp
+#       Load ..\RESOURCE\FIRMBASE\telnetd.exe
+
+#       ResName TELNETD.EXE             # Specify a ROMFS file name.
+#       LoadRes                         # Load a resource into the BIOS image.
+#       BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+#       1106h,                          # The resource ID must be unique.
+#       1,                              # The binary is not data compressed.
+#       $(GSPROJ)\telnetd.cmp
+
+        CompressTo $(GSPROJ)\httpsrv.cmp
+        Load ..\RESOURCE\FIRMBASE\httpsrv.exe
+
+        ResName HTTPSRV.EXE             # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        1107h,                          # The resource ID must be unique.
+        1,                              # The binary is not data compressed.
+        $(GSPROJ)\httpsrv.cmp
+
+        CompressTo $(GSPROJ)\gensw.cmp
+        Load ..\RESOURCE\FIRMBASE\gensw.gif
+
+        ResName gensw.gif               # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        200eh,                          # The resource ID must be unique.
+        1,                              # The binary is data compressed.
+        $(GSPROJ)\gensw.cmp
+
+        CompressTo $(GSPROJ)\romusers.cmp
+        Load $(GSPROJ)\romusers.txt     # source for compression.
+
+        ResName romusers.txt            # Specify a ROMFS file name.
+        LoadRes                         # Load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_SMI,      # The class is an SMI handler binary.
+        2007h,                          # The resource ID must be unique.
+        1,                              # The binary is data compressed.
+        $(GSPROJ)\romusers.cmp
+
+#       Load ACPI AML file.
+
+        CompressTo $(PROJ).CMP          # compress HTML file.
+        Load $(PROJ).AML                # source for compression.
+
+        ResName $(PROJ).AML             # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_ACPI,     # the class is an ACPI (AML) binary.
+        BIOS16:RESOURCE_ID_DSDT,        # the resource ID is DSDT.
+        1,                              # the binary IS data compressed.
+        $(PROJ).CMP                     # file location of firmware application.
+
+        Include $(GSPROJ)\browser.idf   # Load Setup Screen Browser text.
+
+#       Load the graphical resources for the splash screen.  Pick either
+#       standard.idf or high.idf, depending on remaining space.
+
+        Include ..\resource\idf\standard.idf # include low detail graphics.
+#       Include ..\resource\idf\high.idf # include high detail graphics.
+
+	ConvertBMP $(GSPROJ)\HBSPLASH.BMP $(GSPROJ)\HBSPLASH.RLE
+
+	LoadRes
+	BIOS16:RESOURCE_CLASS_GIMAGE,
+	80h,
+	0,
+	$(GSPROJ)\HBSPLASH.RLE
+
+#       The following graphics are not part of the standard set, but may
+#       be needed by some board modules.
+
+#RFD    LoadRes                         # Load a resource into the image.
+#RFD    BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+#RFD    BIOS16:RESOURCE_ID_FS_FLASH,    # The ID is for Flash Drive icon.
+#RFD    0,                              # The image is not data compressed.
+#RFD    ..\RESOURCE\ICONS\RFD.RLE       # Add Flash Drive test icon.
+
+################################################################################
+#       Produce final image and checksum it.                                   #
+################################################################################
+
+#       This is the 128k version.
+
+#128k   ImageDef $(PROJ).BIN, 128k, FFh # Define 128k final binary.
+#128k   At 0 load $(PROJ).TMP           # Load 128h temporary binary.
+#128k   At 1FFFFh Checksum 1 0 20000h   # Checksum the final binary.
+
+#       This is the 256k version.
+
+#256k   ImageDef $(PROJ).BIN, 256k, FFh # Define 256k final binary.
+#256k   At 0 load $(PROJ).TMP           # Load 256k temporary binary.
+#256k   At 3FFFFh Checksum 1 20000h 3ffffh # Checksum the final binary.
+
+#       This is the 384k version.
+
+#384k   ImageDef $(PROJ).BIN, 384k, FFh # Define 384k final binary.
+#384k   At 0 load $(PROJ).TMP           # Load 384k temporary binary.
+#384k   At 5FFFFh Checksum 1 40000h 5ffffh # Checksum the final binary.
+
+#       This is the 512k version.
+
+        ImageDef $(PROJ).BIN, 512k, FFh # Define 512k final binary.
+        At 0 load $(PROJ).TMP           # Load 512k temporary binary.
+        At 7FFFFh Checksum 1 60000h 7ffffh # Checksum the final binary.
+
+#       This is the 1024k version.
+
+#1024k  ImageDef $(PROJ).BIN, 1024k, FFh # Define 1024k final binary.
+#1024k  At 0 load $(PROJ).TMP           # Load 1024k temporary binary.
+#1024k  At FFFFFh Checksum 1 E0000h fffffh # Checksum the final binary.
+
+#       This is the 2048k version.
+
+#2048k  ImageDef $(PROJ).BIN, 2048k, FFh # Define 2048k final binary.
+#2048k  At 0 load $(PROJ).TMP           # Load 2048k temporary binary.
+#2048k  At FFFFFh Checksum 1 E0000h fffffh # Checksum the final binary.
+
+#       This is the 4096k version.
+
+#4096k  ImageDef $(PROJ).BIN, 4096k, FFh # Define 4096k final binary.
+#4096k  At 0 load $(PROJ).TMP           # Load 4096k temporary binary.
+#4096k  At FFFFFh Checksum 1 E0000h fffffh # Checksum the final binary.
+
+#############################################################################
+#       Add a log entry to describe this build to end users using reflash.  #
+#       Note that end users can set the EB2K environment variable to the    #
+#       current BIOS version and the RELEASE environment variable to a user #
+#       specific release identifier in order to customize the message       #
+#       printed by the reflash utility.                                     #
+#############################################################################
+
+        AddLogEntry $(PROJ).log $(EB2K)-$(GSPROJ)-$(Release)

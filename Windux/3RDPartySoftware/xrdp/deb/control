@@ -1,0 +1,7 @@
+Package: hobart-xrdp
+Version: 0.9-0
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides RDP support.
+

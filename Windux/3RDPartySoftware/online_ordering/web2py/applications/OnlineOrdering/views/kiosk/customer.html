@@ -1,0 +1,92 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_customer.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_common.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="phoneModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 40vw;">
+      <div class="modal-header">
+          <h2>Receive Text with Order Status?</h2>
+      </div>
+      <div class="modal-body" id="phoneModal-body">
+        <div class="form-group row justify-content-between">
+          <!--<label for="phoneModal-phone" class="col-2">Phone Number</label>-->
+          <!--<input type="text" class="form-control form-control-lg col-12" id="phoneModal-phone" placeholder="(___) ___-____">-->
+          <div class="col-1"></div>
+          <input id="phoneModal-phone" type="text" class="custom-inverted-thin-border col-10" style="text-align:center; font-size: 8vh;">
+          <div class="col-1"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-warning btn-custom-basics btn-lg" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-custom-color btn-lg" id="phoneModal-send" onclick="send_text();">Send Texts</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="">
+
+<div class="custom-inverted-thin-border m-4" style="width: 100%;">
+<h1 class="m-4" style="text-align: center;">Order Accepted</h1>
+<h1 class="m-4" style="text-align: center;">Your number is <strong id="orderNumber"></strong> for pickup at <strong id="pickupTime"></strong>.</h1>
+</div>
+
+
+<!--<div id="cart-container" class="container" style="height: 62vh; width: 100%; max-width: 90vw;">
+
+
+</div>-->
+
+<div class="row justify-content-between m-4" style="height: 120px;">
+  <div class="col-2"></div>
+  <div class="col-4"><button class="btn btn-block btn-custom-color btn-custom-basics" style="height: 120px; font-size: xx-large; white-space: normal;" onclick="alert('print not implemented yet');" id="printButton">Print<br>Ticket</button></div>
+  <div class="col-4"><button class="btn btn-block btn-custom-color btn-custom-basics" style="height: 120px; font-size: xx-large; white-space: normal;" id ="textButton">Text<br>Ticket</button></div>
+  <div class="col-2"></div>
+</div>
+
+<div class="row justify-content-between mt-4" style="height: 120px;">
+  <div class="col-4"></div>
+  <div class="col-4" style="height: 120px;"><button class="btn btn-block btn-success btn-custom-basics" style="height: 120px; font-size: xx-large; white-space: normal;" onclick="start_over();">New<br>Order</button></div>
+  <div class="col-4"></div>
+</div>
+
+<!--
+<div class="col" onclick="start_over();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="prevButton">
+  <g transform="translate(-47,-94)" class="btn-custom-basics warning-btn">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       d="M 150,122 H 100 V 97 l -50,50 50,50 v -25 h 50 z"/>
+    <text x="74" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Start Over</text>
+  </g>
+</svg>
+</div>
+
+<div class="col" onclick="submit_order();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="addButton">
+  <g transform="translate(-47,-94)" class="bg-success btn-custom-basics">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50,122 H 100 V 97 l 50,50 -50,50 V 172 H 50 Z"/>
+    <text x="58" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Submit Order</text>
+  </g>
+</svg>
+</div>
+
+</div>
+</div>
+-->
+

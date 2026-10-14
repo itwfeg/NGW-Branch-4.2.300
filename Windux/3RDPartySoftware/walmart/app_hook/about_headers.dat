@@ -1,0 +1,97 @@
+
+# WEB HEADERS - configurable web headers
+# Location: /usr/share/walmart_xyz
+# 1: static   - The 5 listed above
+# 2: via DB   - store number, read from DB, passed in
+# 3: auto gen - like the UUID - something unique - epic time in mm (8b) + ipaddress(4b) +  rando number (2b-4b)
+# 4: OS gen   - ipaddress - passed in
+
+# WEB HEADERS
+# These are real Web Headers, some of which we may want to use in the future
+# REQUESTS								
+# A-IM								
+# Accept						  
+# Accept-Charset				  
+# Accept-Datetime					
+# Accept-Encoding					
+# Accept-Language					
+# Access-Control-Request-Method		
+# Access-Control-Request-Headers  
+# Authorization					  
+# ACache-Control					
+# AConnection						
+# AContent-Encoding					
+# AContent-Length					
+# AContent-Type						
+# ACookie							
+# ADate								
+# AExpect							
+# AForwarded						
+# AFrom								
+# AHost								
+# AHTTP2-Settings					
+# AIf-Match							
+# AIf-Modified-Since				
+# AIf-None-Match					
+# AIf-Range							
+# AIf-Unmodified-Since				
+# AMax-Forwards						
+# AOrigin							
+# APragma							
+# AProxy-Authorization				
+# ARange							
+# AReferer [sic]					
+# ATE								
+# ATrailer							
+# ATransfer-Encoding				
+# AUser-Agent						
+# Upgrade							
+# Via								
+# Warning							
+
+[ III. Responses ]
+
+# Access-Control-Allow-Origin,		
+# Access-Control-Allow-Credentials
+# Access-Control-Expose-Headers,	
+# Access-Control-Max-Age,		  
+# Access-Control-Allow-Methods,		
+# Access-Control-Allow-Headers		
+# Accept-Patch						
+# Accept-Ranges						
+# Age						   		
+# Allow								
+# Alt-Svc					   	  
+# Cache-Control						
+# Connection						
+# Content-Disposition[47]	   		
+# Content-Encoding					
+# Content-Language					
+# Content-Length					
+# Content-Location					
+# Content-Range						
+# Content-Type						
+# Date								
+# Delta-Base						
+# ETag								
+# Expires					   		
+# IM								
+# Last-Modified						
+# Link								
+# Location							
+# P3P					 			
+# Pragma							
+# Proxy-Authenticate				
+# Public-Key-Pins[52]	 			
+# Retry-After			 			
+# Server							
+# Set-Cookie						
+# Strict-Transport-Security			
+# Trailer				 			
+# Transfer-Encoding					
+# Tk								
+# Upgrade				 			
+# Vary								
+# Via					 			
+# Warning				 			
+# WWW-Authenticate

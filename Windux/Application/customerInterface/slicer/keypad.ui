@@ -1,0 +1,1742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Keypad</class>
+ <widget class="QFrame" name="Keypad">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>193</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton{
+	background-color:black;
+	color:white;
+	border-width:2px;
+	border-radius:5px;
+	border-style:inset;
+	border-color:white;
+}
+
+QPushButton:pressed{
+	background-color:green;
+}
+
+QPushButton:checked{
+	background-color:green;
+}</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <widget class="QPushButton" name="m_pKeyM">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>m</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyY">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>y</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyDblQuote">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&quot;</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyCloseParen">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>)</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyI">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>i</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyL">
+   <property name="geometry">
+    <rect>
+     <x>402</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>l</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyF">
+   <property name="geometry">
+    <rect>
+     <x>162</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>f</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyDash">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>-</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyS">
+   <property name="geometry">
+    <rect>
+     <x>66</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>s</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyW">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>w</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyOpenParen">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>(</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyN">
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>n</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyZ">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>z</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyColon">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>:</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyCaps">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyPound">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>#</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyEnter">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>144</y>
+     <width>72</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKey7">
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>7</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey5">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>5</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAsterisk">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>*</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey4">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>4</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyH">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>258</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>h</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyK">
+   <property name="geometry">
+    <rect>
+     <x>354</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>k</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey2">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>2</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyX">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>x</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey3">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>3</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey9">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>9</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeySemiColon">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>;</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeySingleQuote">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>'</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyExlamation">
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>!</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyU">
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>u</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyD">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>d</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyG">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>g</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyB">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>b</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyBACKSPACE">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>96</y>
+     <width>96</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyC">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>c</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyO">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>o</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey6">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>6</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyHide">
+   <property name="geometry">
+    <rect>
+     <x>408</x>
+     <y>144</y>
+     <width>72</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKey0">
+   <property name="geometry">
+    <rect>
+     <x>432</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyForwardSlash">
+   <property name="geometry">
+    <rect>
+     <x>432</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>/</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey1">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyJ">
+   <property name="geometry">
+    <rect>
+     <x>306</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>j</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyT">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>t</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyV">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>v</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyR">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>r</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyUnderscore">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>_</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAmpersand">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&amp;&amp;</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeySPACE">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>144</y>
+     <width>192</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyDollar">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>$</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyToggle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>144</y>
+     <width>72</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>#+=</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyQ">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>q</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKey8">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>8</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyE">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>e</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyPlus">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyA">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>a</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyP">
+   <property name="geometry">
+    <rect>
+     <x>432</x>
+     <y>0</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>p</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonLetterGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyQuestion">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>?</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAmpersat">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>@</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyPeriod">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>.</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_pButtonNumberGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAlt">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>144</y>
+     <width>72</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Alt</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyEdiaeresis">
+   <property name="geometry">
+    <rect>
+     <x>354</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ë</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyIcircumflex">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>î</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAgrave">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>à</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyUgrave">
+   <property name="geometry">
+    <rect>
+     <x>192</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ù</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyUcircumflex">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>û</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyEgrave">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>258</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>è</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAElig">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>æ</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyUdiaeresis">
+   <property name="geometry">
+    <rect>
+     <x>288</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ü</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyCcedilla">
+   <property name="geometry">
+    <rect>
+     <x>162</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ç</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyOElig">
+   <property name="geometry">
+    <rect>
+     <x>402</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>œ</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyIdiaeresis">
+   <property name="geometry">
+    <rect>
+     <x>96</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ï</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyEcircumflex">
+   <property name="geometry">
+    <rect>
+     <x>306</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ê</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyAcircumflex">
+   <property name="geometry">
+    <rect>
+     <x>66</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>â</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyOcircumflex">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ô</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyYdiaeresis">
+   <property name="geometry">
+    <rect>
+     <x>336</x>
+     <y>96</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>ÿ</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="m_pKeyEacute">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>48</y>
+     <width>48</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>é</string>
+   </property>
+   <attribute name="buttonGroup">
+    <string notr="true">m_altButtonGroup</string>
+   </attribute>
+  </widget>
+  <zorder>m_pKeyAgrave</zorder>
+  <zorder>m_pKeyUdiaeresis</zorder>
+  <zorder>m_pKeyOcircumflex</zorder>
+  <zorder>m_pKeyEgrave</zorder>
+  <zorder>m_pKeyAcircumflex</zorder>
+  <zorder>m_pKeyIcircumflex</zorder>
+  <zorder>m_pKeyEcircumflex</zorder>
+  <zorder>m_pKeyUcircumflex</zorder>
+  <zorder>m_pKeyEdiaeresis</zorder>
+  <zorder>m_pKeyUgrave</zorder>
+  <zorder>m_pKeyAElig</zorder>
+  <zorder>m_pKeyIdiaeresis</zorder>
+  <zorder>m_pKeyCcedilla</zorder>
+  <zorder>m_pKeyOElig</zorder>
+  <zorder>m_pKeyYdiaeresis</zorder>
+  <zorder>m_pKeyEacute</zorder>
+  <zorder>m_pKeyAlt</zorder>
+  <zorder>m_pKeyBACKSPACE</zorder>
+  <zorder>m_pKeyEnter</zorder>
+  <zorder>m_pKeyHide</zorder>
+  <zorder>m_pKeySPACE</zorder>
+  <zorder>m_pKeyToggle</zorder>
+  <zorder>m_pKeyN</zorder>
+  <zorder>m_pKeyB</zorder>
+  <zorder>m_pKeyQ</zorder>
+  <zorder>m_pKeyR</zorder>
+  <zorder>m_pKeyU</zorder>
+  <zorder>m_pKeyP</zorder>
+  <zorder>m_pKeyZ</zorder>
+  <zorder>m_pKeyX</zorder>
+  <zorder>m_pKeyL</zorder>
+  <zorder>m_pKeyT</zorder>
+  <zorder>m_pKeyF</zorder>
+  <zorder>m_pKeyE</zorder>
+  <zorder>m_pKeyA</zorder>
+  <zorder>m_pKeyY</zorder>
+  <zorder>m_pKeyW</zorder>
+  <zorder>m_pKeyD</zorder>
+  <zorder>m_pKeyJ</zorder>
+  <zorder>m_pKeyI</zorder>
+  <zorder>m_pKeyCaps</zorder>
+  <zorder>m_pKeyM</zorder>
+  <zorder>m_pKeyV</zorder>
+  <zorder>m_pKeyK</zorder>
+  <zorder>m_pKeyC</zorder>
+  <zorder>m_pKeyS</zorder>
+  <zorder>m_pKeyO</zorder>
+  <zorder>m_pKeyH</zorder>
+  <zorder>m_pKeyG</zorder>
+  <zorder>m_pKey3</zorder>
+  <zorder>m_pKeyAmpersand</zorder>
+  <zorder>m_pKeyDollar</zorder>
+  <zorder>m_pKey1</zorder>
+  <zorder>m_pKey8</zorder>
+  <zorder>m_pKeyQuestion</zorder>
+  <zorder>m_pKeyColon</zorder>
+  <zorder>m_pKeyAmpersat</zorder>
+  <zorder>m_pKeySemiColon</zorder>
+  <zorder>m_pKey5</zorder>
+  <zorder>m_pKey2</zorder>
+  <zorder>m_pKeyUnderscore</zorder>
+  <zorder>m_pKeyCloseParen</zorder>
+  <zorder>m_pKeyOpenParen</zorder>
+  <zorder>m_pKeyAsterisk</zorder>
+  <zorder>m_pKey9</zorder>
+  <zorder>m_pKeyForwardSlash</zorder>
+  <zorder>m_pKeyExlamation</zorder>
+  <zorder>m_pKeyDash</zorder>
+  <zorder>m_pKeyPound</zorder>
+  <zorder>m_pKey7</zorder>
+  <zorder>m_pKey4</zorder>
+  <zorder>m_pKeyDblQuote</zorder>
+  <zorder>m_pKey0</zorder>
+  <zorder>m_pKeyPlus</zorder>
+  <zorder>m_pKeySingleQuote</zorder>
+  <zorder>m_pKeyPeriod</zorder>
+  <zorder>m_pKey6</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="m_pButtonLetterGroup">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="m_pButtonNumberGroup">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="m_altButtonGroup">
+   <property name="exclusive">
+    <bool>true</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
+</ui>

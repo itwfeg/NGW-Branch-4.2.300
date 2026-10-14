@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/hobartMetal.png</file>
+    </qresource>
+</RCC>

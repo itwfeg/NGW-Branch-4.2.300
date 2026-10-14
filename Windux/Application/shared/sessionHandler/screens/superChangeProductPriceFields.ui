@@ -1,0 +1,1848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>superChangeProductPriceFields</class>
+ <widget class="QWidget" name="superChangeProductPriceFields">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lblDescription">
+   <property name="geometry">
+    <rect>
+     <x>76</x>
+     <y>60</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>247</x>
+     <y>18</y>
+     <width>151</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDescriptionContent">
+   <property name="geometry">
+    <rect>
+     <x>248</x>
+     <y>67</y>
+     <width>741</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>77</x>
+     <y>13</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Product Number</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QFrame" name="gbNewProduct">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>570</y>
+     <width>981</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbNewProduct{
+	background-color: rgb(231, 231, 231);
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QRadioButton" name="rbRandomWeight">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>80</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Random Weight</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbByCount">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>160</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>By Count</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFixedWeight">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>80</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fixed Weight</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFluidOunces">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>160</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fluid Ounces</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butOK">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblcreateNewProductQuestion">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>12</y>
+      <width>721</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Product</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butCancel">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2NetWeightFluidOunces" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>420</y>
+     <width>551</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Net weight</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2NetWeightFluid">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2UnitSymbolNetFluidWeight">
+    <property name="geometry">
+     <rect>
+      <x>296</x>
+      <y>7</y>
+      <width>51</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">fl oz</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2PlatterTare" native="true">
+   <property name="geometry">
+    <rect>
+     <x>637</x>
+     <y>414</y>
+     <width>671</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_36">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>7</y>
+      <width>101</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Tare</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2TarePlatter">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkbox2TarePlatterForcedTare">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>6</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forced tare</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2TarePlatterUnitSymbolTare">
+    <property name="geometry">
+     <rect>
+      <x>407</x>
+      <y>7</y>
+      <width>31</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">lb</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb2TarePlatterTareType">
+    <property name="geometry">
+     <rect>
+      <x>122</x>
+      <y>4</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2Tare" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>340</y>
+     <width>551</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">Tare</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2Tare">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkbox2ForcedTare">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>3</y>
+      <width>201</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forced tare</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2UnitSymbolTare">
+    <property name="geometry">
+     <rect>
+      <x>297</x>
+      <y>7</y>
+      <width>31</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">lb</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2Discount" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>193</y>
+     <width>871</width>
+     <height>58</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>18</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Discount</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gbGoldsilverBronze" native="true">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>2</y>
+      <width>663</width>
+      <height>56</height>
+     </rect>
+    </property>
+    <widget class="QFrame" name="goldFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>221</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#goldFrame{
+	background-color: rgb(0, 0, 0);
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount1">
+      <property name="geometry">
+       <rect>
+        <x>46</x>
+        <y>0</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel#lbl2Discount1{
+	color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Gold</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="silverFrame">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>0</y>
+       <width>221</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#silverFrame{
+	background-color: rgb(0, 0, 0);
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount2">
+      <property name="geometry">
+       <rect>
+        <x>34</x>
+        <y>0</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel#lbl2Discount2{
+color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Silver</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="bronzeFrame">
+     <property name="geometry">
+      <rect>
+       <x>441</x>
+       <y>0</y>
+       <width>221</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#bronzeFrame{
+	background-color: rgb(0,0,0);
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount3">
+      <property name="geometry">
+       <rect>
+        <x>55</x>
+        <y>0</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel#lbl2Discount3{
+	color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Bronze</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>17</y>
+       <width>221</width>
+       <height>38</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount1CurrencySymbol">
+      <property name="geometry">
+       <rect>
+        <x>4</x>
+        <y>5</y>
+        <width>51</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true">$</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="le2Discount1">
+      <property name="geometry">
+       <rect>
+        <x>58</x>
+        <y>2</y>
+        <width>121</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl2Discount1PercentSymbol">
+      <property name="geometry">
+       <rect>
+        <x>184</x>
+        <y>5</y>
+        <width>26</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">%</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>17</y>
+       <width>221</width>
+       <height>38</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount2CurrencySymbol">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>5</y>
+        <width>41</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true">$</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="le2Discount2">
+      <property name="geometry">
+       <rect>
+        <x>52</x>
+        <y>2</y>
+        <width>121</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl2Discount2PercentSymbol">
+      <property name="geometry">
+       <rect>
+        <x>177</x>
+        <y>5</y>
+        <width>26</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">%</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>17</y>
+       <width>221</width>
+       <height>38</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="lbl2Discount3CurrencySymbol">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>5</y>
+        <width>41</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true">$</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="le2Discount3">
+      <property name="geometry">
+       <rect>
+        <x>55</x>
+        <y>2</y>
+        <width>121</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl2Discount3PercentSymbol">
+      <property name="geometry">
+       <rect>
+        <x>179</x>
+        <y>6</y>
+        <width>26</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">%</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <zorder>frame</zorder>
+    <zorder>frame_2</zorder>
+    <zorder>silverFrame</zorder>
+    <zorder>goldFrame</zorder>
+    <zorder>frame_3</zorder>
+    <zorder>bronzeFrame</zorder>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2DiscountType" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>147</y>
+     <width>551</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <widget class="QComboBox" name="cb2DiscountType">
+    <property name="geometry">
+     <rect>
+      <x>181</x>
+      <y>2</y>
+      <width>351</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>2</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Discount type</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2NetWeightOunces" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>380</y>
+     <width>551</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Net weight</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2NetWeight">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2UnitSymbolNetWeight">
+    <property name="geometry">
+     <rect>
+      <x>296</x>
+      <y>7</y>
+      <width>51</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">oz</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2Points" native="true">
+   <property name="geometry">
+    <rect>
+     <x>654</x>
+     <y>252</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>7</y>
+      <width>81</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Points</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2Points">
+    <property name="geometry">
+     <rect>
+      <x>88</x>
+      <y>5</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2FractionalPrice" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>502</y>
+     <width>631</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Price</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2FractionalPrice">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2CurrencySymbolFractionalPrice">
+    <property name="geometry">
+     <rect>
+      <x>148</x>
+      <y>5</y>
+      <width>31</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">$</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2MetricUnitFractionalPrice">
+    <property name="geometry">
+     <rect>
+      <x>301</x>
+      <y>5</y>
+      <width>151</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">/ 100g</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb2FractionalPriceEnglishUnit">
+    <property name="geometry">
+     <rect>
+      <x>298</x>
+      <y>5</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkbox2FractionalPricingForcedPrice">
+    <property name="geometry">
+     <rect>
+      <x>449</x>
+      <y>2</y>
+      <width>171</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forced price</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2UnitPrice" native="true">
+   <property name="geometry">
+    <rect>
+     <x>69</x>
+     <y>253</y>
+     <width>551</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QCheckBox" name="chkbox2UnitPriceForcedPrice">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>0</y>
+      <width>201</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forced price</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2UnitPriceCurrencySymbol">
+    <property name="geometry">
+     <rect>
+      <x>157</x>
+      <y>8</y>
+      <width>21</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">$</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2UnitPrice">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2UnitPriceUnitSymbol">
+    <property name="geometry">
+     <rect>
+      <x>295</x>
+      <y>9</y>
+      <width>31</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">lb</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>5</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Unit price</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2RegularPrice" native="true">
+   <property name="geometry">
+    <rect>
+     <x>637</x>
+     <y>464</y>
+     <width>551</width>
+     <height>58</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_44">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>15</y>
+      <width>141</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Regular price</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2RegularPrice">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>13</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2CurrencySymbolRegularPrice">
+    <property name="geometry">
+     <rect>
+      <x>158</x>
+      <y>13</y>
+      <width>21</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">$</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2ProportionalTare" native="true">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>350</y>
+     <width>329</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Proportional tare</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2ProportionalTare">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2ProportionalTarePercent">
+    <property name="geometry">
+     <rect>
+      <x>298</x>
+      <y>7</y>
+      <width>26</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">%</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2PoundsForPricing" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>545</y>
+     <width>751</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Price</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2PoundsForPrice">
+    <property name="geometry">
+     <rect>
+      <x>391</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2CurrencySymbolPoundsForPricing">
+    <property name="geometry">
+     <rect>
+      <x>348</x>
+      <y>5</y>
+      <width>40</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">$</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb2PriceModifier">
+    <property name="geometry">
+     <rect>
+      <x>181</x>
+      <y>5</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2PoundsForPricingUnit">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>4</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="statusTip">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string notr="true">lbs</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2PoundsForPricingTextFor">
+    <property name="geometry">
+     <rect>
+      <x>302</x>
+      <y>4</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>for</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkbox2PoundsForPricingForcedPrice">
+    <property name="geometry">
+     <rect>
+      <x>532</x>
+      <y>2</y>
+      <width>171</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forced price</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2ByCount" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>297</y>
+     <width>551</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>By count</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2ByCount">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkbox2ForcedByCount">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>2</y>
+      <width>201</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Forced by count</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gb2ExceptionPrice" native="true">
+   <property name="geometry">
+    <rect>
+     <x>67</x>
+     <y>460</y>
+     <width>551</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>7</y>
+      <width>141</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Exception price</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="le2ExceptionPrice">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>5</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl2CurrencySymbolExceptionPrice">
+    <property name="geometry">
+     <rect>
+      <x>158</x>
+      <y>5</y>
+      <width>21</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">$</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <zorder>gbNewProduct</zorder>
+  <zorder>lblDescription</zorder>
+  <zorder>leProductNumber</zorder>
+  <zorder>lblDescriptionContent</zorder>
+  <zorder>lblProductNumber</zorder>
+  <zorder>gb2NetWeightFluidOunces</zorder>
+  <zorder>gb2PlatterTare</zorder>
+  <zorder>gb2Tare</zorder>
+  <zorder>gb2Discount</zorder>
+  <zorder>gb2DiscountType</zorder>
+  <zorder>gb2NetWeightOunces</zorder>
+  <zorder>gb2Points</zorder>
+  <zorder>gb2FractionalPrice</zorder>
+  <zorder>gb2UnitPrice</zorder>
+  <zorder>gb2RegularPrice</zorder>
+  <zorder>gb2ProportionalTare</zorder>
+  <zorder>gb2PoundsForPricing</zorder>
+  <zorder>gb2ByCount</zorder>
+  <zorder>gb2ExceptionPrice</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

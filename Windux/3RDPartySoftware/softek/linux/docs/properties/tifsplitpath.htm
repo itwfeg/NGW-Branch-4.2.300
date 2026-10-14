@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">TifSplitPath</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		TifSplitPath is the file path template for splitting multi-page TIF files into 
+		sub-files. The template can include the following conversion specifications:
+		<P class="MsoBodyText">
+			<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD width="50">%d</TD>
+					<TD>replaced by a sub-file index number (starting at 1)</TD>
+				</TR>
+				<TR>
+					<TD>%s</TD>
+					<TD>replaced by the barcode found in the sub-file (modes 0 and 1) or the last 
+						barcode found before the sub-file (mode 2). If no relevant barcode is available 
+						then an empty string is used.</TD>
+				</TR>
+			</TABLE>
+		<P class="MsoBodyText">
+		If the template does not include %d or %s, or %s&nbsp;then a %d is assumed 
+		before the file extension. This case also applies if %s is used on it's own and 
+		there is no relevant barcode value available.
+		<P class="MsoBodyText">
+		The mode for splitting the TIF file is controlled by the TifSplitMode property.
+		<P class="MsoBodyText">
+		e.g c:\tmp\output%d_%s.tif
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL < /P >
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_TIFF_SPLIT,&nbsp;char *value) ;
+		<P>void STGetParameter(hBarcode, ST_TIFF_SPLIT,&nbsp;char *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Split into files named output1.tif, output2.tif etc<BR>
+			#include "barcode.h"<BR>
+			char *value =&nbsp;"output%d.tif" &nbsp;;<BR>
+			STSetParameter(hBarcode, ST_TIFF_SPLIT,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{{=response.title or request.application}}</title>
+    
+    <link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static','css/online_ordering.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static','css/kiosk.css')}}"/>
+    <link rel="stylesheet" href="/OnlineOrdering/kiosk/kiosk_configured_styles.css"/>
+    
+    <link rel="shortcut icon" href="/OnlineOrdering/static/images/favicon.ico" type="image/x-icon">
+    
+    {{
+    if currentSettingsJSON:
+      response.write('<script id="currentSettingsScript">var currentSettings = ', escape=False)
+      response.write(currentSettingsJSON, escape=False)
+      response.write(";</script>", escape=False)
+    pass
+    }}
+    
+    {{block head}}
+    {{end}}
+  </head>
+  <body>
+    {{block header}}
+    {{end}}
+    
+    <!-- modals that can be used on various pages -->
+    <div class="modal" id="failureModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="failureModal-body">
+            Failed.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-lg" id="failureModal-cancel" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal" id="restartModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="restartModal-body">
+            <h3>End this order and start over?</h3>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn bg-warning btn-custom-basics btn-lg" id="restartModal-startOver" onclick="start_over();">Start Over</button>
+            <button type="button" class="btn btn-custom-color btn-lg" id="restartModal-keep" data-dismiss="modal">Keep Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal" id="timeoutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body" id="timeoutModal-body">
+            Continue this order or start over?<br>Starting over in <strong id="timeoutModal-time" style="color: red;"></strong> seconds.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-custom-basics btn-danger btn-lg" id="timeoutModal-restart" data-dismiss="modal" onclick="start_over();">Start Over</button>
+            <button type="button" class="btn btn-custom-color btn-lg" id="timeoutModal-keep" data-dismiss="modal">Keep Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal" id="closedModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body custom-bg-color" style="height: 75vh;" id="closedModal-body">
+          
+            <div class="with-logo">
+              <div class="row" style="height: 50vh;">
+                <div class="col-2"></div>
+                <div class="col-8 logo"></div>
+                <div class="col-2"></div>
+              </div>
+              <div style="height: 2vh;"></div>
+              <div style="text-align: center; font-size: 12vh;" class="h-10 with-logo">Closed</div>
+            </div>
+            
+            <div class="without-logo">
+              <div style="height: 25vh;"></div>
+              <div style="height: 20vh; text-align: center; font-size: 15vh;">Closed</div>
+              <div style="height: 25vh;"></div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {{include}}
+
+    {{block footer}}
+    <footer>
+    </footer>
+    {{end}}
+    
+    <script src="{{=URL('static','js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{=URL('static','js/popper.min.js')}}"></script>
+    <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+    <script src="{{=URL('static','js/common.js')}}"></script>
+    {{block scripts}}
+    {{end}}
+  </body>
+</html>

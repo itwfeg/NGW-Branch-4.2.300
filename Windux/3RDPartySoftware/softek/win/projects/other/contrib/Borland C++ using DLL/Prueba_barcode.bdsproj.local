@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2010/06/04 14:12:54.156.bdsproj,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Project1.bdsproj=C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Prueba_barcode.bdsproj</Transaction>
+    <Transaction>2010/06/04 14:13:01.171.cpp,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Unit1.cpp=C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.cpp</Transaction>
+    <Transaction>2010/06/04 14:13:01.171.h,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Unit1.h=C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.h</Transaction>
+    <Transaction>2010/06/04 14:13:01.171.dfm,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Unit1.dfm=C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.dfm</Transaction>
+    <Transaction>2010/06/04 14:15:03.687.cpp,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.cpp=D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\main.cpp</Transaction>
+    <Transaction>2010/06/04 14:15:03.687.h,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.h=D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\main.h</Transaction>
+    <Transaction>2010/06/04 14:15:03.687.dfm,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\main.dfm=D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\main.dfm</Transaction>
+    <Transaction>2010/06/04 14:15:06.015.bdsproj,C:\Documents and Settings\Eduardo\My Documents\Borland Studio Projects\Prueba_barcode.bdsproj=D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\Prueba_barcode.bdsproj</Transaction>
+    <Transaction>2010/06/04 14:27:43.515.lib,C:\Program Files\Softek Software\Softek Barcode Toolkit 30 day evaluation\bin\SoftekBarcode.lib=</Transaction>
+    <Transaction>2010/06/04 14:32:09.500.lib,C:\Program Files\Softek Software\Softek Barcode Toolkit 30 day evaluation\bin\softekbarcode2.lib=</Transaction>
+    <Transaction>2010/06/04 14:32:40.828.dll,D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\SoftekBarcode.dll=</Transaction>
+    <Transaction>2010/06/04 14:33:33.953.lib,D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\softekbarcode2.lib=</Transaction>
+    <Transaction>2010/06/04 15:08:16.906.lib,D:\Trabajo Leonardo\Clasificador Andreani\Lectura de códigos de barras\Detección\Prueba\softekbarcode_brlnd.lib=</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,17 @@
+SCC = This is a Source Code Control file
+
+[example.dsp]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/projects/visualc6", RHDAAAAA
+
+[minigzip.dsp]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/projects/visualc6", RHDAAAAA
+
+[zlib.dsp]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/projects/visualc6", RHDAAAAA
+
+[zlib.dsw]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/projects/visualc6", RHDAAAAA

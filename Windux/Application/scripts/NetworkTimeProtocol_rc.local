@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing. Modified it is used to start apps and cfg some system settings
+# Modified FHA 10/20 2010 with optimizations
+# Added disable write-back caching
+hdparm -WO/dev/sda
+# Set I/O Scheduler mode (mode := | deadline ?)
+echo mode> /sys/block/sda/queue/scheduler
+echo 1> /sys/block/sda/queue/iosched/fifo_batch
+
+server_check()
+{
+	RUNNING=`netstat -anp | grep $1`
+
+	while [ "" = "$RUNNING" ]
+	do
+		RUNNING=`netstat -anp | grep $1`
+		echo -n "."
+	done
+}	
+
+/bin/mkdir /var/log/hobart
+
+# Start the Network Time Protocol daemon, make sure that the daemon's config file (/etc/ntp.conf is correct for your application)
+ntpd
+server_check "ntpd"
+
+xset dpms 0 0 0
+exit 0

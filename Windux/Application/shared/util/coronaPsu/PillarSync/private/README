@@ -1,0 +1,10 @@
+For API info on Python package Paho MQTT client see link below:
+https://www.eclipse.org/paho/index.php?page=clients/python/docs/index.php#publishing
+
+Install MQTT X from the link below which is a broker that you can test MQTT with:
+https://mqttx.app
+
+https://www.eclipse.org/paho/index.php?page=clients/python/docs/index.php#publishing
+
+If you get locked out of administrator interface look for the file below and remove it:
+/usr/local/hobart/coronaPsu/web2py/applications/admin/private/hosts.deny

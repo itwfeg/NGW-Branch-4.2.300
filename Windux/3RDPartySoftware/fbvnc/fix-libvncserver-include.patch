@@ -1,0 +1,11 @@
+diff '--exclude=.git' -Naur framebuffer-vncserver.orig/framebuffer-vncserver.pro framebuffer-vncserver/framebuffer-vncserver.pro
+--- framebuffer-vncserver.orig/framebuffer-vncserver.pro	2016-10-08 12:51:58.140170072 -0400
++++ framebuffer-vncserver/framebuffer-vncserver.pro	2016-10-08 13:27:21.494146573 -0400
+@@ -8,5 +8,5 @@
+ include(deployment.pri)
+ qtcAddDeployment()
+ 
+-
+-LIBS += -lvncserver
++INCLUDEPATH += $$PWD/../debian/usr
++LIBS += -L$$PWD/../debian/usr/lib -lvncserver

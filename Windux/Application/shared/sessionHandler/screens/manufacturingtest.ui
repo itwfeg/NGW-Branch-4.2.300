@@ -1,0 +1,5465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>manufacturingTest</class>
+ <widget class="QWidget" name="manufacturingTest">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1024</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1024</width>
+     <height>600</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1024</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1024</width>
+     <height>600</height>
+    </size>
+   </property>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="testsPage">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <widget class="QTabWidget" name="testTabsWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>28</y>
+       <width>1024</width>
+       <height>600</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>8</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="usesScrollButtons">
+      <bool>false</bool>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <property name="movable">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="dateTimeTab">
+      <attribute name="title">
+       <string>Time</string>
+      </attribute>
+      <widget class="QLabel" name="lblCurrentDateTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>35</y>
+         <width>291</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Current Date and Time:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblCurrentDateTimeData">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>50</y>
+         <width>341</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbDateTimeCorrectAnswers">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>73</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+       <widget class="QRadioButton" name="rbDateTimeCorrectAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbDateTimeCorrectAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblDateTimeCorrect">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>90</y>
+         <width>471</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Is the current date and time correct?</string>
+       </property>
+      </widget>
+      <widget class="QCalendarWidget" name="calendarWidget">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>190</y>
+         <width>461</width>
+         <height>311</height>
+        </rect>
+       </property>
+       <property name="gridVisible">
+        <bool>true</bool>
+       </property>
+       <property name="verticalHeaderFormat">
+        <enum>QCalendarWidget::NoVerticalHeader</enum>
+       </property>
+      </widget>
+      <widget class="QTimeEdit" name="timeEdit">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>190</y>
+         <width>240</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>24</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="wrapping">
+        <bool>true</bool>
+       </property>
+       <property name="timeSpec">
+        <enum>Qt::LocalTime</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnSetDateTime">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>440</y>
+         <width>430</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>240</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>430</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Set Date/Time</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblCurrentDateTimeLabel_2">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>289</y>
+         <width>241</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Time Zone:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbTimeZone">
+       <property name="geometry">
+        <rect>
+         <x>560</x>
+         <y>326</y>
+         <width>431</width>
+         <height>60</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbSysInfo">
+       <property name="geometry">
+        <rect>
+         <x>820</x>
+         <y>20</y>
+         <width>181</width>
+         <height>131</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="title">
+        <string>System Info</string>
+       </property>
+       <widget class="QLabel" name="lblBoardType">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>26</y>
+          <width>141</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="text">
+         <string>Board Type:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardTypeData">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>50</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblSdCardSize">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>80</y>
+          <width>141</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>SD Card Size:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblSdCardSizeData">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>100</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frameBoardSiteTime">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1024</width>
+         <height>521</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameBoardSiteTime{
+    background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblBoardSiteArkRtcPassed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>68</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK Real-Time Clock Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkRtcAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>60</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="gbBoardSiteTestStatus">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>180</y>
+          <width>861</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>Boardsite Test Status</string>
+        </property>
+        <widget class="QLabel" name="lblCurrentTestName">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>50</y>
+           <width>400</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>Current Test:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCurrentTestNameData">
+         <property name="geometry">
+          <rect>
+           <x>480</x>
+           <y>50</y>
+           <width>300</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblOverallTestProgress">
+         <property name="geometry">
+          <rect>
+           <x>15</x>
+           <y>110</y>
+           <width>400</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Overall Test Progress:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblOverallTestProgressData">
+         <property name="geometry">
+          <rect>
+           <x>480</x>
+           <y>110</y>
+           <width>300</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </widget>
+       <zorder>gbBoardSiteTestStatus</zorder>
+       <zorder>lblBoardSiteArkRtcPassed</zorder>
+       <zorder>lblBoardSiteArkRtcAnswerLabel</zorder>
+      </widget>
+      <zorder>frameBoardSiteTime</zorder>
+      <zorder>lblCurrentDateTimeLabel</zorder>
+      <zorder>lblCurrentDateTimeData</zorder>
+      <zorder>gbDateTimeCorrectAnswers</zorder>
+      <zorder>lblDateTimeCorrect</zorder>
+      <zorder>calendarWidget</zorder>
+      <zorder>timeEdit</zorder>
+      <zorder>btnSetDateTime</zorder>
+      <zorder>lblCurrentDateTimeLabel_2</zorder>
+      <zorder>cbTimeZone</zorder>
+      <zorder>gbSysInfo</zorder>
+     </widget>
+     <widget class="QWidget" name="flashTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Flash</string>
+      </attribute>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>10</y>
+         <width>491</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>17</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Scan COP Barcodes or Manually Enter Data</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="programFlashButton">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>480</y>
+         <width>121</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>121</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>121</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Program</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>40</y>
+         <width>861</width>
+         <height>191</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout">
+        <property name="labelAlignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="sysCtrlManufactureDateLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Manufacture Date:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="sysCtrlManufactureDateLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>550</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="sysCtrlSerialNumberLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Serial Number:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="sysCtrlSerialNumberLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>550</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Style:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="sysCtrlStyleLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>550</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="sysCtrlBoardAssemblyNumberLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Board Assembly Number:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="sysCtrlBoardAssemblyNumberLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>550</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="sysCtrlBoardRevisionLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Board Revision Number:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="sysCtrlBoardAssemblyRevisionLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>550</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QTextEdit" name="ubootProgrammingTextEdit">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>230</y>
+         <width>552</width>
+         <height>129</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>541</width>
+         <height>111</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_28">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>230</y>
+         <width>211</width>
+         <height>129</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Uboot Programming:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteArkSerialFlashPassed">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>378</y>
+         <width>421</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ARK Serial Flash Test passed:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteArkSerialFlashAnswerLabel">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>370</y>
+         <width>192</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteKpcSerialFlashAnswerLabel">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>412</y>
+         <width>192</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteKpcSerialFlashPassed">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>420</y>
+         <width>421</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>KPC Serial Flash Test passed:</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="usbTab">
+      <attribute name="title">
+       <string>USB</string>
+      </attribute>
+      <widget class="QWidget" name="layoutWidget_10">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>230</y>
+         <width>721</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="touchSceenHorizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_14">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>USB Barcode Scanner or Keyboard Device Recognized?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="usbBarcodeScannerRecognizedAnswerLabel">
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>22</y>
+         <width>891</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Plug-in USB Mouse into one of the USB Ports on the scale. </string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_11">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>90</y>
+         <width>391</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="touchSceenHorizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_16">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>USB Mouse recognized?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="usbMouseRecognizedAnswerLabel">
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>164</y>
+         <width>891</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Plug-in USB Barcode scanner or Keyboard into the other USB Port on the scale.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblSelfService">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>320</y>
+         <width>650</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>650</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>650</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Is this scale model Self Service with a Built-In Barcode Scanner?</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbSelfServiceAnswers">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>290</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbSelfServiceAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbSelfServiceAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="gbSelfServiceScannerPromptAnswers">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>390</y>
+         <width>312</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbSelfServiceScannerPromptAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbSelfServiceScannerPromptAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbSelfServiceScannerPromptAnswerRetry">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Retry</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblSelfServiceScannerPrompt">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>420</y>
+         <width>650</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>650</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>650</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Did the Built-In Barcode Scanner power On and Off again?</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameBoardSiteUsb">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1024</width>
+         <height>521</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameBoardSiteUsb{
+    background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblBoardSiteArkUsbPassed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>68</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK USB Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkUsbAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>60</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <zorder>frameBoardSiteUsb</zorder>
+      <zorder>layoutWidget_10</zorder>
+      <zorder>label_15</zorder>
+      <zorder>layoutWidget_11</zorder>
+      <zorder>label_17</zorder>
+      <zorder>lblSelfService</zorder>
+      <zorder>gbSelfServiceAnswers</zorder>
+      <zorder>gbSelfServiceScannerPromptAnswers</zorder>
+      <zorder>lblSelfServiceScannerPrompt</zorder>
+     </widget>
+     <widget class="QWidget" name="displayTab">
+      <attribute name="title">
+       <string>Display</string>
+      </attribute>
+      <widget class="QLabel" name="lblTouchScreenCalibrateMessage">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>62</y>
+         <width>561</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Touch screen functioning and calibrated correctly?</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbTouchScreenAnswers">
+       <property name="geometry">
+        <rect>
+         <x>650</x>
+         <y>34</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbTouchScreenAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>20</y>
+          <width>101</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbTouchScreenAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>20</y>
+          <width>82</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="startCalibrationTestButtton">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>15</y>
+         <width>321</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Start Calibration Test</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startDisplayTestButton">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>160</y>
+         <width>450</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start Display Test</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbOperatorDisplayAnswers">
+       <property name="geometry">
+        <rect>
+         <x>650</x>
+         <y>240</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbOperatorDisplayAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbOperatorDisplayAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="gbCustomerDisplayAnswers">
+       <property name="geometry">
+        <rect>
+         <x>650</x>
+         <y>380</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbCustomerDisplayAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbCustomerDisplayAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblCustomerDisplayTestMessage">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>383</y>
+         <width>531</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>On the Customer display, did you observe white/black and color bar/gray screen during the display test?</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblOperatorDisplayTestMessage">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>243</y>
+         <width>531</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>On the Operator display, did you observe white/black and color bar/gray screen during the display test?</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="networkTab">
+      <attribute name="title">
+       <string>Network</string>
+      </attribute>
+      <widget class="QTabWidget" name="networkTypeTab">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>961</width>
+         <height>471</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <widget class="QWidget" name="wirelessTab">
+        <attribute name="title">
+         <string>Wireless</string>
+        </attribute>
+        <widget class="QPushButton" name="startWirelessNetworkTestButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>375</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Network Ping Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="wirelessPingAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>110</y>
+           <width>101</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_25">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>110</y>
+           <width>400</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Network Ping Test Successful?</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWifiNetworkResponseWait">
+         <property name="geometry">
+          <rect>
+           <x>450</x>
+           <y>34</y>
+           <width>400</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No Test in Progress ...</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="wirelessDeviceDetectedLabel">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>350</y>
+           <width>511</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_23">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>320</y>
+           <width>325</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Wireless MAC Address</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWirelessTab_WirelessMACAddressData">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>360</y>
+           <width>325</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWirelessTab_EthernetMACAddressData">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>250</y>
+           <width>325</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_24">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>220</y>
+           <width>325</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Ethernet MAC Address</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="gbServiceDiagWirelessNetworkTest">
+         <property name="geometry">
+          <rect>
+           <x>360</x>
+           <y>180</y>
+           <width>581</width>
+           <height>231</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string notr="true">Destination to Ping:</string>
+         </property>
+         <widget class="QRadioButton" name="rbServiceDiagWirelessNetworkGateway">
+          <property name="geometry">
+           <rect>
+            <x>12</x>
+            <y>50</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Gateway IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbServiceDiagWirelessNetworkDHCP">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>DHCP Server IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbServiceDiagWirelessNetworkManualIP">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>170</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Enter IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblServiceDiagWirelessNetworkGatewayData">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>50</y>
+            <width>250</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblServiceDiagWirelessNetworkDHCPData">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>110</y>
+            <width>250</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtServiceDiagWirelessNetworkManual">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>170</y>
+            <width>250</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>Enter IP address</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="wiredTab">
+        <attribute name="title">
+         <string>Wired</string>
+        </attribute>
+        <widget class="QPushButton" name="startWiredNetworkTestButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>375</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Network Ping Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="wiredPingAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>110</y>
+           <width>101</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>110</y>
+           <width>400</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Network Ping Test Successful?</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWireNetworkResponseWait">
+         <property name="geometry">
+          <rect>
+           <x>450</x>
+           <y>34</y>
+           <width>400</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No Test in Progress ...</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="wiredDeviceDetectedLabel">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>360</y>
+           <width>511</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_21">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>220</y>
+           <width>325</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Ethernet MAC Address</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_22">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>320</y>
+           <width>325</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Wireless MAC Address</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWiredTab_EthernetMACAddressData">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>250</y>
+           <width>325</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblWiredTab_WirelessMACAddressData">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>360</y>
+           <width>325</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="gbServiceDiagWiredNetworkTest">
+         <property name="geometry">
+          <rect>
+           <x>360</x>
+           <y>180</y>
+           <width>581</width>
+           <height>231</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string notr="true">Destination to Ping:</string>
+         </property>
+         <widget class="QRadioButton" name="rbServiceDiagWiredNetworkGateway">
+          <property name="geometry">
+           <rect>
+            <x>12</x>
+            <y>50</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Gateway IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbServiceDiagWiredNetworkDHCP">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>DHCP Server IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbServiceDiagWiredNetworkManualIP">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>170</y>
+            <width>303</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Enter IP Address:</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>12</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblServiceDiagWiredNetworkGatewayData">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>50</y>
+            <width>250</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lblServiceDiagWiredNetworkDHCPData">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>110</y>
+            <width>250</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="txtServiceDiagWiredNetworkManual">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>170</y>
+            <width>250</width>
+            <height>35</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>Enter IP address</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QLineEdit" name="txtIpToPing">
+       <property name="geometry">
+        <rect>
+         <x>710</x>
+         <y>10</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>Enter IP address</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblIpAddressToPing">
+       <property name="geometry">
+        <rect>
+         <x>267</x>
+         <y>9</y>
+         <width>431</width>
+         <height>45</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Test Server IP Address:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameBoardSiteNetwork">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1024</width>
+         <height>521</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameBoardSiteNetwork{
+    background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblBoardSiteArkEthernetPassed">
+        <property name="geometry">
+         <rect>
+          <x>203</x>
+          <y>68</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK Ethernet Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkEthernetAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>633</x>
+          <y>60</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcWifiAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>132</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcWifiPassed">
+        <property name="geometry">
+         <rect>
+          <x>203</x>
+          <y>140</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>KPC WIFI Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblEthernetMACAddressQRCode">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>190</y>
+          <width>100</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <zorder>frameBoardSiteNetwork</zorder>
+      <zorder>networkTypeTab</zorder>
+      <zorder>txtIpToPing</zorder>
+      <zorder>lblIpAddressToPing</zorder>
+     </widget>
+     <widget class="QWidget" name="audioTab">
+      <attribute name="title">
+       <string>Audio</string>
+      </attribute>
+      <widget class="QPushButton" name="startBeeperTestButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>70</y>
+         <width>451</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Start Operator Side Beeper Test</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startStereoTestButton">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>256</y>
+         <width>591</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Start Two Channel Stereo Test</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblConfirmBeeps">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>150</y>
+         <width>568</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Did you hear the beeps?</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblConfirmSpeakers">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>336</y>
+         <width>652</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Did you hear audio playback from left, right, both channels?</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="gbBeeperTestAnswers">
+       <property name="geometry">
+        <rect>
+         <x>710</x>
+         <y>120</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbBeeperTestAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbBeeperTestAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="gbStereoTestAnswers">
+       <property name="geometry">
+        <rect>
+         <x>710</x>
+         <y>310</y>
+         <width>241</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QRadioButton" name="rbStereoTestAnswerYes">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>19</y>
+          <width>101</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Yes</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="rbStereoTestAnswerNo">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>19</y>
+          <width>82</width>
+          <height>60</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="lblTapSeveralTimes">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>70</y>
+         <width>568</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Tap the operator screen several times.</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="bluetoothTab">
+      <attribute name="title">
+       <string>BT</string>
+      </attribute>
+      <widget class="QWidget" name="layoutWidget_12">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>310</y>
+         <width>621</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="touchSceenHorizontalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_18">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Bluetooth Mouse discovered and recognized?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="btMouseRecognizedAnswerLabel">
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>110</y>
+         <width>731</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Turn on Bluetooth Mouse Device and put it into Discover Mode</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startBtTestButton">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>200</y>
+         <width>311</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start Bluetooth Discovery Test</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteArkBtPassed">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>68</y>
+         <width>421</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ARK Bluetooth Test passed:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblBoardSiteArkBtAnswerLabel">
+       <property name="geometry">
+        <rect>
+         <x>630</x>
+         <y>60</y>
+         <width>192</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="fanTab">
+      <attribute name="title">
+       <string>Fan</string>
+      </attribute>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>164</x>
+         <y>220</y>
+         <width>556</width>
+         <height>39</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="fanTestLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Is the Power Supply Fan Spinning?</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbFanSpinningTestAnswerYes">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Yes</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbFanSpinningTestAnswerNo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>No</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="printerTab">
+      <attribute name="title">
+       <string>Printer</string>
+      </attribute>
+      <widget class="QTabWidget" name="printerTestsTab">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>0</y>
+         <width>961</width>
+         <height>491</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="sensorsTab">
+        <attribute name="title">
+         <string>Sensors</string>
+        </attribute>
+        <widget class="QPushButton" name="startMediaSensorTestButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Media Sensor Calibration Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>671</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Backing Paper Only Before Starting this test</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="startLabelTakenSensorTestButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>215</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>641</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Start Label Taken Sensor Test</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget_8">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>270</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_36">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>359</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Label Taken Sensor Test Passed?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="takenSensorTestPassedAnswerLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>No</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QLabel" name="lblMediaSensorDisplay">
+         <property name="geometry">
+          <rect>
+           <x>820</x>
+           <y>70</y>
+           <width>125</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Media:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblStatusValue">
+         <property name="geometry">
+          <rect>
+           <x>670</x>
+           <y>70</y>
+           <width>125</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblLowStockLabel">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>335</y>
+           <width>420</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>420</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="text">
+          <string>Low Stock:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblLowStockData">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>335</y>
+           <width>900</width>
+           <height>60</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>900</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHeadUpLabel">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>400</y>
+           <width>125</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Printhead is:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblHeadUpData">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>400</y>
+           <width>125</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>125</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btnSizeLabels">
+         <property name="geometry">
+          <rect>
+           <x>660</x>
+           <y>215</y>
+           <width>281</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>401</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Size Labels</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="mediaSensorCalibrationTestAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>131</y>
+           <width>540</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_35">
+         <property name="geometry">
+          <rect>
+           <x>11</x>
+           <y>131</y>
+           <width>375</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Media Sensor Calibration Test Passed?</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="cutterTab">
+        <attribute name="title">
+         <string>Cutter</string>
+        </attribute>
+        <widget class="QLabel" name="lblIsCutterAttached">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>250</y>
+           <width>301</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Is Cutter Attached?</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCutterStatus">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>190</y>
+           <width>301</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>The Cutter is currently: </string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblIsCutterAttachedResult">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>250</y>
+           <width>151</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCutterStatusResult">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>190</y>
+           <width>151</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Enabled</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="butEnableCutter">
+         <property name="geometry">
+          <rect>
+           <x>660</x>
+           <y>285</y>
+           <width>240</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>240</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>430</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Disable</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="startPrinterLabelCutterTestButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>150</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Printer Label Cutter Test</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="butResetCutterDefault">
+         <property name="geometry">
+          <rect>
+           <x>660</x>
+           <y>215</y>
+           <width>240</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>240</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>430</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Reset Cutter Default</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="startLowStockSensorTestButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Low Label Stock Sensor Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblStockSensorTest">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>90</y>
+           <width>462</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Low Label Stock Sensor test passed?</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelStockSensorTestResult">
+         <property name="geometry">
+          <rect>
+           <x>500</x>
+           <y>90</y>
+           <width>400</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblLabelCutterTestAnswer">
+         <property name="geometry">
+          <rect>
+           <x>500</x>
+           <y>330</y>
+           <width>100</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_39">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>330</y>
+           <width>462</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Cutter engaged and returned home Test Passed?</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="testLabelTab">
+        <attribute name="title">
+         <string>Test Label</string>
+        </attribute>
+        <widget class="QPushButton" name="startCheckerBoardPatternTestButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>50</y>
+           <width>641</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Print Checker Board Pattern Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_29">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>137</y>
+           <width>641</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Did a label print with the approved checker board pattern?</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="gbCheckerBoardPatternTestAnswers">
+         <property name="geometry">
+          <rect>
+           <x>670</x>
+           <y>110</y>
+           <width>241</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QRadioButton" name="rbCheckerBoardPatternTestAnswerYes">
+          <property name="geometry">
+           <rect>
+            <x>12</x>
+            <y>19</y>
+            <width>101</width>
+            <height>60</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Yes</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbCheckerBoardPatternTestAnswerNo">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>19</y>
+            <width>82</width>
+            <height>60</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>No</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="startVerticalLinePatternTestButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>240</y>
+           <width>651</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Print Vertical Line Pattern Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_31">
+         <property name="geometry">
+          <rect>
+           <x>21</x>
+           <y>327</y>
+           <width>641</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Did a label print with the approved vertical line pattern?</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="gbVerticalLinePatternTestAnswers">
+         <property name="geometry">
+          <rect>
+           <x>670</x>
+           <y>300</y>
+           <width>241</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QRadioButton" name="rbVerticalLinePatternTestAnswerYes">
+          <property name="geometry">
+           <rect>
+            <x>12</x>
+            <y>19</y>
+            <width>101</width>
+            <height>60</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Yes</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="rbVerticalLinePatternTestAnswerNo">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>19</y>
+            <width>82</width>
+            <height>60</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>No</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcCutterAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>570</x>
+           <y>282</y>
+           <width>230</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcCutterPassed">
+         <property name="geometry">
+          <rect>
+           <x>179</x>
+           <y>290</y>
+           <width>390</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>KPC Cutter Test passed:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcDotWearPassed">
+         <property name="geometry">
+          <rect>
+           <x>179</x>
+           <y>348</y>
+           <width>390</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>KPC Dot Wear Test passed:</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcDotWearAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>570</x>
+           <y>340</y>
+           <width>230</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="cassetteTestTab">
+        <attribute name="title">
+         <string>Cassette</string>
+        </attribute>
+        <widget class="QLabel" name="lblCassetteDesc1">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>10</y>
+           <width>861</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Test the Printer Cassette to detect an incorrectly sized print roller.</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCassetteDesc3">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>105</y>
+           <width>861</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel
+{
+	color: red;
+	padding-left: 20px;
+	padding-right: 20px;
+ }
+</string>
+         </property>
+         <property name="text">
+          <string>YOU MUST USE 9 1/2&quot; LABEL STOCK.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="startPrinterCassetteTestButton">
+         <property name="geometry">
+          <rect>
+           <x>250</x>
+           <y>210</y>
+           <width>400</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Start Printer Cassette Test</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCassetteDesc2">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>60</y>
+           <width>861</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Note: The media sensor must already be calibrated.</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblMeasuredLines">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>278</y>
+           <width>320</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Measured lines:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblActualLines">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>328</y>
+           <width>320</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Actual lines:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblMeasuredLinesValue">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>278</y>
+           <width>81</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblActualLinesValue">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>328</y>
+           <width>81</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCassetteTestPassed">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>400</y>
+           <width>370</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Cassette Test Passed?</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCassetteTestPassedResult">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>400</y>
+           <width>81</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblCassetteDesc3_2">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>150</y>
+           <width>861</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>Put 9 1/2&quot; label stock in the printer cassette and press the Start button.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="gbCassetteTestOptionalDesc">
+         <property name="geometry">
+          <rect>
+           <x>580</x>
+           <y>290</y>
+           <width>351</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+         </property>
+         <widget class="QLabel" name="lblCassetteTestOptionalText">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>10</y>
+            <width>311</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>The Printer Cassette Test is OPTIONAL.</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="weigherTab">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <attribute name="title">
+       <string>Weigher</string>
+      </attribute>
+      <widget class="QTabWidget" name="weigherTestsTab">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>991</width>
+         <height>511</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>17</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="calibrationPage">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <attribute name="title">
+         <string>Calibration</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>981</width>
+           <height>471</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="calibrationVerticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="stopsPage">
+        <attribute name="title">
+         <string>Stops</string>
+        </attribute>
+        <widget class="QLabel" name="rightStopValueLabel">
+         <property name="geometry">
+          <rect>
+           <x>522</x>
+           <y>407</y>
+           <width>250</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>32</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_32">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>190</y>
+           <width>981</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:17pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Adjust LEFT STOP until LEFT STOP indicator turns Green.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="leftStopValueLabel">
+         <property name="geometry">
+          <rect>
+           <x>196</x>
+           <y>409</y>
+           <width>250</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>32</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="rightStopLabel">
+         <property name="geometry">
+          <rect>
+           <x>530</x>
+           <y>380</y>
+           <width>231</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>RIGHT STOP</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="leftStopLabel">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>380</y>
+           <width>241</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>LEFT STOP</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="acceptStopsAdjustmentButton">
+         <property name="geometry">
+          <rect>
+           <x>134</x>
+           <y>240</y>
+           <width>641</width>
+           <height>81</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Accept Left Stop Adjustment</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="saveValueButton">
+         <property name="geometry">
+          <rect>
+           <x>139</x>
+           <y>60</y>
+           <width>631</width>
+           <height>81</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save Left Stop Baseline Value</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_33">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>8</y>
+           <width>981</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:17pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Place weight on LEFT side of platter and press Save Baseline Value&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_34">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>330</y>
+           <width>981</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:17pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;Repeat for RIGHT STOP following same guidelines.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblSavedBaselineValue">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>140</y>
+           <width>781</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:17pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="countsPage">
+        <attribute name="title">
+         <string>Counts</string>
+        </attribute>
+        <widget class="QLineEdit" name="loadCellCountsLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>350</x>
+           <y>190</y>
+           <width>261</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>140</y>
+           <width>221</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Load Cell Counts</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>290</y>
+           <width>641</width>
+           <height>43</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="weigherCountsTestPassedLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>371</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Weigher Counts Test Passed?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="weigherCountsTestPassedAnswerLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>41</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>No</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcValueMaxAnswerLabel">
+         <property name="geometry">
+          <rect>
+           <x>591</x>
+           <y>360</y>
+           <width>231</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblBoardSiteKpcValueMaxPassed">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>370</y>
+           <width>391</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>17</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>KPC ValueMax Test passed:</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="canbusTab">
+      <attribute name="title">
+       <string>I/O</string>
+      </attribute>
+      <widget class="QPushButton" name="startCanbusTestButton">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>90</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start CANbus Test</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>961</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Connect the CANbus loopback connector to the board then start CANbus Test</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>343</x>
+         <y>168</y>
+         <width>301</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMaximumSize</enum>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>CANbus test passed?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="canbusAnswerLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_30">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>262</y>
+         <width>961</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Insert uSD card into second slot then start uSD test</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startIOSataTestButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>354</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start uSD Test</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>36</x>
+         <y>440</y>
+         <width>921</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_37">
+          <property name="text">
+           <string>uSD test passed?</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sataAnswerLabel_IO">
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="frameBoardSiteIO">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>1024</width>
+         <height>521</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameBoardSiteIO{
+    background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblBoardSiteArkUsdSlot0Passed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>68</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK uSD Slot 0 Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkUsdSlot0AnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>60</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkUsdSlot1Passed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>118</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK uSD Slot 1 Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkUsdSlot1AnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>110</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkMemoryPassed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>168</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK Memory Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkMemoryAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>160</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkCan0Passed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>218</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>ARK CAN0 Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteArkCan0AnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>210</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcCanPassed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>268</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>KPC CAN Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcCanAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>260</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcModelPassed">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>318</y>
+          <width>421</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>KPC Model Test passed:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBoardSiteKpcModelAnswerLabel">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>310</y>
+          <width>192</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>No</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <zorder>frameBoardSiteIO</zorder>
+      <zorder>startCanbusTestButton</zorder>
+      <zorder>label_4</zorder>
+      <zorder>horizontalLayoutWidget</zorder>
+      <zorder>label_30</zorder>
+      <zorder>startIOSataTestButton</zorder>
+      <zorder>horizontalLayoutWidget_3</zorder>
+     </widget>
+     <widget class="QWidget" name="sataTab">
+      <attribute name="title">
+       <string>SSD</string>
+      </attribute>
+      <widget class="QWidget" name="horizontalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>310</y>
+         <width>921</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_26">
+          <property name="text">
+           <string>SSD test passed?</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sataAnswerLabel">
+          <property name="text">
+           <string>No</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>100</y>
+         <width>451</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Connect SATA SSD Module to board and insert
+ uSD card into second slot to start SSD test</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startSataTestButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>210</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start SSD Test</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="serviceDiagTab">
+      <property name="accessibleName">
+       <string notr="true"/>
+      </property>
+      <property name="accessibleDescription">
+       <string notr="true"/>
+      </property>
+      <attribute name="title">
+       <string>...</string>
+      </attribute>
+      <widget class="QTabWidget" name="hteSmTab">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>961</width>
+         <height>461</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>HTe PC</string>
+        </attribute>
+        <widget class="QPushButton" name="btnStartScan">
+         <property name="geometry">
+          <rect>
+           <x>566</x>
+           <y>10</y>
+           <width>321</width>
+           <height>50</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>271</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>401</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Start Scan</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="txtHTeSmPC">
+         <property name="geometry">
+          <rect>
+           <x>272</x>
+           <y>10</y>
+           <width>251</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="scanResultsList">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>80</y>
+           <width>921</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QListWidget#pingResultsList{
+color: rgb(0,0,0);
+background:white;
+}
+
+QListWidget#pingResultsList::scrollbar{
+width: 40px;
+}</string>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOn</enum>
+         </property>
+         <property name="autoScrollMargin">
+          <number>16</number>
+         </property>
+         <property name="showDropIndicator" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblPAddress">
+         <property name="geometry">
+          <rect>
+           <x>19</x>
+           <y>10</y>
+           <width>251</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>HTe PC IP Address:</string>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="lblScreenMainTitle">
+     <property name="geometry">
+      <rect>
+       <x>112</x>
+       <y>0</y>
+       <width>800</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>800</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>800</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Manufacturing Subsystem Tests</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>701</x>
+       <y>0</y>
+       <width>322</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_12">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>61</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Version:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="applicationVersionLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>71</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="reportPushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>61</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Report</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitPushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Exit</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="colorBarDisplayPage">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <widget class="QLabel" name="colorBarPatternLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1024</width>
+       <height>600</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../sessionhandler.qrc">:/images/screens/od16bit.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="whiteScreenPage">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <widget class="QLabel" name="whiteScreenLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1024</width>
+       <height>600</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="grayScreenPage">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <widget class="QLabel" name="grayPatternLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1024</width>
+       <height>600</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>:/images/screens/grayBackground.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="blackTestPage">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1024</width>
+      <height>600</height>
+     </size>
+    </property>
+    <widget class="QLabel" name="blackPatternLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1024</width>
+       <height>600</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1024</width>
+       <height>600</height>
+      </size>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../sessionhandler.qrc">:/images/screens/blackBackground.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../sessionhandler.qrc"/>
+ </resources>
+ <connections/>
+</ui>

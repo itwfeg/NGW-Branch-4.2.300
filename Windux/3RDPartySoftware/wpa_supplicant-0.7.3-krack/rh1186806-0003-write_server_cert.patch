@@ -1,0 +1,280 @@
+From 0db795b7d3ee8522ad0d484a946ef4fa5922b48d Mon Sep 17 00:00:00 2001
+From: Jouni Malinen <j@w1.fi>
+Date: Sat, 17 Sep 2011 22:42:54 +0300
+Subject: [PATCH 3/5] eapol_test: Add option for writing server certificate
+ chain to a file
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+eapol_test command line argument -o<file> can now be used to request
+the received server certificate chain to be written to the specified
+file. The certificates will be written in PEM format. [Bug 391]
+
+- backport of upstream commit 1b414f59fc46b8c88e606de122debf69e8b5faa8
+- preparatory commit for rh #1186806 fixes (backports)
+
+Signed-off-by: Jiří Klimeš <jklimes@redhat.com>
+---
+ src/crypto/tls.h               |  1 +
+ src/crypto/tls_openssl.c       |  4 +++-
+ src/eap_peer/eap.c             |  1 +
+ src/eap_peer/eap.h             |  5 ++++
+ src/eapol_supp/eapol_supp_sm.c |  1 +
+ src/eapol_supp/eapol_supp_sm.h |  5 ++++
+ wpa_supplicant/eapol_test.c    | 52 +++++++++++++++++++++++++++++++++++-------
+ 7 files changed, 60 insertions(+), 9 deletions(-)
+
+diff --git a/src/crypto/tls.h b/src/crypto/tls.h
+index 0928b5b..b5cac1c 100644
+--- a/src/crypto/tls.h
++++ b/src/crypto/tls.h
+@@ -72,6 +72,7 @@ struct tls_config {
+ 	const char *pkcs11_engine_path;
+ 	const char *pkcs11_module_path;
+ 	int fips_mode;
++	int cert_in_cb;
+ 
+ 	void (*event_cb)(void *ctx, enum tls_event ev,
+ 			 union tls_event_data *data);
+diff --git a/src/crypto/tls_openssl.c b/src/crypto/tls_openssl.c
+index c40181a..a4fe5d7 100644
+--- a/src/crypto/tls_openssl.c
++++ b/src/crypto/tls_openssl.c
+@@ -54,6 +54,7 @@ struct tls_global {
+ 	void (*event_cb)(void *ctx, enum tls_event ev,
+ 			 union tls_event_data *data);
+ 	void *cb_ctx;
++	int cert_in_cb;
+ };
+ 
+ static struct tls_global *tls_global = NULL;
+@@ -687,6 +688,7 @@ void * tls_init(const struct tls_config *conf)
+ 		if (conf) {
+ 			tls_global->event_cb = conf->event_cb;
+ 			tls_global->cb_ctx = conf->cb_ctx;
++			tls_global->cert_in_cb = conf->cert_in_cb;
+ 		}
+ 
+ #ifdef CONFIG_FIPS
+@@ -1142,7 +1144,7 @@ static void openssl_tls_cert_event(struct tls_connection *conn,
+ 		return;
+ 
+ 	os_memset(&ev, 0, sizeof(ev));
+-	if (conn->cert_probe) {
++	if (conn->cert_probe || tls_global->cert_in_cb) {
+ 		cert = get_x509_cert(err_cert);
+ 		ev.peer_cert.cert = cert;
+ 	}
+diff --git a/src/eap_peer/eap.c b/src/eap_peer/eap.c
+index ba77f09..8a992fc 100644
+--- a/src/eap_peer/eap.c
++++ b/src/eap_peer/eap.c
+@@ -1239,6 +1239,7 @@ struct eap_sm * eap_peer_sm_init(void *eapol_ctx,
+ #endif /* CONFIG_FIPS */
+ 	tlsconf.event_cb = eap_peer_sm_tls_event;
+ 	tlsconf.cb_ctx = sm;
++	tlsconf.cert_in_cb = conf->cert_in_cb;
+ 	sm->ssl_ctx = tls_init(&tlsconf);
+ 	if (sm->ssl_ctx == NULL) {
+ 		wpa_printf(MSG_WARNING, "SSL: Failed to initialize TLS "
+diff --git a/src/eap_peer/eap.h b/src/eap_peer/eap.h
+index aa4d9af..d111fed 100644
+--- a/src/eap_peer/eap.h
++++ b/src/eap_peer/eap.h
+@@ -262,6 +262,11 @@ struct eap_config {
+ 	 * This is only used by EAP-WSC and can be left %NULL if not available.
+ 	 */
+ 	struct wps_context *wps;
++
++	/**
++	 * cert_in_cb - Include server certificates in callback
++	 */
++	int cert_in_cb;
+ };
+ 
+ struct eap_sm * eap_peer_sm_init(void *eapol_ctx,
+diff --git a/src/eapol_supp/eapol_supp_sm.c b/src/eapol_supp/eapol_supp_sm.c
+index e4d93e0..72b7bb3 100644
+--- a/src/eapol_supp/eapol_supp_sm.c
++++ b/src/eapol_supp/eapol_supp_sm.c
+@@ -1868,6 +1868,7 @@ struct eapol_sm *eapol_sm_init(struct eapol_ctx *ctx)
+ 	conf.pkcs11_engine_path = ctx->pkcs11_engine_path;
+ 	conf.pkcs11_module_path = ctx->pkcs11_module_path;
+ 	conf.wps = ctx->wps;
++	conf.cert_in_cb = ctx->cert_in_cb;
+ 
+ 	sm->eap = eap_peer_sm_init(sm, &eapol_cb, sm->ctx->msg_ctx, &conf);
+ 	if (sm->eap == NULL) {
+diff --git a/src/eapol_supp/eapol_supp_sm.h b/src/eapol_supp/eapol_supp_sm.h
+index 48fbf6c..c08363e 100644
+--- a/src/eapol_supp/eapol_supp_sm.h
++++ b/src/eapol_supp/eapol_supp_sm.h
+@@ -231,6 +231,11 @@ struct eapol_ctx {
+ 	 */
+ 	void (*cert_cb)(void *ctx, int depth, const char *subject,
+ 			const char *cert_hash, const struct wpabuf *cert);
++
++	/**
++	 * cert_in_cb - Include server certificates in callback
++	 */
++	int cert_in_cb;
+ };
+ 
+ 
+diff --git a/wpa_supplicant/eapol_test.c b/wpa_supplicant/eapol_test.c
+index d28f941..86518db 100644
+--- a/wpa_supplicant/eapol_test.c
++++ b/wpa_supplicant/eapol_test.c
+@@ -23,6 +23,7 @@
+ #include "eapol_supp/eapol_supp_sm.h"
+ #include "eap_peer/eap.h"
+ #include "eloop.h"
++#include "utils/base64.h"
+ #include "rsn_supp/wpa.h"
+ #include "eap_peer/eap_i.h"
+ #include "wpa_supplicant_i.h"
+@@ -75,6 +76,8 @@ struct eapol_test_data {
+ 	char *connect_info;
+ 	u8 own_addr[ETH_ALEN];
+ 	struct extra_radius_attr *extra_attrs;
++
++	FILE *server_cert_file;
+ };
+ 
+ static struct eapol_test_data eapol_test;
+@@ -291,7 +294,6 @@ static void ieee802_1x_encapsulate_radius(struct eapol_test_data *e,
+ static int eapol_test_eapol_send(void *ctx, int type, const u8 *buf,
+ 				 size_t len)
+ {
+-	/* struct wpa_supplicant *wpa_s = ctx; */
+ 	printf("WPA: eapol_test_eapol_send(type=%d len=%lu)\n",
+ 	       type, (unsigned long) len);
+ 	if (type == IEEE802_1X_TYPE_EAP_PACKET) {
+@@ -305,16 +307,16 @@ static int eapol_test_eapol_send(void *ctx, int type, const u8 *buf,
+ static void eapol_test_set_config_blob(void *ctx,
+ 				       struct wpa_config_blob *blob)
+ {
+-	struct wpa_supplicant *wpa_s = ctx;
+-	wpa_config_set_blob(wpa_s->conf, blob);
++	struct eapol_test_data *e = ctx;
++	wpa_config_set_blob(e->wpa_s->conf, blob);
+ }
+ 
+ 
+ static const struct wpa_config_blob *
+ eapol_test_get_config_blob(void *ctx, const char *name)
+ {
+-	struct wpa_supplicant *wpa_s = ctx;
+-	return wpa_config_get_blob(wpa_s->conf, name);
++	struct eapol_test_data *e = ctx;
++	return wpa_config_get_blob(e->wpa_s->conf, name);
+ }
+ 
+ 
+@@ -383,6 +385,20 @@ static void eapol_sm_cb(struct eapol_sm *eapol, int success, void *ctx)
+ }
+ 
+ 
++static void eapol_test_write_cert(FILE *f, const char *subject,
++				  const struct wpabuf *cert)
++{
++	unsigned char *encoded;
++
++	encoded = base64_encode(wpabuf_head(cert), wpabuf_len(cert), NULL);
++	if (encoded == NULL)
++		return;
++	fprintf(f, "%s\n-----BEGIN CERTIFICATE-----\n%s"
++		"-----END CERTIFICATE-----\n\n", subject, encoded);
++	os_free(encoded);
++}
++
++
+ static void eapol_test_cert_cb(void *ctx, int depth, const char *subject,
+ 			       const char *cert_hash,
+ 			       const struct wpabuf *cert)
+@@ -408,6 +424,10 @@ static void eapol_test_cert_cb(void *ctx, int depth, const char *subject,
+ 				     depth, subject, cert_hex);
+ 			os_free(cert_hex);
+ 		}
++
++		if (e->server_cert_file)
++			eapol_test_write_cert(e->server_cert_file,
++					      subject, cert);
+ 	}
+ }
+ 
+@@ -423,7 +443,7 @@ static int test_eapol(struct eapol_test_data *e, struct wpa_supplicant *wpa_s,
+ 		printf("Failed to allocate EAPOL context.\n");
+ 		return -1;
+ 	}
+-	ctx->ctx = wpa_s;
++	ctx->ctx = e;
+ 	ctx->msg_ctx = wpa_s;
+ 	ctx->scard_ctx = wpa_s->scard;
+ 	ctx->cb = eapol_sm_cb;
+@@ -438,6 +458,7 @@ static int test_eapol(struct eapol_test_data *e, struct wpa_supplicant *wpa_s,
+ 	ctx->pkcs11_engine_path = wpa_s->conf->pkcs11_engine_path;
+ 	ctx->pkcs11_module_path = wpa_s->conf->pkcs11_module_path;
+ 	ctx->cert_cb = eapol_test_cert_cb;
++	ctx->cert_in_cb = 1;
+ 
+ 	wpa_s->eapol = eapol_sm_init(ctx);
+ 	if (wpa_s->eapol == NULL) {
+@@ -994,7 +1015,7 @@ static void usage(void)
+ 	       "eapol_test [-nWS] -c<conf> [-a<AS IP>] [-p<AS port>] "
+ 	       "[-s<AS secret>]\\\n"
+ 	       "           [-r<count>] [-t<timeout>] [-C<Connect-Info>] \\\n"
+-	       "           [-M<client MAC address>] \\\n"
++	       "           [-M<client MAC address>] [-o<server cert file] \\\n"
+ 	       "           [-N<attr spec>] \\\n"
+ 	       "           [-A<client IP>]\n"
+ 	       "eapol_test scard\n"
+@@ -1020,6 +1041,8 @@ static void usage(void)
+ 	       "  -M<client MAC address> = Set own MAC address "
+ 	       "(Calling-Station-Id,\n"
+ 	       "                           default: 02:00:00:00:00:01)\n"
++	       "  -o<server cert file> = Write received server certificate\n"
++	       "                         chain to the specified file\n"
+ 	       "  -N<attr spec> = send arbitrary attribute specified by:\n"
+ 	       "                  attr_id:syntax:value or attr_id\n"
+ 	       "                  attr_id - number id of the attribute\n"
+@@ -1061,7 +1084,7 @@ int main(int argc, char *argv[])
+ 	wpa_debug_show_keys = 1;
+ 
+ 	for (;;) {
+-		c = getopt(argc, argv, "a:A:c:C:M:nN:p:r:s:St:W");
++		c = getopt(argc, argv, "a:A:c:C:M:nN:o:p:r:s:St:W");
+ 		if (c < 0)
+ 			break;
+ 		switch (c) {
+@@ -1086,6 +1109,16 @@ int main(int argc, char *argv[])
+ 		case 'n':
+ 			eapol_test.no_mppe_keys++;
+ 			break;
++		case 'o':
++			if (eapol_test.server_cert_file)
++				fclose(eapol_test.server_cert_file);
++			eapol_test.server_cert_file = fopen(optarg, "w");
++			if (eapol_test.server_cert_file == NULL) {
++				printf("Could not open '%s' for writing\n",
++				       optarg);
++				return -1;
++			}
++			break;
+ 		case 'p':
+ 			as_port = atoi(optarg);
+ 			break;
+@@ -1225,6 +1258,9 @@ int main(int argc, char *argv[])
+ 
+ 	eloop_destroy();
+ 
++	if (eapol_test.server_cert_file)
++		fclose(eapol_test.server_cert_file);
++
+ 	printf("MPPE keys OK: %d  mismatch: %d\n",
+ 	       eapol_test.num_mppe_ok, eapol_test.num_mppe_mismatch);
+ 	if (eapol_test.num_mppe_mismatch)
+-- 
+2.1.0
+

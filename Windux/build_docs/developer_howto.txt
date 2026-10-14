@@ -1,0 +1,120 @@
+Hobart Linux Build 
+Developer Howto
+
+1. Using Sun VirtualBox, create a VM with a 20GB virtual disk and 1GB RAM.
+
+2. Install Ubuntu 9.10 from the Live CD to the VM. Accept all defaults. 
+
+3. Launch Update Manager and apply latest Ubuntu updates. Restart.
+
+4. Launch Synaptic Package Manager, install subversion.
+
+5. Create a working copy synced to the SVN repository head revision
+	cd ~
+	mkdir Hobart
+	cd Hobart
+	svn checkout https://externalsvn.bsquare.com/svn/Hobart/Hobart_Linux_Port/branches/shared_code
+
+6. Create the environment variable HOBART_APP and make it persistent. 
+	export HOBART_APP=~/Hobart/shared_code/Application
+   	Also, add the above line to the ~/.bashrc file using gedit or other text editor.
+
+7. Install dselect
+	sudo apt-get install dselect
+
+8. Install a humongous truckload of packages which are required to build
+	sudo dpkg --set-selections < $HOBART_APP/../build_docs/installed-software.linux.hobart
+	sudo dselect  (choose Update from menu, then choose Install)
+	go make coffee while the system downloads about 650MB
+
+9. Install and build i2c-tools from source
+	cd ~
+	apt-get source i2c-tools
+	cd i2c-tools-3.0.2
+	sudo make
+	sudo make install
+
+10. Install libusb-dev
+	sudo apt-get install libusb-dev
+
+11. Install libudev-dev 
+	sudo apt-get install libudev-dev
+	
+12. Install ssl support:
+	sudo apt-get install libcurl4-openssl-dev
+
+13. Create custom udev notification rules
+	sudo cp $HOBART_APP/../Config_files/10-local-rules /etc/udev/rules.d/
+
+14. Create symbolic links to app configuration files
+	sudo mkdir /etc/hobart
+	sudo chmod 777 /etc/hobart
+	sudo ln -s $HOBART_APP/bootParams.cfg               /etc/hobart/bootParams.cfg
+	sudo ln -s $HOBART_APP/source/config_linux.dat      /etc/hobart/config_linux.dat
+	sudo ln -s $HOBART_APP/source/db/defaults_linux.ini /etc/hobart/defaults_linux.ini
+	sudo mkdir /var/log/hobart
+	sudo chmod 777 /var/log/hobart
+
+15. Configure virtual keyboard
+	cp $HOBART_APP/../Config_files/Xdefaults ~/.Xdefaults
+	sudo xrdb -load ~/.Xdefaults
+
+16. Update to SVN head revision
+	cd $HOBART_APP/../
+	svn up
+
+17. Rebuild all libs
+	make clean
+	make
+	
+18. Rebuild the daemon
+	cd $HOBART_APP/source/app
+	make daemon
+	
+		
+**********************************************************
+Following need to be install on each new build:
+-----------------------------------------------
+$HOBART_APP=Your_app_location/Applications
+
+Usb interface(libusb):
+sudo apt-get libUsb-dev
+
+i2c tools:
+sudo apt-get source i2c-tools 
+
+Make the files downloaded by:
+-Entering the director
+-Typing 
+make
+-Then install the tools
+sudo make install
+
+HTTP/FTP etc support:
+sudo apt-get install libcurl4-openssl-dev
+
+inotify setup:
+Copy the file 10-local-rules into the following directory
+/etc/udev/rules.d/
+From
+config_files directory
+
+Config file setup:
+-create /etc/hobart/
+-link these files:
+bootParams.cfg -> 
+$HOBART_APP/bootParams.cfg
+config_linux.dat -> 
+$HOBART_APP/source/config_linux.dat
+defaults_linux.ini -> 
+$HOBART_APP/source/db/defaults_linux.ini
+
+create:/var/log/hobart and make it mode 777 for now
+Eventually our installer will create /var/log/Hobart
+
+Virutal Keyboard:
+Copy "Xdefaults" file from config_files directory to your home directory and rename it to ".Xdefaults" (notice the extra '.')
+Type xrdb -load .Xdefaults
+You can launch the VK by typing xvkbd
+
+

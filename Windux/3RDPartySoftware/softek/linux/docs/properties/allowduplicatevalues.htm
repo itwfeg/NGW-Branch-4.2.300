@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">AllowDuplicateValues</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>The AllowDuplicateValues property&nbsp;can be used to stop the toolkit from 
+			reporting duplicate barcodes on the same page in an image. This can be useful 
+			for images where the middle section of a barcode is badly damaged or missing. 
+			With the property set to TRUE the toolkit may report that there are 2 barcodes 
+			of the same type and value. With the property set to FALSE it would assume that 
+			the 2 barcodes were part of a single barcode and set the bounding rectangle 
+			accordingly.</P>
+		<P>
+			Default value = &nbsp;&nbsp;&nbsp;TRUE
+		</P>
+		<P>void STSetParameter(hBarcode, ST_DUPLICATE_BARCODES,&nbsp;uint16 *value) ;
+		</P>
+		<P>void STGetParameter(hBarcode, ST_DUPLICATE_BARCODES,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Turn off the AllowDuplicateValues property<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;0 ;<BR>
+			STSetParameter(hBarcode, ST_DUPLICATE_BARCODES,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

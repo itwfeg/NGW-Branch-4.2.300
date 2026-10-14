@@ -1,0 +1,92 @@
+sudo apt-get update
+sudo apt-get install eject
+sudo apt-get install sqlite3
+sudo apt-get install exfat-fuse
+sudo apt-get install exfat-utils
+
+# All commands not proceeded by a # are commands that need executed in a shell
+
+# To stop RPI prompt from appearing to confirm you want to run the program that the desktop icon launches:
+/usr/bin/pcmanfm
+
+# Once PC MAN FM loads perform the following:
+# Edit] --> [Preferences] --> [General]
+# [x] Don't ask options on launch executable file
+
+# Install one test station server in a network
+# Multiple client test stations can be installed in a network and they need configured
+# to point to the test station server
+
+# install client test station logic as root:
+sudo sh -x install_test_station.sh -c
+
+# install server test station logic as root:
+sudo sh -x install_test_station.sh -s
+
+# to control the dhcp server which does not currently startup at boot time
+sudo service isc-dhcp-server start
+sudo service isc-dhcp-server stop
+sudo service isc-dhcp-server restart
+
+# to remove black borders on screen
+sudo nano /boot/config.txt
+uncomment line below:
+# disable_overscan=1
+then reboot
+
+Install and Configure Windows 10 Node Controller Test Station
+
+To copy the Windows 10 System to the new 500 MB Kingston SSD do the following in command prompt:
+diskpart
+list disk
+select disk 0
+detail disk
+clean
+convert gpt
+exit
+
+Download and install easseus todo home application to copy Windows 10 system files to 500 MB SSD
+License key: GVZCX-715V2-REYRD-FGQHU-2MTFP
+Launch program
+Select System Clone
+Select the 447 GB Kingston SSD as the destination of the clone
+Select Advanced Options button and check Optimize for SSD and Sector by Sector Clone and select Ok
+Select Next at bottom of screen and copy will start
+
+Resize Windows drive to use all 447 GB of Kingston SSD
+Launch diskmgmt.msc from terminal or Run command
+Extend the the Windows 10 Volume to use all of the 447 GB of the Kingston drive by doing the following:
+Right-Click on windows:A on Disk 0:
+Select Extend Volume from drop down menu
+Select Next
+Select Next on the next screen
+
+windows:A should now be 447 GB
+
+Reboot Windows
+Hold F7 down to go into the BIOS
+Change boot order so Boot Manager(P0: Kingston if first device to boot from)
+
+Install Rasclock 4 into all RPIs so they have a real-time clock
+Follow instructions here:
+https://afterthoughtsoftware.com/products/rasclock
+
+sudo rasp-config
+Interfacing Options->Enable i2c interface
+
+Specifically do the following for Raspbian Buster image:
+Edit /boot/config.txt
+Add the following line:
+dtoverlay=i2c-rtc,pcf2127
+
+Edit /lib/udev/hwclock-set
+Comment out the lines:
+if [ -e /run/systemd/system ] ; then
+    exit 0
+fi
+
+Comment out all lines with -ssystz in them
+
+Set the os system time with following command:
+sudo date -s "YYYYMMDD hhmm"
+sudo hwclock -w

@@ -1,0 +1,41 @@
+#!/bin/sh
+
+USERNAME=mosquitto
+
+# check for existance of a mosquitto user
+id ${USERNAME}
+
+if [[ $? != 0 ]]; then
+
+	echo "postinst: creating ${USERNAME} user..."
+
+	# create the mosquitto group
+	groupadd ${USERNAME}
+
+	if [[ $? != 0 ]]; then
+		echo "postinst: error creating group!"
+	fi
+
+	# create the mosquitto user
+	useradd -c "MQTT" -d /home/${USERNAME} -m -k/etc/skel -s /bin/sh -g ${USERNAME} ${USERNAME}
+
+	if [[ $? != 0 ]]; then
+		echo "postinst: error creating user!"
+	fi
+
+        # set password to the default one
+	usermod -p SwU5kyko1/z1g ${USERNAME}
+
+	if [[ $? != 0 ]]; then
+		echo "postinst: error updating password!"
+	fi
+fi
+
+# make sure the /home/mosquitto directory is present after an upgrade
+mkdir -p /home/${USERNAME}
+
+# update init.d
+update-rc.d mosquitto start 85 2 3 4 5 . stop 15 0 1 6 .
+
+echo "postinst: done!"
+

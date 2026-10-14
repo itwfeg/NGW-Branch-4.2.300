@@ -1,0 +1,7 @@
+Package: hobart-tiliter-apphook
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides Tiliter Vision System support.
+

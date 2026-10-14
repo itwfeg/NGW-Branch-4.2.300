@@ -1,0 +1,17 @@
+# Used by user accounts other than oper; administrator, hobartservice,bsquare
+# the script called sets up the config_os file before calling the tool and then deletes the file when the tool completes
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+#Terminal=false
+Terminal=true
+#Name[en_US]=Hobart-Setup
+Name[en_US]=Hobart-Setup-Tool
+Icon=/home/oper/setup tool icon_47x47.png
+#Exec=/usr/bin/HobartSetup.exe
+#Exec=/usr/bin/start_hobart_setup.sh
+Exec=sudo /usr/bin/start_hobart_setup.sh
+#Name=Hobart-Setup
+Name=Hobart-Setup-Tool
+StartupNotify=true

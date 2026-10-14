@@ -1,0 +1,158 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/item.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_timeout.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="addedModal" tabindex="-1" role="dialog" data-backdrop="static">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body" id="addedModal-body">
+<h3>Item added to cart.</h3>
+</div>
+<div class="row justify-content-around p-2">
+<!--<div class="col"><button type="button" class="btn bg-warning btn-custom-basics btn-lg btn-block" id="addedModal-startOver" onclick="start_over();">Start Over</button></div>-->
+<div class="col"><button type="button" class="btn btn-custom-color btn-lg btn-block" id="addedModal-keep" onclick="view_cart();" data-dismiss="modal">View Cart</button></div>
+<div class="col"><button type="button" class="btn btn-custom-color btn-lg btn-block bg-success" id="addedModal-more" onclick="add_more();" data-dismiss="modal">Add More</button></div>
+</div>
+</div>
+</div>
+</div>
+
+<div onclick="select_prep(this);" class="col prep-button template-div" id="prep-template"><div class="btn btn-block btn-custom-color prep-text" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Template</div></div>
+
+<div class="container main-container">
+
+<div class="row item-page-row">
+
+<div class="col">
+  <div id="item-image" class="btn-custom-color mb-2" style="height: 30vh;"></div>
+  
+  <div class="custom-inverted-thin-border justify-content-center mb-2">
+    <h2 id="item-name" class="mt-2" style="text-align: center;">Loading...</h2>
+    <hr class="mt-1 mb-1 custom-hr"/>
+    <!--<h3 id="item-price" class="mt-2" style="text-align: center;"></h3>-->
+    <div id="product-price" class="row justify-content-center mt-2" style="margin-right: 0px;margin-left: 0px; text-align: center;">
+      <h3 id="normal-price" class="normal-price col-6">Loading...</h3>
+      <h3 id="sale-price" class="sale-price col-6"></h3>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="custom-inverted-thin-border justify-content-center mb-1 row" style="/*height: 30vh;*/">
+    <div class="col-6">
+  
+    <div class="row justify-content-center">
+      <div class="col"><div class="btn-custom-color full-change" style="height:8vh; max-height:8vh; position:relative; text-align: center; width=75%;" onclick="change_amount(this, '1');"><img class="no-drag" src="{{=URL('static','images/plus_icon.svg')}}" draggable="false" style="height:90%; margin-top: 1%; width: 50%;"></div></div>
+      <div class="quarter-change" style="width:1em;"></div>
+      <div class="col quarter-change"><div class="btn-custom-color" style="height:8vh; max-height:8vh; position:relative; text-align: center; width=75%;" onclick="change_amount(this, '0.25');"><img class="no-drag" src="{{=URL('static','images/plus_icon.svg')}}" draggable="false" style="height:90%; margin-top: 1%; width: 50%;"></div></div>
+    </div>
+    
+    
+    <div class="row justify-content-center">
+      <input id="item-amount" type="text" class="custom-inverted-thin-border col ml-1 mb-1 mt-1" style="text-align:center; font-size: 8vh;" onfocusout="clean_amount();">
+    </div>
+    <!--<div class="row justify-content-center">
+      <div id="item-whole" class="custom-inverted-thin-border col ml-1" style="text-align:right; font-size: 8vh;">0</div>
+      <div style="width: 1em; max-width:width: 1em;"><div style="font-size: 8vh;">.</div></div>
+      <div id="item-fractional" class="custom-inverted-thin-border col mr-2" style="text-align:left; font-size: 8vh;">00</div>
+    </div>-->
+    
+    <div class="row justify-content-center">
+      <div class="col"><div class="btn-custom-color full-change" style="height:8vh; max-height:8vh; position:relative; text-align: center; width=75%;" onclick="change_amount(this, '-1');"><img class="no-drag" src="{{=URL('static','images/minus_icon.svg')}}" draggable="false" style="height:90%; margin-top: 2%; width: 50%;"></div></div>
+      <div class="quarter-change" style="width:1em;"></div>
+      <div class="col quarter-change"><div class="btn-custom-color" style="height:8vh; max-height:8vh; position:relative; text-align: center; width=75%;" onclick="change_amount(this, '-0.25');"><img class="no-drag" src="{{=URL('static','images/minus_icon.svg')}}" draggable="false" style="height:90%; margin-top: 2%; width: 50%;"></div></div>
+    </div>
+    
+    </div>
+    <div class="col-2"><div id="units" style="font-size:6vh;position:absolute;top:10vh;"></div></div>
+    <div class="col-3"><div class="custom-inverted-thin-border p-1" style="position: absolute; height: 16vh; top: 6.5vh; text-align: center; font-size: 3.5vh;"><h3 id="item-price" class="mb-2"></h3>Subtotal<hr class="custom-hr mt-1 mb-1"><div id="item-subtotal" class="mb-1">$0.00</div></div></div>
+
+  </div>
+  
+  <div style="font-style: italic; font-size: small; text-align: center;">Actual price calculated at fulfillment.</div>
+  
+  <div class="custom-inverted-thin-border mb-2 row p-0 justify-content-between" id="prep-options">
+    <!--<div class="col" style="/*height: 19vh;*/">-->
+      <!--<h3 style="height:7vh; font-size: 4vh;" class="mt-1 mb-0">Preparation Instructions</h3>-->
+      <!--<div onclick="select_prep(this);" class="col-3 prep-button normal"><div class="btn btn-block btn-custom-color">Normal</div></div>
+      <div onclick="select_prep(this);" class="col-3 prep-button thin"><div class="btn btn-block btn-custom-color">Thin</div></div>
+      <div onclick="select_prep(this);" class="col-3 prep-button thick"><div class="btn btn-block btn-custom-color">Thick</div></div>
+      <div onclick="select_prep(this);" class="col-3 prep-button other"><div class="btn btn-block btn-custom-color">Other</div></div>-->
+    <!--</div>-->
+  </div>
+  
+  
+  
+
+  <!--<div class="custom-inverted-thin-border justify-content-center mb-4 p-1 row">preparation type (thin/thick/whatever</div>-->
+  <div class="custom-inverted-thin-border justify-content-center mb-2 p-1 row">
+  <div class="col" style="height: 27vh;">
+    <h3 style="height:7vh; font-size: 4vh; text-align: center; width: 100%; max-width: 100%;" class="mt-1 mb-0">Other Instructions</h3>
+    <textarea id="instructions" style="height: 17vh; font-size: 3vh; color: black;" class="form-control mt-0" placeholder="Enter any other preparation requests here." maxlength="100"></textarea>
+  </div>
+  </div>
+</div>
+
+</div>
+
+<div class="row kiosk-button-row justify-content-between">
+<div class="col" onclick="history.back();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="prevButton">
+  <g transform="translate(-47,-94)" class="btn-custom-color">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 150,122 H 100 V 97 l -50,50 50,50 v -25 h 50 z"/>
+    <text x="90" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Back</text>
+  </g>
+</svg>
+</div>
+
+<div class="col"><button class="btn btn-block bg-warning btn-custom-basics" onclick="start_over_button()">Start Over</button></div>
+
+<div class="col"><button class="btn btn-block btn-custom-color" onclick="view_cart()">View Cart</button></div>
+
+<!--
+<div class="col" onclick="add_to_cart();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="addButton">
+  <g transform="translate(-47,-94)" class="bg-success btn-custom-basics">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+        d="M 82,129 V 99 h 35 v 30 h 30 v 35 h -30 v 30 H 82 V 164 H 52 v -35 z"/>
+    <text x="64" y="151.5" class="btn-custom-color" id="cart-button" style="stroke-width: 0; fill: #fff; font-size: small;">Add to Cart</text>
+  </g>
+</svg>
+</div>-->
+
+<div class="col" onclick="add_to_cart();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="addButton">
+  <g transform="translate(-47,-94)" class="bg-success btn-custom-basics">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50,122 H 100 V 97 l 50,50 -50,50 V 172 H 50 Z"/>
+    <text x="58" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Add to Cart</text>
+  </g>
+</svg>
+</div>
+
+
+
+
+</div>
+</div>
+

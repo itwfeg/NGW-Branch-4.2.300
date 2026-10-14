@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">SkewTolerance</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">SkewTolerance controls the maximum angle from the horizontal 
+			or vertical at which a barcode will be recognised by the toolkit. The table 
+			below shows the possible values for this property along with the approximate 
+			maximum angles:
+			<UL class="MsoBodyText">
+				<LI>
+				0&nbsp;= &nbsp;up to 5 degrees&nbsp;
+				<LI>
+				1 = 13 degrees
+				<LI>
+				2 = 21 degrees&nbsp;
+				<LI>
+				3 = 29 degrees
+				<LI>
+				4 = 37 degrees
+				<LI>
+					5 = 45 degrees</LI></UL>
+		<P>
+			Default value = &nbsp;&nbsp;&nbsp;&nbsp;0
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_SKEW_SETTING,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_SKEW_SETTING,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Search for barcodes at any angle<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;5 ;<BR>
+			STSetParameter(hBarcode, ST_SKEW_SETTING,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

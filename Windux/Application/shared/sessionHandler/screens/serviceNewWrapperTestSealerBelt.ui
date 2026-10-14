@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>serviceNewWrapperTestSealerBelt</class>
+ <widget class="QWidget" name="serviceNewWrapperTestSealerBelt">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>16</y>
+     <width>971</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Sealer Belt Tests</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>90</y>
+     <width>571</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cycle Sealer Belt (N5)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCycleSealerBelt">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>80</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>201</width>
+     <height>61</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>171</width>
+     <height>61</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cycle</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>571</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sealer Belt Power (N5)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>240</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Belt Setting</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber_5">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>310</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Belt Temperature</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cboxSealerBeltPower">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>160</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBeltSettingTemperature">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>230</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBeltTemperature">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>300</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBeltSettingTemperatureScale">
+   <property name="geometry">
+    <rect>
+     <x>637</x>
+     <y>240</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBeltTemperatureScale">
+   <property name="geometry">
+    <rect>
+     <x>617</x>
+     <y>310</y>
+     <width>531</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

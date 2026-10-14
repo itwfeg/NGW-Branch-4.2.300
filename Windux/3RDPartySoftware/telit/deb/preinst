@@ -1,0 +1,19 @@
+#!/bin/sh
+
+echo "preinst: stopping services..."
+
+# stop gateway scripts
+pkill -f gatewayServer
+pkill -f gatewayDiscovery
+
+# stop devicewise
+/opt/dw/devicewise stop
+
+
+echo "preinst: removing old installation..."
+
+# delete out old devicewise
+rm -rf /opt/dw
+
+echo "preinst: done!"
+

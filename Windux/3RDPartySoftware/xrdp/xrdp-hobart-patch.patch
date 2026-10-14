@@ -1,0 +1,24 @@
+diff -Naur '--exclude=.git' xrdp.orig/xrdp/xrdp_process.c xrdp/xrdp/xrdp_process.c
+--- xrdp.orig/xrdp/xrdp_process.c	2015-04-08 15:00:30.494020000 -0400
++++ xrdp/xrdp/xrdp_process.c	2015-04-08 14:59:23.000000000 -0400
+@@ -73,7 +73,20 @@
+ 
+         if ((self->wm == 0) && (self->session->up_and_running) && (rv == 0))
+         {
++            char* env = 0;
++
+             DEBUG(("calling xrdp_wm_init and creating wm"));
++
++            /* use width from environment */
++            env = g_getenv("XRDP_WIDTH");
++            if (env)
++                self->session->client_info->width = atoi(env);
++
++            /* use height from environment */
++            env = g_getenv("XRDP_HEIGHT");
++            if (env)
++                self->session->client_info->height = atoi(env);
++
+             self->wm = xrdp_wm_create(self, self->session->client_info);
+             /* at this point the wm(window manager) is create and wm::login_mode is
+                zero and login_mode_event is set so xrdp_wm_init should be called by

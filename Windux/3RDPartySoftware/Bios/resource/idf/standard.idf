@@ -1,0 +1,105 @@
+#***    STANDARD.IDF -- Embedded BIOS Standard Icon Include file.
+#
+#1.     Functional Description.
+#       This file includes all of the standard graphics and icons used in for
+#       the splash screen and most of the file systems.
+#
+#2.     Modification History.
+#       K. C. Taylor    00/01/24.       #4.3, New.
+#       K. C. Taylor    00/10/25.       #5.0, added SMP CPU icon.
+#       D. W. Tarr      00/10/31.       #5.0, added RAMTEST_HUGE icon.
+#       M. J. Siler     02/06/12.       #5.1, updated copyright info.
+#       B. J. Brashier  03/07/18.       #5.2, updated copyright info.
+#       P. B. Powers    03/07/21.       #5.2, corrected Brad's mod history comment.
+#
+#3.     NOTICE: Copyright (C) 2000-2003 General Software, Inc.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_RAMTEST_LOW, # The ID is for Low RAM Test icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\LOWRAM.RLE    # Add low RAM test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_RAMTEST_HIGH,# The ID is for High RAM Test icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\HIRAM.RLE     # Add high RAM test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_RAMTEST_HUGE,# The ID is for Huge RAM Test icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\HUGERAM.RLE   # Add high RAM test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_SMP_CPU,     # The ID is for SMP CPU Test icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\CPU.RLE       # Add SMP CPU test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_FS_HARDDRIVE,# The ID is for Hard Drive icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\IDE.RLE       # Add Hard Drive test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_FS_FLOPPY,   # The ID is for Floppy Drive icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\FLOPPY.RLE    # Add Floppy Drive test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_TESTING,     # The ID is "Testing" in progress icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\TESTING.RLE   # Add "Testing" in progress icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_TEST_PASSED, # The ID is test passed icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\PASS.RLE      # Add test passed icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_TEST_FAILED, # The ID is test passed icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\FAILED.RLE    # Add test failed icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_FS_CDROM,    # The ID is for CD-ROM Drive icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\CDROM.RLE     # Add CD-ROM Drive test icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_TEST_NOMEDIA, # The ID is "No Media" icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\NOMEDIA.RLE   # Add "No Media" icon.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_TEST_NOBOOT  # The ID is "No Boot" icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\NOBOOT.RLE    # Add "No Boot" icon.
+
+#        LoadRes                         # Load a resource into the image.
+#        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+#        BIOS16:RESOURCE_ID_SPLASH,      # The ID is the splash screen.
+#        0,                              # The image is data compressed.
+#        ..\RESOURCE\SPLASH\SPLASH.RLE   # Use a standard splash screen.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_BOOTMSG,     # The ID is the boot message.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\SPLASH\PRESSDEL.RLE # Add press [Del] as the boot message.
+
+        LoadRes                         # Load a resource into the image.
+        BIOS16:RESOURCE_CLASS_GIMAGE,   # The class is a graphic image.
+        BIOS16:RESOURCE_ID_FIXPAL,      # The ID is the palette fixing icon.
+        0,                              # The image is not data compressed.
+        ..\RESOURCE\ICONS\PALSET.RLE    # Add the palette fixing icon.

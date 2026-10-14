@@ -1,0 +1,18 @@
+{% if submitted %}
+<h2 style="clear: left;">Generated License:</h2>
+<textarea rows="10" cols="65" style="font-size:20px;">{{ license_data }}
+</textarea>
+<br />
+<label for="file_name_label">Filename:</label>
+<input type="text" style="width: 200px;" id="file_name_input"/>
+
+<button id="save_license">Save License</button>
+<button id="email_license">Email License</button>
+
+<br />
+
+<form action='{% url "LicenseKeyGenerator.views.license_page" %}' method="POST" id="generate_new">
+    {% include "authorized_fields.html" %}
+    <input type="submit" id="generate_new_button" value="Generate New" />
+</form>
+{% endif %}

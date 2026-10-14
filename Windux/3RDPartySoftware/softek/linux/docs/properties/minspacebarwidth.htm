@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MinSpaceBarWidth</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P><STRONG>MinSpaceBarWidth </STRONG>is the minimum acceptable size for a space 
+			between the bars in a barcode. Anything smaller than this value will be 
+			ignored. The default value of 0 allows the toolkit to decide on the best 
+			value..
+		</P>
+		<P>Default value =&nbsp;&nbsp;0</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_MIN_SPACE_BAR_WIDTH,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_MIN_SPACE_BAR_WIDTH,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Set MinSpaceBarWidth to a value of 2<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;4 ;<BR>
+			STSetParameter(hBarcode, ST_MIN_SPACE_BAR_WIDTH,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

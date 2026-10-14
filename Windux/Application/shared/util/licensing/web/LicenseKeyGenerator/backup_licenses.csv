@@ -1,0 +1,181 @@
+id,responsible_individual,company_name,company_address,email_address,phone_number,sales_rep,activation_date,timeout_id,allotment,license_type_id,purchase_order_number,hte_product_names_id,hte_serial_type_id,scale_serial_type_id,serial_number,key,type,license_file_data,login_name
+1,John Jeffries,Stater Bros. Markets,1695 E. George Webster Dr. San Bernardino Ca 92408-0167,John.Jeffries@staterbros.com,909-733-5055,James Meyer,13:45.2,1,5,2,0,12,1,1,2C2F5FF4,31B935AAC6BBD137765E0E615F697B9B7A6C9EFF,SCALE,"Responsible Individual Full Name:John Jeffries
+Company Name:Stater Bros. Markets
+Company Address:1695 E. George Webster Dr. San Bernardino Ca 92408-0167
+Product Name(s):SCALE_NOW_SERVING
+License Key Type:USB_SERIAL_NUMBER
+License Activation Date:2015-1-20
+License Allotment:5
+License Timeout:0
+License Key:31B935AAC6BBD137765E0E615F697B9B7A6C9EFF",JustinBandura
+2,Ian Davis,Hobart,150 Market St,thekewlstore@gmail.com,937-823-7189,Scott Davis,10:25.5,1,1,1,1,12,1,1,E03F497C759CAC7A6897,CC074F5C5461AE5E57B813C88749536A1D78968C,HTE,"Responsible Individual Full Name:Ian Davis
+Company Name:Hobart
+Company Address:150 Market St
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-24
+License Allotment:1
+License Timeout:0
+License Key:CC074F5C5461AE5E57B813C88749536A1D78968C",RegManager
+3,Scott Davis,ITW Hobart,401 W. Market Street,tim.peters@hobartcorp.com,937-332-2864,Jim Socha,58:01.7,1,1,1,1232,12,1,1,F01FAF386C1AFCAEEB74,F3BE50C03ED95D166B5420F2553ABF772E0096EE,HTE,"Responsible Individual Full Name:Scott Davis
+Company Name:ITW Hobart
+Company Address:401 W. Market Street
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-26
+License Allotment:1
+License Timeout:0
+License Key:F3BE50C03ED95D166B5420F2553ABF772E0096EE",RegManager
+4,KEITH HENDERSON,JONES DAIRY FARM,800 JONES AVE.,FREDT@JONESDAIRYFARM.COM,920-563-2431,Sarah Joanis,06:52.1,1,1,2,0,12,1,1,28D244AEF0DC9ABED05C,7A163A4FD526E9180E2D2E6AB6277AFA2C62F119,HTE,"Responsible Individual Full Name:KEITH HENDERSON
+Company Name:JONES DAIRY FARM
+Company Address:800 JONES AVE.
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-26
+License Allotment:1
+License Timeout:0
+License Key:7A163A4FD526E9180E2D2E6AB6277AFA2C62F119",JamesMeyer
+5,Hy-Vee Support Services,Hy-Vee,"5820 Westown Pkwy West Des Moines, IA 50266",cnitchals@hy-vee.com,515-267-2813,Adam Klein,11:09.1,4,1,2,0,12,1,1,34E6D727FB517ED4D92A,44EF7249B6A755A43FD3A4F14A96D6C614B938AF,HTE,"Responsible Individual Full Name:Hy-Vee Support Services
+Company Name:Hy-Vee
+Company Address:5820 Westown Pkwy West Des Moines, IA 50266
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-26
+License Allotment:1
+License Timeout:120
+License Key:44EF7249B6A755A43FD3A4F14A96D6C614B938AF",JamesMeyer
+6,Dick Stevenson,CFED,61-A N. Cleveland-Massillon Rd,dick.stevenson@yahoo.com,301-980-4059,Dick Stevenson,29:00.7,1,1,2,0,12,1,1,0024E8C2D825AC13AA9A,3F12C91D33030D891FB8D1C2BC7A82FEB831C826,HTE,"Responsible Individual Full Name:Dick Stevenson
+Company Name:CFED
+Company Address:61-A N. Cleveland-Massillon Rd
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-26
+License Allotment:1
+License Timeout:0
+License Key:3F12C91D33030D891FB8D1C2BC7A82FEB831C826",JamesMeyer
+7,KEITH HENDERSON,JONES DAIRY FARM,800 JONES AVE.,FREDT@JONESDAIRYFARM.COM,920-563-2431,Sarah Joanis,36:31.4,1,1,2,0,12,1,1,28D244AEF0DC9ABED05C,7A163A4FD526E9180E2D2E6AB6277AFA2C62F119,HTE,"Responsible Individual Full Name:KEITH HENDERSON
+Company Name:JONES DAIRY FARM
+Company Address:800 JONES AVE.
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-26
+License Allotment:1
+License Timeout:0
+License Key:7A163A4FD526E9180E2D2E6AB6277AFA2C62F119",RegManager
+8,Ryan Leafgreen,"Hy-Vee, Inc.",5820 Westtown Parkway,rleafgreen@hy-vee.com,515-267-2800,Adam Klein,50:56.9,1,1,2,0,12,1,1,5C260A6E1069FE4B7F97,C33BBFB8AFEAF9653BD86FD4B8AC3C7EE35A0C0D,HTE,"Responsible Individual Full Name:Ryan Leafgreen
+Company Name:Hy-Vee, Inc.
+Company Address:5820 Westtown Parkway
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-27
+License Allotment:1
+License Timeout:0
+License Key:C33BBFB8AFEAF9653BD86FD4B8AC3C7EE35A0C0D",RegManager
+9,Wayne Harder,Hobart Sales & Service,5013 W 12th Street,wayne.hobart@midconetwork.com,605-332-6531,Jerry Wipf,53:32.6,1,1,2,0,12,1,1,B82A72C9A42F1A84368B,873E3380577FD5079A45D08B66734FA9EB62B6A5,HTE,"Responsible Individual Full Name:Wayne Harder
+Company Name:Hobart Sales & Service
+Company Address:5013 W 12th Street
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-28
+License Allotment:1
+License Timeout:0
+License Key:873E3380577FD5079A45D08B66734FA9EB62B6A5",JamesMeyer
+10,Carl Howe,Alexander aequipment,PO Box 25615,chowe@alexanderequipment.co,336-765-8950,Carl Howe,12:19.5,1,1,2,0,12,1,1,C82A141047456ACCE7EB,44B94F7758821A4A1C6B7766A0841E4D3327E50D,HTE,"Responsible Individual Full Name:Carl Howe
+Company Name:Alexander aequipment
+Company Address:PO Box 25615
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-28
+License Allotment:1
+License Timeout:0
+License Key:44B94F7758821A4A1C6B7766A0841E4D3327E50D",JamesMeyer
+11,William E. Martindale,"Kv41, LLC",3335 N 700 E,kaverne41@aol.com,801-786-2163,Martindale,11:40.2,2,1,2,0,12,1,1,5CF9DD43433410056964,9795E437C3CCBC28219158C910F279B06B1D3900,HTE,"Responsible Individual Full Name:William E. Martindale
+Company Name:Kv41, LLC
+Company Address:3335 N 700 E
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-29
+License Allotment:1
+License Timeout:30
+License Key:9795E437C3CCBC28219158C910F279B06B1D3900",AngelLopez
+12,Gene Fuller,Hobart Sales & Service,"1525 W. North Front Street,",EFuller505@aol.com,308-380-0481,Gene Fuller,31:50.7,1,1,1,demo,12,1,1,E8039A90DD66E08006B5,3479155EE9E8A2FBD8693AF8ED63E1E950135371,HTE,"Responsible Individual Full Name:Gene Fuller
+Company Name:Hobart Sales & Service
+Company Address:1525 W. North Front Street,
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-1-29
+License Allotment:1
+License Timeout:0
+License Key:3479155EE9E8A2FBD8693AF8ED63E1E950135371",AngelLopez
+15,Phil Silverthorn,"Hobart Sales & Service - Salinas, CA",1536 Moffett Street,phil.silverthorn@hobart.sc,310-425-2412,Phil Silverthorn,17:03.5,1,1,1,Sales Bach Bros,12,1,1,7C0507AD2B020A5A9E1A,AEB7077F6DF1919883E87113E64E1FE1E2B89A70,HTE,"Responsible Individual Full Name:Phil Silverthorn
+Company Name:Hobart Sales & Service - Salinas, CA
+Company Address:1536 Moffett Street
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-3
+License Allotment:1
+License Timeout:0
+License Key:AEB7077F6DF1919883E87113E64E1FE1E2B89A70",JamesMeyer
+16,William E. Martindale,"Kv41, LLC",3335 N 700 E,kaverne41@aol.com,801-786-2163,Martindale,29:54.1,2,1,2,0,12,1,1,5CF9DD43433410056964,C740E491AA171CEAE87AF0BFFAA950DFCE7DC407,HTE,"Responsible Individual Full Name:William E. Martindale
+Company Name:Kv41, LLC
+Company Address:3335 N 700 E
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-3
+License Allotment:1
+License Timeout:30
+License Key:C740E491AA171CEAE87AF0BFFAA950DFCE7DC407",JamesMeyer
+17,Rick Lobalzo,CFED,61 N Clev-Mass Rd,rlobalzo@lobalzo.com,330-666-6758,Rick Lobalzo,43:50.7,1,1,1,demo,12,1,1,00219B1EFB87EA740F1F,31294A53EF3D352B1CFB6514F4FA516A661D0A87,HTE,"Responsible Individual Full Name:Rick Lobalzo
+Company Name:CFED
+Company Address:61 N Clev-Mass Rd
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-4
+License Allotment:1
+License Timeout:0
+License Key:31294A53EF3D352B1CFB6514F4FA516A661D0A87",AngelLopez
+18,Levi Caissey,Hobart,2905 York Rd,hobartmt@gmail.com,406-227-5917,Levi Caissey,24:51.8,1,1,1,Sales - Bach,12,1,1,D48564A27A058ABB1FA7,315862CDB977FD91F7FE1E472DAAAEC7519EF1DF,HTE,"Responsible Individual Full Name:Levi Caissey
+Company Name:Hobart
+Company Address:2905 York Rd
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-4
+License Allotment:1
+License Timeout:0
+License Key:315862CDB977FD91F7FE1E472DAAAEC7519EF1DF",JamesMeyer
+19,Store Systems,Stater Bros,301 S Tippecanoe,ssalert2@staterbros.com,909-733-5055,James Meyer,42:54.5,1,1,1,RFP offer,12,1,1,005056BF748154EEF500,2ADAD67DFB9ECD65B8AB22F0E0304413F8D6AF3E,HTE,"Responsible Individual Full Name:Store Systems
+Company Name:Stater Bros
+Company Address:301 S Tippecanoe
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-4
+License Allotment:1
+License Timeout:0
+License Key:2ADAD67DFB9ECD65B8AB22F0E0304413F8D6AF3E",JamesMeyer
+20,Jonathan Alexander,Alexander Equipment,3820 Kimwell Drive,jalexander@alexanderequipment.co,336-407-7669,Jonathan Alexander,29:12.8,1,1,1,Sales,12,1,1,001C42A9A2C91C73C181,16D3A5F610E4F46E06445C54C4BB27800662C46B,HTE,"Responsible Individual Full Name:Jonathan Alexander
+Company Name:Alexander Equipment
+Company Address:3820 Kimwell Drive
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-6
+License Allotment:1
+License Timeout:0
+License Key:16D3A5F610E4F46E06445C54C4BB27800662C46B",JamesMeyer
+21,Angel Lopez,ITW Hobart,401 W Market St,angel.lopez@itwfeg.com,937-332-2789,engineering,41:23.0,1,1,1,engineering,12,1,1,F01FAF3449CC2C4915AC,16DA104E6840F4D18EDCD852049622A5D973A51E,HTE,"Responsible Individual Full Name:Angel Lopez
+Company Name:ITW Hobart
+Company Address:401 W Market St
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-6
+License Allotment:1
+License Timeout:0
+License Key:16DA104E6840F4D18EDCD852049622A5D973A51E",AngelLopez
+22,Angel Lopez,ITW Hobart,701 S Ridge Ave,angel.lopez@itwfeg.com,937-332-2789,engineering,05:16.8,1,1,1,engineering,12,1,1,F04DA2604C7F4817F7E1,9608DF243C8424ABDDD80FC5B66E338B97BD604F,HTE,"Responsible Individual Full Name:Angel Lopez
+Company Name:ITW Hobart
+Company Address:701 S Ridge Ave
+Product Name(s):HTE_SCALEMGMT_SINGLESTORE
+License Key Type:CSID
+License Activation Date:2015-2-10
+License Allotment:1
+License Timeout:0
+License Key:9608DF243C8424ABDDD80FC5B66E338B97BD604F",AngelLopez

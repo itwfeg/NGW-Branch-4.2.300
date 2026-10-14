@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>shelfLifeExpiration</class>
+ <widget class="QWidget" name="shelfLifeExpiration">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="lblPrimaryLanguage">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>60</y>
+     <width>731</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Primary Language Expiring Shelf Life Note</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="txtPrimaryNote">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>104</y>
+     <width>721</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSecondaryLanguage">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>278</y>
+     <width>731</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Secondary Language Expiring Shelf Life Note</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="txtSecondaryNote">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>322</y>
+     <width>721</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

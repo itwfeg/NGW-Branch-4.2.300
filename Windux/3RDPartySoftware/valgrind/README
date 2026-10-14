@@ -1,0 +1,31 @@
+
+Build the package from source:
+$ ./make-debian.sh
+
+Copy it to the SD card:
+$ sudo cp hobart-valgrind.pkg /media/hobart/hobart/root
+
+You need the debugging ld.so on your target SD card (with symbols)! Copy it from the toolchain:
+$ sudo cp /opt/hb6mxd_combo/toolchain/lib/ld-2.19.so /media/hobart/hobart/lib
+
+
+Boot the sd card and install the package:
+# dpkg -i /root/hobart-valgrind.pkg
+
+Run valigrind with correct SO path:
+# VALGRIND_LIB=/usr/lib/valgrind valgrind chobart_d
+
+For full memory checking use the following flag:
+# VALGRIND_LIB=/usr/lib/valgrind valgrind  --leak-check=full chobart_d
+
+
+
+Log valgrind output to a file:
+# VALGRIND_LIB=/usr/lib/valgrind valgrind --log-file="log.txt" chobart_d
+
+--error-limit=no
+
+--undef-value-errors=no
+
+Log valgrind output and app output to file.
+# VALGRIND_LIB=/usr/lib/valgrind valgrind chobart_d > log.txt 2>&1

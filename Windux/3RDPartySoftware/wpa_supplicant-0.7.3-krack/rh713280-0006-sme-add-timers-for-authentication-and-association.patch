@@ -1,0 +1,331 @@
+commit e29853bbff1eef781099a9108e3b51f26b477ac3
+Author: Ben Greear <greearb@candelatech.com>
+Date:   Thu Feb 24 16:59:46 2011 +0200
+
+    SME: Add timers for authentication and asscoiation
+    
+    mac80211 authentication or association operation may get stuck for some
+    reasons, so wpa_supplicant better use an internal timer to recover from
+    this.
+    
+    Signed-off-by: Ben Greear <greearb@candelatech.com>
+
+diff --git a/wpa_supplicant/events.c b/wpa_supplicant/events.c
+index 61ed199..aebb4cf 100644
+--- a/wpa_supplicant/events.c
++++ b/wpa_supplicant/events.c
+@@ -699,13 +699,20 @@ void wpa_supplicant_connect(struct wpa_supplicant *wpa_s,
+ 	 */
+ 	if (wpa_s->reassociate ||
+ 	    (os_memcmp(selected->bssid, wpa_s->bssid, ETH_ALEN) != 0 &&
+-	     (wpa_s->wpa_state != WPA_ASSOCIATING ||
++	     ((wpa_s->wpa_state != WPA_ASSOCIATING &&
++	       wpa_s->wpa_state != WPA_AUTHENTICATING) ||
+ 	      os_memcmp(selected->bssid, wpa_s->pending_bssid, ETH_ALEN) !=
+ 	      0))) {
+ 		if (wpa_supplicant_scard_init(wpa_s, ssid)) {
+ 			wpa_supplicant_req_new_scan(wpa_s, 10, 0);
+ 			return;
+ 		}
++		wpa_msg(wpa_s, MSG_DEBUG, "Request association: "
++			"reassociate: %d  selected: "MACSTR "  bssid: " MACSTR
++			"  pending: " MACSTR "  wpa_state: %s",
++			wpa_s->reassociate, MAC2STR(selected->bssid),
++			MAC2STR(wpa_s->bssid), MAC2STR(wpa_s->pending_bssid),
++			wpa_supplicant_state_txt(wpa_s->wpa_state));
+ 		wpa_supplicant_associate(wpa_s, selected, ssid);
+ 	} else {
+ 		wpa_printf(MSG_DEBUG, "Already associated with the selected "
+@@ -1356,13 +1363,11 @@ static void wpa_supplicant_event_disassoc(struct wpa_supplicant *wpa_s,
+ 					  u16 reason_code)
+ {
+ 	const u8 *bssid;
+-#ifdef CONFIG_SME
+ 	int authenticating;
+ 	u8 prev_pending_bssid[ETH_ALEN];
+ 
+ 	authenticating = wpa_s->wpa_state == WPA_AUTHENTICATING;
+ 	os_memcpy(prev_pending_bssid, wpa_s->pending_bssid, ETH_ALEN);
+-#endif /* CONFIG_SME */
+ 
+ 	if (wpa_s->key_mgmt == WPA_KEY_MGMT_WPA_NONE) {
+ 		/*
+@@ -1409,20 +1414,9 @@ static void wpa_supplicant_event_disassoc(struct wpa_supplicant *wpa_s,
+ 	wpa_supplicant_mark_disassoc(wpa_s);
+ 	bgscan_deinit(wpa_s);
+ 	wpa_s->bgscan_ssid = NULL;
+-#ifdef CONFIG_SME
+-	if (authenticating &&
+-	    (wpa_s->drv_flags & WPA_DRIVER_FLAGS_SME)) {
+-		/*
+-		 * mac80211-workaround to force deauth on failed auth cmd,
+-		 * requires us to remain in authenticating state to allow the
+-		 * second authentication attempt to be continued properly.
+-		 */
+-		wpa_printf(MSG_DEBUG, "SME: Allow pending authentication to "
+-			   "proceed after disconnection event");
+-		wpa_supplicant_set_state(wpa_s, WPA_AUTHENTICATING);
+-		os_memcpy(wpa_s->pending_bssid, prev_pending_bssid, ETH_ALEN);
+-	}
+-#endif /* CONFIG_SME */
++
++	if (authenticating && (wpa_s->drv_flags & WPA_DRIVER_FLAGS_SME))
++		sme_disassoc_while_authenticating(wpa_s, prev_pending_bssid);
+ }
+ 
+ 
+diff --git a/wpa_supplicant/notify.c b/wpa_supplicant/notify.c
+index c9a1b4b..8d217b4 100644
+--- a/wpa_supplicant/notify.c
++++ b/wpa_supplicant/notify.c
+@@ -25,6 +25,7 @@
+ #include "dbus/dbus_new.h"
+ #include "driver_i.h"
+ #include "scan.h"
++#include "sme.h"
+ #include "notify.h"
+ 
+ int wpas_notify_supplicant_initialized(struct wpa_global *global)
+@@ -89,6 +90,8 @@ void wpas_notify_state_changed(struct wpa_supplicant *wpa_s,
+ 
+ 	/* notify the new DBus API */
+ 	wpas_dbus_signal_prop_changed(wpa_s, WPAS_DBUS_PROP_STATE);
++
++	sme_state_changed(wpa_s);
+ }
+ 
+ 
+diff --git a/wpa_supplicant/sme.c b/wpa_supplicant/sme.c
+index e6a4924..325ffc5 100644
+--- a/wpa_supplicant/sme.c
++++ b/wpa_supplicant/sme.c
+@@ -15,6 +15,7 @@
+ #include "includes.h"
+ 
+ #include "common.h"
++#include "utils/eloop.h"
+ #include "common/ieee802_11_defs.h"
+ #include "common/ieee802_11_common.h"
+ #include "eapol_supp/eapol_supp_sm.h"
+@@ -34,6 +34,16 @@
+ #include "scan.h"
+ #include "sme.h"
+ 
++#define SME_AUTH_TIMEOUT 5
++#define SME_ASSOC_TIMEOUT 5
++
++static void sme_auth_timer(void *eloop_ctx, void *timeout_ctx);
++static void sme_assoc_timer(void *eloop_ctx, void *timeout_ctx);
++#ifdef CONFIG_IEEE80211W
++static void sme_stop_sa_query(struct wpa_supplicant *wpa_s);
++#endif /* CONFIG_IEEE80211W */
++
++
+ void sme_authenticate(struct wpa_supplicant *wpa_s,
+ 		      struct wpa_bss *bss, struct wpa_ssid *ssid)
+ {
+@@ -250,7 +260,8 @@ void sme_authenticate(struct wpa_supplicant *wpa_s,
+ 		return;
+ 	}
+ 
+-	/* TODO: add timeout on authentication */
++	eloop_register_timeout(SME_AUTH_TIMEOUT, 0, sme_auth_timer, wpa_s,
++			       NULL);
+ 
+ 	/*
+ 	 * Association will be started based on the authentication event from
+@@ -289,6 +300,8 @@ void sme_event_auth(struct wpa_supplicant *wpa_s, union wpa_event_data *data)
+ 	wpa_hexdump(MSG_MSGDUMP, "SME: Authentication response IEs",
+ 		    data->auth.ies, data->auth.ies_len);
+ 
++	eloop_cancel_timeout(sme_auth_timer, wpa_s, NULL);
++
+ 	if (data->auth.status_code != WLAN_STATUS_SUCCESS) {
+ 		wpa_printf(MSG_DEBUG, "SME: Authentication failed (status "
+ 			   "code %d)", data->auth.status_code);
+@@ -404,7 +417,8 @@ void sme_associate(struct wpa_supplicant *wpa_s, enum wpas_mode mode,
+ 		return;
+ 	}
+ 
+-	/* TODO: add timeout on association */
++	eloop_register_timeout(SME_ASSOC_TIMEOUT, 0, sme_assoc_timer, wpa_s,
++			       NULL);
+ }
+ 
+ 
+@@ -432,24 +446,12 @@ int sme_update_ft_ies(struct wpa_supplicant *wpa_s, const u8 *md,
+ }
+ 
+ 
+-void sme_event_assoc_reject(struct wpa_supplicant *wpa_s,
+-			    union wpa_event_data *data)
++static void sme_deauth(struct wpa_supplicant *wpa_s)
+ {
+ 	int bssid_changed;
+ 
+-	wpa_printf(MSG_DEBUG, "SME: Association with " MACSTR " failed: "
+-		   "status code %d", MAC2STR(wpa_s->pending_bssid),
+-		   data->assoc_reject.status_code);
+-
+ 	bssid_changed = !is_zero_ether_addr(wpa_s->bssid);
+ 
+-	/*
+-	 * For now, unconditionally terminate the previous authentication. In
+-	 * theory, this should not be needed, but mac80211 gets quite confused
+-	 * if the authentication is left pending.. Some roaming cases might
+-	 * benefit from using the previous authentication, so this could be
+-	 * optimized in the future.
+-	 */
+ 	if (wpa_drv_deauthenticate(wpa_s, wpa_s->pending_bssid,
+ 				   WLAN_REASON_DEAUTH_LEAVING) < 0) {
+ 		wpa_msg(wpa_s, MSG_INFO,
+@@ -466,6 +468,26 @@ void sme_event_assoc_reject(struct wpa_supplicant *wpa_s,
+ }
+ 
+ 
++void sme_event_assoc_reject(struct wpa_supplicant *wpa_s,
++			    union wpa_event_data *data)
++{
++	wpa_printf(MSG_DEBUG, "SME: Association with " MACSTR " failed: "
++		   "status code %d", MAC2STR(wpa_s->pending_bssid),
++		   data->assoc_reject.status_code);
++
++	eloop_cancel_timeout(sme_assoc_timer, wpa_s, NULL);
++
++	/*
++	 * For now, unconditionally terminate the previous authentication. In
++	 * theory, this should not be needed, but mac80211 gets quite confused
++	 * if the authentication is left pending.. Some roaming cases might
++	 * benefit from using the previous authentication, so this could be
++	 * optimized in the future.
++	 */
++	sme_deauth(wpa_s);
++}
++
++
+ void sme_event_auth_timed_out(struct wpa_supplicant *wpa_s,
+ 			      union wpa_event_data *data)
+ {
+@@ -503,3 +525,69 @@ void sme_event_disassoc(struct wpa_supplicant *wpa_s,
+ 				       WLAN_REASON_DEAUTH_LEAVING);
+ 	}
+ }
++
++
++static void sme_auth_timer(void *eloop_ctx, void *timeout_ctx)
++{
++	struct wpa_supplicant *wpa_s = eloop_ctx;
++	if (wpa_s->wpa_state == WPA_AUTHENTICATING) {
++		wpa_msg(wpa_s, MSG_DEBUG, "SME: Authentication timeout");
++		sme_deauth(wpa_s);
++	}
++}
++
++
++static void sme_assoc_timer(void *eloop_ctx, void *timeout_ctx)
++{
++	struct wpa_supplicant *wpa_s = eloop_ctx;
++	if (wpa_s->wpa_state == WPA_ASSOCIATING) {
++		wpa_msg(wpa_s, MSG_DEBUG, "SME: Association timeout");
++		sme_deauth(wpa_s);
++	}
++}
++
++
++void sme_state_changed(struct wpa_supplicant *wpa_s)
++{
++	/* Make sure timers are cleaned up appropriately. */
++	if (wpa_s->wpa_state != WPA_ASSOCIATING)
++		eloop_cancel_timeout(sme_assoc_timer, wpa_s, NULL);
++	if (wpa_s->wpa_state != WPA_AUTHENTICATING)
++		eloop_cancel_timeout(sme_auth_timer, wpa_s, NULL);
++}
++
++
++void sme_disassoc_while_authenticating(struct wpa_supplicant *wpa_s,
++				       const u8 *prev_pending_bssid)
++{
++	/*
++	 * mac80211-workaround to force deauth on failed auth cmd,
++	 * requires us to remain in authenticating state to allow the
++	 * second authentication attempt to be continued properly.
++	 */
++	wpa_printf(MSG_DEBUG, "SME: Allow pending authentication "
++		"to proceed after disconnection event");
++	wpa_supplicant_set_state(wpa_s, WPA_AUTHENTICATING);
++	os_memcpy(wpa_s->pending_bssid, prev_pending_bssid, ETH_ALEN);
++
++	/*
++	 * Re-arm authentication timer in case auth fails for whatever reason.
++	 */
++	eloop_cancel_timeout(sme_auth_timer, wpa_s, NULL);
++	eloop_register_timeout(SME_AUTH_TIMEOUT, 0, sme_auth_timer, wpa_s,
++			       NULL);
++}
++
++
++void sme_deinit(struct wpa_supplicant *wpa_s)
++{
++	os_free(wpa_s->sme.ft_ies);
++	wpa_s->sme.ft_ies = NULL;
++	wpa_s->sme.ft_ies_len = 0;
++#ifdef CONFIG_IEEE80211W
++	sme_stop_sa_query(wpa_s);
++#endif /* CONFIG_IEEE80211W */
++
++	eloop_cancel_timeout(sme_assoc_timer, wpa_s, NULL);
++	eloop_cancel_timeout(sme_auth_timer, wpa_s, NULL);
++}
+diff --git a/wpa_supplicant/sme.h b/wpa_supplicant/sme.h
+index b5f150d..a59b38d 100644
+--- a/wpa_supplicant/sme.h
++++ b/wpa_supplicant/sme.h
+@@ -34,6 +34,10 @@ void sme_event_disassoc(struct wpa_supplicant *wpa_s,
+ 			       union wpa_event_data *data);
+ void sme_event_disassoc(struct wpa_supplicant *wpa_s,
+ 			union wpa_event_data *data);
++void sme_state_changed(struct wpa_supplicant *wpa_s);
++void sme_disassoc_while_authenticating(struct wpa_supplicant *wpa_s,
++				       const u8 *prev_pending_bssid);
++void sme_deinit(struct wpa_supplicant *wpa_s);
+ 
+ #else /* CONFIG_SME */
+ 
+@@ -84,6 +87,20 @@ static inline void sme_event_unprot_disconnect(struct wpa_supplicant *wpa_s,
+ {
+ }
+ 
++static inline void sme_state_changed(struct wpa_supplicant *wpa_s)
++{
++}
++
++static inline void
++sme_disassoc_while_authenticating(struct wpa_supplicant *wpa_s,
++				  const u8 *prev_pending_bssid)
++{
++}
++
++static inline void sme_deinit(struct wpa_supplicant *wpa_s)
++{
++}
++
+ #endif /* CONFIG_SME */
+ 
+ #endif /* SME_H */
+diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
+index 7b0bbd1..b6503ca 100644
+--- a/wpa_supplicant/wpa_supplicant.c
++++ b/wpa_supplicant/wpa_supplicant.c
+@@ -419,11 +419,7 @@ static void wpa_supplicant_cleanup(struct wpa_supplicant *wpa_s)
+ 	wpa_s->ibss_rsn = NULL;
+ #endif /* CONFIG_IBSS_RSN */
+ 
+-#ifdef CONFIG_SME
+-	os_free(wpa_s->sme.ft_ies);
+-	wpa_s->sme.ft_ies = NULL;
+-	wpa_s->sme.ft_ies_len = 0;
+-#endif /* CONFIG_SME */
++	sme_deinit(wpa_s);
+ 
+ #ifdef CONFIG_AP
+ 	wpa_supplicant_ap_deinit(wpa_s);

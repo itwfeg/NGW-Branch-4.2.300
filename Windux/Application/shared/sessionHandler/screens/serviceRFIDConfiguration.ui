@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>serviceRFIDConfiguration</class>
+ <widget class="QWidget" name="serviceRFIDConfiguration">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lblInstructionsLine1">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>70</y>
+     <width>391</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>If the firmware needs to be updated, press Update Firmware first</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnUpdateRFIDFirmware">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>479</y>
+     <width>200</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Update Firmware</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnStartRFIDTest">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>479</y>
+     <width>200</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Start Test</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblInstructionsLine2">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>50</y>
+     <width>341</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Press the Start Test button to initiate RFID read/write test</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblFirmwareUpdateMsg">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>410</y>
+     <width>261</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>RFID Firmware Update Result:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTestResultsMsg">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>410</y>
+     <width>251</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>RFID Read/Write Test Result:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblFirmwareUpdateResult">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>440</y>
+     <width>181</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Placeholder text</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTestResultsResult">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>440</y>
+     <width>181</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Placeholder text</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCalibrateRFID">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>479</y>
+     <width>200</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Calibrate</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCalResultsMsg">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>410</y>
+     <width>201</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>RFID Calibration Result:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCalResultsResult">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>440</y>
+     <width>181</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Placeholder text</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLogTitle">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>80</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Log</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitleBar">
+   <property name="geometry">
+    <rect>
+     <x>326</x>
+     <y>10</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>RFID Configuration</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="lnTitleLine">
+   <property name="geometry">
+    <rect>
+     <x>327</x>
+     <y>40</y>
+     <width>381</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="pteRFIDLog">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>110</y>
+     <width>891</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::NoTextInteraction</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblModuleConnectedMsg">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>60</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Module Connection Status:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblModuleConnectedResult">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>80</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Disconnected</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

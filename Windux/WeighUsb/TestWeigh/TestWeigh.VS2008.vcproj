@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="TestWeigh.VS2008"
+	ProjectGUID="{15F0EA10-FC66-4EDB-94BA-82567F39C889}"
+	RootNamespace="TestWeigh.VS2008"
+	Keyword="MakeFileProj"
+	TargetFrameworkVersion="196613"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\\objchk_wxp_x86"
+			IntermediateDirectory=".\\objchk_wxp_x86"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="call $(WDKPATH)\bin\setenv.bat $(WDKPATH) chk wxp&#x0D;&#x0A;cd $(InputDir)&#x0D;&#x0A;build"
+				ReBuildCommandLine="rmdir /s /q .\\objchk_wxp_x86&#x0D;&#x0A;call $(WDKPATH)\bin\setenv.bat $(WDKPATH) chk wxp&#x0D;&#x0A;cd $(InputDir)&#x0D;&#x0A;build"
+				CleanCommandLine="rmdir /s /q .\\objchk_wxp_x86"
+				Output=".\\objchk_wxp_x86\i386\TestWeigh.exe"
+				PreprocessorDefinitions="WIN32;_CONSOLE;_X86_;_DDK_;_DEBUG;DBG=1"
+				IncludeSearchPath="$(WDKPATH)\inc\sdk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt"
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\\objfre_wxp_x86"
+			IntermediateDirectory=".\\objfre_wxp_x86"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="call $(WDKPATH)\bin\setenv.bat $(WDKPATH) fre wxp&#x0D;&#x0A;cd $(InputDir)&#x0D;&#x0A;build"
+				ReBuildCommandLine="rmdir /s /q .\\objfre_wxp_x86&#x0D;&#x0A;call $(WDKPATH)\bin\setenv.bat $(WDKPATH) fre wxp&#x0D;&#x0A;cd $(InputDir)&#x0D;&#x0A;build"
+				CleanCommandLine="rmdir /s /q .\\objfre_wxp_x86"
+				Output=".\\objfre_wxp_x86\i386\TestWeigh.exe"
+				PreprocessorDefinitions="WIN32;_CONSOLE;_X86_;_DDK_;_NDEBUG;DBG=0"
+				IncludeSearchPath="$(WDKPATH)\inc\sdk;$(WDKPATH)\inc\api;$(WDKPATH)\inc\crt"
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+			<File
+				RelativePath=".\TestWeigh.rc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath=".\TestWeigh.cpp"
+				>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

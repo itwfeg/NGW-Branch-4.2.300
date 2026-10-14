@@ -1,0 +1,56 @@
+[Version]
+Signature=$CHICAGO$
+Class=System
+Provider=%MFGNAME%
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+
+[SourceDisksFiles]
+smbus.sys=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+%DESCRIPTION%=DriverInstall
+
+;------------------------------------------------------------------------------
+;  Windows XP Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverCopyFiles]
+smbus.sys,,,2
+
+[DriverInstall.NT.Services]
+AddService=SMBUS,2,DriverService
+
+[DriverService]
+DisplayName    = %FRIENDLYNAME%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START 
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary=%10%\system32\drivers\smbus.sys
+
+[DriverInstall.nt.hw]
+AddReg=DriverHwAddReg
+
+[DriverHwAddReg]
+HKR,,FriendlyName,,%FRIENDLYNAME%
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+
+[Strings]
+MFGNAME="Hobart"
+INSTDISK="smbus Installation Directory"
+DESCRIPTION="Hobart smbus"
+FRIENDLYNAME="Hobart smbus controller"
+

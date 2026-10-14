@@ -1,0 +1,11 @@
+The IPK file is intended for ASURA CPRNT and may be installed by:
+1) uploading the IPK to the system using SCP
+2) logging into the system using SSH
+3) invoking "opkg install hobart-nowserving_XXX_arm.ipk"
+4) rebooting the system
+
+The DEB file is intended for Utilite systems and may be installed by:
+1) uploading the DEB to the system using SCP
+2) logging into the system using SSH
+3) invoking "dpkg -i hobart-nowserving_XXX_armel.deb"
+4) rebooting the system

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# "enable" the OO/NS overlay scripts
+mkdir -p /usr/local/hobart/user/softkeyscripts/
+cp /usr/local/hobart/python/online_orders_script.py /usr/local/hobart/user/softkeyscripts/
+cp /usr/local/hobart/python/online_orders_silent.py /usr/local/hobart/user/softkeyscripts/
+cp /usr/local/hobart/python/now_serving_script.py /usr/local/hobart/user/softkeyscripts/
+
+echo "postinst: done!"
+

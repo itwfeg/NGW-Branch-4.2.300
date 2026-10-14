@@ -1,0 +1,3 @@
+#!/bin/bash
+sleep 5
+/usr/bin/firefox 127.0.0.1/home.asp?consoletype=1&browsertype=2

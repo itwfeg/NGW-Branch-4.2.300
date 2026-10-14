@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.13.0)
+
+add_subdirectory(app)
+add_subdirectory(comm)
+add_subdirectory(core)
+add_subdirectory(db)
+add_subdirectory(EvolutionRTC)
+add_subdirectory(HFC)
+add_subdirectory(MetrologicallySignificant)
+add_subdirectory(util)

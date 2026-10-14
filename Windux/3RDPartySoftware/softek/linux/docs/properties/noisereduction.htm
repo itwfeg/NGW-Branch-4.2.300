@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">NoiseReduction</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>If the <B>NoiseReduction</B> property is none zero then the <A href="Methods.htm#SCANBARCODE">
+				ScanBarCode</A> method will run an image through a noise reduction filter 
+			before scanning for barcodes . The filter removes marks from an image that are 
+			unlikely to be part of a barcode. A larger value for NoiseReduction will remove 
+			larger marks from the image. This increases the chances of finding a barcode in 
+			a poor quality image but also increases the time taken to process an image. A 
+			typical value for <B>NoiseReduction</B> is 10.&nbsp;&nbsp;
+		</P>
+		<P>Default value = &nbsp;&nbsp;&nbsp;0
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_NOISEREDUCTION,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_NOISEREDUCTION,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Set a&nbsp;noise reduction value of 10<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;10 ;<BR>
+			STSetParameter(hBarcode, ST_NOISEREDUCTION,&nbsp;&amp;value) ;</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+
+cd /usr/local/bin
+sh ./mountUsbWifi.sh
+
+case "$1" in
+start)
+	echo -n "Starting wifi networking....."
+	sleep 1
+	ifconfig wlan0 up > /dev/null 2>&1 
+	ifconfig wlan1 up > /dev/null 2>&1
+	iwconfig wlan0 mode managed
+	iwconfig wlan0 channel auto
+
+	wpa_supplicant -B -iwlan0 -c/var/wlan.conf -Dwext
+	udhcpc -R -b -p /var/run/udhcpc.wlan0.pid -i wlan0 -H "`hostname`" -S
+
+	echo "...done."
+;;
+stop)
+	echo -n "Stopping wifi networking....."
+
+	if [ -f /var/run/udhcpc.wlan0.pid ]; then
+		pid=`cat /var/run/udhcpc.wlan0.pid`
+		kill $pid
+	fi
+
+	killall wpa_supplicant
+	ifconfig wlan0 down
+	ifconfig wlan1 down
+	rm /etc/udev/rules.d/70-persistent-net.rules
+	echo "...done."
+;;
+*)
+	echo "Usage: /etc/init.d/wifi {start|stop}"
+	exit 1
+	;;
+esac
+

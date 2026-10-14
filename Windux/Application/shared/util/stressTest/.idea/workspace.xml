@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fc2e6409-7d00-4cf4-a8b8-3dd1220ad640" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1acbprvjxNZ1Hn8hRW4VrlEnzOf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.cpu_memory_tester">
+    <configuration name="cpu_memory_tester" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stressTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DISPLAY" value=":0.0" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <PathMappingSettings>
+        <option name="pathMappings">
+          <list>
+            <mapping local-root="$PROJECT_DIR$" remote-root="/home/pi/cpuMemoryTester" />
+          </list>
+        </option>
+      </PathMappingSettings>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cpu_memory_tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_installer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stressTest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_installer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.cpu_memory_tester" />
+      <item itemvalue="Python.create_installer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.cpu_memory_tester" />
+        <item itemvalue="Python.create_installer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc2e6409-7d00-4cf4-a8b8-3dd1220ad640" name="Default Changelist" comment="" />
+      <created>1574179381486</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574179381486</updated>
+      <workItem from="1574179382675" duration="6067000" />
+      <workItem from="1574451296419" duration="1093000" />
+      <workItem from="1574717480709" duration="43000" />
+      <workItem from="1587038015986" duration="2942000" />
+      <workItem from="1587744539562" duration="6565000" />
+      <workItem from="1587771152946" duration="497000" />
+      <workItem from="1587771705038" duration="258000" />
+      <workItem from="1587772012730" duration="4528000" />
+      <workItem from="1587819894464" duration="2167000" />
+      <workItem from="1587822152939" duration="248000" />
+      <workItem from="1587822417102" duration="8049000" />
+      <workItem from="1587830692057" duration="12855000" />
+      <workItem from="1587844603708" duration="15426000" />
+      <workItem from="1587905847076" duration="5928000" />
+      <workItem from="1587923969598" duration="1713000" />
+      <workItem from="1587935515021" duration="259000" />
+      <workItem from="1587998104970" duration="18319000" />
+      <workItem from="1588032246781" duration="3090000" />
+      <workItem from="1588090061631" duration="126000" />
+      <workItem from="1588101678884" duration="8963000" />
+      <workItem from="1588170900986" duration="1327000" />
+      <workItem from="1588179016392" duration="6000" />
+      <workItem from="1589849149554" duration="12000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="844" y="341" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587909975443">
+      <screen x="0" y="23" width="2560" height="1342" />
+    </state>
+    <state x="844" y="341" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1342@0.23.2560.1342" timestamp="1587909975443" />
+    <state x="844" y="342" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587845563986" />
+    <state x="798" y="542" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587908691543">
+      <screen x="0" y="23" width="2560" height="1343" />
+    </state>
+    <state x="798" y="542" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1343@0.23.2560.1343" timestamp="1587908691543" />
+    <state x="1452" y="442" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587826614687">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="1452" y="442" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587826614687" />
+    <state x="677" y="384" key="#xdebugger.evaluate" timestamp="1587841239861">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="677" y="384" key="#xdebugger.evaluate/0.23.2560.1346@0.23.2560.1346" timestamp="1587841239861" />
+    <state width="1780" height="466" key="DebuggerActiveHint" timestamp="1588027860568">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1780" height="464" key="DebuggerActiveHint/0.23.2560.1338@0.23.2560.1338" timestamp="1587859111912" />
+    <state width="1780" height="466" key="DebuggerActiveHint/0.23.2560.1346@0.23.2560.1346" timestamp="1588027860568" />
+    <state x="1234" y="417" key="EnvironmentVariablesDialog" timestamp="1587831997392">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="1234" y="417" key="EnvironmentVariablesDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587831997392" />
+    <state width="1504" height="274" key="GridCell.Tab.0.bottom" timestamp="1588162680167">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="281" key="GridCell.Tab.0.bottom/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559456" />
+    <state width="1678" height="281" key="GridCell.Tab.0.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1587913446118" />
+    <state width="1678" height="281" key="GridCell.Tab.0.bottom/0.23.2560.1343@0.23.2560.1343" timestamp="1587912670431" />
+    <state width="1504" height="274" key="GridCell.Tab.0.bottom/0.23.2560.1345@0.23.2560.1345" timestamp="1588112888696" />
+    <state width="1504" height="274" key="GridCell.Tab.0.bottom/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680167" />
+    <state width="1812" height="317" key="GridCell.Tab.0.bottom/0.23.2560.1347@0.23.2560.1347" timestamp="1588020348501" />
+    <state width="1504" height="274" key="GridCell.Tab.0.center" timestamp="1588162680166">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="281" key="GridCell.Tab.0.center/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559455" />
+    <state width="1678" height="281" key="GridCell.Tab.0.center/0.23.2560.1342@0.23.2560.1342" timestamp="1587913446118" />
+    <state width="1678" height="281" key="GridCell.Tab.0.center/0.23.2560.1343@0.23.2560.1343" timestamp="1587912670430" />
+    <state width="1504" height="274" key="GridCell.Tab.0.center/0.23.2560.1345@0.23.2560.1345" timestamp="1588112888695" />
+    <state width="1504" height="274" key="GridCell.Tab.0.center/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680166" />
+    <state width="1812" height="317" key="GridCell.Tab.0.center/0.23.2560.1347@0.23.2560.1347" timestamp="1588020348500" />
+    <state width="1504" height="274" key="GridCell.Tab.0.left" timestamp="1588162680166">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="281" key="GridCell.Tab.0.left/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559455" />
+    <state width="1678" height="281" key="GridCell.Tab.0.left/0.23.2560.1342@0.23.2560.1342" timestamp="1587913446118" />
+    <state width="1678" height="281" key="GridCell.Tab.0.left/0.23.2560.1343@0.23.2560.1343" timestamp="1587912670430" />
+    <state width="1504" height="274" key="GridCell.Tab.0.left/0.23.2560.1345@0.23.2560.1345" timestamp="1588112888695" />
+    <state width="1504" height="274" key="GridCell.Tab.0.left/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680166" />
+    <state width="1812" height="317" key="GridCell.Tab.0.left/0.23.2560.1347@0.23.2560.1347" timestamp="1588020348499" />
+    <state width="1504" height="274" key="GridCell.Tab.0.right" timestamp="1588162680166">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="281" key="GridCell.Tab.0.right/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559456" />
+    <state width="1678" height="281" key="GridCell.Tab.0.right/0.23.2560.1342@0.23.2560.1342" timestamp="1587913446118" />
+    <state width="1678" height="281" key="GridCell.Tab.0.right/0.23.2560.1343@0.23.2560.1343" timestamp="1587912670431" />
+    <state width="1504" height="274" key="GridCell.Tab.0.right/0.23.2560.1345@0.23.2560.1345" timestamp="1588112888696" />
+    <state width="1504" height="274" key="GridCell.Tab.0.right/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680166" />
+    <state width="1812" height="317" key="GridCell.Tab.0.right/0.23.2560.1347@0.23.2560.1347" timestamp="1588020348500" />
+    <state width="1504" height="274" key="GridCell.Tab.1.bottom" timestamp="1588162680170">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="306" key="GridCell.Tab.1.bottom/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559438" />
+    <state width="1678" height="306" key="GridCell.Tab.1.bottom/0.23.2560.1342@0.23.2560.1342" timestamp="1587850956995" />
+    <state width="1504" height="274" key="GridCell.Tab.1.bottom/0.23.2560.1345@0.23.2560.1345" timestamp="1588112928400" />
+    <state width="1504" height="274" key="GridCell.Tab.1.bottom/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680170" />
+    <state width="1504" height="274" key="GridCell.Tab.1.center" timestamp="1588162680167">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="306" key="GridCell.Tab.1.center/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559437" />
+    <state width="1678" height="306" key="GridCell.Tab.1.center/0.23.2560.1342@0.23.2560.1342" timestamp="1587850956995" />
+    <state width="1504" height="274" key="GridCell.Tab.1.center/0.23.2560.1345@0.23.2560.1345" timestamp="1588112928400" />
+    <state width="1504" height="274" key="GridCell.Tab.1.center/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680167" />
+    <state width="1504" height="274" key="GridCell.Tab.1.left" timestamp="1588162680167">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="306" key="GridCell.Tab.1.left/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559437" />
+    <state width="1678" height="306" key="GridCell.Tab.1.left/0.23.2560.1342@0.23.2560.1342" timestamp="1587850956994" />
+    <state width="1504" height="274" key="GridCell.Tab.1.left/0.23.2560.1345@0.23.2560.1345" timestamp="1588112928399" />
+    <state width="1504" height="274" key="GridCell.Tab.1.left/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680167" />
+    <state width="1504" height="274" key="GridCell.Tab.1.right" timestamp="1588162680170">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1678" height="306" key="GridCell.Tab.1.right/0.23.2560.1338@0.23.2560.1338" timestamp="1587861559437" />
+    <state width="1678" height="306" key="GridCell.Tab.1.right/0.23.2560.1342@0.23.2560.1342" timestamp="1587850956995" />
+    <state width="1504" height="274" key="GridCell.Tab.1.right/0.23.2560.1345@0.23.2560.1345" timestamp="1588112928400" />
+    <state width="1504" height="274" key="GridCell.Tab.1.right/0.23.2560.1346@0.23.2560.1346" timestamp="1588162680170" />
+    <state x="735" y="421" width="773" height="525" key="PyMappingSimpleResolveDialog" timestamp="1587845511350">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="735" y="421" width="773" height="525" key="PyMappingSimpleResolveDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587845511350" />
+    <state x="587" y="360" width="1140" height="722" key="SettingsEditor" timestamp="1588027029618">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="587" y="359" width="1140" height="722" key="SettingsEditor/0.23.2560.1342@0.23.2560.1342" timestamp="1587909940494" />
+    <state x="730" y="359" key="SettingsEditor/0.23.2560.1343@0.23.2560.1343" timestamp="1587771593395" />
+    <state x="587" y="360" width="1140" height="722" key="SettingsEditor/0.23.2560.1346@0.23.2560.1346" timestamp="1588027029618" />
+    <state width="1162" height="560" key="XDebugger.FullValuePopup" timestamp="1587840232679">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state width="1162" height="560" key="XDebugger.FullValuePopup/0.23.2560.1346@0.23.2560.1346" timestamp="1587840232679" />
+    <state x="0" y="0" width="2560" height="1440" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587848969597">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="0" y="0" width="2560" height="1440" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587848969597" />
+    <state x="286" y="212" width="1520" height="954" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1587848019700">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="286" y="212" width="1520" height="954" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.23.2560.1346@0.23.2560.1346" timestamp="1587848019700" />
+    <state x="944" y="394" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1587843878341">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="944" y="394" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.2560.1346@0.23.2560.1346" timestamp="1587843878341" />
+    <state x="419" y="87" width="1308" height="653" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1587845412901">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="1014" y="603" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.23.2560.1343@0.23.2560.1343" timestamp="1587771584285" />
+    <state x="419" y="87" width="1308" height="653" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.23.2560.1346@0.23.2560.1346" timestamp="1587845412901" />
+    <state x="1135" y="458" width="803" height="641" key="ftp.server.browser" timestamp="1587909927360">
+      <screen x="0" y="23" width="2560" height="1342" />
+    </state>
+    <state x="1135" y="458" key="ftp.server.browser/0.23.2560.1342@0.23.2560.1342" timestamp="1587909927360" />
+    <state x="1135" y="458" width="803" height="641" key="ftp.server.browser/0.23.2560.1343@0.23.2560.1343" timestamp="1587771582023" />
+    <state x="1135" y="459" key="ftp.server.browser/0.23.2560.1346@0.23.2560.1346" timestamp="1587820360000" />
+    <state x="933" y="377" width="670" height="676" key="search.everywhere.popup" timestamp="1588026283660">
+      <screen x="0" y="23" width="2560" height="1346" />
+    </state>
+    <state x="933" y="377" width="670" height="676" key="search.everywhere.popup/0.23.2560.1346@0.23.2560.1346" timestamp="1588026283660" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tester.py</url>
+          <line>197</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tester.py</url>
+          <line>250</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/network_scan.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tester_worker.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tests.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tests.py</url>
+          <line>259</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cpu_memory_tests.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/program_uboot_worker.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/stressTest$stress_test_executive.coverage" NAME="stress_test_executive Coverage Results" MODIFIED="1587860897466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stressTest$create_installer.coverage" NAME="create_installer Coverage Results" MODIFIED="1588112820289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stressTest$cpu_memory_tester.coverage" NAME="cpu_memory_tester Coverage Results" MODIFIED="1588112888621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

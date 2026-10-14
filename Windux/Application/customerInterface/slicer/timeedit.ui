@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TimeEdit</class>
+ <widget class="QDialog" name="TimeEdit">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QLabel" name="header">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>461</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Time Setup</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>44</y>
+     <width>461</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout_2">
+    <item row="0" column="0">
+     <widget class="QLabel" name="timeNowLbl">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Time Now: </string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="timeNow">
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>740</y>
+     <width>461</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="cancelButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="saveButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>Confirm</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>461</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QCalendarWidget" name="calendarWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>210</y>
+      <width>461</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>254</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QCalendarWidget::SingleSelection</enum>
+    </property>
+    <property name="horizontalHeaderFormat">
+     <enum>QCalendarWidget::ShortDayNames</enum>
+    </property>
+    <property name="verticalHeaderFormat">
+     <enum>QCalendarWidget::NoVerticalHeader</enum>
+    </property>
+    <property name="navigationBarVisible">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="monthComboBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>130</y>
+      <width>261</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>72</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>54</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="yearSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>130</y>
+      <width>191</width>
+      <height>72</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSpinBox {
+	height:72px;
+	background: white;
+}
+QSpinBox::up-button {
+	width:36px;
+	height:36px;
+}
+
+QSpinBox::down-button {
+	width:36px;
+	height:36px;
+}</string>
+    </property>
+    <property name="minimum">
+     <number>2000</number>
+    </property>
+    <property name="maximum">
+     <number>2200</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>100</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Month</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>100</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Year</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>25</y>
+      <width>461</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QTimeEdit" name="timeEdit">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>461</width>
+       <height>72</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTimeEdit {
+	height:72px;
+	padding-right: 15px;
+	border-width:3;
+border-radius: 5px;
+border: 1px rgb(0,0,0);
+background:white;
+}
+
+QTimeEdit::up-button {
+	width:36px;
+	height:36px;
+}
+
+QTimeEdit::down-button {
+	width:36px;
+	height:36px;
+}</string>
+     </property>
+     <property name="wrapping">
+      <bool>true</bool>
+     </property>
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::UpDownArrows</enum>
+     </property>
+     <property name="keyboardTracking">
+      <bool>true</bool>
+     </property>
+     <property name="showGroupSeparator" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="displayFormat">
+      <string>hh:mm:ss </string>
+     </property>
+     <property name="calendarPopup">
+      <bool>false</bool>
+     </property>
+     <property name="currentSectionIndex">
+      <number>0</number>
+     </property>
+     <property name="timeSpec">
+      <enum>Qt::LocalTime</enum>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="gbTimeEdit">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>421</width>
+       <height>72</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox#gbTimeEdit{
+color: black;
+/*border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;*/
+border-radius: 5px;
+/*border: 1px rgb(238, 255, 211);
+	background: rgb(238, 255, 211); */
+border: 1px rgb(0,0,0);
+background:white;
+} </string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>12</y>
+        <width>14</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>14</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>14</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:black;</string>
+      </property>
+      <property name="text">
+       <string notr="true">:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hourBut">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>12</y>
+        <width>58</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#hourBut{
+color: black;
+/*border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;*/
+border-radius: 5px;
+border: 1px rgb(0,0,0);
+background:white;
+} </string>
+      </property>
+      <property name="text">
+       <string notr="true">00</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>12</y>
+        <width>14</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>14</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>14</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:black;</string>
+      </property>
+      <property name="text">
+       <string notr="true">:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="minuteBut">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>12</y>
+        <width>58</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#minuteBut{
+color: black;
+/*border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;*/
+border-radius: 5px;
+border: 1px rgb(0,0,0);
+background:white;
+} </string>
+      </property>
+      <property name="text">
+       <string>00</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="secondBut">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>12</y>
+        <width>58</width>
+        <height>48</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>58</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#secondBut{
+color: black;
+/*border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;*/
+border-radius: 5px;
+border: 1px rgb(0,0,0);
+background:white;
+} </string>
+      </property>
+      <property name="text">
+       <string>00</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Time</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

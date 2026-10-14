@@ -1,0 +1,29 @@
+SCC = This is a Source Code Control file
+
+[miniunz.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[minizip.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[testzlib.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[testzlibdll.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[zlibstat.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[zlibvc.sln]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA
+
+[zlibvc.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/3RDPartySoftware/zlib-multios/contrib/vstudio/vc8", LFDAAAAA

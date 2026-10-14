@@ -1,0 +1,194 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">bardecode</FONT>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG></P>
+		<P>
+			bardecode -f image_file [options] [long_options]</P>
+		<P>Bardecode scans TIF and JPG files for barcodes and prints the results to 
+			standard output. The source code for this tool is included with the toolkit.</P>
+		<UL>
+			<LI>
+			options are flags such as -m, which may or may not take an argument.
+			<LI>
+				long options are property name and value pairs, such as --MinSpaceBarWidth=2</LI></UL>
+		<P><STRONG>Options</STRONG></P>
+		<P>
+			<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD width="247">-c min_length</TD>
+					<TD>Minimum length of barcode</TD>
+				</TR>
+				<TR>
+					<TD width="247">-C max_length</TD>
+					<TD>Maximum length of barcode</TD>
+				</TR>
+				<TR>
+					<TD width="247">-d scan_direction</TD>
+					<TD>Scan direction mask 1 = Left to Right, 2 = Top to Bottom 4 = Right to Left and 
+						8 = Bottom to Top. default is 15. The scan direction mask controls the 
+						directions in which. the barcode reader will look for a barcode. With this 
+						version it it now possible to scan for barcodes in any rotation with one call 
+						to the reader.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-f image_file</TD>
+					<TD>image_file can be of type TIF or JPG. JPG files must use the extension ".jpg" 
+						or ".jpeg"</TD>
+				</TR>
+				<TR>
+					<TD width="247">-g</TD>
+					<TD>Load properties and processing instructions from an XML file and save to an XML 
+						or CSV file. Must be used with -x and -X flags. (See <A href="../methods/processxml.htm">
+							Process XML</A> for more details).</TD>
+				</TR>
+				<TR>
+					<TD width="247">-i page_index</TD>
+					<TD>Page number of image indexed from 1</TD>
+				</TR>
+				<TR>
+					<TD width="247">-j jump</TD>
+					<TD>Frequency at which scan lines are sampled, default is 1</TD>
+				</TR>
+				<TR>
+					<TD width="247">-k skew tolerance</TD>
+					<TD>0 = off ranging to 5 = any angle</TD>
+				</TR>
+				<TR>
+					<TD width="247">-L oversample_sep</TD>
+					<TD>Distance between the line samples when over-sampling is used. Default value is 
+						3.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-m</TD>
+					<TD>Scan for multiple barcodes</TD>
+				</TR>
+				<TR>
+					<TD width="247">-M min_space_width</TD>
+					<TD>Minimum allowed size in pixels for a space between bars</TD>
+				</TR>
+				<TR>
+					<TD width="247">-n noise_reduction</TD>
+					<TD>Noise Reduction level (0 = off, typical value is 20)</TD>
+				</TR>
+				<TR>
+					<TD width="247">-N noise_reduction</TD>
+					<TD>Advanced Noise Reduction (0 = off, typical value is 20)</TD>
+				</TR>
+				<TR>
+					<TD width="247">-o min_occurs</TD>
+					<TD>Minimum number of matching scan lines, default 2</TD>
+				</TR>
+				<TR>
+					<TD width="247">-O</TD>
+					<TD>Sample the scan lines in blocks of 3 with each line separated by oversample_sep 
+						lines (see below).</TD>
+				</TR>
+				<TR>
+					<TD width="247">-p pref_occurs</TD>
+					<TD>Preferred number of matching scan lines, default 5</TD>
+				</TR>
+				<TR>
+					<TD width="247">-P</TD>
+					<TD>Show page numbers</TD>
+				</TR>
+				<TR>
+					<TD width="247">-q quiet_size
+					</TD>
+					<TD>Number of pixels wide for the quiet zone around bar code</TD>
+				</TR>
+				<TR>
+					<TD width="247">-S file_template</TD>
+					<TD>Split a multi-page TIF file into smaller TIF files. The first page of each new 
+						file will contain a barcode The template must include %d to index the files 
+						e.g. file%d.tif. Must be used with -m flag.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-t barcode_types</TD>
+					<TD>Specifies the types of barcodes to read, barcode_types is one or more of 
+						"code39", "code128", "upca", "upce", "ean8", "code25", "ean13" and "codabar" 
+						joined together with the | character.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-t any</TD>
+					<TD>Searches for a barcode of any type.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-T color threshold</TD>
+					<TD>Set the color threshold. Ranges from 0 to 255. Default is 128.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-w</TD>
+					<TD>Print TIF Warnings to STDERR</TD>
+				</TR>
+				<TR>
+					<TD width="247">-u upper_ratio</TD>
+					<TD>
+						Defunct flag</TD>
+				</TR>
+				<TR>
+					<TD width="247">-x inputXMLFile</TD>
+					<TD>XML input file (see <A href="../methods/loadxmlsettings.htm">LoadXMLSettings</A>
+						for more details).</TD>
+				</TR>
+				<TR>
+					<TD width="247">-X outputFile</TD>
+					<TD>Save the results to an XML or CSV file. Can be used with the -g flag to process 
+						instructions from an input file and save to an output file. (see <A href="../methods/saveresults.htm">
+							SaveResults</A> for more details).</TD>
+				</TR>
+			</TABLE>
+		</P>
+		<P><STRONG>Long Options</STRONG></P>
+		<P>The long options give access to all the features of the toolkit.</P>
+		<P>Supported long options properties are: <a href="../properties/allowduplicatevalues.htm">
+				AllowDuplicateValues</a>,&nbsp;<A href="code25checksum.htm">Code25Checksum</A>,&nbsp;<A href="code25minoccurrencelength.htm">Code25MinOccurrenceLength</A>,&nbsp;
+			<a href="../properties/code39checksum.htm">Code39Checksum</a>, <a href="../properties/code39needstartstop.htm">
+				Code39NeedStartStop</a>, <a href="../properties/colorthreshold.htm">ColorThreshold</a>,
+			<a href="../properties/convertean13toupce.htm">ConvertEAN13ToUPCE</a>, <a href="../properties/colorthreshold.htm">
+				ColorThreshold</a>, <a href="../properties/convertean13toupce.htm">ConvertEAN13ToUPCE</a>,
+			<a href="../properties/debug.htm">Debug</a>, <a href="../properties/despeckle.htm">Despeckle</a>,
+			<A href="encoding.htm">Encoding</A>, <A href="gammacorrection.htm">GammaCorrection</A>,
+			<A href="maxrectoverlap.htm">MaxRectOverlap</A>,&nbsp;&nbsp;<A href="medianfilter.htm">MedianFilter</A>, 
+			&nbsp; <a href="../properties/minoccurrence.htm">MinOccurrence</a>, <a href="../properties/minseparation.htm">
+				MinSeparation</a>, <a href="../properties/minspacebarwidth.htm">MinSpaceBarWidth</a>,
+			<a href="../properties/multipleread.htm">MultipleRead</a>, <a href="../properties/noisereduction.htm">
+				NoiseReduction</a>, <a href="../properties/.htm"></a>, <a href="../properties/oversamplingseparation.htm">
+				OverSamplingSeparation</a>, <a href="../properties/prefoccurrence.htm">PrefOccurrence</a>,
+			<a href="../properties/quietzonesize.htm">QuietZoneSize</a>, <a href="../properties/pageno.htm">
+				PageNo</a>, <a href="../properties/pattern.htm">Pattern</a>, <a href="../properties/readcodabar.htm">
+				ReadCodabar</a>, <a href="../properties/readcode128.htm">ReadCode128</a>, <a href="../properties/readcode25.htm">
+				ReadCode25</a>, <a href="../properties/readcode25ni.htm">ReadCode25ni</a>, <a href="../properties/readcode39.htm">
+				ReadCode39</a>, <a href="../properties/readean8.htm">ReadEAN8</a>, <a href="../properties/readean13.htm">
+				ReadEAN13</a>, <a href="../properties/readnumeric.htm">ReadNumeric</a>, <a href="../properties/readpatchcodes.htm">
+				ReadPatchCodes</a>, <a href="../properties/readpdf417.htm">ReadPDF417</a>, <A href="readshortcode128.htm">
+				ReadShortCode128</A>,&nbsp; <a href="../properties/readupca.htm">ReadUPCA</a>,
+			<a href="../properties/readupce.htm">ReadUPCE</a>, <a href="../properties/scandirection.htm">
+				ScanDirection</a>, <A href="shortcode128minlength.htm">ShortCode128MinLength</A>,&nbsp;
+			<a href="../properties/showcheckdigit.htm">ShowCheckDigit</a>, <A href="skewlinejump.htm">
+				SkewLineJump</A>,&nbsp; <a href="../properties/skewtolerance.htm">SkewTolerance</a>,
+			<a href="../properties/tifsplitmode.htm">TifSplitMode</a>, <a href="../properties/tifsplitpath.htm">
+				TifSplitPath</a>&nbsp;, <a href="../properties/useoversampling.htm">UseOverSampling</a>&nbsp;and
+			<A href="weightlongerbarcodes.htm">WeightLongerBarcodes</A></P>
+		<P>Please refer to the product documentation for descriptions and appropriate 
+			values.</P>
+		<P><STRONG>Examples</STRONG></P>
+		<P>Scan for a Code 39 barcode in a portrait orientation image:</P>
+		<P>bardecode -f file.tif -t code39 -d 5</P>
+		<P>Using long options:</P>
+		<P>bardecode -f file.tif --ReadCode39=1 --ScanDirection=5</P>
+		<P>Scan for a Code 39 barcode in a landscape orientation image:</P>
+		<P>bardecode -f file.tif -t code39 -d 10</P>
+		<P>Scan for a Code 128 or UPC-A barcode in an image of poor quality:
+		</P>
+		<P>bardecode -n 20 -f file.tif -t "code128|upca"
+		</P>
+		<P>Split a multi-page TIF file into smaller files, each with a barcode on page 1
+		</P>
+		<P>bardecode -t code39 -m -S output%d.tif -f multipage.tif
+		</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

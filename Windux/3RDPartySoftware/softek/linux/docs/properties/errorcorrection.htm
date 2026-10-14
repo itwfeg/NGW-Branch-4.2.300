@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ErrorCorrection</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>Some barcodes cannot be read because the process of scanning or faxing 
+			has&nbsp;split or&nbsp;merged bars together. When ErrorCorrection &nbsp;is set 
+			to True to toolkit will, where possible, make a best guess at such barcodes.
+		</P>
+		<P class="MsoBodyText">
+		Note that this property currently only applies to Code 39 and Code 39 Extended 
+		barcodes.
+		<P class="MsoBodyText">
+		Default Value: False
+		<P>void STSetParameter(hBarcode, ST_ERROR_CORRECTION,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_ERROR_CORRECTION,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Turn on error correction<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_ERROR_CORRECTION,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

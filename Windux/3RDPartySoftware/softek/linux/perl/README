@@ -1,0 +1,56 @@
+SoftekBarcode Perl Module version
+=================================
+
+The SoftekBarcode Perl module provides a Perl interface to the Softek Barcode
+Reader Toolkit. 
+
+INSTALLATION
+
+IMPORTANT...
+
+On some versions of linux you must either:
+
+Copy ../lib/libbardecode.so to /usr/lib
+
+e.g
+
+sudo cp ../lib/libbardecode.so /usr/lib
+
+OR
+
+set LD_LIBRARY_PATH to "../lib" before testing or using the module.
+
+e.g
+
+LD_LIBRARY_PATH=../lib export LD_LIBRARY_PATH
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+	Softek Barcode Reader Toolkit Version
+	libtiff
+	libjpeg
+	libz
+
+COPYRIGHT AND LICENCE
+
+Put the correct copyright and licence information here.
+
+Copyright (C) 2007 by Softek Software Ltd
+
+The Softek Barcode Perl Module is free software; you can redistribute it 
+and/or modify it under the same terms as Perl itself, either Perl version 5.8.0
+or, at your option, any later version of Perl 5 you may have available.
+
+USING THE MODULE
+
+The module supports all the 
+

@@ -1,0 +1,23 @@
+# 
+# System Proxy Setup
+#
+#system=1
+
+# 
+# Auto Proxy Setup
+#
+auto=1
+url=http://wmtpac.wal-mart.com/proxies/store.pac
+
+# 
+# Manual Proxy Setup
+#
+# 0 = none
+# 1 = socks 5
+# 2 = http
+#manual=1
+#type=2
+#hostName=
+#port=
+#user=
+#password=

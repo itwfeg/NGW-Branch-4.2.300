@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<style>
+body { background-color: #cccccc; }
+</style>
+{{end}}
+
+<div class="container main-container" id="deligo-container">
+
+<button type="button" class="btn btn-primary p-0" id="reload-button">
+  <img class="no-drag" src="{{=URL('static','images/refresh_icon.svg')}}" height="35" width="35" draggable="false"></img>
+</button>
+
+<div class="card text-center col m-1 p-0 template-div" id="template-card">
+  <strong><div class="card-body p-1">
+    <div class="card-header text-white card-progress-top">
+      <div class="progress card-progress" id="waiting-bars">
+        <div class="progress-bar bg-info" id="bar-ok" style="width: 100%"></div>
+        <div class="progress-bar bg-danger progress-bar-striped" id="bar-bad" style="width: 0%"></div>
+      </div>
+      <div class="card-progress-top header-text">template</div>
+    </div>
+
+      <p class="card-title">template</p>
+      <p class="card-text" id="time">template</p>
+      <p class="card-text" id="size">template</p>
+    </div>
+  </strong>
+</div>
+
+<div class="row justify-content-around template-div" id="template-row"></div>
+
+<div class="container main-panel-container invisible" id="order-container"></div>
+
+</div>
+
+{{block scripts}}
+<script src="{{=URL('static','js/deligo.js')}}"></script>
+{{end}}
+

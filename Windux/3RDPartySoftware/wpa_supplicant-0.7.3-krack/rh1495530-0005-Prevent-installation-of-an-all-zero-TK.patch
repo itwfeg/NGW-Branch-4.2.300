@@ -1,0 +1,70 @@
+From 327b6d780f2667e99e9b74d4c064531c0208b22b Mon Sep 17 00:00:00 2001
+From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+Date: Fri, 29 Sep 2017 04:22:51 +0200
+Subject: [PATCH 4/8] Prevent installation of an all-zero TK
+
+Properly track whether a PTK has already been installed to the driver
+and the TK part cleared from memory. This prevents an attacker from
+trying to trick the client into installing an all-zero TK.
+
+This fixes the earlier fix in commit
+ad00d64e7d8827b3cebd665a0ceb08adabf15e1e ('Fix TK configuration to the
+driver in EAPOL-Key 3/4 retry case') which did not take into account
+possibility of an extra message 1/4 showing up between retries of
+message 3/4.
+
+Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+---
+ src/common/wpa_common.h | 1 +
+ src/rsn_supp/wpa.c      | 6 +++---
+ src/rsn_supp/wpa_i.h    | 1 -
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -428,7 +428,6 @@ static void wpa_supplicant_process_1_of_
+ 	os_memcpy(ptk->u.auth.rx_mic_key, buf, 8);
+ 	os_memset(buf, 0, sizeof(buf));
+ 	sm->tptk_set = 1;
+-	sm->tk_to_set = 1;
+ 
+ 	if (wpa_supplicant_send_2_of_4(sm, sm->bssid, key, ver, sm->snonce,
+ 				       sm->assoc_wpa_ie, sm->assoc_wpa_ie_len,
+@@ -509,7 +508,7 @@ static int wpa_supplicant_install_ptk(st
+ 	const u8 *key_rsc;
+ 	u8 null_rsc[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+ 
+-	if (!sm->tk_to_set) {
++	if (sm->ptk.installed) {
+ 		wpa_printf(MSG_DEBUG,
+ 			   "WPA: Do not re-install same PTK to the driver");
+ 		return 0;
+@@ -556,7 +555,7 @@ static int wpa_supplicant_install_ptk(st
+ 	/* TK is not needed anymore in supplicant */
+ 	os_memset(sm->ptk.tk1, 0, sizeof(sm->ptk.tk1));
+ 	os_memset(sm->ptk.u.tk2, 0, sizeof(sm->ptk.u.tk2));
+-	sm->tk_to_set = 0;
++	sm->ptk.installed = 1;
+ 
+ 	if (sm->wpa_ptk_rekey) {
+ 		eloop_cancel_timeout(wpa_sm_rekey_ptk, sm, NULL);
+--- a/src/common/wpa_common.h
++++ b/src/common/wpa_common.h
+@@ -175,6 +175,7 @@ struct wpa_ptk {
+ 			u8 rx_mic_key[8];
+ 		} auth;
+ 	} u;
++	int installed; /* 1 if key has already been installed to driver */
+ } STRUCT_PACKED;
+ 
+ 
+--- a/src/rsn_supp/wpa_i.h
++++ b/src/rsn_supp/wpa_i.h
+@@ -28,7 +28,6 @@ struct wpa_sm {
+ 	size_t pmk_len;
+ 	struct wpa_ptk ptk, tptk;
+ 	int ptk_set, tptk_set;
+-	unsigned int tk_to_set:1;
+ 	u8 snonce[WPA_NONCE_LEN];
+ 	u8 anonce[WPA_NONCE_LEN]; /* ANonce from the last 1/4 msg */
+ 	int renew_snonce;

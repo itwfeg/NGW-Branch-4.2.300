@@ -1,0 +1,58 @@
+From def875bf45243e978598a1c2ccf723355644a1b3 Mon Sep 17 00:00:00 2001
+From: Jouni Malinen <j@w1.fi>
+Date: Sun, 20 Nov 2011 12:53:29 +0200
+Subject: [PATCH] Move wpa_sm_remove_pmkid() call to PMKSA cache entry freeing
+
+This makes it clearer that the PMKSA caching entry gets removed from
+the driver regardless of how the internal entry from wpa_supplicant
+gets cleared. In practice, this call was skipped only for the case
+when the entry for the current AP was being updated, so the previous
+version was likely to work with all drivers. Anyway, it is cleaner
+to explicitly remove the old entry even in that case before the new
+entry gets added.
+
+Signed-hostap: Jouni Malinen <j@w1.fi>
+(cherry picked from commit 1323ee314e9dfcabb7a2bd8bbfef9a0f1a4f798b)
+---
+ src/rsn_supp/pmksa_cache.c |    4 +---
+ 1 files changed, 1 insertions(+), 3 deletions(-)
+
+diff --git a/src/rsn_supp/pmksa_cache.c b/src/rsn_supp/pmksa_cache.c
+index 04c9d29..3877efb 100644
+--- a/src/rsn_supp/pmksa_cache.c
++++ b/src/rsn_supp/pmksa_cache.c
+@@ -49,6 +49,7 @@ static void pmksa_cache_free_entry(struct rsn_pmksa_cache *pmksa,
+ 				   struct rsn_pmksa_cache_entry *entry,
+ 				   int replace)
+ {
++	wpa_sm_remove_pmkid(pmksa->sm, entry->aa, entry->pmkid);
+ 	pmksa->pmksa_count--;
+ 	pmksa->free_cb(entry, pmksa->ctx, replace);
+ 	_pmksa_cache_free_entry(entry);
+@@ -66,7 +67,6 @@ static void pmksa_cache_expire(void *eloop_ctx, void *timeout_ctx)
+ 		pmksa->pmksa = entry->next;
+ 		wpa_printf(MSG_DEBUG, "RSN: expired PMKSA cache entry for "
+ 			   MACSTR, MAC2STR(entry->aa));
+-		wpa_sm_remove_pmkid(pmksa->sm, entry->aa, entry->pmkid);
+ 		pmksa_cache_free_entry(pmksa, entry, 0);
+ 	}
+ 
+@@ -207,7 +207,6 @@ pmksa_cache_add(struct rsn_pmksa_cache *pmksa, const u8 *pmk, size_t pmk_len,
+ 		wpa_printf(MSG_DEBUG, "RSN: removed the oldest PMKSA cache "
+ 			   "entry (for " MACSTR ") to make room for new one",
+ 			   MAC2STR(pos->aa));
+-		wpa_sm_remove_pmkid(pmksa->sm, pos->aa, pos->pmkid);
+ 		pmksa_cache_free_entry(pmksa, pos, 0);
+ 	}
+ 
+@@ -258,7 +257,6 @@ void pmksa_cache_flush(struct rsn_pmksa_cache *pmksa, void *network_ctx)
+ 				pmksa->pmksa = entry->next;
+ 			tmp = entry;
+ 			entry = entry->next;
+-			wpa_sm_remove_pmkid(pmksa->sm, tmp->aa, tmp->pmkid);
+ 			pmksa_cache_free_entry(pmksa, tmp, 0);
+ 			removed++;
+ 		} else {
+-- 
+1.7.7.6
+

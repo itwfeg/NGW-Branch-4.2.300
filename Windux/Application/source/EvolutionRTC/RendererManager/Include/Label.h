@@ -1,0 +1,303 @@
+#ifndef LABEL_H
+#define LABEL_H
+
+#define MaxFamilyName	40
+#define MaxTagChars		6
+ 
+typedef enum  
+{
+/*  0  */
+    BARCODE,
+    DESCRIPTION,
+    NUTRIFACTS,
+    EXPANDED_TEXT_1,
+    EXPANDED_TEXT_2,
+/*  5  */
+    SPECIAL_MESSAGE,
+    COUPON_TEXT,
+    PACKED_ON,
+    SELL_BY,
+    BEST_BEFORE,
+/*  10  */
+    NET_WEIGHT,
+    FIXED_WEIGHT,
+    TARE,
+    UNIT_PRICE,
+    TOTAL_PRICE,
+/*  15  */
+    STORE_NAME,
+    STORE_NUMBER,
+    OPERATOR_NUMBER,
+    OPERATOR_NAME,
+    USER_LINE,
+/*  20  */
+    USER_GRAPHIC,
+    STORE_GRAPHIC,
+    GENERIC_TEXT_1,
+    GENERIC_TEXT_2,
+    GENERIC_TEXT_3,
+/*  25  */
+    GENERIC_TEXT_4,
+    GENERIC_TEXT_5,
+    GENERIC_TEXT_6,
+    GENERIC_TEXT_7,
+    GENERIC_TEXT_8,
+/*  30  */
+    GENERIC_TEXT_9,
+    GENERIC_TEXT_10,
+    PRODUCT_NUMBER,
+    REPORTING_CLASS,
+    TOTAL_WEIGHT,
+/*  35  */
+    TOTAL_VALUE,
+    TOTAL_PACKAGES,
+    TOTAL_RUNS,
+    TOTAL_TYPE,
+    TOTAL_TYPE_NAME,
+/*  40  */
+    TOTAL_HOURS,
+    UPC_NUMBER,
+    OP_ACCESS_LEVEL,
+    PRICE_FORM,
+    WEIGHT_TYPE_FORM,
+/*  45  */
+    TEXT_FORM, 
+    SHELF_LIFE_FORM,
+    LINE_FORM,
+    PRODUCT_LIST,
+    SPECIAL_TEXT,
+/*  50  */
+    FIXED_TEXT,
+    CURRENT_TIME,
+    TOTAL_TYPE_NUMBER,
+	INDIRECT_LABEL_REFERENCE,
+	NUTRIFACT_TEXT_1,
+/*  55  */
+	NUTRIFACT_TEXT_2,
+	NUTRIFACT_VALUE_1,
+	NUTRIFACT_VALUE_2,
+	NUTRIFACT_VALUE_3,
+	DIVIDING_LINE,
+/*  60  */
+	TOTAL_ITEMS,
+	CONSTANT_TEXT,
+	GENERIC_TEXT_11,
+	GENERIC_TEXT_12,
+	GENERIC_TEXT_13,
+/*  65  */
+	GENERIC_TEXT_14,
+	GENERIC_TEXT_15,
+	GENERIC_TEXT_16,
+	GENERIC_TEXT_17,
+	GENERIC_TEXT_18,
+/*  70  */
+	GENERIC_TEXT_19,
+	GENERIC_TEXT_20,
+	INDIRECT_GRAPHIC_REFERENCE,
+	MARQUEE_MESSAGE,
+	METRIC_RULE_WEIGHT,
+/*  75  */
+	FORM_SEPARATOR,
+	DISCOUNT_PRICE,
+	DISCOUNT_SAVINGS,
+	DISCOUNT_UNIT_PRICE,
+	PORTION_COUNT,
+/*  80  */
+	AVG_PORTION_COST,
+	AVG_PORTION_WEIGHT,
+	AVG_FS_PORTION_COST,
+	TOTAL_POINTS,
+	SPEC_MSG_SHORT,
+/*  85  */
+	DATE_LINE_TEXT1,
+	DATE_LINE_TEXT2,
+	DATE_LINE_TEXT3,
+	DATE_LINE_FORM1,
+	DATE_LINE_FORM2,
+/*  90  */
+	DATE_LINE_FORM3,
+	NET_WEIGHT_HEADER,
+	TOTAL_ITEM_PKGS_FORM,
+	ITEM_NUMBER_FORM,
+	HEADER_TEXT,
+/*  95  */
+	PRICE_PER_UNIT_WT,
+    SEC_UNIT_PRICE,
+    SEC_TOTAL_PRICE,
+    EXCHANGE_RATE_FORM,
+    SEC_DISC_UNIT_PRICE,
+/*  100  */
+    SEC_DISC_TOT_PRICE,
+    SEC_DISC_SAVINGS,
+	FORCED_KB_WEIGHT,
+	NUTRI_COLUMN_1,			//	Start Evolution fields
+	NUTRI_COLUMN_2,
+/*  105  */
+	NUTRI_COLUMN_3,
+	NUTRI_COLUMN_4,
+	DISCOUNT_TOTAL_PRICE2,
+	DISCOUNT_SAVINGS2,
+	DISCOUNT_UNIT_PRICE2,
+/*  110  */
+	DISCOUNT_TOTAL_PRICE3,
+	DISCOUNT_SAVINGS3,
+	DISCOUNT_UNIT_PRICE3,	//	End Evolution fields
+	COOL_TEXT,
+	TRACKING_TEXT,
+/*  115  */
+	USER_GRAPHIC_2,
+	USER_GRAPHIC_3,
+	USER_GRAPHIC_4,
+	REPORT_STREAM,
+	REPORT_PAGE_NUMBER,
+/*  120  */
+	SELL_BY_TIME,
+	BEST_BEFORE_TIME,
+	PACKED_ON_TIME,
+	SELL_BY_DAY_OF_WEEK,
+
+/*	WARNING !!!		Any new field names added here must be added to Ultima, Quantum and Evolution. No excuses!   */  /* Say what?  Why?? */
+
+	PRODUCT_TEXT_5,         // Cooking Instructions
+/*  125  */
+	PRODUCT_TEXT_6,         // Recipes
+	PRODUCT_TEXT_7,         // Expanded Text 2
+	PRODUCT_TEXT_8,         // Suggestive Selling
+	PRODUCT_TEXT_9,         // Allergens
+	QRCODE,
+	PRICE_CHANGED_LABEL_INDICATOR,
+
+/*  131  */
+	TEMPLATE_NUMBER,
+	TEMPLATE_TEXT_1,
+	TEMPLATE_TEXT_2,
+	TEMPLATE_TEXT_3,
+	TEMPLATE_TEXT_4,
+/*  136  */
+	TEMPLATE_TEXT_5,
+	TEMPLATE_TEXT_6,
+	TEMPLATE_TEXT_7,
+	TEMPLATE_TEXT_8,
+	TEMPLATE_TEXT_9,
+/*  141  */
+	TEMPLATE_TEXT_10,
+	TEMPLATE_TEXT_11,
+	TEMPLATE_TEXT_12,
+	TEMPLATE_TEXT_13,
+	TEMPLATE_TEXT_14,
+/*  146 */
+	TEMPLATE_TEXT_15,
+	TEMPLATE_TEXT_16,
+	TEMPLATE_TEXT_17,
+	TEMPLATE_TEXT_18,
+	TEMPLATE_TEXT_19,
+/*  151  */
+	TEMPLATE_TEXT_20,
+	TEMPLATE_TEXT_21,
+	TEMPLATE_TEXT_22,
+	TEMPLATE_TEXT_23,
+	TEMPLATE_TEXT_24,
+/*  156  */
+	TEMPLATE_TEXT_25,
+
+	CUSTOMER_NAME,
+	ORDER_NUMBER,
+	PICKUP_TIME,
+
+	UNKNOWN_LABEL_FIELD
+
+}FieldType;
+
+#define DISCOUNT_TOTAL_PRICE1 = DISCOUNT_PRICE
+#define DISCOUNT_SAVINGS1	  = DISCOUNT_SAVINGS
+#define DISCOUNT_UNIT_PRICE1  = DISCOUNT_UNIT_PRICE
+
+/****************
+*  Option Flags  *
+****************/
+#define EditImage	0x0001
+#define Scrunch		0x0002
+
+
+typedef enum 
+{
+ 	TextEntity = 			0x0001,
+ 	BarcodeEntity = 		0x0002,
+ 	GraphicEntity = 		0x0004,
+ 	LineEntity = 			0x0008,
+	PreImage = 				0x0010,
+ 	PostImage = 			0x0020,
+	DiscPrOnBarCode =       0x0040,
+	Fixed =           		0x0100,
+ 	Floating =		    	0x0200,
+ 	Stretch =	        	0x0400,
+ 	Variable =        		0x0800,
+	RectBorder =     		0x1000,
+	Inverted =				0x2000,
+	DigimarcKeepOut =		0x4000,
+	CodeCheckerDisabled =	0x8000,
+} FieldDescriptor;
+
+/*~~~~~~~~~~~~~~~~~~~~~  FONT DEFINES  ~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#define PAGE_FONT_ID        0x20        /*0*/
+#define PAGE_FONT_HEIGHT    10
+#define PAGE_FONT_WIDTH     8
+#define SOFTKEY_FONT_ID     0x20
+
+#define HOBART10_FONT_ID    0x22
+#define HOBART10_FONT_HEIGHT     11
+#define FONT_ID1            0x22
+
+#ifdef NONDOMESTIC
+#define SOFTKEY_TOGGLE_FONT_ID      0x22
+#define SOFTKEY_TOGGLE_FONT_HEIGHT  11
+#else
+#define SOFTKEY_TOGGLE_FONT_ID      0x23
+#define SOFTKEY_TOGGLE_FONT_HEIGHT  13
+#endif
+
+#define TITLE_FONT_ID       0x24
+#define TITLE_FONT_HEIGHT   16
+
+#define TITLE_FONT_ID_SPANISH 0x23 /*DKJ*/
+#define TITLE_FONT_HEIGHT_SPANISH   13
+#define NUMERIC_FONT_ID     128
+
+
+typedef enum 
+{
+    FIXED_WIDTH,
+    PROPORTIONAL
+}CharSpacing;						  
+
+
+typedef enum 
+{
+    LeftJustify,
+    CenterJustify,
+    RightJustify,
+    FullJustify,
+    FlowJustify
+}HorizontalJustify;
+
+typedef enum 
+{
+    Up,
+    Down
+}PenState;
+
+typedef enum  
+{
+    White,
+    Black
+}PenColor;
+
+typedef enum
+{
+	HOBART,
+	PNG
+}GraphicFormat;
+
+
+#endif //LABEL_H

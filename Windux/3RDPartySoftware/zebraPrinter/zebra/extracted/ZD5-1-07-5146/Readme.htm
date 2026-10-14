@@ -1,0 +1,845 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>ZDesigner Windows Driver Release Notes</title>
+<style type="text/css">
+.Title-Small {
+	color: #333333;
+	font-size: large;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: #FFCC33;
+}
+.Title-Large {
+	color: #333333;
+	font-size: x-large;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: #FFCC33;
+}
+.NormalText {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: 18px;
+}
+.BlkSectionHeading {
+	background-color: #000000;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.TableHeading {
+	background-color: #000000;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.TableCellStyle {
+	border-left: 1px solid #C0C0C0;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top: 1px solid #C0C0C0;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.NormalTextIndent {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: normal;
+	margin-left: 40px;
+	margin-bottom: 12px;
+}
+.NormalTextBulletList {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: 18px;
+}
+.auto-style9 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: 18px;
+	background-color: #FFFF00;
+}
+.auto-style10 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: normal;
+	margin-bottom: 12px;
+}
+.auto-style12 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: 18px;
+	background-color: #FFFFFF;
+}
+.auto-style13 {
+	background-color: #FFFFFF;
+}
+.auto-style15 {
+	font-size: small;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.auto-style16 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	line-height: 18px;
+	margin-left: 40px;
+}
+.auto-style18 {
+	border-left: 1px solid #C0C0C0;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top: 1px solid #C0C0C0;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	background-color: #FFFFFF;
+}
+.auto-style19 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	background-color: #FFFFFF;
+}
+</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:ContentType msdt:dt="string">Document</mso:ContentType>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+
+<p class="Title-Large"><strong><a name="Top">ZDesigner Windows Printer Driver Release Notes</a></strong></p>
+<p class="Title-Small"><strong>Version 5.1.07.5146</strong> </p>
+
+<p class="BlkSectionHeading"><strong>Table of Contents</strong></p>
+
+
+<span class="NormalText"><a href="#Welcome">Welcome</a><br class="auto-style9" />
+<a href="#Supported_Operating_Systems">Supported Operating Systems</a><br class="auto-style9" />
+<a href="#Installation">Installation</a><br class="auto-style9" />
+<a href="#Supported_Printers">Supported Printers</a><br class="auto-style9" />
+<a href="#Tips_&amp;_Advice">Tips &amp; Advice</a><br class="auto-style9" />
+<a href="#Known_Issues">Known Issues</a><br class="auto-style9" />
+<a href="#Change_Log">Change Log</a><br class="auto-style9" />
+<a href="#Technical_Support">Technical Support</a><br class="auto-style9" />
+<a href="#Software_Updates">Software Updates</a></span><p class="BlkSectionHeading">
+<strong>
+<a name="Welcome">Welcome</a></strong></p>
+
+
+<p class="NormalText">This version of the <span class="SpellE">ZDesigner</span> 
+Windows Printer driver offers many new features and user conveniences. Currently 
+shipping Zebra printers using CPCL, EPL2 or ZPL II can now be driven using one 
+set of driver files. A common user interface for all of the printer languages 
+makes it easy to work with any of the supported printers listed below. New 
+utilities, such as a Font and Graphic Downloader and a Status Monitor have been 
+included.</p>
+<p><span class="NormalText"><a href="#Top">Back to top</a></span><br />
+</p>
+
+<p class="BlkSectionHeading"><strong><a name="Supported_Operating_Systems">Supported 
+Operating Systems</a></strong></p>
+<p class="NormalText"><span class="NormalText">This software is supported on 
+32-bit and 64-bit Microsoft Windows Vista®, Windows 7, Windows 8 and Windows 
+8.1, Windows Server 2003, Windows Server 2008, 
+Windows Server 2008 R2, Windows Server 2012 and Windows Server 2012 R2 operating systems.<br />
+(Windows and Vista are registered trademarks of Microsoft Corporation.)</span></p>
+
+<p class="NormalText"><a href="#Top">Back to top</a></p>
+
+<p class="BlkSectionHeading"><strong><a name="Installation">Installation</a></strong></p>
+
+
+<p class="NormalText"><strong>How to Install Zebra Printer Drivers</strong></p>
+<p class="NormalText">Drivers can be installed from the Windows "Add Printer 
+Wizard" or using the Installation Utility that came with the driver. NOTE: your 
+user account must have the necessary rights to install a driver otherwise 
+contact your system administrator for further assistance.</p>
+<p class="NormalText"><strong>To install using the Installation Utility:</strong></p>
+<ol class="NormalText">
+	<li>Uncompress the driver files. Be sure to note the location that the files 
+	are placed into. </li>
+	<li>Run the PrnInst.exe utility. </li>
+	<li>Follow the prompts to select the printer model and port that you will be 
+	using. </li>
+	<li>The Utility will ask if you want to install the Font and Graphic 
+	Downloader and Status Monitor - select these items if they are needed in 
+	your application. </li>
+	<li>The Utility will install the appropriate files. </li>
+</ol>
+<p class="NormalText"><strong>To install the driver using the Windows "Add 
+Printer Wizard":</strong></p>
+<ol class="NormalText">
+	<li>Uncompress the driver files. Be sure to note the location that the files 
+	are placed into. </li>
+	<li>Using the START menu select "Settings" and then "Printers". The Printers 
+	folder will open up. </li>
+	<li>Double click on "Add Printer" and follow the prompts to begin the 
+	installation process. </li>
+	<li>When you come to the dialog screen that lists Manufacturers and 
+	Printers, select "Have disk". </li>
+	<li>Browse to the location that contains the uncompressed driver files.</li>
+	<li>Select the ZBRN.inf file in the ZBRN folder and click "OK" to continue.
+	</li>
+	<li>Select your printer model from the list of supported printers and click 
+	the Next button to continue. </li>
+	<li>If your printer is connected via a RS-232 serial connection, select "No" 
+	to the question "Would you like to print a test page?". This is suggested to 
+	avoid an error message in case you have not configured the port on the 
+	computer to match the serial settings on the printer. If your printer is 
+	connected via a parallel port and is ready to print, select "Yes" to print 
+	the test page. </li>
+	<li>Follow the remaining prompts to complete the Wizard. Once the install is 
+	done your printer driver is now installed and ready for use. </li>
+</ol>
+<p class="NormalText"><span class="NormalText"><a href="#Top">Back to top</a></span></p>
+
+<p class="BlkSectionHeading"><strong><a name="Supported_Printers">Supported Printers</a></strong></p>
+<p class="NormalText">The following Zebra printers are supported in this 
+version:</p>
+<p class="NormalText">
+105SL 203DPI<br />
+105SL 300DPI<br />
+105SLPlus-203dpi ZPL<br />
+105SLPlus-300dpi ZPL<br />
+110PAX4 203DPI<br />
+110PAX4 300DPI<br />
+110Xi4 203 dpi<br />
+110Xi4 300 dpi<br />
+110Xi4 600 dpi<br />
+110XiIII Plus 200DPI<br />
+110XiIII Plus 300DPI<br />
+110XiIII Plus 600DPI<br />
+140Xi4 203 dpi<br />
+140XiIII Plus<br />
+170PAX4 203DPI<br />
+170PAX4 300DPI<br />
+170Xi4 203 dpi<br />
+170Xi4 300 dpi<br />
+170XiIII Plus<br />
+170XiIII Plus 200DPI<br />
+220Xi4 203 dpi<br />
+220Xi4 300 dpi<br />
+220XiIII Plus<br />
+220XiIII Plus 300DPI<br />
+888-DT<br />
+888-TT<br />
+EZ 320<br />
+GC420d<br />
+GC420d (EPL)<br />
+GC420t<br />
+GC420t (EPL)<br />
+GK420d<br />
+GK420d (EPL)<br />
+GK420t<br />
+GK420t (EPL)<br />
+GK888d<br />
+GK888d (EPL)<br />
+GK888t<br />
+GK888t (EPL)<br />
+GT800 (EPL)<br />
+GT800 (ZPL)<br />
+GT800-300dpi EPL<br />
+GT800-300dpi ZPL<br />
+GX420d<br />
+GX420d (EPL)<br />
+GX420s<br />
+GX420s (EPL)<br />
+GX420t<br />
+GX420t (EPL)<br />
+GX430t<br />
+GX430t (EPL)<br />
+HC100 300 dpi<br />
+iMZ220<br />
+iMZ220 (ZPL)<br />
+iMZ320<br />
+iMZ320 (ZPL)<br />
+KR403<br />
+LP 2824<br />
+LP 2824 Plus (EPL)<br />
+LP 2824 Plus (ZPL)<br />
+LP 2844<br />
+LP 2844-Z<br />
+Mobile Printer<br />
+MZ 220<br />
+MZ 320<br />
+P4T (CPCL)<br />
+P4T (ZPL)<br />
+QL 220/QL 220 Plus<br />
+QL 320/QL 320 Plus<br />
+QL 420/QL 420 Plus<br />
+QLn220<br />
+QLn220 (ZPL)<br />
+QLn320<br />
+QLn320 (ZPL)<br />
+QLn420 (CPCL)<br />
+QLn420 (ZPL)<br />
+R110PAX4 LH-203DPI<br />
+R110PAX4 LH-300DPI<br />
+R110PAX4 RH-203DPI<br />
+R110PAX4 RH-300DPI<br />
+R110Xi 200DPI<br />
+R110Xi 300DPI<br />
+R110Xi HF 200DPI<br />
+R110Xi HF 300DPI<br />
+R110Xi4 203 dpi<br />
+R110Xi4 300 dpi<br />
+R110Xi4 600 dpi<br />
+R170Xi 200DPI<br />
+R170Xi 300DPI<br />
+R2844-Z<br />
+RP4T (ZPL)<br />
+RW 220<br />
+RW 420<br />
+RW4-PS<br />
+RZ400 200 dpi<br />
+RZ400 300 dpi<br />
+RZ600 200 dpi<br />
+RZ600 300 dpi<br />
+S4M-203dpi EPL<br />
+S4M-203dpi ZPL<br />
+S4M-300dpi ZPL<br />
+TLP 2824<br />
+TLP 2824 Plus (EPL)<br />
+TLP 2824 Plus (ZPL)<br />
+TLP 2844<br />
+TLP 2844-Z<br />
+TLP 3842<br />
+TLP 3844-Z<br />
+ZD500R-203dpi ZPL<br />
+ZD500R-300dpi ZPL<br />
+ZE500-4 LH-203dpi ZPL<br />
+ZE500-4 LH-300dpi ZPL<br />
+ZE500-4 RH-203dpi ZPL<br />
+ZE500-4 RH-300dpi ZPL<br />
+ZE500R-4 LH-203dpi ZPL<br />
+ZE500R-4 LH-300dpi ZPL<br />
+ZE500R-4 RH-203dpi ZPL<br />
+ZE500R-4 RH-300dpi ZPL<br />
+ZE500-6 LH-203dpi ZPL<br />
+ZE500-6 LH-300dpi ZPL<br />
+ZE500-6 RH-203dpi ZPL<br />
+ZE500-6 RH-300dpi ZPL<br />
+ZM400 200 dpi (EPL)<br />
+ZM400 200 dpi (ZPL)<br />
+ZM400 300 dpi (ZPL)<br />
+ZM400 600 dpi (ZPL)<br />
+ZM600 200 dpi (EPL)<br />
+ZM600 200 dpi (ZPL)<br />
+ZM600 300 dpi (ZPL)<br />
+ZQ510 (ZPL)<br />
+ZQ510 (CPCL)<br />
+ZQ520 (ZPL)<br />
+ZQ520 (CPCL)<br />
+ZT210-200dpi EPL<br />
+ZT210-200dpi ZPL<br />
+ZT210-300dpi ZPL<br />
+ZT220-200dpi EPL<br />
+ZT220-200dpi ZPL<br />
+ZT220-300dpi ZPL<br />
+ZT230-200dpi EPL<br />
+ZT230-200dpi ZPL<br />
+ZT230-300dpi ZPL<br />
+ZT410-203dpi EPL<br />
+ZT410-203dpi ZPL<br />
+ZT410-300dpi ZPL<br />
+ZT410-600dpi ZPL<br />
+ZT420-203dpi ZPL<br />
+ZT420-300dpi ZPL<br />
+ZT410R-203dpi ZPL<br />
+ZT410R-300dpi ZPL<br />
+ZT420R-203dpi ZPL<br />
+ZT420R-300dpi ZPL<br />
+ZD500-203dpi ZPL<br />
+ZD500-300dpi ZPL<br />
+ZD500-203dpi EPL<br />
+ZD500-300dpi EPL</p>
+<p class="NormalText">
+<br />
+<span class="NormalText"><a href="#Top">Back to top</a></span></p>
+
+<p class="BlkSectionHeading"><strong><a name="Tips_&amp;_Advice">Tips &amp; Advice</a></strong></p>
+
+<span class="NormalText">
+<ol>
+	<li>
+	<p class="NormalText">Use the Use Printer Settings option on the Advanced 
+	Tab to stop the driver from sending the printer configuration and save 
+	configuration commands. This has the effect of improving throughput in some 
+	applications.</p>
+	</li>
+	<li>
+	<p class="NormalText">For ZPL printers, use the use ZIP compression option 
+	on the Other Settings dialog to cause the driver to create compressed 
+	graphics. This has the effect of improving throughput in some applications.</p>
+	</li>
+	<li>
+	<p class="NormalText">Windows Vista has enhanced control over permissions. 
+	When installing in Vista, it is recommended that an Administrator account be 
+	used.</p>
+	</li>
+	<li>
+	<p class="NormalText">Microsoft Word splits strings into single characters. 
+	To avoid this select "Merge characters" option on driver's "Printer 
+	settings" tab.</p>
+	</li>
+	<li>
+	<p class="NormalText">The Status Monitor regularly checks the printer for 
+	current status information. When the driver is being used over a network 
+	connection, this can have the effect of consuming connection ports that 
+	would otherwise be used for accepting print jobs at the printer. If the 
+	Status Monitor is in use and you are experiencing a delay in printing, try 
+	right clicking over the Status Monitor in the system tray (by the clock) and 
+	closing the Status Monitor. </p>
+	</li>
+</ol>
+<p class="NormalText"><a href="#Top">Back to top</a></p>
+</span>
+
+<p class="BlkSectionHeading"><strong><a name="Known_Issues">Known Issues</a></strong></p>
+<ol>
+	<li>
+	<p class="NormalText"><span class="NormalText">The drivers will not print 
+	more than 32767 copies of a document. This is a Windows limitation.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">Graphics print best when a 
+	monochrome image is used. Because Zebra printers are monochrome printers, 
+	color and grayscale images will be printed using the dithering method you 
+	select on the Options tab. There are four available dithering methods, each 
+	offering some control over the final printed image. However, monochrome 
+	images will print in a more predictable fashion.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">When using Word, the 
+	application forces the driver to insert spaces into any edited line of text 
+	using the ZPL Font 0 (ZB:Zebra CG Triumvirate). If you save the document 
+	after editing the text, but before printing it, the spaces will not be 
+	inserted on the printed label.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">Not all Applications will 
+	read internal font information from drivers. Some applications will not 
+	present the list of native fonts and bar codes even if the operating system 
+	is restarted after installing and the driver is set as the default driver. 
+	This is a limitation of some applications.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">The Command Font Prefix and 
+	Suffix value are inserted before and after each character of text in Command 
+	Font when an EPL or CPCL printer driver is used. Microsoft Word splits 
+	strings into single characters. To avoid this select "Merge characters" 
+	option on driver's "Printer settings" tab.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">In Windows 7 and Windows 2008 
+	R2, some applications do not allow the fonts that are native on the printer 
+	to be displayed as selectable when the user accesses the Properties of a 
+	field. In most applications they are displayed and selectable from the Fonts 
+	drop-down menu.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">If Permissions on the 
+	computer do not allow the driver to write in the Registry then the Command 
+	Fonts and/or Stocks Tabs in the driver dialogs will have buttons disabled. 
+	To change Command Fonts and Stocks, open the Printers folder the in Control 
+	Panel, select the printer and then open its "Printing Preferences". Then the 
+	user will be able to modify Command Fonts and Stocks. These properties are 
+	set per device and not per document.</span></p>
+	</li>
+	<li>
+	<p class="NormalText"><span class="NormalText">When the passthrough 
+	start/end character combination includes the {} characters, data may not be 
+	passed through when using newer web browser versions including, but not 
+	limited to Internet Explorer®, Google Chrome™ and Firefox®. Use a start/end 
+	character combination that does not include {}. 
+	</span></p>
+	</li>
+	<li>
+	<p class="NormalText">The P4T and RP4T printers contain firmware supporting 
+	a subset of ZPL commands. As a result, when using the P4T or RP4T ZPL 
+	driver, some functionality in the tools section is not supported by the 
+	printer. The "Feed one label" option may not work and can be substituted by 
+	sending:
+	<span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;
+mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-bidi-font-family:
+&quot;Times New Roman&quot;;color:black;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:AR-SA"><strong>! U1 do “test.feed” “now”</strong><u1:p>.</u1:p></span><span class="NormalText"><br />
+	</span></p>
+	</li>
+</ol>
+<p class="NormalText"><span class="NormalText"><a href="#Top">Back to top</a></span></p>
+
+<p class="BlkSectionHeading"><strong><a name="Change_Log">Change Log</a></strong></p>
+<table cellspacing="0" class="auto-style2" style="width: 100%">
+	<tr class="TableHeading">
+		<td class="TableCellStyle" style="width: 110px" valign="top"><strong>
+		Release Date</strong></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top"><strong>
+		Version</strong></td>
+		<td class="TableCellStyle"><strong>Changes</strong></td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px" valign="top">
+		<span class="NormalText">08 Jan 2010</span></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">2.0</td>
+		<td class="TableCellStyle">
+		<p>Initial release of new platform. New features include:</p>
+		<ul>
+			<li>Status Monitor<ul>
+				<li>For use with EPL and ZPL printers</li>
+				<li>Optionally installable when using the PrnInst.exe utility</li>
+				<li>Regularly checks printer status and displays an error 
+				message when an error occurs</li>
+			</ul>
+			</li>
+			<li>Advanced TCP Port<ul>
+				<li>Provides a defined TCP port type</li>
+			</ul>
+			</li>
+			<li>Tools tab:<ul>
+				<li>Simple method to send common printer commands.</li>
+				<li>Send File and Send Command options.</li>
+				<li>Supports all communication ports.</li>
+			</ul>
+			</li>
+			<li>Use Printer Settings" option on Advanced Setup tab:<ul>
+				<li>Allows user to configure driver to not send printer settings</li>
+			</ul>
+			</li>
+			<li>Inverse option on Advanced Setup tab:<ul>
+				<li>Allows user to cause the entire label to be printed in 
+				inverted format (white text on black background)</li>
+			</ul>
+			</li>
+			<li>Passthrough feature on Other Settings dialog:<ul>
+				<li>Allows user to create blocks of commands to be sent to the 
+				printer unchanged by the driver.</li>
+			</ul>
+			</li>
+			<li>Control Character Substitution on the Other Settings dialog:<ul>
+				<li>Allows the ZPL driver to use the internal characters for the 
+				Format (^) and Control (~) characters</li>
+			</ul>
+			</li>
+			<li>On-screen barcode rendering, display only for design purposes
+			</li>
+		</ul>
+		</td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px" valign="top">08 Jul 2011</td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">2.6.63.02</td>
+		<td class="TableCellStyle">
+		<p>Update Release</p>
+		<ul>
+			<li>Added support for the QLn Series and EZ 320 model.</li>
+			<li>The Print Monitor will now be completed, even if the applicaiton 
+			is still running during the uninstall process.</li>
+			<li>Memory Card options for G-Series printers have been expanded.</li>
+			<li>Print positioning for EPL drivers in 180 degree rotated mode has 
+			been enhanced.</li>
+			<li>Font and Graphic Downloader installation for R110Xi4 has been 
+			corrected.</li>
+			<li>Set-Get-Do Commands formatting issues resolved.</li>
+			<li>UI Language translations for the Printer Install Wizard and 
+			Status Monitor has been updated.</li>
+			<li>Spooler interactions for USB connected printers have been 
+			improved to handle situations where the printer has been 
+			disconnected.</li>
+		</ul>
+		</td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px" valign="top">15 Aug 2011</td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">2.6.63.06</td>
+		<td class="TableCellStyle">
+		<p>Update Release</p>
+		<ul>
+			<li>The "Send File" feature for Mobile printers has been corrected.</li>
+			<li>The GX420s is now supported.</li>
+		</ul>
+		</td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px" valign="top">14 Sep 2011</td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">2.6.63.12</td>
+		<td class="TableCellStyle">
+		<p>Update Release</p>
+		<ul>
+			<li>The "Send and Store" feature for Mobile printers has been 
+			corrected.</li>
+		</ul>
+		</td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px" valign="top">03 Jan 2012</td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">2.6.67.03</td>
+		<td class="TableCellStyle">
+		<p>Update Release</p>
+		<ul>
+			<li>Corrected Russian translations.</li>
+			<li>Improved handling of file headers in the 'Send and Store File in 
+			Printer' function.</li>
+			<li>Added Stream option in advanced setup.</li>
+			<li>Added support for the following printer models :-</li>
+		</ul>
+		<p class="NormalTextIndent">ZDesigner GC420d<br />
+		ZDesigner GC420d (EPL)<br />
+		ZDesigner GC420t<br />
+		ZDesigner GC420t (EPL)<br />
+		ZDesigner QLn220 (ZPL)<br />
+		ZDesigner QLn320 (ZPL)<br />
+		ZDesigner ZE500-4 LH-203dpi ZPL<br />
+		ZDesigner ZE500-4 LH-300dpi ZPL<br />
+		ZDesigner ZE500-4 RH-203dpi ZPL<br />
+		ZDesigner ZE500-4 RH-300dpi ZPL<br />
+		ZDesigner ZE500-6 LH-203dpi ZPL<br />
+		ZDesigner ZE500-6 LH-300dpi ZPL<br />
+		ZDesigner ZE500-6 RH-203dpi ZPL<br />
+		ZDesigner ZE500-6 RH-300dpi ZPL<br />
+		ZDesigner ZT210-200dpi ZPL<br />
+		ZDesigner ZT210-200dpi EPL<br />
+		ZDesigner ZT210-300dpi ZPL<br />
+		ZDesigner ZT220-200dpi ZPL<br />
+		ZDesigner ZT220-200dpi EPL<br />
+		ZDesigner ZT220-300dpi ZPL<br />
+		ZDesigner ZT230-200dpi ZPL<br />
+		ZDesigner ZT230-200dpi EPL<br />
+		ZDesigner ZT230-300dpi ZPL<br />
+		</p>
+		</td>
+	</tr>
+	<tr class="NormalText">
+		<td class="TableCellStyle" style="width: 110px; height: 225px;" valign="top">02 Oct 2012</td>
+		<td class="TableCellStyle" style="width: 70px; height: 225px;" valign="top">2.6.77.09</td>
+		<td class="TableCellStyle" style="height: 225px">
+		<p>Update Release</p>
+		<ul>
+			<li>Executable files are now signed with Zebra Technologies digital 
+			signature.</li>
+			<li>Corrected an issue where the GK888t EPL driver could not be set 
+			for direct thermal mode.</li>
+			<li>Corrected an issue where the GC420t EPL driver could not be set 
+			for thermal transfer mode.</li>
+			<li>Corrected an issue where print jobs were deleted from the 
+			Windows print queue when an out of media condition occurred and USB 
+			communication was used.</li>
+			<li>Added the following printer models:-</li>
+		</ul>
+		<p class="NormalTextIndent">105SLPlus <br />
+		QLn420 <br />
+		iMZ220 <br />
+		iMZ320<br />
+		</p>
+		</td>
+	</tr>
+	<tr class="TableCellStyle">
+		<td class="TableCellStyle" valign="top"><span class="NormalText">25 Oct 2012</span></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">
+		<span class="NormalText">2.6.77.18</span></td>
+		<td class="TableCellStyle">
+		<p><span class="NormalText">Update Release</span></p>
+		<ul class="NormalTextIndent">
+			<li>Updates to be Windows 8 compatible.</li>
+			<li>Corrected iMZ320 model name.</li>
+			<li>The correct Direct Thermal and Thermal Transfer options are now 
+			displayed for the following printer models :-</li>
+		</ul>
+		<p class="NormalTextIndent">GC420t ZPL <br />
+		GK888t ZPL<br />
+		LP2844 <br />
+		GX420s EPL<br />
+		GX420s <br />
+		HC100</p>
+		<ul>
+			<li><span class="NormalTextBulletList">Added the following printer models 
+			</span> </li>
+		</ul>
+		<p class="NormalTextIndent">iMZ220 ZPL<br />
+		iMZ320 ZPL</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="TableCellStyle" valign="top"><span class="auto-style15">11</span><span class="NormalText"> Jun 2013</span></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">
+		<span class="NormalText">2.6.77.19</span></td>
+		<td class="TableCellStyle">
+		<p><span class="NormalText">Update Release</span></p>
+		<ul class="auto-style10">
+			<li>Added the following printer models</li>
+		</ul>
+		<p class="NormalTextIndent"><span class="NormalText">ZD500R-203dpi ZPL<br />
+		ZD500R-300dpi ZPL</span></p>
+		</td>
+	</tr>
+	<tr>
+		<td class="TableCellStyle" valign="top"><span class="NormalText">
+		<span class="auto-style13">10</span> Oct 2013</span></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">
+		<span class="auto-style12">2.7.03.12</span></td>
+		<td class="TableCellStyle">
+		<p><span class="NormalText">Update Release</span></p>
+		<ul class="NormalTextIndent">
+			<li>Server 2012 is now supported.</li>
+			<li>Users can now change languages settings if they have admin 
+			rights (applies to Windows 8 and Server 2012).</li>
+			<li>Corrected an issue where Microsoft Access was reporting 
+			incorrect paper names when custom stocks were defined in the driver.</li>
+			<li>User entered values are now validated against the fields range 
+			values.</li>
+			<li>Corrected an issue in the ZM400 EPL driver that caused incorrect 
+			print positioning and font size printing.</li>
+			<li>Corrected the maximum print width for the EZ320, MZ320 and 
+			iMZ320 printers.</li>
+			<li>Added the following printer models</li>
+		</ul>
+		<p class="NormalTextIndent"><span class="NormalText">ZE500R Series</span></p>
+		</td>
+	</tr>
+	<tr>
+		<td class="TableCellStyle" valign="top"><span class="auto-style12"> 
+		07 Feb 2014</span></td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">
+		<span class="auto-style12">2.7.03.16</span></td>
+		<td class="TableCellStyle">
+		<p><span class="NormalText">Update Release</span></p>
+		<ul class="auto-style10">
+			<li>Added the following printer models</li>
+		</ul>
+		<p class="auto-style16">ZD500</p>
+		<p class="auto-style16">ZT410</p>
+		<p class="auto-style16">ZT410R</p>
+		<p class="auto-style16">ZT420</p>
+		<p class="auto-style16">ZT420R</p>
+		<ul class="auto-style10">
+			<li>Removed the following printer models that have past their 
+			Service &amp; Support discontinuation date.</li>
+		</ul>
+		<p class="auto-style16">110 PAX3</p>
+		<p class="auto-style16">170 PAX3</p>
+		<p class="auto-style16">140 XiIII</p>
+		<p class="auto-style16">170 XiIII</p>
+		<p class="auto-style16">220 XiIII</p>
+		<p class="auto-style16">2746e</p>
+		<p class="auto-style16">90 XiIII</p>
+		<p class="auto-style16">90 XiIII Plus</p>
+		<p class="auto-style16">96 XiIII</p>
+		<p class="auto-style16">96 XiIII Plus</p>
+		<p class="auto-style16">DA402</p>
+		<p class="auto-style16">LP2824-Z</p>
+		<p class="auto-style16">R110 XiIII Plus</p>
+		<p class="auto-style16">R402</p>
+		<p class="auto-style16">R4Mplus</p>
+		<p class="auto-style16">S400</p>
+		<p class="auto-style16">S600</p>
+		<p class="auto-style16">TA402</p>
+		<p class="auto-style16">TLP2824-Z</p>
+		<p class="auto-style16">Z4M</p>
+		<p class="auto-style16">Z4Mplus</p>
+		<p class="auto-style16">Z6M</p>
+		<p class="auto-style16">Z6Mplus</p>
+		<p class="auto-style16">&nbsp;</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="auto-style18" valign="top">
+				24 Sep 2014</td>
+		<td class="TableCellStyle" style="width: 70px" valign="top">
+				<span class="auto-style19">5.1.07.5146</span></td>
+		<td class="TableCellStyle">
+		<p><span class="NormalText">Update Release</span></p>
+		<ul class="auto-style10">
+			<li>Corrected an issue where some labels in a batch did not print 
+			when printing via a network using the ZDesigner port monitor.</li>
+			<li>Improved throughput performance when using USB and Link-OS 
+			printers. </li>
+			<li>To improve throughput performance the &#39;Use ZIP Compression&#39; 
+			setting is now enabled by default in all ZPL models.</li>
+			<li>Corrected an issue where the spooler could resend firmware to 
+			the printer more than once during a firmware update.</li>
+			<li>Corrected an issue where the driver was not installed in the 
+			selected language in the installation wizard.</li>
+			<li>Corrected the maximum print speed settings for the ZT410 and ZT420 
+			printers.</li>
+			<li>Corrected the minimum label length for the ZT410 and ZT420 
+			printers.</li>
+			<li>The RFID option in the ZT410R and ZT420R is now enabled.</li>
+			<li>Corrected an issue where no memory slot was available for 
+			selection in the Font Downloader when using ZD500, ZT410 or ZT420 
+			printers.</li>
+			<li>The PrnList.txt file has been removed from the distribution.</li>
+			<li>Corrected the maximum print width in G-Series EPL and ZT-Series EPL 
+			drivers.</li>
+			<li>To simplify Plug &#39;n&#39; Play installations, the driver distribution 
+			now has a method to prepare the computer system by adding the driver 
+			to the computer&#39;s driver store.</li>
+			<li>Microsoft has ended support for 
+			Windows XP (<a href="http://windows.microsoft.com/en-us/windows/end-support-help" target="_blank">http://windows.microsoft.com/en-us/windows/end-support-help</a>). 
+			This driver release aligns to that decision, with support for 
+			Windows XP having been removed. The prior version, 
+		<span class="auto-style12">2.7.03.16</span>, does 
+			support Windows XP and shall remain available on our website for 
+			download for an extended period of time. Version 
+		<span class="auto-style12">2.7.03.16</span> is 
+			available ‘as is’. </li>
+			</li>
+			<li>There is nothing implemented to prevent this driver from running 
+			on Windows XP. However, this and future versions are not tested on 
+			Windows XP.</li>
+			<li>Added the following printer models:</li>
+		</ul>
+		<p class="auto-style16"><span class="NormalText">ZQ510</span></p>
+		<p class="auto-style16">ZQ520</p>
+		<p class="auto-style16">GT800 (300dpi)</p>
+		<p class="auto-style16">&nbsp;</p>
+		</td>
+	</tr>
+	</table>
+
+<p class="NormalText"><span class="NormalText"><a href="#Top">Back to top</a></span></p>
+<p class="BlkSectionHeading"><strong><a name="Technical_Support">Technical Support</a></strong></p>
+<p class="NormalText">Worldwide Technical Support is available through your 
+Reseller, or at:
+<a href="http://www.zebra.com/us/en/support-downloads.html" target="_blank">
+http://www.zebra.com/us/en/support-downloads.html</a><br />
+<br />
+Zebra Technologies Corporation<br />
+International Headquarters<br />
+333 Corporate Woods Parkway<br />
+Vernon Hills, Illinois 60061-3109 USA<br />
+Phone: +1 847 913 2259<br />
+Fax: +1 847 913 2578</p>
+<p class="NormalText"><span class="NormalText"><a href="#Top">Back to top</a></span></p>
+
+<p class="BlkSectionHeading"><strong><a name="Software_Updates">Software Updates</a></strong></p>
+<p class="NormalText"><span class="NormalText">ZDesigner</span>
+<span class="NormalText">Printer Drivers are frequently updated and modified to 
+take advantage of new developments. Updated drivers will be available on our web 
+site: </span><a href="http://www.zebra.com">http://www.zebra.com</a></p>
+<p class="NormalText"><span class="NormalText"><a href="#Top">Back to top</a></span></p>
+<hr />
+<p class="NormalText">Zebra Technologies Corporation<br />
+© 2014 ZIH Corp. All rights reserved. </p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#echo "preinst: stopping any active backend..."
+#pkill webappd
+
+echo "postinst: done!"
+

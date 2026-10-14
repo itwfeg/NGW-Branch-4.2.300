@@ -1,0 +1,1741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>datamatrixEditor</class>
+ <widget class="QWidget" name="datamatrixEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>961</width>
+    <height>580</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>202</red>
+        <green>224</green>
+        <blue>235</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>202</red>
+        <green>224</green>
+        <blue>235</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>202</red>
+        <green>224</green>
+        <blue>235</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>202</red>
+        <green>224</green>
+        <blue>235</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="windowTitle">
+   <string>Data Matrix</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTextEdit" name="txtFormatString">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>121</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>121</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="butBestBefore">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Best Before Date, in format YYMMDD</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>B : Best Before</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butSellBy">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Sell By Date, in the format YYMMDD</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>C : Sell By</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butDateTime">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Current Date and Time, in the format YYMMDD hhmmss</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>D : Current Date/Time</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butDeptNum">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Scale Department Number</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>d : Department #</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butEanCode">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Ean Code</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>E : Ean Code</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butFormattedEAN">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Formatted EAN Code. This code will contain the entire EAN barcode value string that is the results of the data configured with the Product Defaults EAN13 Format String or Product Defaults EAN128 Format String.</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>e : Formatted EAN Code</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butFormatWtOrBc">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Formatted Weight or By Count in the format. For example, '2.35 lb' or '2'</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>F : Formatted Wt/BC</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butFormatTare">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Formatted Tare in the format. For example, '0.015 kg'</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>f : Formatted Tare</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butDescription">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Item Description, stripped of font sequences</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>I : Description</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butPriceCheckDigit5">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Price Check Digit ( 5-character check calculation )&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>K : Price Check Digit (5)</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="butWeightCheckDigit5">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Weight Check Digit ( 5-character check calculation )&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>k : Weight Check Digit (5)</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butPluLookupNum">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>This is the field that is typed into the UI to find a PLU</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>L : PLU Lookup Number</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butPriceDecs">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>The number of digits that follow the decimal in the Price field</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>M : Price decimals</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butProductNum">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Product Number as part of the barcode Product Number. Usually associated with V : Vendor Number. Is also commonly known as the UPC Number.</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>N : Product Number</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butUnitPrice">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Unit Price, with implied decimal places as per scale configuration</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>O : Unit Price</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butOrigUnitPrice">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Original Unit Price, with implied decimal places as per scale configuration</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>o : Original Unit Price</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butPrice">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Price with implied decimal places as per scale configuration</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>P : Price</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butPriceCheckDigit4">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Scale Price Check Digit (4-character check calculation)</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>p : Price Check Digit (4)</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butByCount">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>By Count Quantity</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>Q : By Count</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butTareWt">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Tare Weight, with implied decimal places as per scale</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>R : Tare Weight</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="butScaleId">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>The ID of the physical scale</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>S : Scale Id</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butTransNum">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>The Transaction Number of the selected Product</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>T : Transaction Number</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butFormattedUPC">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Formatted UPC barcode data. This code will contain the entire UPC bacode value that is printed on a label.  The complete UPC code will contain the prefix, UPC Number, 4 digit price, and any check digits that were configured.</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>u : Formatted UPC Code</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butVendorNum">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Vendor Number, usually associated with the N : Product Number</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>V : Vendor Number</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butWeight">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Weight with implied decimal places as per scale configuration</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>W : Weight</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butWeightCheckDigit4">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Weight Check Digit ( 4-character check calculation )</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>w : Weight Check Digit (4)</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butBarcodePrefix">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Barcode Prefix</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>X : Barcode Prefix</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butItemType">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Item Type, where 1=Random Weight, 2=Fixed Weight, 3=By Count, 4=Fluid Weight</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>Y : Item Type</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butWtDecs">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Weight decimal places, the number of digits to the right of the decimal</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>Z : Weight decimals</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butWeightType">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>Weight Type where 0=kilograms and 1=Pounds</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>z : Weight Type</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="layVertArgs">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="butArgs">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;Arguments&lt;/span&gt; can also contain sub-specifiers: &lt;span style=&quot; font-style:italic;&quot;&gt;flags&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;width&lt;/span&gt;, and &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; (in that order), which are optional and follow these specifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>AUGUMENTS</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+         <item>
+          <widget class="QPushButton" name="butPercent">
+           <property name="minimumSize">
+            <size>
+             <width>151</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="toolTip">
+            <string>A % followed by any number of subsequent %s will be written as a single %</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+           </property>
+           <property name="text">
+            <string>% : Format Specifier</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="butFlags">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;format specifier&lt;/span&gt; can also contain sub-specifiers: &lt;span style=&quot; font-style:italic;&quot;&gt;flags&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;width&lt;/span&gt;, and &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; (in that order), which are optional and follow these specifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>FLAGS</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+            <widget class="QPushButton" name="butDash">
+             <property name="minimumSize">
+              <size>
+                 <width>75</width>
+               <height>0</height>
+              </size>
+             </property>
+               <property name="maximumSize">
+                <size>
+                 <width>75</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Left-Justify within the given field width; Right justification is the default (see width sub-specifier)</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>- : Dash</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="butZero">
+             <property name="minimumSize">
+              <size>
+                 <width>76</width>
+               <height>0</height>
+              </size>
+             </property>
+               <property name="maximumSize">
+                <size>
+                 <width>76</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Left-pads the number with zeroes (0) instead of spaces when padding is specified (see width sub-specifier)</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>0 : Zero</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layVertWidth">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="butWidth">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;format specifier&lt;/span&gt; can also contain sub-specifiers: &lt;span style=&quot; font-style:italic;&quot;&gt;flags&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;width&lt;/span&gt;, and &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; (in that order), which are optional and follow these specifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>WIDTH</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="butWidthNum">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Minimum number of characters to be printed. If the value to be printed is shorter than this number, the result is padded with blank spaces. The value is not truncated even if the result is larger.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>( number )</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layVertPrecision">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="butPrecision">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;format specifier&lt;/span&gt; can also contain sub-specifiers: &lt;span style=&quot; font-style:italic;&quot;&gt;flags&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;width&lt;/span&gt;, and &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; (in that order), which are optional and follow these specifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>PRECISION</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="butPrecisionNum">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;For numeric specifiers&lt;/span&gt;: &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; specifies the minimum number of digits to be written. If the value to be written is shorter than this number, the result is padded with leading zeroes. The value is not truncated even if the result is longer. A &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; of 0 means that no character is written for the value 0. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;For string specifiers&lt;/span&gt;: this is the maximum number of characters to be printed.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Default&lt;/span&gt;: If the period is specified without an explicit value for &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt;, 0 is assumed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>.number</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="butSpecial">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+               <underline>true</underline>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;format specifier&lt;/span&gt; can also contain sub-specifiers: &lt;span style=&quot; font-style:italic;&quot;&gt;flags&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;width&lt;/span&gt;, and &lt;span style=&quot; font-style:italic;&quot;&gt;precision&lt;/span&gt; (in that order), which are optional and follow these specifications.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>SPECIAL</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="butFNC1">
+             <property name="minimumSize">
+              <size>
+               <width>151</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Function Code 1. Used to terminate any variable length field.</string>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color:rgb(202,224,235,255);
+    border-width: 0px;
+    Text-align: left;
+}</string>
+             </property>
+             <property name="text">
+              <string>^ : FNC1</string>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="layBotVert">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="lblNotes">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>* Click any label item to see instructions and comments about the character.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layBotHoriz">
+         <property name="spacing">
+          <number>100</number>
+         </property>
+         <property name="leftMargin">
+          <number>50</number>
+         </property>
+         <property name="rightMargin">
+          <number>50</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="butDone">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>22</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Done</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butCancel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>22</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butClear">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>22</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

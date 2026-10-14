@@ -1,0 +1,2 @@
+function place_order()
+{}

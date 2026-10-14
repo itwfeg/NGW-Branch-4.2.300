@@ -1,0 +1,7 @@
+Package: hobart-hti-pyqt
+Version: 5.5-1
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package contains SIP and PyQt 5.5.1 for the
+ HTi series scales.

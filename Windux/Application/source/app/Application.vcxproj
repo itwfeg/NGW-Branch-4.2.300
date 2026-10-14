@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0AE8DE4F-4D42-45C2-8422-1609DF6FFDE4}</ProjectGuid>
+    <RootNamespace>Application</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Application_$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Application_$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Application_$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Application_$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\3rdPartySoftware\fbwf;..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\db\util\thread;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\HobartHandsFree\shared;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;NOFBWF;USE_ACCOUNTANT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4018;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\3rdPartySoftware\fbwf;..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\db\util\thread;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\HobartHandsFree\shared;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;NOFBWF;USE_ACCOUNTANT;Q_OS_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4018;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\3rdPartySoftware\fbwf;..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\db\util\thread;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\HobartHandsFree\shared;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;NOFBWF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\3rdPartySoftware\fbwf;..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\db\util\thread;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\HobartHandsFree\shared;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;NOFBWF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractSession.cpp" />
+    <ClCompile Include="BuildNumber.cpp" />
+    <ClCompile Include="DBSession.cpp" />
+    <ClCompile Include="GCDSession.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Session.cpp" />
+    <ClCompile Include="SessionManager.cpp" />
+    <ClCompile Include="SessionManagerHelper.cpp" />
+    <ClCompile Include="SessionPrinter.cpp" />
+    <ClCompile Include="SessionWrapper.cpp" />
+    <ClCompile Include="WSSession.cpp" />
+    <ClCompile Include="Messages\AddNewSessionMessage.cpp" />
+    <ClCompile Include="Messages\ChangePrimaryScaleMessage.cpp" />
+    <ClCompile Include="Messages\ChangeSynchronizationTypeMessage.cpp" />
+    <ClCompile Include="Messages\DisableInputProcessingMessage.cpp" />
+    <ClCompile Include="Messages\RebootMessage.cpp" />
+    <ClCompile Include="Messages\RemoveSessionStarterMessage.cpp" />
+    <ClCompile Include="Messages\UIDialogMsg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\HobartCustomerHook\HobartCustomerHook.h" />
+    <ClInclude Include="AbstractSession.h" />
+    <ClInclude Include="AccessKeys.h" />
+    <ClInclude Include="BuildNumber.h" />
+    <ClInclude Include="DBSession.h" />
+    <ClInclude Include="evolution.h" />
+    <ClInclude Include="GCDSession.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="NetworkEvent.h" />
+    <ClInclude Include="scaleModel.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="SessionEvent.h" />
+    <ClInclude Include="SessionManager.h" />
+    <ClInclude Include="SessionManagerHelper.h" />
+    <ClInclude Include="WSSession.h" />
+    <ClInclude Include="Messages\AddNewSessionMessage.h" />
+    <ClInclude Include="Messages\ChangePrimaryScaleMessage.h" />
+    <ClInclude Include="Messages\ChangeSynchronizationTypeMessage.h" />
+    <ClInclude Include="Messages\DisableInputProcessingMessage.h" />
+    <ClInclude Include="Messages\RebootMessage.h" />
+    <ClInclude Include="Messages\RemoveSessionStarterMessage.h" />
+    <ClInclude Include="Messages\UIDialogMsg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HobartCustomerHook\HobartCustomerHook.vcxproj">
+      <Project>{f4fbc53e-d407-4400-a431-d4e60b02217f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

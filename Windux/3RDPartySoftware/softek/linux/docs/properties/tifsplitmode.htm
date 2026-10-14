@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">TifSplitMode</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		TifSplitMode controls the way in which multi-page TIF files are split into 
+		sub-files when the TifSplitPath property is set. A value of 0 means that the 
+		sub-files will each start on a page with a bar code (or page 1). A value of 1 
+		means that each sub-file will terminate on a page with a barcode (or the last 
+		page).
+		<P class="MsoBodyText">
+		For example, a 6 page TIF file with barcodes on pages 2 and 5 will split as 
+		follows:
+		<P class="MsoBodyText">
+		TifSplitMode = 0: First sub-file contains page 1. Second sub-file contains 
+		pages 2, 3 and 4. Third sub-file contains pages 5 and 6.
+		<P class="MsoBodyText">TifSplitMode = 1: First sub-file contains pages 1 and 2. 
+			Second sub-file contains pages 3,&nbsp;4 and 5. Third sub-file contains page 6.</P>
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_TIFF_SPLIT_MODE,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_TIFF_SPLIT_MODE,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Split with barcodes at the end of files.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_TIFF_SPLIT_MODE,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

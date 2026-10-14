@@ -1,0 +1,91 @@
+wlan0     Scan completed :
+          Cell 01 - Address: 00:15:62:FF:9B:A9
+                    Channel:2
+                    Frequency:2.417 GHz (Channel 2)
+                    Quality=26/70  Signal level=-84 dBm  
+                    Encryption key:on
+                    ESSID:"ciscosb"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000004a824e1bb
+                    Extra: Last beacon: 1690ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 02 - Address: 06:15:62:FF:9B:A9
+                    Channel:2
+                    Frequency:2.417 GHz (Channel 2)
+                    Quality=26/70  Signal level=-84 dBm  
+                    Encryption key:on
+                    ESSID:"ciscosb3"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000004a824d864
+                    Extra: Last beacon: 1690ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 03 - Address: 02:15:62:FF:9B:A9
+                    Channel:2
+                    Frequency:2.417 GHz (Channel 2)
+                    Quality=26/70  Signal level=-84 dBm  
+                    Encryption key:on
+                    ESSID:"s4b5c9b8m"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=00000004a824effc
+                    Extra: Last beacon: 1690ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 04 - Address: 2C:B0:5D:22:D1:00
+                    Channel:7
+                    Frequency:2.442 GHz (Channel 7)
+                    Quality=21/70  Signal level=-89 dBm  
+                    Encryption key:on
+                    ESSID:"NetExtender"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+                              24 Mb/s; 36 Mb/s; 54 Mb/s
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+                    Mode:Master
+                    Extra:tsf=000001154f874abe
+                    Extra: Last beacon: 1620ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 05 - Address: 00:15:70:CA:EA:A1
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=16/70  Signal level=-94 dBm  
+                    Encryption key:on
+                    ESSID:"HammerHead"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000002bedaeaffb
+                    Extra: Last beacon: 1570ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 06 - Address: 00:15:70:CA:EA:A0
+                    Channel:11
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality=16/70  Signal level=-94 dBm  
+                    Encryption key:on
+                    ESSID:"Sahate"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s
+                    Bit Rates:24 Mb/s; 36 Mb/s; 48 Mb/s; 54 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000002bedaeb6e7
+                    Extra: Last beacon: 10ms ago
+                    (Unknown Wireless Token 0x8C05)
+          Cell 07 - Address: 00:0F:66:75:9D:B2
+                    Channel:1
+                    Frequency:2.412 GHz (Channel 1)
+                    Quality=32/70  Signal level=-78 dBm  
+                    Encryption key:on
+                    ESSID:"techsupport"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s
+                    Mode:Master
+                    Extra:tsf=0000011551e7118c
+                    Extra: Last beacon: 1750ms ago
+                    (Unknown Wireless Token 0x8C05)
+

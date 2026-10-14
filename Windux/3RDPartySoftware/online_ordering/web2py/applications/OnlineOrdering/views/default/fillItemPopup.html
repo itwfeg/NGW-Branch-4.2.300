@@ -1,0 +1,64 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<link href="{{=URL('static', 'css/order_list.css')}}" rel="stylesheet" type="text/css" />
+<style>
+body { overflow: hidden; }
+</style>
+{{end}}
+
+{{block scripts}}
+{{end}}
+
+<div class="container main-container fillItemPopup" style="width: 500px;">
+
+<textarea id="quantity" class="form-control form-control-lg contrast-readonly mb-2" readonly style="text-align: center; font-size: 30px; height: 55px; overflow: hidden;">{{
+number = ""
+suffix = ""
+if "ProductType" in details and details["ProductType"] == 1:
+    number = "0.000"
+    if "PluWeight" in details and details["PluWeight"]:
+        number = "{:.3f}".format(float(details["PluWeight"])/1000.)
+    pass
+    if currentSettings:
+        if currentSettings["MeasurementSystem"] == "imperial":
+            suffix = " lb"
+        else:
+            suffix = " kg"
+        pass
+    pass
+elif "ProductType" in details and details["ProductType"] in [2,3]:
+    suffix = " count"
+    number = str(details["PluByCount"])
+    if number == "None":
+        number = "N/A"
+    pass
+else:
+    number = "?"
+    pass
+
+if "PluByCount" not in details or details["PluByCount"] is None:
+    if "PluWeight" not in details or details["PluWeight"] is None:
+        number = "Now Serving"
+        suffix = ""
+        details["PluInstructions"] = "Ask customer."
+        pass
+    pass
+
+if "PluInstructions" in details and not details["PluInstructions"]:
+    details["PluInstructions"] = "N/A"
+    pass
+
+response.write(number + suffix)
+}}</textarea>
+
+<div class="row justify-content-between" style="height: 65px;">
+  <div class="input-group col-12">
+    <div class="input-group-prepend">
+      <span class="input-group-text" style="height: 65px;">Instructions</span>
+    </div>
+    <textarea id="reason" class="form-control form-control-lg contrast-readonly" readonly style="height: 65px; font-size: 20px;">{{=details["PluInstructions"]}}</textarea>
+  </div>
+</div>
+
+</div>

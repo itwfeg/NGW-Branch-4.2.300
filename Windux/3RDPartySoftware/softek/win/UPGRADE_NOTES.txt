@@ -1,0 +1,85 @@
+Softek Barcode Reader Toolkit for Windows Version 8.1.1.1p1
+
+Main changes:
+
+1. All the DLL files now come in a single folder and most of the names for DLL's have been changed.
+
+2. New functions have been added in the DLL, COM and .Net (SoftekBarcodeNet.dll) interfaces to support background reading of bar codes.
+
+3. The SDK can now take advantage of multi-core systems. Pages in multi-page documents can be processed in parallel and with a single page the horizontal and vertical scanning can take place in parallel.
+
+4. The PDF Extension has been completely redesigned with native x86 and 64-bit conversion provided by Debenu. PDF files may now be split and will retain their original format.
+
+
+
+In detail....
+
+
+1. File name changes:
+
+Old name					New name			Comment
+
+x86/SoftekBarcode.dll				SoftekBarcodeDLL.dll 		Standard Windows DLL for x86
+x64/SoftekBarcode.dll				SoftekBarcode64DLL.dll		Standard Windows DLL for 64-bit
+x86/SoftekATL.dll				SoftekBarcodeCOM.dll		COM wrapper for SoftekBarcodeDLL.dll
+x64/SoftekATL.dll				SoftekBarcode64COM.dll		COM wrapper for SoftekBarcode64DLL.dll
+anycpu/SoftekBarcodeLib3.dll			SoftekBarcodeNet.dll 		A .Net 3.5 wrapper class for SoftekBarcodeDLL.dll and SoftekBarcode64DLL.dll
+x86/SoftekBarcodeLib2.dll			SoftekBarcodeLib.dll		A .Net 3.5 component for x86
+x64/SoftekBarcodeLib2.dll			SoftekBarcode64Lib.dll		A .Net 3.5 component for 64-bit
+x86/bardecode_jni.dll				SoftekBarcodeDLL.dll		This DLL file now does the job of bardecode_jni.dll
+x64/bardecode_jni.dll				SoftekBarcode64DLL.dll		This DLL file now does the job of bardecode_jni.dll
+
+
+
+2. PDF Extension files no longer required:
+
+x86/cimage.dll
+x86/convert.dll
+x86/cximagecrt.dll
+x86/encryptpdf.dll
+x86/pdf2image.dll
+x86/PDF2ImageCOM.exe
+x86/pdf2img.ini
+x86/pdf2tif.dll
+x86/pdf2tifcom.exe
+x86/SoftekBarcodePDF.dll
+x86/tiffcp.dll
+x64/pdf2image.dll
+x64/pdf2tif.dll
+x64/SoftekBarcodePDF.dll
+
+
+3. New files required for the PDF Extension:
+
+DebenuPDFLibraryDLL1112.dll
+DebenuPDFLibrary64DLL1112.dll
+
+
+4. Files that previously provided an interface to the SDK but are no longer required/supported:
+
+x86/SoftekBarcodeLib.dll (the .Net 1 interface)
+x86/bardecode_jni.dll (java interface - the functionality for this is now contained within SoftekBarcodeDLL.dll)
+x64/bardecode_jni.dll (java interface - the functionality for this is now contained within SoftekBarcode64DLL.dll)
+
+5. Background reading of bar codes:
+
+New functions:
+
+ScanBarCodeInbackground - launch a scan for a bar code in the background
+ScanBarCodeWait - wait for a background scan to complete for a number of milliseconds
+GetProgress - get %age progress of a background read.
+GetBarCodeCount - get number of bar codes found so far in a background read
+ScanBarCodeAbort - abort a background read
+GetBackgroundExitCode - get the exit code from a background read
+
+See the manual pages in documentation.pdf for more details and the sample projects
+
+
+6. Changes to SDK properties
+
+PdfImageRasterOptions		is no longer used by the toolkit and defaults to 0. Applications should set it to 0 for future compatibility.
+PdfImageExtractOptions 		is no longer used by the toolkit and defaults to 0. Applications should set it to 0 for future compatibility.
+MaxThreads			a new (advanced) property that controls how many internal threads an instance of the SDK may use.
+
+
+

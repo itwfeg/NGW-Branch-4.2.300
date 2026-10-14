@@ -1,0 +1,40 @@
+diff -Naur framebuffer-vncserver.orig/src/framebuffer-vncserver.c framebuffer-vncserver/src/framebuffer-vncserver.c
+--- framebuffer-vncserver.orig/src/framebuffer-vncserver.c	2017-08-18 16:39:20.000000000 -0400
++++ framebuffer-vncserver/src/framebuffer-vncserver.c	2017-08-21 10:15:03.735823606 -0400
+@@ -128,7 +128,7 @@
+ 
+     /* Allocate the VNC server buffer to be managed (not manipulated) by
+      * libvncserver. */
+-    vncbuf = calloc(scrinfo.xres * scrinfo.yres, bytespp);
++    vncbuf = calloc(scrinfo.xres * scrinfo.yres, SAMPLES_PER_PIXEL);
+     assert(vncbuf != NULL);
+ 
+     /* Allocate the comparison buffer for detecting drawing updates from frame
+@@ -137,7 +137,7 @@
+     assert(fbbuf != NULL);
+ 
+     /* TODO: This assumes scrinfo.bits_per_pixel is 16. */
+-    server = rfbGetScreen(&argc, argv, scrinfo.xres, scrinfo.yres, BITS_PER_SAMPLE, SAMPLES_PER_PIXEL, bytespp);
++    server = rfbGetScreen(&argc, argv, scrinfo.xres, scrinfo.yres, BITS_PER_SAMPLE, SAMPLES_PER_PIXEL, SAMPLES_PER_PIXEL);
+     assert(server != NULL);
+ 
+     server->desktopName = "framebuffer";
+@@ -200,16 +200,14 @@
+ 
+     uint32_t *f = (uint32_t *)fbmmap;        /* -> framebuffer         */
+     uint32_t *c = (uint32_t *)fbbuf;         /* -> compare framebuffer */
+-    uint32_t *r = (uint32_t *)vncbuf;        /* -> remote framebuffer  */
+-
+-    int xstep = 4/bytespp;
++    uint16_t *r = (uint16_t *)vncbuf;        /* -> remote framebuffer  */
+ 
+     int y;
+     for (y = 0; y < (int)scrinfo.yres; y++)
+     {
+         /* Compare every 1/2/4 pixels at a time */
+         int x;
+-        for (x = 0; x < (int)scrinfo.xres; x += xstep)
++        for (x = 0; x < (int)scrinfo.xres; x++)
+         {
+             uint32_t pixel = *f;
+ 

@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7EF4D90B-C0EC-4B56-A8C6-A54205DA6B1A}</ProjectGuid>
+    <RootNamespace>Comm</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\HobartHandsFree\shared;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\comm\email\SMTP;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\HFC;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4189;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>sensApi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\HobartHandsFree\shared;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\comm\email\SMTP;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\HFC;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4189;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>sensApi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\HobartHandsFree\shared;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\comm\email\SMTP;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\HFC;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>sensApi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\HobartHandsFree\shared;..\..\source\app;..\..\source\comm;..\..\source\comm\email;..\..\source\comm\email\SMTP;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\HFC;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>sensApi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CMFile.cpp" />
+    <ClCompile Include="CMReaderWriter.cpp" />
+    <ClCompile Include="CMReaderWriterDBIndependent.cpp" />
+    <ClCompile Include="CMReaderWriterEvolTag.cpp" />
+    <ClCompile Include="CMReaderWriterEvolUI.cpp" />
+    <ClCompile Include="CMReaderWriterGCD.cpp" />
+    <ClCompile Include="CMReaderWriterHandsFreeDevice.cpp" />
+    <ClCompile Include="CMReaderWriterSyncTag.cpp" />
+    <ClCompile Include="CMReaderWriterUltimaDisk.cpp" />
+    <ClCompile Include="CommSession.cpp" />
+    <ClCompile Include="InitializerComm.cpp" />
+    <ClCompile Include="Messenger.cpp" />
+    <ClCompile Include="NetworkConnectivityManager.cpp" />
+    <ClCompile Include="NetworkStatus.cpp" />
+    <ClCompile Include="Ping.cpp" />
+    <ClCompile Include="ServerSocket.cpp" />
+    <ClCompile Include="SessionMessage.cpp" />
+    <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="email\Email.cpp" />
+    <ClCompile Include="email\EmailManager.cpp" />
+    <ClCompile Include="email\SendErrorEmailEvent.cpp" />
+    <ClCompile Include="email\SendGcdFtpErrorEmailEvent.cpp" />
+    <ClCompile Include="email\SendGcdPlaylistErrorEmailEvent.cpp" />
+    <ClCompile Include="email\SMTP\SMTPClient.cpp" />
+    <ClCompile Include="email\SMTP\SMTPClientInterface.cpp" />
+    <ClCompile Include="cgi\CGICallManager.cpp" />
+    <ClCompile Include="cgi\CGICallPerformedMessage.cpp" />
+    <ClCompile Include="cgi\CGIHTTPAdapter.cpp" />
+    <ClCompile Include="cgi\PerformCGICallMessage.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPClient.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPClientError.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPRequest.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPResponse.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPUnitTester.cpp" />
+    <ClCompile Include="cgi\HTTP\HTTPURI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CMFile.h" />
+    <ClInclude Include="CMReaderWriter.h" />
+    <ClInclude Include="CMReaderWriterDBIndependent.h" />
+    <ClInclude Include="CMReaderWriterEvolTag.h" />
+    <ClInclude Include="CMReaderWriterEvolUI.h" />
+    <ClInclude Include="CMReaderWriterGCD.h" />
+    <ClInclude Include="CMReaderWriterHandsFreeDevice.h" />
+    <ClInclude Include="CMReaderWriterSyncTag.h" />
+    <ClInclude Include="CMReaderWriterUltimaDisk.h" />
+    <ClInclude Include="CommMechanism.h" />
+    <ClInclude Include="CommSession.h" />
+    <ClInclude Include="CommSessionEvent.h" />
+    <ClInclude Include="HobSocket.h" />
+    <ClInclude Include="Messenger.h" />
+    <ClInclude Include="NetworkConnectivityManager.h" />
+    <ClInclude Include="NetworkStatus.h" />
+    <ClInclude Include="Ping.h" />
+    <ClInclude Include="scalemaster.h" />
+    <ClInclude Include="scalemasterEvol.h" />
+    <ClInclude Include="ServerSocket.h" />
+    <ClInclude Include="SessionMessage.h" />
+    <ClInclude Include="UltimaDiskEvent.h" />
+    <ClInclude Include="email\Email.h" />
+    <ClInclude Include="email\EmailComponent.h" />
+    <ClInclude Include="email\EmailManager.h" />
+    <ClInclude Include="email\EmailManagerEvents.h" />
+    <ClInclude Include="email\OutgoingMailerI.h" />
+    <ClInclude Include="email\SendErrorEmailEvent.h" />
+    <ClInclude Include="email\SendGcdFtpErrorEmailEvent.h" />
+    <ClInclude Include="email\SendGcdPlaylistErrorEmailEvent.h" />
+    <ClInclude Include="email\SMTP\SMTPClient.h" />
+    <ClInclude Include="email\SMTP\SMTPClientEvent.h" />
+    <ClInclude Include="email\SMTP\SMTPClientInterface.h" />
+    <ClInclude Include="cgi\CGICallerI.h" />
+    <ClInclude Include="cgi\CGICallManager.h" />
+    <ClInclude Include="cgi\CGICallManagerEvents.h" />
+    <ClInclude Include="cgi\CGICallPerformedMessage.h" />
+    <ClInclude Include="cgi\CGIHTTPAdapter.h" />
+    <ClInclude Include="cgi\PerformCGICallMessage.h" />
+    <ClInclude Include="cgi\HTTP\HTTPClient.h" />
+    <ClInclude Include="cgi\HTTP\HTTPClientError.h" />
+    <ClInclude Include="cgi\HTTP\HTTPClientEvent.h" />
+    <ClInclude Include="cgi\HTTP\HTTPRequest.h" />
+    <ClInclude Include="cgi\HTTP\HTTPResponse.h" />
+    <ClInclude Include="cgi\HTTP\HTTPUnitTester.h" />
+    <ClInclude Include="cgi\HTTP\HTTPURI.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

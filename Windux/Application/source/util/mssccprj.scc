@@ -1,0 +1,13 @@
+SCC = This is a Source Code Control file
+
+[Util.sln]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/Application/source/util", ARJAAAAA
+
+[Util.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/Application/source/util", ARJAAAAA
+
+[UtilWin.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/Application/source/util", ARJAAAAA

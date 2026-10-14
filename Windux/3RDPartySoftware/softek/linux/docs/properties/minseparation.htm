@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MinSeparation</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P><STRONG>MinSeparation</STRONG> defines the minimum distance between barcodes of 
+			identical value and vertical alignment in pixels. If the distance between two 
+			barcodes of same value and on the same alignment is less than MinSeparation 
+			then the toolkit assumes that it is a single barcode that has been split into 2 
+			parts by a problem in the scanning process.
+		</P>
+		<P>Default value = 180
+		</P>
+		<P>&nbsp;void STSetParameter(hBarcode, ST_MIN_SEPARATION,&nbsp;uint16 *value) ;
+		</P>
+		<P>void STGetParameter(hBarcode, ST_MIN_SEPARATION,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Set MinSeparation to a value of 100<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;100 ;<BR>
+			STSetParameter(hBarcode, ST_MIN_SEPARATION,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

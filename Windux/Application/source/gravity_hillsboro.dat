@@ -1,0 +1,12 @@
+The presence of this file indicated that the gravity constant of Hillsboro will be used when determining the calibration of the load cells
+containing the Accelerometer. The difference of the gravity constant between Hillsboro, OH and Troy, OH is partly determined by the elevation of
+each location above sea level.  The difference of elevation, in addition to latitude, longitude is enough to make the gravity constant 
+different between the two places.
+
+Troy Gravity Constant      = 980104
+Hillsboro Gravity Constant = 980023
+
+To use the Hillsboro, OH, gravity constant, the default, rename this file as 'gravity_hillsboro.dat' and reboot.
+To use the Troy, OH gravity constant, rename this file as 'gravity_troy.dat' and reboot.
+
+The existence of this file alone indicates the gravity constant to be used while calibrating the accelerometers, not any text contained within it.

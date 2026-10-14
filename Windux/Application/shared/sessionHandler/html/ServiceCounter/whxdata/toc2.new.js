@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Electrical Connections","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Electrical_Connectionsbc-1"},{"type":"item","name":"Communication Connections","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Communication_Connectionsbc-2"},{"type":"item","name":"Operator Screens Overview","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Operator_Screens_Overviewbc-3"},{"type":"item","name":"Scale Operation Mode Setup","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Scale_Operation_Modebc-4"},{"type":"item","name":"Menu Icon Features","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Menu_Icon_Featuresbc-5"},{"type":"item","name":"Keypad and Keyboard Icons","url":"F35549_Rev_D/Chapter_2/Chapter_2.htm#TOC_Keypad_and_Keyboard_Iconsbc-6"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

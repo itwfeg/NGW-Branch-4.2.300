@@ -1,0 +1,39 @@
+##############################################################
+#
+# File : makefile
+#
+# Make file used for building db/sqlite/
+#
+##############################################################
+
+###################################
+#defines
+###################################
+OS = linux
+
+HOBART_APP ?= $(HOME)/projects/Hobart/shared_code/Application
+export HOBART_APP
+export HOBART_OUT_DIR=$(HOBART_APP)/output
+
+
+##################################
+#make vars
+##################################
+
+#
+#Vars for Source and object files
+#
+SUB_DIRS := \
+    adapter
+
+#    access/            File in this directory is not compiled under Windows
+
+C_SRCS :=
+CPP_SRCS :=
+
+
+##################################
+# makefile template
+##################################
+
+include $(HOBART_APP)/hobart.mk

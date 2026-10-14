@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">GetBarCodePos</FONT>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			int&nbsp;STGetBarCodePos(void *hBarcode, int nBarCode, uint32 *TopLeftX, uint32 
+			*TopLeftY, uint32 *BotRightX, uint32 *BotRightY)</P>
+		<P>
+			STGetBarCodePos retrieves the page number and coordinates of the rectangle 
+			bounding the barcode.</P>
+		<P>
+			<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD>hBarcode</TD>
+					<TD>Handle to barcode session.</TD>
+				</TR>
+				<TR>
+					<TD>nBarCode</TD>
+					<TD>
+						(input) is the index of the barcode (zero based).</TD>
+				</TR>
+				<TR>
+					<TD>TopLeftX</TD>
+					<TD>
+						(output) is a pointer to receive the x-coordinate of the top left hand corner 
+						of the bounding rectangle.</TD>
+				</TR>
+				<TR>
+					<TD>TopLeftY</TD>
+					<TD>(output) is a pointer to receive the y-coordinate of the top left hand corner 
+						of the bounding rectangle.</TD>
+				</TR>
+				<TR>
+					<TD>BotRightX</TD>
+					<TD>
+						(output) is a pointer to receive the x-coordinate of the bottom&nbsp;right hand 
+						corner of the bounding rectangle.</TD>
+				</TR>
+				<TR>
+					<TD>BotRightY</TD>
+					<TD>
+						(output) is a pointer to receive the y-coordinate of the bottom&nbsp;right hand 
+						corner of the bounding rectangle.</TD>
+				</TR>
+			</TABLE>
+		</P>
+		<P><STRONG>Return Value</STRONG></P>
+		<P>
+			Page number where the barcode was found (one based).
+		</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

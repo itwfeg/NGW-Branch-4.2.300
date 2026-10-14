@@ -1,0 +1,5 @@
+# This file can specify the IP addresses from which connections are allowed using a line of the form (the '*' allows anyone)
+#ALLOWED_HOSTS=ip-address1 ip-address2 ...
+#ALLOWED_HOSTS=*
+#
+ALLOWED_HOSTS = 127.0.0.1

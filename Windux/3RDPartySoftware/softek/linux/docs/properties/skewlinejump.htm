@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p>&nbsp;<FONT size="5">MaxRectOverlap</FONT>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>The maximum percentage overlap allowed between 2 bounding rectangles.
+		</P>
+		<P>
+		Default value =&nbsp;&nbsp;70
+		<P>
+		void STSetParameter(hBarcode, ST_MAX_RECT_OVERLAP,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode,&nbsp; ST_MAX_RECT_OVERLAP,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_MAX_RECT_OVERLAP,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

@@ -1,0 +1,1608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>selfserveWeightsMeasuresG2</class>
+ <widget class="QWidget" name="selfserveWeightsMeasuresG2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#selfserveWeightsMeasuresG2
+{
+    background-color: rgb(244,247,250);
+}</string>
+  </property>
+  <widget class="QWidget" name="screenContainer" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1366</width>
+     <height>768</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="lblTitle">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>10</y>
+      <width>601</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+    </property>
+    <property name="text">
+     <string>Enter ID to exit self-service mode,
+then press Enter.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butQuit">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>10</y>
+      <width>125</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#butQuit
+{
+    background-color: rgb(24,113,248);
+    color: rgb(255,255,255);
+    border-style: solid;
+    border-radius: 18px;
+    border-width: 0px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Exit Self-
+Service Mode</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butExit">
+    <property name="geometry">
+     <rect>
+      <x>1310</x>
+      <y>10</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#butExit{
+    background-color: rgb(255,0,0);
+    color: rgb(255,255,255);
+    border-style: solid;
+    border-radius: 14px;
+    border-width: 0px;
+}</string>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butRezero">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>125</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#butRezero
+{
+    background-color: rgb(24,113,248);
+    color: rgb(255,255,255);
+    border-style: solid;
+    border-radius: 18px;
+    border-width: 0px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Rezero</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblExitLabel">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>10</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butAuditLog">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>10</y>
+      <width>125</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>125</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins Medium</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#butAuditLog
+{
+    background-color: rgb(24,113,248);
+    color: rgb(255,255,255);
+    border-style: solid;
+    border-radius: 18px;
+    border-width: 0px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Audit
+Log</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="wgtWeightsMeasures" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>951</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Poppins</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+    background-color: rgb(255,255,255);
+    color: rgb(0,0,0);
+    border-style: solid;
+    border-radius: 28px;
+    border-width: 0px;</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>0</y>
+       <width>801</width>
+       <height>491</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="7" column="1">
+       <widget class="QLabel" name="lblClass">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QLabel" name="lblApprovalCan">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="lblApprovalUSLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Approval (US)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="lblSoftwareVersion">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="lblClassLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Class</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLabel" name="lblnMax">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblIndicatorApprovalLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Indicator Approval</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="lblApprovalCanLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Approval (CAN)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="lbleMinLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>e&lt;sub&gt;min&lt;/sub&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLabel" name="lblApprovalUS">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="lblTempRangeLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Temperature Range</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="lbleMin">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="lblCapacity">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lblIndicator_nMax">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lblSoftwareVersionLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>&quot;Metrology Software Version</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblIndicatorApproval">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lblCapacityLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Capacity</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="lblWeigherModel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lblHardwareVersion">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="lblnMaxLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>n&lt;sub&gt;max&lt;/sub&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblWeigherModelLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>&quot;Weigher Model&quot;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QLabel" name="lblTempRange">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblIndicator_nMaxLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Indicator n&lt;sub&gt;max&lt;/sub&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblHardwareVersionLabel">
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Hardware Version</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>509</y>
+       <width>801</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblConfigParamsLabel">
+        <property name="minimumSize">
+         <size>
+          <width>161</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Config Parameters</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lblCalibrationLabel">
+        <property name="minimumSize">
+         <size>
+          <width>161</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string>Calibration</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lblCalibration">
+        <property name="minimumSize">
+         <size>
+          <width>161</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblConfigParams">
+        <property name="minimumSize">
+         <size>
+          <width>161</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Poppins Medium</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lblTitle
+{
+    color: rgb(0,0,0);
+}</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="wgtNumPad" native="true">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>91</y>
+      <width>368</width>
+      <height>620</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>368</width>
+      <height>620</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>368</width>
+      <height>620</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget#wgtNumPad
+{
+    background-color: rgb(255,255,255);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 40px;
+   /* border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-width: 1px;
+    border-color: rgb(255,0,0); */
+}</string>
+    </property>
+    <widget class="QPushButton" name="butSeven">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>140</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins SemiBold</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butSeven
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+    line-height: 10px;
+}</string>
+     </property>
+     <property name="text">
+      <string notr="true">7</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butEight">
+     <property name="geometry">
+      <rect>
+       <x>136</x>
+       <y>140</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butEight
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>8</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butNine">
+     <property name="geometry">
+      <rect>
+       <x>242</x>
+       <y>140</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butNine
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>9</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFive">
+     <property name="geometry">
+      <rect>
+       <x>136</x>
+       <y>230</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butFive
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butSix">
+     <property name="geometry">
+      <rect>
+       <x>242</x>
+       <y>230</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butSix
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butThree">
+     <property name="geometry">
+      <rect>
+       <x>242</x>
+       <y>320</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butThree
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butOne">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>320</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins SemiBold</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butOne
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFour">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butFour
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butTwo">
+     <property name="geometry">
+      <rect>
+       <x>136</x>
+       <y>320</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butTwo
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butZero">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>410</y>
+       <width>96</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>96</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>96</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins SemiBold</family>
+       <pointsize>26</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butZero
+{
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butBackspace">
+     <property name="geometry">
+      <rect>
+       <x>136</x>
+       <y>410</y>
+       <width>202</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>202</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>202</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins SemiBold</family>
+       <pointsize>26</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butBackspace
+{
+	background:url(:/images/screens/numberpad-backspace-bttn.png);
+    background-color: rgb(239,242,246);
+    color: rgb(25,34,46);
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butEnter">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>530</y>
+       <width>368</width>
+       <height>90</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>368</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>368</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>28</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#butEnter
+{
+	background:url(:/images/screens/numberpad-enter-bttn.png);
+    background-color: rgb(239,242,246);
+    color: rgb(255,255,255);
+    border-style: solid;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 38px;
+    border-bottom-right-radius: 38px;
+    border-width: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string>Enter</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblEnterItem">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>35</y>
+       <width>371</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lblEnterItem
+{
+    color: rgb(55,60,75);
+    background-color: rgb(255,255,255);
+}</string>
+     </property>
+     <property name="text">
+      <string>Enter Operator ID</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtOpID">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>68</y>
+       <width>351</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>42</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit#txtOpID
+{
+    color: rgb(25,34,46);
+    background-color:rgb(255,255,255);
+    border: 0px;
+}</string>
+     </property>
+     <property name="text">
+      <string notr="true">----</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

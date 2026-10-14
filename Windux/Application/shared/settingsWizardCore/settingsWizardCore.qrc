@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/10Mbps.png</file>
+        <file>images/100Mbps.png</file>
+        <file>images/1000Mbps.png</file>
+        <file>images/blankNumKeyVert.png</file>
+        <file>images/blankNumpadKeyHor.png</file>
+        <file>images/blankNumpadNumberKey.png</file>
+        <file>images/brightness.png</file>
+        <file>images/brushedSteelSheet.png</file>
+        <file>images/carbonFiberBackground.png</file>
+        <file>images/connectedLight.png</file>
+        <file>images/connectedLightFinal.png</file>
+        <file>images/connectedLightFinalSelected.png</file>
+        <file>images/disconnectedLight.png</file>
+        <file>images/disconnectedLightFinal.png</file>
+        <file>images/flashKey.png</file>
+        <file>images/flashKeyDock .png</file>
+        <file>images/keyboard.png</file>
+        <file>images/refresh.png</file>
+        <file>images/shutdownIcon.png</file>
+        <file>images/SpinBoxButtonsOffBottom.jpg</file>
+        <file>images/SpinBoxButtonsOffCalendarLeft.png</file>
+        <file>images/SpinBoxButtonsOffCalendarRight.png</file>
+        <file>images/SpinBoxButtonsOffTop.jpg</file>
+        <file>images/strength0.png</file>
+        <file>images/strength1.png</file>
+        <file>images/strength2.png</file>
+        <file>images/strength3.png</file>
+        <file>images/strength4.png</file>
+        <file>images/strength5.png</file>
+        <file>images/volumeOff.png</file>
+        <file>images/volumeOffSmall.png</file>
+        <file>images/volumeOn.png</file>
+        <file>images/volumeOnSmall.png</file>
+        <file>images/VPNIconFinal.png</file>
+        <file>images/WiFi.png</file>
+        <file>images/wiredIconFinal.png</file>
+        <file>images/wirelessIconFinal.png</file>
+        <file>images/SpinBoxButtonsOffTop.png</file>
+        <file>images/SpinBoxButtonsOffBottom.png</file>
+        <file>images/SpinBoxButtonsOffBottomTime.png</file>
+        <file>images/SpinBoxButtonsOffTopTime.png</file>
+        <file>images/brightnessLED.png</file>
+        <file>images/brightnessLEDoff.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,32 @@
+How to build the driver
+
+Prerequistes:
+1. Install Windows Driver Kit (aka WDK, DDK, or WinDDK)
+   WDK Version 6 or higher is required.
+
+2. Visual Studio (optional)
+   Install Visual Studio 2005 or 2008.
+
+Build method 1. DDK build window
+1. Choose Start | Programs | Windows Driver Kits | WDK 6001.18002 + 
+     Build Environments | Windows XP +
+       Windows XP x86 Free Build Environment (for release build)
+       Windows XP x86 Checked Build Environment (for debug build)
+2. Issue the following command:
+	build -fc
+
+Build method 2. DOS command window
+1) Install Microsoft Windows DDK version 6 or higher.
+2) Open a DOS command window: Start | Run | cmd.exe
+3) Navigate to the path containing the driver source code.
+4) Issue one of the following commands:
+	REL.BAT for release build 
+	DBG.BAT for debug build
+
+Build method 3. Visual Studio
+1. Launch Visual Studio
+2. Choose File | Open | Project/Solution...
+3. Navigate to the path containing the driver source code.
+4. Choose WeighUsb.VS2005.sln (or WeighUsb.VS2008.sln for VS2008)
+5. Choose Debug or Release from the configuration drop list on the toolbar.
+6. Choose Build | Rebuild Solution.

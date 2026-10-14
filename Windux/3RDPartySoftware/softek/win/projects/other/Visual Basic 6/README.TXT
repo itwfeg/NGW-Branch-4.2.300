@@ -1,0 +1,1 @@
+The VB6 project uses the OCX interface to the toolkit which means you will need to run REGISTER.BAT in the x86 folder before trying to load this project.

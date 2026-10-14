@@ -1,0 +1,159 @@
+From 68ac875a6df626fe1c32e59e4799494a0d4fab82 Mon Sep 17 00:00:00 2001
+From: Ben Greear <greearb@candelatech.com>
+Date: Sun, 6 Feb 2011 20:15:19 +0200
+Subject: [PATCH 1/2] wpa_supplicant: Support 'relog' command to re-open log files
+
+This allows rolling log files:
+
+mv log.txt log.txt.1
+wpa_cli relog
+
+Signed-off-by: Ben Greear <greearb@candelatech.com>
+---
+ src/utils/wpa_debug.c       |   34 ++++++++++++++++++++++++++++++++++
+ src/utils/wpa_debug.h       |    1 +
+ wpa_supplicant/ctrl_iface.c |    3 +++
+ wpa_supplicant/wpa_cli.c    |    9 +++++++++
+ 4 files changed, 47 insertions(+), 0 deletions(-)
+
+diff --git a/src/utils/wpa_debug.c b/src/utils/wpa_debug.c
+index e8da20b..45d23de 100644
+--- a/src/utils/wpa_debug.c
++++ b/src/utils/wpa_debug.c
+@@ -279,11 +279,43 @@ void wpa_hexdump_ascii_key(int level, const char *title, const u8 *buf,
+ }
+ 
+ 
++#ifdef CONFIG_DEBUG_FILE
++static char *last_path = NULL;
++#endif /* CONFIG_DEBUG_FILE */
++
++int wpa_debug_reopen_file(void)
++{
++#ifdef CONFIG_DEBUG_FILE
++	int rv;
++	if (last_path) {
++		char *tmp = os_strdup(last_path);
++		wpa_debug_close_file();
++		rv = wpa_debug_open_file(tmp);
++		os_free(tmp);
++	} else {
++		wpa_printf(MSG_ERROR, "Last-path was not set, cannot "
++			   "re-open log file.");
++		rv = -1;
++	}
++	return rv;
++#else /* CONFIG_DEBUG_FILE */
++	return 0;
++#endif /* CONFIG_DEBUG_FILE */
++}
++
++
+ int wpa_debug_open_file(const char *path)
+ {
+ #ifdef CONFIG_DEBUG_FILE
+ 	if (!path)
+ 		return 0;
++
++	if (last_path == NULL || os_strcmp(last_path, path) != 0) {
++		/* Save our path to enable re-open */
++		os_free(last_path);
++		last_path = os_strdup(path);
++	}
++
+ 	out_file = fopen(path, "a");
+ 	if (out_file == NULL) {
+ 		wpa_printf(MSG_ERROR, "wpa_debug_open_file: Failed to open "
+@@ -305,6 +337,8 @@ void wpa_debug_close_file(void)
+ 		return;
+ 	fclose(out_file);
+ 	out_file = NULL;
++	os_free(last_path);
++	last_path = NULL;
+ #endif /* CONFIG_DEBUG_FILE */
+ }
+ 
+diff --git a/src/utils/wpa_debug.h b/src/utils/wpa_debug.h
+index 6e5e79e..793275d 100644
+--- a/src/utils/wpa_debug.h
++++ b/src/utils/wpa_debug.h
+@@ -38,6 +38,7 @@ enum { MSG_MSGDUMP, MSG_DEBUG, MSG_INFO, MSG_WARNING, MSG_ERROR };
+ #else /* CONFIG_NO_STDOUT_DEBUG */
+ 
+ int wpa_debug_open_file(const char *path);
++int wpa_debug_reopen_file(void);
+ void wpa_debug_close_file(void);
+ 
+ /**
+diff --git a/wpa_supplicant/ctrl_iface.c b/wpa_supplicant/ctrl_iface.c
+index 1fcf6ee..f332c08 100644
+--- a/wpa_supplicant/ctrl_iface.c
++++ b/wpa_supplicant/ctrl_iface.c
+@@ -1726,6 +1726,9 @@ char * wpa_supplicant_ctrl_iface_process(struct wpa_supplicant *wpa_s,
+ 	if (os_strcmp(buf, "PING") == 0) {
+ 		os_memcpy(reply, "PONG\n", 5);
+ 		reply_len = 5;
++	} else if (os_strncmp(buf, "RELOG", 5) == 0) {
++		if (wpa_debug_reopen_file() < 0)
++			reply_len = -1;
+ 	} else if (os_strcmp(buf, "MIB") == 0) {
+ 		reply_len = wpa_sm_get_mib(wpa_s->wpa, reply, reply_size);
+ 		if (reply_len >= 0) {
+diff --git a/wpa_supplicant/wpa_cli.c b/wpa_supplicant/wpa_cli.c
+index 162a0b8..479d22a 100644
+--- a/wpa_supplicant/wpa_cli.c
++++ b/wpa_supplicant/wpa_cli.c
+@@ -330,6 +330,12 @@ static int wpa_cli_cmd_ping(struct wpa_ctrl *ctrl, int argc, char *argv[])
+ }
+ 
+ 
++static int wpa_cli_cmd_relog(struct wpa_ctrl *ctrl, int argc, char *argv[])
++{
++	return wpa_ctrl_command(ctrl, "RELOG");
++}
++
++
+ static int wpa_cli_cmd_mib(struct wpa_ctrl *ctrl, int argc, char *argv[])
+ {
+ 	return wpa_ctrl_command(ctrl, "MIB");
+@@ -1479,6 +1485,9 @@ static struct wpa_cli_cmd wpa_cli_commands[] = {
+ 	{ "ping", wpa_cli_cmd_ping,
+ 	  cli_cmd_flag_none,
+ 	  "= pings wpa_supplicant" },
++	{ "relog", wpa_cli_cmd_relog,
++	  cli_cmd_flag_none,
++	  "= re-open log-file (allow rolling logs)" },
+ 	{ "mib", wpa_cli_cmd_mib,
+ 	  cli_cmd_flag_none,
+ 	  "= get MIB variables (dot1x, dot11)" },
+-- 
+1.7.1
+
+From 539963e6e11e83aa9f1f5c29adade7a2a383d4bc Mon Sep 17 00:00:00 2001
+From: Lubomir Rintel <lkundrak@v3.sk>
+Date: Mon, 24 Aug 2015 12:11:01 +0200
+Subject: [PATCH 2/2] wpa_supplicant: reopen debug log file upon receipt of SIGHUP signal
+
+This is useful for logrotate to be able to rotate the file even the CLI control
+interface is not enabled (e.g. when using DBus).
+---
+http://lists.shmoo.com/pipermail/hostap/2015-August/033584.html
+
+ wpa_supplicant/wpa_supplicant.c |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
+index 2052090..6e87281 100644
+--- a/wpa_supplicant/wpa_supplicant.c
++++ b/wpa_supplicant/wpa_supplicant.c
+@@ -711,6 +711,7 @@ static void wpa_supplicant_reconfig(int sig, void *signal_ctx)
+ {
+ 	struct wpa_global *global = signal_ctx;
+ 	struct wpa_supplicant *wpa_s;
++	wpa_debug_reopen_file();
+ 	wpa_printf(MSG_DEBUG, "Signal %d received - reconfiguring", sig);
+ 	for (wpa_s = global->ifaces; wpa_s; wpa_s = wpa_s->next) {
+ 		if (wpa_supplicant_reload_configuration(wpa_s) < 0) {
+-- 
+1.7.1
+

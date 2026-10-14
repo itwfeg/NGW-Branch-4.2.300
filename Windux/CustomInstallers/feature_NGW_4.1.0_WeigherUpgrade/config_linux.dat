@@ -1,0 +1,606 @@
+# Internal Configuration parameters - set by Hobart Only
+#
+# Format of commands is 'parameterName=parameterValue'
+#
+# Comments begin with '#'.  Everything after the comment indicators is ignored.
+# Comments can be on their own line, or on the same line as a command.
+#
+
+# HLXLinuxLauncher expects the following line to one contiguous string, no space around the = sign, no comment at the end
+scaleName=Hobart_HTi
+scaleServiceName = Hobart Scale Service
+webServiceName = GoWebs
+appInstallerExe = appInstaller.exe
+
+scaleServiceExe = ScaleService.exe
+webServiceExe = srvany.exe
+pathToLaunchUI = /home/Hobart/AccessScale/appLauncher.exe
+
+systemGraphicsLocation=/usr/local/hobart/system/graphics
+userGraphicsLocation=/usr/local/hobart/user/graphics
+imagesLocation=/usr/local/hobart/images
+systemUserRootDir=/usr/local/hobart
+graphicsExtensions=.png                  # Can also be ".png,.gif,.bmp"
+graphicFileSpecifiers=*.png,*.gif,*.jpg
+noGraphicSelectedName=None
+systemGraphicsTar=system.tar
+userGraphicsTar=user.tar
+productGraphicsTar=products.tar
+productGraphicsDir=images/products/
+systemProductGraphicsDir=images/system/products/
+productGraphicsDefaultExtension=.jpg
+categoryGraphicsTar=categories.tar
+categoryGraphicsDir=images/categories/
+systemCategoryGraphicsDir=images/system/categories/
+categoryGraphicsDefaultExtension=.jpg
+specialsGraphicsTar=specials.tar
+specialsGraphicsDir=images/specials/
+specialsGraphicsDefaultExtension=.gif
+streamingGraphicsTar=slideshow.tar
+streamingGraphicsDir=images/slideshow/
+streamingGraphicsDefaultExtension=.jpg
+softkeyGraphicsTar=softkeys.tar
+softkeyGraphicsDir=images/softkeys/
+softkeyGraphicsDefaultExtension=.gif
+reservedSoftkeyGraphicsDir=/usr/local/hobart/system/flashkeygfx
+selfServeGraphicsDir=images/selfServe/
+systemSelfServeGraphicsDir=images/system/selfServe/
+selfServeGraphicsDefaultExtension=.jpg
+planogramGraphicsDir=images/planograms/
+planogramGraphicsDefaultExtension=.jpg
+videosDir=videos/
+videosDefaultExtension=.mp4
+
+# This file is in the systemUserRootDir dir
+langFileName=/usr/local/hobart/lang
+
+#
+#
+webPagesRootDir=/var
+generalWebPageDirName=webPages
+linuxWebPageDirName=www
+languageFilesDir=/etc/hobart
+pythonScriptsDir=python/
+
+keyMountDir=/media/thumb
+
+serviceLoginId=7776	  # HobRecordNum
+serviceKeyRemoveTimeout=30		# in minutes
+serviceKeyFile=service/key.dat
+superKeyFile=supervisor/key.dat
+selfServeKeyFile=selfserve/key.dat
+
+directorySeparator=/
+TemporaryDBDirectory=/etc/hobart/vmTmp/TempDBFiles
+# Note: if you change the following line, you also have to update defaults.ini (the db config file)
+dbLocation=/usr/local/hobart/db/scale/dbfiles
+emptyDbLocation=/usr/local/hobart/db/scale/dbempty
+dbDefaultsFile=/etc/hobart/defaults_linux.ini
+# The following is cleared out for the LX scale, since we do not need to write the database from ram to compact flash.
+dbBackupEnabled=F
+dbBackupLocation=
+dbMirrorLocation=/usr/local/hobart/db/scale/dbmirror
+dbCheckBeforeShutdown=F
+dbCheckIntegrity=T
+dbCheckIntegrityFrequency=144  # the number of times per day to check for expired records (0 = never, 1 = at midnight, 2 = at midnight and noon, 24 = hourly on the hour, 48 = every half hour, 96 = every 15 minutes, 144 = every 10 minutes, 288 = every 5 minutes, 1440 = every minute)
+dbCheckIndices=F
+dbRebuildIndicesEnabled=T
+versionIndependentBackupFile=/etc/hobart/verIndData
+autoLoadVersionIndependentData=T
+backupVersionIndependentDataNow=F
+makeCopyOfVersionIndependentData=F
+
+autoBackupDatabaseLocation=/usr/local/hobart/backup
+autoBackupPLUDataFile=plu_data.ht
+autoBackupFlashkeyDataFile=flashkey_data.ht
+autoBackupLabelDataFile=label_data.ht
+autoBackupOperatorDataFile=operator_data.ht
+autoBackupStoreNameNumberFile=store_data.ht
+autoBackupConfigFile=configuration_data.ht
+autoBackupSynchConfigFile=synchronization_data.ht
+
+SQLInitialCommand0=PRAGMA journal_mode=WAL
+# SOF-2210: Change 15-minute update to 1-hour; Turn off 15-minute update
+SQLInitialCommand1=UPDATE Configs SET CoValue='1' where CoName='FTPhourlyUpdates' AND (SELECT count(*) FROM Configs WHERE CoName='FTP15MinuteUpdates' AND CoValue='1') = 1;
+SQLInitialCommand2=UPDATE Configs SET CoValue='0' WHERE CoName='FTP15MinuteUpdates';
+
+primaryConsoleSessionPriority=100
+remoteConsoleSessionPriority=100
+maxRemoteConsoleSessions=20
+maxConsecutiveRTCMessages=10 # short
+eventManagerEnabled=T
+sessionManagerEnabled=T
+sessionManagerStartupDelay=0   # in msec, 0=wait until initialized
+sessionManagerPeriodicTimer=60 # in seconds
+realTimeControllerEnabled=T
+timerManagerEnabled=T
+versionManagerEnabled=T
+usbEnabledAtBootup=T
+interruptXferTimeout=1000 #  defined in milliseconds
+bulkXferTimeout=1000 #  defined in milliseconds
+expiredRecordsCheckFrequency=24  # the number of times per day to check for expired records (0 = never, 1 = at midnight, 2 = at midnight and noon, 24 = hourly on the hour, 48 = every half hour, 96 = every 15 minutes, 1440 = every minute)
+
+fpmManagerNotATeamPlayer=F
+fakeWeigherManagerEnabled=F	# bool
+fakeWeigherFrequency=600	# 60 = 1 per second, 30 = 2 per second, 15 = 4 per second, 120 = 1 per every 2 seconds, ...
+fakeWeightStart=10000
+fakeWeightIncrement=1250
+# Weigher.h - WmHLX1=8, WmAWS=10, WmAWS2=12, 
+fakeWeigherModel=8
+# scaleFactors - 1, 2, 5
+fakeWeigherScaleFactor=5
+fakeWeigherMinWeightToPrint=5
+# Avoir and Metric - 15kg weigher sf=5: 15045 * 20 = 300900
+# Metric - 15kg weigher sf=2: 15018 * 20 = 300360
+fakeWeigherMaxWeight=300900
+# WeighMode_Avoir=1, WeighMode_Metric=0
+fakeWeigherMode=1
+
+fakePrinterManagerEnabled=F	# bool
+# The value for the next parameter needs to be one of the values in the LabelLengthLines enum, defined in Printer.h
+fakePrinterLabelLength=4999
+
+fakeCLAManagerEnabled=F		# bool
+fakeWrapperManagerEnabled=F	# bool
+testBrowserEnabled=F		# bool
+testBrowserMsgDelay=400		# int
+testMessagesEnabled=F	#	False will disable access to 'Test Messages' in the menus
+
+RFIDEnabled=F
+RFIDDebounceTime=5   # in seconds
+RFIDComPort=2
+#RFIDHWPresent=
+
+diagnosticsManagerEnabled=T
+diagnosticsDB=/usr/local/hobart/db/diagnostics/diag.db
+diagnosticsDBBackup=/usr/local/hobart/db/diagnostics/diag.db.backup
+diagnosticsDBOld=/usr/local/hobart/db/diagnostics/diag.db.old
+
+BarcodeScannerEnabled=T
+BarcodeScannerComPort=4   #  set to the COM port that the driver installed the device on in your Control Panel System Devices
+
+printerProbeTime=60       #  seconds to probe printer when no communications are present
+weigherProbeTime=60       #  seconds to probe weigher when no communications are present
+custDispProbeTime=60      # seconds to probe customer display (numeric and marquee)
+labelApplierProbeTime=10  #  seconds to probe cla when no communications are present
+wrapperProbeTime=4        #  seconds to probe wrapper when no communications are present
+
+USBBulkDriveOnlyMode=T
+USBBulkDriveName=d:                     # ***** WARNING: /dev/xxx ?
+CompactFlashDriveName=/
+PermanentRamDriveName=/ram0
+TemporaryRamDriveName=/ram1
+evolutionDirectory=/etc/hobart/
+bootParametersFileName=bootParams.cfg
+defaultNetworkConfigDir=defaultNetCfg
+tmpNetworkConfigDir=tmpNetCfg
+firmwareDirectory=/lib/firmware/hobart/
+firmwareGenericFilename=source.bin
+#The next parameter is a list of all firmware filenames that are stored in the permanent firmware directory noted above in 'firmwareDirectory', without directory path
+#Additionally, three digits before the filename is the component's internal id number.
+firmwareFilenames=045sourceFPC.bin 076sourceFPC2.bin 078sourceKPCApp.bin 080sourceKPCApp.bin 081sourceKPCBoot.bin 051XPEWeigher.zip
+
+VersionManagerTempDir=/etc/hobart/vmTmp/
+VersionManagerForceUpgrade=F
+DefaultUpgradeFileName=evolution.ini
+instalLogFile=/home/Hobart/AccessScale/install.log
+VersionInfoFileName=version.ini
+defaultUpgradeDirectory=/home/Hobart/AccessScale/upgrade
+upgradeZipFile=Hobart.zip
+upgradeIniFile=Hobart.ini
+
+maxGraphicsPerProduct=4
+productNameMaxLength=50
+updatePrinterConfig=F	#  whether or not to update printer configuration on bootup
+onlyPriLangForProdStats=T
+# The number of implied decimal places for a percentage.
+# i.e. if 3, 100% represented in memory as 1000, 10% in memory as 100
+percentagePrecision=2  #short, the number of implied decimal places for a percentage
+maxLifeDays=998		# Per Ultima code (CCD)
+maxLifeHours=23
+maxBonusPoints=9999
+quarterPoundFor=25
+halfPoundFor=50	
+hundredGramsFor=100
+continuousStatisticsDelay=15	# in seconds
+lostPeripheralsCheckTime=30	# in seconds
+
+keyboardNetWeightPrecision=2  # for turkey weigher
+
+subtractDescent=F
+maxLabelNumber=9999
+labelFeedHeelFirst=1	   #  1 = HeelFirst or 0 = HeadFirst
+testLabelType=2			#  0 = CheckerBoard, 1 = VerticalLines, 2 = HorizontalLines, 3 = HighPower
+ignoreLabelFit=F
+labelHorizontalOffset=0	#  dots from left hand edge of label
+defaultNutriLabelTemplate=/etc/hobart/defaultNutriLabel.hlx
+shelfLifeExpLabelFamily=9901
+expirationLabelExpiredLimit=2  # number of days that a product is expired before the expiration label record is deleted automatically.
+runTotalsLabelFamily=10201
+
+FBWFActivated=F
+usingRestrictedLogins=F
+# Following used by VersionManager in ScaleService, and appInstaller
+appInstallerIsService=F
+startupDelay=0
+simulatePrinting=F          # for testing on laptop, when don't have a physical printer
+monitorMemoryInterval=180   # for HLX, this is in minutes (default=30), for Fastrack this is in seconds (default=60)
+
+dualRangeLimitAvoir=12000
+dualRangeLimitMetric=6000
+rezeroWeightLimitAvoir=600    # default to .600 lbs
+rezeroWeightLimitMetric=300   # default to .300 kg
+
+connectionIdentificationTimer=30     # in seconds
+connectionIdentificationDelay=500    # in millisconds
+commSessionReadMessageTimer=60       # in seconds
+commSessionReadMessageDelay=200      # in milliseconds
+waitBeforeConnectingTimer=5          # in seconds
+waitBeforeConnectingDelay=1000       # milliseconds
+
+pingConnectivityFrequency=0   # don't ping
+pingConnectivityAttempts=1    # number of echo requests
+offlinePingConnectivityFrequency=10  # in seconds
+offlinePingConnectivityAttempts=4
+
+synchronizationEnabled=T
+synchronizeAllSecondariesTimer=90      # in seconds
+notifyLocalBatchesTimer=90             # in seconds
+recordsPerSyncIteration=5              # number of records
+delayPerSyncIteration=100              # in milliseconds
+maximumNumberRetries=3                 # up to 3 retries
+retryCommandTimer=300                  # in seconds
+hoursBeforeDeregistering=72            # in hours
+delayPurgingBatches=100                # in milliseconds
+hoursBeforeRemovingDeletedBatches=20   # in hours
+recordsPerApplyIteration=10            # in records
+delayPerApplyIteration=200             # in milliseconds
+delayPerDeleteIteration=100            # in milliseconds
+synchronizationStatusMessagesEnabled=F
+
+useProductionPlanningDialog=T
+httpRequestMethod=4                           # 1 = OPTIONS, 2 = GET, 3 = HEAD, 4 = POST, 5 = PUT, 6 = DELETE, 7 = TRACE, 8 = CONNECT
+httpRequestContentType=application/json       # request content type for POST
+httpWaitingDelay=1000                         # in ms
+httpReadResponseTimer=300                     # 30 seconds
+httpReadSomeResponseDelay=50                  # in milliseconds
+httpReadNoResponseDelay=500                   # in milliseconds
+httpMaxResponseLineLength=2048                # 2048 octets
+httpReportErrors=F
+httpQueryStore=store
+httpQueryDept=dept
+httpQueryModel=model
+httpQueryPLU=plu
+httpQueryWeight=weight
+httpQueryQuantity=prod_qty
+httpQueryLanguage=lang
+httpUseOfflineSpool=T
+httpOfflineSpoolRetry=30                      # in minutes
+httpOfflineSpoolMaxRequestAge=14              # in days
+
+expandedTextWidth=420
+expandedTextHeight=420
+expandedTextFontName=Hobart
+expandedTextPointSize=5
+specialMessageWidth=420
+specialMessageHeight=420
+specialMessageFontName=Hobart
+specialMessagePointSize=5
+productNoteWidth=420
+productNoteHeight=420
+productNoteFontName=Hobart
+productNotePointSize=5
+marqueeTextWidth=420
+marqueeTextHeight=420
+marqueeTextFontName=Hobart
+marqueeTextPointSize=5
+productText5Width=420
+productText5Height=420
+productText5FontName=Hobart
+productText5PointSize=5
+productText6Width=420
+productText6Height=420
+productText6FontName=Hobart
+productText6PointSize=5
+productText7Width=420
+productText7Height=420
+productText7FontName=Hobart
+productText7PointSize=5
+productText8Width=420
+productText8Height=420
+productText8FontName=Hobart
+productText8PointSize=5
+productText9Width=420
+productText9Height=420
+productText9FontName=Hobart
+productText9PointSize=5
+
+prodDescriptionWidth=420
+prodDescriptionHeight=100
+prodDescriptionFontName=Hobart
+prodDescriptionPointSize=10
+coolTrackingTextWidth=420
+coolTrackingTextHeight=80
+coolTrackingTextFontName=Hobart
+coolTrackingTextPointSize=5
+
+maxLabelLengthPct=70
+maxLabelLengthPctEpp=50
+
+dimBLength1_000=264
+dimBLength1_500=365
+dimBLength1_750=416
+dimBLength2_000=467
+dimBLength2_375=543
+dimBLength2_500=567
+dimBLength3_000=666
+dimBLength3_500=772
+dimBLength4_000=876
+dimBLength4_500=977
+dimBLength5_000=1079
+dimBLength5_500=1181
+dimBLength6_000=1282
+dimBLength6_500=1381
+dimBLength7_000=1486
+dimBLength7_500=1585
+dimBLength8_000=1676
+dimBLength8_500=1778
+dimBLength9_000=1880
+dimBLength9_500=1991
+dimBLength10_00=2082
+dimBLengthContinuous=4999
+
+# GCD related
+gcdEnabled=T
+gcdEnabledStandalone=T
+desktopStoreLogoPath=/usr/local/hobart/user/graphics
+desktopStoreLogoFileName=StoreLogo
+deviceStoreLogoPath=/sdmemory/images/ImageFiles
+deviceStoreLogoFileName=StoreLogo
+deviceApplicationUpdatesDir=/sdmemory/application_updates
+deviceApplicationUpdatesSourceFileName=source.bin
+devicePlaylistUpdatesDir=/sdmemory/playlist_updates
+localTempDir=/usr/local/hobart/gcdTmp
+adapterDescSearchRNDIS=HLX GCD (RNDIS Network Adapter)
+ipSubnetMask=255.255.255.0
+ipAddressHLX=127.0.0.1
+ipAddressGCD=127.0.0.1
+gcdServerPort=27015
+gcdDisplayObjectXmlPathFormat=/SDMemory/TLXML/TLXML%d%d.xml
+gcdDiscoveryMessage=_GCD_
+gcdDiscoveryPort=27016;
+
+goodBeepEnabled=F
+#goodBeepFrequency=
+#goodBeepPeriod=
+#goodBeepDelay=
+badBeepEnabled=F
+#badBeepFrequency=
+#badBeepPeriod=
+#badBeepDelay=
+
+UpKeyboardXCoordinate = 0
+UpKeyboardYCoordinate = 60
+UpKeyboardWidth = 0
+UpKeyboardHeight = 0
+DownKeyboardXCoordinate = 0
+DownKeyboardYCoordinate = 550
+DownKeyboardWidth  = 0
+DownKeyboardHeight = 0
+MiddleKeyboardXCoordinate = 0
+MiddleKeyboardYCoordinate = 190
+MiddleKeyboardWidth  = 0
+MiddleKeyboardHeight = 0
+
+
+webPagesDir=/var/www
+
+
+# Following used by appLauncher
+AdministratorAllowedUIAccess=T
+
+# Following used by appRunOnce, along with startupDelay directly above
+appRunOnce.runForever=F
+
+
+# New for Fastrack
+
+exceptionsDisplayDialog=F
+notifyWhenCfgIReloaded=F
+notifyWhenConfigDebugReloaded=T
+
+ProductDiscountLevel1Label=Gold
+ProductDiscountLevel2Label=Silver
+ProductDiscountLevel3Label=Bronze
+
+defaultFontName=Hobart
+noFontSelectedName=
+fontExtensions=.ttf
+systemFontsDir=/usr/local/hobart/system/fonts
+userFontsDir=/usr/local/hobart/user/fonts
+
+notifyUIOfUpdateStatus=F
+
+delayBetweenManagerThreadMessages=250
+delayBetweenSessionMessages=10
+
+cfgIParameterNotFoundThrowsException=F
+
+numberOfProductTexts=9
+
+accumItemsLabelFamilyStart=180
+accumItemsItemLabelType=177
+accumItemsTotalsOnlyLabelFamilyStart=191
+accumItemsItemCountRenderNotify=99
+accumItemsSimulatePrinting=F
+
+printerStatusNonRepeatingMsgsToUI=T
+
+continuousNetworkStatusDelay=30  # in seconds
+networkConnectivityOnlineWaitPeriodSecs=10
+networkConnectivityOfflineWaitPeriodSecs=10
+networkConnectivityOfflineRetransmissionPeriodSecs=300
+networkConnectivityInterfaceDetectionTime=5  # in seconds
+
+AutoTesterNeedsLabelTaken=F
+
+planogramsEnabled=T
+
+maxBestSellerSoftkeys=42
+maxBestSellerSoftkeysFromFeature=T
+
+softKeyPluNumberBeforeName=T
+softKeyNewlineBetweenPluNumberAndName=T
+
+messageLoggingDirectory=/usr/local/hobart
+messageLoggingInfoFilename=info.log
+messageLoggingWarningsFilename=warnings.log
+messageLoggingErrorsFilename=errors.log
+messageLoggingStartupShutdownFilename=shutdown.dat
+messageLoggingScaleEventsFilename=scaleEvents.log
+messageLoggingDataMaintenanceFilename=dataMaintenance.log
+messageLoggingScheduledEventsFilename=scheduledEvents.log
+messageLoggingMaxFileSize=0		# Bytes
+
+operAccessLevelsForProductsEnabled=T
+
+recallsEnabled=T
+
+productUINutriLabelNum=10080
+productSupportTextLabelNum=10098
+
+unDimScreenOnZeroWeight=F
+unDimScreenOnNonZeroWeight=F
+unDimScreenOnTapPlatter=F
+
+commRequiresDataTypeTag=F
+
+downloadDir=/usr/local/hobart/download
+downloadFileSpecifiers=*.ht,*.hlx,*.dat,*.label_tagged,*.bin,*.zip
+# how often do we check for files in the download directory
+downloadCheckingIntervalTimer=60  # in seconds
+# once we see the first file appear in the download directory, we will wait
+# this number of seconds to go looking to see if any more files showed up,
+# or if any files have changed in size (they are still downloading)
+downloadCheckingUpdateTimer=30     # in seconds
+downloadProcessingDir=/usr/local/hobart/pending
+downloadOutputDir=/usr/local/hobart/output
+
+remoteScaleMaintenanceEnabled=F
+remoteScaleMaintClrOutboxDays=0		# Number of days for files to sit in the outbox before removing them. If zero - don't remove.
+
+keepCopyOfProcessedData=F
+makeProcessedFilenameUnique=T
+processedDir=/usr/local/hobart/processed
+
+pythonEnabled=T
+smBackendPort=5076
+pythonScriptPort=5077
+pythonSftpUpdatePort=5078
+pythonDBBackupResponsePort=5079
+pythonDeviceEventMessageScriptName=sendDeviceEventMessage.py
+pythonSendSmBackendMessageScriptName=sendSmBackendMessage.py
+pythonGetBoardTypeScriptName=getBoardType.py
+scaleManagementHandlesUpgrade=T
+
+coreDumpEnabled=T
+
+defaultPingInterval=00:05
+
+switchToRunScreenOnStableWeight=F
+
+
+#If any 'DeleteAllFiles entry below is a directory, it has to end with the directory separator for this OS!
+
+DeleteAllFiles_name0=/usr/local/hobart/audio/
+DeleteAllFiles_recursive0=T
+DeleteAllFiles_exclusions0=bothChannels.aac,leftChannel.aac,rightChannel.aac
+
+DeleteAllFiles_name1=/usr/local/hobart/videos/
+DeleteAllFiles_recursive1=T
+DeleteAllFiles_exclusions1=Accumulate_Items_Video.mp4,FlashKey_Basics_Video.mp4,Printer_Overview_Video.mp4,Scale_Navigation_Video.mp4,Search_Capabilities_Video.mp4,Super_ConfigOp_Video.mp4,Super_Cool_Video.mp4,Super_FlashkeyEd_Video.mp4,Super_OpScreen_Video.mp4,Super_Overview_Video.mp4,Tare_Functionality_Video.mp4
+
+DeleteAllFiles_name2=/usr/local/hobart/playlists/
+DeleteAllFiles_recursive2=T
+DeleteAllFiles_exclusions2=playlist.txt
+
+DeleteAllFiles_name3=/usr/local/hobart/images/
+DeleteAllFiles_exclusions3=hti8.bmp
+
+DeleteAllFiles_name4=/usr/local/hobart/images/planograms/
+DeleteAllFiles_recursive4=T
+
+DeleteAllFiles_name5=/usr/local/hobart/images/selfServe/
+DeleteAllFiles_recursive5=T
+
+DeleteAllFiles_name6=/usr/local/hobart/info.log
+
+DeleteAllFiles_name7=/usr/local/hobart/layouts/storelogo.png
+
+
+appUpgradeIndicatorFile=/etc/hobart/vmTmp/appInstaller.log
+appInstallerPath=/etc/hobart/vmTmp/SC/appInstaller.sh
+
+licensePackageStrings=SCALE_FULLSCREEN_FLASHKEYS,SCALE_FPP,SCALE_WEB_BROWSER,SCALE_OFFICE_VIEWER,SCALE_PDF_VIEWER,SCALE_NOW_SERVING,SCALE_TRANS_GCD,SCALE_PRINTER_EPP,SCALE_MEAL_BUILDER,SCALE_CAT3_AUDITTRAIL,SCALE_REMOTE_PRINTING,SCALE_DIGIMARC,SCALE_PICK5,SCALE_CODE_CHECKER,SCALE_HANDSFREEDEVICE,SCALE_INTERNATIONAL_ROUNDING,SCALE_ENHANCED_CENTERSCREEN
+
+usbPrinterOutputFilename=/etc/hobart/labelImage.bmp
+usbPrinterXCoordinate=10
+usbPrinterYCoordinate=10
+
+networkPrinterDriversDirectory=/usr/share/cups/model/
+knownUsbPrinters=Zebra
+knownUsbPrinterDrivers=zebra.ppd
+# knownLanPrinters=Zebra,Epson,HP PhotoJet
+# knownLanPrinterDrivers=zebra.ppd,pxlcolor.ppd,pxlcolor.ppd
+
+extPrintersPDFExtensions=pdf
+extPrintersDOCExtensions=doc,docx,xls,xlsx
+defaultGhostScriptDevice=laserjet
+ghostScriptDevices=Ricoh MP C4503 PXL|laserjet
+
+mfgTestServer=10.31.17.3
+
+stagingDir=/usr/local/hobart/staging
+
+staticProductDataTarballName=staticProductData.tar.gz
+
+maxCutTestNumber=9999
+requireMeatSpecSheet=T
+cat3AuditTrailDefaultFileName=/usr/local/hobart/cat3AuditTrail.csv
+cat3WeigherConfigFileName=/usr/local/hobart/cat3WeigherConfig.ht
+
+selfServePrintToScreenFilename=/tmp/printToScreen.bmp
+selfServePrintToScreenLabelType=10070
+selfServePrintToScreenLabelTypeFS=10071
+
+conserveContinuousStockByNotSizing=T
+
+unitPricePrintOptionsEnabled=1234
+unitPricePrintExactCalcBackupMethod=3
+
+saveLabel=F
+
+# Costco - special config settings
+ignoreVendorAndProductNumTagsWhenUpcNumTag=F
+forceNonZeroByCountForFixedWeightItems=F
+
+scaleSettingsFile=/usr/local/hobart/db/settingswizard/scalesettings
+
+HFPDDIpAddress=127.0.0.1
+HFPDDPort=5100
+consecutiveTimesClosestToBeLoggedIn=5
+getDevicesInLoginRangeInterval=3  # in seconds
+getDevicesInLoginRangeAge=2
+getDevicesInRangeInterval=0       # in seconds, Not setting this up right now
+getDevicesInRangeAge=30
+
+# Unknown
+
+StdLogOutDir=/home/Hobart/AccessScale/
+StdLogOutPriority=199
+StdLogOutMaxFileSize=10000000
+
+systemDir=/usr/local/hobart/system
+userDir=/usr/local/hobart/user
+
+# countdownMode=3		# short, either 1=by-weight, 2=by-value, 3=by-packages

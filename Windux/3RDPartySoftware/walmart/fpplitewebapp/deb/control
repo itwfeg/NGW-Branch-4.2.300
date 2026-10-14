@@ -1,0 +1,10 @@
+Package: hobart-fpplite-app
+Version: 1.3-0
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides the Walmart FPP Lite application.
+ .
+ This package contains the binary and base configuration. For
+ customization please use HTe.
+

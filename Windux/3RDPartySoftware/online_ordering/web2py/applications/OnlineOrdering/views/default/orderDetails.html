@@ -1,0 +1,390 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<link href="{{=URL('static', 'css/order_list.css')}}" rel="stylesheet" type="text/css" />
+{{end}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/order_details.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="actionModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <!--<div class="modal-header" style="text-align: center;">
+          <h3 id="actionModal-item" style="text-align: center; width: 100%; text-overflow: ellipsis;">item description goes here</h3>
+        </div>-->
+      <div class="modal-body" id="actionModal-body" style="text-align: center;">
+        <h2 id="actionModal-PLU">PLU: ???</h2>
+        <h4 id="actionModal-description" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">???</h4>
+        <h4 id="actionModal-qty">Qty.: ???</h4>
+        <hr style="margin-top: 1em; margin-bottom: 1em;"/>
+        <div class="row justify-content-between">
+          <div class="col-6">
+            <button type="button" class="bottomButton btn bottomButtonRed" id="actionModal-cancel"><img class="btn-icon no-drag" src="{{=URL('static','images/cancel_icon.svg')}}" draggable="false"><br>Cancel</button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="bottomButton btn" id="actionModal-substitute"><img class="btn-icon no-drag" src="{{=URL('static','images/substitute_icon.svg')}}" draggable="false"><br>Substitute</button>
+          </div>
+        </div>
+        <br />
+        <div class="row justify-content-between">
+          <div class="col-6">
+            <button type="button" class="bottomButton btn bottomButtonOrange" id="actionModal-reset"><img class="btn-icon no-drag" src="{{=URL('static','images/broom_icon.svg')}}" draggable="false"><br>Reset</button> <!--selectResetItem(this)-->
+          </div>
+          <div class="col-6">
+            <button type="button" class="bottomButton" id="actionModal-fill"><img class="btn-icon no-drag" src="{{=URL('static','images/fill_icon.svg')}}" draggable="false"><br>Fill</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="continueModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="continueModal-body">
+        Not all items are marked as complete.<br>Complete order anyway?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="continueModal-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="continueModal-continue">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="lockedModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="lockedModal-body">
+        This order has already been started.<br>Continue anyway?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="lockedModal-back" onmouseup="selectBack(this);">Back</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="lockedModal-continue" data-dismiss="modal">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="completeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="completeModal-body">
+        All items finished.<br>Mark order as complete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-hobart btn-lg" id="completeModal-back" data-dismiss="modal">Back</button>
+        <button type="button" class="btn btn-success btn-lg" id="completeModal-complete" onmouseup="selectComplete();" data-dismiss="modal">Complete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="cannotModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cannot Fill Item?</h4>
+        </div>
+      <div class="modal-body" id="cannotModal-body">
+        <div class="form-group row justify-content-between">
+          <label for="cannotModal-PLU" class="col-2">PLU</label>
+          <input type="text" class="form-control form-control-lg col-7 contrast-readonly" id="cannotModal-PLU" placeholder="" readonly>
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="cannotModal-qty" class="col-2">#</label>
+          <input type="text" class="form-control form-control-lg col-7 contrast-readonly" id="cannotModal-qty" placeholder="" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reason</span>
+          </div>
+          <input type="text" class="form-control form-control-lg contrast-rw" id="cannotModal-reason">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="cannotModal-cancel" data-dismiss="modal">Cancel Item</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="cannotModal-keep" data-dismiss="modal">Keep Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="cancelledModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Order Cancelled</h4>
+        </div>
+      <div class="modal-body" id="cancelledModal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reason</span>
+          </div>
+          <textarea class="form-control form-control-lg contrast-readonly" id="cancelledModal-reason" readonly></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="cancelledModal-ok" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="substituteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Substitute Item?</h4>
+        </div>
+      <div class="modal-body" id="substituteModal-body">
+        <div class="form-group row justify-content-between">
+          <label for="substituteModal-oldPLU" class="col-4" style="font-size: x-large; white-space: nowrap;">Old PLU</label>
+          <input type="text" class="form-control form-control-lg contrast-readonly col-4" id="substituteModal-oldPLU" placeholder="" readonly>
+          <div class="col-4"></div>
+        </div><!--
+        <div class="form-group row justify-content-between">
+          <label for="substituteModal-qty" class="col-4">Old #</label>
+          <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="substituteModal-oldqty" placeholder="" readonly>
+        </div>-->
+        <div class="form-group row justify-content-between">
+          <label for="substituteModal-PLU" class="col-4" style="font-size: x-large; white-space: nowrap;">New PLU</label>
+          <input type="text" class="form-control form-control-lg col-4 contrast-rw" id="substituteModal-PLU" placeholder="">
+          <div class="col-4">
+            <button type="button" class="btn btn-hobart btn-lg" id="substituteModal-search" data-dismiss="modal" onmouseup="showSearchSubstitute();">Search...</button>
+          </div>
+        </div><!--
+        <div class="form-group row justify-content-between">
+          <label for="substituteModal-qty" class="col-4">New #</label>
+          <input type="text" class="form-control form-control-lg col-7 contrast-rw" id="substituteModal-qty" placeholder="">
+        </div>-->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Reason</span>
+          </div>
+          <input type="text" class="form-control form-control-lg contrast-rw" id="substituteModal-reason">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="substituteModal-submit" data-dismiss="modal">Substitute Item</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="substituteModal-keep" data-dismiss="modal">Keep Item</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="addItemModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Item?</h4>
+        </div>
+      <div class="modal-body" id="addItemModal-body">
+        <!--<div class="form-group row justify-content-between">
+          <label for="addItemModal-PLU" class="col-4" style="font-size: x-large; white-space: nowrap;">PLU</label>
+          <input type="text" class="form-control form-control-lg col-4 contrast-rw" id="addItemModal-PLU" placeholder="">
+          <div class="col-4">
+            <button type="button" class="btn btn-hobart btn-lg" id="addItemModal-search" data-dismiss="modal" onmouseup="showSearchSubstitute();">Search...</button>
+          </div>
+        </div>-->
+        <div class="row">
+          <div class="input-group col-8">
+            <div class="input-group-prepend">
+              <span class="input-group-text">PLU</span>
+            </div>
+            <input type="text" class="form-control form-control-lg contrast-rw" id="addItemModal-PLU">
+          </div>
+          <div class="col-4">
+            <button type="button" class="btn btn-hobart btn-lg" id="addItemModal-search" data-dismiss="modal" onmouseup="showSearchAdd();">Search...</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="addItemModal-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="addItemModal-add" onmouseup="addItem()" data-dismiss="modal">Add</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="searchModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="searchModal-body" style="max-height: 500px;">
+        <div class="form-group row justify-content-between">
+          <div class="col-1"></div>
+          <input type="text" class="form-control form-control-lg col-6 col-md-7 contrast-rw" id="searchModal-string" placeholder="Search by product name...">
+          <div class="col-2 hideOnCenter"></div>
+          <div class="col-3 col-md-2"><button type="button" class="btn btn-hobart btn-lg btn-block" id="searchModal-lookup" onmouseup="searchProds();"><img class="btn-icon-small no-drag" src="{{=URL('static','images/search_icon.svg')}}" draggable="false"></button></div>
+          <div class="col-1 col-md-1"></div>
+        </div>
+
+      <hr style="display: none;"/>
+      
+      <div id="searchModal-results" style="overflow-y: auto; overflow-x: hidden; max-height: 350px;">
+      <div class="row template mb-3 row-center search-result">
+        <div class="col-1 hideOnCenter"></div>
+        <div class="col-8 col-md-6 align-self-center searchModal-lookupName searchModal-field">???</div>
+        <div class="col-2 col-md-2 align-self-center searchModal-lookupPrice searchModal-field hideOnCenter">???</div>
+        <div class="searchModal-PLU" style="display: none;">???</div>
+        <div class="col-3 col-md-2"><button type="button" class="btn btn-hobart btn-lg btn-block" onmouseup=""><img class="btn-icon-small no-drag" src="{{=URL('static','images/plus_icon.svg')}}" draggable="false"></button></div>
+        <div class="col-1"></div>
+      </div>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="fillByCountModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="fillByCountModal-body">
+        <div style="text-align: center;">
+          <h2 id="fillByCountModal-PLU"></h2>
+          <h4 id="fillByCountModal-description"></h4>
+          <h4 id="fillByCountModal-qty"></h4>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Instructions</span>
+            </div>
+            <textarea id="fillByCountModal-instructions" class="form-control form-control-lg contrast-readonly" readonly></textarea>
+          </div>
+        </div>
+        <div class="row justify-content-between mr-4">
+          <div class="col-3"><button type="button" id="fillByCountModal-print" data-dismiss="modal" class="bottomButton"><img class="btn-icon no-drag" src="{{=URL('static','images/printer_icon.svg')}}" draggable="false"><br>Print</button></div>
+          <div class="col-3"><button type="button" class="bottomButton" id="fillByCountModal-lookup" data-dismiss="modal"><img class="btn-icon no-drag" src="{{=URL('static','images/details_icon.svg')}}" draggable="false"><br>Load PLU</button></div>
+          <div class="col-3"><button type="button" class="bottomButton bottomButtonGreen" id="fillByCountModal-keep" data-dismiss="modal"><img class="btn-icon no-drag" src="{{=URL('static','images/check_icon.svg')}}" draggable="false"><br>Done</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="modal" id="fillByCountModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Fill Item</h4>
+        </div>
+      <div class="modal-body" id="fillByCountModal-body">
+
+        <div class="form-group row justify-content-between">
+          <label for="fillByCountModal-PLU" class="col-4">PLU</label>
+          <input type="text" class="form-control form-control-lg col-7 contrast-readonly" id="fillByCountModal-PLU" placeholder="" readonly>
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="fillByCountModal-qty" class="col-4">#</label>
+          <input type="text" class="form-control form-control-lg col-7 contrast-readonly" id="fillByCountModal-qty" placeholder="" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Instructions</span>
+          </div>
+          <input type="text" class="form-control form-control-lg contrast-readonly" id="fillByCountModal-instructions" readonly></input>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-lg" id="fillByCountModal-print" data-dismiss="modal">Fill</button>
+        <button type="button" class="btn btn-hobart btn-lg" id="fillByCountModal-keep" data-dismiss="modal">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<div class="container main-container">
+<div id="informationDiv" class="orderDetailsDiv">
+   <table class="orderDetailsTable">
+       <tbody>
+           <tr>
+               <td>Order</td>
+               <td id="orderNum"></td>
+               <td class="tableSpacer"></td>
+               <td>Status</td>
+               <td id="orderStatus"></td>
+               <td><button type="button" class="bottomButton" onmouseup="printReport(this);" id="reportButton"><img class="btn-icon no-drag" draggable="false" src="/OnlineOrdering/static/images/person_icon.svg"><br>Order Label</button></td>
+           </tr>
+           <tr>
+               <td>Name</td>
+               <td id="orderName"></td>
+               <td class="tableSpacer"></td>
+               <td>Operator</td>
+               <td id="orderOperator"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Delivery</td>
+               <td id="orderTime"></td>
+               <td class="tableSpacer"></td>
+               <td>Finish</td>
+               <td id="orderFinish"></td>
+               <td></td>
+           </tr>
+       </tbody>
+   </table>
+</div>
+
+<div id="tableDataDivDetails" class="orderDataDivContent grayOut">
+<table id="tableOrderData" class="orderDataTableContent">
+    <thead id="tableHeader" class="orderDataTableTitle orderDataDivTitle">
+    <tr class="orderDataRowTitle">
+      <th class="itemNumberCol">PLU</th>
+      <th class="descriptionCol">Description</th>
+      <th class="byCountCol">Qty</th>
+      <th class="priceCol">Price</th>
+      <th class="fillOrderCol"></th>
+      <th class="orderNumIdCol hiddenCol">OrderNumID</th>
+      <th class="productTypeCol hiddenCol">ProductType</th>
+      <th class="allowSubstitutionsCol hiddenCol">AllowSubstitutions</th>
+    </tr>
+  </thead>
+	<tbody id="orderData">
+	</tbody>
+	<tbody style="display: none;">
+		<tr id="orderDataRowToClone" onmouseup="actionButton(this.children[4].children[0]);">
+			<td class="itemNumberCol"></td>
+			<td class="descriptionCol"></td>
+			<td class="byCountCol"></td>
+			<td class="priceCol"></td>
+			<td class="fillOrderCol">
+			  <button type="button" class="fillButton" onmouseup="actionButton(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/fill_icon.svg')}}" draggable="false"></button>
+        <button type="button" class="XButton" onmouseup="actionButton(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/cancel_icon.svg')}}" draggable="false"></button>
+        <button type="button" class="doneButton" onmouseup="actionButton(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/check_icon.svg')}}" draggable="false"></button>
+        <button type="button" class="substituteButton" onmouseup="actionButton(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/substitute_icon.svg')}}" draggable="false"></button>
+      </td>
+      <td class="orderNumIdCol hiddenCol"></td>
+      <td class="productTypeCol hiddenCol"></td>
+      <td class="allowSubstitutionsCol hiddenCol"></td>
+		</tr>
+		<tr id="addItemRowToClone" class="orderDataRow addItemRow">
+			<td class="itemNumberCol"></td>
+			<td class="descriptionCol">Add item to order.</td>
+			<td class="byCountCol"></td>
+			<td class="priceCol"></td>
+			<td class="fillOrderCol">
+			  <button type="button" class="fillButton" onmouseup="showAddItemModal()"><img class="btn-icon no-drag" src="{{=URL('static','images/plus_icon.svg')}}" draggable="false"></button>
+            </td>
+            <td class="orderNumIdCol hiddenCol"></td>
+            <td class="productTypeCol hiddenCol"></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div id="bottomButtonRow" class="row justify-content-between">
+  <div class="col-2 col-sm-3 col-md-2"><button type="button" class="bottomButton" id="homeButton" onmouseup="selectBack(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/back_icon.svg')}}" draggable="false"><br>Back</button></div>
+  <div class="col-2 col-sm-3 col-md-2 hideOnCenter"><button type="button" class="bottomButton bottomButtonOrange" id="resetOrder" onmouseup="selectResetOrder(this)""><img class="btn-icon no-drag" src="{{=URL('static','images/broom_icon.svg')}}" draggable="false"><br>Reset All</button></div>
+<!--  <div class="col-2 col-sm-3 col-md-2"><button type="button" class="bottomButton" id="resetItem" onmouseup="selectResetItem(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/broom_icon.svg')}}" draggable="false"><br>Reset Item</button></div>-->
+  <div class="col-2 col-sm-3 col-md-2"><button type="button" class="bottomButton bottomButtonRed" id="cancelButton"  name="cancelButton"  onmouseup="selectCancel(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/cancel_icon.svg')}}" draggable="false"><br>Cancel Order</button></div>
+  <div class="col-2 col-sm-3 col-md-2"><button type="button" class="bottomButton bottomButtonGreen" id="completeButton" onmouseup="selectComplete(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/check_icon.svg')}}" draggable="false"><br>Complete</button></div>
+</div>

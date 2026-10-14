@@ -1,0 +1,279 @@
+Installation log for: Softek Barcode Reader Toolkit for Windows 8.1.1.4
+Install date: 11-Feb-2015 9:13:03a
+Install type: New
+Install location: c:\tmp\Softek Barcode 8.1.1.4
+Installer version: 25.1
+Product version: 8.1.1.4
+Overwriting version: 8.1.1.4
+Operating system: Windows 7 Professional Service Pack 1
+
+Granting rights to directory "c:\tmp\Softek Barcode 8.1.1.4"...OK
+cimage.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\cimage.dll
+DebenuPDFLibrary64DLL1113.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\DebenuPDFLibrary64DLL1113.dll
+DebenuPDFLibraryDLL1113.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\DebenuPDFLibraryDLL1113.dll
+README.txt >>> c:\tmp\Softek Barcode 8.1.1.4\bin\README.txt
+REGISTER.BAT >>> c:\tmp\Softek Barcode 8.1.1.4\bin\REGISTER.BAT
+REGISTER64.BAT >>> c:\tmp\Softek Barcode 8.1.1.4\bin\REGISTER64.BAT
+SoftekBarcode.ocx >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcode.ocx
+SoftekBarcode64COM.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcode64COM.dll
+SoftekBarcode64DLL.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcode64DLL.dll
+SoftekBarcode64DLL.lib >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcode64DLL.lib
+SoftekBarcode64Lib.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcode64Lib.dll
+SoftekBarcodeCOM.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcodeCOM.dll
+SoftekBarcodeDLL.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcodeDLL.dll
+SoftekBarcodeDLL.lib >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcodeDLL.lib
+SoftekBarcodeLib.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcodeLib.dll
+SoftekBarcodeNet.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekBarcodeNet.dll
+SoftekSDK64Demo.exe >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekSDK64Demo.exe
+Binding c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekSDK64Demo.exe : OK
+SoftekSDKDemo.exe >>> c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekSDKDemo.exe
+Binding c:\tmp\Softek Barcode 8.1.1.4\bin\SoftekSDKDemo.exe : OK
+VeryPDFLibrary.dll >>> c:\tmp\Softek Barcode 8.1.1.4\bin\VeryPDFLibrary.dll
+documentation.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\documentation.pdf
+IMG_0001.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\images\adobe pdf\IMG_0001.pdf
+IMG_0002.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\images\adobe pdf\IMG_0002.pdf
+IMG_0003.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\images\adobe pdf\IMG_0003.pdf
+IMG_0004.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\images\adobe pdf\IMG_0004.pdf
+multipage.pdf >>> c:\tmp\Softek Barcode 8.1.1.4\images\adobe pdf\multipage.pdf
+code128_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_01.tif
+code128_02.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_02.tif
+code128_03.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_03.tif
+code128_04.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_04.tif
+code128_05.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_05.tif
+code128_06.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_06.tif
+code128_07.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_07.tif
+code128_08.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_08.tif
+code128_09.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_09.tif
+code128_10.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_10.tif
+code128_11.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_11.tif
+code128_skew_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code128_skew_01.tif
+code25_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_01.tif
+code25_02.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_02.tif
+code25_03.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_03.tif
+code25_04.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_04.tif
+code25_05.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_05.tif
+code25_06.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_06.tif
+code25_07.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_07.tif
+code25_08.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code25_08.tif
+code39_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_01.tif
+code39_02.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_02.tif
+code39_03.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_03.tif
+code39_04.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_04.tif
+code39_05.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_05.tif
+code39_06.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_06.tif
+code39_07.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_07.tif
+code39_08.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_08.tif
+code39_09.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_09.tif
+code39_10.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_10.tif
+code39_11.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\code39_11.tif
+datamatrix_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\datamatrix_01.tif
+datamatrix_02.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\datamatrix_02.tif
+datamatrix_03.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\datamatrix_03.jpg
+ean13.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\ean13.tif
+ean8.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\ean8.jpg
+composite.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\composite.jpg
+expanded_enc0100.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0100.jpg
+expanded_enc0101_3202.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0101_3202.jpg
+expanded_enc0101_3203.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0101_3203.jpg
+expanded_enc01100.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc01100.jpg
+expanded_enc01101.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc01101.jpg
+expanded_enc0111000.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111000.jpg
+expanded_enc0111001.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111001.jpg
+expanded_enc0111010.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111010.jpg
+expanded_enc0111011.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111011.jpg
+expanded_enc0111100.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111100.jpg
+expanded_enc0111101.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111101.jpg
+expanded_enc0111110.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111110.jpg
+expanded_enc0111111.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc0111111.jpg
+expanded_enc1.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_enc1.jpg
+expanded_stack_01.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_stack_01.jpg
+expanded_stack_02.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_stack_02.jpg
+expanded_stack_03.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_stack_03.jpg
+expanded_stack_04.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_stack_04.jpg
+expanded_stack_05.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\expanded_stack_05.jpg
+limited.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\limited.jpg
+photo_01.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_01.jpg
+photo_02.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_02.jpg
+photo_03.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_03.jpg
+photo_04.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_04.jpg
+photo_05.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_05.jpg
+photo_06.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\photo_06.jpg
+rss14_stack_01.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\rss14_stack_01.jpg
+rss14_stack_02.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\rss14_stack_02.jpg
+rss14_stack_03.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\rss14_stack_03.jpg
+rss14_stack_04.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\GS1 Databar\rss14_stack_04.jpg
+multi.JPG >>> c:\tmp\Softek Barcode 8.1.1.4\images\multi.JPG
+multipage.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\multipage.tif
+pdf417_01.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\pdf417_01.tif
+pdf417_02.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\pdf417_02.tif
+pdf417_03.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\pdf417_03.tif
+pdf417_04.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\pdf417_04.tif
+pdf417_05.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\pdf417_05.tif
+pen.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\pen.jpg
+kanji.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\kanji.jpg
+qrcode01.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode01.jpg
+qrcode02.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode02.jpg
+qrcode03.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode03.jpg
+qrcode04.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode04.jpg
+qrcode05.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode05.jpg
+qrcode06.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode06.jpg
+qrcode07.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode07.jpg
+qrcode08.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode08.jpg
+qrcode09.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode09.jpg
+qrcode10.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\qrcode10.jpg
+VALUES.txt >>> c:\tmp\Softek Barcode 8.1.1.4\images\qrcode\VALUES.txt
+sample_sheet.jpg >>> c:\tmp\Softek Barcode 8.1.1.4\images\sample_sheet.jpg
+001.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\001.tif
+002.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\002.tif
+003.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\003.tif
+004.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\004.tif
+005.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\005.tif
+006.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\006.tif
+007.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\007.tif
+008.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\008.tif
+009.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\009.tif
+010.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\010.tif
+011.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\011.tif
+012.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\012.tif
+013.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\013.tif
+014.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\014.tif
+015.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\015.tif
+016.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\016.tif
+017.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\017.tif
+018.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\018.tif
+019.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\019.tif
+020.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\020.tif
+021.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\021.tif
+022.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\022.tif
+023.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\023.tif
+024.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\024.tif
+025.tif >>> c:\tmp\Softek Barcode 8.1.1.4\images\speckled\025.tif
+SoftekBarcodeDLL.h >>> c:\tmp\Softek Barcode 8.1.1.4\include\SoftekBarcodeDLL.h
+go_x64.bat >>> c:\tmp\Softek Barcode 8.1.1.4\java\go_x64.bat
+go_x86.bat >>> c:\tmp\Softek Barcode 8.1.1.4\java\go_x86.bat
+image.tif >>> c:\tmp\Softek Barcode 8.1.1.4\java\image.tif
+sample.class >>> c:\tmp\Softek Barcode 8.1.1.4\java\sample.class
+sample.java >>> c:\tmp\Softek Barcode 8.1.1.4\java\sample.java
+Barcode.class >>> c:\tmp\Softek Barcode 8.1.1.4\java\Softek\Barcode.class
+Barcode.java >>> c:\tmp\Softek Barcode 8.1.1.4\java\Softek\Barcode.java
+LICENSE.txt >>> c:\tmp\Softek Barcode 8.1.1.4\LICENSE.txt
+Project1.dpr >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using com\Project1.dpr
+Project1.dproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using com\Project1.dproj
+SoftekATL_TLB.pas >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using com\SoftekATL_TLB.pas
+Unit1.dfm >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using com\Unit1.dfm
+Unit1.pas >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using com\Unit1.pas
+Project1.dpr >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\Project1.dpr
+Project1.dproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\Project1.dproj
+SoftekATL_TLB.pas >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\SoftekATL_TLB.pas
+Softekbarcode.pas >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\Softekbarcode.pas
+Unit1.dfm >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\Unit1.dfm
+Unit1.pas >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Delphi using win32 dll\Unit1.pas
+README.txt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\ASP\README.txt
+softekbarcode.asp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\ASP\softekbarcode.asp
+main.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\main.cpp
+main.dfm >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\main.dfm
+main.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\main.h
+Prueba_barcode.bdsproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\Prueba_barcode.bdsproj
+Prueba_barcode.bdsproj.local >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\Prueba_barcode.bdsproj.local
+Prueba_barcode.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\Prueba_barcode.cpp
+Prueba_barcode.res >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Borland C++ using DLL\Prueba_barcode.res
+README.txt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Delphi using DLL\README.txt
+SOFTEKBARCODE.PAS >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\Delphi using DLL\SOFTEKBARCODE.PAS
+README.txt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\contrib\README.txt
+Form1.frm >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\Visual Basic 6\Form1.frm
+Project1.vbp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\Visual Basic 6\Project1.vbp
+Project1.vbw >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\Visual Basic 6\Project1.vbw
+README.TXT >>> c:\tmp\Softek Barcode 8.1.1.4\projects\other\Visual Basic 6\README.TXT
+softekbarcode.rbp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\Real Studio\softekbarcode.rbp
+AssemblyInfo.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\AssemblyInfo.vb
+BarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\BarcodeReader.sln
+BarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\BarcodeReader.suo
+BarcodeReader.vbproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\BarcodeReader.vbproj
+Form1.resx >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\Form1.resx
+Form1.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using .net\Form1.vb
+AssemblyInfo.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\AssemblyInfo.vb
+BarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\BarcodeReader.sln
+BarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\BarcodeReader.suo
+BarcodeReader.vbproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\BarcodeReader.vbproj
+Form1.resx >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\Form1.resx
+Form1.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using com\Form1.vb
+AssemblyInfo.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\AssemblyInfo.vb
+BarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\BarcodeReader.sln
+BarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\BarcodeReader.suo
+BarcodeReader.vbproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\BarcodeReader.vbproj
+Form1.resx >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\Form1.resx
+Form1.vb >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VB.Net using win32 dll\Form1.vb
+App.ico >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\App.ico
+AssemblyInfo.cs >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\AssemblyInfo.cs
+BarcodeReader.csproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\BarcodeReader.csproj
+BarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\BarcodeReader.sln
+BarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\BarcodeReader.suo
+Form1.cs >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\Form1.cs
+Form1.resx >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC# using .net\Form1.resx
+app.ico >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\app.ico
+app.rc >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\app.rc
+AssemblyInfo.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\AssemblyInfo.cpp
+Form1.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\Form1.h
+Form1.resx >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\Form1.resx
+ReadMe.txt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\ReadMe.txt
+resource.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\resource.h
+SampleBarcodeReader.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\SampleBarcodeReader.cpp
+SampleBarcodeReader.vcproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\SampleBarcodeReader.vcproj
+stdafx.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\stdafx.cpp
+stdafx.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader\stdafx.h
+SampleBarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader.sln
+SampleBarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using .net\SampleBarcodeReader.suo
+SampleBarcodeReader.ico >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\res\SampleBarcodeReader.ico
+SampleBarcodeReader.rc2 >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\res\SampleBarcodeReader.rc2
+resource.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\resource.h
+SampleBarcodeReader.aps >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.aps
+SampleBarcodeReader.clw >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.clw
+SampleBarcodeReader.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.cpp
+SampleBarcodeReader.dsp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.dsp
+SampleBarcodeReader.dsw >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.dsw
+SampleBarcodeReader.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.h
+SampleBarcodeReader.opt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.opt
+SampleBarcodeReader.plg >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.plg
+SampleBarcodeReader.rc >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.rc
+SampleBarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.sln
+SampleBarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.suo
+SampleBarcodeReader.vcproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReader.vcproj
+SampleBarcodeReaderDlg.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReaderDlg.cpp
+SampleBarcodeReaderDlg.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\SampleBarcodeReaderDlg.h
+softekbarcode.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\softekbarcode.cpp
+softekbarcode.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\softekbarcode.h
+StdAfx.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\StdAfx.cpp
+StdAfx.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using ocx\StdAfx.h
+SampleBarcodeReader.ico >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\res\SampleBarcodeReader.ico
+SampleBarcodeReader.rc2 >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\res\SampleBarcodeReader.rc2
+resource.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\resource.h
+SampleBarcodeReader.aps >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.aps
+SampleBarcodeReader.clw >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.clw
+SampleBarcodeReader.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.cpp
+SampleBarcodeReader.dsp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.dsp
+SampleBarcodeReader.dsw >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.dsw
+SampleBarcodeReader.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.h
+SampleBarcodeReader.opt >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.opt
+SampleBarcodeReader.plg >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.plg
+SampleBarcodeReader.rc >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.rc
+SampleBarcodeReader.sln >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.sln
+SampleBarcodeReader.suo >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.suo
+SampleBarcodeReader.vcproj >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReader.vcproj
+SampleBarcodeReaderDlg.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReaderDlg.cpp
+SampleBarcodeReaderDlg.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SampleBarcodeReaderDlg.h
+softekbarcode.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\softekbarcode.cpp
+softekbarcode.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\softekbarcode.h
+SoftekBarcodeDLL.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\SoftekBarcodeDLL.h
+StdAfx.cpp >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\StdAfx.cpp
+StdAfx.h >>> c:\tmp\Softek Barcode 8.1.1.4\projects\VC++ using win32 dll\StdAfx.h
+README.txt >>> c:\tmp\Softek Barcode 8.1.1.4\README.txt
+RunDemo.bat >>> c:\tmp\Softek Barcode 8.1.1.4\RunDemo.bat
+UPGRADE_NOTES.txt >>> c:\tmp\Softek Barcode 8.1.1.4\UPGRADE_NOTES.txt
+
+Ignoring delayed deletion: c:\program files\google\chrome
+
+Start Menu Shortcut(SoftekSDKDemo.exe) >>> C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Softek Barcode Reader Toolkit\SoftekSDKDemo.exe.LNK
+Uninstaller Shortcut >>> C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Softek Barcode Reader Toolkit\Uninstall Softek Barcode Reader Toolkit for Windows 8.1.1.4.LNK
+Uninstaller Shortcut >>> c:\tmp\Softek Barcode 8.1.1.4\Uninstall\Uninstall Softek Barcode Reader Toolkit for Windows 8.1.1.4.LNK
+
+Installation Successful

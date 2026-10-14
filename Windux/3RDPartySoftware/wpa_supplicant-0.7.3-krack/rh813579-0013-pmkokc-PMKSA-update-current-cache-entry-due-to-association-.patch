@@ -1,0 +1,108 @@
+From 9ec44481a7ebc77e0c8345f908ff88f061cdb9ab Mon Sep 17 00:00:00 2001
+From: Dan Williams <dcbw@redhat.com>
+Date: Mon, 13 Aug 2012 17:05:51 -0500
+Subject: [PATCH] PMKSA: update current cache entry due to association and
+ disassociation
+
+---
+ src/rsn_supp/wpa.c              | 10 +++++++++-
+ src/rsn_supp/wpa.h              |  2 +-
+ wpa_supplicant/events.c         |  2 +-
+ wpa_supplicant/ibss_rsn.c       |  2 +-
+ wpa_supplicant/tests/test_wpa.c |  2 +-
+ 5 files changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+index a2c0773..8596815 100644
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -2106,11 +2106,12 @@ void wpa_sm_deinit(struct wpa_sm *sm)
+  * wpa_sm_notify_assoc - Notify WPA state machine about association
+  * @sm: Pointer to WPA state machine data from wpa_sm_init()
+  * @bssid: The BSSID of the new association
++ * @network_ctx: Network configuration context for this BSSID
+  *
+  * This function is called to let WPA state machine know that the connection
+  * was established.
+  */
+-void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
++void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid, void *network_ctx)
+ {
+ 	int clear_ptk = 1;
+ 
+@@ -2126,6 +2127,12 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+ 	if (os_memcmp(sm->preauth_bssid, bssid, ETH_ALEN) == 0)
+ 		rsn_preauth_deinit(sm);
+ 
++	if (!pmksa_cache_set_current(sm, NULL, bssid, network_ctx, 0)) {
++		wpa_printf(MSG_WARNING, "WPA: expected existing PMKSA cache "
++		           "entry for " MACSTR " but none found",
++		           MAC2STR(sm->bssid));
++	}
++
+ #ifdef CONFIG_IEEE80211R
+ 	if (wpa_ft_is_completed(sm)) {
+ 		/*
+@@ -2168,6 +2175,7 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+ void wpa_sm_notify_disassoc(struct wpa_sm *sm)
+ {
+ 	rsn_preauth_deinit(sm);
++	pmksa_cache_clear_current (sm);
+ 	if (wpa_sm_get_state(sm) == WPA_4WAY_HANDSHAKE)
+ 		sm->dot11RSNA4WayHandshakeFailures++;
+ }
+diff --git a/src/rsn_supp/wpa.h b/src/rsn_supp/wpa.h
+index 1077b5a..9d172f9 100644
+--- a/src/rsn_supp/wpa.h
++++ b/src/rsn_supp/wpa.h
+@@ -94,7 +94,7 @@ struct rsn_supp_config {
+ 
+ struct wpa_sm * wpa_sm_init(struct wpa_sm_ctx *ctx);
+ void wpa_sm_deinit(struct wpa_sm *sm);
+-void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid);
++void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid, void *network_ctx);
+ void wpa_sm_notify_disassoc(struct wpa_sm *sm);
+ void wpa_sm_set_pmk(struct wpa_sm *sm, const u8 *pmk, size_t pmk_len);
+ void wpa_sm_set_pmk_from_pmksa(struct wpa_sm *sm);
+diff --git a/wpa_supplicant/events.c b/wpa_supplicant/events.c
+index 5b70670..bc5ff9e 100644
+--- a/wpa_supplicant/events.c
++++ b/wpa_supplicant/events.c
+@@ -1583,7 +1583,7 @@ static void wpa_supplicant_event_assoc(struct wpa_supplicant *wpa_s,
+ 		 * smartcard or SIM/USIM. */
+ 		wpa_supplicant_scard_init(wpa_s, wpa_s->current_ssid);
+ 	}
+-	wpa_sm_notify_assoc(wpa_s->wpa, bssid);
++	wpa_sm_notify_assoc(wpa_s->wpa, bssid, wpa_s->current_ssid);
+ 	if (wpa_s->l2)
+ 		l2_packet_notify_auth_start(wpa_s->l2);
+ 
+diff --git a/wpa_supplicant/ibss_rsn.c b/wpa_supplicant/ibss_rsn.c
+index 046f181..e65163c 100644
+--- a/wpa_supplicant/ibss_rsn.c
++++ b/wpa_supplicant/ibss_rsn.c
+@@ -215,7 +215,7 @@ static int ibss_rsn_supp_init(struct ibss_rsn_peer *peer, const u8 *own_addr,
+ 		return -1;
+ 	}
+ 
+-	wpa_sm_notify_assoc(peer->supp, peer->addr);
++	wpa_sm_notify_assoc(peer->supp, peer->addr, NULL);
+ 
+ 	return 0;
+ }
+diff --git a/wpa_supplicant/tests/test_wpa.c b/wpa_supplicant/tests/test_wpa.c
+index 0d659ad..8ff8e5c 100644
+--- a/wpa_supplicant/tests/test_wpa.c
++++ b/wpa_supplicant/tests/test_wpa.c
+@@ -205,7 +205,7 @@ static int supp_init(struct wpa *wpa)
+ 		return -1;
+ 	}
+ 
+-	wpa_sm_notify_assoc(wpa->supp, wpa->auth_addr);
++	wpa_sm_notify_assoc(wpa->supp, wpa->auth_addr, NULL);
+ 
+ 	return 0;
+ }
+-- 
+1.7.11.2
+

@@ -1,0 +1,26 @@
+Building
+========
+
+There is a 'deploy.cmd' script which will build and deploy everything to the 'deploy' folder.
+
+Simply zip up or copy the 'sshd' folder to 'c:\sshd' and install.
+
+Installation
+============
+
+On the HTx machine you must have wodSSHD.dll (or wodSSHD64.dll) installed via 'regsrv32 wodSSHD.dll'.
+
+You will also need to register the service using 'C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe hobartsshd.exe'
+
+If you don't want to perform this manually there is a '_register_sshd.cmd' script to do this. You must run it as admin.
+
+Users
+=====
+
+To create a new user or to modify a user's password you need to create or modify the <username>.pub file.
+
+This file contains the md5 of a user's password + salt value.
+
+For example, if the salt is 'XX' and the users password is 'password' the md5 of 'passwordXX' is 'df8160a02d861143b384fcc3d8dae156'
+
+The 'user.pub' file will contain XXdf8160a02d861143b384fcc3d8dae156

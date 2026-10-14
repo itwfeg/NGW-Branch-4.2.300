@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>serviceFrequentShopper</class>
+ <widget class="QWidget" name="serviceFrequentShopper">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="lblShopperSettings">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>40</y>
+     <width>900</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+	color: white;
+     background: black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>Frequent shopper settings</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblRoundingMethod">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>110</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Rounding method:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbRoundingMethod">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>110</y>
+     <width>441</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbSetupFrequentShopper">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>230</y>
+     <width>441</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSetUpFrequentShopper">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>230</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Set up frequent shopper:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDefaultDiscountType">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>290</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Default discount type:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbDefaultDiscountType">
+   <property name="geometry">
+    <rect>
+     <x>518</x>
+     <y>290</y>
+     <width>441</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbDefaultDiscountFormula">
+   <property name="geometry">
+    <rect>
+     <x>518</x>
+     <y>350</y>
+     <width>441</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDefaultDiscountFormula">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>350</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Default discount formula:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbRoundingWeightPrecision">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>170</y>
+     <width>441</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblRoundingWeightPrecision">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>170</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Rounding weight precision:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkEnableGlobalPercentOff">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>410</y>
+     <width>451</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>481</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Enable Global Percent Off</string>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="txtGlobalPercentageOff">
+   <property name="geometry">
+    <rect>
+     <x>518</x>
+     <y>463</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>111</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>99999</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>8</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbGlobalPercentageOff">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>463</y>
+     <width>450</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>211</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>450</width>
+     <height>41</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Global Percentage Off:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblGlobalPercentOffProportionalTarePercent">
+   <property name="geometry">
+    <rect>
+     <x>664</x>
+     <y>470</y>
+     <width>26</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true">%</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

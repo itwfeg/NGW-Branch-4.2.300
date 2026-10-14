@@ -1,0 +1,1679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CuttingTestInitialInformation</class>
+ <widget class="QWidget" name="CuttingTestInitialInformation">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>571</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="grpStartCutTest">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>941</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QWidget" name="layoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="laySupplierNum">
+     <item>
+      <widget class="QLabel" name="supplierNumberLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>191</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Supplier number</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="supplierNumber">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>111</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>99999</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="commentButton">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>140</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Additional
+Comments</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="layProdNum">
+     <item>
+      <widget class="QLabel" name="productNumberLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>191</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Product number</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="hobart::numericLineEdit" name="productNumber">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>111</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>99999</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+    <zorder>productNumber</zorder>
+    <zorder>productNumberLabel</zorder>
+   </widget>
+   <widget class="QPushButton" name="startButton">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>20</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Start
+Cutting Test</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="layProdCost">
+     <item>
+      <widget class="QLabel" name="productCostLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>191</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Product cost</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="hobart::numericLineEdit" name="productCost">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>111</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>99999</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="layTestNum">
+     <item>
+      <widget class="QLabel" name="testNumberLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>391</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>391</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Cutting test number</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="testNumber">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>161</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1000</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="lblMessages">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>480</y>
+      <width>911</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>911</width>
+      <height>31</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>911</width>
+      <height>31</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string>Fill out all fields...</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="layProdWeight">
+     <item>
+      <widget class="QLabel" name="productWeightLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>191</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Product weight</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="hobart::numericLineEdit" name="productWeight">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>111</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>99999</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="suspendButton">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>260</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Put Cutting
+Test on Hold</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>360</y>
+      <width>641</width>
+      <height>43</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="layLotNum">
+     <item>
+      <widget class="QLabel" name="lotNumberLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>211</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>191</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string>Lot number</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lotNumber">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>111</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>99999</width>
+         <height>41</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #202020;</string>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="lblTimeDeets">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>460</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string> ( * 24 hour time )</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCalendarWidget" name="packingDateCalendar">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>20</y>
+      <width>561</width>
+      <height>461</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: black;</string>
+    </property>
+    <property name="minimumDate">
+     <date>
+      <year>2016</year>
+      <month>1</month>
+      <day>1</day>
+     </date>
+    </property>
+    <property name="firstDayOfWeek">
+     <enum>Qt::Sunday</enum>
+    </property>
+    <property name="verticalHeaderFormat">
+     <enum>QCalendarWidget::NoVerticalHeader</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="packingDateLabel">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>421</y>
+      <width>211</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>211</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>211</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string>Packing date</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="packingMinutes">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>421</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>41</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>41</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string notr="true"/>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblDotDot">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>426</y>
+      <width>11</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>11</width>
+      <height>31</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>11</width>
+      <height>31</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string>:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="packingHours">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>421</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>41</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>41</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string notr="true"/>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="packingDate">
+    <property name="geometry">
+     <rect>
+      <x>229</x>
+      <y>421</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>291</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>291</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Midlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Dark">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Mid">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Shadow">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Highlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="AlternateBase">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Midlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Dark">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Mid">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Shadow">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Highlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="AlternateBase">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="WindowText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Button">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Midlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Dark">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Mid">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Text">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>32</red>
+          <green>32</green>
+          <blue>32</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Shadow">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Highlight">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>51</red>
+          <green>153</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="AlternateBase">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string notr="true"/>
+    </property>
+    <property name="shortcut">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cancelCutTestButton">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>380</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Cancel
+Cut Test</string>
+    </property>
+   </widget>
+   <zorder>layoutWidget_6</zorder>
+   <zorder>commentButton</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>startButton</zorder>
+   <zorder>layoutWidget_3</zorder>
+   <zorder>layoutWidget_2</zorder>
+   <zorder>lblMessages</zorder>
+   <zorder>layoutWidget_5</zorder>
+   <zorder>suspendButton</zorder>
+   <zorder>layoutWidget_7</zorder>
+   <zorder>lblTimeDeets</zorder>
+   <zorder>packingDateLabel</zorder>
+   <zorder>packingMinutes</zorder>
+   <zorder>lblDotDot</zorder>
+   <zorder>packingHours</zorder>
+   <zorder>packingDate</zorder>
+   <zorder>packingDateCalendar</zorder>
+   <zorder>cancelCutTestButton</zorder>
+  </widget>
+  <widget class="QGroupBox" name="grpAdditionalComments">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>941</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QPushButton" name="skipCommentsButton">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>260</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Cancel
+Comments</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblInstructions">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>611</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+    <property name="text">
+     <string>Please enter any additional comments</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveCommentsButton">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>140</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Save
+Comments</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="txtComments">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>641</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #202020;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="returnToTestButton">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>380</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>171</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Return To
+Cut Test</string>
+    </property>
+   </widget>
+  </widget>
+  <zorder>grpAdditionalComments</zorder>
+  <zorder>grpStartCutTest</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

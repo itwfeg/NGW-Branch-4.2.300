@@ -1,0 +1,103 @@
+XpdfWidget/Qt
+=============
+
+The XpdfWidget software and documentation are
+copyright 2011-2019 Glyph & Cog, LLC.
+
+Email: info@glyphandcog.com
+WWW: http://www.glyphandcog.com/
+
+The PDF data structures, operators, and specification are
+documented in ISO 32000-1:2008.
+
+
+------------------------------------------------------------------------
+API DOCUMENTATION
+------------------------------------------------------------------------
+
+After unpacking the tar file, the API documentation will be located
+in .../XpdfWidgetQtSrc-x.y.z/doc/index.html .
+
+
+------------------------------------------------------------------------
+INSTALLATION USING QMAKE
+------------------------------------------------------------------------
+
+1. Unpack the tar file -- the following instructions will refer to
+   the source directory (.../XpdfWidgetQtSrc-x.y.z) as $dir.
+
+2. Copy the appropriate aconf-XXX.h file to aconf.h:
+      Windows: copy aconf-win32.h aconf.h
+      Linux:   cp aconf-linux.h aconf.h
+      Mac:     cp aconf-mac.h aconf.h
+
+3. Build FreeType, if needed.  The source can be downloaded from
+   http://www.freetype.org/download.html and you can use the
+   "misc/freetype.pro" file supplied with XpdfWidget to control the
+   build.
+
+4. Edit XpdfWidgetQt.pro and modify FREETYPE_INCLUDE_DIR and
+   FREETYPE_LIB_DIR to point to the directories containing the
+   FreeType headers and library.
+
+5. Run qmake:
+
+     qmake
+
+6. Build:
+
+     Windows:   nmake
+     Linux/Mac: make
+
+   That should leave the XpdfWidget library as:
+
+     $dir/libXpdfWidget.a
+
+7. To build the demo app, edit demo/XpdfWidgetQtDemo.pro, similarly to
+   step #4.  Then run qmake and make:
+
+     cd demo
+     qmake
+     make (or nmake)
+
+   That should leave the demo executable as:
+
+     $dir/demo/XpdfWidgetQtDemo
+
+
+------------------------------------------------------------------------
+QT QUICK / QML INTERFACE
+------------------------------------------------------------------------
+
+Building the Qt Quick / QML version of XpdfWidget is similar.  Follow
+steps 1-3 above.  Then:
+
+4. Rename "XpdfQuick.rename-to-pro" to "XpdfQuick.pro".
+
+5. Edit XpdfQuick.pro and modify FREETYPE_INCLUDE_DIR and
+   FREETYPE_LIB_DIR to point to the directories containing the
+   FreeType headers and library.
+
+6. Run qmake:
+
+     qmake XpdfQuick.pro
+
+7. Build:
+
+     Windows:   nmake
+     Linux/Mac: make
+
+   That should leave the XpdfQuick library as:
+
+     $dir/libXpdfQuick.a
+
+8. To build the demo app, edit xpdf-qt/quick-demo/XpdfWidgetQtDemo.pro,
+   similarly to step #5.  Then run qmake and make:
+
+     cd xpdf-qt/quick-demo
+     qmake
+     make (or nmake)
+
+   That should leave the demo executable as:
+
+     $dir/xpdf-qt/quick-demo/XpdfQuickDemo

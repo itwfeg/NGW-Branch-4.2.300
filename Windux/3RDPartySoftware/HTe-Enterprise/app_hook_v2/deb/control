@@ -1,0 +1,7 @@
+Package: hobart-hte-apphook
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides HTe Hook support.
+

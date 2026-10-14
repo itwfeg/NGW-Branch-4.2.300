@@ -1,0 +1,109 @@
+/**
+ * @file fileresourceevent.cpp
+ *
+ * @copyright Copyright (c) 2021, ITW Hobart Food Equipment Group, U.S.A.
+ * @author Randy Blankley
+ */
+
+#include "fileresourceevent.h"
+
+#include <QVector>
+
+static const QVector<uint> FILE_RESOURCE_EVENT = {4, 4, 0, 0};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::FileResourceEvent( uint type, uint subtype ) :
+    _Mybase( FILE_RESOURCE_EVENT )
+{
+    setType( type );
+    setSubtype( subtype );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::FileResourceEvent( uint type, uint subtype, const QString& filename, const QByteArray& data ) :
+    _Mybase( FILE_RESOURCE_EVENT )
+{
+    setType( type );
+    setSubtype( subtype );
+
+    setFilename( filename );
+    setData( data );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::FileResourceEvent( DeviceType device, uint event, uint type, uint subtype ) :
+    _Mybase( device, event, FILE_RESOURCE_EVENT )
+{
+    setType( type );
+    setSubtype( subtype );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::FileResourceEvent( DeviceType device, uint event, uint type, uint subtype, const QString& filename, const QByteArray& data ) :
+    _Mybase( device, event, FILE_RESOURCE_EVENT )
+{
+    setType( type );
+    setSubtype( subtype );
+
+    setFilename( filename );
+    setData( data );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::FileResourceEvent( const QByteArray& a ) :
+    _Mybase( a )
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+FileResourceEvent::~FileResourceEvent()
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+uint FileResourceEvent::type() const
+{
+    return _Mybase::data<uint>( 0 );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void FileResourceEvent::setType( uint value )
+{
+    _Mybase::setData( 0, value );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+uint FileResourceEvent::subtype() const
+{
+    return _Mybase::data<uint>( 1 );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void FileResourceEvent::setSubtype( uint value )
+{
+    _Mybase::setData( 1, value );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QString FileResourceEvent::filename() const
+{
+    return _Mybase::data<QString>( 2 );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void FileResourceEvent::setFilename( const QString& value )
+{
+    return _Mybase::setData( 2, value );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QByteArray FileResourceEvent::data() const
+{
+    return _Mybase::data<QByteArray>( 3 );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void FileResourceEvent::setData( const QByteArray& value )
+{
+    return _Mybase::setData( 3, value );
+}

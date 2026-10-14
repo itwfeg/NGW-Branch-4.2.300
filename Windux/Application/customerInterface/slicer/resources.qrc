@@ -1,0 +1,53 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="knobIcon">res/media_knob_increase.png</file>
+        <file alias="weightIcon">res/weight_icon.jpg</file>
+        <file alias="multipleSlicesIcon">res/multipleSlices.png</file>
+        <file alias="singleSliceIcon">res/singleSlice.png</file>
+        <file>res/subway_logo.png</file>
+        <file>res/downArrow.png</file>
+        <file>res/upArrow.png</file>
+        <file>res/service.png</file>
+        <file>res/supervisor.png</file>
+        <file>res/home2.png</file>
+        <file>res/menu.png</file>
+        <file>res/whole_foods_logo.png</file>
+        <file>res/btnBack.png</file>
+        <file>res/back-icon.png</file>
+        <file>res/leftarrow.png</file>
+        <file>res/rightarrow.png</file>
+        <file>res/menu12.png</file>
+        <file>res/alertmessage.png</file>
+        <file>res/weightsetting.png</file>
+        <file>res/calibrate.png</file>
+        <file>res/capsLockIcon.png</file>
+        <file>res/clearIcon.png</file>
+        <file>res/dismissIcon.png</file>
+        <file>res/backspaceIcon.png</file>
+        <file>res/returnIcon.png</file>
+        <file>res/black_weight_icon.png</file>
+        <file alias="menu-logo">res/menu-transparent.png</file>
+        <file alias="logo">res/hobartlogo.png</file>
+        <file>res/new_supervisor.png</file>
+        <file>res/serviceIconSmall.png</file>
+        <file>res/finishedSupervisor.png</file>
+        <file>res/clock.png</file>
+        <file>res/wrench.png</file>
+        <file>res/weight_icon.png</file>
+        <file>res/home.png</file>
+        <file>res/home3.png</file>
+        <file>res/multipleSlicesManual.png</file>
+        <file alias="multipleSlicesIconManual">res/manualStackLogo.png</file>
+        <file>res/downArrowInverted.png</file>
+        <file>res/upArrowInverted.png</file>
+        <file>res/Status.png</file>
+        <file>res/install.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>res/black_weight_icon.png</file>
+        <file>res/30SecTimeoutEnabled.png</file>
+        <file>res/30SecTimeoutDisabled.png</file>
+        <file>languages/lang_en_ca.qm</file>
+        <file>languages/lang_fr_ca.qm</file>
+    </qresource>
+</RCC>

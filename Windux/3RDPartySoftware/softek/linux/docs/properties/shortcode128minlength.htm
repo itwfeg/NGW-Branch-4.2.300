@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">ShortCode128MinLength</FONT>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>The smallest length allowed for a barcode of type "SHORTCODE128".
+		</P>
+		<P>
+		Default value =&nbsp;&nbsp;2
+		<P>
+		void STSetParameter(hBarcode, ST_SHORT_CODE128_MIN_LENGTH,&nbsp;uint16 *value) 
+		;
+		<P>void STGetParameter(hBarcode, ST_SHORT_CODE128_MIN_LENGTH,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;4 ;<BR>
+			STSetParameter(hBarcode, ST_SHORT_CODE128_MIN_LENGTH,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

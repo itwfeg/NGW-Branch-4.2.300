@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "preinst: stopping any active squish sessions..."
+pkill squishrunner
+pkill squishserver
+
+echo "postinst: done!"
+

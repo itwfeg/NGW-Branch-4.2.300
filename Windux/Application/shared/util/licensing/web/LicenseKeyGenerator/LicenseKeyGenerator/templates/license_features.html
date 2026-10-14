@@ -1,0 +1,31 @@
+<h3>License Features</h3>
+
+<div class="column" id="submit_bar">
+    {{ form.type.errors }}
+    <br />
+    {{ form.type.label_tag }} {{ form.type }}
+
+    <br />
+    <br />
+
+    <div id="hte_product_names">
+        {{ form.hte_product_names.errors }}
+
+        <div class="label_align_top">
+            {{ form.hte_product_names.label_tag }} 
+        </div>
+
+        {{ form.hte_product_names }}
+
+    </div>
+
+    <div id="scale_product_names" style="display:none;">
+        {{ form.scale_product_names.errors }}
+
+        <div class="label_align_top">
+            {{ form.scale_product_names.label_tag }} 
+        </div>
+
+        {{ form.scale_product_names }}
+    </div>
+</div>

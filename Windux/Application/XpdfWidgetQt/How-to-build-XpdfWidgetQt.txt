@@ -1,0 +1,46 @@
+﻿
+How to build XpdfWidgetQt
+
+=========================
+
+
+
+Follow these instructions to build the XpdfWidgetQt libraries from scratch for the Timesys ARM cross-compiler.
+
+
+
+
+1.  Set environment variables for the cross-compiler:
+
+
+
+export PATH=/opt/timesys/nitrogen6x/toolchain/ccache:/opt/timesys/nitrogen6x/toolchain/bin:$PATH
+export
+ARCH=arm
+export
+CROSS_COMPILE=armv7l-timesys-linux-gnueabi-
+
+
+
+2.  cd to …/XpdfWidgetQt/src directory
+
+
+
+3.  Run the “configure” shell script that was provided as follows:
+
+
+
+$ CXX=armv7l-timesys-linux-gnueabi-g++  ./configure
+
+
+
+4.  Among other files created, the configure script will generate a "aconf.h" file specific to Timesys ARM compiler.
+
+
+
+5.  cd to …/XpdfWidgetQt and run make.
+
+
+
+    This will build libFreeTypeLib.a and libXpdfWidgetQtLib.a.
+

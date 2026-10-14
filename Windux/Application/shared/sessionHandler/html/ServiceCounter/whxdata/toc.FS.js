@@ -1,0 +1,4 @@
+(function() {
+    var toc =  [{"type":"item","name":"Cover","url":"FSX3Chapters/Cover/Cover.htm"},{"type":"book","name":"Chapter 1: Introduction","key":"toc1","url":"#FSX3Chapters/Chapter_1/Chapter_1.htm"},{"type":"book","name":"Chapter 2: Understanding the System","key":"toc2","url":"FSX3Chapters/Chapter_2/Chapter_2.htm"},{"type":"book","name":"Chapter 3: Using the FS Self-Serve Scale","key":"toc3","url":"FSX3Chapters/Chapter_3/Chapter_3.htm"},{"type":"book","name":"Chapter 4: Printer & Label Stock","key":"toc4","url":"FSX3Chapters/Chapter_4/Chapter_4.htm"}];
+    window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+    })();

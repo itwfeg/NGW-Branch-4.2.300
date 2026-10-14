@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!-- eric project file for project usbKeyUpdater -->
+<!-- Saved: 2016-05-06, 16:48:38 -->
+<!-- Copyright (C) 2016 ITW Hobart, scott.davis@hobartcorp.com -->
+<Project version="5.1">
+  <Language></Language>
+  <Hash>3908ce2872f622dc5b5e670df70aee6118a99948</Hash>
+  <ProgLanguage mixed="0">Python2</ProgLanguage>
+  <ProjectType>Qt4</ProjectType>
+  <Description>Application to create USB thumb drive keys.</Description>
+  <Version>0.1</Version>
+  <Author>ITW Hobart</Author>
+  <Email>scott.davis@hobartcorp.com</Email>
+  <TranslationPattern>QScintilla-gpl-2.7/Qt3/qscintilla_%language%.ts</TranslationPattern>
+  <Eol index="-1"/>
+  <Sources>
+    <Source>Ui_usbKeyUpdater.py</Source>
+    <Source>__init__.py</Source>
+    <Source>buildUsbKeyUpdater.bat</Source>
+    <Source>crypto.py</Source>
+    <Source>directory_utils.py</Source>
+    <Source>getMountPoints.py</Source>
+    <Source>is64BitOS.py</Source>
+    <Source>keyInfo.py</Source>
+    <Source>osTypeUpdater.py</Source>
+    <Source>printUsbDevicesConfig.py</Source>
+    <Source>usbKeyUpdater</Source>
+    <Source>usbKeyUpdater.nsi</Source>
+    <Source>usbKeyUpdater.py</Source>
+    <Source>usbKeyUpdaterUi.py</Source>
+    <Source>usbKeyUpdater_rc.py</Source>
+    <Source>usbQuery.py</Source>
+    <Source>verifyDongleKey.py</Source>
+  </Sources>
+  <Forms>
+    <Form>usbKeyUpdater.ui</Form>
+  </Forms>
+  <Translations/>
+  <Resources>
+    <Resource>usbKeyUpdater.qrc</Resource>
+  </Resources>
+  <Interfaces/>
+  <Others/>
+  <MainScript>usbKeyUpdater.py</MainScript>
+  <Vcs>
+    <VcsType>None</VcsType>
+    <VcsOptions>
+      <dict>
+        <key>
+          <string>add</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>checkout</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>commit</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>diff</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>export</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>global</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>history</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>log</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>remove</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>status</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>tag</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>update</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+      </dict>
+    </VcsOptions>
+    <VcsOtherData>
+      <dict>
+        <key>
+          <string>standardLayout</string>
+        </key>
+        <value>
+          <bool>True</bool>
+        </value>
+      </dict>
+    </VcsOtherData>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES"/>
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.qrc" type="RESOURCES"/>
+    <FiletypeAssociation pattern="*.ts" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.ui" type="FORMS"/>
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS"/>
+  </FiletypeAssociations>
+</Project>

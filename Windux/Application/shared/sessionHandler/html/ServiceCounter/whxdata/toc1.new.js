@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Welcome","url":"F35549_Rev_D/Chapter_1/Chapter_1.htm#TOC_Welcomebc-1"},{"type":"item","name":"FCC Note","url":"F35549_Rev_D/Chapter_1/Chapter_1.htm#TOC_FCC_Notebc-2"},{"type":"item","name":"Industry Canada Note","url":"F35549_Rev_D/Chapter_1/Chapter_1.htm#TOC_Industry_Canada_Notebc-3"},{"type":"item","name":"Verify Correctness of Weight and Price","url":"F35549_Rev_D/Chapter_1/Chapter_1.htm#TOC_Verify_Correctness_ofbc-4"},{"type":"item","name":"Operator Manual Terminology","url":"F35549_Rev_D/Chapter_1/Chapter_1.htm#TOC_Operator_Manualbc-5"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,3 @@
+{{extend 'layout.html'}}
+{{=P('DASHBOARD')}}
+{{=TABLE(TR(TD('POWER'),TD('VOLTAGE')),TR(TD(IMG(_src=URL('power_plot.png'))),TD(IMG(_src=URL('voltage_plot.png')))),TR(TD('CURRENT'),TD('FREQUENCY')),TR(TD(IMG(_src=URL('current_plot.png'))),TD(IMG(_src=URL('frequency_plot.png')))))}}

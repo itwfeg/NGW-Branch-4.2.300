@@ -1,0 +1,13 @@
+xvkbd*Multi_key.width: 1
+xvkbd*Escape.width: 1
+xvkbd*MainMenu.width: 1
+xvkbd*Caps_Lock.width: 1
+xvkbd*Meta_L.width: 1
+xvkbd*Meta_R.width: 1
+xvkbd*Focus.width: 1
+xvkbd.modalKeytop: true
+xvkbd.functionkey: false
+xvkbd.keypad: false
+xvkbd*Font: 6x12
+xvkbd.alwaysOnTop: true
+xvkbd.noSync: true

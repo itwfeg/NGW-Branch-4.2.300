@@ -1,0 +1,11 @@
+Build instructions for xrdp:
+
+$ git clone https://github.com/neutrinolabs/xrdp
+$ patch -p0 -i xrdp-hobart-patch.patch
+$ cd xrdp
+$ ./bootstrap
+$ ./configure --enable-jpeg --host=armv7l-timesys-linux-gnueabi
+$ make
+$ make install DESTDIR=/home/hobart/xrdp
+
+Zip up 'etc' and 'usr' folders into xrdp_armle.tar.gz (or xrdp_armhf.tar.gz) and check in.

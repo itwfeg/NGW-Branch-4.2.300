@@ -1,0 +1,105 @@
+[Version]
+Signature=$CHICAGO$
+Class=CustomUsb
+ClassGuid={A5DCBF10-6530-11D2-901F-00C04FB951ED}
+;ClassGuid={004965C5-EF0A-4779-B42A-BA8AD7C98E60}
+Provider=%MFGNAME%
+DriverVer=06/08/2011,2.1.7600.16385
+CatalogFile = weighUsb.cat
+
+[ClassInstall32]
+Addreg=CustomClassReg     
+
+[CustomClassReg]
+HKR,,,0,%ClassName%
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=12	;= c:\windows\system32\drivers
+			;DefaultDestDir=10,System32\Drivers
+
+[SourceDisksFiles]
+;WeighUsb.sys=1,%path%
+WeighUsb.sys=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+;aws wrapper
+%wrapper.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0300
+
+;weigher with code
+%weigher.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0400
+
+;ARM weigher with code
+%weigherArm.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0401
+
+;evol printer bootloader
+%printerBoot.DeviceDesc%=DriverInstall,USB\VID_128C&PID_8200
+
+;evol printer 
+%printer.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0200
+
+;new evol printer 
+%printerArm.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0205
+
+;HLX APC
+%apc.DeviceDesc%=DriverInstall,USB\VID_128C&PID_0204
+
+;------------------------------------------------------------------------------
+;  Windows XP Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall]
+CopyFiles=DriverCopyFiles
+
+[DriverCopyFiles]
+WeighUsb.sys,,,2
+
+[DriverInstall.Services]
+AddService=WGHUSB,2,DriverService
+
+[DriverService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\WeighUsb.sys
+
+;ServiceBinary=%10%\system32\drivers\WeighUsb.sys
+
+[DriverInstall.hw]
+AddReg=DriverHwAddReg
+
+[DriverHwAddReg]
+HKR,,FriendlyName,,%FRIENDLYNAME%
+HKR,"System\Currentcontrolset\Services\WeighingUsb\Parameters","MaximumTransferSize",0x10001,4096
+HKR,"System\Currentcontrolset\Services\WeighingUsb\Parameters","DebugLevel",0x10001,2
+HKR,"System\Currentcontrolset\services\WeighingUsb\Parameters","WeighingUsbEnable",0x10001,1
+
+
+;HKLM,"System\Currentcontrolset\Services\WeighingUsb\Parameters","MaximumTransferSize",0x10001,4096
+;HKLM,"System\Currentcontrolset\Services\WeighingUsb\Parameters","DebugLevel",0x10001,2
+;HKLM,"System\Currentcontrolset\services\WeighingUsb\Parameters","WeighingUsbEnable",0x10001,1
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+
+[Strings]
+ClassName="Hobart"
+MFGNAME="Hobart"
+;path="share_linux\win7Driver"
+wrapper.DeviceDesc = "AWS Wrapper"
+weigher.DeviceDesc = "Access Weigher"
+weigherArm.DeviceDesc = "Access Weigher ARM"
+printerBoot.DeviceDesc = "Access Printer BootStrapped"
+printer.DeviceDesc = "Access Printer"
+printerArm.DeviceDesc = "Access Printer ARM"
+apc.DeviceDesc = "APC"
+INSTDISK="Hobart Installation Directory"
+DESCRIPTION="Hobart Weigher"
+FRIENDLYNAME="Hobart USB Weighing Device"
+

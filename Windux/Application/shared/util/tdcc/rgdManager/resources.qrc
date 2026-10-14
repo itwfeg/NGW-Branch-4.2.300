@@ -1,0 +1,26 @@
+<RCC>
+  <qresource prefix="/">
+    <file>resources/netscan_stop.png</file>
+    <file>resources/badge1.png</file>
+    <file>resources/badge2.png</file>
+    <file>resources/badge3.png</file>
+    <file>resources/badge4.png</file>
+    <file>resources/badge5.png</file>
+    <file>resources/badge6.png</file>
+    <file>resources/badge7.png</file>
+    <file>resources/badge8.png</file>
+    <file>resources/badge9.png</file>
+    <file>resources/badge10.png</file>
+    <file>resources/bbIcon.ico</file>
+    <file>resources/bbIcon.png</file>
+    <file>resources/comboBoxDownArrow.png</file>
+    <file>resources/folder.png</file>
+    <file>resources/info.png</file>
+    <file>resources/netscan.png</file>
+    <file>resources/reboot.png</file>
+    <file>resources/rgd.png</file>
+    <file>resources/Step-1.jpg</file>
+    <file>resources/Step-2.jpg</file>
+    <file>resources/zoom_32.png</file>
+  </qresource>
+</RCC>

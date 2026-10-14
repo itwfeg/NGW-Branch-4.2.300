@@ -1,0 +1,1983 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="util\accountant\accountant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\accountant\accountanti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\checksums\checksum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\cloptions\cloptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\time\date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\time\datetime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbaccessentity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbbatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbbatchesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbbatchesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbbatchi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategoriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategoriesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategorydetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategorydetailedstatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategorydetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategorydetailedstatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategoryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategorystatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategorystatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcategorystatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcategorystatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbclassesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbclassesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbclassi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbclasstotal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbclasstotali.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbclasstotalsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbclasstotalsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbconfiguration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbconfigurationi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbconfigurationsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbconfigurationsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategoriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategoriesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategorycountriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategorycountriesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategorycountry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategorycountryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategoryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategorypretext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategorypretexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategorypretextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategorypretextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategoryproductionstep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategoryproductionstepi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcategoryproductionstepsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcategoryproductionstepsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcountriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcountriesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolcountry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolcountryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoollist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoollisti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoollistsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoollistsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoollisttext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoollisttexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoollisttextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoollisttextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolpretext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolpretexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolpretextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolpretextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolproductionstep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolproductionstepi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcoolproductionstepsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcoolproductionstepsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcooltext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcooltexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcooltextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcooltextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcooltotal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcooltotali.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcooltotalsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcooltotalsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcuttingtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcuttingtesti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbcuttingtestsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbcuttingtestsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbm\dbdatabasei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbdevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbdevicei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbdevicesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbdevicesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbemailalert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbemailalerti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbemailalertsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbemailalertsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbexpirationlabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbexpirationlabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbexpirationlabelsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbm\dbfactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbm\dbfactoryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbflashfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbflashfilei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbflashfilesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbflashfilesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbhourlytotal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbhourlytotali.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbhourlytotalsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbhourlytotalsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbignorewordi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbignorewordsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbknifetimehistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbknifetimehistoryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbknifetimehistoryrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbknifetimehistoryrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dblabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dblabeli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dblabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dblabelsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dblabeltext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dblabeltexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dblabeltextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dblabeltextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbm\dbmanageri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbnetworkerror.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbnetworkerrori.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbnetworkerrorsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbnetworkerrorsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbnutrition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbnutritioni.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbnutritionsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbnutritionsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatorchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatorchangei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatorchangesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatorchangesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatori.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatornote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatornotei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatornotesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatornotesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatorsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatorsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatortotal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatortotali.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dboperatortotalsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dboperatortotalsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethoddetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethoddetailedstatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethoddetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethoddetailedstatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethodi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethodsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethodsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethodstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethodstatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbpresentationmethodstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbpresentationmethodstatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductdefault.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductdefaulti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductdefaultsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductdefaultsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductdetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductdetailedstatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductdetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductdetailedstatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductsequencei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductsequencesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductstatistici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproductstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproductstatisticsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBProductText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttexti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBProductTextsRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttextsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproducttotal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttotali.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbproducttotalsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttotalsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbquery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbqueryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBRecall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbrecalli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBRecallsRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbrecallsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbrecordmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbromlabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbromlabeli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbromlabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbromlabelsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbscale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbscalei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbscalesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbscalesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeyfeature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeyfeaturei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeyfeaturesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeyfeaturesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeygroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeygroupi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeygroupsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeygroupsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeyi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeysrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeysrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeystyle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeystylei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsoftkeystylesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsoftkeystylesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbspecialprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbspecialprogrami.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbspecialprogramsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbspecialprogramsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbstatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstatusi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbstatusrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstatusrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstatusstorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstatusstoragerm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbstreaminggraphic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstreaminggraphici.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbstreaminggraphicsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbstreaminggraphicsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsynchronizationchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsynchronizationchangei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbsynchronizationchangesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbsynchronizationchangesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\time\dbtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtransaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbtransactioni.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtransactionsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbtransactionsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtransactiontype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbtransactiontypei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbtransactiontypesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbtransactiontypesrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbwrappererrorhistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbwrappererrorhistoryi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbwrappererrorhistoryrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbwrappererrorhistoryrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\debug\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\filesys\directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="driver2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="edb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\e_exception\exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\filesys\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\filesys\filename.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\thread\lock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\thread\mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\nibble\nibble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\platform\platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\properties\properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\properties\propertiestree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\ptr\ptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\containers\Registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteautoincrementsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitebatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitebatchesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategoriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategorydetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategorydetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategorystatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecategorystatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteclassesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteconfiguration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteconfigurationsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorycountriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorycountry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorypretext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategorypretextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoryproductionstep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcategoryproductionstepsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcountriesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolcountry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoollist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoollistsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoollisttext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoollisttextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolpretext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolpretextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolproductionstep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecoolproductionstepsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecooltext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecooltextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecuttingtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitecuttingtestsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitedatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitedevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitedevicesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteemailalert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteemailalertsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteexpirationlabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteexpirationlabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitefactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitefield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteflashfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteflashfilesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteignoreword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteignorewordsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteknifetimehistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteknifetimehistoryrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitelabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitelabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitelabeltext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitelabeltextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitenetworkerror.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitenetworkerrorsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitenutrition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitenutritionsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteoperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteoperatornote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteoperatornotesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteoperatorsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethoddetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethoddetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitepresentationmethodstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductdefault.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductdefaultsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductdetailedstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductdetailedstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductproductsequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductproductsequencequery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductsequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductsequencesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductstatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproductstatisticsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproducttext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproducttextsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitequery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliterecall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliterecallsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliterecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteRecordKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliterecordmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteromlabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteromlabelsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitescale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitescalesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeyfeature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeyfeaturesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeygroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeygroupsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeysrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeystyle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesoftkeystylesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitespecialprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitespecialprogramsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitestreaminggraphic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitestreaminggraphicsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesynchronizationchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitesynchronizationchangesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitetransaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitetransactionsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitetransactiontype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitetransactiontypesrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitewrappererrorhistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitewrappererrorhistoryrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="std\access\stdfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="std\access\stdindex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="std\access\stdrecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\thread\thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\debug\trace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\e_string\utilstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\platform\win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\thread\win32threads.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttextcfgsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttexticfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBProductTextCfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBProductTextCfgsRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproducttextcfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqliteproducttextcfgsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbproducttextcfgi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBBarcodeScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitebarcodescanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbbarcodescanneri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbbarcodescannersrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitebarcodescannersrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBBarcodeScannersRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBDept.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBDeptsRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbdepti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbdeptsrmi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitedept.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite\adapter\sqlitedeptsrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbd\dbexpirationlabeli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="util\accountant\accountant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\checksums\checksum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\cloptions\cloptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\time\date.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\time\datetime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbbatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbbatchesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategoriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategorydetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategorydetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategorystatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcategorystatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbclassesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbconfiguration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbconfigurationsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategoriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategorycountriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategorycountry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategorypretext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategorypretextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategoryproductionstep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcategoryproductionstepsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcountriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolcountry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoollist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoollistsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoollisttext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoollisttextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolpretext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolpretextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolproductionstep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcoolproductionstepsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcooltext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcooltextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcuttingtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbcuttingtestsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbdevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbdevicesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbemailalert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbemailalertsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbm\dbexception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbexpirationlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbexpirationlabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbm\dbfactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbflashfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbflashfilesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbknifetimehistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbknifetimehistoryrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dblabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dblabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dblabeltext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dblabeltextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbm\dbmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbnetworkerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbnetworkerrorsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbnutrition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbnutritionsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dboperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dboperatornote.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dboperatornotesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dboperatorsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethoddetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethoddetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethodsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethodstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbpresentationmethodstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductdefault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductdefaultsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductdetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductdetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproductstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproducttext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproducttextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbrecall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbrecallsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbromlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbromlabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbscale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbscalesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeyfeature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeyfeaturesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeygroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeygroupsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeysrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeystyle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsoftkeystylesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbspecialprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbspecialprogramsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstatusrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstatusstorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstatusstoragerm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstreaminggraphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbstreaminggraphicsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsynchronizationchange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbsynchronizationchangesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\time\dbtime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbtransaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbtransactionsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbtransactiontype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbtransactiontypesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbwrappererrorhistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbwrappererrorhistoryrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\filesys\directory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="driver2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\e_exception\exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\filesys\file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\filesys\filename.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\nibble\nibble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\platform\platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\properties\properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\properties\propertiestree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\3RDPartySoftware\sqlite-3071401\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteautoincrementsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitebatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitebatchesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategoriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategorydetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategorydetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategorystatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecategorystatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteclassesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteconfiguration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteconfigurationsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorycountriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorycountry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorypretext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategorypretextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoryproductionstep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcategoryproductionstepsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcountriesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolcountry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoollist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoollistsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoollisttext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoollisttextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolpretext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolpretextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolproductionstep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecoolproductionstepsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecooltext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecooltextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecuttingtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitecuttingtestsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitedatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitedevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitedevicesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteemailalert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteemailalertsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteexpirationlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteexpirationlabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitefactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitefield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteflashfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteflashfilesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteignoreword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteignorewordsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteknifetimehistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteknifetimehistoryrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitelabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitelabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitelabeltext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitelabeltextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitenetworkerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitenetworkerrorsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitenutrition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitenutritionsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteoperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteoperatornote.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteoperatornotesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteoperatorsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethoddetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethoddetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitepresentationmethodstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductdefault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductdefaultsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductdetailedstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductdetailedstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductproductsequencequery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductsequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductsequencesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductstatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproductstatisticsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproducttext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproducttextsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliterecall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliterecallsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliterecord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliterecordmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteromlabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteromlabelsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitescale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitescalesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeyfeature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeyfeaturesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeygroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeygroupsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeysrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeystyle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesoftkeystylesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitespecialprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitespecialprogramsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitestreaminggraphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitestreaminggraphicsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesynchronizationchange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitesynchronizationchangesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitetransaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitetransactionsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitetransactiontype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitetransactiontypesrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitewrappererrorhistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitewrappererrorhistoryrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\access\stdfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\access\stdindex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std\access\stdrecord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\debug\trace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\e_string\utilstring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\platform\win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproducttextcfg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbproducttextcfgsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproducttextcfg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqliteproducttextcfgsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitebarcodescanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitebarcodescannersrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbbarcodescanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbbarcodescannersrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbdept.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbd\dbdeptsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitedept.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\adapter\sqlitedeptsrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

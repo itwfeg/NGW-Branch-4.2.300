@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>serviceNewWrapperInterlocks</class>
+ <widget class="QWidget" name="serviceNewWrapperInterlocks">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>971</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interlocks&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblFilmSupplyDoor">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>128</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblRightCanopy">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>228</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblIntakeCleanOut">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>328</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLeftSideCover">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>278</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblStartSwitch">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>428</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblStopSwitch">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>378</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblRightSideCover">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>178</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>128</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Film Supply Door</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_7">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>178</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Right Side Cover</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_6">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>228</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Right Canopy</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_5">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>278</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Left Side Cover</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_4">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>328</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Intake Clean Out</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_2">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>378</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stop Switch</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWeigherText_3">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>428</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Start Switch</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

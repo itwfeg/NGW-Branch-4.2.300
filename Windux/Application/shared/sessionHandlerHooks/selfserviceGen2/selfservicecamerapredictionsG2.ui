@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>selfServiceCameraPredictionsG2</class>
+ <widget class="QWidget" name="selfServiceCameraPredictionsG2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#selfServiceCameraPredictionsG2
+{
+   background-color: rgb(255, 255, 255);
+    border-radius: 40px;
+    border-style: none;
+}</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="screenContainer" native="true">
+     <property name="styleSheet">
+      <string notr="true">QWidget#screenContainer
+{
+    background-color: rgb(255,255,255);
+    border-radius: 40px;
+    border-style: none;
+    border-color: rgb(255,255,255);
+}</string>
+     </property>
+     <widget class="QLabel" name="dialogTitle">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>841</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Poppins Medium</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel#dialogTitle
+{
+    background-color:rgb(244,247,250);
+    color:rgb(18,20,29);
+    border-style:none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Please confirm the loose item on the scale</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="productSearch">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>540</y>
+        <width>276</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>276</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>276</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Poppins SemiBold</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#productSearch{
+    color:rgb(255,255,255);
+    background-color:rgb(24,113,248);
+    border-radius:16px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Product Search</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cancel">
+      <property name="geometry">
+       <rect>
+        <x>494</x>
+        <y>540</y>
+        <width>276</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>276</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>276</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Poppins SemiBold</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#cancel {
+    color:rgb(255,255,255);
+    background-color:rgb(24,113,248);
+    border-radius:16px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="cameraPage" native="true">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>80</y>
+        <width>421</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#cameraPage
+{
+    background-color: rgb(244,247,250);
+    border-radius:16px;
+    /* border-style: solid; */
+    /* border-radius: 40px; */
+}</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

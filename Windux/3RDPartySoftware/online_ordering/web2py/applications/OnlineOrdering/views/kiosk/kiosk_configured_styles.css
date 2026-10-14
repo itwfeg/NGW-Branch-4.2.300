@@ -1,0 +1,145 @@
+.btn-custom-color
+{
+  background-color: {{=currentSettings["KioskLightColor"]}};
+  color: {{=currentSettings["KioskTextColor"]}};
+  border: 3px solid {{=currentSettings["KioskTextColor"]}};
+  border-color: {{=currentSettings["KioskTextColor"]}};
+  border-radius: 8px;
+  text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+  
+  /* for SVG buttons */
+  fill: {{=currentSettings["KioskLightColor"]}};
+  stroke: {{=currentSettings["KioskTextColor"]}};
+  stroke-width: 3;
+}
+
+.btn-custom-basics
+{
+  color: {{=currentSettings["KioskTextColor"]}};
+  border: 3px solid {{=currentSettings["KioskTextColor"]}};
+  border-color: {{=currentSettings["KioskTextColor"]}};
+  border-radius: 8px;
+  text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+  
+  /* for SVG buttons */
+  stroke: {{=currentSettings["KioskTextColor"]}};
+  stroke-width: 3;
+}
+
+.btn-custom-color:active
+{
+  background-color: {{=currentSettings["KioskDarkColor"]}};
+  
+  /* for SVG buttons */
+  fill: {{=currentSettings["KioskDarkColor"]}};
+}
+
+.custom-fg-color
+{
+  {{
+  if "KioskLightColor" in currentSettings and currentSettings["KioskLightColor"]:
+    response.write("  background-color:" + currentSettings["KioskLightColor"] + " !important;", escape=False)
+  pass
+  }}
+}
+
+.custom-bg-color
+{
+  {{
+  if "KioskBGColor" in currentSettings and currentSettings["KioskBGColor"]:
+    response.write("  background-color:" + currentSettings["KioskBGColor"] + " !important;", escape=False)
+  pass
+  }}
+}
+
+.btn-custom-color:disabled
+{
+  opacity: 0.3 !important;
+}
+
+.custom-thin-border
+{
+  color: {{=currentSettings["KioskTextColor"]}};  
+  border-radius: 8px;
+  border-style: solid;
+  border-color: {{=currentSettings["KioskTextColor"]}};
+  border-width: 1px;
+  background-color: {{=currentSettings["KioskLightColor"]}};
+}
+
+.custom-inverted-thin-border
+{
+  border-radius: 8px;
+  border-style: solid;
+  border-color: {{=currentSettings["KioskLightColor"]}};
+  border-width: 1px;
+  background-color: {{=currentSettings["KioskTextColor"]}};
+}
+
+body
+{
+  {{
+  if "KioskBGImage" in currentSettings and currentSettings["KioskBGImage"]:
+    response.write("  background-image: url(\"" + currentSettings["KioskBGImage"] + "\");", escape=False)
+  pass
+  }}
+
+  background-size: cover;
+  
+  {{
+  if "KioskBGColor" in currentSettings and currentSettings["KioskBGColor"]:
+    response.write("  background-color:" + currentSettings["KioskBGColor"] + " !important;", escape=False)
+  pass
+  }}
+}
+
+.modal-content
+{
+  font-size: x-large;
+  {{
+  if "KioskBGColor" in currentSettings and currentSettings["KioskBGColor"]:
+    response.write("  background-color:" + currentSettings["KioskBGColor"] + " !important;", escape=False)
+  pass
+  }}
+}
+
+.logo
+{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  {{
+  if "KioskLogo" in currentSettings and currentSettings["KioskLogo"]:
+    response.write("  background-image: url(\"" + currentSettings["KioskLogo"] + "\");", escape=False)
+  else:
+    response.write("  display: none;")
+  pass
+  }}
+}
+
+.with-logo
+{
+{{
+  if "KioskLogo" not in currentSettings or not currentSettings["KioskLogo"]:
+    response.write("  display: none;")
+  pass
+}}
+}
+
+.without-logo
+{
+{{
+  if "KioskLogo" in currentSettings and currentSettings["KioskLogo"]:
+    response.write("  display: none;")
+  pass
+}}
+}
+
+.custom-hr
+{
+    border: none;
+    height: 1px;
+    background-color: {{=currentSettings["KioskLightColor"]}};
+    color: {{=currentSettings["KioskLightColor"]}};
+}

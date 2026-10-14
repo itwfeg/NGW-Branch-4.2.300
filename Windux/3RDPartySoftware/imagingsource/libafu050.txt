@@ -1,0 +1,51 @@
+
+I had to install the following development packages in order to compile:
+libusb-1.0-0-dev
+gstreamer0.10-dev
+libgstreamer-plugins-base0.10-dev
+
+I copied the library into /usr/lib
+
+You must sudo ./example to get it to run.
+
+I copied the rules file into /lib/udev/rules.d and added the following lines:
+ATTRS{idVendor}=="199e", ATTRS{idProduct}=="8208", GROUP="video", MODE="0660"
+ATTRS{idVendor}=="199e", ATTRS{idProduct}=="8209", GROUP="video", MODE="0660"
+
+----
+
+Please download attachments from:
+ftp://tis_ftp:Imaging199@ftp.theimagingsource.com/Imaging/4babb4/libafu050.tgz
+
+Scott,
+
+I appreciate your call. Attached is the file needed to run the Autofocus camera (DFK AFU050-L34) in Linux and here is additional instruction:
+
+If you "make" the project, a libafu050.so is created. Copy this to your standard library path or enter
+
+export LD_LIBRARY_PATH=.
+
+before calling 
+
+./example
+
+There must be set some rw rights too:
+
+sudo chmod guo+rw /dev/bus/usb/002/008 
+
+The parameters can be find by entering 
+
+lsub
+
+Thank you,
+
+Jason Covar
+Sales Manager
+--------------------------------
+The Imaging Source, LLC
+North and South America
+Tel:    +1/704-370-0110 ext. 312
+Fax:    +1/704-370-0906   
+web:    www.TheImagingSource.com  
+web:    www.AstronomyCameras.com  
+--------------------------------

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "postinst: configuring devicewise..."
+
+# configure devicewise
+dwconfig
+
+echo "postinst: starting services..."
+
+# start devicewise
+/opt/dw/devicewise start
+
+# start gateway scripts
+python /usr/local/hobart/python/gatewayDiscovery.py &
+python /usr/local/hobart/python/gatewayServer.py &
+
+echo "postinst: done!"
+

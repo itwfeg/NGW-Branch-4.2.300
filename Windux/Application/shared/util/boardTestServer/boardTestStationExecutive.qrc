@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="images">
+    <file>dateTimeIcon.png</file>
+    <file>scanner_cr_suffix_config_barcode.png</file>
+    <file>scanner_usb_serial_config_barcode.png</file>
+    <file>folder.png</file>
+    <file>export_database.png</file>
+    <file>restart_server.png</file>
+    <file>test_server_window_icon.png</file>
+    <file>test_server.png</file>
+    <file>software_install.png</file>
+    <file>stop_server.png</file>
+    <file>start_server.png</file>
+    <file>green_status.png</file>
+    <file>red_status.png</file>
+  </qresource>
+</RCC>

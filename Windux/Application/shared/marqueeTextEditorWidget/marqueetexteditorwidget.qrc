@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/Blink2.gif</file>
+        <file>images/Clear2.gif</file>
+        <file>images/Frame2.gif</file>
+        <file>images/Hold2.gif</file>
+        <file>images/Norm2.gif</file>
+        <file>images/Quick2.gif</file>
+        <file>images/Roll2.gif</file>
+        <file>images/Scroll2.gif</file>
+        <file>images/Slow2.gif</file>
+        <file>images/XQuick2.gif</file>
+    </qresource>
+</RCC>

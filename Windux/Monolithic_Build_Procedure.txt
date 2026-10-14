@@ -1,0 +1,70 @@
+
+In order to run the 'buildMonolithic' python scripts on your PC, you need to have
+the following installed for Python:
+
+1.  Twisted
+2.  PyUsb
+3.  Chilkat
+
+
+
+The generic steps to build the monolithic upgrade are as follows:
+
+1)  python buildMonolithicCorePreInstallFeature.py {release_tag}
+
+For example:
+
+    python buildMonolithicCorePreInstallFeature.py 1.13.110-07012015_125021
+
+
+2)  python buildMonolithicCoreFeature.py {release_tag} {svn_branch_name}
+
+For example:
+
+    python buildMonolithicCoreFeature.py 1.13.110-07012015_125021  branch-timesys-3.10
+
+
+
+This will create two MD5s and two tarballs:
+
+    1.  The monolithic core pre-install
+    2.  The monolithic core feature
+
+
+------------------------------------------------------------------------------
+
+A Windows command file named "runBuildMonolithic.cmd" is available in the Windux
+directory, which will run the two python scripts listed above and generate
+the TGZ and MD5 files.  Open a command window in the Windux directory and execute:
+
+    runBuildMonolithic.cmd (Release tag}  {Branch Name}
+
+For example:
+
+    runBuildMonolithic.cmd 1.13.110-07012015_125021 branch-timesys-3.10
+
+
+------------------------------------------------------------------------------
+
+To run the monolithic upgrade on a scale, run the monolithic core pre-install
+(which will be fairly quick) and then the monolithic core feature upgrade.
+
+==============================================================================
+
+
+However, for monolithic downgrades, a special startupSequence script is needed.
+
+This requires some extra steps.
+
+
+1.  Under Windux/Application/shared/sessionHandler/python there is a startupSequence_112.py file.
+
+    Replace/rename it with the existing (new) startupSequence.py file (on engdev1)
+    [The way i did this was through an SVN commit/update/revert]
+
+
+2.  Run the steps at the top
+
+
+3.  Once finished, rename the startupSequence.py to startupSequence_112.py,
+    and revert back to the real (new) startupSequence script.

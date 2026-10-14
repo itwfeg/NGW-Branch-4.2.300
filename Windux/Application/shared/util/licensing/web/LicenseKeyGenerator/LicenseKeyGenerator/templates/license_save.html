@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>License Creation Successful</title>
+</head>
+<body>
+
+    {% include "license_form.html" %}
+
+    {% load staticfiles %}
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="{% static "Blob.js" %}"></script>
+    <script src="{% static "FileSaver.js" %}"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+        	var license_data = "{% filter escapejs %}{{ license_data }}{% endfilter %}";
+            var blob = new Blob([license_data], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, "license.lic");
+        })
+    </script>
+    
+</body>
+</html>

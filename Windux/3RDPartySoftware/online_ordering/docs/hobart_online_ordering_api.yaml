@@ -1,0 +1,1293 @@
+openapi: 3.0.0
+info:
+  title: Hobart Online Ordering API
+  version: 2.0.0
+  description: API to interact with the Hobart Online Ordering system, which integrates order tracking with existing Hobart devices.
+  contact:
+    url:  http://hobartcorp.com/
+    email: evan.clinton@itwfeg.com
+
+servers:
+  - url: /api/v1/
+    description: Relative path to this API on an Online Ordering server
+
+tags:
+  - name: System Information
+    description: Endpoints to access information about the Online Ordering system.
+  - name: Order Management
+    description: Endpoints to manage orders and their components.
+  - name: Additional Records
+    description: Endpoints to manage additional records in support of online ordering.
+
+components:
+  parameters:
+    limit:
+      description: Maximum number of items to return.
+      in: query
+      name: limit
+      schema:
+        type: integer
+    dir:
+      description: Return items sorted in ascending or descending order.
+      in: query
+      name: dir
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+    sort:
+      description: Sort items returned on a specified property.
+      in: query
+      name: sort
+      schema:
+        type: string
+        example: OrderNumber
+    before:
+      description: Return orders with an OrderPickup before this time.
+      in: query
+      name: before
+      schema:
+        type: string
+    after:
+      description: Return orders with an OrderPickup after this time.
+      in: query
+      name: after
+      schema:
+        type: string
+    status:
+      description: Return only orders with the specified OrderStatus.
+      in: query
+      name: status
+      schema:
+        type: integer
+    DeptNum:
+      in: path
+      name: DeptNum
+      description: Department number.
+      required: true
+      schema:
+        type: integer
+    OrderNumber:
+      in: path
+      name: OrderNumber
+      description: Order number.
+      required: true
+      schema:
+        type: integer
+    ZoneNum:
+      in: path
+      name: ZoneNum
+      description: Zone number.
+      required: true
+      schema:
+        type: integer
+    location:
+      in: path
+      name: location
+      description: Either products or categories.
+      required: true
+      schema:
+        type: string
+        enum:
+        - products
+        - categories
+
+  schemas:
+    Order:
+      description: Describes a single order.
+      type: object
+      properties:
+        OrderNumber:
+          description: Unique number for this order.  A new order will have a number chosen if one is not provided.
+          type: integer
+        OrderInstructions:
+          description: Instructions, if any, relevant to the entire order.
+          type: string
+        OrderStatus:
+          description: Current status of the order. 1:"Waiting", 2:"In progress", 3:"Ready", 5:"Cancelled"
+          type: integer
+          enum: [1,2,3,5]
+        CustomerName:
+          description: Name of the customer for this order.
+          type: string
+        OrderSMS:
+          description: Contact phone number for this order.
+          type: string
+        OrderOrigin:
+          description: Origin type of this order.  1:Online, 2:Kiosk, 3:Take a Number.
+          type: integer
+          enum: [1,2,3]
+        StoreNumber:
+          description: Store that this order is to be fulfilled at.
+          type: integer
+        OrderCreation:
+          description: Time that order was created at.
+          type: string
+        OrderPickup:
+          description: Time that is requested for order completion.
+          type: string
+        OrderStart:
+          description: Time that order was first opened on a scale.
+          type: string
+        OrderFinish:
+          description: Time that order was marked complete.
+          type: string
+        Operators:
+          description: List of operators who completed any part of this order.
+          type: array
+          items:
+            type: string
+          readOnly: true
+        AllowSubstitutions:
+          description: Allow the operator to substitute items in this order.
+          type: integer
+          enum: [0,1]
+        ItemCount:
+          description: Number of items in this order.
+          type: integer
+          readOnly: true
+        Items:
+          description: items submitted with an order.
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/OrderDetails'
+          writeOnly: true
+      required:
+        - OrderStatus
+        - OrderOrigin
+        - OrderPickup
+    
+    OrderDetails:
+      description:  Describes a single product within an order.
+      type: object
+      properties:
+        DeptNum:
+          description: Department that this product is within.
+          type: integer
+        OrderNumId:
+          description: Unique-within-this-order details OrderNumId
+          type: integer
+        OrderNumber:
+          description: Order that this item is associated with.
+          type: integer
+        ZoneNum:
+          description: Zone for this product.
+          type: integer
+        PrNum:
+          description: PLU for this product.
+          type: integer
+        PluWeight:
+          description: Requested weight if by weight.
+          type: integer
+        PluByCount:
+          description: Requested quantity if by count.
+          type: integer
+        ProductType:
+          description: Product type (by count etc.).
+          type: integer
+        PluInstructions:
+          description: Preparation instructions for this item, if any.
+          type: string
+        ReasonCancelled:
+          description: Operator-entered reason if this item is cancelled or substituted.
+          type: string
+        Cancelled:
+          description: Whether or not this item has been cancelled.
+          type: integer
+          enum: [0,1]
+        Filled:
+          description: Whether or not this item has been filled.
+          type: integer
+          enum: [0,1]
+        Substituted:
+          description: Whether or not this item has been substituted.
+          type: integer
+          enum: [0,1]
+        OriginalPrNum:
+          description: If substituted, the original PLU is saved here.
+          type: integer
+        FinalPrice:
+          description: Item subtotal reported by the scale once filled (units are cents).
+          type: integer
+        FinalWeight:
+          description: Item weight reported by the scale once filled (for by-weight items).
+          type: integer
+        FinalCount:
+          description: Item count reported by the scale once filled (for by-count items).
+        AllowSubstitutions:
+          description: Allow the operator substitute to this item.
+          type: integer
+          enum: [0,1]
+
+    Product:
+      description: Describes a single product.
+      type: object
+      properties:
+        PrNum:
+          description: Product number.
+          type: integer
+        DeptNum:
+          description: Department number.
+          type: integer
+        ZoneNum:
+          description: Default zone for this product.
+          type: integer
+        ClNum:
+          description: Reporting class.
+          type: integer
+        TxNum:
+          description: EXP text 11.
+          type: integer
+        PrIsPrnSL:
+          description: Print shelf life.
+          type: integer
+        DLXNum:
+          description: Default COOL text.
+          type: integer
+        ProdTxt5Num:
+          description: Cooking instructions.
+          type: integer
+        ProdTxt6Num:
+          description: Recipe.
+          type: integer
+        ProdTxt7Num:
+          description: EXP text 2.
+          type: integer
+        ProdTxt8Num:
+          description: ProdTxt8Num
+          type: integer
+        ProdTxt9Num:
+          description: Allergens.
+          type: integer
+        SMNum:
+          description: Special message.
+          type: integer
+        NFNum:
+          description: Nutrition.
+          type: integer
+        NtNum:
+          description: Note.
+          type: integer
+        LbNum1:
+          description: Label 1.
+          type: integer
+        LbNum2:
+          description: Label 2.
+          type: integer
+        LbNum3:
+          description: Label 3.
+          type: integer
+        CaNum:
+          description: Category.
+          type: integer
+        SpNum:
+          description: Special number.
+          type: integer
+        LCNum:
+          description: COOL category.
+          type: integer
+        LPNum:
+          description: COOL pretext.
+          type: integer
+        LXNum:
+          description: Current COOL text.
+          type: integer
+        LLID:
+          description: COOL list key.
+          type: integer
+        MaNum:
+          description: Marquee.
+          type: integer
+        PrPrice:
+          description: Price.
+          type: integer
+        PrPrMod:
+          description: Price factor.
+          type: integer
+        PrIsFrcPr:
+          description: Force price.
+          type: integer
+        PrExcPr:
+          description: Exception price.
+          type: integer
+        PrDscMe:
+          description: Discount method.
+          type: integer
+        PrDscPr1:
+          description: Discount price 1.
+          type: integer
+        PrDscPr2:
+          description: Discount price 2.
+          type: integer
+        PrDscPr3:
+          description: Discount price 3.
+          type: integer
+        PrTare:
+          description: Tare.
+          type: integer
+        PrTareB:
+          description: Tare B.
+          type: integer
+        PrIsFrcTr:
+          description: Force tare.
+          type: integer
+        PrPrpTare:
+          description: Porportional tare.
+          type: integer
+        PrNetWt:
+          description: Net weight.
+          type: integer
+        PrByCnt:
+          description: By count.
+          type: integer
+        PrIsFrcBC:
+          description: Force by count.
+          type: integer
+        PrShlfLfD:
+          description: Shelf life days.
+          type: integer
+        PrShlfLfH:
+          description: Shelf life hours.
+          type: integer
+        PrProdLfD:
+          description: Product life days.
+          type: integer
+        PrProdLfH:
+          description: Product life hours.
+          type: integer
+        PrIsPrnPL:
+          description: Print product life.
+          type: integer
+        PrIsPrnPO:
+          description: Print packed on.
+          type: integer
+        PrBnsPts:
+          description: Bonus points.
+          type: integer
+        PrPrtns:
+          description: Portions.
+          type: integer
+        PrIsUsSL:
+          description: Apply security label.
+          type: integer
+        PrInMode:
+          description: Intake mode.
+          type: integer
+        PrLblRot1:
+          description: Label 1 rotation.
+          type: integer
+        PrLblPlc1:
+          description: Label 1 placement.
+          type: integer
+        PrLblRot2:
+          description: Label 2 rotation.
+          type: integer
+        PrLblPlc2:
+          description: Label 2 placement.
+          type: integer
+        PrLblRot3:
+          description: Label 3 rotation.
+          type: integer
+        PrLblPlc3:
+          description: Label 3 placement.
+          type: integer
+        PrName1:
+          description: PrName1
+          type: string
+        PrName2:
+          description: PrName2
+          type: string
+        PrVCOLTxt:
+          description: Verify COOL text.
+          type: integer
+        PrCOLReq:
+          description: PrCOLReq
+          type: integer
+        PrPrPlT:
+          description: Production planning type.
+          type: integer
+        PrType:
+          description: Product type.  1:By weight (primary units), 2:By count, 3:By weight (secondary units).
+          type: integer
+          enum: [1,2,3]
+        PrBarPref:
+          description: Barcode prefix.
+          type: integer
+        PrBarProN:
+          description: Barcode product number.
+          type: integer
+        PrBarVenN:
+          description: Barcode vendor number.
+          type: integer
+        PrEANCd:
+          description: Barcode EAN code.
+          type: string
+        PrRawBarC:
+          description: Raw barcode number.
+          type: string
+        PrCdNm1:
+          description: PrCdNm1
+          type: integer
+        PrCdNm2:
+          description: PrCdNm2
+          type: integer
+        PrSpcSD:
+          description: Special start date.
+          type: string
+        PrDesc:
+          description: Product description.
+          type: integer
+        PrGrNm1:
+          description: Graphic 1.
+          type: string
+        PrGrNm2:
+          description: Graphic 2.
+          type: string
+        PrGrNm3:
+          description: Graphic 3.
+          type: string
+        PrGrNm4:
+          description: Graphic 4.
+          type: string
+        PrImage:
+          description: Product image.
+          type: string
+        PrCOLTN:
+          description: Cool tracking text.
+          type: string
+        PrMealSideItemsGroupNum:
+          description: Meal side item group number.
+          type: integer
+        PrMealSideItemsAreFree:
+          description: Meal side items are free.
+          type: integer
+        PrMealNumSidesIncluded:
+          description: Meal number of sides included.
+          type: integer
+        PrCutTestMeatSpecSheetGroupNum:
+          description: Cut test meat spec sheet group number.
+          type: integer
+        PrWeightMin:
+          description: Pick 5 Weight minimum.
+          type: integer
+        PrWeightMax:
+          description: Pick 5 Weight maximum.
+          type: integer
+        PrTotalPriceMin:
+          description: Pick 5 Total price minimum.
+          type: integer
+        PrTotalPriceMax:
+          description: Pick 5 Total price maximum.
+          type: integer
+        PrManualLabelTypeNum1:
+          description: Manual label type 1.
+          type: integer
+        PrManualLabelTypeNum2:
+          description: Manual label type 2.
+          type: integer
+        PrManualLabelTypeNum3:
+          description: Manual label type 3.
+          type: integer
+        PrPrepackLabelTypeNum1:
+          description: Prepack label type 1.
+          type: integer
+        PrPrepackLabelTypeNum2:
+          description: Prepack label type 2.
+          type: integer
+        PrPrepackLabelTypeNum3:
+          description: Prepack label type 3.
+          type: integer
+        PrProdEntryLabelTypeNum1:
+          description: Prod entry label type 1.
+          type: integer
+        PrProdEntryLabelTypeNum2:
+          description: Prod entry label type 2.
+          type: integer
+        PrProdEntryLabelTypeNum3:
+          description: Prod entry label type 3.
+          type: integer
+        PrSelfServLabelTypeNum1:
+          description: Selfserve label type 1.
+          type: integer
+        PrSelfServLabelTypeNum2:
+          description: Selfserve label type 2.
+          type: integer
+        PrSelfServLabelTypeNum3:
+          description: Selfserve label type 3.
+          type: integer
+        PrPick5LabelTypeNum1:
+          description: Pick 5 label type 1.
+          type: integer
+        PrPick5LabelTypeNum2:
+          description: Pick 5 label type 2.
+          type: integer
+        PrPick5LabelTypeNum3:
+          description: Pick 5 label type 3.
+          type: integer
+        PrCheck:
+          description: PrCheck
+          type: integer
+      required:
+        - PrNum
+        - DeptNum
+
+    Operator:
+      description: Describes a single operator.
+      type: object
+      properties:
+        OpNum:
+          description: Operator ID
+          type: string
+        OpRFID:
+          description: Operator RFID tag.
+          type: string
+        OpAccLev:
+          description: Operator access level.
+          type: integer
+        OpPLang:
+          description: Operator preferred language.
+          type: integer
+        OpSawNote:
+          description: OpSawNote
+          type: integer
+          enum: [0,1]
+        OpName:
+          description: Operator name.
+          type: string
+        OpCheck:
+          description: OpCheck
+          type: integer
+
+    Category:
+      description:  Describes a single category.
+      type: object
+      properties:
+        DeptNum:
+          description: Department that this category is within.
+          type: integer
+        CaNum:
+          description: Category number.
+          type: integer
+        Cat_CaNum:
+          description: Cat_CaNum
+          type: integer
+        CaName1:
+          description: Category name 1.
+          type: string
+        CaName2:
+          description: Category name 2.
+          type: string
+        CaCdNm1:
+          description: CaCdNm1
+          type: string
+        CaCdNm2:
+          description: CaCdNm2
+          type: string
+        CaBgClr:
+          description: CaBgClr
+          type: integer
+        CaTxClr:
+          description: CaTxClr
+          type: integer
+        CaImage:
+          description: Category image.
+          type: string
+        CaPList:
+          description: CaPList
+          type: string
+        CaCheck:
+          description: CaCheck
+          type: integer
+
+    Department:
+      description: Describes a single department.
+      type: object
+      properties:
+        DeptNum:
+          description: Department number.
+          type: integer
+        DeptName1:
+          description: Department name 1.
+          type: string
+        DeptName2:
+          description: Department name 2.
+          type: string
+        DeptCheck:
+          description: DeptCheck
+          type: integer
+
+    Zone:
+      description: Describes a zone within a department.
+      type: object
+      properties:
+        ZoneNum:
+          description: Zone number.
+          type: integer
+        DeptNum:
+          description: Department number.
+          type: string
+        ZoneName:
+          description: Zone name.
+          type: string
+
+paths:
+  /version:
+    get:
+      tags: [System Information]
+      summary: Returns the version of the Online Ordering system.
+      responses:
+        '200':
+          description: system version information as JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  applicationVersion:
+                    type: string
+                    description: version of the API software
+                    example: "1.0.0"
+                  databaseVersion:
+                    type: string
+                    description: version of the database schema
+                    example: "1.0.0"
+
+  /orders:
+    get:
+      tags: [Order Management]
+      summary: Returns a subset of all orders.
+      parameters:
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/dir'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/before'
+        - $ref: '#/components/parameters/after'
+        - $ref: '#/components/parameters/status'
+          
+      responses:
+        '200':
+          description: all matching orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags: [Order Management]
+      summary: Add one or more orders to the system.
+      requestBody:
+        description: New orders to add to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: list of OrderNumbers inserted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+        '400':
+          description: Unsuccessful insert; no changes made.
+
+    put:
+      tags: [Order Management]
+      summary: Update one or more orders in the system.
+      requestBody:
+        description: Orders to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: Sucessful update.
+        '400':
+          description: Unsuccessful update; no changes made.
+
+  /orders/{OrderNumber}/:
+    get:
+      tags: [Order Management]
+      summary: Returns the specified order.
+      parameters:
+        - $ref: '#/components/parameters/OrderNumber'
+
+      responses:
+        '200':
+          description: the matching order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  
+  /orderdetails/:
+    put:
+      tags: [Order Management]
+      summary: Upsert one or more order details.
+      requestBody:
+        description: Order details to upsert into the system.  Product details and a new OrderNumId will be supplied if not included in the PUT.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderDetails'
+      responses:
+        '200':
+          description: Successfully updated products.
+        '400':
+          description: Unsuccessful update; no changes made.
+
+  /orderdetails/{OrderNumber}/:
+    get:
+      tags: [Order Management]
+      summary: Returns items within a specific order.
+      parameters:
+        - $ref: '#/components/parameters/OrderNumber'
+      responses:
+        '200':
+          description: the matching items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetails'
+
+  /orderdetails/{OrderNumber}/{DeptNum}/{ZoneNum}/{OrderNumId}:
+    get:
+      tags: [Order Management]
+      summary: Returns a specific item within an order.
+      parameters:
+        - $ref: '#/components/parameters/OrderNumber'
+        - $ref: '#/components/parameters/ZoneNum'
+        - $ref: '#/components/parameters/DeptNum'
+        - in: path
+          name: OrderNumId
+          description: order item number
+          required: true
+          schema:
+           type: integer
+      responses:
+        '200':
+          description: the matching item
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetails'
+
+  /products/{DeptNum}/{PrNum}:
+    parameters:
+    - $ref: '#/components/parameters/DeptNum'
+    - in: path
+      name: PrNum
+      description: product number
+      required: true
+      schema:
+        type: integer
+    get:
+      tags: [Additional Records]
+      summary: Returns a specific product.
+      responses:
+        '200':
+          description: the matching product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    delete:
+      tags: [Additional Records]
+      summary: Deletes a specific products.
+      responses:
+        '200':
+          description: Sucessfully deleted the product.
+
+  /products/all:
+    get:
+      tags: [Additional Records]
+      summary: Returns all known products.
+      responses:
+        '200':
+          description: the matching products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    delete:
+      tags: [Additional Records]
+      summary: Delete all known products.
+      responses:
+        '200':
+          description: Sucessfully deleted all products.
+
+  /products/:
+    post:
+      tags: [Additional Records]
+      summary: Insert new products.
+      requestBody:
+        description: Orders to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Successfully inserted products.
+        '400':
+          description: Unsuccessful update; no changes made.
+    put:
+      tags: [Additional Records]
+      summary: Update one or more products.
+      requestBody:
+        description: Orders to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Successfully updated products.
+        '400':
+          description: Unsuccessful update; no changes made.
+  
+  /operators/all:
+    get:
+      tags: [Additional Records]
+      summary: Returns all operators.
+      responses:
+        '200':
+          description: all operators
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operator'
+    delete:
+      tags: [Additional Records]
+      summary: Delete all known operators.
+      responses:
+        '200':
+          description: Sucessfully deleted all operators.
+  
+  /operators/:
+    post:
+      tags: [Additional Records]
+      summary: Add one or more operators to the system.
+      requestBody:
+        description: New operators to add to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Operator'
+      responses:
+        '200':
+          description: Successfully inserted operators.
+    put:
+      tags: [Additional Records]
+      summary: Update one or more operators in the system.
+      requestBody:
+        description: Operators to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Operator'
+      responses:
+        '200':
+          description: Successfully updated operators.
+
+  /operators/{OpNum}/:
+    parameters:
+      - in: path
+        name: OpNum
+        description: operator number
+        required: true
+        schema:
+          type: integer
+    get:
+      tags: [Additional Records]
+      summary: Returns specified operator.
+      responses:
+        '200':
+          description: specified operator
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operator'
+    delete:
+      tags: [Additional Records]
+      summary: Delete specified operator.
+      responses:
+        '200':
+          description: Sucessfully deleted specified operator.
+
+  /categories/all:
+    get:
+      tags: [Additional Records]
+      summary: Returns all categories.
+      responses:
+        '200':
+          description: all categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    delete:
+      tags: [Additional Records]
+      summary: Delete all known categories.
+      responses:
+        '200':
+          description: Sucessfully deleted all categories.
+
+  /categories/:
+    post:
+      tags: [Additional Records]
+      summary: Add one or more categories to the system.
+      requestBody:
+        description: New categories to add to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Successfully inserted categories.
+    put:
+      tags: [Additional Records]
+      summary: Update one or more categories in the system.
+      requestBody:
+        description: Categories to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Successfully updated categories.
+
+  /categories/{DeptNum}/{CaNum}/:
+    parameters:
+      - $ref: '#/components/parameters/DeptNum'
+      - in: path
+        name: CaNum
+        description: category number
+        required: true
+        schema:
+          type: integer
+    get:
+      tags: [Additional Records]
+      summary: Returns specified category.
+      responses:
+        '200':
+          description: specified category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    delete:
+      tags: [Additional Records]
+      summary: Delete specified category.
+      responses:
+        '200':
+          description: Sucessfully deleted specified category.
+
+  /departments/all:
+    get:
+      tags: [Additional Records]
+      summary: Returns all departments.
+      responses:
+        '200':
+          description: all departments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+    delete:
+      tags: [Additional Records]
+      summary: Delete all known departments.
+      responses:
+        '200':
+          description: Sucessfully deleted all departments.
+  
+  /departments/:
+    post:
+      tags: [Additional Records]
+      summary: Add one or more departments to the system.
+      requestBody:
+        description: New departments to add to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Department'
+      responses:
+        '200':
+          description: Successfully inserted departments.
+    put:
+      tags: [Additional Records]
+      summary: Update one or more departments in the system.
+      requestBody:
+        description: Departments to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Department'
+      responses:
+        '200':
+          description: Successfully updated departments.
+
+  /departments/{DeptNum}/:
+    parameters:
+      - $ref: '#/components/parameters/DeptNum'
+    get:
+      tags: [Additional Records]
+      summary: Returns specified departments.
+      responses:
+        '200':
+          description: specified departments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+    delete:
+      tags: [Additional Records]
+      summary: Delete specified department.
+      responses:
+        '200':
+          description: Sucessfully deleted specified department.
+  
+  /images/{location}/all:
+    parameters:
+    - $ref: '#/components/parameters/location'
+    get:
+      tags: [Additional Records]
+      summary: Returns list of all existing images.
+      responses:
+        '200':
+          description: all matching images.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    delete:
+      tags: [Additional Records]
+      summary: Deletes all matching images.
+      responses:
+        '200':
+          description: Successfully deleted all matching images.
+
+  /images/{location}/:
+    post:
+      tags: [Additional Records]
+      parameters:
+        - $ref: '#/components/parameters/location'
+      requestBody:
+        description: New image to upload into the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filename:
+                  description: Filename to save this image as.  Legal characters are "1234567890-=qwertyuiop[]asdfghjklzxcvbnm. _()+QWERTYUIOPASDFGHJKLZXCVBNM"
+                  type: string
+                image:
+                  description:  Base64-encoded image (must be a gif, png, jpg).
+                  type: string
+      responses:
+        '200':
+          description: Image successfully uploaded.
+
+  /images/{location}/{DeptNum}/{IdNum}:
+    get:
+      tags: [Additional Records]
+      parameters:
+      - $ref: '#/components/parameters/location'
+      - $ref: '#/components/parameters/DeptNum'
+      - in: path
+        name: IdNum
+        description: either a product number (PrNum) or a category number (CaNum) as appropriate.
+        required: true
+        schema:
+         type: integer
+      summary: Returns the image for the specified product or category.
+      responses:
+        '303':
+          description: redirect to the matching image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpg:
+              schema:
+                type: string
+                format: binary 
+            image/gif:
+              schema:
+                type: string
+                format: binary
+
+  /images/{location}/{FileName}/:
+    delete:
+      tags: [Additional Records]
+      parameters:
+        - $ref: '#/components/parameters/location'
+        - in: path
+          name: FileName
+          description: image file to delete
+          required: true
+          schema:
+            type: string
+      summary: Deletes an existing image file by name.
+      responses:
+        '200': 
+          description: Successfully deleted the image.
+
+  /zones/all:
+    get:
+      tags: [Additional Records]
+      summary: Returns all zones.
+      responses:
+        '200':
+          description: all zones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+    delete:
+      tags: [Additional Records]
+      summary: Delete all known zones.
+      responses:
+        '200':
+          description: Sucessfully deleted all zones.
+  
+  /zones/:
+    post:
+      tags: [Additional Records]
+      summary: Add one or more zones to the system.
+      requestBody:
+        description: New zones to add to the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Zone'
+      responses:
+        '200':
+          description: Successfully inserted zones.
+    put:
+      tags: [Additional Records]
+      summary: Update one or more zones in the system.
+      requestBody:
+        description: Zones to update in the system.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Zone'
+      responses:
+        '200':
+          description: Successfully updated departments.
+
+  /zones/{DeptNum}/:
+    parameters:
+      - $ref: '#/components/parameters/DeptNum'
+    get:
+      tags: [Additional Records]
+      summary: Returns zones of the specified department.
+      responses:
+        '200':
+          description: specified zones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+
+  /zones/{DeptNum}/{ZoneNum}/:
+    parameters:
+      - $ref: '#/components/parameters/DeptNum'
+      - $ref: '#/components/parameters/ZoneNum'
+    get:
+      tags: [Additional Records]
+      summary: Get specified zone.
+      responses:
+        '200':
+          description: specified zone
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+    delete:
+      tags: [Additional Records]
+      summary: Delete specified zone.
+      responses:
+        '200':
+          description: Sucessfully deleted specified zone.

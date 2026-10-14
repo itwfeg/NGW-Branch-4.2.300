@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ReadDatabar</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+							<P>
+								When set to TRUE the toolkit will search for GS1 Databar barcodes. The following 
+                                types of GS1 Databar are supported:<br />
+                                <br />
+                                <ul>
+                                <li>RSS-14</li>
+                                <li>RSS-14 Truncated</li>
+                                <li>RSS-14 Stacked</li>
+                                <li>RSS-14 Stacked Omnidirectional</li>
+                                <li>RSS Limited</li>
+                                <li>RSS Expanded</li>
+                                <li>RSS Expanded Stacked</li>
+                                </ul>
+                                Please note the the bounding rectangle for stacked versions of the barcode 
+                                currently only includes either the top-most or bottom-most element of the stack.<br />
+                            <br />
+                            <b>Reading supplementary data</b><br />
+                            <br />
+                            Some GS1 Databar barcodes encode supplementary data in the form of a 
+                            micro-PDF-417 barcode above the linear portion of the barcode. To read the 
+                            supplementary portion set ReadMicroPDF417 to True and ensure that DatabarOptions 
+                            includes the option to read supplementary barcodes.<br />
+							</P>
+							<P>
+								Default value = &nbsp;&nbsp;FALSE 							</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_READ_DATABAR,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_READ_DATABAR,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Turn on databar recognition.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_READ_DATABAR,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

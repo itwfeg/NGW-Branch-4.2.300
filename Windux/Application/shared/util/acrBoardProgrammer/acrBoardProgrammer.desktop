@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=ACR Board Programmer
+Comment=ITW Hobart ACR Board Programmer
+Exec=python3 /home/pi/acr_board_programmer/acrBoardProgrammer.py
+Icon=/home/pi/acr_board_programmer/acrBoardProgrammer.png
+Path=/home/pi/acr_board_programmer
+Terminal=False
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true

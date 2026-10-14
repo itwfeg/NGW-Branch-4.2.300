@@ -1,0 +1,24 @@
+#! /bin/sh
+#
+# This is an init script for smBackend
+
+case "$1" in
+  start)
+    echo -n "Starting smBackend"
+    python /usr/local/hobart/python/microSmBackend.py &
+    ;;
+  stop)
+    echo -n "Stopping smBackend"
+    pkill -f microSmBackend.py
+    ;;
+  restart)
+    echo -n "Restarting smBackend"
+    pkill -f microSmBackend.py
+    python /usr/local/hobart/python/microSmBackend.py &
+    ;;
+  *)
+    echo "Usage: /etc/init.d/smBackend {start|stop|restart}"
+    exit 1
+esac
+
+

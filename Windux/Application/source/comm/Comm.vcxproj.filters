@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="EMail">
+      <UniqueIdentifier>{fdfd75f8-d939-45c2-889d-381c81c1ac06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EMail\SMTP">
+      <UniqueIdentifier>{e33b3ccf-e6e5-4018-bd1e-e2774c72cb05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CGI">
+      <UniqueIdentifier>{6a5c9bab-a5fb-4258-aaaf-9db84eaac169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CGI\HTTP">
+      <UniqueIdentifier>{a4a2ab4f-4fbc-4639-b49b-3d465a68b882}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CMFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterDBIndependent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterEvolTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterEvolUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterGCD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterSyncTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterUltimaDisk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InitializerComm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Messenger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkConnectivityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSocket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="email\Email.cpp">
+      <Filter>EMail</Filter>
+    </ClCompile>
+    <ClCompile Include="email\EmailManager.cpp">
+      <Filter>EMail</Filter>
+    </ClCompile>
+    <ClCompile Include="email\SendErrorEmailEvent.cpp">
+      <Filter>EMail</Filter>
+    </ClCompile>
+    <ClCompile Include="email\SendGcdFtpErrorEmailEvent.cpp">
+      <Filter>EMail</Filter>
+    </ClCompile>
+    <ClCompile Include="email\SendGcdPlaylistErrorEmailEvent.cpp">
+      <Filter>EMail</Filter>
+    </ClCompile>
+    <ClCompile Include="email\SMTP\SMTPClient.cpp">
+      <Filter>EMail\SMTP</Filter>
+    </ClCompile>
+    <ClCompile Include="email\SMTP\SMTPClientInterface.cpp">
+      <Filter>EMail\SMTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\CGICallManager.cpp">
+      <Filter>CGI</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\CGICallPerformedMessage.cpp">
+      <Filter>CGI</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\CGIHTTPAdapter.cpp">
+      <Filter>CGI</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\PerformCGICallMessage.cpp">
+      <Filter>CGI</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPClient.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPClientError.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPRequest.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPResponse.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPUnitTester.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="cgi\HTTP\HTTPURI.cpp">
+      <Filter>CGI\HTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="CMReaderWriterHandsFreeDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CMFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterDBIndependent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterEvolTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterEvolUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterGCD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterSyncTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterUltimaDisk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommMechanism.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommSessionEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HobSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Messenger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkConnectivityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scalemaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scalemasterEvol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UltimaDiskEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="email\Email.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\EmailComponent.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\EmailManager.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\EmailManagerEvents.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\OutgoingMailerI.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SendErrorEmailEvent.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SendGcdFtpErrorEmailEvent.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SendGcdPlaylistErrorEmailEvent.h">
+      <Filter>EMail</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SMTP\SMTPClient.h">
+      <Filter>EMail\SMTP</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SMTP\SMTPClientEvent.h">
+      <Filter>EMail\SMTP</Filter>
+    </ClInclude>
+    <ClInclude Include="email\SMTP\SMTPClientInterface.h">
+      <Filter>EMail\SMTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\CGICallerI.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\CGICallManager.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\CGICallManagerEvents.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\CGICallPerformedMessage.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\CGIHTTPAdapter.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\PerformCGICallMessage.h">
+      <Filter>CGI</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPClient.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPClientError.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPClientEvent.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPRequest.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPResponse.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPUnitTester.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="cgi\HTTP\HTTPURI.h">
+      <Filter>CGI\HTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="CMReaderWriterHandsFreeDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

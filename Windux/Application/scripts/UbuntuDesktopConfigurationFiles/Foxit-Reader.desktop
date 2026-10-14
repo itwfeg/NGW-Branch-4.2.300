@@ -1,0 +1,17 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=FoxitReader
+Type=Application
+GenericName=Foxit PDF Reader
+Comment=Read PDF Document
+Exec=FoxitReader %F
+StartupNotify=true
+Icon=/usr/share/pixmaps/fx-icon.png
+Terminal=false
+Categories=GNOME;GTK;Application;Office;Viewer;
+MimeType=application/pdf;application/x-bzpdf;application/x-gzpdf;
+Comment[zh_CN]=Read PDF Document
+GenericName[zh_CN]=Foxit PDF Reader

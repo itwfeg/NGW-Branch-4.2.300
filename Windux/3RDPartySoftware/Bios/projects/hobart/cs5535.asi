@@ -1,0 +1,1477 @@
+//
+// FILE NAME.
+//      CS5535.ASI - Geode CS5535 Companion Device ASL Support Module.
+//
+// FUNCTIONAL DESCRIPTION.
+//      This module contains the ASL code definitions for the Geode CS5535.
+//      It is intended for inclusion on projects requiring this device.
+//
+//      This ASL support module supports the Geode CS5535 core logic and Super
+//      I/O silicon components.  The GX3 silicon is supported in a separate ASL
+//      module.
+//
+//      The Geode CS5535 core logic silicon supports the following PCI devices:
+//      - Dev 0Fh, Func 00h:  GPCI_SB Device.
+//      - Dev 0Fh, Func 02h:  IDE Controller.
+//      - Dev 0Fh, Func 03h:  AC'97 Audio Codec Controller.
+//      - Dev 0Fh, Func 04h:  USB Host Controller.
+//      - Dev 0Fh, Func 05h:  USB Host Controller.
+//
+//      The Geode CS5535 Diverse Device logic also supports the following
+//      legacy devices:
+//      - PC compatible cascaded 8259 Programmable Interrupt Controllers (PIC).
+//      - PC compatible cascaded 8237 DMA Controllers.
+//      - PC compatible 8254 Programmable Interval Timer (PIT).
+//      - Two Serial Port devices (16550A and 16450 compatible).
+//      - IR Communications Port shared with Serial Port 1 hardware.
+//      - System Management Bus (SMB) Controller.
+//      - LPC Bus interface.
+//      - General Purpose I/O (GPIO) Controller.
+//      - Multi Function General Purpose Timer's (MFGPT).
+//      - Real Time Clock (RTC) unit.
+//      - Power Management Controller.
+//
+//      Currently we do not support the UART and RTC devices in the ASL code.
+//      This is because the CS5535 uses Model Specific Registers (MSR) to
+//      configure the address of these devices.  ASL does not support access
+//      to MSR's.
+//
+//      This ASL support module also requires the META.ASI ASL Include file.
+//
+//      This ASL support module does not provide power management functionality
+//      as this varies according to motherboard & chipset GPIO routing &
+//      capabilities.  In order to provide this functionality simply declare
+//      the necessary methods in the ASL project file with an explicit path in
+//      the method or object definition.
+//
+// MODIFICATION HISTORY.
+//      D. K. Chalfant  03/11/03.       #5.2, new, from sc1200.asi@v3.
+//      E. Khoruzhenko  04/01/22.       #5.2, added SP3/SP4 and FB interface.
+//      E. Khoruzhenko  04/02/05.       #5.2, added RTC, fixed STA for UARTs.
+//
+// WARNINGS.
+//      None.
+//
+// NOTICE:  Copyright (C) 2003-2004 General Software, Inc.
+//
+
+//
+// This I/O region is used to communicate with Firmbase GX3 Chipset Driver.
+// Because these registers are located above the virtual ACPI I/O regiser
+// block, OS will not use them. All accesses to this region *must* be in
+// aligned DWORDs. Any misaligned or wrong sized acceses will be ignored by
+// the driver. Interface is the following: fill out parameters PAR1, PAR2,
+// PAR3, etc,  depending on the particular command; then submit a command
+// itself by writing the command code into the FBBF register. FBBF is the
+// first in the register block, the rest of the registers in the region can
+// be used as parameters. Firmbase driver will start processing the command
+// after it is written to FBBF. The result of the command is available for
+// reading from the parameter fields. For command and parameter definitions
+// refer to the Firmbase GX3 Chipset Driver.
+//
+
+OperationRegion (FBBF, SystemIO, 0x9C60, 0x20)
+Field (FBBF, DWordAcc, NoLock, Preserve) {
+    FCMD, 32,
+    PAR1, 32,
+    PAR2, 32,
+    PAR3, 32
+}
+
+//
+// GPCI_SB Device.
+//
+
+Device (ISA) {
+    Name (_ADR, 0x000F0000)             // Address (PCI Dev Fh, Func 0h).
+
+    //
+    // PCI Configuration Space registers.
+    // Geode CS5535 Core Logic Function 0h.
+    //
+
+    OperationRegion (GF_0, PCI_Config, 0x00, 0x100)
+    Field (GF_0, AnyAcc, NoLock, Preserve) {
+        Offset (0x5C),                  // PCI Interrupt Steering 1.
+        PI_A,   4,                      // Bit[3:0].INTA Target Interrupt.
+        PI_B,   4,                      // Bit[7:4].INTB Target Interrupt.
+        Offset (0x5D),                  // PCI Interrupt Steering 2.
+        PI_C,   4,                      // Bit[3:0].INTC Target Interrupt.
+        PI_D,   4                       // Bit[7:4].INTD Target Interrupt.
+    } // ISA.GF_0 OpRegion
+
+    //
+    // LD_S:  LPC Decode Status - currently not used, just returns a One.
+    //
+    // Determine if a peripheral device is enabled for LPC decode.
+    //
+    // Entry
+    //    Arg0 - Bit Index:
+    //        00 = Parallel Port.
+    //        01 = Serial Port 0.
+    //        02 = Serial Port 1.
+    //        06 = Floppy Disk Controller.
+    //        10 = Keyboard Controller.
+    //
+    //
+    // Exit:
+    //    Zero - device not enabled for LPC decode.
+    //    One  - device enabled for LPC decode.
+    //
+
+    Method (LD_S, 1, NotSerialized) {
+        Return (One)
+    } // ISA.LD_S method
+
+    //
+    // DEVICE NAME.
+    //      SBSR - South Bridge Static Resource Reporting.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      This device definition reports static resources consumed by the
+    //      Geode CS5535 core logic.
+    //
+    //      This device does not report register blocks with reprogrammable
+    //      base addresses.  These are reported in a separate device.
+    //
+    //      We are NOT reporting ISA alias addresses in this device.  There
+    //      is a separate device for alias addresses since the decode of
+    //      alias addresses can be enabled or disabled in the LPC Bus PCI
+    //      register space.
+    //
+    // MANDATORY METHODS.
+    //      _HID - Hardware ID.  Report as Motherboard Resources.
+    //      _UID - Unique ID.  Required for multiple instances of an EisaId.
+    //      _CRS - report current resource consumption.
+    //
+    // OPTIONAL METHODS.
+    //      None.
+    //
+    // MODIFICATION HISTORY.
+    //      D. K. Chalfant  03/11/03.       #5.3, new.
+    //
+
+    Device (SBSR) {
+        Name (_HID, EISAID ("PNP0C02")) // Hardware ID.
+        Name (_UID, 0xD1)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        // South Bridge Static Resources.
+        //
+        // Report static resources using PNPISA compatible IO Port
+        // Descriptors.
+        //
+
+        Name (RS_S, ResourceTemplate () {
+            IO (Decode16, 0x0092, 0x0092, 1, 0x01) // Port 92h.
+            IO (Decode16, 0x0481, 0x0481, 1, 0x03) // DMA Page regs.
+            IO (Decode16, 0x0487, 0x0487, 1, 0x01) // DMA Page reg.
+            IO (Decode16, 0x0489, 0x0489, 1, 0x01) // DMA Page regs.
+            IO (Decode16, 0x048A, 0x048A, 1, 0x02) // DMA Page regs.
+            IO (Decode16, 0x048F, 0x048F, 1, 0x01) // DMA Page reg.
+            IO (Decode16, 0x04D0, 0x04D0, 1, 0x02) // Edge,Level register.
+            IO (Decode16, 0xac18, 0xac18, 8, 0x08) // virtual registers.
+        }) // SBSR.RS_S object
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0x0, NotSerialized) {
+            Return (RS_S)
+        } // SBSR._CRS method
+    } // SBSR device
+
+    //
+    // Legacy Real Time Clock.
+    //
+
+    Include ("..\\acpi\\isa\\rtc.asi")
+
+    //
+    // Legacy DMA Controller.
+    //
+
+    Include ("..\\acpi\\isa\\8237.asi")
+
+    //
+    // Legacy Programmable Interrupt Controller.
+    //
+
+    Include ("..\\acpi\\isa\\8259.asi")
+
+    //
+    // Legacy Programmable Interval Timer.
+    //
+
+    Include ("..\\acpi\\isa\\8254.asi")
+
+    //
+    // Legacy PC Speaker.
+    //
+
+    Include ("..\\acpi\\isa\\spkr.asi")
+
+    //
+    // Legacy Math Coprocessor Device.
+    //
+
+    Include ("..\\acpi\\isa\\coproc.asi")
+
+    //
+    // Generic Methods and Objects for PCI Interrupt Link Devices.
+    //
+
+    //
+    // METHOD NAME.
+    //      LCRS - Generic _CRS Handler for PCI Interrupt Link Devices.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      This ASL method provides a generic, reusable _CRS handler for all
+    //      Geode CS5535 PCI interrupt link devices.
+    //
+    // MODIFICATION HISTORY.
+    //      D. K. Chalfant  03/11/03.       #5.3, new.
+    //
+    // ENTRY PARAMETERS.
+    //      Arg0 - 8259 PIC mode:  current INTx Target Interrupt bitfield value.
+    //
+    // EXIT PARAMETERS.
+    //      None.
+    //
+    // WARNINGS.
+    //      None.
+    //
+
+    Method (LCRS, 0x1, NotSerialized) {
+        Store (Arg0, Local0)
+
+        //
+        // Geode CS55350 always operates in 8259 PIC mode.
+        // Arg0 = PCI Interrupt Routing register value (ISA IRQ line).
+        //
+
+        Store (Zero, IRQL)              // init _INT to known value.
+
+        //
+        // We test if the Geode PCI Interrupt Steering register INTx Target
+        // Interrupt bitfield indicates PCI interrupt steering is enabled for
+        // the requested PCI interrupt line.  We only program a value to report
+        // the resource assignment if the register is enabled.  Otherwise we
+        // retain the zero value programmed immediately above to indicate
+        // the link is not assigned any resources.
+        //
+
+        If (LNotEqual (Local0, Zero)) { // is PCI Int steering enabled?
+
+            //
+            // PCI Interrupt Routing Register is enabled.
+            //
+
+            ShiftLeft (One, Local0, IRQL) // wr resource buffer _IRQ bitmap.
+        }
+        Return (RSPC)                   // return PIC mode resources.
+    } // LCRS method
+
+    //
+    // Generic PCI Interrupt Link Device 8259 PIC Mode Resource Buffer.
+    //
+    // Create a dynamically programmable, generic resource template for PIC
+    // operation.  We create the resource template using a single PnP ISA
+    // compatible IRQ Format resource descriptor with the optional Byte[3]
+    // IRQ Information byte.  We also need to create a field object to access
+    // the resource descriptor _INT IRQ mask field so we can program the
+    // actual ISA IRQ assignment for this PCI interrupt device.
+    //
+    // Create IRQL field to dynamically program the RSPC IRQ Number.
+    //
+
+    Name (RSPC, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {} // Byte[01] _IRQ = IRQL.
+    }) // RSPC object
+    CreateWordField (RSPC, 0x01, IRQL)
+
+    //
+    // Generic PCI Interrupt Link Device 8259 PIC Mode _PRS Buffer.
+    //
+    // We define a generic resource template defining the entire set of ISA
+    // IRQ lines which can be assigned to PCI interrupt steering devices in
+    // 8259 PIC mode for our particular motherboard design.
+    //
+    // This template is returned when O/S ACPI driver calls the _PRS
+    // method for a particular PCI steering link device while operating in
+    // 8259 PIC mode only.
+    //
+    // !!! OEM NOTE !!!
+    // The set of PCI interrupts defined in the IRQ descriptor MUST match
+    // the set of ISA IRQ's you have specified in the project file using
+    // the CONFIG_PCI_IRQ_BITMAP option.
+    //
+
+    Name (RP10, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {10}
+    })
+
+    Name (RP11, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {11}
+    })
+
+    //
+    // We define a separate Alias for every PCI link device so that, if
+    // necessary, we could make different ISA IRQ lines to different groups
+    // of PCIIRQ connections on the Geode.
+    //
+
+    Alias (RP10, RP_A)
+    Alias (RP11, RP_B)
+    Alias (RP10, RP_C)
+    Alias (RP11, RP_D)
+
+    Name (PI_E, 5)
+    Name (RP_E, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {5}
+    })
+
+    Name (PI_F, 6)
+    Name (RP_F, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {6}
+    })
+
+    Name (PI_G, 7)
+    Name (RP_G, ResourceTemplate () {
+        IRQ (Level, ActiveLow, Shared) {7}
+    })
+
+    //
+    // METHOD NAME.
+    //      LSRS - Generic _SRS Handler for PCI Interrupt Link Devices.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      This ASL method provides a generic, reusable _SRS handler for all
+    //      Geode CS5535 PCI interrupt link devices.
+    //
+    //      The entry parameter resource descriptor buffer passed to _SRS by
+    //      the OS ACPI driver follows the same format as the resource buffer
+    //      returned to the OS by the _CRS method.
+    //
+    //      Geode CS5535 operates only in 8259 PIC mode therefore this format
+    //      consists of a single PnP ISA compatible IRQ Format resource
+    //      descriptor.
+    //
+    // MODIFICATION HISTORY.
+    //      D. K. Chalfant  03/11/03.       #5.3, new.
+    //      D. K. Chalfant  03/11/04.       #5.3, update legal IRQ bitmap.
+    //
+    // ENTRY PARAMETERS.
+    //      Arg0 - Resource Template from OS ACPI driver.  This template is in
+    //             the same format _CRS returns to OS ACPI driver.
+    //
+    // EXIT PARAMETERS.
+    //      Integer - non zero value is the value the caller needs to write
+    //                back to the appropriate PCI Interrupt Routing register.
+    //              - zero value indicates request not handled.
+    //
+    // WARNINGS.
+    //      None.
+    //
+
+    Method (LSRS, 0x1, NotSerialized) {
+
+        //
+        // Geode CS5535 always operates in 8259 PIC mode.
+        //
+        // Create field to access the _INT field in the entry parameter
+        // resource buffer IRQ descriptor.
+        //
+
+        CreateWordField (Arg0, 0x01, INTN)
+
+        //
+        // Error checking boundary condition.
+        // We mask off all ISA IRQ lines reserved from PCI IRQ assignment
+        // on the Geode CS5535.  The mask is obtained from the PCI Interrupt
+        // Steering Register INTx Target Interrupt bitfield list of allowed
+        // and reserved ISA IRQ lines.
+        //
+
+        And (INTN, 0xFFFA, Local0)
+
+        //
+        // We convert the Arg0 entry parameter resource descriptor
+        // IRQ channel bitmask to a zero-based integer value.
+        //
+
+        If (LNotEqual (Local0, Zero)) { // do we have a valid IRQ request?
+            Store (CBN1 (INTN), Local0) // yes - convert bitmap to integer.
+        }
+
+        //
+        // Local0 = ISA IRQ assignment requested by OS ACPI driver in the
+        //          format used by PnP ISA compatible IRQ Format resource
+        //          descriptor.
+        //
+        // This value will now equal zero if an invalid IRQ channel has been
+        // requested or a non-zero value corresponding to the IRQ number.  A
+        // zero value will result in the caller disabling IRQ steering for the
+        // requested PCI interrupt.
+
+        Return (Local0)
+    } // LSRS method
+
+    //
+    // METHOD NAME.
+    //      LSTA - Generic _STA Handler for PCI Interrupt Link Devices.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      This ASL method provides a generic, reusable _STA handler for all
+    //      Geode CS5535 PCI interrupt link devices.
+    //
+    // MODIFICATION HISTORY.
+    //      D. K. Chalfant  03/11/03.       #5.3, new.
+    //
+    // ENTRY PARAMETERS.
+    //      Arg0 - 8259 PIC mode:  INTx Target Interrupt bitfield (IRQ number).
+    //
+    // EXIT PARAMETERS.
+    //      Bitmap:
+    //      BIT0 - set if the device is present.
+    //      BIT1 - set if the device is enabled and decoding its resources.
+    //      BIT2 - set if the device should be shown in user interface.
+    //      BIT3 - set if the device is functioning properly.
+    //      BIT4 - set if the battery is present.
+    //
+    // WARNINGS.
+    //      None.
+    //
+
+    Method (LSTA, 0x1, NotSerialized) {
+
+        //
+        // Geode CS5535 always operates in 8259 PIC mode.
+        // Arg0 = INTx Target Interrupt bitfield value (IRQ line).
+        //
+
+        If (LEqual (Arg0, Zero)) {      // is PCI steering disabled?
+
+            //
+            // PCI INTx Interrupt Steering is disabled.
+            // We return status as present, disabled, do not show in UI,
+            // and functioning.
+            //
+
+            Return (0x09)               // yes - functioning, present.
+        } Else {
+
+            //
+            // PCI Interrupt Routing register is enabled.
+            // We return status as present, enabled, do not show in UI,
+            // and functioning.
+            //
+
+            Return (0x0B)               // no  - functioning, enabled, present.
+        }
+    } // LSTA method
+
+    //
+    // DEVICE NAME.
+    //      LN_A - PCI Interrupt Link Device for PCI INTA Steering.
+    //      LN_B - PCI Interrupt Link Device for PCI INTB Steering.
+    //      LN_C - PCI Interrupt Link Device for PCI INTC Steering.
+    //      LN_D - PCI Interrupt Link Device for PCI INTD Steering.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      These device definitions describe the PCI Interrupt Routing Link
+    //      devices necessary for the Operating System ACPI driver to
+    //      dynamically configure PCI interrupt assignments.
+    //
+    //      Each link device corresponds to a single PCI Interrupt Routing
+    //      bitfield on the Geode CS5535 GPCI_SB function.  These bitfields are
+    //      described below:
+    //      - LN_A   PCI Interrupt Steering Register 1 Bit[3:0] INTA.
+    //      - LN_B   PCI Interrupt Steering Register 1 Bit[7:4] INTB.
+    //      - LN_C   PCI Interrupt Steering Register 2 Bit[3:0] INTC.
+    //      - LN_D   PCI Interrupt Steering Register 2 Bit[7:4] INTD.
+    //
+    //      Each link device implements the methods and objects necessary
+    //      for OSPM to dynamically interrogate and configure the link.
+    //
+    //      !!! NOTE !!!
+    //      Start number _UID values at 1 instead of 0.
+    //      Otherwise all PCI link devices will be non-functional in Windows
+    //      98SE and the Device Manager will indicate PCI routing was obtained
+    //      from PCI BIOS real-mode calls instead of ACPI BIOS tables.
+    //
+    // MANDATORY METHODS.
+    //      _HID - return PnP EISA identifier for device.
+    //      _UID - return unique identifier.
+    //      _CRS - return link resources.
+    //      _DIS - disable link device.
+    //      _PRS - return total set of possible link resources.
+    //      _SRS - set link resources to OSPM requirements.
+    //      _STA - return device status.
+    //
+    // OPTIONAL METHODS.
+    //      None.
+    //
+    // MODIFICATION HISTORY.
+    //      D. K. Chalfant  03/11/03.       #5.3, new.
+    //
+
+    Device (LN_A) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x01)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_A))        // return PIC mode resources.
+        } // LN_A._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            Store (Zero, PI_A)          // disable interrupt steering.
+        } // LN_A._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_A)               // return 8259 possible resources.
+        } // LN_A._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            Store (LSRS (Arg0), PI_A)
+        } // LN_A._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_A))
+        } // LN_A._STA method
+    } // LN_A device
+
+    Device (LN_B) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x02)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_B))        // return PIC mode resources.
+        } // LN_B._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            Store (Zero, PI_B)          // disable interrupt steering.
+        } // LN_B._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_B)               // return 8259 possible resources.
+        } // LN_B._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            Store (LSRS (Arg0), PI_B)
+        } // LN_B._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_B))
+        } // LN_B._STA method
+    } // LN_B device
+
+    Device (LN_C) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x03)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_C))        // return PIC mode resources.
+        } // LN_C._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            Store (Zero, PI_C)          // disable interrupt steering.
+        } // LN_C._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_C)               // return 8259 possible resources.
+        } // LN_C._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            Store (LSRS (Arg0), PI_C)
+        } // LN_C._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_C))
+        } // LN_C._STA method
+    } // LN_C device
+
+    Device (LN_D) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x04)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_D))        // return PIC mode resources.
+        } // LN_D._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            Store (Zero, PI_D)          // disable interrupt steering.
+        } // LN_D._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_D)               // return 8259 possible resources.
+        } // LN_D._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            Store (LSRS (Arg0), PI_D)
+        } // LN_D._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_D))
+        } // LN_D._STA method
+    } // LN_D device
+
+    Device (LN_E) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x04)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_E))        // return PIC mode resources.
+        } // LN_E._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+        } // LN_E._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_E)               // return 8259 possible resources.
+        } // LN_E._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+        } // LN_E._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_E))
+        } // LN_E._STA method
+    } // LN_E device
+
+    Device (LN_F) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x04)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_F))        // return PIC mode resources.
+        } // LN_F._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+        } // LN_F._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_F)               // return 8259 possible resources.
+        } // LN_F._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+        } // LN_F._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_F))
+        } // LN_F._STA method
+    } // LN_F device
+
+    Device (LN_G) {
+        Name (_HID, EisaId ("PNP0C0F")) // Hardware ID.
+        Name (_UID, 0x04)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (LCRS (PI_G))        // return PIC mode resources.
+        } // LN_G._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+        } // LN_G._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (RP_G)               // return 8259 possible resources.
+        } // LN_G._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+        } // LN_G._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (LSTA (PI_G))
+        } // LN_G._STA method
+    } // LN_G device
+
+    //
+    // Serial Port Possible Resource Settings Buffer.
+    // Both Serial Port logical devices are identical.  Therefore we provide a
+    // single resource buffer for both devices.
+    //
+    // The resource template format MUST be identical between the _CRS, _PRS, and
+    // _SRS methods.  In other words, the type, number, and order of resource
+    // descriptors must be identical in all three methods.
+    //
+    // The resource configurations below are derived from Microsoft Knowledge Base
+    // Article 123992 Basic Configurations for COM Ports in Windows 95.
+    //
+
+    Name (UPRS, ResourceTemplate () {
+    
+        //
+        // Basic Configuration 0.
+        // Not editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x03F8, 0x03F8, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // Basic Configuration 1.
+        // IRQ channels editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x03F8, 0x03F8, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+    
+        //
+        // Basic Configuration 2.
+        // Not editable.
+        //
+
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x02F8, 0x02F8, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+    
+        //
+        // Basic Configuration 3.
+        // IRQ channels editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x02F8, 0x02F8, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+
+        //
+        // Basic Configuration 4.
+        // Not editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x03E8, 0x03E8, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // Basic Configuration 5.
+        // IRQ channels editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x03E8, 0x03E8, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+    
+        //
+        // Basic Configuration 6.
+        // Not editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x02E8, 0x02E8, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+    
+        //
+        // Basic Configuration 7.
+        // IRQ channels editable.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x02E8, 0x02E8, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // LPC Address Decode 0 Register.
+        // LPC Serial Port x Address Select = 010b.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0220, 0x0220, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0220, 0x0220, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // LPC Address Decode 0 Register.
+        // LPC Serial Port x Address Select = 011b.
+        //
+    
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0228, 0x0228, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0228, 0x0228, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // LPC Address Decode 0 Register.
+        // LPC Serial Port x Address Select = 100b.
+        //
+
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0238, 0x0238, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0238, 0x0238, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        //
+        // LPC Address Decode 0 Register.
+        // LPC Serial Port x Address Select = 110b.
+        //
+
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0338, 0x0338, 0x08, 0x08)
+            IRQNoFlags () {3}
+        }
+        StartDependentFnNoPri () {
+            IO (Decode16, 0x0338, 0x0338, 0x08, 0x08)
+            IRQNoFlags () {4}
+        }
+    
+        EndDependentFn ()
+    }) // UPRS object
+
+    //
+    // DEVICE NAME.
+    //      SP3 - Integrated UART1 Device.
+    //      SP4 - Integrated UART2 Device.
+    //
+    // FUNCTIONAL DESCRIPTION.
+    //      This device definition enables the Operating System ACPI driver to
+    //      interrogate and configure the CS5535's integrated UARTs. Most
+    //      methods for this device rely on a presence of the Firmbase GX3
+    //      Chipset Driver. Communication with that driver is accomplished
+    //      by accessing a special ACPI I/O register area beyond the area used
+    //      by the OS.
+    //
+    //      This allows the Operating System ACPI driver to perform the following
+    //      functions:
+    //      - Determine current resources.
+    //      - Disable the device.
+    //      - Reconfigure device resources (also reenable the device).
+    //      - Determine full set of possible resources.
+    //      - Determine device status.
+    //
+    //      The Operating System ACPI driver can use these functions to manage
+    //      the device by properly assigning system resources and preventing
+    //      resource conflicts with other system devices.
+    //
+    //      The Serial Port device is capable of operating with a wide variety
+    //      of resource assignments.
+    //
+    //      Our ASL code currently supports only standard legacy resource
+    //      combinations.
+    //
+    // MANDATORY METHODS.
+    //      _HID - return PnP EISA identifier for device.
+    //      _UID - return unique identifier for multiple devices with same _HID.
+    //      _CRS - return UART current resource assignments.
+    //      _DIS - disable UART.
+    //      _PRS - return all possible UART resource configurations.
+    //      _SRS - configure UART to use resources specified by OS ACPI driver.
+    //      _STA - return UART status depending on register settings.
+    //
+    // OPTIONAL METHODS.
+    //      _PSC - return current device power state.
+    //      _PS0 - prepare to transition device to D0 power state.
+    //      _PS3 - prepare to transition device to D3 power state.
+    //
+    // MODIFICATION HISTORY.
+    //      E. Khoruzhenko  04/01/21.       #5.2, new.
+    //      K. C. Taylor    04/12/17.       #5.2, fixed UART IRQ assignment.
+    //
+
+    Device (SP3) {
+        Name (_HID, EisaId ("PNP0501")) // Hardware ID.
+        Name (_UID, 0xF3)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (UCRS (1))           // return info for UART1.
+        } // SP3._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            UDIS (1)                    // disable the device.
+        } // SP3._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (UPRS)               // return possible resources.
+        } // SP3._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            USRS (1, Arg0)              // set resource handler.
+        } // SP3._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (USTA (1))
+        } // SP3._STA method
+    } // SP3 device
+
+    Device (SP4) {
+        Name (_HID, EisaId ("PNP0501")) // Hardware ID.
+        Name (_UID, 0xF4)               // Unique ID.
+
+        //
+        // Current Resource Settings.
+        //
+
+        Method (_CRS, 0, NotSerialized) {
+            Return (UCRS (2))           // return info for UART2.
+        } // SP3._CRS method
+
+        //
+        // Disable.
+        //
+
+        Method (_DIS, 0, NotSerialized) {
+            UDIS (2)                    // disable the device.
+        } // SP3._DIS method
+
+        //
+        // Possible Resource Settings.
+        //
+
+        Method (_PRS, 0, NotSerialized) {
+            Return (UPRS)               // return possible resources.
+        } // SP3._PRS method
+
+        //
+        // Set Resource Settings.
+        //
+
+        Method (_SRS, 1, NotSerialized) {
+            USRS (2, Arg0)               // set resource handler.
+        } // SP3._SRS method
+
+        //
+        // Status.
+        //
+
+        Method (_STA, 0, NotSerialized) {
+            Return (USTA (2))
+        } // SP3._STA method
+    } // SP4 device
+} // ISA device
+
+//
+// METHOD NAME.
+//      UCRS - _CRS Handler for CS5535's Integrated UARTs.
+//
+// FUNCTIONAL DESCRIPTION.
+//      This ASL method is called to produce the CRS buffer for the specified
+//      UART passed to this method. This method obtains the UART config info
+//      from the Firmbase chipset driver.
+//
+// MODIFICATION HISTORY.
+//      E. Khoruzhenko  04/01/21.       #5.2, new.
+//
+// ENTRY PARAMETERS.
+//      Arg0 - UART Number.
+//
+// EXIT PARAMETERS.
+//      None.
+//
+// WARNINGS.
+//      The resource template format MUST be identical between the _CRS, _PRS,
+//      and _SRS methods.  In other words, the type, number, and order of
+//      resource descriptors must be identical in all three methods.
+//
+
+Method (UCRS, 1, NotSerialized) {
+
+    //
+    // UART Resource Buffer.
+    //
+
+    Name (URBF, ResourceTemplate () {
+
+        //
+        // IO Port Descriptor - Range 0.
+        //
+
+        IO (                            // Offset 0x00.
+            Decode16,                   // Byte[01] _DEC.
+            0x0000,                     // Byte[03:02] _MIN.
+            0x0000,                     // Byte[05:04] _MAX.
+            0x01,                       // Byte[06] _ALN.
+            0x00)                       // Byte[07] _LEN.
+
+        //
+        // IRQ Format Descriptor.
+        //
+
+        IRQNoFlags ()                   // Offset 0x08.
+            {}                          // Byte[0A:09] _INT.
+    }) // URBF object
+
+    //
+    // Create fields for dynamic resource buffer programming.
+    //
+
+    CreateWordField (URBF, 0x02, MN_2)  // IO Range 0 _MIN.
+    CreateWordField (URBF, 0x04, MX_2)  // IO Range 0 _MAX.
+    CreateByteField (URBF, 0x06, AL_2)  // IO Range 0 _ALN.
+    CreateByteField (URBF, 0x07, LN_2)  // IO Range 0 _LEN.
+    CreateWordField (URBF, 0x09, IRQ2)  // IRQ channel mask.
+
+    //
+    // Get the UART settings from the Firmbase chipset driver for the specified
+    // UART. Bit definition for the returned UART information is the following:
+    //
+    // BIT15   - Soft-Reset.
+    // BIT12   - UART GPIO's were setup by BIOS.
+    // BIT11   - enable extended register banks.
+    // BIT10   - enable test mode.
+    // BIT9    - freeze device clocks, IRQ still enabled.
+    // BIT8    - enable IRQ & functionality, doesn't affect I/O.
+    // 0x00F0  - mask for the IRQ number.
+    // BIT2    - enable I/O decode.
+    // 0x0003  - mask for the base address.
+    //
+
+    Store (Arg0, PAR1)                  // write UART number to PAR1.
+    Store (0x00010001, FCMD)            // write command to get UART info.
+    Store (PAR2, Local0)                // read UART info from PAR2.
+
+    //
+    // IO range descriptor.
+    // Program _MIN, _MAX, & _LEN fields.
+    //
+
+    And (Local0, 4, Local1)             // Local1 = I/O space enable flag.
+    And (Local0, 3, Local2)             // Local2 = base I/O address code.
+    If (Local1) {                       // is I/O space enabled?
+        If (LEqual (Local2, 0)) {       // COM4.
+            Store (0x2e8, MN_2)
+        }
+        If (LEqual (Local2, 1)) {       // COM2.
+            Store (0x2f8, MN_2)
+        }
+        If (LEqual (Local2, 2)) {       // COM3.
+            Store (0x3e8, MN_2)
+        }
+        If (LEqual (Local2, 3)) {       // COM1.
+            Store (0x3f8, MN_2)
+        }
+    } Else {
+        Store (0, MN_2)                 // I/O space disabled, set it to 0.
+    }
+    Store (MN_2, MX_2)
+
+    Store (0x08, AL_2)                  // SIO enforces 8 byte alignment.
+    Store (0x08, LN_2)                  // set _LEN field.
+
+    //
+    // Program IRQ descriptor.
+    //
+
+    And (Local0, 0x00f0, Local1)
+    ShiftRight (Local1, 4, Local1)      // Local1 = base I/O address code.
+    If (LEqual (Local1, 0)) {           // is IRQ = 0?
+        Store (0x00, IRQ2)              // yes - no IRQ assignment.
+    } Else {
+        ShiftLeft (0x01, Local1, IRQ2)  // no  - program _INT.
+    }
+    Return (URBF)                       // return resource buffer.
+} // UCRS method
+
+//
+// METHOD NAME.
+//      USTA - _STA Handler for CS5535's Integrated UARTs.
+//
+// FUNCTIONAL DESCRIPTION.
+//      This ASL method is called to get the status of the specified UART.
+//      If the UART is disabled in the BIOS setup screen, we return zero
+//      indicating that device does not exist. UART info is obtained from
+//      the Firmbase chipset driver.
+//
+// MODIFICATION HISTORY.
+//      E. Khoruzhenko  04/01/21.       #5.2, new.
+//
+// ENTRY PARAMETERS.
+//      Arg0 - UART Number.
+//
+// EXIT PARAMETERS.
+//      None.
+//
+// WARNINGS.
+//      The resource template format MUST be identical between the _CRS, _PRS,
+//      and _SRS methods.  In other words, the type, number, and order of
+//      resource descriptors must be identical in all three methods.
+//
+
+Method (USTA, 1, NotSerialized)
+{
+    Store (Arg0, PAR1)                  // write UART number to PAR1.
+    Store (0x00010001, FCMD)            // write command to get UART info.
+    Store (PAR2, Local0)                // read UART info from PAR2.
+    And (Local0, 4, Local1)             // Local1 = device enabled.
+    And (Local0, 0x1000, Local2)        // Local2 = device is present in hardware.
+
+    If (Local2) {                       // is device present in hardware?
+        If (Local1) {                   // is device enabled?
+            Return (0x0f)               // if so, return proper status.
+        } Else {
+            Return (0x0d)               // show the device is disabled.
+        }
+    } Else {
+        Return (0)                      // do not show the device.
+    }
+} // USTA
+
+//
+// METHOD NAME.
+//      UDIS - _DIS Handler for CS5535's Integrated UARTs.
+//
+// FUNCTIONAL DESCRIPTION.
+//      This ASL method is called to disable the specified UART. The actual
+//      work is done by the Firmbase driver.
+//
+// MODIFICATION HISTORY.
+//      E. Khoruzhenko  04/01/21.       #5.2, new.
+//
+// ENTRY PARAMETERS.
+//      Arg0 - UART Number.
+//
+// EXIT PARAMETERS.
+//      None.
+//
+// WARNINGS.
+//      The resource template format MUST be identical between the _CRS, _PRS,
+//      and _SRS methods.  In other words, the type, number, and order of
+//      resource descriptors must be identical in all three methods.
+//
+
+Method (UDIS, 1, NotSerialized)
+{
+    Store (Arg0, PAR1)                  // write UART number to PAR1.
+    Store (0x00010001, FCMD)            // write command to get UART info.
+    Store (PAR2, Local0)                // read UART info from PAR2.
+
+    And (Local0, Not (4), Local0)       // disable the device, it is still present in hardware.
+
+    Store (Arg0, PAR1)                  // write UART number to PAR1.
+    Store (Local0, PAR2)                // write UART info to PAR2.
+    Store (0x00010002, FCMD)            // write command to set UART info.
+} // UDIS
+
+//
+// METHOD NAME.
+//      USRS - _SRS Handler for CS5535's Integrated UARTs.
+//
+// FUNCTIONAL DESCRIPTION.
+//      This ASL method is called by the OS to set the device resources for
+//      the specified UART. OS passes the standard resource buffer and Firmbase
+//      driver does the actual work in hardware.
+//
+// MODIFICATION HISTORY.
+//      E. Khoruzhenko  04/01/21.       #5.2, new.
+//
+// ENTRY PARAMETERS.
+//      Arg0 - UART Number.
+//      Arg1 - UART resource buffer.
+//
+// EXIT PARAMETERS.
+//      None.
+//
+// WARNINGS.
+//      The resource template format MUST be identical between the _CRS, _PRS,
+//      and _SRS methods.  In other words, the type, number, and order of
+//      resource descriptors must be identical in all three methods.
+//
+
+Method (USRS, 2, NotSerialized)
+{
+
+    //
+    // Create fields for dynamic resource buffer programming.
+    //
+
+    CreateWordField (Arg1, 0x02, MN_2) // IO Range 0 _MIN.
+    CreateWordField (Arg1, 0x04, MX_2) // IO Range 0 _MAX.
+    CreateByteField (Arg1, 0x06, AL_2) // IO Range 0 _ALN.
+    CreateByteField (Arg1, 0x07, LN_2) // IO Range 0 _LEN.
+    CreateWordField (Arg1, 0x09, IRQ2) // IRQ channel mask.
+
+    //
+    // Encode I/O address.
+    //
+
+    If (LEqual (MN_2, 0x3f8)) {         // COM1.
+         Store (3, Local0)
+    }
+    If (LEqual (MN_2, 0x2f8)) {         // COM2.
+         Store (1, Local0)
+    }
+    If (LEqual (MN_2, 0x3e8)) {         // COM3.
+         Store (2, Local0)
+    }
+    If (LEqual (MN_2, 0x2e8)) {         // COM4.
+         Store (0, Local0)
+    }
+    Or (Local0, 4, Local0)              // enable I/O decode.
+
+    //
+    // Encode IRQ #.
+    //
+
+    If (IRQ2) {                         // is OS driver requesting IRQ?
+        FindSetRightBit (IRQ2, Local1)
+        Subtract (Local1, 0x01, Local1) // yes - wr SIO Interrupt Number reg.
+        And (Local1, 15, Local1)
+        ShiftLeft (Local1, 4, Local1)
+    } Else {
+        Store (0x00, Local1)
+    }
+    Or (Local0, Local1, Local0)         // pack IRQ into Local0.
+    Or (Local0, 0x0100, Local0)         // enable the device.
+
+    //
+    // Send the configuration settings to the Firmbase GX3 Driver to program
+    // the hardware.
+    //
+
+    Store (Arg0, PAR1)                  // write UART number to PAR1.
+    Store (Local0, PAR2)                // write UART info to PAR2.
+    Store (0x00010002, FCMD)            // write command to set UART info.
+} // USRS
+
+//
+// IDE Controller.
+//
+
+Device (IDE0) {
+    Name (_ADR, 0x000F0002)             // Address (PCI Dev Fh, Func 2h).
+
+    //
+    // PCI Configuration Space registers.
+    // Geode CS5535 Core Logic Function 2h.
+    //
+
+    OperationRegion (GF_2, PCI_Config, 0x00, 0x100)
+    Field (GF_2, AnyAcc, NoLock, Preserve) {
+    } // IDE0.GF_2 OpRegion
+} // IDE0 device
+
+//
+// AC'97 Controller.
+//
+
+Device (AC97) {
+    Name (_ADR, 0x000F0003)             // Address (PCI Dev Fh, Func 3h).
+
+    //
+    // PCI Configuration Space registers.
+    // Geode CS5535 Core Logic Function 3h.
+    //
+
+    OperationRegion (GF_3, PCI_Config, 0x00, 0x100)
+    Field (GF_3, AnyAcc, NoLock, Preserve) {
+    } // AC97.GF_3 OpRegion
+} // AC97 device
+
+//
+// USB Controller 1.
+// Open Host Controller Interface (OHCI) compliant.
+//
+
+Device (USB1) {
+    Name (_ADR, 0x000F0004)             // Address (PCI Dev Fh, Func 4h).
+
+    //
+    // PCI Configuration Space registers.
+    // Geode CS5535 Core Logic USB Host Controller 1.
+    //
+
+    OperationRegion (HC1R, PCI_Config, 0x00, 0x100)
+    Field (HC1R, AnyAcc, NoLock, Preserve) {
+    } // USB1.HC1R OpRegion
+} // USB1 device
+
+//
+// USB Controller 2.
+// Open Host Controller Interface (OHCI) compliant.
+//
+
+Device (USB2) {
+    Name (_ADR, 0x000F0005)             // Address (PCI Dev Fh, Func 5h).
+
+    //
+    // PCI Configuration Space registers.
+    // Geode CS5535 Core Logic USB Host Controller 2.
+    //
+
+    OperationRegion (HC2R, PCI_Config, 0x00, 0x100)
+    Field (HC2R, AnyAcc, NoLock, Preserve) {
+    } // USB2.HC2R OpRegion
+} // USB2 device
+

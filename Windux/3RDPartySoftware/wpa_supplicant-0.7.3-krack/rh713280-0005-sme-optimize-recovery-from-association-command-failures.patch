@@ -1,0 +1,24 @@
+commit e5ad96b745c66620c70ff94be645a72fab6ea9c8
+Author: Jouni Malinen <jouni.malinen@atheros.com>
+Date:   Fri Nov 26 17:37:22 2010 +0200
+
+    SME: Optimize recovery from assocication command failures
+    
+    mac80211 can indicate this mainly because of channel selection
+    conflicts with other vifs. If there is another BSS on another
+    channel, we should try to connect to it instead.
+
+diff --git a/wpa_supplicant/sme.c b/wpa_supplicant/sme.c
+index 02b7639..7312c65 100644
+--- a/wpa_supplicant/sme.c
++++ b/wpa_supplicant/sme.c
+@@ -396,7 +396,8 @@ void sme_associate(struct wpa_supplicant *wpa_s, enum wpas_mode mode,
+ 	if (wpa_drv_associate(wpa_s, &params) < 0) {
+ 		wpa_msg(wpa_s, MSG_INFO, "Association request to the driver "
+ 			"failed");
+-		wpa_supplicant_req_scan(wpa_s, 5, 0);
++		wpas_connection_failed(wpa_s, wpa_s->pending_bssid);
++		os_memset(wpa_s->pending_bssid, 0, ETH_ALEN);
+ 		return;
+ 	}
+ 

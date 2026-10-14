@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">PageNo</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P><B>PageNo</B> is a 1 based index that specifies the page to be scanned in an 
+			image. A value of zero indicates that every page will be scanned&nbsp;&nbsp;
+		</P>
+		<P>Default value = &nbsp;&nbsp;&nbsp;0
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_PAGE_NO,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_PAGE_NO,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Only check for barcodes on page 3<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;3 ;<BR>
+			STSetParameter(hBarcode, ST_PAGE_NO,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

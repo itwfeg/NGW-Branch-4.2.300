@@ -1,0 +1,36 @@
+From 98ea94317701de9c5ac31c8b1205145d224d4219 Mon Sep 17 00:00:00 2001
+From: Jouni Malinen <jouni.malinen@atheros.com>
+Date: Tue, 1 Feb 2011 00:04:02 +0200
+Subject: [PATCH] Set portValid=TRUE on association for driver-based 4-way
+ handshake
+
+This was previously done for WPA/WPA2-Personal as part of association
+processing when the driver is implementing 4-way handshake. The
+portValid needs to be done for WPA/WPA2-Enterprise to get the proper
+EAPOL authentication completed callback to configure PMK to the driver.
+---
+ wpa_supplicant/events.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/wpa_supplicant/events.c b/wpa_supplicant/events.c
+index 6b6fcf7..a2556c6 100644
+--- a/wpa_supplicant/events.c
++++ b/wpa_supplicant/events.c
+@@ -1263,6 +1263,14 @@ static void wpa_supplicant_event_assoc(struct wpa_supplicant *wpa_s,
+ 		wpa_supplicant_set_state(wpa_s, WPA_COMPLETED);
+ 		eapol_sm_notify_portValid(wpa_s->eapol, TRUE);
+ 		eapol_sm_notify_eap_success(wpa_s->eapol, TRUE);
++	} else if ((wpa_s->drv_flags & WPA_DRIVER_FLAGS_4WAY_HANDSHAKE) &&
++		   wpa_key_mgmt_wpa_ieee8021x(wpa_s->key_mgmt)) {
++		/*
++		 * The driver will take care of RSN 4-way handshake, so we need
++		 * to allow EAPOL supplicant to complete its work without
++		 * waiting for WPA supplicant.
++		 */
++		eapol_sm_notify_portValid(wpa_s->eapol, TRUE);
+ 	}
+ 
+ 	if (wpa_s->pending_eapol_rx) {
+-- 
+1.7.7.6
+

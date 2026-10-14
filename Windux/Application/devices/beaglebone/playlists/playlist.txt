@@ -1,0 +1,78 @@
+# Playlist Template for the Hobart Graphical Customer Display Scale
+#
+#
+# Copyright 2012 by
+# ITW Food Equipment Group
+# Troy, Ohio
+
+#
+# All lines starting with a "#" character are considered comments only.
+
+# This playlist filename must be an ASCII text file saved with a filename
+# ending in .txt; Example: <filename.txt>
+# The filename can only consist of the lower case characters a - z, 0 - 9, and the
+# special character "_" (underline).
+#
+# The total size of all files contained in this playlist is limited by Available
+# Flash space on the storage device located in your scale.
+# To display the Available Flash space for media storage perform the following on the scale:
+# Supervisor->Show Statistics
+# View the Scale Memory section Row labeled "Free" and the column labeled "Flash".  This
+# is the amount of Available Flash space that can contain playlist referenced media files.
+#
+# All video, image, or audio filenames referenced in this playlist file
+# must only contain lowercase characters a - z, 0 - 9, and the special
+# character "_" (underline).
+#
+# Make sure you follow the insructions for each of the three (3) sections of this
+# template.
+#
+# VIDEO Section
+# Make sure each video is preceded with the word video followed with a unique number from
+# 1 to 99 and surrounded in brackets [].
+#
+
+#[video1]
+
+# SLIDE SHOW Section
+# Make sure each slide show is preceded with the word slideshow followed with a unique
+# number 1 to 99 surrounded by brackets [], and consisting of the following on
+# seperate lines;
+# The audio filename to play during this slide show preceeded with the text "audio=".
+# The time, in seconds, to display each image in the slide show precedded with the
+# text "delay=".
+# The filenames, one per line, of each image to be used in this slide show listed
+# in the order they are to de displayed.
+
+[slideshow1]
+#audio=music.mp3
+delay=10
+#menu.png
+#pic1.png
+#pic2.png
+#pic3.png
+#pic4.png
+#pic5.png
+#pic6.png
+configure.png
+
+[slideshow2]
+#audio=music.mp3
+delay=10
+menu.png
+welcome.png
+
+#PLAY LIST Section
+# Make sure the first line is the word playlist surrounded by brackets [].
+# List the previously defined video and slide shows in the order they are to be played
+# one per line.
+
+[playlist]
+# here is an example that would play slideshow 1, then video 1, then slideshow 2,
+# then video 2
+#slideshow2
+slideshow1
+
+# Activate this playlist file by selecting the following on the scale:
+#  Supervisor->Scale Operations->Display Options->Customer Display
+#  then select this playlist file in the Playlist File option menu.

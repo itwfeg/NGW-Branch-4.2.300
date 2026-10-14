@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "postinst: installing certificates..."
+update-ca-certificates
+
+echo "postinst: forgetting hobart/db/hte ..."
+sed -i.bak '/db\/hte/d' /var/lib/dpkg/info/hobart-hte-apphook.list
+sed -i.bak '/db\/hte/d' /var/lib/dpkg/info/hobart-hte-apphook.md5sums
+
+echo "postinst: done!"
+

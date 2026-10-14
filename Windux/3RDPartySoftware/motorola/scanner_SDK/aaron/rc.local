@@ -1,0 +1,42 @@
+#!/bin/bash
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/home:/usr/local/hobart/wifi:/usr/local/hobart/eGTouch_v2.5.2520.L-ma:/usr/local/hobart/python:/usr/lib/python2.7
+export PYTHONPATH=$PYTHONPATH:/usr/local/hobart/python
+
+# tune memory for disabled swap
+echo 1 1 > /proc/sys/vm/lowmem_reserve_ratio
+
+case "$1" in
+start)
+    udevadm test $(udevadm info -q path -n /dev/ttyACM0)
+    udevadm test $(udevadm info -q path -n /dev/ttyACM1)
+    /usr/sbin/ethtool -s eth0 autoneg on advertise 0x0F
+    # startup system with first boot checks
+    echo "$(date)" >> /root/before.txt
+    su - root -c "/bin/sh /etc/init.d/setupClock.sh"
+    wait
+    /bin/sync
+    #echo "$(date)" >> /root/after.txt
+    su - root -c "/bin/sh /usr/local/hobart/python/installSetupTools.sh"
+    wait
+    /bin/sync 
+    su - root -c "/bin/sh /usr/local/hobart/python/installPackages.sh"
+    wait
+    /bin/sync
+    su - root -c "/usr/bin/python /usr/local/hobart/python/startupSequence.py"
+    wait
+    /bin/sync
+    su - root -c "/usr/bin/python /usr/local/hobart/python/startScaleApplication.py"
+    wait
+    ;;
+
+stop)
+    
+    /usr/bin/python /usr/local/hobart/python/shutdownSequence.py "$2"
+    ;;
+
+*)
+    ;;
+esac
+
+
+

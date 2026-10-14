@@ -1,0 +1,19 @@
+/**
+ * @file abstractrequest.cpp
+ *
+ * @copyright Copyright (c) 2020 Hobart Corporation
+ * @author Randy Blankley
+ */
+
+#include "abstractrequest.h"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+abstractRequest::abstractRequest( QObject *parent ) :
+    _Mybase( parent )
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+abstractRequest::~abstractRequest()
+{
+}

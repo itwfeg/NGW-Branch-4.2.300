@@ -1,0 +1,88 @@
+html, body {
+    height: 100%
+}
+
+html {
+    display: table;
+    width: 100%;
+}
+
+body {
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+.column {
+    padding: 15px;
+    position: relative;
+    float: left;
+}
+
+.text_field_cell {
+    padding: 5px;
+}
+
+.char_field {
+    width: 200px;
+}
+
+#submit_button {
+    padding-left: 30%;
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+    clear: both;
+}
+
+#submit_bar {
+    width: 85.7%;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+}
+
+#accordion {
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.accordion_section {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    margin: auto;
+}
+
+#id_hte_product_names {
+    height: 280px;
+    font-size: 20px;
+}
+
+#id_scale_product_names {
+    font-size: 20px;
+    height: 105px;
+}
+
+#id_type {
+    font-size: 20px;
+}
+
+.errorlist {
+    position: relative;
+    list-style: none;
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+}

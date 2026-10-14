@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>itw.ico</file>
+    <file>acrBoardProgrammer.ico</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>images/scanner_cr_suffix_config_barcode.png</file>
+    <file>images/scanner_usb_serial_config_barcode.png</file>
+    <file>images/sigmatron_label.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,137 @@
+#ifndef __TISUVC_H__
+#define __TISUVC_H__
+enum
+{ PU_CONTROL_UNDEFINE                       = 0x00,
+  PU_BACKLIGHT_COMPENSATION_CONTROL         = 0x01,
+  PU_BRIGHTNESS_CONTROL                     = 0x02,
+  PU_CONTRAST_CONTROL                       = 0x03,
+  PU_GAIN_CONTROL                           = 0x04,
+  PU_POWER_LINE_FREQUENCY_CONTROL           = 0x05,
+  PU_HUE_CONTROL                            = 0x06,
+  PU_SATURATION_CONTROL                     = 0x07,
+  PU_SHARPNESS_CONTROL                      = 0x08,
+  PU_GAMMA_CONTROL                          = 0x09,
+  PU_WHITE_BALANCE_TEMPERATURE_CONTROL      = 0x0A,
+  PU_WHITE_BALANCE_TEMPERATURE_AUTO_CONTROL = 0x0B,
+  PU_WHITE_BALANCE_COMPONENT_CONTROL        = 0x0C,
+  PU_WHITE_BALANCE_COMPONENT_AUTO_CONTROL   = 0x0D,
+  PU_DIGITAL_MULTIPLIER_CONTROL             = 0x0E,
+  PU_DIGITAL_MULTIPLIER_LIMIT_CONTROL       = 0x0F,
+  PU_HUE_AUTO_CONTROL                       = 0x10,
+  PU_ANALOG_VIDEO_STANDARD_CONTROL          = 0x11,
+  PU_ANALOG_LOCK_STATUS_CONTROL             = 0x12,
+
+  PU_TIS_CAPABILITY							= 0x20,
+  PU_TIS_COLOR_FORMAT						= 0x21,
+  PU_TIS_COLOR_FORMAT_CAP					= 0x22,
+
+};
+
+enum
+{ CT_CONTROL_UNDEFINE               = 0x00,
+  CT_SCANNING_MODE_CONTROL          = 0x01,
+  CT_AE_MODE_CONTROL                = 0x02,
+  CT_AE_PRIORITY_CONTROL            = 0x03,
+  CT_EXPOSURE_TIME_ABSOLUTE_CONTROL = 0x04,
+  CT_EXPOSURE_TIME_RELATIVE_CONTROL = 0x05,
+  CT_FOCUS_ABSOLUTE_CONTROL         = 0x06,
+  CT_FOCUS_RELATIVE_CONTROL         = 0x07,
+  CT_FOCUS_AUTO_CONTROL             = 0x08,
+  CT_IRIS_ABSOLUTE_CONTROL          = 0x09,
+  CT_IRIS_RELATIVE_CONTROL          = 0x0A,
+  CT_ZOOM_ABSOLUTE_CONTROL          = 0x0B,
+  CT_ZOOM_RELATIVE_CONTROL          = 0x0C,
+  CT_PANTILT_ABSOLUTE_CONTROL       = 0x0D,
+  CT_PANTILT_RELATIVE_CONTROL       = 0x0E,
+  CT_ROLL_ABSOLUTE_CONTROL          = 0x0F,
+  CT_ROLL_RELATIVE_CONTROL          = 0x10,
+  CT_PRIVACY_CONTROL                = 0x11,
+
+  CT_TIS_CAPABILITY		= 0x20,
+  CT_TIS_IIC_ADDRESS		= 0x21,
+  CT_TIS_IIC_VALUE		= 0x22,
+  CT_TIS_FRAME_RATE		= 0x23,
+  CT_TIS_PIXEL_CLOCK		= 0x24,
+  CT_TIS_PARTIAL_SCAN_WIDTH	= 0x25,
+  CT_TIS_PARTIAL_SCAN_HEIGHT	= 0x26,
+  CT_TIS_BLANKING_INFO		= 0x27,
+  CT_TIS_PARTIAL_SCAN_X		= 0x28,
+  CT_TIS_PARTIAL_SCAN_Y		= 0x29,
+  CT_TIS_BINNING		= 0x2a,
+  CT_TIS_SOFTWARE_TRIGGER	= 0x2b,
+  CT_TIS_SENSOR_RESET           = 0x2c,
+  CT_TIS_FIRMWARE_REVISION	= 0x2d,
+  CT_TIS_DIGITAL_OUTPUT		= 0x2e,
+  CT_TIS_HDR_ENABLE             = 0x2f,
+  CT_TIS_HDR_SHUTTER_1		= 0x30,
+  CT_TIS_HDR_SHUTTER_2		= 0x31,
+  CT_TIS_HDR_VSTEP_1		= 0x32,
+  CT_TIS_HDR_VSTEP_2		= 0x33,
+  CT_TIS_HDR_VSTEP_3		= 0x34,
+  CT_TIS_HDR_VSTEP_4		= 0x35,
+  CT_TIS_SKIP			= 0x36,
+  CT_TIS_STROBE			= 0x37,
+  CT_TIS_TEST_PARTIAL_SCAN_WIDTH  = 0x38,
+  CT_TIS_TEST_PARTIAL_SCAN_HEIGHT = 0x39,
+  CT_TIS_TEST_BINNING		= 0x3a,
+  CT_TIS_TEST_BLANKING_INFO	= 0x3b,
+  CT_TIS_CCM			= 0x3c,
+  CT_TIS_H_BLANKING_TRIM	= 0x3d,
+  CT_TIS_OVERFLOW_COUNT		= 0x3e,
+
+  CT_TIS_IIC_DEV_ADDRESS        = 0x40,
+  CT_TIS_UART                   = 0x41,
+  CT_TIS_IIC_ACCESS		= 0x42,
+  CT_TIS_IIC16_ADDRESS		= 0x43,
+  CT_TIS_EEPROM                 = 0x44,
+  CT_TIS_EEPROM_ADDRESS         = 0x45,
+  CT_TIS_ENABLE_STREAMING	= 0x46,
+  CT_TIS_EEPROM_DATA_OFFSET	= 0x47,
+
+  CT_TIS_TEST						= 0x50,
+
+};
+enum
+{	XU_CONTROL_UNDEFINED			= 0x00,
+	XU_TRIGGER_CONTROL				= 0x01,
+	XU_PARTIAL_SCAN_X_CONTROL		= 0x02,
+	XU_PARTIAL_SCAN_Y_CONTROL		= 0x03,
+	XU_BINNING_CONTROL				= 0x04,
+	//XU_SHUTTER2_CONTROL				= 0x05,
+	XU_EXT_IO_CONTROL               = 0x05,
+	XU_GAIN_R_CONTROL				= 0x06,
+	XU_GAIN_G_CONTROL				= 0x07,
+	XU_GAIN_B_CONTROL				= 0x08,
+	XU_IIC_CONTROL					= 0x09,
+	XU_SOFTWARE_TRIGGER				= 0x0a,
+	XU_SKIP							= 0x0b,
+	XU_FOCUS_ONE_PUSH				= 0x0c,	// size: 1, 1 = enable, self clearing
+	XU_AUTO_EXPOSURE				= 0x0d, // size: 1, 0 = disable, 1 = enable
+	XU_AUTO_GAIN					= 0x0e,	// size: 1, 0 = disable, 1 = enable 
+	XU_AUTO_WHITE_BALANCE                           = 0x0f, // size: 1, 0 = disable, 1 = enable
+	XU_EXPOSURE_MAX_AUTO                    = 0x10,
+	XU_EV_DELTA_CONTROL                     = 0x11,
+};
+
+enum
+{
+  VC_ID_HEADER           = 0x00,
+  VC_ID_INPUT_TERMINAL   = 0x01,
+  VC_ID_OUTPUT_TERMINAL  = 0x02,
+  VC_ID_PROCESSING_UNIT  = 0x03,
+  VC_ID_EXTENSION_UNIT   = 0x04
+};
+
+enum
+{
+  RC_UNDEFINED = 0x00,
+  SET_CUR      = 0x01,
+  GET_CUR      = 0x81,
+  GET_MIN      = 0x82,
+  GET_MAX      = 0x83,
+  GET_RES      = 0x84,
+  GET_LEN      = 0x85,
+  GET_INFO     = 0x86,
+  GET_DEF      = 0x87
+};
+#endif//__TISUVC_H__

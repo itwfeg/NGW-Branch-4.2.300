@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$/../../../Application/shared/sessionHandler/python">
+      <excludeFolder url="file://$MODULE_DIR$/../../../Application/shared/sessionHandler/python" />
+    </content>
+    <orderEntry type="jdk" jdkName="Remote Python 2.7.11 (sftp://root@10.3.176.110:22/usr/bin/python)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
+</module>

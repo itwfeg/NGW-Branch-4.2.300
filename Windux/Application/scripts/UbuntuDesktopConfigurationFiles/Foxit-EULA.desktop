@@ -1,0 +1,18 @@
+#!/usr/bin/env xdg-open
+
+# Modified FHA 7/2011 to use Foxit reader and a PDF file instead of Firefox and a HTML file
+#
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=FoxitEULA
+Type=Application
+GenericName=Foxit License Agreement
+Comment=Foxit License
+#Exec=/usr/bin/firefox /home/bsquare/Foxit_eula.htm
+Exec=FoxitReader /home/oper/FoxitEULA.pdf
+StartupNotify=true
+Icon=/usr/share/pixmaps/fx-icon.png
+Terminal=false
+Categories=GNOME;GTK;Application;Office;Viewer;
+MimeType=application/pdf;application/x-bzpdf;application/x-gzpdf;

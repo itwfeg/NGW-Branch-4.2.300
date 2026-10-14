@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>selfserveInstructG2</class>
+ <widget class="QWidget" name="selfserveInstructG2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="screenContainer" native="true">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>2</y>
+     <width>1366</width>
+     <height>768</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QWidget#screenContainer{ background-color: rgb(244,247,250,0); } */</string>
+   </property>
+   <widget class="QWidget" name="wgtWeightBox" native="true">
+    <property name="geometry">
+     <rect>
+      <x>-2</x>
+      <y>648</y>
+      <width>320</width>
+      <height>118</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>320</width>
+      <height>118</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>118</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(18,20,29);</string>
+    </property>
+    <widget class="QLabel" name="lblLowRange">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>98</y>
+       <width>82</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>82</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>82</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(55,60,75);
+color: rgb(249,250,251);
+border-radius: 8px;</string>
+     </property>
+     <property name="text">
+      <string notr="true">12 x 0.005 lb</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblWeightTitle">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>7</y>
+       <width>131</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins Medium</family>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>WEIGHT</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblCapacity">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>98</y>
+       <width>101</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>CAPACITY</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblWeight">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>36</y>
+       <width>301</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>43</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblHighRange">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>98</y>
+       <width>82</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>82</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>82</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 8px;
+background-color: rgb(55,60,75);
+color: rgb(249,250,251);</string>
+     </property>
+     <property name="text">
+      <string notr="true">30 x 0.01 lb</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblZero">
+     <property name="geometry">
+      <rect>
+       <x>278</x>
+       <y>98</y>
+       <width>41</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>41</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>41</width>
+       <height>18</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 8px;
+background-color: rgb(55,60,75);
+color: rgb(249,250,251);</string>
+     </property>
+     <property name="text">
+      <string>ZERO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <zorder>lblWeightTitle</zorder>
+    <zorder>lblCapacity</zorder>
+    <zorder>lblWeight</zorder>
+    <zorder>lblLowRange</zorder>
+    <zorder>lblZero</zorder>
+    <zorder>lblHighRange</zorder>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

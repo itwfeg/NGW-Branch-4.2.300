@@ -1,0 +1,10 @@
+To flash an image to eMMC just follow the following document
+https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md
+
+Before booting, you'll want to edit the config.txt file in the boot directory ( for me this was /media/hobart/boot after I flashed the image ) at the bottom add the following line:
+dtoverlay=dwc2,dr_mode=host
+This enables USB which is disabled by default
+
+you should now be able to boot the raspberry pi
+If you used an image from Yocto you can log in as root with no password if you didn't specify this in the build ( Be sure to set a password )
+If you used Raspbian the default user name is pi and password is raspberry ( Be sure to change the password )

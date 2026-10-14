@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ReadNumeric</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When True the toolkit will only report numeric barcodes. Note that this the same 
+			as setting the Pattern property to the value "^[0-9]+$".
+		</P>
+		<P>Default Value: False
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_NUMERIC_BARCODE,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_NUMERIC_BARCODE,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Read only numeric barcodes.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_NUMERIC_BARCODE,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

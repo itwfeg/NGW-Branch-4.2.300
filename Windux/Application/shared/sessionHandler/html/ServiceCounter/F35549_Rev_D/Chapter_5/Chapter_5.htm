@@ -1,0 +1,838 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Chapter 5</title>
+
+ <link rel="stylesheet" href="../../F35549_Rev_D.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+ <meta name="generator" content="Adobe FrameMaker 2019" />
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "5";
+</script>
+ <meta name="brsprev" value="F35549_Rev_D/Chapter_4/Chapter_4.htm">
+</head>
+
+<body dir="ltr">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+ <div dir="ltr">
+  <p dir="ltr" class="FM_Chapter_Title"><a name="IX_Hands_Free_Login_1"></a><a name="IX_Hands_Free_Login"></a>Chapter 5: <a name="XREF_55116_Hands_Free_Login"></a>Hands Free Login</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr15">
+   <td class="td20">
+   <h1 dir="ltr" class="FM_Title_1">Introduction</h1>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">The Hands-Free Pager Device (HFPD) is used to log into and notify the user of issues with Hobart equipment. The purpose of this document is to inform the user on how to properly configure and use the HFPD. The following steps assume that the scale in use has the _SCALE_HANDSFREEDEVICE license and the hti-linux-feature-hfpd feature installed.&#160;</p>
+   <div align="center"><img alt="inset_1.jpg" id="image151" src="../../assets/inset_1.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&#160;</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-size  : 2.0pt;">&nbsp;</p>
+</td>
+</tr>
+   <tr class="tr157">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Hands_Free_Pager_Device"></a><a name="IX_Hands_Free_Pager_Device"></a>Hands-Free Pager Device Hardware</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody">On the front side the handsfree device has three main compo&#173;nents, the display, the speaker and the button.</p>
+   <div align="center"><img alt="inset_000126.jpg" id="image152" src="../../assets/inset_000126.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-size  : 2.0pt;">&nbsp;</p>
+</td>
+</tr>
+   <tr class="tr158">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_HFPD_Display"></a><a name="IX_HFPD_Display"></a>HFPD Display</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody">The HFPD is equipped with an e-ink display. The display is used to display messages and status information about the beeper. The display is split into four sections, the logo section, the shift mode section, the information section, and the message section.</p>
+   <div align="center"><img alt="inset_2.jpg" id="image153" src="../../assets/inset_2.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-size  : 2.0pt;">&nbsp;</p>
+</td>
+</tr>
+   <tr class="tr159">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+   <tr class="tr160">
+   <td class="td25">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td10">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td11">
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">Logo Section</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">The logo section, highlighted by the green box, displays the com&#173;pany logo. The logo can be set using the <a href="#XREF_97495_Hands_Free_Login"><span class="FM_Blue_Link">Hands Free Login App</span></a>. <span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span><a href="#XREF_97495_Hands_Free_Login"><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span><span class="FM_Blue_Link">Hands Free Login App</span><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span></a><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span>.</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">Shift Mode Section</p>
+   <p dir="ltr" class="CellBody">The shift mode section of the device, highlighted by the red box, tells if the device is currently active or inactive. For more infor&#173;mation about active and inactive mode see <span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span><a href="#XREF_41834_Device_Operation"><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span><span class="FM_Blue_Link">Device Operation</span><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span></a><span class="FM_Hyperlink" style="color   : #0664c1; text-decoration  : underline  ;
+		"></span>. The shift text can be configured using the Hands Free Login App.</p>
+   <p dir="ltr" class="FM_Statement_with_"><a name="XREF_Toc23343623"></a><span style="text-decoration  : underline  ;
+		">Information Section</span></p>
+   <p dir="ltr" class="CellBody">The information section, highlighted by the yellow box, displays information about the recently received message or the user name associated with the device. If there is no message, the user name is displayed. If there is a message displayed on the screen, the information section displays the time the message was sent, the scale that sent the message, the number of messages queued, and the status of the device. In the information section displays ‘15:23:20 000 1 *’. The first section,’15:23:20’ represents the time the message was sent. The second section, ‘000’ is the scale number. ‘1’ is the number of messages on the queue, and the ‘*’ is the status of the scale. Possible status symbols are displayed in the following table.</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table161" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr30">
+   <td class="td162">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 8.250pt; font-weight : bold;">&nbsp;</p>
+</td>
+   <td class="td163">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 8.250pt; font-weight : bold;">&nbsp;</p>
+</td>
+   <td class="td164">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 8.250pt; font-weight : bold;">Status Symbol</p>
+</td>
+   <td class="td165">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 10.500pt; font-weight : bold;">Description</p>
+</td>
+</tr>
+   <tr class="tr30">
+   <td class="td162">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 0.750pt;">&nbsp;</p>
+</td>
+   <td class="td163">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 0.750pt;">&nbsp;</p>
+</td>
+   <td class="td166">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 0.750pt;">‘!’</p>
+</td>
+   <td class="td167">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 10.500pt;">Low battery</p>
+</td>
+</tr>
+   <tr class="tr30">
+   <td class="td168">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td169">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td170">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">‘&gt;’</p>
+</td>
+   <td class="td171">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 11.250pt;">Message queue overflowed</p>
+</td>
+</tr>
+   <tr class="tr30">
+   <td class="td168">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td169">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td170">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">‘&lt;’</p>
+</td>
+   <td class="td171">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 9.750pt;">One or more messages queued</p>
+</td>
+</tr>
+   <tr class="tr30">
+   <td class="td162">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td163">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">&nbsp;</p>
+</td>
+   <td class="td166">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 7.500pt;">‘*’</p>
+</td>
+   <td class="td167">
+   <p dir="ltr" class="FM_Table_Text" style="text-indent : 11.250pt;">Message queue empty</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr172">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">Message Section</p>
+   <p dir="ltr" class="FM_Statement_with_">The message section, highlighted by the blue box, displays the oldest message in the queue. If multiple messages are queued the user must press the <a href="#XREF_94156_HFPD_Button"><span class="FM_Blue_Link">HFPD Button</span></a>&#160;to clear the displayed message and see the next.</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_HFPD_Button"></a><a name="XREF_94156_HFPD_Button"></a>HFPD Button</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">The button, illustrated in red, is used to dismiss messages and switch between active and inactive modes. When a message is sent to the device it will be displayed on the Message section of the HFPD Display. To clear this message press and release the button. Clearing one message will display the next queued mes&#173;sage if one exists. The button can also switch the device between active and inactive modes. To switch between modes, hold the button for approximately two seconds. The device will then beep and refresh the display. Embedded in the button is an LED ring. The LED ring will slowly flash when the device battery is less than 10%.</p>
+</td>
+</tr>
+   <tr class="tr24">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_HFPD_Speaker"></a><a name="XREF_HFPD_Speaker"></a>HFPD Speaker</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="FM_Statement_with_">The speaker, highlighted in white, is used to notify the user of new messages, and key presses. The speaker can be configured using the <a href="#XREF_97495_Hands_Free_Login"><span class="FM_Blue_Link">Hands Free Login App</span></a>.</p>
+</td>
+</tr>
+   <tr class="tr26">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Device_Operation"></a><a name="XREF_41834_Device_Operation"></a>Device Operation</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">The Hands-Free Login device has two different modes of opera&#173;tion, active and inactive. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">Active Mode</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">The Hands-Free device broadcasts information for Hobart equip&#173;ment to pick-up. This allows Hobart equipment to connect to the HFPD to send messages and update configuration. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;"><span style="font-weight : bold; ">NOTE:</span>&#160;The HFPD must be in active mode to enable automatic login. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">Inactive Mode</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">Use this mode to save battery. The Hands-Free device does not broadcast its information and will not receive any messages when it is in Inactive Mode.</p>
+</td>
+</tr>
+   <tr class="tr173">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Device_Configuration"></a><a name="XREF_Device_Configuration"></a>Device Configuration</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">Before you can configure HFPD and operators, you must install the license. _SCALE_HANDSFREEDEVICE </p>
+</td>
+</tr>
+   <tr class="tr30">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Associating_with"></a><a name="XREF_Associating_with"></a>Associating with Operators</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">Associating the HFPD with a scale operator allows the user to be automatically logged in when they approach the scale and then automatically become logged out when they leave the scale. Completing the following section will associate an operator with a HFPD.</p>
+</td>
+</tr>
+   <tr class="tr98">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr174">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Numbered">1.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Navigate to the “Supervisor Pages”.</p>
+   <div align="center"><img alt="inset_000129.png" id="image154" src="../../assets/inset_000129.png" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Numbered">&#160;</p>
+   <p dir="ltr" class="FM_Numbered">2.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Press the “ALL FUNCTIONS” button near the bottom of the screen. This will bring up the full supervisor menu.<span style="font-family : Calibri; ">&#160;</span></p>
+   <div align="center"><img alt="inset_8.jpg" id="image155" src="../../assets/inset_8.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Numbered">3.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Next select Operator ID that matches the MAC address of the HFPD you are associating. </p>
+   <p dir="ltr" class="FM_Note_Text"><span style="font-weight : bold; ">NOTE: </span>The mac address can be found in the battery compart&#173;ment, below the batteries, or in the message field after a device reboot. </p>
+   <p dir="ltr" class="FM_Note_Text">&nbsp;</p>
+   <p dir="ltr" class="FM_Numbered">4.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Next fill in the following information; Access level, Opera&#173;tor name, and Preferred language, to their desired values. If the box for “Automatically create hands free operators” is checked, it will prompt the scale to automatically detect and create operators for each HFPD within range.</p>
+   <p dir="ltr" class="FM_Numbered">5.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Once the HFPD is configured, return to the home screen to complete the association process.</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Hands_Free_Login_App"></a><a name="XREF_97495_Hands_Free_Login"></a>Hands Free Login App</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-family : Calibri;">The Hands-Free Login App is used to detect and configure HFPDs. Through the app you can change fields and settings, send messages, and update firmware for HFPDs. The Hands-Free Login app is installed and licensed by Hobart Technicians. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-family : Calibri;">&nbsp;</p>
+   <p dir="ltr" class="FM_Note_Text"><span style="font-weight : bold; ">NOTE: </span>Before you can use The Hands-Free App you must have the _SCALE_HANDSFREEDEVICE license installed.</p>
+   <p dir="ltr" class="FM_Note_Text">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_">To run the Hands-Free Login App </p>
+   <p dir="ltr" class="FM_Paranum" style="font-size  : 11.0pt;">1.<span style="padding-left: 4pt;" class="FMAutoNumber_1"></span>First you must swipe down from the top of the screen. This will bring up the app tray.</p>
+   <div align="center"><img alt="down.png" id="image156" src="../../assets/down.png" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Paranum" style="font-size  : 11.0pt;">2.<span style="padding-left: 4pt;" class="FMAutoNumber_1"></span>Locate and press the Hands-Free Login App.</p>
+   <div align="center"><img alt="screen.png" id="image157" src="../../assets/screen.png" style="max-width: 100% ;height: auto" />
+   </div></td>
+</tr>
+   <tr class="tr175">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr27">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Configuring_Hands_Free"></a><a name="XREF_Configuring_Hands_Free"></a>Configuring Hands-Free Pager Device</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="FM_Statement_with_">To configure a HFPD, you must first detect the device using the Hands-Free Login app. </p>
+   <p dir="ltr" class="FM_Statement_with_">1. &#160;&#160;&#160;Open the Hands-Free Login app. The discovery screen will appear.</p>
+   <div align="center"><img alt="discovery_screen.png" id="image158" src="../../assets/discovery_screen.png" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Statement_with_">2. &#160;&#160;&#160;&#160;To modify device configuration, press the row containing the TAG ID matching the MAC address of your device.</p>
+   <p dir="ltr" class="FM_Statement_with_">3. &#160;&#160;&#160;Press the Edit button. The device configuration screen will appear.</p>
+   <div align="center"><img alt="inset_10.jpg" id="image159" src="../../assets/inset_10.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Statement_with_">&#160;&#160;&#160;&#160;</p>
+</td>
+</tr>
+   <tr class="tr176">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr27">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Configuring_HFPD_Fields"></a><a name="XREF_Configuring_HFPD_Fields"></a>Configuring HFPD Fields and Settings</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody">The Hands-Free Login app provides a method for configuring HFPD fields and settings. On the app’s Device Configuration page, three tabs are used to configure HFPDs. They are the “Operator Setup”, “Shift Text” and “Logo” tabs.</p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-weight : bold;">Operator Setup</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt; font-weight : bold;">&nbsp;</p>
+   <p dir="ltr" class="CellBody">The Operator Setup tab allows the user to set the Operator Name, Shift Duration, and Beep Time. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="CellBody">1. &#160;&#160;Enter the operator name. This will be displayed on the HFPD if there are no messages on the device (there is a 16 character restriction due space of screen).</p>
+   <p dir="ltr" class="CellBody">2. &#160;&#160;Shift Duration is used to automatically change the to sleeping mode after the set time is reached. Shift Duration can be any whole number value between 0 and 36 hours. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="FM_Note_Text"><span style="font-weight : bold; ">NOTE: </span>Setting the Shift Duration to 0 disables the timer.</p>
+   <p dir="ltr" class="FM_Note_Text">&nbsp;</p>
+   <p dir="ltr" class="CellBody">3. &#160;&#160;Beep Time specifies the duration of the beep when a message is received, or the button is pressed. The Beep Time can be set to any whole number between 0 and 255. Setting the value to 0 silences the beep timer. </p>
+   <p dir="ltr" class="FM_Note_Text">After filling out the desired values press the save button to send the values to the HFPD.</p>
+   <div align="center"><img alt="inset_5.jpg" id="image160" src="../../assets/inset_5.jpg" style="max-width: 100% ;height: auto" />
+   </div></td>
+</tr>
+   <tr class="tr177">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr178">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Statement_with_" style="font-weight : bold;">Shift Text</p>
+   <p dir="ltr" class="CellBody">This will show if the device is Active or Inactive. &#160;ten characters each. </p>
+   <p dir="ltr" class="CellBody">Active Messages are displayed when the device is active and receiving messages. </p>
+   <p dir="ltr" class="CellBody">Inactive Messages are displayed when the device is in low power mode and not receiving messages. </p>
+   <p dir="ltr" class="CellBody">Fill in the desired values for Active and Inactive messages, press save to send the values to the HFPD</p>
+   <div align="center"><img alt="inset_6.jpg" id="image161" src="../../assets/inset_6.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody">.</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr178">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Statement_with_" style="font-weight : bold;">Shift Text</p>
+   <p dir="ltr" class="CellBody">This will show if the device is Active or Inactive. &#160;ten characters each. </p>
+   <p dir="ltr" class="CellBody">Active Messages are displayed when the device is active and receiving messages. </p>
+   <p dir="ltr" class="CellBody">Inactive Messages are displayed when the device is in low power mode and not receiving messages. </p>
+   <p dir="ltr" class="CellBody">Fill in the desired values for Active and Inactive messages, press save to send the values to the HFPD</p>
+   <div align="center"><img alt="inset_14.jpg" id="image162" src="../../assets/inset_14.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody">.</p>
+</td>
+</tr>
+   <tr class="tr179">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Statement_with_" style="font-weight : bold;">Logo</p>
+   <p dir="ltr" class="CellBody">Images can be uploaded to the HFPD to be displayed in the logo section. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_" style="font-weight : bold;">The optimal logo resolution is 128 x 48 pixels. Images other than this size will be scaled to this resolution and may need to be cropped to fit. Acceptable file formats for logos are .bmp, .gif, .jpg and .png. </p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr180">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="FM_Statement_with_">To upload a new logo</p>
+   <p dir="ltr" class="CellBody">1. &#160;Navigate to the Logo tab on the Device Configuration page. </p>
+   <p dir="ltr" class="CellBody">2. &#160;Enter the path to the logo in the Logo Filename box or clicking the button with three dots (” …”) at the end of the box. </p>
+   <div align="center"><img alt="inset_16.jpg" id="image163" src="../../assets/inset_16.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="text-indent : -1.250pt;">Clicking the button will bring up another window. Here you can navigate to the filename for the Logo you want to upload.</p>
+   <div align="center"><img alt="inset_17.jpg" id="image164" src="../../assets/inset_17.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">3. &#160;Press the Upload Logo button once the logo has been selected. This will send the image to the HFPD. The display will update with the new logo once the HFPD receives the Logo.</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Messages"></a><a name="XREF_Messages"></a>Messages</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="FM_Statement_with_">Custom messages can be sent to the HFPD devices and cleared on the device using the Messages tab of the Device Configuration page. The Message field is limited to 16 spaced due to display size.</p>
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">To send a custom message</p>
+   <p dir="ltr" class="FM_Statement_with_">1. &#160;&#160;Fill the Message Text box. </p>
+   <p dir="ltr" class="FM_Statement_with_">2. &#160;&#160;Press the Send Message button.</p>
+   <div align="center"><img alt="inset_9.jpg" id="image165" src="../../assets/inset_9.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">To clear all messages</p>
+   <p dir="ltr" class="CellBody">1. &#160;&#160;Navigate to the device configuration page for that device.</p>
+   <p dir="ltr" class="CellBody">2. &#160;&#160;Select the Messages Tab. </p>
+   <p dir="ltr" class="CellBody">3. &#160;&#160;Next press the “Clear All Messages” button. This will erase all messages on the device. </p>
+</td>
+</tr>
+   <tr class="tr181">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Firmware"></a><a name="IX_Firmware"></a>Firmware</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody">As new features are added and bugs are fixed, new versions of HFPD firmware will be released. The <a href="#XREF_97495_Hands_Free_Login"><span class="FM_Blue_Link">Hands Free Login App</span></a> pro&#173;vides the ability to upload new firmware to HFPD. </p>
+</td>
+</tr>
+   <tr class="tr26">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Add_Firmware_to_Scale"></a><a name="IX_FCC_Note_1"></a>Add Firmware to Scale</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody">As new features are added and bugs are fixed, new versions of HFPD firmware will be released. The <a href="#XREF_97495_Hands_Free_Login"><span class="FM_Blue_Link">Hands Free Login App</span></a> pro&#173;vides the ability to upload new firmware to HFPD. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="CellBody">Firmware must be stored on the scale before information can be uploaded to the HFPD. Feature files are created to provide an easy route for adding new firmware files. Contact Hobart Service to get the latest HFPD firmware feature files. Feature files should be labeled htseries-any-hfpd-application-*.package.tgz. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="FM_Statement_with_">To add new firmware to the scale</p>
+   <p dir="ltr" class="CellBody">1.. &#160;Navigate to the “Supervisor Pages” press the “ALL FUNC &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;TIONS”.</p>
+   <p dir="ltr" class="CellBody">2. &#160;Press the “Upgrade via USB” button. </p>
+   <p dir="ltr" class="CellBody">3. &#160;Insert the USB drive that contains the feature file into the scale. </p>
+   <p dir="ltr" class="CellBody">4. &#160;Press the “Choose Upgrade Firmware File” button. This will &#160;bring up the firmware file dialog. </p>
+   <div align="center"><img alt="inset_7.jpg" id="image166" src="../../assets/inset_7.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody">5. &#160;Navigate to the HFPD firmware feature. </p>
+   <p dir="ltr" class="CellBody">6. &#160;Select the file and press “Open” to finalize the selection.</p>
+   <p dir="ltr" class="CellBody">7. &#160;Close the file selection window. </p>
+   <p dir="ltr" class="CellBody">8. &#160;Press “Upgrade Firmware” start the upgrade. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="CellBody">A message will popup stating Successful upgrade installation &#160;when upgrade is complete. &#160;The upgrade will copy a firmware file named IARHFPD-X.X.zip &#160;in the /lib/firmware/hfpd/ folder. </p>
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+   <p dir="ltr" class="CellBody">Now the firmware file can be upload to the HFPD using the <span class="FM_Hyperlink" style="color   : #0664c1; "></span><a href="#XREF_97495_Hands_Free_Login"><span class="FM_Hyperlink" style="color   : #0664c1; "></span><span class="FM_Blue_Link">Hands Free Login App</span><span class="FM_Hyperlink" style="color   : #0664c1; "></span></a><span class="FM_Hyperlink" style="color   : #0664c1; "></span><span class="FM_Hyperlink">.</span></p>
+</td>
+</tr>
+   <tr class="tr182">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="CellBody">&nbsp;</p>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Uploading_Firmware"></a><a name="IX_Uploading_Firmware"></a>Uploading Firmware</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">To upload firmware</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">1. Open the Hands Free app and edit the device you wish to upgrade. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">2. Once connected to the device you will need to navigate to the “Firmware” tab. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">3. &#160;Then press the “…” button to open the file selection. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">4. &#160;Use the file selection to select the firmware file to be installed.</p>
+   <div align="center"><img alt="inset_3.jpg" id="image167" src="../../assets/inset_3.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">5. &#160;Press Open to finalize the selection. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">6. &#160;Press “Update” to flash the firmware to the HDFPD. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">A window will appear showing the progress of the upgrade and notify the user when the upgrade is complete.</p>
+   <div align="center"><img alt="inset_15.jpg" id="image168" src="../../assets/inset_15.jpg" style="max-width: 100% ;height: auto" />
+   </div></td>
+</tr>
+   <tr class="tr183">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr15">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_1"><a name="IX_Alerts"></a>Alerts</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td18" rowspan="2">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">Hobart equipment can be configured to automatically send alerts to nearby HFPDs when the equipment encounters an error. Alerts will be sent to all devices within range of the scale. They can be configured to be sent when the issue occurs and when the issue is resolved.</p>
+</td>
+</tr>
+   <tr class="tr184">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr19">
+   <td class="td20">
+   <p dir="ltr" class="FM_Title_2"><a name="TOC_Alert_Configuration"></a><a name="IX_Alert_Configuration"></a>Alert Configuration</p>
+</td>
+   <td class="td17">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td185" rowspan="2">
+   <p dir="ltr" class="FM_Statement_with_" style="text-decoration  : underline  ;">To configure automatic alert messages on a scale</p>
+   <p dir="ltr" class="FM_Numbered">1.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Navigate to the “Supervisor Pages” and press “ALL FUNC&#173;TIONS”. </p>
+   <p dir="ltr" class="FM_Numbered">2.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Press “Email Alerts”.</p>
+   <div align="center"><img alt="inset_11.jpg" id="image169" src="../../assets/inset_11.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Numbered">&#160;&#160;&#160;</p>
+   <p dir="ltr" class="FM_Numbered">3.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Once the Email Alerts page is displayed navigate to the “Hands-Free Device Alerts”. </p>
+   <div align="center"><img alt="inset_12.jpg" id="image170" src="../../assets/inset_12.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="FM_Numbered">4.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Check the boxes next to the desired alerts to enable the Alert for that issue. </p>
+   <p dir="ltr" class="FM_Numbered">5.<span style="padding-left: 12pt;" class="FMAutoNumber_1"></span>Checking the “Notify when resolved” box across from the issue will send an Alert when the issue is resolved. The delay indicated on the “Email Alerts” tab applies to both email alerts and HFPD alerts.</p>
+</td>
+</tr>
+   <tr class="tr186">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+<div width="100%" align="left">
+  <table border-spacing="0" dir="ltr" class="table14" border-collapse="collapse" style="max-width: 100% ;height: auto">
+   <tr class="tr187">
+   <td class="td23">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td3">
+   <p dir="ltr" class="CellBody">&nbsp;</p>
+</td>
+   <td class="td4">
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;"><span style="font-weight : bold; ">NOTE: </span>When any of the configured issues are detected or resolved, the scale will send a message to all nearby HFPD. The message will start with &#160;a “P:” or an “R:” then will state the error. “P:” is sent when the error is detected </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">“R:” is sent when the issue is resolved. </p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">For example, when Out Of Labels is detected the scale will send “P: Out Of Labels”. </p>
+   <div align="center"><img alt="inset_4.jpg" id="image171" src="../../assets/inset_4.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <div align="center"><img alt="inset_13.jpg" id="image172" src="../../assets/inset_13.jpg" style="max-width: 100% ;height: auto" />
+   </div>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+   <p dir="ltr" class="CellBody" style="padding-top : 0.000pt; padding-left : -6.000pt; padding-right : 0.000pt; padding-bottom : 0.000pt;">&nbsp;</p>
+</td>
+</tr>
+  </table>
+</div>
+  <p dir="ltr" class="FM_Bold_Text">&nbsp;</p>
+ </div>
+</body>
+
+</html>
+

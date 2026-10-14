@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/widgets/downArrowIcon.png</file>
+        <file>images/widgets/planogramIcon.png</file>
+        <file>images/widgets/planogramIconAlert.png</file>
+        <file>images/widgets/printerIcon.png</file>
+        <file>images/widgets/printerIconAlert.png</file>
+        <file>images/widgets/recallIcon.png</file>
+        <file>images/widgets/recallIconAlert.png</file>
+        <file>images/widgets/wiredIcon.png</file>
+        <file>images/widgets/wiredIconAlert.png</file>
+        <file>images/widgets/wirelessIcon0.png</file>
+        <file>images/widgets/wirelessIcon1.png</file>
+        <file>images/widgets/wirelessIcon2.png</file>
+        <file>images/widgets/wirelessIcon3.png</file>
+        <file>images/widgets/wirelessIcon4.png</file>
+        <file>images/widgets/wirelessIcon5.png</file>
+        <file>images/widgets/wirelessIconAlert.png</file>
+        <file>images/widgets/printerIconBlack.png</file>
+    </qresource>
+</RCC>

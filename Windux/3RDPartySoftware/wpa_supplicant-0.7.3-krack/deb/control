@@ -1,0 +1,9 @@
+Package: hobart-wpasupplicant
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides a patched wpa_supplicant for
+ CERT VU#228519 (KRACK).
+
+

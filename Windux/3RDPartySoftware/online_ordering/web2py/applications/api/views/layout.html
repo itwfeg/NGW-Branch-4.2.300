@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{=response.title or request.application}}</title>
+    <link rel="stylesheet" href="{{=URL('static','css/bootstrap.min.css')}}"/>
+    
+    {{block head}}{{end}}
+  </head>
+  <body>
+    {{block header}}
+    {{end}}
+    
+    <div class="container main-container">
+    {{include}}
+    </div>
+
+    {{block footer}}
+    <footer>
+    </footer>
+    {{end}}
+    
+    <script src="{{=URL('static','js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{=URL('static','js/popper.min.js')}}"></script>
+    <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+    {{block scripts}}
+    {{end}}
+  </body>
+</html>

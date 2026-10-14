@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "postinst: starting daemon..."
+/usr/local/hobart/apps/hfpd/hfpdd &
+
+echo "postinst: done!"
+

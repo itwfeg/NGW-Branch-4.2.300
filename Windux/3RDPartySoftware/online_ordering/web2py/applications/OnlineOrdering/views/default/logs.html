@@ -1,0 +1,55 @@
+{{extend 'layout.html'}}
+
+{{block scripts}}
+<script type="text/javascript">
+$().ready(load);
+
+function load()
+{
+$("#logs").children().not('.template').remove();
+
+$.getJSON("/api/v1/logs/json", null).done(function(data)
+{
+  for (var i = 0; i < data.length; i++)
+  {
+    var $new_row = $(".template").clone().removeClass("template").removeClass("d-none");
+    $new_row.find(".data").text(data[i]);
+
+    $new_row.appendTo("#logs");
+  }
+  
+  window.scrollTo(0, document.body.scrollHeight);
+
+}).fail(function() {failed("failed to load logs!")});
+}
+</script>
+{{end}}
+
+<button type="button" class="btn btn-primary p-0" id="reload-button">
+<img class="no-drag" src="{{=URL('static','images/refresh_icon.svg')}}" height="35" width="35" draggable="false" onmouseup="load();"></img>
+</button>
+
+<a href="/api/v1/logs/file">
+<button type="button" class="btn btn-primary p-0" id="download-button" style="position: fixed;
+top: 110px;
+left: 5px;
+height: 45px;
+width: 45px;">
+<img class="no-drag" src="{{=URL('static','images/download_icon.svg')}}" height="35" width="35" draggable="false" onmouseup="download();"></img>
+</button>
+</a>
+
+<div class="container main-container" id="log-container">
+<table id="log-table" class="table table-striped table-sm" style="font-size: small; background-color: white; user-select: text; -webkit-user-select: text;">
+<thead class="thead-light">
+<tr>
+<th>Logs</th>
+</tr>
+</thead>
+<tbody id="logs">
+<tr class="d-none template">
+<td class="data"></td>
+</tr>
+</tbody>
+</table>
+</div>

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=CPU Memory Tester
+Comment=ITW Hobart CPU Memory Tester
+Exec=python3 /home/pi/cpu_memory_tester/cpu_memory_tester.py
+Icon=/home/pi/cpu_memory_tester/cpu_memory_tester.png
+Path=/home/pi/cpu_memory_tester
+Terminal=False
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true

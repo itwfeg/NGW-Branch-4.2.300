@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<P><FONT size="5">GammaCorrection</FONT>&nbsp;
+		</P>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>If GammaCorrection is set to a value other than 100 then the toolkit will apply 
+			gamma correction to a color image. The amount of gamma correction is equal to 
+			GammaCorrection / 100.&nbsp;For example, to achieve a gamma correction of 0.5 
+			the property should be set to a value of 50.
+		</P>
+		<P>Default value = 100
+		</P>
+		<P>void STSetParameter(hBarcode, ST_GAMMA_CORRECTION,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_GAMMA_CORRECTION,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_GAMMA_CORRECTION,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

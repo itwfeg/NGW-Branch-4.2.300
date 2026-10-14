@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Hobart License Key Generator
+</title>
+
+{% load staticfiles %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{% static "styles.css" %}">
+
+<script src="//code.jquery.com/jquery-1.11.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src='{% static "Blob.js" %}'></script>
+<script src='{% static "FileSaver.js" %}'></script>
+
+{% include "form_scripts.html" %}
+
+{% include "form_error_styles.html" %}
+</head>
+
+<body>
+{% include "header.html" %}
+{% include "error_header.html" %}
+
+<form action='{% url "LicenseKeyGenerator.views.license_page" %}' method="post" id="main_form">
+    {% csrf_token %}
+
+    {% include "authorized_fields.html" %}
+
+    <input name="submitted" type="hidden" value="True" />
+
+    <div id="accordion">
+        {% include "license_details.html" %}
+        {% include "license_features.html" %}
+        {% include "key_gen_options.html" %}
+    </div>
+
+    {% if not submitted %}
+        <div class="column" id="submit_button">
+            <input type="submit" value="Generate License" id="form_submit" />
+        </div>
+    {% endif %}
+</form>
+
+{% include "submit_bar.html" %}
+
+{% if not submitted %}
+    <div style="padding:15px; position:relative; float: left; vertical-align: middle; text-align: center; margin: auto;">
+        <button id="import_request" style="float: left;">
+        	Import License Request File
+        </button>
+    </div>
+{% endif %}
+
+<form action='{% url "LicenseKeyGenerator.views.import_request" %}' method="POST" id="request_form">
+    {% csrf_token %}
+    {% include "authorized_fields.html" %}
+</form>
+
+{% include "footer.html" %}
+
+</body>
+</html>

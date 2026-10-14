@@ -1,0 +1,30 @@
+From e5e682a505498e3d700e253a40d92d98ca61de46 Mon Sep 17 00:00:00 2001
+From: Dan Williams <dcbw@redhat.com>
+Date: Fri, 18 Nov 2011 23:23:45 +0200
+Subject: [PATCH] nl80211: Fix UNSPEC signal quality reporting
+
+r->level got assigned so it's clearly not INVALID; instead
+r->qual should be invalid.
+
+Signed-hostap: Dan Williams <dcbw@redhat.com>
+(cherry picked from commit 98ac6763ff282125acf69886af9c92162c35f243)
+---
+ src/drivers/driver_nl80211.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/drivers/driver_nl80211.c b/src/drivers/driver_nl80211.c
+index 0e052d2..5cc3eb7 100644
+--- a/src/drivers/driver_nl80211.c
++++ b/src/drivers/driver_nl80211.c
+@@ -3045,7 +3045,7 @@ static int bss_info_handler(struct nl_msg *msg, void *arg)
+ 		r->flags |= WPA_SCAN_LEVEL_DBM | WPA_SCAN_QUAL_INVALID;
+ 	} else if (bss[NL80211_BSS_SIGNAL_UNSPEC]) {
+ 		r->level = nla_get_u8(bss[NL80211_BSS_SIGNAL_UNSPEC]);
+-		r->flags |= WPA_SCAN_LEVEL_INVALID;
++		r->flags |= WPA_SCAN_QUAL_INVALID;
+ 	} else
+ 		r->flags |= WPA_SCAN_LEVEL_INVALID | WPA_SCAN_QUAL_INVALID;
+ 	if (bss[NL80211_BSS_TSF])
+-- 
+1.7.7.6
+

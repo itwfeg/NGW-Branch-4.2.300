@@ -1,0 +1,59 @@
+
+THIS SOFTWARE REQUIRES RUN-TIME LICENSING. IF YOU WISH TO INSTALL THE SDK ON YOUR CUSTOMERS SYSTEMS OR INCLUDE IT IN YOUR APPLICATION THEN YOU WILL NEED TO PURCHASE RUN-TIME LICENSES IN THE FORM OF USER, SERVER OR DISTRIBUTION LICENSES.
+
+
+
+
+
+SOFTEK BARCODE READER TOOLKIT FOR WINDOWS - ELECTRONIC END USER LICENSE AGREEMENT
+
+NOTICE TO USER:
+
+
+THIS IS A CONTRACT, BY INSTALLING AND USING THIS SOFTWARE
+YOU ACCEPT ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT.
+
+This Softek Software Computer Systems ("Softek Software") End User License Agreement accompanies the Softek Software Barcode Reader product and related explanatory materials ("Software").  The term Software" also shall include any upgrades, modified versions or updates of the Software licensed to you by Softek Software. Please read this Agreement carefully. If you decline this agreement, you will not be able to use the Software.
+
+Upon your acceptance of this Agreement, Softek Software grants to you a non-exclusive license to use the Software, provided that you agree to the following:
+
+1. Use of the Software.
+
+You may install the Software on a hard disk or other storage device; install and use the Software by the licenced number of users on a file server for use on a network for the purposes of (i) permanent installation onto hard disks or other storage devices or (ii) use of the Software over such network; and make backup copies of the Software.
+
+2. Copyright and Trademark Rights.
+
+The Software is owned by Softek Software and its suppliers, and its structure, organisation and code are the valuable trade secrets of Softek Software and its suppliers.  The Software also is protected by United Kingdom Copyright Law and International Treaty provisions.  You may use trademarks only insofar as required to comply with Section 1 of this Agreement and to identify printed output produced by the Software, in accordance with accepted trademark practice,including identification of trademark owner's name, Such use of any trademark does not give you any rights of ownership in that trademark.  Except as stated above, this Agreement does not grant you any intellectual property rights in the Software.
+
+3. Restrictions.
+
+You agree not to modify, adapt, translate, reverse engineer, decompile, disassemble or otherwise attempt to discover the source code of the Software.  You may not alter or modify the installer program or create a new installer for the Software.  The Software is licensed and distributed by Softek Software for recognition of bar codes.
+
+4. No Warranty.
+
+The Software is being delivered to you AS IS and Softek Software makes no warranty as to its use or performance.  Softek Software AND ITS SUPPLIERS DO NOT AND CANNOT WARRANT THE PERFORMANCE OR RESULTS YOU MAY OBTAIN BY USING THE SOFTWARE OR DOCUMENTATION.  SOFTEK SOFTWARE AND ITS SUPPLIERS MAKE NO WARRANTIES, EXPRESS OR IMPLIED, AS TO NONINFRINGEMENT OF THIRD PARTY RIGHTS, MERCHANTABILITY,
+OR FITNESS FOR ANY PARTICULAR PURPOSE. IN NO EVENT WILL Softek Software OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY CONSEQUENTIAL, INCIDENTAL OR SPECIAL DAMAGES,INCLUDING ANY LOST PROFITS OR LOST SAVINGS, EVEN IF A Softek Software REPRESENTATIVE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY ANY THIRD PARTY.
+
+5. Governing Law and General Provisions.
+
+This Agreement will be governed by the laws of England & Wales, excluding the application of its conflicts of law rules.  This Agreement will not be governed by the United Nations Convention on Contracts for the International Sale of Goods, the application of which is expressly excluded.  If any part of this Agreementis found void and unenforceable, it will not affect the validity of the
+balance of the Agreement, which shall remain valid and enforceable according to its terms.  You agree that the Software will not be shipped, transferred or exported into any country or used in any manner prohibited by the United Kingdom or any other export laws, restrictions or regulations. This Agreement shall automatically terminate upon failure by you to comply with its terms.  This Agreement may only be modified in writing signed by an authorised officer of Softek Software.
+
+ACKNOWLEDGEMENTS:
+
+The following portions of third party code have been used in creating this software:
+
+1. libtiff
+
+Copyright (c) 1988-1997 Sam Leffler
+Copyright (c) 1991-1997 Silicon Graphics, Inc.
+
+2. libjpeg
+
+This software is based in part on the work of the Independent JPEG Group
+
+
+Unpublished-rights reserved under the copyright laws of the United Kingdom.  Softek Software Ltd, 4 Ladysmith Road, Ivinghoe  LU7 9EE, United Kingdom.
+
+
+YOUR ACCEPTANCE OF THE FOREGOING AGREEMENT WAS INDICATED BY INSTALLATION.

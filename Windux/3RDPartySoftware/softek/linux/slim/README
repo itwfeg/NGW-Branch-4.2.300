@@ -1,0 +1,2 @@
+The slim versions of the libraries do not need linking with libtiff and libjpeg,
+but only support reading barcode from bitmaps.

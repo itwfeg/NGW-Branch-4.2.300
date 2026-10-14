@@ -1,0 +1,89 @@
+Building Yocto on CM4 (using Raspberry Pi 4 BSP):
+
+I found the best way to build a Yocto image is using Ubuntu 20.04 in VMWare Workstation. 
+Yocto requires quite a bit of space, and they recommend having at least 50GB of free space
+
+The following steps are loosely based off of the Yocto quick build document here: https://www.yoctoproject.org/docs/2.5/brief-yoctoprojectqs/brief-yoctoprojectqs.html
+
+first, run the command in the document to install all the dependencies on your host machine (the VM)
+
+Next, clone the Yocto repository
+git clone git://git.yoctoproject.org/poky
+
+and checkout to the gatesgarth branch ( this is the latest stable release at time of writing )
+git checkout gatesgarth
+
+see here for releases: https://wiki.yoctoproject.org/wiki/Releases
+
+or you can 
+git clone -b gatesgarth git://git.yoctoproject.org/poky
+which will clone and checkout to the gatesgarth branch
+
+you can do a quick sanity check to make sure you're in the right branch
+git branch
+
+Next we need to add some layers,
+cd poky
+git clone -b gatesgarth git://git.yoctoproject.org/meta-raspberrypi		// for raspberry pi hardware
+git clone -b gatesgarth git://git.openembedded.org/meta-openembedded		// dependencies for meta-raspberrypi
+git clone -b gatesgarth https://github.com/meta-qt5/meta-qt5.git
+git clone -b gatesgarth git://git.openembedded.org/meta-python2			// needed for Qt
+git clone -b gatesgarth git://git.yoctoproject.org/meta-openssl102		// dependency for scale application
+git clone -b gatesgarth git://github.com/dv1/meta-gstreamer1.0.git		// dependency for scale application
+
+Any layers you add should match the branch of poky ( in our case it is gatesgarth )
+
+now init the build environment with
+source oe-init-build-env
+
+You should now be able to use bitbake and we can add our layers to the build
+bitbake-layers add-layer ../meta-raspberrypi
+bitbake-layers add-layer ../meta-openembedded/meta-*				// this should add all the open embedded layers
+bitbake-layers add-layer ../meta-qt5
+bitbake-layers add-layer ../meta-python2
+bitbake-layers add-layer ../meta-openssl102
+bitbake-layers add-layer ../meta-gstreamer1.0
+
+you can repeat this process for any layers you want to add, you can find layers from yocto here ( make sure they match with your poky branch )
+http://layers.openembedded.org/layerindex/branch/master/layers/
+
+There are also many other 3rd party layers lying around
+Most layers will be using the MIT license
+
+Now edit the conf/local.conf file in the build directory and add the following line somewhere at the top
+MACHINE ?= "raspberrypi4-64"
+note: I believe you can leave in the MACHINE ??= "qemux86-64" but i commented it out anyway
+
+You'll also want to add the following line to the end of the same file
+SSTATE_MIRRORS = "\
+file://.* http://sstate.yoctoproject.org/dev/PATH;downloadfilename=PATH \n \
+file://.* http://sstate.yoctoproject.org/2.4/PATH;downloadfilename=PATH \n \
+file://.* http://sstate.yoctoproject.org/2.5/PATH;downloadfilename=PATH \n \
+"
+
+as well as
+
+INHERIT += "rm_work"
+
+To add dependencies you can use the IMAGE_INSTALL_append variable
+For example:
+IMAGE_INSTALL_append = " openssh vim apt dbus gdb binutils openssl sqlite gstreamer libical curl freetype udev readline jpeg libvncserver drm libnl xcb \
+qtbase qtmultimedia qtwebengine qtconnectivity qtscript"
+
+Otherwise the first build will take all day, and you may run out of disk space half way through the build.
+
+Now, we can finally start the build
+For now, I'm building the base system see the following link for other images you can build that come with yocto/openembedded
+https://www.yoctoproject.org/docs/1.1/poky-ref-manual/poky-ref-manual.html#ref-images
+bitbake core-image-base
+
+When the build is done ( FYI: first build will take over an hour ) you'll have a compressed image .wic image you can write to an SD card it should be named something like
+core-image-base-raspberrypi4-64.wic.bz2
+
+This can be extracted using bzip2
+bzip2 -d -f core-image-base-raspberrypi4-64.wic.bz2
+
+and you'll get the image file
+core-image-base-raspberrypi4-64.wic
+which you can just write to an SD card normally using dd
+dd if=core-image-base-raspberrypi4-64.wic of=/dev/sdX bs=1M iflag=fullblock oflag=direct conv=fsync

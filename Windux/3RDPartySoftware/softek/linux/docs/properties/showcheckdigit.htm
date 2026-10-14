@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ShowCheckDigit</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		When set to TRUE the OCX will include the barcode check digit in the returned 
+		string.&nbsp;
+		<P class="MsoBodyText">
+		Note: This property only applies to barcode types&nbsp;with built in check 
+		digits (e.g Code 128).&nbsp;&nbsp;&nbsp;
+		<P>
+			Default value = &nbsp;&nbsp;&nbsp;&nbsp;FALSE
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_SHOW_CHECK_DIGIT,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_SHOW_CHECK_DIGIT,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Return check digits with the barcode string<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_SHOW_CHECK_DIGIT,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

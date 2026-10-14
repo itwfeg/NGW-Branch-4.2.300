@@ -1,0 +1,3 @@
+The mosquitto MQTT message broker will create this user on the system:
+user: mosquitto
+pwd: mosq50uitto50

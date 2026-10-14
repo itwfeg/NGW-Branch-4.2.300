@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Hobart Now Serving
+Exec=/usr/local/hobart/nowServing/nowServing -tv
+Icon=/usr/local/hobart/nowServing/icon.png
+Comment=Hobart Now Serving
+X-GNOME-Autostart-enabled=true

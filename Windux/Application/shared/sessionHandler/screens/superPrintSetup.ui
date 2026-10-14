@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>superPrintSetup</class>
+ <widget class="QWidget" name="superPrintSetup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lblPrintSetupHeading">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>30</y>
+     <width>900</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+	color: white;
+     background: black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>Setup reports</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSetupDescription">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>100</y>
+     <width>900</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>For Preprinted label stock, you can offset the printing at the top and/or bottom of the label so the report will not print over any preprinted information.  To do this, enter the number of print lines you wish to offset.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTopOfLabel">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>210</y>
+     <width>250</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Top of label</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBottomOfLabel">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>255</y>
+     <width>250</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Bottom of label</string>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="txtTopOfLabelMargin">
+   <property name="geometry">
+    <rect>
+     <x>375</x>
+     <y>210</y>
+     <width>190</width>
+     <height>40</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="txtBottomOfLabelMargin">
+   <property name="geometry">
+    <rect>
+     <x>375</x>
+     <y>255</y>
+     <width>190</width>
+     <height>40</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMarginHeading">
+   <property name="geometry">
+    <rect>
+     <x>375</x>
+     <y>165</y>
+     <width>190</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+	color: white;
+     background: black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>Margin (lines)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLength">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>165</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+	color: white;
+     background: black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>Length</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLines">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>165</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+	color: white;
+     background: black;
+ }</string>
+   </property>
+   <property name="text">
+    <string>Lines</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLengthData_1">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>200</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>0.25&quot;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLinesData_1">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>200</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>51</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLinesData_2">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>235</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>102</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLengthData_2">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>235</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>0.50&quot;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLinesData_3">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>270</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>152</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLengthData_3">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>270</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>0.75&quot;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLinesData_4">
+   <property name="geometry">
+    <rect>
+     <x>733</x>
+     <y>305</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>203</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLengthData_4">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>305</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>1.00&quot;</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTestTheMargins">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>370</y>
+     <width>900</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Test the margins.  This test will print the Configuration report using the margins above.</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnPrintTestReport">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>430</y>
+     <width>400</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>400</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Print a test report</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnStopPrinting">
+   <property name="geometry">
+    <rect>
+     <x>562</x>
+     <y>430</y>
+     <width>400</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>400</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Stop printing</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>621</x>
+     <y>195</y>
+     <width>20</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>823</x>
+     <y>195</y>
+     <width>20</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>329</y>
+     <width>203</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>631</x>
+     <y>223</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_5">
+   <property name="geometry">
+    <rect>
+     <x>631</x>
+     <y>260</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_6">
+   <property name="geometry">
+    <rect>
+     <x>631</x>
+     <y>295</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_7">
+   <property name="geometry">
+    <rect>
+     <x>722</x>
+     <y>165</y>
+     <width>20</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

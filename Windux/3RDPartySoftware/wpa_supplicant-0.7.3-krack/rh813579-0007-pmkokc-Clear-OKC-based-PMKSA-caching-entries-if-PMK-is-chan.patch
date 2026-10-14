@@ -1,0 +1,37 @@
+From c3fea272747f738f5723fc577371fe03711d988f Mon Sep 17 00:00:00 2001
+From: Jouni Malinen <j@w1.fi>
+Date: Sun, 2 Oct 2011 19:36:37 +0300
+Subject: [PATCH] Clear OKC-based PMKSA caching entries if PMK is changed
+
+Whenever PMK gets changed (e.g., due to re-authentication), all PMKSA
+caching entries that were created using the previous PMK needs to be
+replaced. Previously, only the entry for the current AP was cleared.
+Flush the other entries based on network_ctx matches to get rid of the
+OKC entries. These entries can then be re-creating using OKC with the
+new PMK.
+---
+ src/rsn_supp/pmksa_cache.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/src/rsn_supp/pmksa_cache.c b/src/rsn_supp/pmksa_cache.c
+index fe3d8da..04c9d29 100644
+--- a/src/rsn_supp/pmksa_cache.c
++++ b/src/rsn_supp/pmksa_cache.c
+@@ -186,6 +186,14 @@ pmksa_cache_add(struct rsn_pmksa_cache *pmksa, const u8 *pmk, size_t pmk_len,
+ 			wpa_printf(MSG_DEBUG, "RSN: Replace PMKSA entry for "
+ 				   "the current AP");
+ 			pmksa_cache_free_entry(pmksa, pos, 1);
++
++			/*
++			 * If OKC is used, there may be other PMKSA cache
++			 * entries based on the same PMK. These needs to be
++			 * flushed so that a new entry can be created based on
++			 * the new PMK.
++			 */
++			pmksa_cache_flush(pmksa, network_ctx);
+ 			break;
+ 		}
+ 		prev = pos;
+-- 
+1.7.7.6
+

@@ -1,0 +1,724 @@
+Softek Barcode Toolkit Version 7.4.2 Development Release Notes
+==============================================================
+
+1. Improvements to barcode recognition
+
+Improvements have been made to the Code 39, Code 128, GS1-Databar and Datamatrix modules. 
+
+2. Code 93 Support
+
+Support for Code 93 barcodes has also been added. Please refer to the manual page for further details.
+
+3. TIF Resolution
+
+If a TIF document uses a resolution of 1 dpi then the value will be ignored and a default value of 200 dpi used instead.
+
+4. PDF-417 decoding 
+
+An error has been fixed that could lead to corruption in the output values for some PDF-417 barcodes.
+
+5. Partial reads on PDF-417 barcodes
+
+It was possible for certain PDF-417 barcodes to give partial and incorrect readings. This has been corrected. The maximum length for a PDF-417 barcode has now been increased from 2K to 8K (when represented in quoted printable format).
+
+6. 2-D barcodes at coarse fax resolution
+
+Previous versions of the toolkit were not able to decode 2-D barcodes from coarse resolution faxes because the vertical and horizontal resolutions were different. This has been corrected.
+
+
+Softek Barcode Toolkit Version 7.3.1a Development Release Notes
+===============================================================
+
+1. Correction of errors in the Java interface:
+
+a. Incorrect reporting of barcode type.
+b. Null exceptions or virtual machine crashes in the SetProperties function of the Barcode class.
+c. Inability to control the ReadDataMatrix property.
+
+Softek Barcode Toolkit Version 7.3.1 Development Release Notes
+==============================================================
+
+1. GS-1 Databar
+
+GS-1 Databar support has been added to toolkit. This includes RSS-14, RSS-14 Stacked, RSS Truncated, RSS Limited, RSS Expanded and RSS Expanded Stacked. There is also support for supplemental information encoded in micro-PDF-417 barcodes.
+
+2. Color Images
+
+A new property called ColorProcessLevel has been added to the toolkit. This property controls the amount of time the toolkit will spend processing a color image and should make it unnecessary to set the ColorThreshold property to a value other than zero. If you are upgrading from a previous version of the toolkit and set ColorThreshold to a non-zero value in your code then you will need to change the value to 0 in order to take advantage of the new property.
+
+3. Micro-PDF-417
+
+A memory violation error has been fixed in the micro PDF-417 module.
+
+4. Java Interface
+
+The properties; ReadMicroPDF417, ReadDatabar and ReadDataMatrix have been added to the java interface.
+
+5. SkewTolerance Range
+
+Range checks have been added for the value of the SkewTolerance property.
+
+6. Median Filter memory leak
+
+A memory leak has been fixed when MedianFiler is set to True.
+
+7. Double read on skewed DataMatrix barcodes.
+
+An error whereby it was possible to get a double read for slightly skewed datamatrix barcodes has been fixed.
+
+8. Empty values for Datamatrix
+
+An error whereby the toolkit returned empty datamatrix barcode values for some images has been fixed.
+
+
+Softek Barcode Toolkit Version 7.2.1 Release Notes
+==================================================
+
+1. Datamatrix Barcode Support
+
+Support has been added for Datamatrix ECC 200 barcodes. To enable the reading of datamatrix barcodes please set the ReadDataMatrix property to True.
+
+2. Memory leak fix
+
+Previous versions of the toolkit contained a memory leak if SkewTolerance > 0 and UseOverSampling was set to True or 1.
+
+3. Support for 2 and 3 digit Code 25 barcodes.
+
+If MinLength is set to an appropriate value then the toolkit will recognize 2 and 3 digit Code-25 barcodes.
+
+4. Potential memory over-run when reading micro-PDF417 barcodes fixed.
+
+
+Softek Barcode Toolkit Version 7.1.4 Release Notes
+=====================================================
+
+1. Java Interface Extended
+
+The Java interface has been extended to include tiff-split functionality.
+
+2. Patch Code Recognition
+
+Previous versions of the toolkit would output false positive results if ReadPatchCodes was set to True and MinOccurrence and PrefOccurrence were left at default values, but version 7.1.4 imposes a minimum hit count for patch codes of 30. This value can only be changed via the LoadXMLSettings method/function by setting the property PatchCodeMinOccurrence.
+
+3. PDF-417 Recognition
+
+Improvements have been made to PDF-417 recognition, which allow the toolkit to cope with larger variations in the width of columns.
+
+
+Softek Barcode Toolkit Version 7.1.3 Release Notes
+=====================================================
+
+1. Improved support for the EAN-13 family of barcodes.
+ 
+The EAN-13 module has been improved to allow a greater variance in module width.
+ 
+2. Extended support for Code 2 of 5 barcodes.
+ 
+Support added for the following variants of the Code 25 family: Datalogic, Matrix, Industrial and IATA via the ReadCode25ni setting.
+ 
+3. Improved detection of false positive results when using SkewSettings > 0.
+ 
+In previous versions it was possible to get partial reads of barcode such as Code 2 of 5 when using SkewSetting values > 0. This version detects and removes such errors.
+ 
+4. Encoding property added  to control format in which barcodes are returned:
+ 
+0 (default) = raw (with null characters suppressed)
+1 = Quoted printable
+2 = Unicode
+3 = UTF-8
+ 
+Note that this property mainly applies to PDF-417 barcodes.
+ 
+5. Sorting of barcode results
+ 
+Previous versions of the toolkit have generally returned barcodes ordered bottom up and left to right - with some exceptions. This version now checks the ordering to ensure that barcodes are returned in the expected order.
+ 
+6. Bug fix in SaveResults method in the .net 2.0 component.
+ 
+In previous versions this function only saved the results for the last page in a multi-page TIF document.
+
+7. The properties PdfBpp, PdfDpi, PageNo and Photometric can be exported and imported using the XML interface.
+
+8. Support for micro-PDF-417 and short Code-128 barcodes added.
+
+Micro-PDF-417 barcodes are a variant of PDF-417 that uses the guard patterns to store the information normally held in the first and last columns. The ReadMicroPDF417 property controls the detection of this barcode type and default to False.
+
+Short Code-128 barcodes are Code-128 barcodes using Symbol set C, with no start or stop character. The ReadShortCode128 property controls the detection of this barcode type and defaults to False. There is also a property to control the minimum allowed length for a short Code-128 barcode called ShortCode128MinLength. 
+
+Softek Barcode Toolkit Version 7.1.2 Release Notes
+=====================================================
+
+1. Code 39 Module
+
+A logic error in the Code 39 module has been fixed.
+
+Softek Barcode Toolkit Version 7.1.1 Release Notes
+=====================================================
+
+1. bardecode command
+
+The bardecode command has been modified to accept long options in the form of --Property=Value. For example:
+
+--MinSpaceBarWidth=2
+
+This allows access to the advanced features of the toolkit.
+
+The command has also been modified to read settings from XML files and export results to XML files. 
+
+Please refer to docs/shell/bardecode.htm for more detail.
+
+1. Code 39 Module
+
+The Code 39 module has been improved to handle barcodes with split bars.
+
+2. Java and Perl Interfaces
+
+The Java and Perl interfaces now form part of this distribution. Please refer to the java and perl folders in this archive for more information.
+
+SetScanRect, GetBarStringRect and GetBarStringPage methods added to Java interface.
+
+3. Tiff Split
+
+The TiffSplitPath property can now include %s as well as %d. The %s code will be replaced by the value of the barcode in the sub-file.
+
+4. JPG Loading Errors
+
+The handling of error conditions when loading a jpg file has been improved.
+
+5. MinSpaceBarWidth
+
+The default value for MinSpaceBarWidth has been changed from 1 to 0. The value 0 indicates that the toolkit should switch between values of 1 and 2 when scanning an image. This is very useful for reading barcodes from speckled images.
+
+
+Softek Barcode Toolkit Version 7.1.0 Release Notes
+=====================================================
+
+Median Filter, XML and Java Interfaces......
+
+1. Median Filter
+
+The Median Filter option is another method of cleaning noisy images. It's more versatile than the noise reduction filters because it isn't restricted to a single orientation, although it isn't recomended for low resolution images.
+
+2. XML Interface Added
+
+2.1 Using an XML File to Control Properties
+
+It is now possible to load settings for the toolkit from an XML file. What's more, it is also possible to define groups of settings, to be applied successively to an image until a barcode is found. Groups of settings can also be targetted at particular pages in an image.
+
+See the manual pages for LoadXMLSettings and ExportXMLSettings for more details.
+
+2.2 Exporting Results to an XML or CSV File
+
+The SaveResults method can be used to export barcode values and locations to an XML or CSV file.
+
+See the manual page for SaveResults for more details.
+
+2.3 Using an XML File to Specify Files or Folders to be Processed.
+
+An XML file can also be used to spedify files and folders for the toolkit to scan, with the results written to another XML file or a CSV file.
+
+See the manual page for ProcessXML for more details.
+
+3. Java Interface
+
+The toolkit is now provided with a Java class, which can be found in the java folder under the installation folder. Please see the README file in the Java folder for more details on the supported properties and methods.
+
+4. Code 25 character width tolerance
+
+The allowed variation in width for Code 25 characters in barcodes of more than 6 characters has been increased.
+
+5. Extra wide spaces
+
+The toolkit now handles barcodes with an exceptionally high ratio between the first black bar and first white space.
+
+6. Auto Color Threshold Calculation Improved
+
+The automatic calculation of the value for color threshold has been improved.
+
+7. PDF-417 Recognition
+
+An improvement has been made to the PDF-417 algorithm, which allows it to recognise much lower resolution images than was previously possible. A logic error has also been fixed in the decoding alogorithm for byte compacted data.
+
+8. Code 39 Recognition
+
+A small improvement has been made to the Code 39 algorithm to handle barcodes with a low ratio between the wide and narrow bars.
+
+
+Softek Barcode Toolkit Version 7.0.10 Release Notes
+=====================================================
+
+1. Code 128 recognition.
+
+A small change to help read barcodes where the size of the black bars have been shrunk by the scanning process.
+
+Softek Barcode Toolkit Version 7.0.9 Release Notes
+=====================================================
+
+1. Auto-calculation of Color Threshold
+
+The algorithm to to calculate the color threshold value has been improved to handle a greater variety of color images. The new method also recognizes color images that only use 2 unique colors (i.e. black and white encoded as color).
+
+2. Code 128 recognition
+
+The variation in character width for a code 128 barcode has been increased to allow better detection in color images. A restriction in character width variation is still used for reasons of performance.
+
+3. Memory leak when Using Noise Reduction on Color Images
+
+If a color bitmap was processed with the NoiseReduction property set to a value great than zero and ScanDirection exclusively portrait or landscape, then a memory leak occurred. The leak has now been fixed.
+
+
+Softek Barcode Toolkit Version 7.0.8 Release Notes
+=====================================================
+
+1. A logic error in TifSplitMode has been fixed.
+
+If TifSPlitMode was set to zero then the second barcode in the image would appear on the last page of the first file, rather than the first page of the second file.
+
+
+Softek Barcode Toolkit Version 7.0.7 Release Notes
+=====================================================
+
+1. Code 128 recognition
+
+The variation in character width for a code 128 barcode has been increased.
+
+Softek Barcode Toolkit Version 7.0.5 Release Notes
+=====================================================
+
+1. The following combination of settings in versions 7.0.3 and 7.0.4 was causing the ScanBarCode function to return a value of 0, but has been corrected in this version.
+
+PageNo != 0
+MultipleRead = True
+ScanDirection = 1, 4 or 5
+
+2. The recognition of PDF-417 Barcode with small column widths has been improved.
+
+3. The default for the ReadPDF417 property has been changed from TRUE to FALSE.
+
+
+Softek Barcode Toolkit Version 7.0.4 Release Notes
+=====================================================
+
+1. Automatic setting of ColorThreshold
+
+If the ColorThreshold property is set to a value of zero then  the toolkit will automatically calculate a value. This enables the toolkit to read barcodes from very dark or very light images.
+
+2. Code 128 Recognition
+
+The tolerance level for differences in the width of Code 128 characters has been increased.
+
+Softek Barcode Toolkit Version 7.0.3 Release Notes
+=====================================================
+
+1. PDF-417 Recognition Improved
+
+The PDF-417 module has been improved to handle images with the following defects:
+
+a. The scanning process has reduced the size of the black bars.
+b. Part of the end pattern is missing.
+c. The column widths vary through the image.
+d. The bases of some columns are missing.
+
+2. Code 39 Error Correction/Oversample Bug
+
+A buffer over-run which occurred on some images where Code 39 error correction and oversampling had both been set has been fixed.
+
+
+Softek Barcode Toolkit Version 7.0.2  Release Notes
+=====================================================
+
+1. Splitting TIF files according to the location of the barcodes in the image.
+
+A new mode has been added, which will split a TIF file and throw away the pages containing a barcode. For example, if an image consists of 10 pages, with barcodes on pages 1, 4 and 6 then the toolkit will create 3 new files. The first file will contain pages 2 and 3. The second will contain page 5 and the third will contain pages 7, 8, 9 and 10.
+
+Set TifSplitMode to a value of 2 to use this mode.
+
+2. Code 128 recognition improved.
+
+During the scanning process it is possible for the black bars to increase in size and for the white spaces to shrink. The toolkit has always allowed for this problem, but it meant that the Code 128 module sometimes mis-read a character value and so failed to return a value for the barcode. This has been corrected and some barcodes that were not detected will now read OK.
+
+
+Softek Barcode Toolkit Plus 2-D Version 7.0.1a Release Notes
+=====================================================
+
+1.  PDF-417
+
+THIS FEATURE IS ONLY AVAILABLE WITH THE 2-D VERSION OF THE BARCODE TOOLKIT.
+
+PDF-417 reading capability has been added to the toolkit (please see note above). Control over PDF-417 reading is via the ReadPDF417 property, which by default is set to False.
+
+2. Code 25 Module modified to handle differences in character widths in high resolution images.
+
+3. MaxLength increased from 99 to 999.
+
+4. Code 39 checksum calculation fixed.
+
+Softek Barcode Toolkit Version 6.2.1 Release Notes
+==================================================
+
+1. Code 39, Code 25 and Codabar Recognition
+
+The rules for the above barcode symbologies have been tightened to reduce the possibility of a false positive reading.
+
+Softek Barcode Toolkit Version 6.2.0 Release Notes
+==================================================
+
+1. Code 39 Recognition
+
+Further enhancements have been made to Code 39 recognition:
+
+If the Code39Checksum property is set to True then the toolkit will only report Code 39 barcodes where the last character is a valid checksum for the rest of the string.
+
+If the ExtendedCode39 property is set to True then the toolkit will attempt to interpret the barcode in the Code 39 Extended symbol set.
+
+2. Code 25 Recognition
+
+The Code 25 recognition module has been modified to allow for barcodes where the width of a module for a bar may be different to that of a space.
+
+3. Regular Expression Matching
+
+The Pattern property now allows applications to specify a regular expression that all reported barcodes must match against. For example, Pattern = "^ABC[0-9]+XYZ$" would match barcodes similar to "ABC123456XYZ".
+
+If the related property called Numeric is set to True then it is the equivalent of setting Pattern to "^[0-9]+$".
+
+4. Improved Code 128 Recognition
+
+The Code 128 recognition module has been improved to cope with barcodes where the bar widths have been distorted by the process of scanning or faxing.
+
+5. Error Correction
+
+If the ErrorCorrection property is set to True then the toolkit will attempt to find the best match for a barcode character where it is practical to do so. This currently only applies to Code 39 barcodes, but will be extended to other types in the future.
+
+6. Minimum Space Bar Width
+
+The MinSpaceBarWidth property specifies the smallest width of a space in a barcode. Any spaces smaller than this width will be ignored by the toolkit. This is very useful when a scanned image contains lots of white dots in the black bars. Setting the property to a value of 2 or 3 can often result in a reliable read for such images.
+
+8. Improvement in speed
+
+Optimization in the Code 25, Code 39 and Code 128 module has given a significant improvement in speed.
+
+Softek Barcode Toolkit Version 6.1.1 Release Notes
+==================================================
+
+1. The bardecode program no longer supports the defunct -r flag for setting the
+rotation of the image.
+
+2. The bardecode program can now control the skew angle via the -A flag. -A 0
+(the default) allows for up to 5 degrees of skew and -A 5 allows for any angle 
+of skew.
+
+3. Mapping mode when setting the barcode zone.
+
+A new property has been added to specify the mapping mode when setting the
+barcode zone in an image. ST_MAPPING_MODE can have the following values:
+
+0 = Units in pixels (default)
+1 = Units are a percentage of the image width and height.
+
+Example:
+
+uint16 val = 1 ;
+STSetParameter(hBarcode, ST_MAPPING_MODE, &val) ;
+
+4. UPC-E Recognition
+
+A bug that prevented the recognition of valid UPC-E barcodes has been fixed.
+
+5. Images with Small Height
+
+The toolkit now correctly handles images with a height of less than 4 pixels.
+
+6. Old JPEG Compression
+
+If a TIF file contains pages that use old jpeg compression then the return 
+value will either be the number of barcodes found on other pages or, if no 
+other barcodes were found, a value of -5.
+
+7. Code 39 and Code 25 Recognition
+
+The algorithms for Code 39 and Code 25 have been improved to cope better with poor quality barcodes.
+
+8. Duplicate Barcodes
+
+You can suppress the reporting of duplicate barcodes on the same page with the
+ST_DUPLICATE_BARCODES property. 0 = suppress duplicate values. 1 = allow
+duplicate values (default).
+
+9. Minimum Separation of Barcodes on a Page
+
+You can control the minimum distance allowed between 2 identical barcodes. If 
+the distance between 2 identical barcodes is less than the value of this
+property then the barcodes are considered to be part of a single barcode that
+has been damaged in some way. The units of this property are measured in 300th's
+of an inch (i.e a value of 300 represents 1 inch). The default value is 180.
+
+
+Example:
+
+uint16 val = 100 ;
+STSetParameter(hBarcode, ST_MIN_SEPARATION, &val) ;
+
+10. Minimum and Maximum length of a barcode
+
+The minimum and maximum length of a barcode can be controlled through the
+ST_MIN_LEN and ST_MAX_LEN properties.
+
+uint16 val = 10 ;
+STSetParameter(hBarcode, ST_MIN_LEN, &val) ;
+val = 20 ;
+STSetParameter(hBarcode, ST_MAX_LEN, &val) ;
+
+
+Softek Barcode Toolkit Version 6.0.10 Release Notes
+===================================================
+
+1. The version numbering system has been brought in line with the Windows 
+version of the toolkit.
+
+2. Segmentation Fault Problems with OverSampling
+
+When OverSampling was used with certain images the barcode toolkit read 1 scan 
+line beyond the length of the image and caused an access violation. This has 
+now been corrected.
+
+3. ColorThreshold level problem resolved
+
+A problem with setting high values for ColorThreshold has been resolved.
+
+
+Softek Barcode Toolkit Version 6.09 Release Notes
+=================================================
+
+1. The barcode library is now available in both static and shared forms. The 
+shared library is called libbardecode.so. This file needs to be installed in 
+/usr/lib and can then be linked using a command line such as:
+
+cc myfile.c -lbardecode -ltiff -ljpeg
+
+2. The recognition of Codabar barcodes has been improved in line with the 
+changes made for Code 39 and Code 25 barcodes.
+
+Softek Barcode Toolkit Version 6.07 Release Notes
+=================================================
+
+1. Splitting of TIF Files into sub-files
+
+A bug has been fixed in the splitting of TIF files into sub-files, based on 
+the position of barcodes in the master image. It was found that it was 
+possible, in certain situations, for barcodes to be repeated. This has been 
+fixed.
+
+2. Default size of the Quiet Zone
+
+The default size of the quiet zone has been reduced slightly to accommodate the
+quiet zone found between barcodes on products (e.g EAN-13 barcodes on magazines)
+
+
+Softek Barcode Toolkit Version 6.03 Release Notes
+=================================================
+
+1. Code 39 barcodes with length less than 4 characters would not read.
+
+Solution: The toolkit will now read Code 39 barcodes of any length. Remember 
+though that the purpose of the MinLength setting is to cut down on the chance 
+of a false positive reading.
+
+
+Changes for Version 6.01
+========================
+
+The main change to the barcode toolkit for version 6 is the ability to work in a
+multi-threaded environment. 
+
+The algorithms for the Code 3 of 9 and Code 2 of 5 Interleaved barcode types 
+have been re-written to provide a better success rate with low resolution 
+images.
+
+It's also worth noting why version 5 was never released. Just as version 5 got 
+to the pre-release stage, the need for a thread safe version of the toolkit was
+identified and was given top priority. 
+
+Summary of changes:
+
+
+1. Support for the Codabar symbology.
+
+The toolkit now supports recognition of the Codabar barcode type. The 
+ST_READ_CODABAR setting has been added, with a default value of True.
+
+
+2. Improved recognition algorithms for Code 3 of 9 and Code 2 of 5 Interleaved.
+
+Both of the algorithms for detecting Code 3 of 9 and Code 2 of 5 Interleaved 
+barcodes have been improved. This particularly applies to low resolution images
+where there may only be minor differences between the wide and narrow bars.
+
+
+3. UPC-E to EAN-13 Conversion
+
+UPC-E is a zero suppressed version of UPC-A/EAN-13 and the default in version 4
+was to restore the suppressed zero's. The option has been added in version 6 to
+leave the barcode as it is printed, via the CONVERT_UPCE_TO_EAN13 setting. The 
+default value is True - which means that the zero's will be restored (the 
+behaviour in version 4).
+
+
+4. Retrieve the Direction of a Barcode in an Image
+
+A new function has been added to retrieve the orientation of a barcode. The 
+STGetBarCodeDirection function returns a value that, if used for the 
+ST_ORIENTATION_MASK setting, would detect the barcode. Some barcodes can be 
+read from left to right or right to left. In these cases the direction returned
+is the first match found. 
+
+
+5. 45 degree angle scanning
+   
+4 new scan directions are available in the toolkit. The default value for the 
+ST_ORIENTATION_MASK is still set to 15, which covers left-right and top-down 
+directions. Please refer to the C_API for full details of the new values for 
+the mask.
+
+
+6 TIF Split Mode
+
+The way in which a multi-page TIF file can be split into smaller files is now
+more flexible. The TIFF_SPLIT_MODE setting allows for the barcode to be on
+either the first or the last page of each of the new files.
+
+
+Changes for Version 5.01pre2
+============================
+
+1. This version of the toolkit can scan images at angles of 45 degrees and the
+following mask values are available through the -d flag:
+
+16 = Top Left to Bottom Right
+32 = Top Right to Bottom Left
+64 = Bottom Right to Top Left
+128 = Bottom Left to Top Right.
+
+2. Codabar barcodes are now recognised and can be checked for using the 
+"-t codabar" option.
+
+3. The Mimumum and Maximum lengths for barcodes can be specified using the -c
+and -C flags respectively. Check digits are included in the length.
+
+e.g -c 10 -C 15 will look for barcodes of length 10 to 15 inclusive.
+
+
+
+Changes for Version 4.04
+========================
+
+1. Improved recognition of Code 2 of 5 (Interleaved) barcodes.
+2. Added -P flag to bardecode command to show page numbers.
+
+Changes for Version 4.02
+========================
+
+1. Fixed bug in loading of jpeg images.
+2. Added support for image "over sampling". The value of a pixel is worked out
+   from the average value of itself, the pixel n rows above and the pixel n rows
+   below. Where n is determined by the value passed with the -L flag. This 
+   method is reasonably fast and tends to remove the effect of speckles in an 
+   image. The bardecode command implements this as the -O flag.
+3. Previous versions of the toolkit have only scanned for a barcode in one
+   orientation or rotation. This version can check for barcode in any direction
+   in a single call to the barcode reader. The directions to use are specified
+   in a mask built up from the values 1 for Left to Right, 2 for Top to Bottom,
+   4 for Right To Left and 8 for Bottom to Top. The default value if 15.
+4. An option of advanced noise reduction has been added. It works in the same
+   way as normal noise reduction but removes white speckles as well as black.
+   Turn on advanced noise reduction with the -N flag.
+
+Changes for Version 3.07
+========================
+
+1. Fixed bug in Code 128 barcodes.
+2. Increased size of default quiet zone to 0.1 inch
+3. Support added for patch codes in toolkit (though not in demo code yet)
+4. Support for TIF LZW images added.
+5. Fixed bug that stopped recognition of barcodes at extreme edges of an image.
+
+Changes for Version 3.02
+========================
+
+1. Support for Code 128 barcode
+2. The toolkit now handles monochrome JPEG files correctly.
+
+
+Changes for Version 3.01 
+========================
+
+1. Support for Jpeg format.
+
+2. Support for UPC-A, UPC-E, EAN-8 and EAN-13 barcode formats added.
+
+
+Changes for Version 2.07 Alpha
+==============================
+
+1. Splitting Multi-Page TIF Files on Pages Containing Barcodes
+
+A new feature has been added to the toolkit that will split multi-page TIF files
+on pages containing barcodes.
+
+e.g. If the 10 page file multipage.tif contains barcodes on pages 2 6 and 7
+then the command:
+
+./code39trial -m -S output%d.tif multipage.tif
+
+will produce files:
+
+output1.tif     containing pages 2, 3, 4 and 5
+output2.tif     with page 6
+output3.tif     with pages 7, 8, 9 and 10
+
+
+Changes for Version 2.06
+========================
+
+1. Support for color RGB TIFF images.
+
+2. Multi-page Image Support
+
+Default behaviour changed to examine all pages in an image for a barcode -
+rather than just the first page.
+
+e.g. 
+
+A. If a TIF file called multi.tif contains 2 pages with barcodes "AAAA" and
+"BBBB" then:
+
+./code39trial multi.tif        will output "AAAA"
+./code39trial multi.tif -m     will output "AAAA" and "BBBB"
+
+The previous version would only have checked page 1 and so found no barcode.
+
+./code39trial multi.tif -i 2   will output "BBBB"
+
+B. If a TIF file called multi.tif contains 2 pages with one barcode "BBBB" 
+on page 2 then:
+
+./code39trial multi.tif        will output "BBBB"
+
+The previous version would only have checked page 1 and so found no barcode.
+
+Changes for V2.05
+=================
+
+1. C Programmers API
+
+Included the C programmers API. For more details see the C_API folder.
+
+2. Variable Quiet Zone Sizes
+
+Added -q flag to code39trial command to allow the use of non-standard quiet
+zones around barcodes. For example:
+
+./code39trial -q 3 file.tif
+
+...specifies a quiet zone of 3 pixels around the barcode. i.e. There has to be 
+at least 3 white pixels surrounding the barcode.
+

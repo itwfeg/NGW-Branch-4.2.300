@@ -1,0 +1,7 @@
+Package: hobart-devregs
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides devregs.
+

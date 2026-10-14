@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MaxLength</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		MaxLength defines the largest length for a barcode string, including checksum 
+		characters.
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;99
+		<P>void STSetParameter(hBarcode, ST_MAX_LEN,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_MAX_LEN,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Ignore all barcodes with length &gt; 10<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;10 ;<BR>
+			STSetParameter(hBarcode, ST_MAX_LEN,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

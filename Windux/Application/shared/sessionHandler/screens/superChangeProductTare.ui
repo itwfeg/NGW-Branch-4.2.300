@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>superChangeProductTare</class>
+ <widget class="QWidget" name="superChangeProductTare">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="lblProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>14</y>
+     <width>251</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Product Number</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDescription">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>74</y>
+     <width>251</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>30</y>
+     <width>171</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDescriptionContent">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>96</y>
+     <width>671</width>
+     <height>89</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QFrame" name="gbTareMaxReached">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>297</y>
+     <width>1021</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbTareMaxReached{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <widget class="QLabel" name="lblTareMaxReached">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>12</y>
+      <width>921</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#lblTareMaxReached{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="gbTareNotAvailable">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>297</y>
+     <width>1021</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbTareNotAvailable{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <widget class="QLabel" name="lblTareNotAvailable">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>10</y>
+      <width>921</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#lblTareNotAvailable{
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>Tare is not available for this Product type.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="gbNewProduct">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>429</y>
+     <width>995</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbNewProduct{
+	background-color: rgb(231, 231, 231);
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QRadioButton" name="rbRandomWeight">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>80</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Random Weight</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbByCount">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>160</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>By Count</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFixedWeight">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>80</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fixed Weight</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFluidOunces">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>160</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fluid Ounces</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butOK">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblcreateNewProductQuestion">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>12</y>
+      <width>721</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">Product</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butCancel">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gbTare" native="true">
+   <property name="geometry">
+    <rect>
+     <x>29</x>
+     <y>190</y>
+     <width>771</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <widget class="QCheckBox" name="cbForcedTare">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>10</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Forced Tare</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTare">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>7</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">Tare</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTareUnit">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>10</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">lb</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="leTare">
+    <property name="geometry">
+     <rect>
+      <x>279</x>
+      <y>6</y>
+      <width>171</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="inputMask">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
+    <property name="placeholderText">
+     <string notr="true"/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gbProportionalTare" native="true">
+   <property name="geometry">
+    <rect>
+     <x>29</x>
+     <y>245</y>
+     <width>771</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="lblProportionalTarePercent">
+    <property name="geometry">
+     <rect>
+      <x>461</x>
+      <y>9</y>
+      <width>46</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">%</string>
+    </property>
+   </widget>
+   <widget class="hobart::numericLineEdit" name="leProportionalTare">
+    <property name="geometry">
+     <rect>
+      <x>279</x>
+      <y>5</y>
+      <width>171</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="inputMask">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
+    <property name="placeholderText">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblProportionalTare">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>3</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Proportional Tare</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>leProductNumber</tabstop>
+  <tabstop>leTare</tabstop>
+  <tabstop>cbForcedTare</tabstop>
+  <tabstop>leProportionalTare</tabstop>
+  <tabstop>rbRandomWeight</tabstop>
+  <tabstop>rbByCount</tabstop>
+  <tabstop>rbFixedWeight</tabstop>
+  <tabstop>rbFluidOunces</tabstop>
+  <tabstop>butCancel</tabstop>
+  <tabstop>butOK</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

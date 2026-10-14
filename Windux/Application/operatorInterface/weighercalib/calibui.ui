@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>calibui</class>
+ <widget class="QWidget" name="calibui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>666</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Accelerometer Calibration Tool</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#calibui
+{
+border-style:outset;
+border-radius:10px;
+border: 5px solid gray;
+color: black;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>11</number>
+   </property>
+   <property name="topMargin">
+    <number>11</number>
+   </property>
+   <property name="rightMargin">
+    <number>11</number>
+   </property>
+   <property name="bottomMargin">
+    <number>11</number>
+   </property>
+   <item>
+    <widget class="QStackedWidget" name="wdgtStackedWidgetMain">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1002</width>
+       <height>390</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QStackedWidget#stackedWidget
+{
+border-style:outset;
+border-radius:8px;
+border:0px solid gray;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="wgtSteps">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#wgtSteps
+{
+border-style:outset;
+border-radius:8px;
+border:0px solid gray;
+}</string>
+      </property>
+      <widget class="QLabel" name="lblShowHowTo">
+       <property name="geometry">
+        <rect>
+         <x>11</x>
+         <y>1</y>
+         <width>978</width>
+         <height>378</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>978</width>
+         <height>378</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>255</red>
+             <green>255</green>
+             <blue>255</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="WindowText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Text">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="ButtonText">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="255">
+             <red>240</red>
+             <green>240</green>
+             <blue>240</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lblShowHowTo
+{
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblGravityConst">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>370</y>
+         <width>741</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lblGravityConst
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:1px;
+border:0px solid gray;
+}</string>
+       </property>
+       <property name="text">
+        <string>.</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="wgtScans">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget#wgtScans
+{
+border-style:outset;
+border-radius:8px;
+border:3px solid red;
+color: black;
+}
+</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>7</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetNoConstraint</enum>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="vertLeftSide" stretch="100,0,100,100,100">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetNoConstraint</enum>
+           </property>
+           <property name="leftMargin">
+            <number>25</number>
+           </property>
+           <property name="topMargin">
+            <number>40</number>
+           </property>
+           <property name="rightMargin">
+            <number>15</number>
+           </property>
+           <property name="bottomMargin">
+            <number>80</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lblDateTitle">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel#lblDateTitle
+{
+border-style:outset;
+border-radius:0px;
+border:0px solid gray;
+}</string>
+             </property>
+             <property name="text">
+              <string>Date</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblDateToday">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>54</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel#lblDateToday
+{
+color: 208,208,208;
+border:3px solid gray;
+}</string>
+             </property>
+             <property name="text">
+              <string>02/09/2018</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="spacerLeft">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>98</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblAssNum">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel#lblAssNum
+{
+border-style:outset;
+border-radius:0px;
+border:0px solid gray;
+}</string>
+             </property>
+             <property name="text">
+              <string>Board Assembly Number</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtAssNum">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>54</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit#txtAssNum
+{
+border-style:outset;
+border-radius:8px;
+border:3px solid red;
+color: black;
+}</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vertRightSide" stretch="0,0,0,0,0">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetNoConstraint</enum>
+           </property>
+           <property name="leftMargin">
+            <number>15</number>
+           </property>
+           <property name="topMargin">
+            <number>40</number>
+           </property>
+           <property name="rightMargin">
+            <number>25</number>
+           </property>
+           <property name="bottomMargin">
+            <number>80</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lblSerNum">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel#lblSerNum
+{
+border-style:outset;
+border-radius:0px;
+border:0px solid gray;
+}</string>
+             </property>
+             <property name="text">
+              <string>Serial Number</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtSerNum">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>54</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit#txtSerNum
+{
+border-style:outset;
+border-radius:8px;
+border:3px solid red;
+color: black;
+}</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="spacerRight">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>98</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblHwvNum">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel#lblHwvNum
+{
+border-style:outset;
+border-radius:0px;
+border:0px solid gray;
+}</string>
+             </property>
+             <property name="text">
+              <string>Hardware Version</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtHwvNum">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>54</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>24</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit#txtHwvNum
+{
+border-style:outset;
+border-radius:8px;
+border:3px solid red;
+color: black;
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="loadCellData" native="true">
+     <layout class="QHBoxLayout" name="dataLayout">
+      <item>
+       <widget class="QLabel" name="lbl_x">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl_x
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_y">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl_y
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_z">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl_z
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_counts">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl_counts
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblTellHowTo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>1002</width>
+       <height>75</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>75</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lblTellHowTo
+{
+background-image: url(:/images/none.png);
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}</string>
+     </property>
+     <property name="text">
+      <string>Set the thing like this on the thingy.
+Can I go two lines on this thingy and word wrap to the next? </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblError">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+       <weight>75</weight>
+       <italic>true</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel#lblError
+{
+color : red;
+background-image: url(:/images/none.png);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="wdgtStackedWidgetButs">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="page1">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>75</height>
+       </size>
+      </property>
+      <widget class="QPushButton" name="butNextHowTo">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>1002</width>
+         <height>75</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>1002</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>75</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#butNextHowTo
+{
+background-color: qlineargradient(spread:repeat, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(96,96,96, 255), stop:1 rgba(255, 255, 255, 255));
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}
+
+QPushButton#butNextHowTo:pressed {
+    background-color: rgb(0, 224, 0);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>Begin</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page2">
+      <property name="minimumSize">
+       <size>
+        <width>1002</width>
+        <height>75</height>
+       </size>
+      </property>
+      <layout class="QFormLayout" name="formLayout_2">
+       <item row="0" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="layBegin">
+         <property name="spacing">
+          <number>150</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetNoConstraint</enum>
+         </property>
+         <item>
+          <widget class="QPushButton" name="butUseKilograms">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>75</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>75</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton#butUseKilograms
+{
+background-color: qlineargradient(spread:repeat, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(96,96,96, 255), stop:1 rgba(255, 255, 255, 255));
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}
+
+QPushButton#butUseKilograms:pressed {
+    background-color: rgb(0, 224, 0);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>Begin with Kgs</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butUsePounds">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>75</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>75</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton#butUsePounds
+{
+background-color: qlineargradient(spread:repeat, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(96,96,96, 255), stop:1 rgba(255, 255, 255, 255));
+border-style:outset;
+border-radius:8px;
+border:3px solid gray;
+}
+
+QPushButton#butUsePounds:pressed {
+    background-color: rgb(0, 224, 0);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>Begin with Lbs</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>txtSerNum</tabstop>
+  <tabstop>txtAssNum</tabstop>
+  <tabstop>txtHwvNum</tabstop>
+  <tabstop>butUseKilograms</tabstop>
+  <tabstop>butUsePounds</tabstop>
+  <tabstop>butNextHowTo</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

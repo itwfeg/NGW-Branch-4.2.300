@@ -1,0 +1,54 @@
+Copyright 2002-2012 Softek Software Limited
+http:://www.bardecode.com
+
+PLEASE RUN configure.sh BEFORE USING THE SDK. THIS WILL CREATE LINKS TO THE CORRECT BUILD OF THE SDK FOR YOUR SYSTEM.
+
+The Softek Barcode Toolkit reads barcodes from TIF and JPG files. The 'C' API can be used to read barcodes from bitmaps held in memory. You can also create JPG files containing Code 39 and Code 128 barcodes.
+
+This software is not free and should always be licensed when used in a commercial situation. Please contact sales@bardecode.com for more information.
+
+IMPORTANT
+=========
+
+If you only need to read barcodes from bitmaps held in memory then you can avoid linking with libtiff and libjpeg by using the library files in the "slim" folder.
+
+INSTALLATION
+============
+
+The binary files for the toolkit are stored in the "build" folder. Please ensure that the symbolic link called "arch" links to the closest build for your system.
+
+You can either run the configure.sh script to do this or do the following...
+
+1. Select the closest match in the build folder for your system.
+2. rm arch
+3. ln -s build/[best build folder] arch
+e.g: ln -s build/ubuntu_12.04_x86_64 arch
+
+Quick Start:
+
+arch/bin/bardecode -t any -f images/code39_01.tif
+
+The following folders are included in this archive:
+
+arch/bin - contains the commands bardecode, code39draw and code128draw.
+
+docs - contains documentation in the form of html files.
+
+images - contains sample barcode images.
+
+include - contains the barcode.h include file.
+
+java - contains the Java interface to the barcode toolkit.
+
+arch/lib - contains the static and shared versions of the bardecode library.
+
+arch/slim - contains the static and shared versions of the bardecode library that require no linking with libtiff or libjpeg.
+
+perl - contains the SoftekBarcode perl module.
+
+src - contains the source to the bardecode.c program. The source for the baardecode library or the draw programs are not included. There is no need to build any programs unless you wish to modify the bardecode.c source.
+
+IMPORTANT: If you wish to use the run bardecode as a shared library then please do the following:
+
+1. Copy arch/lib/libbardecode.so to /usr/lib
+2. From the src folder, run "make shared". This will compile and link bardecode.c with the shared library.

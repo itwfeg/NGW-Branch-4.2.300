@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# "disable" the OO/NS overlay scripts
+rm /usr/local/hobart/user/softkeyscripts/online_orders_script.py
+rm /usr/local/hobart/user/softkeyscripts/online_orders_silent.py
+rm /usr/local/hobart/user/softkeyscripts/now_serving_script.py
+
+echo "prerm: done!"
+

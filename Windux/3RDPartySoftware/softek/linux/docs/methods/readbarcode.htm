@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">ReadBarCode</FONT>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>void *STReadBarCode(void *hBarcode, char *file, char *type, char ***bc, char 
+			***bc_type)</P>
+		<P>STReadBarCode scans an image file for barcodes and returns the number of 
+			barcodes found or an error number.</P>
+		<P>
+			<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD>hBarcode</TD>
+					<TD>Handle to barcode session.</TD>
+				</TR>
+				<TR>
+					<TD>file</TD>
+					<TD>(input) is the name of the image file to scan.</TD>
+				</TR>
+				<TR>
+					<TD>type</TD>
+					<TD>(input) is the type of file ("jpg" or "tif"). If this value is set to NULL then 
+						the file type is determined from the file extension.</TD>
+				</TR>
+				<TR>
+					<TD>bc</TD>
+					<TD>(output) is a pointer to an array of character strings containing barcodes.</TD>
+				</TR>
+				<TR>
+					<TD>bc_type</TD>
+					<TD>(output) is a pointer to an array of character strings containing the barcode 
+						types in the bar_codes array.</TD>
+				</TR>
+			</TABLE>
+		</P>
+		<P><STRONG>Return Value</STRONG></P>
+		<P>A negative number indicates an error (see below), other values inidicate the 
+			number of barcodes found in the file.</P>
+		<P>
+			<TABLE id="Table2" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD>ST_ERROR_FILE_OPEN (-1)</TD>
+					<TD>Cannot open image file</TD>
+				</TR>
+				<TR>
+					<TD>ST_ERROR_MULTI_PLANE (-2)</TD>
+					<TD>Multiplane images not supported</TD>
+				</TR>
+				<TR>
+					<TD>ST_ERROR_BITS_PER_SAMPLE (-3)</TD>
+					<TD>Unsupported number of bits per sample</TD>
+				</TR>
+				<TR>
+					<TD>ST_ERROR_MALLOC (-4)</TD>
+					<TD>Memory allocation error</TD>
+				</TR>
+				<TR>
+					<TD>ST_ERROR_COLOR_TIFF (-5)</TD>
+					<TD>Unsupported compression</TD>
+				</TR>
+			</TABLE>
+		</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

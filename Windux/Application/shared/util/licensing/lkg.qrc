@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/">
+    <file>resources/ApplicationCancel.png</file>
+    <file>resources/license.png</file>
+	<file>resources/Import.png</file>
+  </qresource>
+</RCC>

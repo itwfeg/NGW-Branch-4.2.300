@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[UnitTester.sln]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/Application/UnitTester", PWJAAAAA
+
+[UnitTester.vcproj]
+SCC_Aux_Path = "\\TROYENG1\vss databases\Windux"
+SCC_Project_Name = "$/CommonCodeBase/MAINBRANCH_WINDUX/Application/UnitTester", PWJAAAAA

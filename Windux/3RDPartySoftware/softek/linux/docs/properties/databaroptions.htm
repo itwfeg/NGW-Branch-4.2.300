@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">DatabarOptions</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+							<P>The DatabarOptions property can be used to set various options for GS1 Databar 
+                                recognition. All options are turned on by default, but some applications may 
+                                find it useful to disable certain features for performance reasons.</P>
+							<P>The property works as a mask and can be constructed from the following values:</P>
+							<UL>
+								<LI>
+								    1 = Read the supplementary 2-D portion if indicated by the linkage flag.<LI>
+								    2 = Read RSS-14 barcodes<LI>
+								    4 = Read RSS-14 Stacked barcodes<LI>
+									8 = Read RSS-Limited barcodes</LI>
+                                <LI>
+									16 = Read RSS-Expanded barcodes</LI>
+                                <LI>
+									32 = Read RSS-Expanded Stacked barcodes</LI></UL>
+							<P>Default Value: 255
+							</P>
+							<P>void STSetParameter(hBarcode, ST_DATABAR_OPTIONS,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_DATABAR_OPTIONS,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;31 ;<BR>
+			STSetParameter(hBarcode, ST_DATABAR_OPTIONS,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

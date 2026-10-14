@@ -1,0 +1,549 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<link href="{{=URL('static', 'css/jquery.timepicker.min.css')}}" rel="stylesheet" type="text/css" />
+{{end}}
+
+<div class="container main-container" id="settings-container">
+
+<div class="modal fade" id="submitModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="submitModal-body">
+      ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="submitModal-button">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="selectModal-body">
+        <h3>Select an uploaded picture to use:</h3>
+        <select class="form-control form-control-lg" id="selectModal-pic">
+          <option value="">Loading..</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="selectModal-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="selectModal-select" data-dismiss="modal">Select</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="storeInfo-tab" data-toggle="tab" href="#storeInfo" role="tab">Store</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="generalSetup-tab" data-toggle="tab" href="#generalSettings" role="tab">General</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="orderSettings-tab" data-toggle="tab" href="#orderSettings" role="tab">Orders</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="departments-tab" data-toggle="tab" href="#departmentSettings" role="tab">Departments</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tvSettings" role="tab">TV</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="zones-tab" data-toggle="tab" href="#zonesSettings" role="tab">Zones</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pics-tab" data-toggle="tab" href="#picsSettings" role="tab">Pics</a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane show active" id="storeInfo" role="tabpanel">
+  <form id="storeInfo-form">
+  
+
+
+    <div class="form-group">
+    <label for="StoreNumber">Store Number</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Store number should be a unique number referring to the store that this system is placed in.  This number is used when communicating with other systems." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="StoreNumber" placeholder="0">
+    </div>
+    
+    <div class="form-group">
+    <label for="StorePhone">Store Contact Phone Number</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="This number is presented to customers on Kiosk tickets for contact and support purposes." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="StorePhone" placeholder="0">
+    </div>
+    
+    <hr />
+
+    {{days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']}}
+    {{for day in days:}}
+    <div class="form-group container">
+    <label for="{{=day}}Open">{{=day}} Hours</label>
+    <div class="row">
+    <input type="text" class="form-control form-control-lg col timepicker" id="{{=day}}Open" placeholder="7:00 AM">
+    <input type="text" class="form-control form-control-lg col timepicker" id="{{=day}}Close" placeholder="9:00 PM">
+    </div>
+    </div>
+    {{pass}}
+    
+    <hr/>
+    
+    <div class="form-group container">
+    <label for="SalesOrFrequentShopper">Sales Type</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="This determines if the kiosk will display either no sales prices, sales prices, or frequent shopper discounts." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="SalesOrFrequentShopper">
+      <option value="0">No discounts</option>
+      <option value="1">Sale discounts</option>
+      <option value="2">Frequent Shopper discounts</option>
+    </select>
+    </div>
+    
+    <div class="form-group container">
+    <label for="FrequentShopperType">Frequent Shopper Type</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Whether a single frequent shopper setting will apply to all products, or each product will have its own settings." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="FrequentShopperType">
+      <option value="1">Global</option>
+      <option value="0">Per PLU</option>
+    </select>
+    </div>
+    
+    <div class="form-group container">
+    <label for="FrequentShopperDiscountType">Frequent Shopper Discount Type</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Type of discount for calculating frequent shopper discount.  Only applies if global frequent shopper type is selected." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="FrequentShopperDiscountType">
+      <option value="2">Discount Price</option>
+      <option value="1">Cents Off</option>
+      <option value="6">Package Discount</option>
+      <option value="3">Percent Off</option>
+      <option value="4">Advertised Price</option>
+      <option value="5">Percent Added</option>
+    </select>
+    </div>
+    
+    <div class="form-group container">
+    <label for="FrequentShopperDiscountFormula">Frequent Shopper Discount Formula</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Formula for calculating frequent shopper discount.  Only applies if global frequent shopper type is selected." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="FrequentShopperDiscountFormula">
+      <option value="1">IBM</option>
+      <option value="4">NCR</option>
+      <option value="0">RII</option>
+      <option value="2">IBM-EM2</option>
+      <option value="7">ICL-SASI</option>
+      <option value="9">IBM-ACE</option>
+    </select>
+    </div>
+    
+  </form>
+  </div>
+
+  <div class="tab-pane container" id="generalSettings" role="tabpanel">
+  <form id="generalSettings-form">
+  
+    <div class="form-group">
+    <div class="form-check-inline">
+    <input type="checkbox" class="form-check-input OperatorLogging" name="OperatorLogging" id="OperatorLogging" placeholder="1">
+    <label for="OperatorLogging" class="form-check-label">Log Operators</label>
+    </div>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Require operators to log in before doing significant operations, such as cancelling an order.  Also logs operators into the database (i.e. who filled what order)." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    </div>
+  
+    <div class="form-group">
+    <label for="AccessLevelDelete" class="">Operator Access Level</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Operator access level required to cancel an order.  If an operator has a lower level than this, they will not be able to cancel orders.  Has no effect if operator logins are not required." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="AccessLevelDelete" placeholder="0">
+    </div>
+    
+    <hr />
+  
+    <!-- TODO remove one of these two? -->
+    <div class="form-group">
+    <label for="OrderListMinutes">Order List View (Minutes)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Show orders due within this many minutes." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="OrderListMinutes" placeholder="0">
+    </div>
+    
+    <div class="form-group">
+    <label for="OrderListMax" class="">Maximum Orders to Display (#)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Maximum number of orders to show on the order list." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="OrderListMax" placeholder="100">
+    </div>
+
+    <div class="form-group">
+    <label for="OrderHistoryDays">Order History Length (Days)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Number of days to keep orders in the database.  After this many days, the orders will be deleted." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="OrderHistoryDays" placeholder="0">
+    </div>
+    
+    <div class="form-group">
+    <label for="AutorefreshTime">Auto Refresh Interval (Seconds)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Refresh order lists after this many seconds." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="AutorefreshTime" placeholder="60">
+    </div>
+    
+    <div class="form-group">
+    <label for="NowServingWaitTime" class="">Max Wait Time (Minutes) for Now Serving</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Target wait time for Now Serving.  After this many minutes, warnings/alerts will be displayed." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="NowServingWaitTime" placeholder="10">
+    </div>
+    
+    <div class="form-group">
+    <label for="HourTimeSlots">Hourly Time Slots</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="The number of times slots per hour to allow orders in." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="HourTimeSlots" placeholder="0">
+    </div>
+    
+    <div class="form-group">
+    <label for="OrdersPerSlot">Orders per Time Slot</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="The number of orders that can be placed within a single time slot." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="OrdersPerSlot" placeholder="0">
+    </div>
+    
+    <hr />
+
+    <div class="form-group">
+    <label for="KioskBGImage">Kiosk Background Image</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Image displayed as the background on all kiosk pages.  Specific departments can have a background image set, which will override this." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskBGImage" placeholder="">
+    <div class="btn btn-primary" onmouseup="select_pic(this);">Select...</div>
+    </div>
+    
+    <div class="form-group">
+    <label for="KioskBGColor">Kiosk Background Color</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Background color used on all kiosk pages.  This will not be visible if a background image is set." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskBGColor" placeholder="linen">
+    </div>
+    
+    <div class="form-group">
+    <label for="KioskLightColor">Kiosk Primary Color</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Primary color used on kiosk pages.  This is the main color used for buttons and other elements." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskLightColor" placeholder="#4472c4">
+    </div>
+    
+    <div class="form-group">
+    <label for="KioskDarkColor">Kiosk Primary Color (darker)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Darker version of primary color used on kiosk pages.  This is used as a secondary accent color on buttons and other elements." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskDarkColor" placeholder="#1b4a9c">
+    </div>
+    
+    <div class="form-group">
+    <label for="KioskTextColor">Kiosk Text Color</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Color used for text on kiosk page buttons.  Make sure it will be visible on top of the primary color." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskTextColor" placeholder="#fff">
+    </div>
+    
+    <div class="form-group">
+    <label for="KioskLogo">Kiosk Logo Image</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Image used as a logo on all kiosk pages.  This will be shown on the start page and other highly visible locations." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskLogo" placeholder="">
+    <div class="btn btn-primary" onmouseup="select_pic(this);">Select...</div>
+    </div>
+
+    <div class="form-group">
+    <label for="KioskTimeout">Kiosk Timeout</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Number of seconds after which a popup will ask the user to continue or reset the kiosk order that is in progress." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="KioskTimeout" placeholder="60">
+    </div>
+    
+    <hr />
+    
+    <div class="form-group">
+      <div>Measurement System</div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input MeasurementSystem" name="MeasurementSystem" type="radio" id="MeasurementSystem-imperial" value="imperial" checked>
+            <label class="form-check-label" for="MeasurementSystem-imperial">Imperial</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input MeasurementSystem" name="MeasurementSystem" type="radio" id="MeasurementSystem-metric" value="metric">
+            <label class="form-check-label" for="MeasurementSystem-metric">Metric</label>
+        </div>
+        <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Use the Imperial or Metric measurement system.  This is used to correctly display units." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    </div>
+    
+    <!-- not necessary anymore?
+    <div class="form-group">
+    <div class="form-check-inline">
+    <input type="checkbox" class="form-check-input BlockOrders" name="BlockOrders" id="BlockOrders" placeholder="1">
+    <label for="BlockOrders" class="form-check-label">Block Orders</label>
+    </div>
+    <small class="form-text">Only allow one scale at a time to fill an order.</small>
+    </div>
+    -->
+    
+    <hr />
+    
+    <div class="form-group">
+    <label for="AlertPhone">Store Alert Phone Number</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="SMS alerts, such as alerts on overdue orders, are sent to this number.  It is not shown to customers." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="AlertPhone" placeholder="0">
+    </div>
+
+    <div class="form-group">
+    <div class="form-check-inline">
+    <input type="checkbox" class="form-check-input EnableCustomerSMS" name="EnableCustomerSMS" id="EnableCustomerSMS" placeholder="1">
+    <label for="EnableCustomerSMS" class="form-check-label">Enable customer SMS</label>
+    </div>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Enable SMS messaging to customers.  Messages are sent when an order is cancelled or completed (if the customer supplied a number)." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    </div>
+    
+    <div class="form-group">
+    <div class="form-check-inline">
+    <input type="checkbox" class="form-check-input OverdueSMSAlert" name="OverdueSMSAlert" id="OverdueSMSAlert" placeholder="0">
+    <label for="OverdueSMSAlert" class="form-check-label">Overdue SMS Alert</label>
+    </div>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Send an SMS alert to the store alert number when an order goes past its pickup time without being marked as completed." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    </div>
+  </form>
+  </div>
+  
+  <div class="tab-pane container" id="orderSettings" role="tabpanel">
+  <form id="orderSettings-form">
+    <div class="form-group">
+    <label for="OrderItemWeightMin">Minimum Item Weight (Kiosk)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Minimum weight for a single item that can be ordered at the kiosk." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="OrderItemWeightMin" placeholder="0.00">
+    </div>
+
+    <div class="form-group">
+    <label for="OrderItemWeightMin">Maximum Item Weight (Kiosk)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Maximum weight for a single item that can be ordered at the kiosk." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="OrderItemWeightMax" placeholder="0.00">
+    </div>
+    
+    <div class="form-group">
+    <label for="OrderItemQtyMax" class="">Maximum Quantity By Count (Kiosk)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Maximum quantity for a single by-count item that can be ordered at the kiosk." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="OrderItemQtyMax" placeholder="100">
+    </div>
+    
+    <div class="form-group">
+    <label for="MinimumOrderWait">Minimum Wait Time (Minutes) for Kiosk Orders</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Earliest time into the future at which a new Kiosk order can be picked up.  Used to offer time slots to customers." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="MinimumOrderWait" placeholder="0">
+    </div>
+    
+    <div class="form-group">
+    <label for="WarningTime" class="">Order Warning Time (Minutes)</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Warn when orders are due within this many minutes." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="number" class="form-control form-control-lg" id="WarningTime" placeholder="10">
+    </div>
+  </form>
+  </div>
+  
+  <div class="tab-pane container" id="departmentSettings" role="tabpanel">
+  <form id="departmentSettings-form" style="">
+    <div class="form-group container departmentSettings-container template-div">
+    
+    
+    
+    <label class="departmentSettings-label col card-header header-collapsed" onmouseup="collapse_departments(event, this);">Department Hours</label>
+    <div class="departmentSettings-DeptNum" style="display: none;"></div>
+
+    <div class="departmentSettings-collapsible collapse">
+    
+    
+    <div class="form-group container">
+    {{days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']}}
+    {{for day in days:}}
+    <div class="form-group container">
+    <label>{{=day}} Hours</label>
+    <div class="row">
+    <input type="text" class="form-control form-control-lg col departmentSettings-{{=day}}Open departmentSettings-open departmentSettings timepicker" placeholder="07:00 AM">
+    <input type="text" class="form-control form-control-lg col departmentSettings-{{=day}}Close departmentSettings-close departmentSettings timepicker" placeholder="9:00 PM">
+    </div>
+    </div>
+    {{pass}}
+
+
+    <div class="form-group container">
+    <label>Department Background Image</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Image displayed as the background on all kiosk pages for this department.  This overrides the main kiosk background image, if any is set." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg col departmentSettings-BG departmentSettings" placeholder="">
+    <div class="btn btn-primary" onmouseup="select_pic(this);">Select...</div>
+    </div>
+    </div>
+    
+    <div class="form-group container">
+
+    <label>Department Preparation Options</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Preparation options shown as buttons on the kiosk item pages.  Must be comma-separated list." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg col departmentSettings-PrepOptions departmentSettings" placeholder="">
+    </div>
+    
+    </div>
+    </div>
+  </form>
+  </div>
+  
+  <div class="tab-pane container" id="tvSettings" role="tabpanel">
+    <form id="tvSettings-form">
+    <div class="form-group">
+    <label for="TVMarqueeText" class="">TV Marquee</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Scrolling text shown in the marquee area of the screen." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVMarqueeText" placeholder="">
+    </div>
+    
+    <div class="form-group">
+    <label for="TVLayout">TV Layout</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Panel layout for the TV." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="TVLayout">
+      <option value="1">1 - One top, two bottom, marquee top</option>
+      <option value="2">2 - One left, two right, marquee top</option>
+      <option value="3">3 - One top, two bottom, marquee bottom</option>
+      <option value="4">4 - Two top, one bottom, marquee bottom</option>
+      <option value="5">5 - Small left, large center, small right, marquee bottom</option>
+      <option value="6">6 - One left, one right, marquee top left</option>
+      <option value="7">7 - One region, marquee top</option>
+      <option value="8">8 - Large left, small right, marquee top left</option>
+      <option value="9">9 - One region, no marquee</option>
+    </select>
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionA">TV Region A</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Contents of TV region A." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="TVRegionA" onchange="region_select(this);">
+      <option value="W">Web page</option>
+      <option value="P">Playlist</option>
+      <option value="W">Queue Page</option>
+      <option value="W">Logo Page</option>
+    </select>
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionAURL" class="">TV Region A URL</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="URL loaded to show in the TV region A." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionAURL" placeholder="">
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionAPlaylist" class="">TV Region A Playlist</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Playlist to show in the TV region A." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionAPlaylist" placeholder="">
+    </div>
+
+    <div class="form-group">
+    <label for="TVRegionB">TV Region B</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Contents of TV region B." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="TVRegionB" onchange="region_select(this);">
+      <option value="W">Web page</option>
+      <option value="P">Playlist</option>
+      <option value="W">Queue Page</option>
+      <option value="W">Logo Page</option>
+    </select>
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionBURL" class="">TV Region B URL</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="URL loaded to show in the TV region B." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionBURL" placeholder="">
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionBPlaylist" class="">TV Region B Playlist</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Playlist to show in the TV region A." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionBPlaylist" placeholder="">
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionC">TV Region C</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Contents of TV region C." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <select class="form-control form-control-lg" id="TVRegionC" onchange="region_select(this);">
+      <option value="W">Web page</option>
+      <option value="P">Playlist</option>
+      <option value="W">Queue Page</option>
+      <option value="W">Logo Page</option>
+    </select>
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionCURL" class="">TV Region C URL</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="URL loaded to show in the TV region C." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionCURL" placeholder="">
+    </div>
+    
+    <div class="form-group">
+    <label for="TVRegionCPlaylist" class="">TV Region C Playlist</label>
+    <a tabindex="0" class="btn btn-secondary popover-button" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Playlist to show in the TV region A." style="margin-bottom: 0.5em;"><img class="btn-icon no-drag" src="{{=URL('static','images/info_icon.svg')}}" draggable="false" style="margin: 0;"></a>
+    <input type="text" class="form-control form-control-lg" id="TVRegionCPlaylist" placeholder="">
+    </div>
+    
+    </form>
+  </div>
+  
+    <div class="tab-pane container" id="zonesSettings" role="tabpanel">
+        <table id="zonesTable" class="table table-striped table-sm" style="font-size: medium;">
+        <thead class="thead-light">
+        <tr>
+        <th>Dept. #</th>
+        <th>Dept. Name</th>
+        <th>Zone #</th>
+        <th>Zone Name</th>
+        <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="zones">
+        <tr class="d-none template zoneTemplate">
+        <td class="zones-DeptNum">0</td>
+        <td class="zones-DeptName">Default</td>
+        <td class="zones-ZoneNum">0</td>
+        <td class="zones-ZoneName">Default</td>
+        <td class="zones-action"><div class="btn btn-danger btn-block" onmouseup="remove_zone(this);">Remove</div></td>
+        </tr>
+        <tr id="newZone">
+        <td class="zones-DeptNum"></td>
+        <td class="zones-DeptName"><select id="deptSelect"></select></td>
+        <td class="zones-ZoneNum"></td>
+        <td class="zones-ZoneName"><input id="newZoneName"></input></td>
+        <td class="zones-action"><div class="btn btn-success btn-block" onmouseup="add_zone(this);">Add</div></td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+    
+    <div class="tab-pane container" id="picsSettings" role="tabpanel">
+    <!--<div class="row justify-content-between">
+    <div class="col-4">Upload New Image</div>
+    <input class="col-7" type="file" accept=".gif,.png,.svg,.jpg,.jpeg" onchange="file_upload(this);">-->
+    <br>
+    
+        <table id="uploadsTable" class="table table-striped table-sm" style="font-size: medium;">
+        <thead class="thead-light">
+        <tr>
+        <th>Image</th>
+        <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="pics">
+        <tr class="d-none template picsTemplate">
+        <td class="pics-name">Default</td>
+        <td class="pics-action"><div class="btn btn-danger btn-block" onmouseup="remove_image(this);">Remove</div></td>
+        </tr>
+        <tr id="newPic" class="picsTemplate">
+        <td class="pics-name"><input id="pic-file" class="col-7" type="file" accept=".gif,.png,.svg,.jpg,.jpeg"></td>
+        <td class="pics-action"><div class="btn btn-success btn-block" onmouseup="file_upload(this);">Add</div></td>
+        </tr>
+        </tbody>
+        </table>
+    
+    </div>
+    </div>
+  
+   <div class="row">
+    <div class="btn btn-block btn-danger col-3" id="settings-default">Factory Defaults</div>
+    <div class="col-2"></div>
+    <div class="btn btn-block btn-danger col-2" id="settings-reload">Reset</div>
+    <div class="col-2"></div>
+    <div class="btn btn-block btn-primary col-3" id="settings-submit">Save Changes</div>
+   </div>
+</div>
+
+</div>
+
+{{block scripts}}
+    <script src="{{=URL('static','js/jquery.timepicker.min.js')}}"></script>
+    <script src="{{=URL('static','js/settings.js')}}"></script>
+{{end}}

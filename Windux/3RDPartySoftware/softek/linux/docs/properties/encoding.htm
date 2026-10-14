@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Encoding</font>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>The Encoding property comntrols the format in which the toolkit returns 
+			strings&nbsp;for barcode types that use full symbol sets such as PDF-417.&nbsp;
+		</P>
+		<P>The property can take any of the following values:</P>
+		<UL>
+			<LI>
+			0 = Raw , with null characters suppressed.
+			<LI>
+			1 = Quoted printable
+			<LI>
+			2 = Unicode
+			<LI>
+				3 = UTF-8</LI></UL>
+		<P>Default Value: 0
+		</P>
+		<P>void STSetParameter(hBarcode, ST_ENCODING,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_ENCODING,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_ENCODING,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

@@ -1,0 +1,204 @@
+commit 7e6646c794ccd1df8d38b9927d11e101c0d45517
+Author: Jouni Malinen <jouni.malinen@atheros.com>
+Date:   Thu Nov 25 22:00:04 2010 +0200
+
+    SME: Fix re-try after auth/assoc timeout/failure
+    
+    There were various issues in how the SME (i.e., nl80211-based driver
+    interface) handled various authentication and association timeouts and
+    failures. Authentication failure was not handled at all (wpa_supplicant
+    just stopped trying to connect completely), authentication timeout
+    resulted in blacklisting not working in the expected way (i.e., the same
+    BSS could be selected continuously), and association cases had similar
+    problems.
+    
+    Use a common function to handle all these cases and fix the blacklist
+    operation. Use smaller delay before trying to scan again during the
+    initial cycle through the available APs to speed up connection. Add
+    a special case for another-BSS-in-the-same-ESS being present to
+    speed up recovery from networks with multiple APs doing load balancing
+    in various odd ways that are deployed out there.
+
+diff --git a/wpa_supplicant/blacklist.c b/wpa_supplicant/blacklist.c
+index 4ffb220..8f12ac9 100644
+--- a/wpa_supplicant/blacklist.c
++++ b/wpa_supplicant/blacklist.c
+@@ -44,7 +44,7 @@ struct wpa_blacklist * wpa_blacklist_get(struct wpa_supplicant *wpa_s,
+  * wpa_blacklist_add - Add an BSSID to the blacklist
+  * @wpa_s: Pointer to wpa_supplicant data
+  * @bssid: BSSID to be added to the blacklist
+- * Returns: 0 on success, -1 on failure
++ * Returns: Current blacklist count on success, -1 on failure
+  *
+  * This function adds the specified BSSID to the blacklist or increases the
+  * blacklist count if the BSSID was already listed. It should be called when
+@@ -66,7 +66,7 @@ int wpa_blacklist_add(struct wpa_supplicant *wpa_s, const u8 *bssid)
+ 		wpa_printf(MSG_DEBUG, "BSSID " MACSTR " blacklist count "
+ 			   "incremented to %d",
+ 			   MAC2STR(bssid), e->count);
+-		return 0;
++		return e->count;
+ 	}
+ 
+ 	e = os_zalloc(sizeof(*e));
+@@ -79,7 +79,7 @@ int wpa_blacklist_add(struct wpa_supplicant *wpa_s, const u8 *bssid)
+ 	wpa_printf(MSG_DEBUG, "Added BSSID " MACSTR " into blacklist",
+ 		   MAC2STR(bssid));
+ 
+-	return 0;
++	return e->count;
+ }
+ 
+ 
+diff --git a/wpa_supplicant/sme.c b/wpa_supplicant/sme.c
+index 985c900..55788de 100644
+--- a/wpa_supplicant/sme.c
++++ b/wpa_supplicant/sme.c
+@@ -33,6 +33,77 @@
+ #include "scan.h"
+ #include "sme.h"
+ 
++static int sme_another_bss_in_ess(struct wpa_supplicant *wpa_s)
++{
++	struct wpa_bss *bss, *cbss;
++
++	cbss = wpa_s->current_bss;
++
++	dl_list_for_each(bss, &wpa_s->bss, struct wpa_bss, list) {
++		if (bss == cbss)
++			continue;
++		if (bss->ssid_len == cbss->ssid_len &&
++		    os_memcmp(bss->ssid, cbss->ssid, bss->ssid_len) == 0 &&
++		    wpa_blacklist_get(wpa_s, bss->bssid) == NULL)
++			return 1;
++	}
++
++	return 0;
++}
++
++
++static void sme_connection_failed(struct wpa_supplicant *wpa_s,
++				  const u8 *bssid)
++{
++	int timeout;
++	int count;
++
++	/*
++	 * Add the failed BSSID into the blacklist and speed up next scan
++	 * attempt if there could be other APs that could accept association.
++	 * The current blacklist count indicates how many times we have tried
++	 * connecting to this AP and multiple attempts mean that other APs are
++	 * either not available or has already been tried, so that we can start
++	 * increasing the delay here to avoid constant scanning.
++	 */
++	count = wpa_blacklist_add(wpa_s, bssid);
++	if (count == 1 && wpa_s->current_bss) {
++		/*
++		 * This BSS was not in the blacklist before. If there is
++		 * another BSS available for the same ESS, we should try that
++		 * next. Otherwise, we may as well try this one once more
++		 * before allowing other, likely worse, ESSes to be considered.
++		 */
++		if (sme_another_bss_in_ess(wpa_s)) {
++			wpa_printf(MSG_DEBUG, "SME: Another BSS in this ESS "
++				   "has been seen; try it next");
++			wpa_blacklist_add(wpa_s, bssid);
++		}
++	}
++
++	switch (count) {
++	case 1:
++		timeout = 100;
++		break;
++	case 2:
++		timeout = 500;
++		break;
++	case 3:
++		timeout = 1000;
++		break;
++	default:
++		timeout = 5000;
++	}
++
++	/*
++	 * TODO: if more than one possible AP is available in scan results,
++	 * could try the other ones before requesting a new scan.
++	 */
++	wpa_supplicant_req_scan(wpa_s, timeout / 1000,
++				1000 * (timeout % 1000));
++}
++
++
+ void sme_authenticate(struct wpa_supplicant *wpa_s,
+ 		      struct wpa_bss *bss, struct wpa_ssid *ssid)
+ {
+@@ -295,8 +366,10 @@ void sme_event_auth(struct wpa_supplicant *wpa_s, union wpa_event_data *data)
+ 		if (data->auth.status_code !=
+ 		    WLAN_STATUS_NOT_SUPPORTED_AUTH_ALG ||
+ 		    wpa_s->sme.auth_alg == data->auth.auth_type ||
+-		    wpa_s->current_ssid->auth_alg == WPA_AUTH_ALG_LEAP)
++		    wpa_s->current_ssid->auth_alg == WPA_AUTH_ALG_LEAP) {
++			sme_connection_failed(wpa_s, wpa_s->pending_bssid);
+ 			return;
++		}
+ 
+ 		switch (data->auth.auth_type) {
+ 		case WLAN_AUTH_OPEN:
+@@ -430,7 +503,6 @@ void sme_event_assoc_reject(struct wpa_supplicant *wpa_s,
+ 			    union wpa_event_data *data)
+ {
+ 	int bssid_changed;
+-	int timeout = 5000;
+ 
+ 	wpa_printf(MSG_DEBUG, "SME: Association with " MACSTR " failed: "
+ 		   "status code %d", MAC2STR(wpa_s->pending_bssid),
+@@ -452,29 +524,12 @@ void sme_event_assoc_reject(struct wpa_supplicant *wpa_s,
+ 	}
+ 	wpa_s->sme.prev_bssid_set = 0;
+ 
+-	if (wpa_blacklist_add(wpa_s, wpa_s->pending_bssid) == 0) {
+-		struct wpa_blacklist *b;
+-		b = wpa_blacklist_get(wpa_s, wpa_s->pending_bssid);
+-		if (b && b->count < 3) {
+-			/*
+-			 * Speed up next attempt if there could be other APs
+-			 * that could accept association.
+-			 */
+-			timeout = 100;
+-		}
+-	}
++	sme_connection_failed(wpa_s, wpa_s->pending_bssid);
+ 	wpa_supplicant_set_state(wpa_s, WPA_DISCONNECTED);
+ 	os_memset(wpa_s->bssid, 0, ETH_ALEN);
+ 	os_memset(wpa_s->pending_bssid, 0, ETH_ALEN);
+ 	if (bssid_changed)
+ 		wpas_notify_bssid_changed(wpa_s);
+-
+-	/*
+-	 * TODO: if more than one possible AP is available in scan results,
+-	 * could try the other ones before requesting a new scan.
+-	 */
+-	wpa_supplicant_req_scan(wpa_s, timeout / 1000,
+-				1000 * (timeout % 1000));
+ }
+ 
+ 
+@@ -482,7 +537,7 @@ void sme_event_auth_timed_out(struct wpa_supplicant *wpa_s,
+ 			      union wpa_event_data *data)
+ {
+ 	wpa_printf(MSG_DEBUG, "SME: Authentication timed out");
+-	wpa_supplicant_req_scan(wpa_s, 5, 0);
++	sme_connection_failed(wpa_s, wpa_s->pending_bssid);
+ }
+ 
+ 
+@@ -490,8 +545,8 @@ void sme_event_assoc_timed_out(struct wpa_supplicant *wpa_s,
+ 			       union wpa_event_data *data)
+ {
+ 	wpa_printf(MSG_DEBUG, "SME: Association timed out");
++	sme_connection_failed(wpa_s, wpa_s->pending_bssid);
+ 	wpa_supplicant_mark_disassoc(wpa_s);
+-	wpa_supplicant_req_scan(wpa_s, 5, 0);
+ }
+ 
+ 

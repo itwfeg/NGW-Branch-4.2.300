@@ -1,0 +1,101 @@
+1.  DEFINITIONS
+
+In this agreement (unless the context otherwise requires) the following expressions shall have the following meanings:
+
+1.1  Licensed Program shall mean:
+
+(i)  that computer program specified in the Schedule embedded in the media or diskette(s) enclosed with this agreement, and any part thereof and any amendment of such program; and
+
+(ii)  All related documents and manuals in machine readable, printed or other form, from time to time delivered by ITW or its Dealers or Distributors to the Customer to facilitate the Use of such computer program, part or amendment of such program.
+
+1.2  Designated CPU shall mean, with respect to each Licensed Program, one or more central processing units identified in the Schedule, by location, type and serial number and its or their ancillary equipment or if no central processing unit is identified in the Schedule then any one central processing unit owned and used by the Customer. 
+
+1.3  Use of a Licensed Program shall mean copying all or any portion of the Licensed Program from any storage or processing unit or media to any other processing or storage unit or media.
+
+1.4  Internal Use of a Licensed Program shall mean Use on the Customers premises, for the purposes only of the Customers own business and not as part of a bureau service provision to persons other than the Customer.
+
+1.5  Archive shall mean to make a limited number of copies of all or any portion of the Licensed Program for the purpose of safe keeping.
+
+1.6  Run Time Library means the set of Copyright Diskette(s) or Media which may be provided to enable the Licensed program(s) to run on the designated CPU.
+
+1.7  Customer shall mean the person, body or company named in the License agreement.
+
+1.8  Site shall mean Customers premises.
+
+1.9  License shall mean these terms and conditions of this agreement detailed below. 
+
+2.  LICENSE
+
+2.1  Subject to these terms and conditions, ITW hereby grants to the Customer and the Customer hereby accepts, a personal, non transferable and non exclusive License to Use the Licensed Programs solely for Internal Use and solely on the Designated CPU.
+
+2.2  A separate License is required for each copy of the Licensed Program Used by the Customer provided, however, that this License for the Designated CPU shall be temporarily transferred to one backup processor unit if the Designated CPU is inoperative due to malfunction or during the performance of routine maintenance, engineering changes or changes in features or model, until the Designated CPU is restored to operative condition and temporary processing of the data already entered into the backup processor unit is completed.
+
+3.  LIMITED PERMISSION TO COPY OR MODIFY
+
+3.1  Except as expressly provided herein, this License grants no right to USE, copy or print the Licensed Programs in whole or in part; no right or title, in particular copyright, in or ownership of any Licensed Programs is transferred or assigned to the Customer.
+
+3.2  The Customer shall not Use, copy or print, in whole or in part, any Licensed Programs except:
+
+(i)  for Use by the Customer on the Designated CPU:
+
+(ii)  for Archive purposes.
+
+3.3  In no event shall the Customer take more than three (3) copies of the Licensed Programs for Archive purposes.  The Customer shall maintain appropriate records of the number and location of all copies that it may make of any Licensed Program and shall make them available for inspection by ITW upon reasonable request. The original and any copies of the Licensed Program, in whole or in part, which are made by ITW or the Customer or otherwise, shall at all times be the sole exclusive property of ITW.
+
+3.4  The Customer may not change, modify or enhance any Licensed Program or Users Guide or any other related documents without prior written consent of ITW.
+
+4.  PROTECTION AND SECURITY
+
+4.1  The Customer acknowledges that the Licensed Program furnished to the Customer by ITW is to be held by the Customer on a strictly confidential basis which shall continue to apply notwithstanding termination of this License.
+
+4.2  The Customer shall not cause or permit disclosure of any Licensed Program in any form to any person other than the Customers or ITW employees without the prior written consent of ITW.
+
+4.3  The Customer shall take all reasonable steps to ensure that no unauthorised person shall have access to any Licensed Program, and that no person authorised to have access to it shall make any unauthorised copy thereof. Without prejudice to the generality of the foregoing, the Customer shall promptly report to ITW any unauthorised disclosure or Use of any Licensed Program of which it becomes aware and shall take such further steps as may reasonably be requested by ITW to prevent unauthorised Use thereof.
+
+4.4  The Customer shall not remove any copyright, trademark or proprietary notice appearing on the Licensed Program or associated Documentation.
+
+5.  RESPONSIBILITIES OF THE CUSTOMER
+
+5.1  The Customer shall be exclusively responsible for the supervision, management and control of its Use of the Licensed Programs.
+
+6.  LIMITATION OF LIABILITY
+
+6.1  The Liability of ITW, if any, arising out of this License or anything to be done hereunder shall be limited to a sum not exceeding the amount of the License Fee paid by the customer for the ITW product. The Company shall not be liable in any circumstances for substitute goods, property damage, loss of profits, lost or corrupted data, interruption of business or any consequential damages of any kind whether in contract, tort or otherwise.
+
+7.  LIMITED WARRANTIES
+
+7.1  ITW makes no warranties with respect to the Licensed Programs and all warranties express or implied are excluded.   ITW does not warrant that the functions contained in the Licensed Programs, Program Specifications or Associated Documentation will meet the Customers requirements and that the operation of the Licensed Programs will be uninterrupted or error free and that there are not discrepancies between the product and the documentation.
+
+8.  TERM OF LICENSE
+
+8.1  The License is effective from the date of signature of the License. This License shall remain in effect until terminated pursuant to the provisions of clause 9.
+
+9.  TERMINATION
+
+9.1  The License shall automatically terminate upon any act of bankruptcy by or against the Customer, upon any assignment for the benefit of creditors of the Customer, execution of judgement or process against the Customer or its assets, or upon dissolution of the Customer, or if a winding up order is made by any competent court in respect of the Customer.
+
+9.2  The Customer may terminate this License in whole but without refund.
+
+9.3  ITW may terminate this License forthwith upon written notice and without refund if the Customer shall be in breach of any of the terms hereof.
+
+9.4  In respect of any termination of this License, the Customer shall, at the Customers election either:
+
+(i)  return to ITW the original and all copies of the Licensed Program and related materials covered by such termination;  and/or
+
+(ii)  furnish to ITW evidence satisfactory to the Company that such original and all such copies have been destroyed.
+
+10.  GENERAL
+
+10.1  If any of the provisions of this License are found to be invalid by any court of competent jurisdiction, the same shall not affect the remaining provisions of this License, which shall remain in full force and effect.
+
+10.2  This License constitutes the entire agreement between the parties with respect to the subject matter;  all prior Licenses, representations, statements, negotiations and undertakings are superseded hereby.
+
+10.3  Neither this License nor any of the rights, Licenses, programs or materials to which it applies may be assigned, sublicensed or otherwise transferred by the Customer without the prior written consent of ITW.
+
+10.4  The headings of the clauses and the marginal notes are included for guidance only and do not form part of this License.
+
+10.5  The customer is granted the right to use with the Licensed program(s) any included Run Time Library, but that this Run Time Library is subject to the separate terms and conditions which accompany it.
+
+10.6  This License shall be governed by the law of England and the parties submit to the exclusive jurisdiction of the English Courts.
+
+10.7  Acknowledgement: You acknowledge that you have read this agreement, understood it, and agree to be bound by its Terms and Conditions.

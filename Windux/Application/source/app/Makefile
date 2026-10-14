@@ -1,0 +1,222 @@
+##############################################################
+#
+# File : makefile
+#
+# Make file used for building Core/
+#
+##############################################################
+
+###################################
+#defines
+###################################
+OS = linux
+
+HOBART_APP ?= $(HOME)/projects/Hobart/Windux/Application
+export HOBART_APP
+export HOBART_OUT_DIR=$(HOBART_APP)/output
+
+
+##################################
+#make vars
+##################################
+
+#
+#Vars for Source and object files
+#
+SUB_DIRS := \
+    Messages 
+
+C_SRCS :=
+CPP_SRCS := \
+    AbstractSession.cpp \
+    BuildNumber.cpp \
+    DBSession.cpp \
+    Main.cpp \
+    Session.cpp \
+    SessionManager.cpp \
+    SessionManagerHelper.cpp \
+    SessionPrinter.cpp \
+    SessionWrapper.cpp \
+    ShutdownManager.cpp \
+    WSSession.cpp \
+    GCDSession.cpp
+
+INC_DIRS := \
+    -I$(HOBART_APP)/PAL \
+    -I$(HOBART_APP)/PAL/PAL_linux \
+    -I$(HOBART_APP)/inc/linux \
+    -I$(HOBART_APP)/source/app \
+    -I$(HOBART_APP)/source/comm \
+    -I$(HOBART_APP)/source/comm/email \
+    -I$(HOBART_APP)/source/core \
+    -I$(HOBART_APP)/source/core/Synchronization \
+    -I$(HOBART_APP)/source/core/VersionManager/include \
+    -I$(HOBART_APP)/source/db \
+    -I$(HOBART_APP)/source/db/util \
+    -I$(HOBART_APP)/source/db/util/filesys \
+    -I$(HOBART_APP)/source/db/util/thread \
+    -I$(HOBART_APP)/HobartHandsFree/shared \
+    -I$(HOBART_APP)/source/EvolutionRTC/BoardSite/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/CanManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/CanManager/Messages/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/DiagnosticsManager \
+    -I$(HOBART_APP)/source/EvolutionRTC/DiagnosticsManager/Messages \
+    -I$(HOBART_APP)/source/EvolutionRTC/HandsFreeDevice/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/LabelApplierManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/MarqueeManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/MessageCenter \
+    -I$(HOBART_APP)/source/EvolutionRTC/NumericManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/OperatingModes/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/PngGraphics/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/PrinterManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/ProductDev/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/RendererManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/RFIDManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/RTCManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/ScannerManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/TimerManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/WeigherManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/WrapperManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/USBCommManagers/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/USBManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/GCDManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/KPCBootManager/Include/ \
+    -I$(HOBART_APP)/source/EvolutionRTC/KPCBootManager/Messages/Include/ \
+    -I$(HOBART_APP)/source/EvolutionRTC/KPCBootUpgrader/Include/ \
+    -I$(HOBART_APP)/source/EvolutionRTC/KPCBootUpgrader/Messages/Include/ \
+    -I$(HOBART_APP)/source/HFC \
+    -I$(HOBART_APP)/source/HFC/devices \
+    -I$(HOBART_APP)/source/HFC/messages \
+    -I$(HOBART_APP)/source/HFC/reports \
+    -I$(HOBART_APP)/source/HFC/tags \
+    -I$(HOBART_APP)/source/util \
+    -I$(HOBART_APP)/source/util/Inc \
+    -I$(HOBART_APP)/HobartCustomerHook \
+    -I$(HOBART_APP)/source/MetrologicallySignificant \
+    -I$(HOBART_APP)/../Smbus/driver
+
+
+##################################
+# makefile template
+##################################
+
+ARCHIVES := \
+    $(HOBART_OUT_DIR)/PAL_PAL_linux.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_BoardSite_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_BoardSite_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_KPCBootManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_KPCBootManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_KPCBootUpgrader_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_KPCBootUpgrader_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CanManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CanManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CanManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CanManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CodeUpdater_PrinterManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CodeUpdater_Wrapper_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_CodeUpdater_CLA_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_DiagnosticsManager.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_DiagnosticsManager_DBO.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_DiagnosticsManager_EdgeComm.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_DiagnosticsManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_DiagnosticsManager_Util.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_LabelApplierManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_LabelApplierManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_MarqueeManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_MarqueeManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_MessageCenter.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_NumericManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_NumericManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_OperatingModes_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_OperatingModes_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_PngGraphics_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_PrinterManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_PrinterManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_ProductDev_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RFIDManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RFIDManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RTCManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RTCManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RendererManager_common.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RendererManager_datamatrix.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RendererManager_qrcode.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RendererManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_RendererManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_ScannerManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_ScannerManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_TimerManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_TimerManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_USBCommManagers_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_USBCommManagers_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_USBManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_USBManager_Source_linux.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_WeigherManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_WeigherManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_WrapperManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_WrapperManager_Source.a \
+    $(HOBART_OUT_DIR)/source_EvolutionRTC_GCDManager_Messages.a \
+    $(HOBART_OUT_DIR)/source_HFC.a \
+    $(HOBART_OUT_DIR)/source_HFC_devices.a \
+    $(HOBART_OUT_DIR)/source_HFC_drivers.a \
+    $(HOBART_OUT_DIR)/source_HFC_messages.a \
+    $(HOBART_OUT_DIR)/source_HFC_reports.a \
+    $(HOBART_OUT_DIR)/source_HFC_tags.a \
+    $(HOBART_OUT_DIR)/source_app.a \
+    $(HOBART_OUT_DIR)/source_app_Messages.a \
+    $(HOBART_OUT_DIR)/source_comm.a \
+    $(HOBART_OUT_DIR)/source_comm_cgi.a \
+    $(HOBART_OUT_DIR)/source_comm_cgi_http.a \
+    $(HOBART_OUT_DIR)/source_comm_email.a \
+    $(HOBART_OUT_DIR)/source_comm_email_SMTP.a \
+    $(HOBART_OUT_DIR)/source_core.a \
+    $(HOBART_OUT_DIR)/source_core_StateMachine.a \
+    $(HOBART_OUT_DIR)/source_core_Synchronization.a \
+    $(HOBART_OUT_DIR)/source_core_Synchronization_Commands.a \
+    $(HOBART_OUT_DIR)/source_core_Synchronization_Messages.a \
+    $(HOBART_OUT_DIR)/source_core_VersionManager_messages.a \
+    $(HOBART_OUT_DIR)/source_core_VersionManager_source.a \
+    $(HOBART_OUT_DIR)/source_db_sqlite_adapter.a \
+    $(HOBART_OUT_DIR)/source_db_dbd.a \
+    $(HOBART_OUT_DIR)/source_db_dbm.a \
+    $(HOBART_OUT_DIR)/source_db_util_accountant.a \
+    $(HOBART_OUT_DIR)/source_db_util_checksums.a \
+    $(HOBART_OUT_DIR)/source_db_util_e_exception.a \
+    $(HOBART_OUT_DIR)/source_db_util_e_string.a \
+    $(HOBART_OUT_DIR)/source_db_util_filesys.a \
+    $(HOBART_OUT_DIR)/source_db_util_nibble.a \
+    $(HOBART_OUT_DIR)/source_db_util_platform.a \
+    $(HOBART_OUT_DIR)/source_db_util_properties.a \
+    $(HOBART_OUT_DIR)/source_db_util_time.a \
+    $(HOBART_OUT_DIR)/source_util.a \
+    $(HOBART_OUT_DIR)/source_util_Src.a \
+    $(HOBART_OUT_DIR)/source_MetrologicallySignificant.a \
+    $(HOBART_APP)/HobartHandsFree/shared/libhfpdshared.a \
+    $(HOBART_APP)/../3RDPartySoftware/digimarc/lib/libdlsdk.a \
+
+APP_LIBS := -L$(HOBART_OUT_DIR) -lHobartCustomerHook `pkg-config --libs libudev libusb libusb-1.0 sqlite3 freetype2 libcurl zlib`
+
+
+include $(HOBART_APP)/hobart.mk
+
+daemon: chobart_d.o
+	@echo ----- libs -----
+	@echo $(LIBS)
+	@echo ----- libs -----
+	$(LINK) $(LDFLAGS) \
+	    chobart_d.o \
+	    -Wl,--start-group \
+	        $(ARCHIVES) \
+	    -Wl,--end-group \
+	    $(LIBS) \
+	    -o chobart_d
+
+exe: $(OUT_DIR)/linux_guid.oo
+	$(LINK) $(LDFLAGS) \
+	    $(OUT_OBJS) \
+	    $(OUT_DIR)/linux_guid.oo \
+	    -Wl,--start-group \
+	        $(ARCHIVES) \
+	    -Wl,--end-group \
+	    $(LIBS) \
+	    -o main.exe
+

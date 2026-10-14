@@ -1,0 +1,35 @@
+
+#include "decoder.h"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+decoder::decoder( QObject *parent ) :
+    _Mybase( parent )
+{
+    qRegisterMetaType<barcodeType>( "barcodeType" );
+    qRegisterMetaType<barcode>( "barcode" );
+    qRegisterMetaType<barcodeList>( "barcodeList" );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+decoder::~decoder()
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QString decoder::codec() const
+{
+    return "image/jpeg";
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void decoder::decode( const QString& fileName )
+{
+    barcodeList barcodes( decodeImage( fileName ) );
+
+    // nothing to do
+    if ( barcodes.isEmpty() )
+        return;
+
+    // emit signal!
+    Q_EMIT decodedBarcodes( barcodes );
+}

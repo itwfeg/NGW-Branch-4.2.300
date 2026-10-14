@@ -1,0 +1,177 @@
+.main-container
+{
+  width: 95vw;
+  height: 95vh;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.kiosk-row
+{
+  height: 20vh;
+}
+
+.kiosk-button-row
+{
+  height: 20vh;
+}
+
+.kiosk-button-row .col-3
+{
+  height: 100%;
+  max-height: 100%;
+}
+
+.kiosk-button-row .col
+{
+  height: 100%;
+  max-height: 100%;
+}
+
+.kiosk-row .btn
+{
+  height: 20vh;
+  font-size: x-large;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.products-row
+{
+  height: 20vh;
+}
+
+.products-row .btn
+{
+  height: 16vh;
+  font-size: medium;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.kiosk-button-row svg
+{
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.kiosk-button-row .btn
+{
+  /*position: absolute;
+  top: 25%;
+  left: 5%;*/
+  position: relative;
+  top: 25%;
+  left: 5%;
+  height: 50%;
+  font-size: x-large;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.product-price
+{
+  text-align: center;
+  height: 4.5vh;
+  font-size: 3vh;
+}
+
+.sale-price
+{
+  color: red;
+  overflow: hidden;
+}
+
+.on-sale .normal-price
+{
+  text-decoration: line-through;
+  color: gray;
+}
+
+.not-on-sale .sale-price
+{
+  display: none;
+}
+
+.template-div
+{
+  display: none;
+}
+
+.grayOut
+{
+  opacity: 0.35;
+}
+
+button
+{
+  transition: none !important;
+}
+
+.btn
+{
+  transition: none !important;
+}
+
+#addButton
+{
+  fill: #28a745;
+}
+
+#addButton:active
+{
+  fill: #218d3a;
+}
+
+.warning-btn
+{
+  fill: #ffc107;
+}
+
+.warning-btn:active
+{
+  fill: #e0a800;
+}
+
+.item-page-row
+{
+  height: 75vh;
+  max-height: 75vh;
+}
+
+#item-image
+{
+  height: 40vh;
+  max-height: 40vh;
+  
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in
+{
+  opacity: 0.9;
+}
+
+.modal-backdrop.show
+{
+  opacity: 0.7;
+}

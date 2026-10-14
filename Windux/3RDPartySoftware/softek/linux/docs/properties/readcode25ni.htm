@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ReadCode25ni</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			When set to TRUE the toolkit will search for type&nbsp;2 of 5 non-interleaved 
+			barcodes.&nbsp;&nbsp;
+		</P>
+		<P>
+			Default value = &nbsp;&nbsp;FALSE
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_READ_CODE25_NI,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_READ_CODE25_NI,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Turn on Code 25 non-interleaved recognition.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_READ_CODE25_NI,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

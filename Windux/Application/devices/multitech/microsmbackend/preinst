@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "preinst: stopping backend services..."
+pkill -f autoconfig.py
+pkill -f gatewayDiscovery.py
+pkill -f microSmBackend.py
+
+echo "postinst: done!"
+

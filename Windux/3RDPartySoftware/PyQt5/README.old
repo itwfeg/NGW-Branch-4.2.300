@@ -1,0 +1,104 @@
+If you have already built an image once you can skip down to "Build Image" step as you already did the setup.
+
+SIP
+---
+Download latest SIP from: 
+http://www.riverbankcomputing.com/software/sip/download
+
+I needed a python development environment for my Ubuntu 16.04:
+$ sudo apt-get install python3-dev
+
+Extract and cd into folder for build:
+hobart@ubuntu-vm:~/Source/Local/sip-4.18$ python3 configure.py
+hobart@ubuntu-vm:~/Source/Local/sip-4.18$ make
+hobart@ubuntu-vm:~/Source/Local/sip-4.18$ sudo make install
+
+PyQt
+----
+Download PyQt5 matching what is installed on your development environment. For me this was 5.6.0:
+http://www.riverbankcomputing.com/software/pyqt/download5
+
+I needed a development environment for python dbus for this step:
+$ sudo apt-get install python-dbus-dev
+
+For this version of Qt and sip I needed to make sip less strict... gedit configure.py and remove the '-f' around line 2350:
+    # Build the SIP command line.
+    #argv = [quote(target_config.sip), '-w', '-f', sip_flags]
+    argv = [quote(target_config.sip), '-w', sip_flags]
+
+I also needed to help the dbus module find the proper header... modify dbus/Makefile and add '-I/usr/lib/x86_64-linux-gnu/dbus-1.0/include' to the INCPATH:
+INCPATH       = -I. -I. -I/usr/include/python3.5m -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I. -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore -I. -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++
+
+Extract and cd into folder for build:
+hobart@ubuntu-vm:~/Source/Local/PyQt5-gpl-5.6$ python3 configure.py --qmake /opt/Qt5.6.0/5.6/gcc_64/bin/qmake
+hobart@ubuntu-vm:~/Source/Local/PyQt5-gpl-5.6$ make -j8
+hobart@ubuntu-vm:~/Source/Local/PyQt5-gpl-5.6$ sudo make install
+
+pyqtdeploy
+----------
+We will be using pyqtdeploy to create the packages for our ARM system.
+
+You will need pip3... so install it (if you do not have already):
+$ sudo apt-get install python3-pip
+
+Install pyqtdeploy:
+$ pip3 install pyqtdeploy
+
+
+Build Image
+-----------
+
+Load in the timesys hard float environment:
+. ./buildCombo.sh
+
+CD into Source/Local and create the following dir structure:
+./armv7l
+./armv7l/root
+./armv7l/downloads
+
+Extract SIP 4.18 and PyQt 5.5.1 into the downloads folder.
+
+[SIP]
+
+Copy timesys toolchain spec:
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads& cp timesys-linux-g++ ./sip-4.18/specs
+
+Enter SIP folder, compile, install:
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/sip-4.16.6$ /home/hobart/.local/bin/pyqtdeploycli pyqtdeploycli --package sip --target linux-32 configure
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/sip-4.16.6$ python configure.py --sysroot=/opt/hb6mxd_combo/toolchain/usr --no-tools --configuration=sip-linux.cfg --platform=timesys-linux-g++ --bindir=/home/hobart/Source/Local/armv7l/root/usr/bin --destdir=/home/hobart/Source/Local/armv7l/root/usr/lib/python2.7/dist-packages --sipdir=/home/hobart/Source/Local/armv7l/root/usr/share/sip --incdir=/home/hobart/Source/Local/armv7l/root/usr/include/python2.7
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/sip-4.16.6$ make
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/sip-4.16.6$ make install
+
+[PyQt]
+
+Enter PyQt folder, prep the package:
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/PyQt-gpl-5.5.1$ /home/hobart/.local/bin/pyqtdeploycli --package pyqt5 --target linux-32 configure
+
+Modify the pyqt5-linux.cfg:
+remove all instances of:
+ QtDesigner
+ QtOpenGL
+ QtQuick
+ QtQuickWidgets
+ _QOpenGLFunctions_2_0
+add in the following:
+ QtWebKit
+ QtWebKitWidgets
+
+add this line to disable opengl dependancies:
+pyqt_disabled_features = PyQt_Desktop_OpenGL PyQt_OpenGL
+
+Configure:
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/PyQt-gpl-5.5.1$ python configure.py --verbose --sysroot=/opt/hb6mxd_combo/toolchain/usr --assume-shared --no-tools --no-qsci-api --no-designer-plugin --no-qml-plugin --configuration=pyqt5-linux.cfg --qmake=/opt/hb6mxd_combo/toolchain/bin/qmake --bindir=/home/hobart/Source/Local/armv7l/root/usr/bin --destdir=/home/hobart/Source/Local/armv7l/root/usr/lib/python2.7/dist-packages --sipdir=/home/hobart/Source/Local/armv7l/root/usr/share/sip/PyQt5 --sip-incdir=/home/hobart/Source/Local/armv7l/root/usr/include/python2.7
+
+Make and install:
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/PyQt-gpl-5.5.1$ make -j8
+hobart@ubuntu-vm:~/Source/Local/armv7l/downloads/PyQt-gpl-5.5.1$ make install
+
+[Deployment]
+
+Copy the 'root' folder in Source/Local/armv7l to 3RDPartySoftware/PyQt. Run the make-deb script.
+
+
+
+

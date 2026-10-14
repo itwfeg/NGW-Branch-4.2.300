@@ -1,0 +1,6 @@
+select disk 0
+select partition 1 noerr
+delete partition noerr
+create partition primary
+active
+assign letter=D

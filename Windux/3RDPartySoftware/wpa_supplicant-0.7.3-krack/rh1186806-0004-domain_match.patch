@@ -1,0 +1,427 @@
+From 794f5dc3f3e7d6d7fbe1bab6933bfd40b8e4e4ab Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ji=C5=99=C3=AD=20Klime=C5=A1?= <jklimes@redhat.com>
+Date: Fri, 15 May 2015 09:12:36 +0200
+Subject: [PATCH 4/5] Add domain_match network profile parameter
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is similar with domain_suffix_match, but required a full match of
+the domain name rather than allowing suffix match (subdomains) or
+wildcard certificates.
+
+- backport of upstream commit cebee30f3170b5104a41bd27ac5f98615ed57656
+- fix for #1186806 - counterpart of RHEL 7.2 commit
+  http://pkgs.devel.redhat.com/cgit/rpms/wpa_supplicant/diff/0013-rh1178263-domain_match.patch?h=rhel-7.2&id=a353a0f3d7670d3eb62162f7afd2e20f40dc68c3
+
+Signed-off-by: Jiří Klimeš <jklimes@redhat.com>
+---
+ src/crypto/tls.h                   |   7 +-
+ src/crypto/tls_internal.c          |   5 ++
+ src/crypto/tls_openssl.c           | 134 +++++++++++++++++++++++++++++++++++--
+ src/eap_peer/eap_config.h          |  23 +++++++
+ src/eap_peer/eap_tls_common.c      |   2 +
+ wpa_supplicant/config.c            |   4 ++
+ wpa_supplicant/config_file.c       |   2 +
+ wpa_supplicant/wpa_supplicant.conf |  12 ++++
+ 8 files changed, 184 insertions(+), 5 deletions(-)
+
+diff --git a/src/crypto/tls.h b/src/crypto/tls.h
+index b5cac1c..aa6e98d 100644
+--- a/src/crypto/tls.h
++++ b/src/crypto/tls.h
+@@ -46,7 +46,8 @@ enum tls_fail_reason {
+ 	TLS_FAIL_SUBJECT_MISMATCH = 5,
+ 	TLS_FAIL_ALTSUBJECT_MISMATCH = 6,
+ 	TLS_FAIL_BAD_CERTIFICATE = 7,
+-	TLS_FAIL_SERVER_CHAIN_PROBE = 8
++	TLS_FAIL_SERVER_CHAIN_PROBE = 8,
++	TLS_FAIL_DOMAIN_MISMATCH = 10,
+ };
+ 
+ union tls_event_data {
+@@ -93,6 +94,9 @@ struct tls_config {
+  * %NULL to allow all subjects
+  * @altsubject_match: String to match in the alternative subject of the peer
+  * certificate or %NULL to allow all alternative subjects
++ * @domain_match: String to match in the dNSName or CN of the peer
++ * certificate or %NULL to allow all domain names. This requires a full,
++ * case-insensitive match.
+  * @client_cert: File or reference name for client X.509 certificate in PEM or
+  * DER format
+  * @client_cert_blob: client_cert as inlined data or %NULL if not used
+@@ -133,6 +137,7 @@ struct tls_connection_params {
+ 	const char *ca_path;
+ 	const char *subject_match;
+ 	const char *altsubject_match;
++	const char *domain_match;
+ 	const char *client_cert;
+ 	const u8 *client_cert_blob;
+ 	size_t client_cert_blob_len;
+diff --git a/src/crypto/tls_internal.c b/src/crypto/tls_internal.c
+index 64124d8..f4ad466 100644
+--- a/src/crypto/tls_internal.c
++++ b/src/crypto/tls_internal.c
+@@ -172,6 +172,11 @@ int tls_connection_set_params(void *tls_ctx, struct tls_connection *conn,
+ 	if (cred == NULL)
+ 		return -1;
+ 
++	if (params->domain_match) {
++		wpa_printf(MSG_INFO, "TLS: domain_match not supported");
++		return -1;
++	}
++
+ 	if (tlsv1_set_ca_cert(cred, params->ca_cert,
+ 			      params->ca_cert_blob, params->ca_cert_blob_len,
+ 			      params->ca_path)) {
+diff --git a/src/crypto/tls_openssl.c b/src/crypto/tls_openssl.c
+index a4fe5d7..331643f 100644
+--- a/src/crypto/tls_openssl.c
++++ b/src/crypto/tls_openssl.c
+@@ -67,7 +67,7 @@ struct tls_connection {
+ 	ENGINE *engine;        /* functional reference to the engine */
+ 	EVP_PKEY *private_key; /* the private key if using engine */
+ #endif /* OPENSSL_NO_ENGINE */
+-	char *subject_match, *altsubject_match;
++	char *subject_match, *altsubject_match, *domain_match;
+ 	int read_alerts, write_alerts, failed;
+ 
+ 	tls_session_ticket_cb session_ticket_cb;
+@@ -959,6 +959,7 @@ void tls_connection_deinit(void *ssl_ctx, struct tls_connection *conn)
+ 	tls_engine_deinit(conn);
+ 	os_free(conn->subject_match);
+ 	os_free(conn->altsubject_match);
++	os_free(conn->domain_match);
+ 	os_free(conn->session_ticket);
+ 	os_free(conn);
+ }
+@@ -1049,6 +1050,112 @@ static int tls_match_altsubject(X509 *cert, const char *match)
+ }
+ 
+ 
++#ifndef CONFIG_NATIVE_WINDOWS
++static int domain_suffix_match(const u8 *val, size_t len, const char *match,
++			       int full)
++{
++	size_t i, match_len;
++
++	/* Check for embedded nuls that could mess up suffix matching */
++	for (i = 0; i < len; i++) {
++		if (val[i] == '\0') {
++			wpa_printf(MSG_DEBUG, "TLS: Embedded null in a string - reject");
++			return 0;
++		}
++	}
++
++	match_len = os_strlen(match);
++	if (match_len > len || (full && match_len != len))
++		return 0;
++
++	if (os_strncasecmp((const char *) val + len - match_len, match,
++			   match_len) != 0)
++		return 0; /* no match */
++
++	if (match_len == len)
++		return 1; /* exact match */
++
++	if (val[len - match_len - 1] == '.')
++		return 1; /* full label match completes suffix match */
++
++	wpa_printf(MSG_DEBUG, "TLS: Reject due to incomplete label match");
++	return 0;
++}
++#endif /* CONFIG_NATIVE_WINDOWS */
++
++
++static int tls_match_suffix(X509 *cert, const char *match, int full)
++{
++#ifdef CONFIG_NATIVE_WINDOWS
++	/* wincrypt.h has conflicting X509_NAME definition */
++	return -1;
++#else /* CONFIG_NATIVE_WINDOWS */
++	GENERAL_NAME *gen;
++	void *ext;
++	int i;
++	int j;
++	int dns_name = 0;
++	X509_NAME *name;
++
++	wpa_printf(MSG_DEBUG, "TLS: Match domain against %s%s",
++		   full ? "": "suffix ", match);
++
++	ext = X509_get_ext_d2i(cert, NID_subject_alt_name, NULL, NULL);
++
++	for (j = 0; ext && j < sk_GENERAL_NAME_num(ext); j++) {
++		gen = sk_GENERAL_NAME_value(ext, j);
++		if (gen->type != GEN_DNS)
++			continue;
++		dns_name++;
++		wpa_hexdump_ascii(MSG_DEBUG, "TLS: Certificate dNSName",
++				  gen->d.dNSName->data,
++				  gen->d.dNSName->length);
++		if (domain_suffix_match(gen->d.dNSName->data,
++					gen->d.dNSName->length, match, full) ==
++		    1) {
++			wpa_printf(MSG_DEBUG, "TLS: %s in dNSName found",
++				   full ? "Match" : "Suffix match");
++			return 1;
++		}
++	}
++
++	if (dns_name) {
++		wpa_printf(MSG_DEBUG, "TLS: None of the dNSName(s) matched");
++		return 0;
++	}
++
++	name = X509_get_subject_name(cert);
++	i = -1;
++	for (;;) {
++		X509_NAME_ENTRY *e;
++		ASN1_STRING *cn;
++
++		i = X509_NAME_get_index_by_NID(name, NID_commonName, i);
++		if (i == -1)
++			break;
++		e = X509_NAME_get_entry(name, i);
++		if (e == NULL)
++			continue;
++		cn = X509_NAME_ENTRY_get_data(e);
++		if (cn == NULL)
++			continue;
++		wpa_hexdump_ascii(MSG_DEBUG, "TLS: Certificate commonName",
++				  cn->data, cn->length);
++		if (domain_suffix_match(cn->data, cn->length, match, full) == 1)
++			{
++				wpa_printf(MSG_DEBUG, "TLS: %s in commonName found",
++					   full ? "Match" : "Suffix match");
++				return 1;
++			}
++	}
++
++	wpa_printf(MSG_DEBUG, "TLS: No CommonName %smatch found",
++		   full ? "": "suffix ");
++	return 0;
++#endif /* CONFIG_NATIVE_WINDOWS */
++}
++
++
+ static enum tls_fail_reason openssl_tls_fail_reason(int err)
+ {
+ 	switch (err) {
+@@ -1174,7 +1281,7 @@ static int tls_verify_cb(int preverify_ok, X509_STORE_CTX *x509_ctx)
+ 	int err, depth;
+ 	SSL *ssl;
+ 	struct tls_connection *conn;
+-	char *match, *altmatch;
++	char *match, *altmatch, *domain_match;
+ 	const char *err_str;
+ 
+ 	err_cert = X509_STORE_CTX_get_current_cert(x509_ctx);
+@@ -1187,6 +1294,7 @@ static int tls_verify_cb(int preverify_ok, X509_STORE_CTX *x509_ctx)
+ 	conn = SSL_get_app_data(ssl);
+ 	match = conn ? conn->subject_match : NULL;
+ 	altmatch = conn ? conn->altsubject_match : NULL;
++	domain_match = conn ? conn->domain_match : NULL;
+ 
+ 	if (!preverify_ok && !conn->ca_cert_verify)
+ 		preverify_ok = 1;
+@@ -1248,6 +1356,14 @@ static int tls_verify_cb(int preverify_ok, X509_STORE_CTX *x509_ctx)
+ 		openssl_tls_fail_event(conn, err_cert, err, depth, buf,
+ 				       "AltSubject mismatch",
+ 				       TLS_FAIL_ALTSUBJECT_MISMATCH);
++	} else if (depth == 0 && domain_match &&
++		   !tls_match_suffix(err_cert, domain_match, 1)) {
++		wpa_printf(MSG_WARNING, "TLS: Domain match '%s' not found",
++			   domain_match);
++		preverify_ok = 0;
++		openssl_tls_fail_event(conn, err_cert, err, depth, buf,
++				       "Domain mismatch",
++				       TLS_FAIL_DOMAIN_MISMATCH);
+ 	} else
+ 		openssl_tls_cert_event(conn, err_cert, depth, buf);
+ 
+@@ -1476,7 +1592,8 @@ int tls_global_set_verify(void *ssl_ctx, int check_crl)
+ 
+ static int tls_connection_set_subject_match(struct tls_connection *conn,
+ 					    const char *subject_match,
+-					    const char *altsubject_match)
++					    const char *altsubject_match,
++					    const char *domain_match)
+ {
+ 	os_free(conn->subject_match);
+ 	conn->subject_match = NULL;
+@@ -1494,6 +1611,14 @@ static int tls_connection_set_subject_match(struct tls_connection *conn,
+ 			return -1;
+ 	}
+ 
++	os_free(conn->domain_match);
++	conn->domain_match = NULL;
++	if (domain_match) {
++		conn->domain_match = os_strdup(domain_match);
++		if (conn->domain_match == NULL)
++			return -1;
++	}
++
+ 	return 0;
+ }
+ 
+@@ -2629,7 +2754,8 @@ int tls_connection_set_params(void *tls_ctx, struct tls_connection *conn,
+ 	}
+ 	if (tls_connection_set_subject_match(conn,
+ 					     params->subject_match,
+-					     params->altsubject_match))
++					     params->altsubject_match,
++					     params->domain_match))
+ 		return -1;
+ 
+ 	if (params->engine && params->ca_cert_id) {
+diff --git a/src/eap_peer/eap_config.h b/src/eap_peer/eap_config.h
+index b64b68f..e40d210 100644
+--- a/src/eap_peer/eap_config.h
++++ b/src/eap_peer/eap_config.h
+@@ -211,6 +211,21 @@ struct eap_peer_config {
+ 	u8 *altsubject_match;
+ 
+ 	/**
++	 * domain_match - Constraint for server domain name
++	 *
++	 * If set, this FQDN is used as a full match requirement for the
++	 * server certificate in SubjectAltName dNSName element(s). If a
++	 * matching dNSName is found, this constraint is met. If no dNSName
++	 * values are present, this constraint is matched against SubjectName CN
++	 * using same full match comparison. This behavior is similar to
++	 * domain_suffix_match, but has the requirement of a full match, i.e.,
++	 * no subdomains or wildcard matches are allowed. Case-insensitive
++	 * comparison is used, so "Example.com" matches "example.com", but would
++	 * not match "test.Example.com".
++	 */
++	char *domain_match;
++
++	/**
+ 	 * ca_cert2 - File path to CA certificate file (PEM/DER) (Phase 2)
+ 	 *
+ 	 * This file can have one or more trusted CA certificates. If ca_cert2
+@@ -306,6 +321,14 @@ struct eap_peer_config {
+ 	u8 *altsubject_match2;
+ 
+ 	/**
++	 * domain_match2 - Constraint for server domain name
++	 *
++	 * This field is like domain_match, but used for phase 2 (inside
++	 * EAP-TTLS/PEAP/FAST tunnel) authentication.
++	 */
++	char *domain_match2;
++
++	/**
+ 	 * eap_methods - Allowed EAP methods
+ 	 *
+ 	 * (vendor=EAP_VENDOR_IETF,method=EAP_TYPE_NONE) terminated list of
+diff --git a/src/eap_peer/eap_tls_common.c b/src/eap_peer/eap_tls_common.c
+index 7bd50f6..6e4614a 100644
+--- a/src/eap_peer/eap_tls_common.c
++++ b/src/eap_peer/eap_tls_common.c
+@@ -68,6 +68,7 @@ static void eap_tls_params_from_conf1(struct tls_connection_params *params,
+ 	params->dh_file = (char *) config->dh_file;
+ 	params->subject_match = (char *) config->subject_match;
+ 	params->altsubject_match = (char *) config->altsubject_match;
++	params->domain_match = (char *) config->domain_match;
+ 	params->engine = config->engine;
+ 	params->engine_id = config->engine_id;
+ 	params->pin = config->pin;
+@@ -89,6 +90,7 @@ static void eap_tls_params_from_conf2(struct tls_connection_params *params,
+ 	params->dh_file = (char *) config->dh_file2;
+ 	params->subject_match = (char *) config->subject_match2;
+ 	params->altsubject_match = (char *) config->altsubject_match2;
++	params->domain_match = (char *) config->domain_match2;
+ 	params->engine = config->engine2;
+ 	params->engine_id = config->engine2_id;
+ 	params->pin = config->pin2;
+diff --git a/wpa_supplicant/config.c b/wpa_supplicant/config.c
+index 7e2a5b4..3213d31 100644
+--- a/wpa_supplicant/config.c
++++ b/wpa_supplicant/config.c
+@@ -1456,6 +1456,7 @@ static const struct parse_data ssid_fields[] = {
+ 	{ STRe(dh_file) },
+ 	{ STRe(subject_match) },
+ 	{ STRe(altsubject_match) },
++	{ STRe(domain_match) },
+ 	{ STRe(ca_cert2) },
+ 	{ STRe(ca_path2) },
+ 	{ STRe(client_cert2) },
+@@ -1464,6 +1465,7 @@ static const struct parse_data ssid_fields[] = {
+ 	{ STRe(dh_file2) },
+ 	{ STRe(subject_match2) },
+ 	{ STRe(altsubject_match2) },
++	{ STRe(domain_match2) },
+ 	{ STRe(phase1) },
+ 	{ STRe(phase2) },
+ 	{ STRe(pcsc) },
+@@ -1623,6 +1625,7 @@ static void eap_peer_config_free(struct eap_peer_config *eap)
+ 	os_free(eap->dh_file);
+ 	os_free(eap->subject_match);
+ 	os_free(eap->altsubject_match);
++	os_free(eap->domain_match);
+ 	os_free(eap->ca_cert2);
+ 	os_free(eap->ca_path2);
+ 	os_free(eap->client_cert2);
+@@ -1631,6 +1634,7 @@ static void eap_peer_config_free(struct eap_peer_config *eap)
+ 	os_free(eap->dh_file2);
+ 	os_free(eap->subject_match2);
+ 	os_free(eap->altsubject_match2);
++	os_free(eap->domain_match2);
+ 	os_free(eap->phase1);
+ 	os_free(eap->phase2);
+ 	os_free(eap->pcsc);
+diff --git a/wpa_supplicant/config_file.c b/wpa_supplicant/config_file.c
+index 5f07045..f2bc209 100644
+--- a/wpa_supplicant/config_file.c
++++ b/wpa_supplicant/config_file.c
+@@ -758,6 +758,7 @@ static void wpa_config_write_network(FILE *f, struct wpa_ssid *ssid)
+ 	STR(dh_file);
+ 	STR(subject_match);
+ 	STR(altsubject_match);
++	STR(domain_match);
+ 	STR(ca_cert2);
+ 	STR(ca_path2);
+ 	STR(client_cert2);
+@@ -766,6 +767,7 @@ static void wpa_config_write_network(FILE *f, struct wpa_ssid *ssid)
+ 	STR(dh_file2);
+ 	STR(subject_match2);
+ 	STR(altsubject_match2);
++	STR(domain_match2);
+ 	STR(phase1);
+ 	STR(phase2);
+ 	STR(pcsc);
+diff --git a/wpa_supplicant/wpa_supplicant.conf b/wpa_supplicant/wpa_supplicant.conf
+index 0cd5b02..2484bed 100644
+--- a/wpa_supplicant/wpa_supplicant.conf
++++ b/wpa_supplicant/wpa_supplicant.conf
+@@ -466,6 +466,10 @@ fast_reauth=1
+ #	sertificate is only accepted if it contains this string in the subject.
+ #	The subject string is in following format:
+ #	/C=US/ST=CA/L=San Francisco/CN=Test AS/emailAddress=as@example.com
++#	Note: Since this is a substring match, this cannot be used securily to
++#	do a suffix match against a possible domain name in the CN entry. For
++#	such a use case, domain_match should be used instead.
++#	instead.
+ # altsubject_match: Semicolon separated string of entries to be matched against
+ #	the alternative subject name of the authentication server certificate.
+ #	If this string is set, the server sertificate is only accepted if it
+@@ -474,6 +478,14 @@ fast_reauth=1
+ #	Example: EMAIL:server@example.com
+ #	Example: DNS:server.example.com;DNS:server2.example.com
+ #	Following types are supported: EMAIL, DNS, URI
++# domain_match: Constraint for server domain name
++#	If set, this FQDN is used as a full match requirement for the
++#	server certificate in SubjectAltName dNSName element(s). If a
++#	matching dNSName is found, this constraint is met. If no dNSName
++#	values are present, this constraint is matched against SubjectName CN
++#	using same full match comparison. No subdomains or wildcard matches
++#	are allowed. Case-insensitive comparison is used, so "Example.com"
++#	matches "example.com", but would not match "test.Example.com".
+ # phase1: Phase1 (outer authentication, i.e., TLS tunnel) parameters
+ #	(string with field-value pairs, e.g., "peapver=0" or
+ #	"peapver=1 peaplabel=1")
+-- 
+2.1.0
+

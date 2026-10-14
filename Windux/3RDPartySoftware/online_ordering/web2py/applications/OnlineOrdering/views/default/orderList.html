@@ -1,0 +1,127 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<link href="{{=URL('static', 'css/order_list.css')}}" rel="stylesheet" type="text/css" />
+{{end}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/order_list.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div id="scaleLocation" class="" style="
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  height: 40px;
+  width: 40px;
+  font-size: small;
+  word-wrap: break-word;
+  overflow: hidden;
+  background-color: rgb(68, 114, 196);
+  border: 1px solid black;
+  border-radius: 2px;
+  text-align: center;
+  padding: 0;
+  background-color: rgb(233, 235, 245);"
+  >
+  <div id="scaleLocation-dept">D:?</div>
+  <div id="scaleLocation-zone">Z:?</div>
+</div>
+
+<div class="container main-container">
+
+<!-- Table with data -->
+<div id="tableDataDiv" class="orderDataDivContent grayOut">
+  <table id="tableOrderData" class="orderDataTableContent">
+    <thead id="tableHeader" class="orderDataTableTitle orderDataDivTitle">
+    <tr class="orderDataRowTitle">
+      <th class="orderIDCol sortNone" onmouseup="sortOrders(this, 'orderIDCol')"  >Order</th>
+      <th class="customerCol sortNone" onmouseup="sortOrders(this, 'customerCol')" >Customer</th>
+      <th class="prettyDeliveryTimeCol sortDesc" onmouseup="sortOrders(this, 'prettyDeliveryTimeCol')" >Due Time</th>
+      <th class="originCol sortNone" onmouseup="sortOrders(this, 'originCol')" >Type</th>
+      <th class="orderQtyCol sortNone" onmouseup="sortOrders(this, 'orderQtyCol')" >#</th>
+      <th class="orderStatusCol sortNone" onmouseup="sortOrders(this, 'orderStatusCol')" >Status</th>
+      <th class="deliveryTimeCol hiddenCol"></th>
+    </tr>
+  </thead>
+    <tbody id="orderData">
+      <tr id="0" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+      <tr  id="1" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+      <tr  id="2" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+      <tr  id="3" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+      <tr  id="4" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+      <tr  id="5" class="orderDataRow" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+    </tbody>
+
+    <tbody style="display: none;">
+      <!-- This row is here in order to make clones of it to display in the orders table body above. -->
+      <tr id="orderDataRowToClone" onmouseup="selectRow(this)" >
+        <td class="orderIDCol"></td>
+        <td class="customerCol"></td>
+        <td class="prettyDeliveryTimeCol"></td>
+        <td class="originCol"></td>
+        <td class="orderQtyCol"></td>
+        <td class="orderStatusCol"><button class="btn btn-lg listButton" onmouseup="selectDetails(this.parentElement.parentElement);"></button></td>
+        <td class="deliveryTimeCol hiddenCol"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Bottom Row Buttons -->
+<div id="bottomButtonRow" class="row justify-content-between">
+  <div class="col-2"><button type="button" class="bottomButton" id="mainButton"    name="mainButton"    onmouseup="selectMain(this)" ><img class="btn-icon no-drag" src="{{=URL('static','images/home_icon.svg')}}" draggable="false"><br>Main</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="searchButton"  name="searchButton"  onmouseup="selectSearch(this)" ><img class="btn-icon no-drag" src="{{=URL('static','images/search_icon.svg')}}" draggable="false"><br>Search</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="refreshButton" name="refreshButton" onmouseup="selectRefresh(this)" ><img class="btn-icon no-drag" src="{{=URL('static','images/refresh_icon.svg')}}" draggable="false"><br>Refresh</button></div>
+  <div class="col-2"><button type="button" class="bottomButton bottomButtonRed" id="cancelButton"  name="cancelButton"  onmouseup="selectCancel(this)" ><img class="btn-icon no-drag" src="{{=URL('static','images/cancel_icon.svg')}}" draggable="false"><br>Cancel</button></div>
+  <!--<div class="col-2"><button type="button" class="bottomButton" id="detailsButton" name="detailsButton" onmouseup="selectDetails(this)" ><img class="btn-icon no-drag" src="{{=URL('static','images/details_icon.svg')}}" draggable="false"><br>Details</button></div>-->
+  </div>
+</div>

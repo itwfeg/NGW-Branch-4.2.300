@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CuttingTestDetails</class>
+ <widget class="QWidget" name="CuttingTestDetails">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>571</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="butPrint">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>480</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="butFinished">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>480</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+   </property>
+   <property name="text">
+    <string>Finished</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="butSave">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>480</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>171</width>
+     <height>71</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    margin: 0 0 0 0;
+    color: white;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #c0c0c0, stop: 1 #404040);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+QPushButton:pressed {
+    margin: 0 0 0 0;
+    color: black;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #d0d0d0);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #000000;
+}</string>
+   </property>
+   <property name="text">
+    <string>Save to USB</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblOperName">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>80</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Operator name:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblOperator">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>80</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tblDetails">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>110</y>
+     <width>940</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>940</width>
+     <height>100</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>940</width>
+     <height>1000</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string notr="true"/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableWidget{
+color: black;
+}</string>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderCascadingSectionResizes">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderDefaultSectionSize">
+    <number>50</number>
+   </attribute>
+   <attribute name="verticalHeaderHighlightSections">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>50</number>
+   </attribute>
+   <attribute name="verticalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+  </widget>
+  <widget class="QLabel" name="lblProdNum">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>50</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Product number: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCutTestNum">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Cutting test number: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCutTestNumber">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>20</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>50</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSupplierNum">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>191</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Supplier number: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSupplierNumber">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>80</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLotNum">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>80</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Lot number: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProdWght">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>50</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Product weight: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProdCost">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>20</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Product cost: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductCost">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>20</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductWeight">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>50</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblLotNumber">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>80</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblPackingDate">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>50</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblStatus">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>20</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string notr="true">None</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblPackDate">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>50</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Packing date: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTestStatus">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>20</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: black;</string>
+   </property>
+   <property name="text">
+    <string>Status: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblUserInfo">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>430</y>
+     <width>941</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"utf-8\"?><cki><ck fm=\"#\" to=\"a\"/><ck fm=\"abl\" to=\"can\"/><ck fm=\"canada\" to=\"enter\"/><ck fm=\"enter_icon\" to=\"individual\"/><ck fm=\"industry\" to=\"messag\"/><ck fm=\"met\" to=\"plat­ter\"/><ck fm=\"pleas\" to=\"screen\"/><ck fm=\"scroll\" to=\"the\"/><ck fm=\"their\" to=\"with\"/><ck fm=\"within\" to=\"•\"/></cki>";

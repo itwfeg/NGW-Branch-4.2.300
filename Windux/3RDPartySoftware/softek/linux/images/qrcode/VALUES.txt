@@ -1,0 +1,13 @@
+The values of the QR-Codes in this folder are as follows:
+
+qrcode01.jpg: http://bit.ly/ufvFBu?r=qr
+qrcode02.jpg: http://www.colnago.com
+qrcode03.jpg: http://bit.ly/mAZnkd
+qrcode04.jpg: http://barclays.mobi/qr
+qrcode05.jpg: http://barclays.mobi/qr
+qrcode06.jpg: http://www.cyclingweekly.co.uk/buyandsell/1/bargainsoftheweek.html?utm_source=CWMAGBOTW&utm_medium=QR&utm_campaign=BOTW+Mag+QR+Code
+qrcode07.jpg: http://bit.ly/oAr20C?r=qr
+qrcode08.jpg: http://bit.ly/mAZnkd
+qrcode09.jpg: http://qreate.me/1uDL
+qrcode10.jpg: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ (encoded once as a normal qr-code and once as a series using structured append).
+kanji.jpg: Kanji character example

@@ -1,0 +1,1 @@
+Xpdf/Qt Widget version 3.03.18

@@ -1,0 +1,27 @@
+README file for directory /usr/share/fonts/truetype/hobart
+created 1/12/201 Frank Albers
+
+This directory is the standard configuration directory for HLX/Access system fonts.
+Since the print renderer expects the font file names to be lowercase the following files were renamed to all lowercase:
+abalone.ttf
+centurion.ttf
+everest..ttf
+gravilex.ttf
+hauteclaire.ttf
+hobart.ttf
+hobartbold.ttf
+hobartplain.ttf
+london.ttf
+marquee12.ttf
+patrician.ttf
+quantum.ttf
+sp.ttf
+splarge.ttf
+tancred.ttf
+ultima.ttf
+
+Any other fonts that are added for the HLX/Access printers must have all lowercase filenames and be in both of the following directories:
+/usr/local/hobart/system/fonts/ or /usr/local/hobart/user/fonts/
+/usr/share/fonts/truetype/hobart/
+
+

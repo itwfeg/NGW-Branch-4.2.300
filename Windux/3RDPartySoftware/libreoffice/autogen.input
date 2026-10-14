@@ -1,0 +1,39 @@
+PKG_CONFIG=/opt/hb6mxd_combo/toolchain/bin/pkg-config
+CC=ccache armv7l-timesys-linux-gnueabihf-gcc
+CXX=ccache armv7l-timesys-linux-gnueabihf-g++
+PKG_CONFIG_FOR_BUILD=/usr/bin/pkg-config
+CC_FOR_BUILD=/usr/bin/gcc
+CXX_FOR_BUILD=/usr/bin/g++
+--build=x86_64-linux-gnu
+--host=armv7l-timesys-linux-gnueabihf
+--with-distro=LibreOfficeLinux
+--with-package-format=deb
+--with-vendor=Hobart
+--with-lang=en-US es fr
+--with-x
+--without-java
+--without-doxygen
+--disable-coinmp
+--disable-gltf
+--disable-gstreamer-0-10
+--disable-gnome-vfs
+--disable-kde
+--disable-kde4
+--disable-postgresql-sdbc
+--enable-epm
+--enable-gstreamer-1-0
+--enable-python=system
+PYTHON_CFLAGS=-I/opt/hb6mxd_combo/toolchain/include/python2.7
+PYTHON_LIBS=-lpython2.7
+--with-system-bluez
+--with-system-cairo
+--with-system-curl
+--with-system-expat
+--with-system-icu
+--with-system-jpeg
+--with-system-lcms2
+--with-system-libpng
+--with-system-libxml
+--with-system-nss
+--with-system-openssl
+--with-system-zlib

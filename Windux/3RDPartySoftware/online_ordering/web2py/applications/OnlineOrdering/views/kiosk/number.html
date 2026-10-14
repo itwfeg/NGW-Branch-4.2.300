@@ -1,0 +1,21 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/number.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="container" style="">
+
+<div class="custom-inverted-thin-border m-4" style="width: 100%;">
+<h1 class="m-4" style="text-align: center;">Your number is <strong id="orderNumber">?</strong>.</h1>
+<h1 class="m-4" style="text-align: center;">Estimated wait time: <strong id="wait">?</strong> minutes.</h1>
+</div>
+
+<div class="row justify-content-between mt-4" style="height: 120px;">
+  <div class="col-4"></div>
+  <div class="col-4" style="height: 120px;"><button class="btn btn-block btn-success btn-custom-basics" style="height: 120px; font-size: xx-large; white-space: normal;" onclick="start_over();">Start<br>Over</button></div>
+  <div class="col-4"></div>
+</div>
+

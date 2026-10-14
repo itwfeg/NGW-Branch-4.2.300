@@ -1,0 +1,477 @@
+#-------------------------------------------------------------------#
+#    File        :  CODEBASE.DEF                                    #
+#    Product     :  PowerDesigner                                   #
+#    Database    :  Codebase 6.5                                    #
+#                                                                   #
+# (C) 2002 Hobart Corporation                                       #
+#-------------------------------------------------------------------#
+#    Description :                                                  #
+#        This file defines the target database's parameters. To     #
+#      define DDL commands, the following system variables are      #
+#      available :                                                  #
+#        %DBMSNAME%   : RDBMS name                                  #
+#        %DATABASE%   : database name                               #
+#        %PATHSCRIPT% : script directory                            #
+#        %NAMESCRIPT% : script file name                            #
+#        %STARTCMD%   : command for executing a script              #
+#        %REMARK%     : remark                                      #
+#        %COMMENT%    : table or column comment                     #
+#        %TABLE%      : table name                                  #
+#        %INDEX%      : index name                                  #
+#        %COLUMN%     : column name                                 #
+#        %COLNNO%     : column number                               #
+#        %DATATYPE%   : column type                                 #
+#        %LENGTH%     : column length                               #
+#        %PREC%       : column precision                            #
+#        %NOTNULL%    : NULL / NOT NULL                             #
+#        %WITHDEFAULT%: WITH DEFAULT                                #
+#        %UNIQUE%     : UNIQUE                                      #
+#        %CLUSTER%    : CLUSTER                                     #
+#        %ASC%        : ASC / DESC                                  #
+#-------------------------------------------------------------------#
+
+Product  = PowerDesigner
+Version  = 3.0
+DbmsName = Sqlite 3
+DbmsAlias= Sqlite3
+
+#-------------------------------------------------------------------#
+#    Database characteristics definition                            #
+#-------------------------------------------------------------------#
+#  End of command character
+Terminator = ;
+
+#  End of block character
+BlockTerminator =
+
+#  Field separation character. Example: col1, col2, col3
+Delimiter = ,
+
+#  Quote for strings
+Quote = '
+
+#  Continuation character
+SqlContinue =
+
+#  Invalid characters for names
+IllegalChar = " +-*/!=<>'"()"
+
+#  Default character
+DefaultChar = "_"
+
+#  Table name length
+MaxTableLen = 30
+
+#  Index name length
+MaxIndexLen = 30
+
+#  Column name length
+MaxColumnLen = 30
+
+#  Constraint name length
+MaxConstLen = 30
+
+#  Maximum number of columns in an index
+MaxColIndex = 16
+
+#  Script header
+Header =
+
+#  Script footer
+Footer =
+
+#  Uppercase only. YES/NO
+UpperCaseOnly = NO
+
+#  Lowercase only. YES/NO
+LowerCaseOnly = NO
+
+#  SQL syntax allowed. YES/NO
+SQLSupport = YES
+
+#  Parentheses allowed in "create table". YES/NO
+EnableTabPar = YES
+
+#  NOT NULL keyword allowed. YES/NO
+EnableNotNull = YES
+
+#  NULL keyword allowed. YES/NO
+EnableNull = NO
+
+#  Options allowed in "create table" & "create index". YES/NO
+EnableOption = YES
+
+#  Integrity constraints allowed. YES/NO
+EnableIntegrity = YES
+
+#  Primary key allowed. YES/NO
+EnablePrimKey = YES
+
+#  Foreign key allowed. YES/NO
+EnableFornKey = YES
+
+#  Primary key created in table. YES/NO
+PkInTable = YES
+
+#  Foreign key created in table. YES/NO
+FkInTable = YES
+
+#  Primary key is auto-indexed. YES/NO
+PKAutoIndex = NO
+
+#  Foreign key is auto-indexed. YES/NO
+FKAutoIndex = NO
+
+#  UNIQUE constraint allowed for tables. YES/NO
+EnableUniqConst = YES
+
+#  Default allowed. YES/NO
+EnableDefault = YES
+
+#  Default at the end. YES/NO
+DefaultAtEnd = YES
+
+#  Reserved default values
+ReservedDefault =
+USER
+NULL
+
+#  Check allowed. YES/NO
+EnableCheck = YES
+
+#  Verify if a column is NULL. YES/NO
+CheckNull = YES
+
+#  Constraint name allowed. YES/NO
+EnableConstName = NO
+
+#  Unique constraint name (in the database). YES/NO
+UniqConstName = NO
+
+#  Constraint name at the end. YES/NO
+ConstNameAtEnd = YES
+
+#  Constraint name template for Primary Keys
+PKConstraintName = PK_%.U27:TABLE%
+
+#  Constraint name template for Foreign Keys
+FKConstraintName = FK_%.U8:CHILD%_%.U9:REFR%_%.U8:PARENT%
+
+#  Constraint name template for Alternate Keys
+AKConstraintName = AK_%.U18:AKEY%_%.U8:TABLE%
+
+#  Constraint name template for Check of Column
+CKCConstraintName = CKC_%.U17:COLN%_%.U8:TABLE%
+
+#  Constraint name template for Check of Table
+CKTConstraintName = CKT_%.U26:TABLE%
+
+#  Index allowed. YES/NO
+EnableIndex = YES
+
+#  Parentheses allowed in "create index". YES/NO
+EnableIndPar = YES
+
+#  Unique index allowed. YES/NO
+EnableUnique = YES
+
+#  Clustered index allowed. YES/NO
+EnableCluster = NO
+
+#  ASC, DESC keywords allowed. YES/NO
+EnableAscDesc = YES
+
+#  Unique index name (in the database). YES/NO
+UniqIndxName = YES
+
+#  "Alter table" command allowed. YES/NO
+EnableAlter = YES
+
+#  Multi-script allowed. YES/NO
+EnableMultiFile = YES
+
+#  Main script extension
+ScriptExt = sql
+
+#  Other scripts extension
+TableExt = tab
+
+#-------------------------------------------------------------------#
+#    Database commands definition                                   #
+#-------------------------------------------------------------------#
+#  Command for executing a script
+StartCommand =
+
+#  Command for remarks. Example: rem %REMARK%
+Remark = -- %REMARK%
+
+#  Command for creating a database. Example: create database %DATABASE%
+CreateDatabase =
+
+#  Default options for creating a database.
+DatabaseOption =
+
+#  Command for opening a database. Example: open database %DATABASE%
+OpenDatabase =
+
+#  Command for closing a database. Example: close database
+CloseDatabase =
+
+#  Command for dropping a database. Example: drop database %DATABASE%
+DropDatabase =
+
+#  Command for creating a table. Example: create table %TABLE%
+CreateTable = create table %TABLE%
+
+#  Command for defining a table column
+AddColTable = %COLUMN% %DATATYPE% %NOTNULL%
+
+#  Default options for creating a table.
+TableOption =
+
+#  SQL command for obtaining the table options by ODBC.
+SQLTableOption =
+
+#  Command for adding a table comment
+TableComment =
+
+#  Command for adding a column comment
+ColumnComment =
+
+#  Command for dropping a table. Example: drop table %TABLE%
+DropTable = drop table %TABLE% cascade
+
+#  Command for creating an index. Example: create index %INDEX%
+CreateIndex = create %UNIQUE% index %INDEX% on %TABLE%
+
+#  Command for defining an index column
+AddColIndex = %COLUMN% %ASC%
+
+#  Default options for creating an index.
+IndexOption =
+relaxed match
+
+#  Default values for index options.
+DefIndexOption =
+
+#  SQL command for obtaining the index options by ODBC.
+SQLIndexOption =
+
+#  Command for dropping an index. Example: drop index %INDEX%
+DropIndex = drop index %INDEX%
+
+#  SQL command for obtaining the alternate key indexes of a table by ODBC.
+SQLAkeyIndex =
+
+#  Command for creating a view. Example: create view %VIEW%
+CreateView = create view %VIEW%
+
+#  Command for dropping a view. Example: drop view %VIEW%
+DropView = drop view %VIEW%
+
+#  Command for adding a view comment.
+ViewComment =
+
+#  Option for checking a view.
+ViewCheck = with check option
+
+#  List of group functions.
+GroupFunc =
+avg()
+count()
+max()
+min()
+sum()
+
+#  List of number functions.
+NumberFunc =
+
+#  List of character functions.
+CharFunc =
+
+#  List of date functions.
+DateFunc =
+
+#  List of conversion functions.
+ConvertFunc =
+
+#  List of other functions.
+OtherFunc =
+USER
+
+#  List of operators for views.
+ListOperators =
+=
+<>
+>
+<
+>=
+<=
+not
+in
+not in
+between
+not between
+exists
+not exists
+like
+not like
+is null
+is not null
+= any
+<> any
+> any
+< any
+>= any
+<= any
+= all
+<> all
+> all
+< all
+>= all
+<= all
+
+#  Command for renaming a table
+RenameTable =
+
+#  Command for renaming a column
+RenameColumn =
+
+#  Command for adding a column
+AddColumn = 
+
+#  Command for modifying a column
+ModifyColumn =
+
+#  Command for dropping a column
+DropColumn =
+
+#  Alter table header
+AlterTableHeader =
+
+#  Command for modifying a table
+AlterTable = alter table %TABLE%
+
+#  Alter table footer
+AlterTableFooter =
+
+#  Command for renaming a column in "alter table"
+AltRenameColumn =
+
+#  Command for adding a column in "alter table"
+AltAddColumn = add %COLUMN% %DATATYPE%
+
+#  Command for modifying a column in "alter table"
+AltModifyColumn =
+
+#  Command for dropping a column in "alter table"
+AltDropColumn =
+
+#  Command for the validation by OBDC.
+Commit = commit
+
+#-------------------------------------------------------------------#
+#    How to use generated script                                    #
+#-------------------------------------------------------------------#
+#  Usage for a single script
+Usage1 =
+  (1) Go to the directory %PATHSCRIPT%
+  (2) Start the SQL interpreter
+  (3) Run the database creation script:
+        %NAMESCRIPT%
+
+#  Usage for multi-scripts
+Usage2 =
+  (1) Go to the directory %PATHSCRIPT%
+  (2) Start the SQL interpreter
+  (3) Run the database creation scripts
+
+#-------------------------------------------------------------------#
+#    Data types translation table from PowerDesigner's internal     #
+#    data types to target database's data types.                    #
+#-------------------------------------------------------------------#
+AmcdDataType =
+<UNDEF> = <undefined>
+A%n     = TEXT
+VA%n    = TEXT
+LA      = TEXT
+LA%n    = TEXT
+LVA     = TEXT
+LVA%n   = TEXT
+BT      = TEXT
+BT%n    = TEXT
+SI      = INTEGER
+I       = INTEGER
+LI      = INTEGER
+N       = INTEGER
+N%n     = INTEGER
+N%s,%p  = REAL(%s,%p)
+DC      = REAL
+DC%n    = REAL
+DC%s,%p = REAL(%s,%p)
+SF      = REAL
+F       = REAL
+F%n     = REAL
+LF      = REAL
+MN      = INTEGER
+MN%n    = INTEGER
+MN%s,%p = REAL(%s,%p)
+D       = DATE
+T       = TIME
+DT      = DATETIME
+TS      = DATE
+BL      = INTBOOLEAN
+NO      = INTEGER
+NO%n    = INTEGER
+BIN%n   = TEXT
+LBIN    = TEXT
+LBIN%n  = TEXT
+TXT     = TEXT
+TXT%n   = TEXT
+MB      = TEXT
+MB%n    = TEXT
+VMB     = TEXT
+VMB%n   = TEXT
+LVA     = TEXT
+LVA%n   = TEXT
+PIC     = BLOB
+PIC%n   = BLOB 
+BMP     = BLOB
+BMP%n   = BLOB 
+OLE     = TEXT
+OLE%n   = TEXT
+*       = TEXT
+
+#-------------------------------------------------------------------#
+#    Data types translation table from target database's data       #
+#    types to PowerDesigner's internal data types.                  #
+#-------------------------------------------------------------------#
+PhysDataType =
+<undefined>   = <UNDEF>
+CHAR          = A1
+CHAR(%n)      = A%n
+CHARACTER(%n) = A%n
+VARCHAR(%n)   = VA%n
+CHARACTER VARYING(%n) = VA%n
+NUMERIC       = N
+NUMERIC(%n)   = N%n
+NUMERIC(%s,%p)= N%s,%p
+DECIMAL       = DC
+DECIMAL(%n)   = DC%n
+DECIMAL(%s,%p)= DC%s,%p
+DEC           = DC
+DEC(%n)       = DC%n
+DEC(%s,%p)    = DC%s,%p
+INTEGER       = I
+INT           = I
+SMALLINT      = SI
+REAL          = SF
+FLOAT         = F
+FLOAT(%n)     = F%n
+DOUBLE PRECISION = LF
+DATE          = D
+DATETIME      = DT
+TIME          = T
+BOOLEAN       = BL
+*             = A10
+

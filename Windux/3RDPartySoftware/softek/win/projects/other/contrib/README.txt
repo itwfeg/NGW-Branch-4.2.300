@@ -1,0 +1,1 @@
+Please note that the projects in this folder have been contributed by other developers and are without warranty of any kind.

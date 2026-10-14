@@ -1,0 +1,16 @@
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\bin\Debug\DataGatewayFileManipulator.exe
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\bin\Debug\DataGatewayFileManipulator.pdb
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\DataGatewayFileManipulator.mainForm.resources
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\DataGatewayFileManipulator.Properties.Resources.resources
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\DataGatewayFileManipulator.csproj.GenerateResource.Cache
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\DataGatewayFileManipulator.exe
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Debug\DataGatewayFileManipulator.pdb
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\bin\Release\DataGatewayFileManipulator.exe
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\bin\Release\DataGatewayFileManipulator.pdb
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\ResolveAssemblyReference.cache
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\DataGatewayFileManipulator.mainForm.resources
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\DataGatewayFileManipulator.Properties.Resources.resources
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\DataGatewayFileManipulator.csproj.GenerateResource.Cache
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\DataGatewayFileManipulator.exe
+C:\Users\hatfike\Documents\Visual Studio 2005\Projects\DataGatewayFileManipulator\DataGatewayFileManipulator\obj\Release\DataGatewayFileManipulator.pdb

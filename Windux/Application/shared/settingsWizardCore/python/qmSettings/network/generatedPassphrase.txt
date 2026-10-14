@@ -1,0 +1,5 @@
+network={
+	ssid="Sahate"
+	#psk="51Zebra69"
+	psk=70597143a13297d295fae83913843a627d510d0b0ccc3746edef599520beea25
+}

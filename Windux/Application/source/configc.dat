@@ -1,0 +1,16 @@
+# "Custom" Internal Configuration parameters - set by Hobart Only
+#
+# Config params in this file override the settings in config.dat.
+# They can also be specified here, but not exist in config.dat (although that is not the norm!)
+#
+# The purpose of this file is to have a "custom" setting for one or more internal configuration parameters,
+# for a specified customer.  These parameters are controlled by Hobart only.
+# This file is not overwritten during the upgrade process, where config.dat is;
+# thus, these "customer-specific overrides" will not be lost after upgrading to a
+# more recent application version made available to any customer.
+#
+# Format of commands is 'parameterName=parameterValue'
+#
+# Comments begin with '#'.  Everything after the comment indicators is ignored.
+# Comments can be on their own line, or on the same line as a command.
+#

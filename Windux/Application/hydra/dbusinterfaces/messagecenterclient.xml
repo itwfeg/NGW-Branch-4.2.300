@@ -1,0 +1,9 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/com/hobartcorp/messagecenterclient">
+    <interface name="com.hobartcorp.MessageCenterClient">
+        <method name="processEvent">
+            <arg name="event" type="ay" direction="in"/>
+        </signal>
+    </interface>
+</node>

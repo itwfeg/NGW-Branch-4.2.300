@@ -1,0 +1,32 @@
+#################################GENERAL SETTINGS
+
+NAME="Ad Service"
+DESCRIPTION="Ad Service Setup"
+CATEGORY="Web"
+TYPE="native"
+
+#############Below optional
+#ICON="hfpd.png"
+#SUPPORT=""
+#BCMODE=""
+#HTDOCS="/signage/htdocs"
+#HTACCESS=""
+#PRERUN=""
+#POSTRUN=""
+
+
+###############################NATIVE APPLICATIONS
+#EXECUTABLE="/usr/local/hobart/apps/hfpd/hfpdui"
+
+DAEMON="/usr/bin/python /usr/local/hobart/apps/adservice/ad_service.py --config-file /usr/local/hobart/apps/adservice/ad_service_testing.cfg"
+DAEMON_SHUTDOWN="pkill -f ad_service.py"
+
+#PARAMETERS=""
+
+
+
+#############################JAVA APPLICATIONS
+
+APPLICATIONS=""
+
+#PARAMETERS=""

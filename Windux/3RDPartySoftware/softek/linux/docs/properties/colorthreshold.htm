@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ColorThreshold</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P><B>ColorThreshold</B> is the color value used by the control to decide whether a 
+			pixel should be considered to be black or white. The value should be in the 
+			range 0 to 255.
+		</P>
+		<P>Please note that if this property is set to a non-zero value than 
+            ColorProcessLevel is effectively set to a value of 0. It is recommended to set 
+            this property to 0 and control the accuracy of reading from color images through 
+            the ColorProcessLevel property.</P>
+		<P>Default value = 0
+		</P>
+		<P>void STSetParameter(hBarcode, ST_CONTRAST,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_CONTRAST,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Set the ColorThreshold to 140<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;140 ;<BR>
+			STSetParameter(hBarcode, ST_CONTRAST,&nbsp;&amp;value) ;</P>
+		<P>
+		</P>
+	</body>
+</html>

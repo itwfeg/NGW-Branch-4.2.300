@@ -1,0 +1,26 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/kiosk_start.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="container main-container" style="height: 95vh;">
+
+<div class="row" style="height: 95vh !important;" id="start-button-container">
+<div class="col-1 with-logo"></div>
+<div class="col-4 logo" id="start-logo-container"></div>
+<div class="col-2 with-logo"></div>
+<div class="col-4 without-logo"></div>
+<div class="col-4">
+<div style="height: 16vh;"></div>
+<button type="button" class="btn btn-custom-color btn-lg btn-block" id="startOrderButton" style="height: 24vh; font-size: 4vh;" onclick="place_order();">Place<br>Order</button>
+<div style="height: 16vh;"></div>
+<button type="button" class="btn btn-custom-color btn-lg btn-block" id="startNumberButton" style="height: 24vh; font-size: 4vh;" onclick="take_number();">Take<br>Number</button>
+<div style="height: 16vh;"></div>
+</div>
+<div class="col-4 without-logo"></div>
+<div class="col-1 with-logo"></div>
+</div>
+
+</div>
+

@@ -1,0 +1,398 @@
+From 636229bbf0ad3b08443e8fe541679fe73c575189 Mon Sep 17 00:00:00 2001
+From: Michael Chang <mchang@novell.com>
+Date: Tue, 5 Jul 2011 12:22:32 +0300
+Subject: [PATCH 1/5] Add dbus signal for information about server
+ certification
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+In general, this patch attemps to extend commit
+00468b4650998144f794762206c695c962c54734 with dbus support.
+
+This can be used by dbus client to implement subject match text
+entry with preset value probed from server. This preset value, if
+user accepts it, is remembered and passed to subject_match config
+for any future authentication.
+
+Signed-off-by: Michael Chang <mchang@novell.com>
+
+- backport of upstream commit ade74830b45466abb41b8e8dbc2f595d8bacb793
+- preparatory commit for rh #1186806 fixes (backports)
+
+Signed-off-by: Jiří Klimeš <jklimes@redhat.com>
+---
+ src/eap_peer/eap.c             |  7 ++++++
+ src/eap_peer/eap.h             | 11 +++++++++
+ src/eapol_supp/eapol_supp_sm.c | 12 +++++++++-
+ src/eapol_supp/eapol_supp_sm.h | 11 +++++++++
+ wpa_supplicant/dbus/dbus_new.c | 54 ++++++++++++++++++++++++++++++++++++++++++
+ wpa_supplicant/dbus/dbus_new.h | 12 ++++++++++
+ wpa_supplicant/dbus/dbus_old.c | 53 +++++++++++++++++++++++++++++++++++++++++
+ wpa_supplicant/dbus/dbus_old.h | 12 ++++++++++
+ wpa_supplicant/notify.c        | 12 ++++++++++
+ wpa_supplicant/notify.h        |  4 ++++
+ wpa_supplicant/wpas_glue.c     | 12 ++++++++++
+ 11 files changed, 199 insertions(+), 1 deletion(-)
+
+diff --git a/src/eap_peer/eap.c b/src/eap_peer/eap.c
+index b9f186b..a650648 100644
+--- a/src/eap_peer/eap.c
++++ b/src/eap_peer/eap.c
+@@ -1206,6 +1206,13 @@ static void eap_peer_sm_tls_event(void *ctx, enum tls_event ev,
+ 				     data->peer_cert.subject,
+ 				     cert_hex);
+ 		}
++		if (sm->eapol_cb->notify_cert) {
++			sm->eapol_cb->notify_cert(sm->eapol_ctx,
++						  data->peer_cert.depth,
++						  data->peer_cert.subject,
++						  hash_hex,
++						  data->peer_cert.cert);
++		}
+ 		break;
+ 	}
+ 
+diff --git a/src/eap_peer/eap.h b/src/eap_peer/eap.h
+index 40d0b69..aa4d9af 100644
+--- a/src/eap_peer/eap.h
++++ b/src/eap_peer/eap.h
+@@ -221,6 +221,17 @@ struct eapol_callbacks {
+ 	 */
+ 	void (*eap_param_needed)(void *ctx, const char *field,
+ 				 const char *txt);
++
++	/**
++	 * notify_cert - Notification of a peer certificate
++	 * @ctx: eapol_ctx from eap_peer_sm_init() call
++	 * @depth: Depth in certificate chain (0 = server)
++	 * @subject: Subject of the peer certificate
++	 * @cert_hash: SHA-256 hash of the certificate
++	 * @cert: Peer certificate
++	 */
++	void (*notify_cert)(void *ctx, int depth, const char *subject,
++			    const char *cert_hash, const struct wpabuf *cert);
+ };
+ 
+ /**
+diff --git a/src/eapol_supp/eapol_supp_sm.c b/src/eapol_supp/eapol_supp_sm.c
+index 77cd564..e4d93e0 100644
+--- a/src/eapol_supp/eapol_supp_sm.c
++++ b/src/eapol_supp/eapol_supp_sm.c
+@@ -1810,6 +1810,15 @@ static void eapol_sm_eap_param_needed(void *ctx, const char *field,
+ #define eapol_sm_eap_param_needed NULL
+ #endif /* CONFIG_CTRL_IFACE || !CONFIG_NO_STDOUT_DEBUG */
+ 
++static void eapol_sm_notify_cert(void *ctx, int depth, const char *subject,
++				 const char *cert_hash,
++				 const struct wpabuf *cert)
++{
++	struct eapol_sm *sm = ctx;
++	if (sm->ctx->cert_cb)
++		sm->ctx->cert_cb(sm->ctx->ctx, depth, subject,
++				 cert_hash, cert);
++}
+ 
+ static struct eapol_callbacks eapol_cb =
+ {
+@@ -1822,7 +1831,8 @@ static struct eapol_callbacks eapol_cb =
+ 	eapol_sm_set_config_blob,
+ 	eapol_sm_get_config_blob,
+ 	eapol_sm_notify_pending,
+-	eapol_sm_eap_param_needed
++	eapol_sm_eap_param_needed,
++	eapol_sm_notify_cert
+ };
+ 
+ 
+diff --git a/src/eapol_supp/eapol_supp_sm.h b/src/eapol_supp/eapol_supp_sm.h
+index 1d2a32b..48fbf6c 100644
+--- a/src/eapol_supp/eapol_supp_sm.h
++++ b/src/eapol_supp/eapol_supp_sm.h
+@@ -220,6 +220,17 @@ struct eapol_ctx {
+ 	 * @authorized: Whether the supplicant port is now in authorized state
+ 	 */
+ 	void (*port_cb)(void *ctx, int authorized);
++
++	/**
++	 * cert_cb - Notification of a peer certificate
++	 * @ctx: Callback context (ctx)
++	 * @depth: Depth in certificate chain (0 = server)
++	 * @subject: Subject of the peer certificate
++	 * @cert_hash: SHA-256 hash of the certificate
++	 * @cert: Peer certificate
++	 */
++	void (*cert_cb)(void *ctx, int depth, const char *subject,
++			const char *cert_hash, const struct wpabuf *cert);
+ };
+ 
+ 
+diff --git a/wpa_supplicant/dbus/dbus_new.c b/wpa_supplicant/dbus/dbus_new.c
+index 8bd42c5..cf4e4dc 100644
+--- a/wpa_supplicant/dbus/dbus_new.c
++++ b/wpa_supplicant/dbus/dbus_new.c
+@@ -650,6 +650,54 @@ nomem:
+ 
+ #endif /* CONFIG_WPS */
+ 
++void wpas_dbus_signal_certification(struct wpa_supplicant *wpa_s,
++				    int depth, const char *subject,
++				    const char *cert_hash,
++				    const struct wpabuf *cert)
++{
++	struct wpas_dbus_priv *iface;
++	DBusMessage *msg;
++	DBusMessageIter iter, dict_iter;
++
++	iface = wpa_s->global->dbus;
++
++	/* Do nothing if the control interface is not turned on */
++	if (iface == NULL)
++		return;
++
++	msg = dbus_message_new_signal(wpa_s->dbus_new_path,
++				      WPAS_DBUS_NEW_IFACE_INTERFACE,
++				      "Certification");
++	if (msg == NULL)
++		return;
++
++	dbus_message_iter_init_append(msg, &iter);
++	if (!wpa_dbus_dict_open_write(&iter, &dict_iter))
++		goto nomem;
++
++	if (!wpa_dbus_dict_append_uint32(&dict_iter, "depth", depth) ||
++	    !wpa_dbus_dict_append_string(&dict_iter, "subject", subject))
++		goto nomem;
++
++	if (cert_hash &&
++	    !wpa_dbus_dict_append_string(&dict_iter, "cert_hash", cert_hash))
++		goto nomem;
++
++	if (cert &&
++	    !wpa_dbus_dict_append_byte_array(&dict_iter, "cert",
++					     wpabuf_head(cert),
++					     wpabuf_len(cert)))
++		goto nomem;
++
++	if (!wpa_dbus_dict_close_write(&iter, &dict_iter))
++		goto nomem;
++
++	dbus_connection_send(iface->con, msg, NULL);
++
++nomem:
++	dbus_message_unref(msg);
++}
++
+ 
+ /**
+  * wpas_dbus_signal_prop_changed - Signals change of property
+@@ -1489,6 +1537,12 @@ static const struct wpa_dbus_signal_desc wpas_dbus_interface_signals[] = {
+ 	  }
+ 	},
+ #endif /* CONFIG_WPS */
++	{ "Certification", WPAS_DBUS_NEW_IFACE_INTERFACE,
++	  {
++		  { "certification", "a{sv}", ARG_OUT },
++		  END_ARGS
++	  }
++	},
+ 	{ NULL, NULL, { END_ARGS } }
+ };
+ 
+diff --git a/wpa_supplicant/dbus/dbus_new.h b/wpa_supplicant/dbus/dbus_new.h
+index 9cdefcb..41692f0 100644
+--- a/wpa_supplicant/dbus/dbus_new.h
++++ b/wpa_supplicant/dbus/dbus_new.h
+@@ -120,6 +120,10 @@ void wpas_dbus_signal_blob_removed(struct wpa_supplicant *wpa_s,
+ void wpas_dbus_signal_debug_level_changed(struct wpa_global *global);
+ void wpas_dbus_signal_debug_timestamp_changed(struct wpa_global *global);
+ void wpas_dbus_signal_debug_show_keys_changed(struct wpa_global *global);
++void wpas_dbus_signal_certification(struct wpa_supplicant *wpa_s,
++				    int depth, const char *subject,
++				    const char *cert_hash,
++				    const struct wpabuf *cert);
+ 
+ #else /* CONFIG_CTRL_IFACE_DBUS_NEW */
+ 
+@@ -230,6 +234,14 @@ static inline void wpas_dbus_signal_debug_show_keys_changed(
+ {
+ }
+ 
++static inline void wpas_dbus_signal_certification(struct wpa_supplicant *wpa_s,
++						  int depth,
++						  const char *subject,
++						  const char *cert_hash,
++						  const struct wpabuf *cert)
++{
++}
++
+ #endif /* CONFIG_CTRL_IFACE_DBUS_NEW */
+ 
+ #endif /* CTRL_IFACE_DBUS_H_NEW */
+diff --git a/wpa_supplicant/dbus/dbus_old.c b/wpa_supplicant/dbus/dbus_old.c
+index 7f25bf0..b256a73 100644
+--- a/wpa_supplicant/dbus/dbus_old.c
++++ b/wpa_supplicant/dbus/dbus_old.c
+@@ -547,6 +547,59 @@ void wpa_supplicant_dbus_notify_wps_cred(struct wpa_supplicant *wpa_s,
+ }
+ #endif /* CONFIG_WPS */
+ 
++void wpa_supplicant_dbus_notify_certification(struct wpa_supplicant *wpa_s,
++					      int depth, const char *subject,
++					      const char *cert_hash,
++					      const struct wpabuf *cert)
++{
++	struct wpas_dbus_priv *iface;
++	DBusMessage *_signal = NULL;
++	const char *hash;
++	const char *cert_hex;
++	int cert_hex_len;
++
++	/* Do nothing if the control interface is not turned on */
++	if (wpa_s->global == NULL)
++		return;
++	iface = wpa_s->global->dbus;
++	if (iface == NULL)
++		return;
++
++	_signal = dbus_message_new_signal(wpa_s->dbus_path,
++					  WPAS_DBUS_IFACE_INTERFACE,
++					  "Certification");
++	if (_signal == NULL) {
++		wpa_printf(MSG_ERROR,
++		           "dbus: wpa_supplicant_dbus_notify_certification: "
++		           "Could not create dbus signal; likely out of "
++		           "memory");
++		return;
++	}
++
++	hash = cert_hash ? cert_hash : "";
++	cert_hex = cert ? wpabuf_head(cert) : "";
++	cert_hex_len = cert ? wpabuf_len(cert) : 0;
++
++	if (!dbus_message_append_args(_signal,
++				      DBUS_TYPE_INT32,&depth,
++				      DBUS_TYPE_STRING, &subject,
++	                              DBUS_TYPE_STRING, &hash,
++	                              DBUS_TYPE_ARRAY, DBUS_TYPE_BYTE,
++				      &cert_hex, cert_hex_len,
++	                              DBUS_TYPE_INVALID)) {
++		wpa_printf(MSG_ERROR,
++		           "dbus: wpa_supplicant_dbus_notify_certification: "
++		           "Not enough memory to construct signal");
++		goto out;
++	}
++
++	dbus_connection_send(iface->con, _signal, NULL);
++
++out:
++	dbus_message_unref(_signal);
++
++}
++
+ 
+ /**
+  * wpa_supplicant_dbus_ctrl_iface_init - Initialize dbus control interface
+diff --git a/wpa_supplicant/dbus/dbus_old.h b/wpa_supplicant/dbus/dbus_old.h
+index a9840c2..d4af862 100644
+--- a/wpa_supplicant/dbus/dbus_old.h
++++ b/wpa_supplicant/dbus/dbus_old.h
+@@ -82,6 +82,10 @@ void wpa_supplicant_dbus_notify_state_change(struct wpa_supplicant *wpa_s,
+ 					     enum wpa_states old_state);
+ void wpa_supplicant_dbus_notify_wps_cred(struct wpa_supplicant *wpa_s,
+ 					 const struct wps_credential *cred);
++void wpa_supplicant_dbus_notify_certification(struct wpa_supplicant *wpa_s,
++					      int depth, const char *subject,
++					      const char *cert_hash,
++					      const struct wpabuf *cert);
+ 
+ char * wpas_dbus_decompose_object_path(const char *path, char **network,
+                                        char **bssid);
+@@ -114,6 +118,14 @@ wpa_supplicant_dbus_notify_wps_cred(struct wpa_supplicant *wpa_s,
+ {
+ }
+ 
++static inline void
++wpa_supplicant_dbus_notify_certification(struct wpa_supplicant *wpa_s,
++					      int depth, const char *subject,
++					      const char *cert_hash,
++					      const struct wpabuf *cert)
++{
++}
++
+ static inline int
+ wpas_dbus_register_iface(struct wpa_supplicant *wpa_s)
+ {
+diff --git a/wpa_supplicant/notify.c b/wpa_supplicant/notify.c
+index 831a2a6..a0ebd64 100644
+--- a/wpa_supplicant/notify.c
++++ b/wpa_supplicant/notify.c
+@@ -341,3 +341,15 @@ void wpas_notify_resume(struct wpa_global *global)
+ 			wpa_supplicant_req_scan(wpa_s, 0, 100000);
+ 	}
+ }
++
++
++void wpas_notify_certification(struct wpa_supplicant *wpa_s, int depth,
++			       const char *subject, const char *cert_hash,
++			       const struct wpabuf *cert)
++{
++	/* notify the old DBus API */
++	wpa_supplicant_dbus_notify_certification(wpa_s, depth, subject,
++						 cert_hash, cert);
++	/* notify the new DBus API */
++	wpas_dbus_signal_certification(wpa_s, depth, subject, cert_hash, cert);
++}
+diff --git a/wpa_supplicant/notify.h b/wpa_supplicant/notify.h
+index 2e70bdb..57d1bad 100644
+--- a/wpa_supplicant/notify.h
++++ b/wpa_supplicant/notify.h
+@@ -78,4 +78,8 @@ void wpas_notify_debug_show_keys_changed(struct wpa_global *global);
+ void wpas_notify_suspend(struct wpa_global *global);
+ void wpas_notify_resume(struct wpa_global *global);
+ 
++void wpas_notify_certification(struct wpa_supplicant *wpa_s, int depth,
++			       const char *subject, const char *cert_hash,
++			       const struct wpabuf *cert);
++
+ #endif /* NOTIFY_H */
+diff --git a/wpa_supplicant/wpas_glue.c b/wpa_supplicant/wpas_glue.c
+index 094b89c..a129751 100644
+--- a/wpa_supplicant/wpas_glue.c
++++ b/wpa_supplicant/wpas_glue.c
+@@ -32,6 +32,7 @@
+ #include "wps_supplicant.h"
+ #include "bss.h"
+ #include "scan.h"
++#include "notify.h"
+ 
+ 
+ #ifndef CONFIG_NO_CONFIG_BLOBS
+@@ -572,6 +573,16 @@ static void wpa_supplicant_port_cb(void *ctx, int authorized)
+ 		   authorized ? "Authorized" : "Unauthorized");
+ 	wpa_drv_set_supp_port(wpa_s, authorized);
+ }
++
++
++static void wpa_supplicant_cert_cb(void *ctx, int depth, const char *subject,
++				   const char *cert_hash,
++				   const struct wpabuf *cert)
++{
++	struct wpa_supplicant *wpa_s = ctx;
++
++	wpas_notify_certification(wpa_s, depth, subject, cert_hash, cert);
++}
+ #endif /* IEEE8021X_EAPOL */
+ 
+ 
+@@ -602,6 +613,7 @@ int wpa_supplicant_init_eapol(struct wpa_supplicant *wpa_s)
+ 	ctx->eap_param_needed = wpa_supplicant_eap_param_needed;
+ 	ctx->port_cb = wpa_supplicant_port_cb;
+ 	ctx->cb = wpa_supplicant_eapol_cb;
++	ctx->cert_cb = wpa_supplicant_cert_cb;
+ 	ctx->cb_ctx = wpa_s;
+ 	wpa_s->eapol = eapol_sm_init(ctx);
+ 	if (wpa_s->eapol == NULL) {
+-- 
+2.1.0
+

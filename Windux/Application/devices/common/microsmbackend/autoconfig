@@ -1,0 +1,24 @@
+#! /bin/sh
+#
+# This is an init script for autoconfig
+
+case "$1" in
+  start)
+    echo -n "Starting autoconfig"
+    python /usr/local/hobart/python/autoconfig.py &
+    ;;
+  stop)
+    echo -n "Stopping autoconfig"
+    pkill -f autoconfig.py
+    ;;
+  restart)
+    echo -n "Restarting autoconfig"
+    pkill -f autoconfig.py
+    python /usr/local/hobart/python/autoconfig.py &
+    ;;
+  *)
+    echo "Usage: /etc/init.d/autoconfig {start|stop|restart}"
+    exit 1
+esac
+
+

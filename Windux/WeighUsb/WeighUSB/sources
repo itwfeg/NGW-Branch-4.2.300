@@ -1,0 +1,28 @@
+# Copyright (c) 2000 Microsoft Corporation.  All rights reserved.
+
+TARGETNAME=WeighUsb
+TARGETTYPE=DRIVER
+DDKROOT=$(_NTDRIVE)$(_NTROOT)
+
+C_DEFINES= $(C_DEFINES)
+
+TARGETPATH=obj
+
+# INCLUDES=$(INCLUDES);$(DDKROOT)\private\ntos\inc;..\..\inc;$(MFC_INC_PATH);
+INCLUDES=$(DDKROOT)\private\ntos\inc;..\..\inc;$(MFC_INC_PATH);
+
+# USE_MAPSYM=1  ;; obsolete, don't use
+
+TARGETLIBS=  $(DDK_LIB_PATH)\hidclass.lib  \
+             $(DDK_LIB_PATH)\usbd.lib      \
+             $(DDK_LIB_PATH)\Rtlver.lib    \
+             $(DDK_LIB_PATH)\Wdmsec.lib    \
+             $(DDK_LIB_PATH)\ntoskrnl.lib
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=WghUsb.c      \
+        WghDispatch.c \
+        WghPower.c \
+        Wghusb.rc
+

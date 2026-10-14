@@ -1,0 +1,159 @@
+/**
+ * @file softkeytogglemanager.cpp
+ *
+ * @copyright Copyright (c) 2022 Hobart Corporation
+ * @author Joe Crew
+ */
+
+#include <logmanager.h>
+#include "softkeytogglemanager.h"
+#include <QString>
+
+/// Hobart namespace.
+namespace hobart {
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+softkeyToggleManager::softkeyToggleManager( QObject *parent ) :
+    _Mybase( parent ),
+    toggleFlashkeyON_( false ),
+    toggleFlashkeyRow_( 0 ),
+    toggleFlashkeyCol_( 0 ),
+    toggleFlashkeyGroup_( 0 ),
+    toggleFlashkeyBorder_( 0 ),
+    toggledFlashkeyImage_( "" )
+{
+
+    // connect signals/slots - dont know if I need them really
+    connect( this, SIGNAL( toggleFlashkeyON() ),     SLOT( onFlashkeyOnChanged() ) );
+    connect( this, SIGNAL( toggleFlashkeyRow() ),    SLOT( onFlashkeyRowChanged() ) );
+    connect( this, SIGNAL( toggleFlashkeyCol() ),    SLOT( onFlashkeyColChanged() ) );
+    connect( this, SIGNAL( toggleFlashkeyGroup() ),  SLOT( onFlashkeyGroupChanged() ) );
+    connect( this, SIGNAL( toggleFlashkeyBorder() ), SLOT( onFlashkeyBorderChanged() ) );
+    connect( this, SIGNAL( toggleFlashkeyImage() ),  SLOT( onFlashkeyImageChanged() ) );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+softkeyToggleManager::~softkeyToggleManager()
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+bool softkeyToggleManager::toggleFlashkeyON() const
+{
+    return toggleFlashkeyON_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+int softkeyToggleManager::toggleFlashkeyRow() const
+{
+    return toggleFlashkeyRow_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+int softkeyToggleManager::toggleFlashkeyCol() const
+{
+    return toggleFlashkeyCol_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+int softkeyToggleManager::toggleFlashkeyGroup() const
+{
+    return toggleFlashkeyGroup_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+int softkeyToggleManager::toggleFlashkeyBorder() const
+{
+    return toggleFlashkeyBorder_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QString softkeyToggleManager::toggledFlashkeyImage() const
+{
+    return toggledFlashkeyImage_;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggleFlashkeyON( bool value )
+{
+    toggleFlashkeyON_ = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggleFlashkeyRow( int value )
+{
+    toggleFlashkeyRow_ = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggleFlashkeyCol( int value )
+{
+    toggleFlashkeyCol_ = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggleFlashkeyGroup( int value )
+{
+    toggleFlashkeyGroup_ = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggleFlashkeyBorder( int value )
+{
+    toggleFlashkeyBorder_ = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::setToggledFlashkeyImage( const QString& value )
+{
+    if ( value == toggledFlashkeyImage_ )
+        return;
+
+    toggledFlashkeyImage_ = value;
+
+    // should I set a dirty flag here?  not refreshing it in this class so no for now
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyOnChanged( )
+{
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyRowChanged( )
+{
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyColChanged( )
+{
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyGroupChanged( )
+{
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyBorderChanged( )
+{
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void softkeyToggleManager::onFlashkeyImageChanged( )
+{
+    return;
+}
+
+} /// Hobart namespace
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+

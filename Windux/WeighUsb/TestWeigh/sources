@@ -1,0 +1,26 @@
+
+TARGETNAME=TestWeigh
+TARGETTYPE=PROGRAM
+
+UMTYPE=console
+UMBASE=0x01000000
+
+USE_MSVCRT=1
+USER_C_FLAGS=/EHsc 
+MSC_OPTIMIZATION=/Od
+USE_NATIVE_EH=1 
+
+
+TARGETPATH=obj
+
+INCLUDES=..\weighUSB
+
+
+TARGETLIBS= $(DDK_LIB_PATH)\usbd.lib \
+            $(SDK_LIB_PATH)\setupapi.lib 
+
+SOURCES=      \
+        TestWeigh.cpp  
+
+        #        TestWeigh.rc
+

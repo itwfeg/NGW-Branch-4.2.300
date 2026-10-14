@@ -1,0 +1,6 @@
+This is code written by Hobart for supporting the Walmart FPP Lite browser app.
+
+What this code does:
+1) Opens a fullscreen browser pointing to the Walmart FPP Lite web app.
+
+This code could be easily adapted to support other web applications.

@@ -1,0 +1,45 @@
+Touch Screen Howto
+------------------
+
+1)  Copy Tsharc305BETA.tar.gz to target.  Uncompress in a folder somewhere.
+                tar -xvzpf Tsharc305BETA.tar.gz
+
+2)  Go into the Tsharc305BETA folder.  Install as root
+                Cd Tsharc305BETA
+                sudo ./install.sh
+
+3)  A menu will come up.  Select #2, Serial controller on COM1 /dev/ttyS0
+
+4)  Select item #12, Install selected components
+
+5)  Manually start touch screen for a quick test:
+                boot.tsharc start
+
+6)  Touch the screen.  The cursor should move.  Not correctly - but it should move.
+
+7)  Next, run the calibrate program
+                hlincal
+
+8)  A menu will come up.  Select #3 Calibration
+
+9)  Another menu will come up.  Select #3, 9 point calibration
+
+10)  Then select #6, Begin GUI Calibration
+
+11)  9 targets will come up.  Touch the center of each one with your finger for about a second.
+
+12)  A test screen will come up.  Drag your finger around to see if the mouse cursor follows it correctly.
+
+13)  Press the "Accept" button.
+
+14)  Select P to return to previous menu
+
+15)  Select O, OK - Exit and write current controller data
+
+16)  Manually stop then start touch screen again.  Ignore the script errors for brackets - they don't hurt anything.
+                boot.tsharc stop
+                boot.tsharc start
+
+17)  That should be it - touch screen should be working.
+
+

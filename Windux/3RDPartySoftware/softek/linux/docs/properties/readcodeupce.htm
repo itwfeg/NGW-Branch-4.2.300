@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ReadUPCE</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			When set to TRUE the toolkit will search for&nbsp;UPC-E type 
+			barcodes.&nbsp;&nbsp;
+		</P>
+		<P>
+			Default value = &nbsp;&nbsp;FALSE
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_READ_UPCE,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_READ_UPCE,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Turn on&nbsp;UPC-E recognition.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_READ_UPCE,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

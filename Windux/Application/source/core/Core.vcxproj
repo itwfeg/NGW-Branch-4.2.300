@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2A1914D2-FCCE-4FAD-8253-DD5F28023BE5}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\db\util\filesys;..\..\source\util\Inc;..\..\source\util;..\..\source\HFC\tags;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\db\util;..\..\source\db;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\core;..\..\source\comm;..\..\source\MetrologicallySignificant;..\..\..\smbus\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4018;4189;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\db\util\filesys;..\..\source\util\Inc;..\..\source\util;..\..\source\HFC\tags;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\db\util;..\..\source\db;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\core;..\..\source\comm;..\..\source\MetrologicallySignificant;..\..\..\smbus\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4018;4189;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\db\util\filesys;..\..\source\util\Inc;..\..\source\util;..\..\source\HFC\tags;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\db\util;..\..\source\db;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\core;..\..\source\comm;..\..\source\MetrologicallySignificant;..\..\..\smbus\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\db\util\thread;..\..\source\db\util\filesys;..\..\source\util\Inc;..\..\source\util;..\..\source\HFC\tags;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\db\util;..\..\source\db;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\core;..\..\source\comm;..\..\source\MetrologicallySignificant;..\..\..\smbus\driver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="bootParameters.cpp" />
+    <ClCompile Include="FpmManager.cpp" />
+    <ClCompile Include="LeapStatusWrite.cpp" />
+    <ClCompile Include="MainBoardEEPROM.cpp" />
+    <ClCompile Include="MtdManufacturingData.cpp" />
+    <ClCompile Include="MtdNGWWrapperData.cpp" />
+    <ClCompile Include="MtdScaleData.cpp" />
+    <ClCompile Include="MtdScaleHwCfg.cpp" />
+    <ClCompile Include="MtdScaleSWConfig.cpp" />
+    <ClCompile Include="MtdSectionStatistics.cpp" />
+    <ClCompile Include="Smbus.cpp" />
+    <ClCompile Include="VersionManager\messages\PeripheralCodeUpdate.cpp" />
+    <ClCompile Include="VersionManager\messages\PeripheralRequestCodeUpdate.cpp" />
+    <ClCompile Include="VersionManager\messages\ProcessDBFilesRequest.cpp" />
+    <ClCompile Include="VersionManager\messages\ShutdownSystemRequest.cpp" />
+    <ClCompile Include="VersionManager\messages\ShutdownSystemResponse.cpp" />
+    <ClCompile Include="VersionManager\messages\UpdateSoftwareAutomatically.cpp" />
+    <ClCompile Include="VersionManager\messages\UpdateSoftwareManually.cpp" />
+    <ClCompile Include="VersionManager\messages\UpgradeList.cpp" />
+    <ClCompile Include="VersionManager\messages\UpgradePeripheral.cpp" />
+    <ClCompile Include="VersionManager\messages\UpgradeTransferStatus.cpp" />
+    <ClCompile Include="VersionManager\messages\UpgradeVersions.cpp" />
+    <ClCompile Include="VersionManager\messages\UsbAddComponent.cpp" />
+    <ClCompile Include="VersionManager\messages\usbRemoveComponent.cpp" />
+    <ClCompile Include="VersionManager\messages\VmStatusMsg.cpp" />
+    <ClCompile Include="VersionManager\messages\WriteFileToSCEEPMsg.cpp" />
+    <ClCompile Include="VersionManager\source\HobComplexVersion.cpp" />
+    <ClCompile Include="VersionManager\source\HobDependency.cpp" />
+    <ClCompile Include="VersionManager\source\HobVersion.cpp" />
+    <ClCompile Include="VersionManager\source\SoftwareSystem.cpp" />
+    <ClCompile Include="VersionManager\source\VersionManager.cpp" />
+    <ClCompile Include="StateMachine\StateMachineBase.cpp" />
+    <ClCompile Include="Synchronization\CommunicationSynchronizer.cpp" />
+    <ClCompile Include="Synchronization\DatabaseSynchronizer.cpp" />
+    <ClCompile Include="Synchronization\DownloadLocalBatchesUseCase.cpp" />
+    <ClCompile Include="Synchronization\NotifyLocalBatchesPresentUseCase.cpp" />
+    <ClCompile Include="Synchronization\NotifyOnlineUseCase.cpp" />
+    <ClCompile Include="Synchronization\PrimaryCommSession.cpp" />
+    <ClCompile Include="Synchronization\PrimarySynchronizationManager.cpp" />
+    <ClCompile Include="Synchronization\QueueManager.cpp" />
+    <ClCompile Include="Synchronization\RequestRegistrationUseCase.cpp" />
+    <ClCompile Include="Synchronization\SecondaryCommSession.cpp" />
+    <ClCompile Include="Synchronization\SecondarySynchronizationManager.cpp" />
+    <ClCompile Include="Synchronization\SynchronizationCommSession.cpp" />
+    <ClCompile Include="Synchronization\SynchronizationManager.cpp" />
+    <ClCompile Include="Synchronization\SynchronizationManagerProxy.cpp" />
+    <ClCompile Include="Synchronization\SynchronizationManagerUnitTester.cpp" />
+    <ClCompile Include="Synchronization\Synchronizer.cpp" />
+    <ClCompile Include="Synchronization\SynchronizeSecondaryScaleUseCase.cpp" />
+    <ClCompile Include="Synchronization\Messages\AbortBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\AbortBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\AddRecordToBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\AddRecordToBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ApplyBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ApplyBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ComingUpOnLineMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\CompleteBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\CompleteBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\CompleteCommandMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\CreateBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\CreateBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DeleteBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DeleteBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DeregisterSecondaryScaleMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DeregisterSecondaryScaleProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DownloadLocalBatchesMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\DownloadLocalBatchesProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\EmptyQueueMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ExecuteCommandMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\GoingOffLineMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\NewSynchronizationStatusMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\NotifyLocalBatchesLazilyMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\NotifyOnlineProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessHQBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessHQBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessRemoteBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessRemoteBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessScaleOnlineMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessSynchronizedBatchMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessSynchronizedBatchProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessUserChangesMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessUserChangesProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessUserFileMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\ProcessUserFileProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\RegisterSecondaryScaleMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\RegisterSecondaryScaleProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\RequestRegistrationProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\RetryCommandMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\StartSyncManagerMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\StartSyncManagerProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\StopSynchronizerMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\SynchronizePrimaryScaleProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScaleMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScaleProcessedMessage.cpp" />
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScalesLazilyMessage.cpp" />
+    <ClCompile Include="Synchronization\Commands\AbortBatchCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\ApplyAndDeleteBatchCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\ApplyBatchCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\Command.cpp" />
+    <ClCompile Include="Synchronization\Commands\CommandWrapper.cpp" />
+    <ClCompile Include="Synchronization\Commands\CommCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\DeleteBatchCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\DownloadLocalBatchesCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\NotifyLocalBatchesPresentCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\NotifyOnlineCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\PurgeBatchesCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\RequestDeregistrationCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\RequestRegistrationCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\SynchronizePrimaryScaleCommand.cpp" />
+    <ClCompile Include="Synchronization\Commands\SynchronizeSecondaryScaleCommand.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bootParameters.h" />
+    <ClInclude Include="FpmEvent.h" />
+    <ClInclude Include="FpmManager.h" />
+    <ClInclude Include="HandleSpecialKeys.h" />
+    <ClInclude Include="LeapStatusWrite.h" />
+    <ClInclude Include="MainBoardEEPROM.h" />
+    <ClInclude Include="MtdManufacturingData.h" />
+    <ClInclude Include="MtdNGWWrapperData.h" />
+    <ClInclude Include="MtdScaleData.h" />
+    <ClInclude Include="MtdScaleHwCfg.h" />
+    <ClInclude Include="MtdScaleSWConfig.h" />
+    <ClInclude Include="MtdSectionStatistics.h" />
+    <ClInclude Include="Smbus.h" />
+    <ClInclude Include="VersionManager\include\HobComplexVersion.h" />
+    <ClInclude Include="VersionManager\include\HobDependency.h" />
+    <ClInclude Include="VersionManager\include\HobVersion.h" />
+    <ClInclude Include="VersionManager\include\PeripheralCodeUpdate.h" />
+    <ClInclude Include="VersionManager\include\PeripheralRequestCodeUpdate.h" />
+    <ClInclude Include="VersionManager\include\ProcessDBFilesRequest.h" />
+    <ClInclude Include="VersionManager\include\ShutdownSystemRequest.h" />
+    <ClInclude Include="VersionManager\include\ShutdownSystemResponse.h" />
+    <ClInclude Include="VersionManager\include\SoftwareSystem.h" />
+    <ClInclude Include="VersionManager\include\UpdateSoftwareAutomatically.h" />
+    <ClInclude Include="VersionManager\include\UpdateSoftwareManually.h" />
+    <ClInclude Include="VersionManager\include\UpgradeList.h" />
+    <ClInclude Include="VersionManager\include\UpgradePeripheral.h" />
+    <ClInclude Include="VersionManager\include\UpgradeTransferStatus.h" />
+    <ClInclude Include="VersionManager\include\UpgradeVersions.h" />
+    <ClInclude Include="VersionManager\include\UsbAddComponent.h" />
+    <ClInclude Include="VersionManager\include\usbRemoveComponent.h" />
+    <ClInclude Include="VersionManager\include\VersionManager.h" />
+    <ClInclude Include="VersionManager\include\VersionManagerEvent.h" />
+    <ClInclude Include="VersionManager\include\VmStatusMsg.h" />
+    <ClInclude Include="VersionManager\include\WriteFileToSCEEPMsg.h" />
+    <ClInclude Include="StateMachine\Action.h" />
+    <ClInclude Include="StateMachine\State.h" />
+    <ClInclude Include="StateMachine\StateMachine.h" />
+    <ClInclude Include="StateMachine\StateMachineBase.h" />
+    <ClInclude Include="StateMachine\StateMachineController.h" />
+    <ClInclude Include="StateMachine\Transition.h" />
+    <ClInclude Include="Synchronization\CommSessionErrorEvent.h" />
+    <ClInclude Include="Synchronization\CommunicationSynchronizer.h" />
+    <ClInclude Include="Synchronization\CommunicationSynchronizerError.h" />
+    <ClInclude Include="Synchronization\CommunicationSynchronizerEvent.h" />
+    <ClInclude Include="Synchronization\DatabaseSynchronizer.h" />
+    <ClInclude Include="Synchronization\DownloadLocalBatchesUseCase.h" />
+    <ClInclude Include="Synchronization\ISynchronizationUseCase.h" />
+    <ClInclude Include="Synchronization\NotifyLocalBatchesPresentUseCase.h" />
+    <ClInclude Include="Synchronization\NotifyOnlineUseCase.h" />
+    <ClInclude Include="Synchronization\PrimaryCommSession.h" />
+    <ClInclude Include="Synchronization\PrimarySynchronizationManager.h" />
+    <ClInclude Include="Synchronization\QueueManager.h" />
+    <ClInclude Include="Synchronization\RequestRegistrationUseCase.h" />
+    <ClInclude Include="Synchronization\ScaleSynchronizationType.h" />
+    <ClInclude Include="Synchronization\SecondaryCommSession.h" />
+    <ClInclude Include="Synchronization\SecondarySynchronizationManager.h" />
+    <ClInclude Include="Synchronization\SynchronizationCommSession.h" />
+    <ClInclude Include="Synchronization\SynchronizationManager.h" />
+    <ClInclude Include="Synchronization\SynchronizationManagerProxy.h" />
+    <ClInclude Include="Synchronization\SynchronizationManagerUnitTester.h" />
+    <ClInclude Include="Synchronization\Synchronizer.h" />
+    <ClInclude Include="Synchronization\SynchronizeSecondaryScaleUseCase.h" />
+    <ClInclude Include="Synchronization\Messages\AbortBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\AbortBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\AddRecordToBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\AddRecordToBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ApplyBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ApplyBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ComingUpOnLineMessage.h" />
+    <ClInclude Include="Synchronization\Messages\CompleteBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\CompleteBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\CompleteCommandMessage.h" />
+    <ClInclude Include="Synchronization\Messages\CreateBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\CreateBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DeleteBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DeleteBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DeregisterSecondaryScaleMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DeregisterSecondaryScaleProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DownloadLocalBatchesMessage.h" />
+    <ClInclude Include="Synchronization\Messages\DownloadLocalBatchesProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\EmptyQueueMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ExecuteCommandMessage.h" />
+    <ClInclude Include="Synchronization\Messages\GoingOffLineMessage.h" />
+    <ClInclude Include="Synchronization\Messages\NewSynchronizationStatusMessage.h" />
+    <ClInclude Include="Synchronization\Messages\NotifyLocalBatchesLazilyMessage.h" />
+    <ClInclude Include="Synchronization\Messages\NotifyOnlineProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessHQBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessHQBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessRemoteBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessRemoteBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessScaleOnlineMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessSynchronizedBatchMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessSynchronizedBatchProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessUserChangesMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessUserChangesProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessUserFileMessage.h" />
+    <ClInclude Include="Synchronization\Messages\ProcessUserFileProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\RegisterSecondaryScaleMessage.h" />
+    <ClInclude Include="Synchronization\Messages\RegisterSecondaryScaleProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\RequestRegistrationProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\RetryCommandMessage.h" />
+    <ClInclude Include="Synchronization\Messages\StartSyncManagerMessage.h" />
+    <ClInclude Include="Synchronization\Messages\StartSyncManagerProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\StopSynchronizerMessage.h" />
+    <ClInclude Include="Synchronization\Messages\SynchronizationDevEvent.h" />
+    <ClInclude Include="Synchronization\Messages\SynchronizePrimaryScaleProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScaleMessage.h" />
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScaleProcessedMessage.h" />
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScalesLazilyMessage.h" />
+    <ClInclude Include="Synchronization\Commands\AbortBatchCommand.h" />
+    <ClInclude Include="Synchronization\Commands\ApplyAndDeleteBatchCommand.h" />
+    <ClInclude Include="Synchronization\Commands\ApplyBatchCommand.h" />
+    <ClInclude Include="Synchronization\Commands\Command.h" />
+    <ClInclude Include="Synchronization\Commands\CommandWrapper.h" />
+    <ClInclude Include="Synchronization\Commands\CommCommand.h" />
+    <ClInclude Include="Synchronization\Commands\DeleteBatchCommand.h" />
+    <ClInclude Include="Synchronization\Commands\DownloadLocalBatchesCommand.h" />
+    <ClInclude Include="Synchronization\Commands\NotifyLocalBatchesPresentCommand.h" />
+    <ClInclude Include="Synchronization\Commands\NotifyOnlineCommand.h" />
+    <ClInclude Include="Synchronization\Commands\PurgeBatchesCommand.h" />
+    <ClInclude Include="Synchronization\Commands\RequestDeregistrationCommand.h" />
+    <ClInclude Include="Synchronization\Commands\RequestRegistrationCommand.h" />
+    <ClInclude Include="Synchronization\Commands\SynchronizePrimaryScaleCommand.h" />
+    <ClInclude Include="Synchronization\Commands\SynchronizeSecondaryScaleCommand.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PAL\PAL.vcxproj">
+      <Project>{ce947c65-5841-4d63-a3f1-2c1cec227960}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

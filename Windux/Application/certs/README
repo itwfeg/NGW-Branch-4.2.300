@@ -1,0 +1,97 @@
+Information
+===========
+
+This folder contains certificates and keys pertaining to code signing (scale features) and ssh keys.
+
+Folder              Usage
+------------------- ---------------------------------------------------------------------------------------------------
+./ca                Stores root certificate and issuing authorities. Don't use unless you know what your doing!
+./ca/codeSigningCA  This is the issuing authority responsible for code signing.
+./feature           Install script for scale feature.
+./ssh               SSH key for root user.
+
+There are also several certificates and scripts available.
+
+Name                          Usage
+----------------------------- ---------------------------------------------------------------------------------------------------------------------------------
+copyCerts.sh                  Updates hobart code signing certificate and root cert. Use if you have generated a new certificate (i.e. the old one expired).
+HobartCodeSigningCert.crt     Hobart code signing certificate and chain.
+HobartCodeSigningCertKey.pem  Key file for the hobart certificate.
+HobartRootCA.crt              Hobart root certificate.
+signFeatureInstaller.sh       Generates signature for a file. This is a SHA256 sum, which is then signed with the private key.
+verifyFeatureInstaller.sh     Validates a signature file using the hobart signing certificate.
+
+If you have questions please see Randy.
+
+Release Process
+===============
+
+The code signing certificate should be renewed every release. This process should be performed just before the release branch is taken. In this way, signed code is valid for 2 years. 
+
+To generate a new certificate follow this process:
+
+1) Generate a new CSR for this release
+
+$ cd Windux/Application/certs/ca/codeSigningCA
+$ CADIR=Windux/Application/certs/ca openssl req -config openssl.cnf \
+      -key private/hobartkey.pem \
+      -new -sha256 -out csr/hobartcsr-2.3.pem
+
+Enter pass phrase for hobartkey.pem: authentichobart
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+-----
+Country Name (2 letter code) [US]:US
+State or Province Name [Ohio]:Ohio
+Locality Name [Troy]:Troy
+Organization Name [ITW]:ITW
+Organizational Unit Name [Hobart]:Hobart
+Common Name []:Verified Hobart Software 2.3
+Email Address []:HT.Support@itwfeg.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+
+2) Sign the CSR
+
+$ CADIR=Windux/Application/certs/ca openssl ca -config openssl.cnf \
+      -extensions usr_cert -days 730 -notext -md sha256 \
+      -in csr/hobartcsr-2.3.pem \
+      -out certs/hobartcert-2.3.pem
+      
+Enter pass phrase for intermediatekey.pem: code1signer
+
+Sign the certificate? [y/n]:y
+1 out of 1 certificate requests certified, commit? [y/n]y
+
+3) Update the certs folder
+
+$ cd Windux/Application/certs
+$ gedit copyCerts.sh
+
+Update the code signing cert to the one you just generated:
+
+# generate code signing cert
+cat ca/codeSigningCA/certs/hobartcert-2.3.pem ca/codeSigningCA/certs/intermediatecert.pem > $CRT
+
+Save the script then run it.
+
+$ ./copyCerts.sh
+
+4) Add new files to SVN and check everything in
+
+Make sure these files get added:
+Windux/Application/certs/ca/codeSigningCA/newcerts/10XX.pem
+Windux/Application/certs/ca/codeSigningCA/csr/hobartcsr-2.3.pem
+Windux/Application/certs/ca/codeSigningCA/certs/hobartcert-2.3.pem
+
+Do a check in.
+
+New Code Signing Authority Process
+==================================
+
+This process should be performed every 5 years staring in 2015. So this means in years 2020, 2025, 2030, etc. Code signing authorities are valid for 10 years.
+
+TODO

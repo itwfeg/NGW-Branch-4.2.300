@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">Despeckle</FONT>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>If the <B>Despeckle</B> property is none zero then the <A href="Methods.htm#SCANBARCODE">
+				ScanBarCode</A> method will run an image through a despeckle filter before 
+			scanning for barcodes . The filter removes marks from an image that are 
+			unlikely to be part of a barcode. A larger value for&nbsp;Despeckle will remove 
+			larger marks from the image. This increases the chances of finding a barcode in 
+			a poor quality image but also increases the time taken to process an image. 
+			Note that the Despeckle filter also removes small white gaps in vertical bars. 
+			A typical value for <B>NoiseReduction</B> is 10.&nbsp;&nbsp;
+		</P>
+		<P>Default value = &nbsp;&nbsp;&nbsp;0
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_DESPECKLE,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_DESPECKLE,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			//&nbsp;Set a&nbsp;despeckle value of 10<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;10 ;<BR>
+			STSetParameter(hBarcode, ST_DESPECKLE,&nbsp;&amp;value) ;</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

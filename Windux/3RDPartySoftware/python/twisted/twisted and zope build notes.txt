@@ -1,0 +1,25 @@
+notes for twisted and zope
+==========================
+Both of these can be built as pure python libraries with some work.
+
+I built both of these on the scale, don't think there's a nice way to cross-compile/cross-build them.
+
+zope
+----
+extract 4.7.1 and run:
+
+PURE_PYTHON=1 python3 ./setup.py bdist
+
+Which will create a tarball in dist/
+
+twisted
+-------
+For twisted we have to modify src/twisted/python/_setup.py
+Go to the line that says:
+# The C extensions used for Twisted.
+
+Just below, replace the _isCPython with False
+
+Change the function _checkPythonVersion to immediately return (it doesn't like python3.4)
+
+

@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MinLength</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		MinLength defines the smallest length for a barcode string, including checksum 
+		characters.
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_MIN_LEN,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_MIN_LEN,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Ignore all barcodes with length&nbsp;&lt; 5<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;5 ;<BR>
+		STSetParameter(hBarcode, ST_MIN_LEN,&nbsp;&amp;value) ;< /P >
+		<P>&nbsp;
+		</P>
+	</body>
+</html>

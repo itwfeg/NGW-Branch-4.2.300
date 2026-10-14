@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Code39NeedStartStop</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			When set to TRUE the toolkit will only report Code 39 barcodes that start and 
+			end with a * character.&nbsp;
+		</P>
+		<P>Setting this property to FALSE is not recommended for the following reasons:</P>
+		<OL>
+			<LI>
+			It is not a valid Code 39 barcode without the start and stop * character.
+			<LI>
+			Without a start/stop * character, a Code 39 barcode reads with 2 different 
+			values, left to right, and right to left. The toolkit will report it as 2 
+			different barcodes unless the scan direction is restricted to one direction 
+			only.
+			<LI>
+				The probablility of a false positive reading is increased significantly by 
+				setting this property to FALSE.</LI></OL>
+		<P>
+			Default value =&nbsp;&nbsp;1
+		</P>
+		<P>void STSetParameter(hBarcode, ST_CODE39_NEEDS_ASTERISKS,&nbsp;uint16 *value) ;
+		</P>
+		<P>void STGetParameter(hBarcode, ST_CODE39_NEEDS_ASTERISKS,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Disable the need for Code 39 start/stop characters<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;0 ;<BR>
+			STSetParameter(hBarcode, ST_CODE39_NEEDS_ASTERISKS,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

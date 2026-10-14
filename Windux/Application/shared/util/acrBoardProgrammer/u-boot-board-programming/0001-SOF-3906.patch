@@ -1,0 +1,160 @@
+From e95eeec3ce41e5dd965c4c230ad98ac6e6442a76 Mon Sep 17 00:00:00 2001
+From: Aaron Swift <aaron.swift@itwfeg.com>
+Date: Mon, 26 Oct 2020 10:50:19 -0400
+Subject: [PATCH] SOF-3906
+
+---
+ cmd/fuse.c            |  4 +-
+ configs/ark_defconfig |  5 ++-
+ include/configs/ark.h | 97 +++++++++++++++++++++++++++++--------------
+ 3 files changed, 71 insertions(+), 35 deletions(-)
+
+diff --git a/cmd/fuse.c b/cmd/fuse.c
+index 95e04bb905..13d7afd3da 100644
+--- a/cmd/fuse.c
++++ b/cmd/fuse.c
+@@ -106,8 +106,8 @@ static int do_fuse(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 			printf("Programming bank %u word 0x%.8x to 0x%.8x...\n",
+ 					bank, word, val);
+-			if (!confirmed && !confirm_prog())
+-				return CMD_RET_FAILURE;
++			/*if (!confirmed && !confirm_prog())
++				return CMD_RET_FAILURE; */
+ 			ret = fuse_prog(bank, word, val);
+ 			if (ret)
+ 				goto err;
+diff --git a/configs/ark_defconfig b/configs/ark_defconfig
+index 0a2bee2aa2..240d9698c2 100644
+--- a/configs/ark_defconfig
++++ b/configs/ark_defconfig
+@@ -1,8 +1,9 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_MX6=y
+ CONFIG_TARGET_ARK=y
+-CONFIG_SPL=y
++#CONFIG_SPL=y
+ CONFIG_VIDEO=y
+-CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=arch/arm/imx-common/spl_sd.cfg,MX6QDL,SPL,DEFCONFIG=\"ark\""
++#CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=arch/arm/imx-common/spl_sd.cfg,MX6QDL,SPL,DEFCONFIG=\"ark\""
++CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=board/novtech/ark/imximage_dq.cfg,MX6QDL,DDR_MB=1024"
+ CONFIG_SPI_FLASH=y
+ CONFIG_SPI_FLASH_STMICRO=y
+diff --git a/include/configs/ark.h b/include/configs/ark.h
+index bcc53dc498..012fb44d14 100644
+--- a/include/configs/ark.h
++++ b/include/configs/ark.h
+@@ -70,6 +70,8 @@
+ */
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	"version=3.7.6\0" \
++	"mac_addr_high=0x0123\0" \
++	"mac_addr_low=0x456789ab\0" \
+ 	"fileaddr=0x12000000\0" \
+ 	\
+ 	"d_main_pos_10=320 200\0" \
+@@ -260,37 +262,70 @@
+ 	"image_file=uImage\0" \
+ 	"image_addr=0x10800000\0" \
+ 	"bootcmd_ark=" \
+-		"errortype=missingdisk; " \
+-		"for dtype in " CONFIG_DRIVE_TYPES "; do " \
+-			"if itest.s usb == ${dtype}; then " \
+-				"usb start; "  \
+-			"fi; " \
+-			"disks=\"${primary_mmc} ${secondary_mmc}\"; " \
+-			"if itest.s mmc != ${dtype}; then " \
+-				"disks=0; " \
+-			"fi; " \
+-			"for disk in ${disks}; do " \
+-				"echo Trying device ${dtype} ${disk}...; " \
+-				"if ${dtype} dev ${disk}; then " \
+-					"errortype=missingfiles; " \
+-					"active_partition_saved=${active_partition}; " \
+-					"run setactivepart; " \
+-					"run setftdfile; " \
+-					"run setbootargs; " \
+-					"if load ${dtype} ${disk}:1 ${image_addr} ${image_file}; then " \
+-						"if load ${dtype} ${disk}:1 ${fdt_addr} ${fdt_file}; then " \
+-							"fdt addr ${fdt_addr}; " \
+-							"fdt resize; " \
+-							"run cmd_hdmi cmd_lcd cmd_lvds cmd_lvds2; " \
+-							"bootm ${image_addr} - ${fdt_addr}; " \
+-						"fi; " \
+-					"fi; " \
+-					"setenv active_partition ${active_partition_saved}; " \
+-				"fi; " \
+-			"done; " \
+-		"done; " \
+-		"run displayerror; "
+-
++		"beep=2;" \
++		"echo Hobart i.mx6 ARK auto board programmer......;" \
++		"if sf probe; then " \
++			"echo erasing sections.;" \
++			"sf erase 0x0 0xc0000;" \
++			"echo u-boot section erased...;" \
++			"sf erase 0xc0000 0x2000;" \
++			"echo env section erased...;" \
++			"sf erase 0x190000 0xF000;" \
++			"echo branding section erased...;" \
++			"sf erase 0x1D0000 0xF000;" \
++			"echo version section erased...;" \
++			"sf erase 0x1F0000 0xF000;" \
++		"fi;" \
++		"echo flash erased!;" \
++		"mmc dev 1;" \
++		"echo mmc initialized.;" \
++		"load mmc 1:3 10800000 u-boot-ark.imx;"\
++		"echo ARK SPL U-boot image loaded into memory.;"\
++		"sf write 10800000 0x400 ${filesize};" \
++		"echo u-boot programmed....;" \
++		"if itest.s x6SOLO == x${cpu} ; then " \
++			"load mmc 1:1 10800000 hts8.bmp;"\
++			"echo u-boot branding splash loaded into memory.;"\
++		"elif itest.s x6D == x${cpu} ; then " \
++			"load mmc 1:1 10800000 hti8.bmp;"\
++			"echo u-boot branding splash loaded into memory.;"\
++		"elif itest.s x6Q == x${cpu} ; then " \
++			"load mmc 1:1 10800000 htx8.bmp;"\
++			"echo u-boot branding splash loaded into memory.;"\
++		"else " \
++			"load mmc 1:1 10800000 htqp8.bmp;"\
++			"echo u-boot branding splash loaded into memory.;"\
++		"fi; " \
++		"sf write 10800000 0x190000 ${filesize};" \
++		"echo u-boot branding splash programmed.;"\
++		"load mmc 1:1 10800000 u-version.bmp;"\
++		"sf write 10800000 0x1D0000 ${filesize};" \
++		"echo version splash programmed.;"\
++		"load mmc 1:1 10800000 u-diagnostics.bmp;"\
++		"sf write 10800000 0x1F0000 ${filesize};" \
++		"echo diagnostics splash programmed.;"\
++		"fuse read 0 5;" \
++		"if itest.s 00000000 == ${fuse_read_val0} ; then " \
++			"echo programming efuses boot.;"\
++			"fuse prog 0 5 0x68006050;"\
++			"fuse prog 0 6 0x00000010;"\
++		"else " \
++			"echo boot efuses already programmed!;"\
++		"fi; " \
++		"fuse read 4 3;" \
++		"if itest.s 00000000 == ${fuse_read_val0} ; then " \
++			"echo programming efuses MAC.;"\
++			"fuse prog 4 3 ${mac_addr_high};" \
++			"fuse prog 4 2 ${mac_addr_low};" \
++			"echo MAC programming of efuses finished.;"\
++		"else " \
++			"echo mac efuses already programmed!;"\
++		"fi; " \
++		"echo erasing environment variable section.;"\
++		"sf erase 0xc0000 0x2000;"\
++		"echo board programmed successfully.;"\
++		"itw_beep ${beep};" 
++	
+ #define CONFIG_BOOTCOMMAND "run bootcmd_ark;"
+ 
+ #define CONFIG_ARP_TIMEOUT	200UL
+-- 
+2.17.1
+

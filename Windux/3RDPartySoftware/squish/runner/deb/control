@@ -1,0 +1,11 @@
+Package: hobart-squish
+Version: 6.6-0
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides squishserver and squishrunner which enables
+ record and playback functionality on the HT series hardware.
+ .
+ This package contains the binary and base configuration. For
+ customization please use HTe.
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "preinst: forgetting hobart/db/hte ..."
+sed -i.bak '/db\/hte/d' /var/lib/dpkg/info/hobart-hte-apphook.list
+sed -i.bak '/db\/hte/d' /var/lib/dpkg/info/hobart-hte-apphook.md5sums
+
+echo "preinst: done!"
+

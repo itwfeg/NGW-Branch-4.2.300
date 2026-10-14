@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>RGB64Th.png</file>
+        <file>HobartWallpaper.png</file>
+        <file>StainlessSteel.png</file>
+        <file>GcdGrayBackground.png</file>
+    </qresource>
+</RCC>

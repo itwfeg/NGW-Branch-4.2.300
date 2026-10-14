@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Code25Checksum</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When True the toolkit will only report Code&nbsp;25 barcodes where the last 
+			character is a valid checksum for the rest of the barcode.&nbsp;The toolkit 
+			expects a Code&nbsp;25 checksum to be calculated using the following 
+			method:&nbsp;
+		</P>
+		<OL>
+			<LI>
+			Sum all of the even positioned characters (the right hand message character is 
+			always even), and multiply by 3.
+			<LI>
+			Sum all the odd positioned characters.
+			<LI>
+			Sum the totals from steps 1 and 2.
+			<LI>
+			The checksum is the smallest number that when added to this sum results in a 
+			multiple of 10.
+			<LI>
+				If the resulting number of characters is odd and you are using Interleaved Code 
+				2 of 5 then add a leading 0 to the message data.</LI></OL>
+		<P>Default Value: False
+		</P>
+		<P>void STSetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Turn&nbsp;on the Code39Checksum property<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

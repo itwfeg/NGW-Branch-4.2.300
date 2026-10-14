@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "postinst: removing demo apps..."
+rm -rf /extension/apps/LineDisplay/
+rm -rf /extension/apps/MagstripeReader/
+rm -rf /extension/apps/SampleWebApp/
+rm -rf /extension/apps/Survey/
+rm -rf /extension/apps/Video/
+rm -rf /extension/apps/asuraburger/
+rm -rf /extension/apps/signage/
+rm -rf /extension/apps/testLED/
+
+echo "postinst: installing smBackend..."
+update-rc.d smBackend start 80 3 4 5 . stop 80 0 1 6 .
+
+echo "postinst: done!"
+echo "postinst: THIS MACHINE NEEDS REBOOTED!"
+

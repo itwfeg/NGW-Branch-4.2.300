@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Pattern</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		The Pattern property is a regular expression that each barcode found in an 
+		image is compared against. The toolkit will only return barcodes that match the 
+		pattern.
+		<P class="MsoBodyText">
+		The toolkit use POSIX extended regular expression syntax.
+		<P class="MsoBodyText">Examples:
+			<UL>
+				<LI>
+					<DIV class="MsoBodyText">"ABCDEF" will match all barcodes containing "ABCDEF" (e.g 
+						"XYZABCDEFXYZ") .
+					</DIV>
+				<LI>
+					<DIV class="MsoBodyText">"ABC[0-9]+" will match all barcodes containing "ABC" 
+						followed by&nbsp;one or more digits (e.g XYZABC71827XYZ").
+					</DIV>
+				<LI>
+					<DIV class="MsoBodyText">"^ABC[0-9]+$" will match barcodes that only consist of 
+						"ABC" followed by one or more digits (e.g "ABC12345").</DIV>
+				</LI>
+			</UL>
+		<P class="MsoBodyText">
+		Note that if a Code 39 barcode uses a checksum character and the Pattern 
+		property is used to specify the entire string (ie. the last character of the 
+		pattern is $) then the Code39Checksum property must also be set to True.
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_REGEX_MATCH,&nbsp;char *value) ;
+		<P>void STGetParameter(hBarcode, ST_REGEX_MATCH,&nbsp;char **value) ;</P>
+		<P>e.g</P>
+		<P>// Only scan for barcodes that contains a string similar to ABCD1234567<BR>
+			#include "barcode.h"<BR>
+			char *value =&nbsp;"^ABCD[0-9]+" ;<BR>
+			STSetParameter(hBarcode, ST_REGEX_MATCH,&nbsp;value) ;</P>
+	</body>
+</html>

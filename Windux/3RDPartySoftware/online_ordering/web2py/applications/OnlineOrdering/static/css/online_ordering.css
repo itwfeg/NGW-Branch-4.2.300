@@ -1,0 +1,197 @@
+body {
+  /* disallow text selection */
+  user-select: none;
+  -webkit-user-select: none;
+  
+	font-family: "Verdana", Verdana, sans-serif;
+	font-weight: normal;
+	color: black;
+	background-color: Linen;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.container{
+max-width: 920px;
+}
+
+.main-container {
+font-size: x-large;
+}
+
+#settings-container {
+max-width: 850px;
+}
+
+#order-container {
+font-size: medium;
+left: 60px;
+max-width: 574px;
+top:0;
+bottom:0;
+position:fixed;
+overflow-y:scroll;
+overflow-x:hidden;
+}
+
+.card {
+width: 125px;
+max-width: 125px;
+min-width: 125px;
+}
+
+.template-div {
+display: none;
+}
+
+#reload-button {
+position: fixed;
+top: 5px;
+left: 5px;
+height: 90px;
+width: 45px;
+}
+
+.no-drag img {
+/* really don't allow user to drag or select */
+/* without this, clicking via touch is inconsistent */
+user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+}
+
+.card-progress {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+border-radius: 0;
+z-index: 0;
+border-radius: inherit;
+}
+
+.card-progress-top {
+position: relative;
+z-index: 99;
+}
+
+.btn-icon {
+margin-right: 10px;
+height: 30px;
+width: 30px;
+}
+
+.btn-icon-small {
+height: 30px;
+width: 30px;
+}
+
+.bottomButton .btn-icon {
+margin-right: 0px;
+}
+
+#product-block{
+margin-right: 8px;
+margin-left: 10px;
+}
+
+.grayOut
+{
+  opacity: 0.5;
+}
+
+.searchModal-field
+{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 1.6em;
+}
+
+/* a bit over the top because the scale browser is old */
+.row-center
+{
+display: -webkit-flexbox;
+display: -ms-flexbox;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+justify-content: center;
+}
+
+.template
+{
+  display: none !important;
+}
+
+#start-container
+{
+  width: 80%;
+  height: 700px;
+}
+
+#start-button-container .btn-custom-color
+{
+  border-radius: 16px;
+  border: 8px solid;
+}
+
+.start-logo-container {
+    margin: 10%;
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}
+#start-logo {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
+}
+
+.popover-body {
+    font-size: large;
+    font-family: "Verdana", Verdana, sans-serif;
+}
+
+.popover-button {
+    float: right;
+}
+
+hr {
+    border-top: 2px solid rgba(0,0,0,.2) !important;
+    
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.final-actual:after
+{
+  white-space: pre-line;
+  content: "\a(actual)";
+}
+
+.tab-pane
+{
+  padding: 1em;
+  background-color: white;
+  border-top: 0px;
+  box-shadow:  0px 0px 0px 1px #dee2e6 inset !important;
+  margin-bottom: 1em;
+}
+
+.header-collapsed::before {
+  content: '▶ ';
+}
+
+
+.header-shown::before {
+  content: '▼ ';
+}
+

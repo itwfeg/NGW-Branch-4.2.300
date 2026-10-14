@@ -1,0 +1,18 @@
+#**     ROMUSERS.TXT - Firmbase User Authorization File for Integrated TCB.
+#
+#       Functional Description.
+#       This file contains a list of users, passwords, and capabilities
+#       queried by the Firmbase TCB's integrated Security Authority when
+#       authenticating LOCAL users and authorizing requests.
+#
+#       This file is stored as /dev/rom/romusers.txt and as such is merged
+#       with the composite BIOS image itself.  It provides EB2K user
+#       authentication data.  It it not used for the INTERNET realm;
+#       that file is called USERS.TXT and is located on the USB Disk On Key
+#       device inserted into the server's USB slot.
+
+USER guest
+PASS gensw
+
+RESOURCE HTTPSRV:*      # access to HTTP server.
+RESOURCE TELNETD:*      # access to Telnet server.

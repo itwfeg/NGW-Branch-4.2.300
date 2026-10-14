@@ -1,0 +1,56 @@
+From 0e502f97c5848ec30d9a822c03f05c57471abbed Mon Sep 17 00:00:00 2001
+From: Dan Williams <dcbw@redhat.com>
+Date: Fri, 10 Aug 2012 17:55:17 +0300
+Subject: [PATCH] PMKSA: Do not evict active cache entry when adding new ones
+
+If the PMKSA cache is full (i.e., 32 candidates have been seen in scan
+results and have not yet expired) then any additional entries can
+potentially evict the current/active entry (if it is the oldest entry),
+which triggers a pointless local deauthentication. The supplicant
+shouldn't replace the current/active entry if it is still valid, but
+instead the oldest entry that is *not* the current/active one.
+
+Signed-hostap: Dan Williams <dcbw@redhat.com>
+intended-for: hostap-1
+---
+ src/rsn_supp/pmksa_cache.c | 24 +++++++++++++++++++-----
+ 1 file changed, 19 insertions(+), 5 deletions(-)
+
+diff --git a/src/rsn_supp/pmksa_cache.c b/src/rsn_supp/pmksa_cache.c
+index 2d265d0..9783e7c 100644
+--- a/src/rsn_supp/pmksa_cache.c
++++ b/src/rsn_supp/pmksa_cache.c
+@@ -197,11 +197,25 @@ pmksa_cache_add(struct rsn_pmksa_cache *pmksa, const u8 *pmk, size_t pmk_len,
+ 	if (pmksa->pmksa_count >= pmksa_cache_max_entries && pmksa->pmksa) {
+ 		/* Remove the oldest entry to make room for the new entry */
+ 		pos = pmksa->pmksa;
+-		pmksa->pmksa = pos->next;
+-		wpa_printf(MSG_DEBUG, "RSN: removed the oldest PMKSA cache "
+-			   "entry (for " MACSTR ") to make room for new one",
+-			   MAC2STR(pos->aa));
+-		pmksa_cache_free_entry(pmksa, pos, 0);
++
++		if (pos == pmksa->sm->cur_pmksa) {
++			/*
++			 * Never remove the current PMKSA cache entry, since
++			 * it's in use, and removing it triggers a needless
++			 * deauthentication.
++			 */
++			pos = pos->next;
++			pmksa->pmksa->next = pos ? pos->next : NULL;
++		} else
++			pmksa->pmksa = pos->next;
++
++		if (pos) {
++			wpa_printf(MSG_DEBUG, "RSN: removed the oldest idle "
++				   "PMKSA cache entry (for " MACSTR ") to "
++				   "make room for new one",
++				   MAC2STR(pos->aa));
++			pmksa_cache_free_entry(pmksa, pos, 0);
++		}
+ 	}
+ 
+ 	/* Add the new entry; order by expiration time */
+-- 
+1.7.11.2
+

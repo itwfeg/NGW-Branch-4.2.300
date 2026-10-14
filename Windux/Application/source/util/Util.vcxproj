@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D99B5E5A-7A01-44AA-851E-C582B50944E8}</ProjectGuid>
+    <RootNamespace>Util</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Util_$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Util_$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Util_$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Util_$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\HFC;..\..\source\util\Inc;..\..\..\3rdPartySoftware\zlib;..\..\..\3rdPartySoftware\zlib\minizip;..\..\source\HFC\tags;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\MetrologicallySignificant;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;_DEBUG;_LIB;_WIN32_WINNT= 0x0501;_CRT_SECURE_NO_DEPRECATE;ZLIB_WINAPI;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\HFC;..\..\source\util\Inc;..\..\..\3rdPartySoftware\zlib;..\..\..\3rdPartySoftware\zlib\minizip;..\..\source\HFC\tags;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\MetrologicallySignificant;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_OS;WIN32;_DEBUG;_LIB;_WIN32_WINNT= 0x0501;_CRT_SECURE_NO_DEPRECATE;ZLIB_WINAPI;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\HFC;..\..\source\util\Inc;..\..\..\3rdPartySoftware\zlib;..\..\..\3rdPartySoftware\zlib\minizip;..\..\source\HFC\tags;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\MetrologicallySignificant;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;_WIN32_WINNT= 0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\app;..\..\source\comm;..\..\source\db;..\..\source\db\util;..\..\source\EvolutionRTC\MessageCenter;..\..\source\HFC;..\..\source\util\Inc;..\..\..\3rdPartySoftware\zlib;..\..\..\3rdPartySoftware\zlib\minizip;..\..\source\HFC\tags;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\MetrologicallySignificant;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;_WIN32_WINNT= 0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CHobartTimer.cpp" />
+    <ClCompile Include="CZip.cpp" />
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="epcrfid.cpp" />
+    <ClCompile Include="Hex.cpp" />
+    <ClCompile Include="MemShow.cpp" />
+    <ClCompile Include="MessageLogger.cpp" />
+    <ClCompile Include="PythonScripter.cpp" />
+    <ClCompile Include="ServiceSpeaker.cpp" />
+    <ClCompile Include="SimpleTimer.cpp" />
+    <ClCompile Include="TimerContainer.cpp" />
+    <ClCompile Include="Trace.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bool.h" />
+    <ClInclude Include="CHobartTimer.h" />
+    <ClInclude Include="CZip.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="Double.h" />
+    <ClInclude Include="epcrfid.h" />
+    <ClInclude Include="Hex.h" />
+    <ClInclude Include="Integer.h" />
+    <ClInclude Include="ITimerHandler.h" />
+    <ClInclude Include="Long.h" />
+    <ClInclude Include="MemShow.h" />
+    <ClInclude Include="MessageLogger.h" />
+    <ClInclude Include="Power.h" />
+    <ClInclude Include="PythonScripter.h" />
+    <ClInclude Include="ServiceSpeaker.h" />
+    <ClInclude Include="SimpleTimer.h" />
+    <ClInclude Include="TimerContainer.h" />
+    <ClInclude Include="Trace.h" />
+    <ClInclude Include="UInteger.h" />
+    <ClInclude Include="ULong.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,142 @@
+#***    BROWSER.IDF Image Definition File for Embedded BIOS 5.3 HTML files.
+#
+#1.     Functional Description.
+#       This file merges all the standard .HTML files displayed by the
+#       the BIOS HTML browser into the main binary.
+#
+#2.     Modification history.
+#       E. Khoruzhenko  05/06/04.       #5.3.3, new.
+#
+#3.     NOTICE: Copyright (C) 2005 General Software, Inc.
+
+        CompressTo $(GSPROJ)\0.cmp      # compress HTML file.
+        Load $(GSPROJ)\0.htm            # source for compression.
+
+        ResName 0.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_0,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\0.cmp                 # platform-specific HTML file (main).
+
+#       CompressTo $(GSPROJ)\1.cmp      # compress HTML file.
+#       Load $(GSPROJ)\1.htm            # source for compression.
+
+#       ResName 1.htm                   # specify a resource name.
+#       LoadRes                         # load a resource into the BIOS image.
+#       BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+#       BIOS16:RESOURCE_ID_HTML_1,      # the ID is 1st browser file.
+#       1,                              # the binary IS data compressed.
+#       $(GSPROJ)\1.cmp                 # platform-specific HTML file (platform).
+
+#       CompressTo $(GSPROJ)\2.cmp      # compress HTML file.
+#       Load $(GSPROJ)\2.htm            # source for compression.
+
+#       ResName 2.htm                   # specify a resource name.
+#       LoadRes                         # load a resource into the BIOS image.
+#       BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+#       BIOS16:RESOURCE_ID_HTML_2,      # the ID is 1st browser file.
+#       1,                              # the binary IS data compressed.
+#       $(GSPROJ)\2.cmp                 # platform-specific HTML file (errata).
+
+        CompressTo $(GSPROJ)\3.cmp      # compress HTML file.
+        Load $(GSPROJ)\3.htm            # source for compression.
+
+        ResName 3.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_3,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\3.cmp                 # platform-specific HTML file (SV).
+
+#       CompressTo $(GSPROJ)\4.cmp      # compress HTML file.
+#       Load ..\RESOURCE\HTML\4.htm     # source for compression.
+
+#       ResName 4.htm                   # specify a resource name.
+#       LoadRes                         # load a resource into the BIOS image.
+#       BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+#       BIOS16:RESOURCE_ID_HTML_4,      # the ID is 1st browser file.
+#       1,                              # the binary IS data compressed.
+#       $(GSPROJ)\4.cmp                 # file location of standard HTML file.
+
+#       CompressTo $(GSPROJ)\5.cmp      # compress HTML file.
+#       Load ..\RESOURCE\HTML\5.htm     # source for compression.
+
+#       ResName 5.htm                   # specify a resource name.
+#       LoadRes                         # load a resource into the BIOS image.
+#       BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+#       BIOS16:RESOURCE_ID_HTML_5,      # the ID is 1st browser file.
+#       1,                              # the binary IS data compressed.
+#       $(GSPROJ)\5.cmp                 # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\6.cmp      # compress HTML file.
+        Load ..\RESOURCE\HTML\6.htm     # source for compression.
+
+        ResName 6.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_6,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\6.cmp                 # file location of standard HTML file.
+
+#       Firmbase HTML file.
+
+        CompressTo $(GSPROJ)\7.cmp      # compress HTML file.
+        Load ..\RESOURCE\HTML\7.htm     # source for compression.
+
+        ResName 7.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_7,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\7.cmp                 # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\8.cmp      # compress HTML file.
+        Load ..\RESOURCE\HTML\8.htm     # source for compression.
+
+        ResName 8.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_8,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\8.cmp                 # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\9.cmp      # compress HTML file.
+        Load ..\RESOURCE\HTML\9.htm     # source for compression.
+
+        ResName 9.htm                   # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_9,      # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\9.cmp                 # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\10.cmp     # compress HTML file.
+        Load ..\RESOURCE\HTML\10.htm    # source for compression.
+
+        ResName 10.htm                  # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_10,     # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\10.cmp                # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\11.cmp     # compress HTML file.
+        Load ..\RESOURCE\HTML\11.htm    # source for compression.
+
+        ResName 11.htm                  # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_11,     # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\11.cmp                # file location of standard HTML file.
+
+        CompressTo $(GSPROJ)\12.cmp     # compress HTML file.
+        Load ..\RESOURCE\HTML\12.htm    # source for compression.
+
+        ResName 12.htm                  # specify a resource name.
+        LoadRes                         # load a resource into the BIOS image.
+        BIOS16:RESOURCE_CLASS_HTML,     # the class is an HTML file.
+        BIOS16:RESOURCE_ID_HTML_12,     # the ID is 1st browser file.
+        1,                              # the binary IS data compressed.
+        $(GSPROJ)\12.cmp                # file location of standard HTML file.

@@ -1,0 +1,5 @@
+# Debug levels for Apphook manager
+# Level 0 = No logging
+# Level 1 = Basic logging 
+# Level 2 = Detailed logging with timing and thread info
+LogLevel=1

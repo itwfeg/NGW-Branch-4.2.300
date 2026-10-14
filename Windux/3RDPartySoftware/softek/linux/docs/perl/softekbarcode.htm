@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<P>
+			SoftekBarcode(3) User Contributed Perl Documentation SoftekBarcode(3)<BR>
+			<BR>
+			<STRONG>NAME</STRONG></P>
+		<P dir="ltr" style="MARGIN-RIGHT: 0px">
+			SoftekBarcode - Perl extension for the Softek Barcode Reader Toolkit<BR>
+			<BR>
+			<STRONG>SYNOPSIS</STRONG></P>
+		<P dir="ltr" style="MARGIN-RIGHT: 0px">
+			use SoftekBarcode ;<BR>
+			<BR>
+			# Create object<BR>
+			my $bar = SoftekBarcode-&gt;new() ;<BR>
+			<BR>
+			#Set properties<BR>
+			$bar-&gt;{ReadCode39} = 1 ;<BR>
+			$bar-&gt;{MultipleRead} = 1 ;<BR>
+			<BR>
+			# Scan for barcode<BR>
+			my $count = $bar-&gt;ScanBarCode("/tmp/image.tif") ;<BR>
+			<BR>
+			printf "Found %d barcodes\n", $count ;<BR>
+			<BR>
+			# Read results\n<BR>
+			foreach my $i (1..$count)<BR>
+			{<BR>
+			&nbsp;&nbsp; my $barcode = $bar-&gt;GetBarString($i) ;<BR>
+			&nbsp;&nbsp;&nbsp;printf "barcode is %s\n", $barcode ;<BR>
+			&nbsp;&nbsp; my $type = $bar-&gt;GetBarStringType($i) ;<BR>
+			&nbsp;&nbsp; printf "Type is %s\n", $type ;<BR>
+			}<BR>
+			<BR>
+			<STRONG>DESCRIPTION</STRONG></P>
+		<P dir="ltr" style="MARGIN-RIGHT: 0px">The SoftekBarcode module provides a Perl 
+			interface to the Softek Barcode Reader Toolkit and requires the libbardecode.so 
+			file to function. The Perl interface is free to use, but the Softek Barcode 
+			Reader toolkit is a commercial product.<BR>
+			<BR>
+			The module contains the following methods:<BR>
+			<BR>
+			new<BR>
+			<BR>
+			Create a new instance of the barcode reader toolkit<BR>
+			<BR>
+			ScanBarCode ($filePath)<BR>
+			<BR>
+			Scan the specified file for barcodes and return the number of barcodes<BR>
+			found.<BR>
+			<BR>
+			GetBarString ($index)<BR>
+			<BR>
+			Get the value of a barcode found after calling ScanBarCode. The argument is a 1 
+			based index to the barcode.<BR>
+			<BR>
+			GetBarStringType ($index)<BR>
+			<BR>
+			Get the type of a barcode found after calling ScanBarCode. The argument<BR>
+			is a 1 based index to the barcode.<BR>
+			<BR>
+			The following properties are available and a description for each one<BR>
+			can be found at http://www.bardecode.com/help/<BR>
+			<BR>
+			AllowDuplicateValues<BR>
+			Code39Checksum<BR>
+			Code39NeedStartStop<BR>
+			ColorThreshold<BR>
+			ConvertUPCEToEAN13<BR>
+			Despeckle<BR>
+			ErrorCorrection<BR>
+			ExtendedCode39<BR>
+			LineJump = &gt; 3<BR>
+			Maxlength<BR>
+			MinLength<BR>
+			MinOccurrence<BR>
+			MinSeparation<BR>
+			MinSpaceBarWidth<BR>
+			MultipleRead<BR>
+			NoiseReduction<BR>
+			PageNo<BR>
+			Pattern<BR>
+			PrefOccurrence<BR>
+			QuietZoneSize<BR>
+			ReadCodabar<BR>
+			ReadCode128<BR>
+			ReadCode25<BR>
+			ReadCode25ni<BR>
+			ReadCode39<BR>
+			ReadEAN13<BR>
+			ReadEAN8<BR>
+			ReadNumeric<BR>
+			ReadPatchCodes<BR>
+			ReadPDF417<BR>
+			ReadUPCA<BR>
+			ReadUPCE<BR>
+			ScanDirection<BR>
+			ShowCheckDigit<BR>
+			SkewTolerance<BR>
+			UseOverSampling<BR>
+			<BR>
+			<STRONG>EXPORT</STRONG>
+			<BR>
+			<BR>
+			None by default.<BR>
+			<BR>
+			<STRONG>SEE ALSO</STRONG>
+			<BR>
+			<a href="http://www.bardecode.com">http://www.bardecode.com</a><BR>
+			<BR>
+			<STRONG>AUTHOR</STRONG>
+			<BR>
+			Andy Beezer, <a href="mailto:andy.beezer@softeksoftware.co.uk">andy.beezer@softeksoftware.co.uk</a><BR>
+			<BR>
+			<STRONG>COPYRIGHT AND LICENSE</STRONG>
+			<BR>
+			Copyright (C) 2007 by Andy Beezer, Softek Software Ltd<BR>
+			<BR>
+			This library is free software; you can redistribute it and/or modify it under 
+			the same terms as Perl itself, either Perl version 5.8.0 or, at your option, 
+			any later version of Perl 5 you may have available.<BR>
+			<BR>
+			perl v5.8.0 2007-10-11 SoftekBarcode(3)<BR>
+		</P>
+	</body>
+</html>

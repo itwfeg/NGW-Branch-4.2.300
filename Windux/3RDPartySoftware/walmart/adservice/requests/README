@@ -1,0 +1,47 @@
+
+# How to create an requests install tarball of dependencies that can be installed with no internet connection
+# A good Stack Overflow article on installing pypi packages on a device with no internet connection can be found
+# here:
+# https://stackoverflow.com/questions/11091623/python-packages-offline-installation/51646354
+
+# NOTE:
+#    Lines beginning with # are comments
+#    Lines beginning with > are bash commands that should be executed on HT scale via ssh
+
+# Network an HT scale with Application version 3.3.0+ and make sure it has access to the internet
+
+# SSH into the HT scale since this needs to be done on the target
+> ssh root@{ip_address_of_scale}
+
+# if not already installed pip will need to be installed.  3.3.0 is where pip was first installed
+# type the following command to see if it is installed:
+> whereis pip
+
+# if installed output from whereis command should be:
+pip: /usr/bin/pip2.7 /usr/bin/pip
+
+# if not installed proceed to step named: << INSTALL PIP >>
+
+# if installed go to step named: << BUILD REQUESTS INSTALL TARBALL WITH DEPENDENCIES >>
+
+# << INSTALL PIP >>
+# Make sure pip is installed by the following procedure:
+> cd adservice/pip
+> /usr/bin/tar xzvfm pip-19.3.tar.gz -C /tmp
+> sync
+> cd /tmp/pip-19.3
+> python setup.py install
+
+# << BUILD REQUESTS INSTALL TARBALL WITH DEPENDENCIES >>
+> pip download -r requirements.txt
+
+# HOW TO INSTALL REQUESTS OFFLINE TARBALL
+#
+> cd /usr/local/hobart/python
+
+# extract the install_requests_offline.tar.gz file
+> tar xvzf install_requests_offline.tar.gz -C /tmp
+
+# install the requests package and all dependencies via pip
+> cd /tmp
+> pip install --no-index --find-links ./install_requests_offline -r ./install_requests_offline/requirements.txt

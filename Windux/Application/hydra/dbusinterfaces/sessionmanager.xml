@@ -1,0 +1,25 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/com/hobartcorp/sessionmanager">
+    <interface name="com.hobartcorp.SessionManager">
+        <method name="createSession">
+            <arg name="r" type="s" direction="out"/>
+            <arg name="type" type="u" direction="in"/>
+        </method>
+        <method name="createNamedSession">
+            <arg name="r" type="s" direction="out"/>
+            <arg name="type" type="u" direction="in"/>
+            <arg name="name" type="s" direction="in"/>
+        </method>
+        <method name="destroySession">
+            <arg name="name" type="s" direction="in"/>
+        </method>
+        <method name="resumeNamedSession">
+            <arg name="r" type="s" direction="out"/>
+            <arg name="name" type="s" direction="in"/>
+        </method>
+        <method name="count">
+            <arg name="r" type="u" direction="out"/>
+        </method>
+    </interface>
+</node>

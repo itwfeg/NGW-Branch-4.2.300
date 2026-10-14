@@ -1,0 +1,27 @@
+From 734baae0af9a82390e33e680c62b13051e34a692 Mon Sep 17 00:00:00 2001
+From: Jouni Malinen <jouni@qca.qualcomm.com>
+Date: Wed, 7 Sep 2011 16:31:09 +0300
+Subject: [PATCH] Clear driver PMKSA cache entry on PMKSA cache expiration
+
+If the driver maintains its own copy of the PMKSA cache, we need to
+clear an entry from the driver whenever wpa_supplicant is dropping
+an old PMKSA cache entry.
+---
+ src/rsn_supp/pmksa_cache.c |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/src/rsn_supp/pmksa_cache.c b/src/rsn_supp/pmksa_cache.c
+index cac8c83..12f1f1e 100644
+--- a/src/rsn_supp/pmksa_cache.c
++++ b/src/rsn_supp/pmksa_cache.c
+@@ -66,6 +66,7 @@ static void pmksa_cache_expire(void *eloop_ctx, void *timeout_ctx)
+ 		pmksa->pmksa = entry->next;
+ 		wpa_printf(MSG_DEBUG, "RSN: expired PMKSA cache entry for "
+ 			   MACSTR, MAC2STR(entry->aa));
++		wpa_sm_remove_pmkid(pmksa->sm, entry->aa, entry->pmkid);
+ 		pmksa_cache_free_entry(pmksa, entry, 0);
+ 	}
+ 
+-- 
+1.7.7.6
+

@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<LINK REL="StyleSheet" HREF="..\style.css" TYPE="text/css">
+	</head>
+	<body>
+		<p>
+			<font face="Verdana, Geneva, Arial, Helvetica" size="5">ProcessXML</font>
+		</p>
+		<p>
+			<b>Overview </b>
+		</p>
+		<P><b> int STProcessXML (void *hBarcode, char *inputFilePath, char *outputFilePath, int 
+				silent)&nbsp; </b>
+		</P>
+		<P><STRONG>hBarcode </STRONG>is a handle to a barcode session.<BR>
+			<STRONG>inputFilePath </STRONG>is the path to the XML file containing settings 
+			and process instructions.<BR>
+			<STRONG>outputFilePath </STRONG>is the path to the output CXV or XML 
+			file&nbsp;that will&nbsp;receive the results.<STRONG> &nbsp;
+				<BR>
+				silent</STRONG> controls whether the function writes to standard output or 
+			displays a message box (win32).&nbsp;</P>
+		<P>ProcessXML takes property values, file names and folder names from the inputFile 
+			and creates outputFile in either XML or CSV file format.
+		</P>
+		<P>The property values defined in the XML file follow the specification as defined 
+			in the manual page for <A href="loadxmlsettings.htm">LoadXMLSettings</A>. The 
+			files and folder to process are defined in the following way....</P>
+		<P>To process a file:</P>
+		<P>&lt;Process&gt;<BR>
+			&nbsp;&nbsp; &lt;File&gt;/path/to/image.tif&lt;/File&gt;<BR>
+			&lt;/Process&gt;</P>
+		<P>To process the images in a folder:</P>
+		<P>&lt;Process&gt;<BR>
+			&nbsp;&nbsp; &lt;Folder&gt;/path/to/folder&lt;/Folder&gt;<BR>
+			&lt;/Process&gt;</P>
+		<P>Both the File and Folder tags accept an optional id attribute. This&nbsp;can 
+			be&nbsp;used in the output to identify the image file or folder.</P>
+		<P>Example:</P>
+		<P>&lt;xml&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;MedianFilter&gt;1&lt;/MedianFilter&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Process&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;File 
+			id=1001&gt;C:\tmp\image1.tif&lt;/File&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;File 
+			id=1002&gt;C:\tmp\image2.tif&lt;/File&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;File 
+			id=1003&gt;C:\tmp\image3.tif&lt;/File&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Folder 
+			id=9001&gt;C:\tmp\images&lt;/Folder&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Process&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>See the manual page for <A href="saveresults.htm">SaveResults</A> for the output 
+			file format.</P>
+		<P>
+			<b>Return Value</b>
+		</P>
+		<p>1 on success and 0 on failure.</p>
+	</body>
+</html>

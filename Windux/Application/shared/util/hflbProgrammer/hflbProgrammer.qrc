@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="hflbDialog">
+    <file>beeper1.png</file>
+  </qresource>
+</RCC>

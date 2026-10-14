@@ -1,0 +1,1594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6BE8B728-A66C-4711-9F8C-21576C8F6D5D}</ProjectGuid>
+    <RootNamespace>EvolutionRTC</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ShowIncludes>false</ShowIncludes>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Setupapi.lib;PAL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ShowIncludes>false</ShowIncludes>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Setupapi.lib;PAL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Setupapi.lib;PAL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Setupapi.lib;PAL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicecmdresult.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\deviceconnect.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicedisconnect.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\deviceerror.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicelist.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicelistreq.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\deviceopnamelist.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicesendmessage.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\devicestate.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\message.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\messagefactory.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\ping.h" />
+    <ClInclude Include="..\..\HobartHandsFree\shared\pong.h" />
+    <ClInclude Include="BoardSite\Include\BoardSite.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteEvent.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteGeneric.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteReqTestMode.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteTest.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteTestComplete.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteTestCompleteUI.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteTestManager.h" />
+    <ClInclude Include="BoardSite\Include\BoardSiteTestStatus.h" />
+    <ClInclude Include="CanManager\Include\CanLibrary.h" />
+    <ClInclude Include="CanManager\Include\CanManager.h" />
+    <ClInclude Include="CanManager\Include\CanTranslator.h" />
+    <ClInclude Include="CanManager\Include\deviceProductIDs.h" />
+    <ClInclude Include="CanManager\Include\GpioDeviceReset.h" />
+    <ClInclude Include="CanManager\Include\NGWUpdateManager.h" />
+    <ClInclude Include="CanManager\Include\Sam7xCANUpdater.h" />
+    <ClInclude Include="CanManager\Include\SystemStartManager.h" />
+    <ClInclude Include="CanManager\Include\UnitTest.h" />
+    <ClInclude Include="CanManager\Messages\Include\KpcSystemErrors.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWStartUpgrade.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeFinished.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeInfo.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeProgress.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeRequired.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeStatus.h" />
+    <ClInclude Include="CanManager\Messages\Include\NGWUpgradeUIReady.h" />
+    <ClInclude Include="CanManager\Messages\Include\Sam7xUpdaterMsg.h" />
+    <ClInclude Include="CodeUpdater\AtmelAT91\FCError.h" />
+    <ClInclude Include="CodeUpdater\CLA\Include\CUCLACommManager.h" />
+    <ClInclude Include="CodeUpdater\CLA\Include\CUCLAStatus.h" />
+    <ClInclude Include="CodeUpdater\CLA\Include\UsbCLACodeUpdater.h" />
+    <ClInclude Include="CodeUpdater\PrinterManager\Include\CUPrinter.h" />
+    <ClInclude Include="CodeUpdater\PrinterManager\Include\CUPrinterCommManager.h" />
+    <ClInclude Include="CodeUpdater\PrinterManager\Include\CUPrinterEvent.h" />
+    <ClInclude Include="CodeUpdater\PrinterManager\Include\CUPrinterPeripheralMessages.h" />
+    <ClInclude Include="CodeUpdater\Wrapper\Include\CUEvolWrapperStatus.h" />
+    <ClInclude Include="CodeUpdater\Wrapper\Include\CUWrapperCommManager.h" />
+    <ClInclude Include="CodeUpdater\Wrapper\Include\usbwrappercodeupdater.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\Config.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ConfigTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\Diag.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\DiagStep.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\DiagStepTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\DiagTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\EventLog.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\EventLogTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\PrinterDotUsage.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\PrinterDotWear.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\PrinterHeadStatus.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceAction.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceActionTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceCat.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceCatTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceMaintLog.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceMaintLogTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceMethod.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServiceMethodTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServicePart.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ServicePartTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\TableBase.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\TableBaseImpl.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\ValueMax.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\Wizards.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WizardsTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperAuditLog.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperAuditLogTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperTimings.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperTimingsTable.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperTrays.h" />
+    <ClInclude Include="DiagnosticsManager\DBO\WrapperTraysTable.h" />
+    <ClInclude Include="DiagnosticsManager\DiagnosticsDB.h" />
+    <ClInclude Include="DiagnosticsManager\DiagnosticsEdgeDevice.h" />
+    <ClInclude Include="DiagnosticsManager\DiagnosticsManager.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\DiagnosticsMsg.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\EdgePacket.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\EventMsg.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\Header.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\HealthInfoMsg.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\PowerUpMsg.h" />
+    <ClInclude Include="DiagnosticsManager\EdgeComm\StatusCheckMsg.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsAuditLog.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsCheckErrorHandler.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsClearServiceMaintRecord.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsConfiguration.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsEvent.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsExportDatabase.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsInitWizard.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsMessage.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsMessageBasic.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsPerformWizardTesting.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsPrintServiceMaintLog.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsReport.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsSendDatabase.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsServiceActions.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsServiceMaintLog.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsShowWizard.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsStartErrorHandler.h" />
+    <ClInclude Include="DiagnosticsManager\Messages\DiagnosticsStatus.h" />
+    <ClInclude Include="DiagnosticsManager\Util\BasicSocket.h" />
+    <ClInclude Include="DiagnosticsManager\Util\Dict.h" />
+    <ClInclude Include="DiagnosticsManager\Util\NetworkVal.h" />
+    <ClInclude Include="DiagnosticsManager\Util\Timestamp.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevLoadDisplayObjectXMLMsg.h" />
+    <ClInclude Include="KPCBootManager\Include\KpcBootEvent.h" />
+    <ClInclude Include="KPCBootManager\Include\KPCBootManager.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootAck.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootAppVersion.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootBulkMsg.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootCmd.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootFlush.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootFrame.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootFrameHeader.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootGeneric.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootReady.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootStatus.h" />
+    <ClInclude Include="KPCBootManager\Messages\Include\KPCBootVersion.h" />
+    <ClInclude Include="KPCBootUpgrader\Include\KPCBootUpgrader.h" />
+    <ClInclude Include="KPCBootUpgrader\Include\KpcBootUpgraderEvent.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderAck.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderBulkMsg.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderCmd.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderFlush.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderFrame.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderFrameHeader.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderGeneric.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCBootUpgraderStatus.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCUpgradeInfo.h" />
+    <ClInclude Include="KPCBootUpgrader\Messages\Include\KPCUpgradeProgress.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLAPackageDischarge.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLARemoveUpgradeFiles.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLAReqSystemInfo.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLASystemInfo.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLASystemInfoErase.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLASystemInfoWrite.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLASystemStatus.h" />
+    <ClInclude Include="LabelApplierManager\Include\CLATestComplete.h" />
+    <ClInclude Include="LabelApplierManager\Include\CompactLabelApplier.h" />
+    <ClInclude Include="LabelApplierManager\Include\CompactLabelApplierConfiguration.h" />
+    <ClInclude Include="LabelApplierManager\Include\CompactLabelApplierInquire.h" />
+    <ClInclude Include="LabelApplierManager\Include\CompactLabelApplierMessages.h" />
+    <ClInclude Include="LabelApplierManager\Include\CompactLabelApplierSensors.h" />
+    <ClInclude Include="LabelApplierManager\Include\EvolLabelApplierConfiguration.h" />
+    <ClInclude Include="LabelApplierManager\Include\EvolLabelApplierMessages.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILACloseWindow.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILACycle.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILAForceLabel.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILAManager.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILAOff.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILAOpenWindow.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILARequestSpeed.h" />
+    <ClInclude Include="LabelApplierManager\Include\ILASpeed.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplier.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierCloseWindow.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierConfiguration.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierDisable.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierEnable.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierEvent.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierGeneric.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierInquire.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierLabelApplierKind.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierLabelReady.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierLabelTaken.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierManager.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierMode.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierOff.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierOn.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierOpenWindow.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierPackageReady.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierPositionInfo.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierPrint.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestCloseWindow.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestInquire.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestLabelApplierKind.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestOff.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestSensors.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestStatus.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestTest.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierRequestWakeup.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierReset.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSensors.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSensorsTracking.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSetup.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierStatus.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemConfiguration.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemInquire.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemRequestInquire.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemRequestStatus.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemRequestWakeup.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemStatus.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierSystemWakeup.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierTest.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierUltimaAutoMode.h" />
+    <ClInclude Include="LabelApplierManager\Include\LabelApplierWakeup.h" />
+    <ClInclude Include="LabelApplierManager\Include\UltimaLabelApplierMessages.h" />
+    <ClInclude Include="MarqueeManager\Include\Marquee.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeConfiguration.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeEvent.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeGeneric.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeInquire.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeManager.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeMarqueeKind.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeMode.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeOpMode.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueePeripheralMessages.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeRequestWakeup.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeStatus.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeSystemStatus.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeTest.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeUpdate.h" />
+    <ClInclude Include="MarqueeManager\Include\MarqueeWakeup.h" />
+    <ClInclude Include="NumericManager\Include\Numeric.h" />
+    <ClInclude Include="NumericManager\Include\NumericAnnunciator.h" />
+    <ClInclude Include="NumericManager\Include\NumericConfiguration.h" />
+    <ClInclude Include="NumericManager\Include\NumericEvent.h" />
+    <ClInclude Include="NumericManager\Include\NumericField.h" />
+    <ClInclude Include="NumericManager\Include\NumericGeneric.h" />
+    <ClInclude Include="NumericManager\Include\NumericInquire.h" />
+    <ClInclude Include="NumericManager\Include\NumericManager.h" />
+    <ClInclude Include="NumericManager\Include\NumericMode.h" />
+    <ClInclude Include="NumericManager\Include\NumericNumericKind.h" />
+    <ClInclude Include="NumericManager\Include\NumericOpMode.h" />
+    <ClInclude Include="NumericManager\Include\NumericPeripheralMessages.h" />
+    <ClInclude Include="NumericManager\Include\NumericRequestWakeup.h" />
+    <ClInclude Include="NumericManager\Include\NumericStatus.h" />
+    <ClInclude Include="NumericManager\Include\NumericSystemStatus.h" />
+    <ClInclude Include="NumericManager\Include\NumericTest.h" />
+    <ClInclude Include="NumericManager\Include\NumericVirtualImage.h" />
+    <ClInclude Include="NumericManager\Include\NumericWakeup.h" />
+    <ClInclude Include="NumericManager\Include\VacuumFlourescentVirtualImage.h" />
+    <ClInclude Include="OperatingModes\Include\AccumulateItemsMode.h" />
+    <ClInclude Include="OperatingModes\Include\AutoWeighEvolWrapperMode.h" />
+    <ClInclude Include="OperatingModes\Include\AutoWeighMode.h" />
+    <ClInclude Include="OperatingModes\Include\AutoWeighWrapperMode.h" />
+    <ClInclude Include="OperatingModes\Include\BuildAMealMode.h" />
+    <ClInclude Include="OperatingModes\Include\IdleMode.h" />
+    <ClInclude Include="OperatingModes\Include\IlaWeighMode.h" />
+    <ClInclude Include="OperatingModes\Include\LabelPrintingCounts.h" />
+    <ClInclude Include="OperatingModes\Include\ManualWeighMode.h" />
+    <ClInclude Include="OperatingModes\Include\OperatingMode.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeAccumulateItems.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeAutoManualApply.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeAutoWeigh.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeBuildAMeal.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeGeneric.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeIdle.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeManualWeigh.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeMonitor.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeOperate.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModePluEntry.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModePowerDown.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeProductionEntry.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeSemiWeigh.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeService.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeStatus.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeSupervisor.h" />
+    <ClInclude Include="OperatingModes\Include\OperationModeWrapOnly.h" />
+    <ClInclude Include="OperatingModes\Include\OpModeEvent.h" />
+    <ClInclude Include="OperatingModes\Include\OpModePackage.h" />
+    <ClInclude Include="OperatingModes\Include\ProductionEntryMode.h" />
+    <ClInclude Include="OperatingModes\Include\SemiWeighMode.h" />
+    <ClInclude Include="OperatingModes\Include\ServiceMode.h" />
+    <ClInclude Include="PngGraphics\Include\deflate.h" />
+    <ClInclude Include="PngGraphics\Include\gconver.h" />
+    <ClInclude Include="PngGraphics\Include\hob2png.h" />
+    <ClInclude Include="PngGraphics\Include\infblock.h" />
+    <ClInclude Include="PngGraphics\Include\infcodes.h" />
+    <ClInclude Include="PngGraphics\Include\inffast.h" />
+    <ClInclude Include="PngGraphics\Include\inftrees.h" />
+    <ClInclude Include="PngGraphics\Include\infutil.h" />
+    <ClInclude Include="PngGraphics\Include\png.h" />
+    <ClInclude Include="PngGraphics\Include\png2hob.h" />
+    <ClInclude Include="PngGraphics\Include\pngconf.h" />
+    <ClInclude Include="PngGraphics\Include\zconf.h" />
+    <ClInclude Include="PngGraphics\Include\zlib.h" />
+    <ClInclude Include="PngGraphics\Include\zutil.h" />
+    <ClInclude Include="PrinterManager\Include\CommandCounterOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandDataOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandIdleOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandOperationList.h" />
+    <ClInclude Include="PrinterManager\Include\CommandOperations.h" />
+    <ClInclude Include="PrinterManager\Include\CommandPrintOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandStatusOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandStepOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandStepUntilOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandTestOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandWaitOperation.h" />
+    <ClInclude Include="PrinterManager\Include\CommandWaitUntilOperation.h" />
+    <ClInclude Include="PrinterManager\Include\EssPrinterTeachTable.h" />
+    <ClInclude Include="PrinterManager\Include\EvolPrinterTeachTable.h" />
+    <ClInclude Include="PrinterManager\Include\Printer.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterAdvanceLabelStock.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterCommand.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterConfiguration.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterCutterStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterDeletePackage.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterDisable.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterDonePostImagingSelfServeBarcodeLabelImage.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterEnable.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterEnableTakeup.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterEvent.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterFactoryDefaultsComplete.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterFlashStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterFlush.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterGapCalStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterGeneric.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterHeadDotAck.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterHeadDotStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterHeadType.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterHeadWear.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterInquire.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterKpcError.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelComplete.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelImageSize.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelReady.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelTaken.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelTransferComplete.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelTransferFailed.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelTransferReady.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterLabelWidth.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterManager.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterMask.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterMode.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterNewAddress.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterNewPrinterType.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterNomSize.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPeripheralMessages.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPostImage.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPreImage.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPrinterKind.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPrinterType.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterPrintTestLabel.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRam.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestCalibrate.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestHeadDotStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestHeadDotWear.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestInquire.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestLabelTransfer.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestLabelWidth.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestPrinterKind.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestPrinterType.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestPrintheadPower.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestSensors.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestStockMetrics.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRequestWakeup.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterReset.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterRS485FlowControl.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSensors.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSensorsTracking.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSizing.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterStockMetrics.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemCalibrationSwitch.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemConfiguration.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemInquire.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemRequestInquire.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemRequestStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemRequestWakeup.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemStatus.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterSystemWakeup.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterTakeLabelTime.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterTeach.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterTeachTable.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterTest.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterTestCassette.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterVersion.h" />
+    <ClInclude Include="PrinterManager\Include\PrinterWakeup.h" />
+    <ClInclude Include="PrinterManager\Include\PrintheadPower.h" />
+    <ClInclude Include="PrinterManager\Include\RS485Manager.h" />
+    <ClInclude Include="PrinterManager\Include\SSPrinterManager.h" />
+    <ClInclude Include="PrinterManager\Include\StEppPrinterTeachTable.h" />
+    <ClInclude Include="PrinterManager\Include\VoidLabelBits.h" />
+    <ClInclude Include="ProductDev\Include\ProductChangeMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductCompleteMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductFinishedPrintingAllLabelsMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductLookupMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductPackageCompleteMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductReadAllAccumulatedItemsMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductRemoveAccumItemMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductStartPrintForTransactionMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductStatusMsg.h" />
+    <ClInclude Include="ProductDev\Include\ProductUpdateMsg.h" />
+    <ClInclude Include="RendererManager\common\bitstring.h" />
+    <ClInclude Include="RendererManager\common\buffer.h" />
+    <ClInclude Include="RendererManager\common\rbitmap.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmapi.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmecc.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmecclevel.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmmetrics.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmmode.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmmodedata.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmmodule.h" />
+    <ClInclude Include="RendererManager\datamatrix\dmsymbolsize.h" />
+    <ClInclude Include="RendererManager\Include\DataMatrixBarcode.h" />
+    <ClInclude Include="RendererManager\Include\QRBarcode.h" />
+    <ClInclude Include="RendererManager\Include\RendererInitDotHeadWear.h" />
+    <ClInclude Include="RendererManager\Include\RendererNewDotHeadWear.h" />
+    <ClInclude Include="RendererManager\qrcode\poly.h" />
+    <ClInclude Include="RendererManager\qrcode\qrapi.h" />
+    <ClInclude Include="RendererManager\qrcode\qrecc.h" />
+    <ClInclude Include="RendererManager\qrcode\qreccblock.h" />
+    <ClInclude Include="RendererManager\qrcode\qrecclevel.h" />
+    <ClInclude Include="RendererManager\qrcode\qrmetrics.h" />
+    <ClInclude Include="RendererManager\qrcode\qrmode.h" />
+    <ClInclude Include="RendererManager\qrcode\qrmodedata.h" />
+    <ClInclude Include="RendererManager\qrcode\qrmodule.h" />
+    <ClInclude Include="RendererManager\qrcode\qrversion.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RTCManager\Include\AccessKeyActivation.h" />
+    <ClInclude Include="RTCManager\Include\AccessKeyDeactivation.h" />
+    <ClInclude Include="RTCManager\Include\RealTimeController.h" />
+    <ClInclude Include="RTCManager\Include\System.h" />
+    <ClInclude Include="RTCManager\Include\SystemCalibrationSwitch.h" />
+    <ClInclude Include="RTCManager\Include\SystemConfiguration.h" />
+    <ClInclude Include="RTCManager\Include\SystemDisable.h" />
+    <ClInclude Include="RTCManager\Include\SystemEEPBlockRead.h" />
+    <ClInclude Include="RTCManager\Include\SystemEEPBlockWrite.h" />
+    <ClInclude Include="RTCManager\Include\SystemEnable.h" />
+    <ClInclude Include="RTCManager\Include\SystemEvent.h" />
+    <ClInclude Include="RTCManager\Include\SystemGeneric.h" />
+    <ClInclude Include="RTCManager\Include\SystemInquire.h" />
+    <ClInclude Include="RTCManager\Include\SystemMode.h" />
+    <ClInclude Include="RTCManager\Include\SystemRead.h" />
+    <ClInclude Include="RTCManager\Include\SystemRequestInquire.h" />
+    <ClInclude Include="RTCManager\Include\SystemRequestStatus.h" />
+    <ClInclude Include="RTCManager\Include\SystemRequestWakeup.h" />
+    <ClInclude Include="RTCManager\Include\SystemReset.h" />
+    <ClInclude Include="RTCManager\Include\SystemStatus.h" />
+    <ClInclude Include="RTCManager\Include\SystemStatusInfo.h" />
+    <ClInclude Include="RTCManager\Include\SystemWakeup.h" />
+    <ClInclude Include="RTCManager\Include\SystemWrite.h" />
+    <ClInclude Include="RTCManager\Include\UsbKbdAttachChange.h" />
+    <ClInclude Include="USBCommManagers\Include\CLACommManager.h" />
+    <ClInclude Include="USBCommManagers\Include\FPCCommManager.h" />
+    <ClInclude Include="ScannerManager\Include\motorolassiscanner.h" />
+    <ClInclude Include="ScannerManager\Include\ScannerManager.h" />
+    <ClInclude Include="ScannerManager\Include\ScannerProductRead.h" />
+    <ClInclude Include="ScannerManager\Include\serialiolinux.h" />
+    <ClInclude Include="ScannerManager\Include\serialiowin.h" />
+    <ClInclude Include="WeigherManager\Include\CANWeigherManager.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCat3AuditRecords.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCat3DateTime.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCat3PageRequest.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCat3RecordStatus.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCat3Statistics.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherFactoryDefaultsComplete.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherKpcError.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemInfo.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemRequestValueMax.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxAllGains.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxAssembly.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxDateOfMan.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxFitParams.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxHwVersion.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxSerialNumber.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteAssembly.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteDateOfMan.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteHwVersion.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteSerialNumber.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteXGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteYGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxWriteZGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxXGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxYGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherValueMaxZGainFactor.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherWriteCat3Record.h" />
+    <ClInclude Include="WrapperManager\Include\EncoderPositionRange.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCameraCalibration.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCameraHeightScan.h" />
+    <ClInclude Include="WrapperManager\Include\evolwrappercamerascan.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCamerasTracking.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCameraThreshold.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperConfiguration.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperControl.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCycle.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperCycleCount.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperDiagnosticsTest.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperDiagnosticsTestResult.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperErrorHistory.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperErrorInfo.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperErrorTranslator.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperEventCapture.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperGeneralConfig.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperGeneralSensors.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperHeaterConfig.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperInquire.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperInterlockSensors.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperLoad.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperMessages.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperMotorProfile.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperNode.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPackageDesc.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPackageDischarge.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPackageHistory.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPackageTimings.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPackageTimingsPointer.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperPkgDetectorStatus.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperRemoveUpgradeFiles.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperReqCameraThreshold.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperReqCycleCount.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperReqSystemInfo.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperReqSystemReset.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperRequestPackageTimings.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperReqUIModel.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSaveCycleCount.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSensors.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSettings.h" />
+    <ClInclude Include="WrapperManager\Include\evolwrapperstatus.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperStatusInfo.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSystemInfo.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSystemInfoErase.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperSystemInfoWrite.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperTemperatureInfo.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperTest.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperTestComplete.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperTrayNames.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperUIModel.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperUnlockPackageTimings.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperWakeup.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperWrap.h" />
+    <ClInclude Include="WrapperManager\Include\EvolWrapperWriteCameraThreshold.h" />
+    <ClInclude Include="WrapperManager\Include\HeaterConfiguration.h" />
+    <ClInclude Include="WrapperManager\Include\NGWAck.h" />
+    <ClInclude Include="WrapperManager\Include\NGWBootNodeCMD.h" />
+    <ClInclude Include="WrapperManager\Include\NGWBootStatus.h" />
+    <ClInclude Include="WrapperManager\Include\NGWBootVersion.h" />
+    <ClInclude Include="WrapperManager\Include\NGWBulkTransfer.h" />
+    <ClInclude Include="WrapperManager\Include\NGWDimensionOverrides.h" />
+    <ClInclude Include="WrapperManager\Include\NGWEngException.h" />
+    <ClInclude Include="WrapperManager\Include\NGWEngInfo.h" />
+    <ClInclude Include="WrapperManager\Include\NGWFlush.h" />
+    <ClInclude Include="WrapperManager\Include\NGWGeneric.h" />
+    <ClInclude Include="WrapperManager\Include\NGWReqBootStatus.h" />
+    <ClInclude Include="WrapperManager\Include\NGWRequestBootVersion.h" />
+    <ClInclude Include="WrapperManager\Include\NGWRequestVersion.h" />
+    <ClInclude Include="WrapperManager\Include\NGWWrapperPause.h" />
+    <ClInclude Include="WrapperManager\Include\NGWWrapperResume.h" />
+    <ClInclude Include="WrapperManager\Include\NodeInternalTemperature.h" />
+    <ClInclude Include="WrapperManager\Include\WrapBox.h" />
+    <ClInclude Include="WrapperManager\Include\WrapBoxSize.h" />
+    <ClInclude Include="WrapperManager\Include\wrapper.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperAbort.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperConfiguration.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperControl.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperCycle.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperDisable.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperEnable.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperErrorHistory.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperErrorHistoryTracking.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperErrorInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperEvent.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperFilmWidthDimensions.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperGeneric.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperGripperTiming.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperHeaterInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperInquire.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperIntakeMode.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperJog.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperLoad.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperManager.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperMode.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperOpen.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperPackageHistory.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperPackageInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperPackCodeInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperPackSize.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperPause.h" />
+    <ClInclude Include="WrapperManager\Include\wrapperrequesterrorhistory.h" />
+    <ClInclude Include="WrapperManager\Include\wrapperrequestinquire.h" />
+    <ClInclude Include="WrapperManager\Include\wrapperrequestpackagehistory.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperRequestSensors.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperRequestSettings.h" />
+    <ClInclude Include="WrapperManager\Include\wrapperrequeststatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperRequestWakeup.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperRequestWrapperKind.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperReset.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperResume.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSensors.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSensorsTracking.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSettings.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSetWrapMode.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperStateInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperStatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperStatusInfo.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperStatusTracking.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemConfiguration.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemInquire.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemRequestInquire.h" />
+    <ClInclude Include="WrapperManager\Include\wrappersystemrequeststatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemRequestWakeup.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemStatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperSystemWakeup.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperTest.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperTime.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperTiming.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperWakeup.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperWrap.h" />
+    <ClInclude Include="WrapperManager\Include\WrapperWrapperKind.h" />
+    <ClInclude Include="TimerManager\Include\Timeout.h" />
+    <ClInclude Include="TimerManager\Include\Timer.h" />
+    <ClInclude Include="TimerManager\Include\TimerEvent.h" />
+    <ClInclude Include="TimerManager\Include\TimerManager.h" />
+    <ClInclude Include="RendererManager\Include\Barcode.h" />
+    <ClInclude Include="RendererManager\Include\bitblt.h" />
+    <ClInclude Include="RendererManager\Include\BitMap.h" />
+    <ClInclude Include="RendererManager\Include\Blob.h" />
+    <ClInclude Include="RendererManager\Include\CRendererUtil.h" />
+    <ClInclude Include="RendererManager\Include\DrawingPrimitives.h" />
+    <ClInclude Include="RendererManager\Include\Ean128CBarcode.h" />
+    <ClInclude Include="RendererManager\Include\EanBarcode.h" />
+    <ClInclude Include="RendererManager\Include\FormRecord.h" />
+    <ClInclude Include="RendererManager\Include\Frame.h" />
+    <ClInclude Include="RendererManager\Include\GenericBarcode.h" />
+    <ClInclude Include="RendererManager\Include\GraphicHeader.h" />
+    <ClInclude Include="RendererManager\Include\GraphicImage.h" />
+    <ClInclude Include="RendererManager\Include\HobartLabel.h" />
+    <ClInclude Include="RendererManager\Include\hoblabel.h" />
+    <ClInclude Include="RendererManager\Include\ImageControl.h" />
+    <ClInclude Include="RendererManager\Include\ImageRecord.h" />
+    <ClInclude Include="RendererManager\Include\label.h" />
+    <ClInclude Include="RendererManager\Include\OffSetRecord.h" />
+    <ClInclude Include="RendererManager\Include\Pen.h" />
+    <ClInclude Include="RendererManager\Include\Point.h" />
+    <ClInclude Include="RendererManager\Include\Rectangle.h" />
+    <ClInclude Include="RendererManager\Include\Renderer.h" />
+    <ClInclude Include="RendererManager\Include\RendererCloseSession.h" />
+    <ClInclude Include="RendererManager\Include\RendererEvent.h" />
+    <ClInclude Include="RendererManager\Include\RendererGeneric.h" />
+    <ClInclude Include="RendererManager\Include\RendererManager.h" />
+    <ClInclude Include="RendererManager\Include\RendererManagerUnitTester.h" />
+    <ClInclude Include="RendererManager\Include\RendererRenderComplete.h" />
+    <ClInclude Include="RendererManager\Include\RendererRenderStart.h" />
+    <ClInclude Include="RendererManager\Include\RendererRequestRendering.h" />
+    <ClInclude Include="RendererManager\Include\RendererRequestSession.h" />
+    <ClInclude Include="RendererManager\Include\RendererSessionId.h" />
+    <ClInclude Include="RendererManager\Include\RendererSetDestination.h" />
+    <ClInclude Include="RendererManager\Include\RendererSetSource.h" />
+    <ClInclude Include="RendererManager\Include\ResourceHeader.h" />
+    <ClInclude Include="RendererManager\Include\Rss14.h" />
+    <ClInclude Include="RendererManager\Include\SwapBytes.h" />
+    <ClInclude Include="RendererManager\Include\TempHeader.h" />
+    <ClInclude Include="RendererManager\Include\UltimaObjects.h" />
+    <ClInclude Include="RendererManager\Include\UpcBarcode.h" />
+    <ClInclude Include="RendererManager\Include\UpcD3Barcode.h" />
+    <ClInclude Include="RendererManager\Include\WordWrapLineMetrics.h" />
+    <ClInclude Include="USBCommManagers\Include\APCCommManager.h" />
+    <ClInclude Include="USBCommManagers\Include\CommHeader.h" />
+    <ClInclude Include="USBCommManagers\Include\ESCCommManager.h" />
+    <ClInclude Include="USBCommManagers\Include\EvolWrapperCommManager.h" />
+    <ClInclude Include="USBCommManagers\Include\PrinterCommManager.h" />
+    <ClInclude Include="USBCommManagers\Include\USBEvolHeader.h" />
+    <ClInclude Include="USBCommManagers\Include\WeigherCommManager.h" />
+    <ClInclude Include="USBManager\Include\AtmelDeviceHandler.h" />
+    <ClInclude Include="USBManager\Include\AtmelSambaUpdater.h" />
+    <ClInclude Include="USBManager\Include\CUsbCommBase.h" />
+    <ClInclude Include="USBManager\Include\CypressEzUsbUpdater.h" />
+    <ClInclude Include="USBManager\Include\device_event.h" />
+    <ClInclude Include="USBManager\Include\EvolPrinterCodeUpdater.h" />
+    <ClInclude Include="USBManager\Include\EvolWeigherCodeUpdater.h" />
+    <ClInclude Include="USBManager\Include\HIDDeviceEvent.h" />
+    <ClInclude Include="USBManager\Include\HobartUsbUpdater.h" />
+    <ClInclude Include="USBManager\Include\IntelHexParser.h" />
+    <ClInclude Include="USBManager\Include\IPeripheralUpdater.h" />
+    <ClInclude Include="USBManager\Include\IUsbCodeUpdater.h" />
+    <ClInclude Include="USBManager\Include\UsbCodeUpdater.h" />
+    <ClInclude Include="USBManager\Include\UsbManager.h" />
+    <ClInclude Include="USBManager\Include\UsbManagerWin32.h" />
+    <ClInclude Include="USBManager\Include\UsbNode.h" />
+    <ClInclude Include="USBManager\Include\win32\usb_win_node.h" />
+    <ClInclude Include="WeigherManager\Include\UsbWeigherSystemStatus.h" />
+    <ClInclude Include="WeigherManager\Include\Weigher.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherCachedStatus.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherColdReset.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherControl.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherDisable.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherEnable.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherEvent.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherGeneric.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherInquire.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherLock.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherManager.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherMode.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherNormal.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherRequestInquire.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherRequestStatus.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherRequestWakeup.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherRequestWeigherKind.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherReset.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherRezero.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemCalibrationSwitch.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemConfiguration.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemInquire.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemRequestInquire.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemRequestStatus.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemRequestWakeup.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemReset.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemStatus.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherSystemWakeup.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherWakeup.h" />
+    <ClInclude Include="WeigherManager\Include\WeigherWeigherKind.h" />
+    <ClInclude Include="RFIDManager\include\RFIDEvent.h" />
+    <ClInclude Include="RFIDManager\include\RFIDManager.h" />
+    <ClInclude Include="RFIDManager\include\TIRIS.h" />
+    <ClInclude Include="RFIDManager\include\TIRISReadOnlyId.h" />
+    <ClInclude Include="GCDManager\Include\GCD.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevDataMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevFileUploadMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevLanguageAndWeighModeMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevLoadPlaylistMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevNoParamMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevSetPlaybackWaitTimeMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevSetTimeInfo.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevSetVolumeMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevStringParamMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDDevTestColorMsg.h" />
+    <ClInclude Include="GCDManager\Include\gcdevent.h" />
+    <ClInclude Include="GCDManager\Include\GCDFtpUpdateMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDGCDKind.h" />
+    <ClInclude Include="GCDManager\Include\GCDStatus.h" />
+    <ClInclude Include="GCDManager\Include\GCDSystemMsg.h" />
+    <ClInclude Include="GCDManager\Include\GCDSystemStatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPCalibration.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPConfig.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPDist.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPRequest.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPStatus.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPTest.h" />
+    <ClInclude Include="WrapperManager\Include\WrPPPVersion.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\HobartHandsFree\shared\message.cpp" />
+    <ClCompile Include="..\..\HobartHandsFree\shared\messagefactory.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteGeneric.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteReqTestMode.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteTest.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteTestComplete.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteTestCompleteUI.cpp" />
+    <ClCompile Include="BoardSite\Messages\BoardSiteTestStatus.cpp" />
+    <ClCompile Include="BoardSite\Source\BoardSiteTestManager.cpp" />
+    <ClCompile Include="CanManager\Messages\KpcSystemErrors.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWStartUpgrade.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeFinished.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeInfo.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeProgress.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeRequired.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeStatus.cpp" />
+    <ClCompile Include="CanManager\Messages\NGWUpgradeUIReady.cpp" />
+    <ClCompile Include="CanManager\Messages\Sam7xUpdaterMsg.cpp" />
+    <ClCompile Include="CanManager\Source\CanLibrary.cpp" />
+    <ClCompile Include="CanManager\Source\CanManager.cpp" />
+    <ClCompile Include="CanManager\Source\CanTranslator.cpp" />
+    <ClCompile Include="CanManager\Source\GpioDeviceReset.cpp" />
+    <ClCompile Include="CanManager\Source\NGWUpdateManager.cpp" />
+    <ClCompile Include="CanManager\Source\Sam7xCANUpdater.cpp" />
+    <ClCompile Include="CanManager\Source\SystemStartManager.cpp" />
+    <ClCompile Include="CanManager\Source\UnitTest.cpp" />
+    <ClCompile Include="CodeUpdater\CLA\Source\CUCLACommManager.cpp" />
+    <ClCompile Include="CodeUpdater\CLA\Source\CUCLAStatus.cpp" />
+    <ClCompile Include="CodeUpdater\CLA\Source\UsbCLACodeUpdater.cpp" />
+    <ClCompile Include="CodeUpdater\PrinterManager\Source\CUPrinterCommManager.cpp" />
+    <ClCompile Include="codeupdater\wrapper\source\CUEvolWrapperStatus.cpp" />
+    <ClCompile Include="CodeUpdater\Wrapper\Source\CUWrapperCommManager.cpp" />
+    <ClCompile Include="CodeUpdater\Wrapper\Source\UsbWrapperCodeUpdater.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\Config.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\Diag.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\DiagStep.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\EventLog.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\PrinterDotUsage.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\PrinterDotWear.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\PrinterHeadStatus.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ServiceAction.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ServiceCat.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ServiceMaintLog.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ServiceMethod.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ServicePart.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\ValueMax.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\Wizards.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\WrapperAuditLog.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\WrapperTimings.cpp" />
+    <ClCompile Include="DiagnosticsManager\DBO\WrapperTrays.cpp" />
+    <ClCompile Include="DiagnosticsManager\DiagnosticsDB.cpp" />
+    <ClCompile Include="DiagnosticsManager\DiagnosticsEdgeDevice.cpp" />
+    <ClCompile Include="DiagnosticsManager\DiagnosticsManager.cpp" />
+    <ClCompile Include="DiagnosticsManager\EdgeComm\EdgePacket.cpp" />
+    <ClCompile Include="DiagnosticsManager\Messages\DiagnosticsMessage.cpp" />
+    <ClCompile Include="DiagnosticsManager\Util\BasicSocket.cpp" />
+    <ClCompile Include="DiagnosticsManager\Util\Dict.cpp" />
+    <ClCompile Include="DiagnosticsManager\Util\NetworkVal.cpp" />
+    <ClCompile Include="DiagnosticsManager\Util\Timestamp.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevLoadDisplayObjectXMLMsg.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootAck.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootAppVersion.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootBulkMsg.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootCmd.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootFlush.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootFrame.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootFrameHeader.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootGeneric.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootReady.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootStatus.cpp" />
+    <ClCompile Include="KPCBootManager\Messages\KPCBootVersion.cpp" />
+    <ClCompile Include="KPCBootManager\Source\KPCBootManager.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderAck.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderBulkMsg.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderCmd.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderFlush.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderFrame.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderFrameHeader.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderGeneric.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCBootUpgraderStatus.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCUpgradeInfo.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Messages\KPCUpgradeProgress.cpp" />
+    <ClCompile Include="KPCBootUpgrader\Source\KPCBootUpgrader.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLAPackageDischarge.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLARemoveUpgradeFiles.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLAReqSystemInfo.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLASystemInfo.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLASystemInfoErase.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLASystemInfoWrite.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLASystemStatus.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CLATestComplete.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CompactLabelApplierConfiguration.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CompactLabelApplierInquire.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\CompactLabelApplierSensors.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\EvolLabelApplierConfiguration.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILACloseWindow.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILACycle.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILAForceLabel.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILAOff.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILAOpenWindow.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILARequestSpeed.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\ILASpeed.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierCloseWindow.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierConfiguration.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierDisable.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierEnable.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierGeneric.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierInquire.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierLabelApplierKind.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierLabelReady.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierLabelTaken.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierMode.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierOff.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierOn.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierOpenWindow.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierPackageReady.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierPositionInfo.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierPrint.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestCloseWindow.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestInquire.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestLabelApplierKind.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestOff.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestSensors.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestStatus.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestTest.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierRequestWakeup.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierReset.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSensors.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSensorsTracking.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSetup.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierStatus.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemConfiguration.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemInquire.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemRequestInquire.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemRequestStatus.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemRequestWakeup.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemStatus.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierSystemWakeup.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierTest.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierUltimaAutoMode.cpp" />
+    <ClCompile Include="LabelApplierManager\Messages\LabelApplierWakeup.cpp" />
+    <ClCompile Include="LabelApplierManager\Source\ILAManager.cpp" />
+    <ClCompile Include="LabelApplierManager\Source\LabelApplierManager.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeConfiguration.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeGeneric.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeInquire.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeMarqueeKind.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeMode.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeOpMode.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeRequestWakeup.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeStatus.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeSystemStatus.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeTest.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeUpdate.cpp" />
+    <ClCompile Include="MarqueeManager\Messages\MarqueeWakeup.cpp" />
+    <ClCompile Include="MarqueeManager\Source\MarqueeManager.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericAnnunciator.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericConfiguration.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericField.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericGeneric.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericInquire.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericMode.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericNumericKind.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericOpMode.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericRequestWakeup.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericStatus.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericSystemStatus.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericTest.cpp" />
+    <ClCompile Include="NumericManager\Messages\NumericWakeup.cpp" />
+    <ClCompile Include="NumericManager\Source\NumericManager.cpp" />
+    <ClCompile Include="NumericManager\Source\NumericVirtualImage.cpp" />
+    <ClCompile Include="NumericManager\Source\VacummFlourescentVirtualImage.cpp" />
+    <ClCompile Include="OperatingModes\Messages\LabelPrintingCounts.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeAccumulateItems.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeAutoManualApply.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeAutoWeigh.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeBuildAMeal.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeGeneric.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeIdle.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeManualWeigh.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeMonitor.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeOperate.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModePluEntry.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModePowerDown.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeProductionEntry.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeSemiWeigh.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeService.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeStatus.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeSupervisor.cpp" />
+    <ClCompile Include="OperatingModes\Messages\OperationModeWrapOnly.cpp" />
+    <ClCompile Include="OperatingModes\Source\AccumulateItemsMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\AutoWeighEvolWrapperMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\AutoWeighMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\AutoWeighWrapperMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\BuildAMealMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\IdleMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\IlaWeighMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\ManualWeighMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\OperatingMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\OpModePackage.cpp" />
+    <ClCompile Include="OperatingModes\Source\ProductionEntryMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\SemiWeighMode.cpp" />
+    <ClCompile Include="OperatingModes\Source\ServiceMode.cpp" />
+    <ClCompile Include="PngGraphics\Source\adler32.c" />
+    <ClCompile Include="PngGraphics\Source\crc32.c" />
+    <ClCompile Include="PngGraphics\Source\deflate.c" />
+    <ClCompile Include="PngGraphics\Source\hob2png.c" />
+    <ClCompile Include="PngGraphics\Source\png.c" />
+    <ClCompile Include="PngGraphics\Source\png2hob.c" />
+    <ClCompile Include="PngGraphics\Source\pngerror.c" />
+    <ClCompile Include="PngGraphics\Source\pngget.c" />
+    <ClCompile Include="PngGraphics\Source\pngmem.c" />
+    <ClCompile Include="PngGraphics\Source\pngread.c" />
+    <ClCompile Include="PngGraphics\Source\pngrio.c" />
+    <ClCompile Include="PngGraphics\Source\pngrtran.c" />
+    <ClCompile Include="PngGraphics\Source\pngrutil.c" />
+    <ClCompile Include="PngGraphics\Source\pngset.c" />
+    <ClCompile Include="PngGraphics\Source\pngtrans.c" />
+    <ClCompile Include="PngGraphics\Source\pngwio.c" />
+    <ClCompile Include="PngGraphics\Source\pngwrite.c" />
+    <ClCompile Include="PngGraphics\Source\pngwtran.c" />
+    <ClCompile Include="PngGraphics\Source\pngwutil.c" />
+    <ClCompile Include="PngGraphics\Source\trees.c" />
+    <ClCompile Include="PngGraphics\Source\zutil.c" />
+    <ClCompile Include="PrinterManager\Messages\CommandCounterOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandDataOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandIdleOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandPrintOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandStatusOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandStepOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandStepUntilOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandTestOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandWaitOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\CommandWaitUntilOperation.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterAdvanceLabelStock.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterCommand.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterConfiguration.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterCutterStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterDeletePackage.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterDisable.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterDonePostImagingSelfServeBarcodeLabelImage.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterEnable.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterEnableTakeup.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterFactoryDefaultsComplete.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterFlashStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterFlush.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterGapCalStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterGeneric.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterHeadDotAck.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterHeadDotStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterHeadType.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterHeadWear.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterInquire.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterKpcError.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelComplete.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelImageSize.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelReady.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelTaken.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelTransferComplete.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelTransferFailed.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelTransferReady.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterLabelWidth.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterMask.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterMode.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterNewAddress.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterNewPrinterType.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterNomSize.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterPostImage.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterPreImage.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterPrinterKind.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterPrinterType.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterPrintTestLabel.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRam.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestCalibrate.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestHeadDotStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestHeadDotWear.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestInquire.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestLabelTransfer.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestLabelWidth.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestPrinterKind.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestPrinterType.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestPrintheadPower.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestSensors.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestStockMetrics.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRequestWakeup.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterReset.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterRS485FlowControl.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSensors.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSensorsTracking.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSizing.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterStockMetrics.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemCalibrationSwitch.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemConfiguration.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemInquire.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemRequestInquire.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemRequestStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemRequestWakeup.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemStatus.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterSystemWakeup.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterTakeLabelTime.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterTeach.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterTest.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterTestCassette.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterVersion.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrinterWakeup.cpp" />
+    <ClCompile Include="PrinterManager\Messages\PrintheadPower.cpp" />
+    <ClCompile Include="PrinterManager\Source\CommandOperationList.cpp" />
+    <ClCompile Include="PrinterManager\Source\EssPrinterTeachTable.cpp" />
+    <ClCompile Include="PrinterManager\Source\EvolPrinterTeachTable.cpp" />
+    <ClCompile Include="PrinterManager\Source\PrinterManager.cpp" />
+    <ClCompile Include="PrinterManager\Source\PrinterTeachTable.cpp" />
+    <ClCompile Include="PrinterManager\Source\RS485Manager.cpp" />
+    <ClCompile Include="PrinterManager\Source\SSPrinterManager.cpp" />
+    <ClCompile Include="PrinterManager\Source\StEppPrinterTeachTable.cpp" />
+    <ClCompile Include="PrinterManager\Source\VoidLabelBits.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductChangeMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductCompleteMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductFinishedPrintingAllLabelsMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductLookupMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductPackageCompleteMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductReadAllAccumulatedItemsMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductRemoveAccumItemMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductStartPrintForTransactionMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductStatusMsg.cpp" />
+    <ClCompile Include="ProductDev\Messages\ProductUpdateMsg.cpp" />
+    <ClCompile Include="RendererManager\common\bitstring.cpp" />
+    <ClCompile Include="RendererManager\common\buffer.cpp" />
+    <ClCompile Include="RendererManager\common\rbitmap.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmapi.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmecc.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmmetrics.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmmode.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmmodedata.cpp" />
+    <ClCompile Include="RendererManager\datamatrix\dmmodule.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererInitDotHeadWear.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererNewDotHeadWear.cpp" />
+    <ClCompile Include="RendererManager\qrcode\poly.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrapi.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrecc.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qreccblock.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrmetrics.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrmode.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrmodedata.cpp" />
+    <ClCompile Include="RendererManager\qrcode\qrmodule.cpp" />
+    <ClCompile Include="RendererManager\Source\DataMatrixBarcode.cpp" />
+    <ClCompile Include="RendererManager\Source\QRBarcode.cpp" />
+    <ClCompile Include="USBCommManagers\Source\CLACommManager.cpp" />
+    <ClCompile Include="USBCommManagers\Source\FPCCommManager.cpp" />
+    <ClCompile Include="ScannerManager\Messages\ScannerProductRead.cpp" />
+    <ClCompile Include="ScannerManager\Source\motorolassiscanner.cpp" />
+    <ClCompile Include="ScannerManager\Source\ScannerManager.cpp" />
+    <ClCompile Include="ScannerManager\Source\serialiolinux.cpp" />
+    <ClCompile Include="ScannerManager\Source\serialiowin.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCat3AuditRecords.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCat3DateTime.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCat3PageRequest.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCat3RecordStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCat3Statistics.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherFactoryDefaultsComplete.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherKpcError.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemInfo.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemRequestValueMax.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxAllGains.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxAssembly.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxDateOfMan.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxFitParams.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxHwVersion.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxSerialNumber.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteAssembly.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteDateOfMan.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteHwVersion.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteSerialNumber.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteXGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteYGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxWriteZGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxXGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxYGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherValueMaxZGainFactor.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherWriteCat3Record.cpp" />
+    <ClCompile Include="WeigherManager\Source\CANWeigherManager.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCameraCalibration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCameraHeightScan.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCameraScan.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCamerasTracking.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCameraThreshold.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperConfiguration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperControl.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCycle.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperCycleCount.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperDiagnosticsTest.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperDiagnosticsTestResult.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperErrorHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperErrorInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperEventCapture.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperGeneralConfig.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperGeneralSensors.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperHeaterConfig.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperInquire.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperInterlockSensors.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperLoad.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperMotorProfile.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperNode.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPackageDesc.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPackageDischarge.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPackageHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPackageTimings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPackageTimingsPointer.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperPkgDetectorStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperRemoveUpgradeFiles.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperReqCameraThreshold.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperReqCycleCount.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperReqSystemInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperReqSystemReset.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperRequestPackageTimings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperReqUIModel.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperResetDefaultPackageTimings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSaveCycleCount.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSensors.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSettings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperStatusInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSystemInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSystemInfoErase.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSystemInfoWrite.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperSystemStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperTemperatureInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperTest.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperTestComplete.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperTrayNames.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperUIModel.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperUnlockPackageTimings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperWrap.cpp" />
+    <ClCompile Include="WrapperManager\Messages\EvolWrapperWriteCameraThreshold.cpp" />
+    <ClCompile Include="WrapperManager\Messages\HeaterConfiguration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWAck.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWBootNodeCMD.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWBootStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWBootVersion.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWBulkTransfer.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWDimensionOverrides.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWEngException.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWEngInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWFlush.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWGeneric.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWReqBootStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWRequestBootVersion.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWRequestVersion.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWWrapperPause.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NGWWrapperResume.cpp" />
+    <ClCompile Include="WrapperManager\Messages\NodeInternalTemperature.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapBoxSize.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperAbort.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperConfiguration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperControl.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperCycle.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperDisable.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperEnable.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperErrorHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperErrorHistoryTracking.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperErrorInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperFilmWidthDimensions.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperGeneric.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperGripperTiming.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperHeaterInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperInquire.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperIntakeMode.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperJog.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperLoad.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperMode.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperOpen.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperPackageHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperPackageInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperPackCodeInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperPackSize.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperPause.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestErrorHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestInquire.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestPackageHistory.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestSensors.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestSettings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperRequestWrapperKind.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperReset.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperResume.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSensors.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSensorsTracking.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSettings.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSetWrapMode.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperStateInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperStatusInfo.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperStatusTracking.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemConfiguration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemInquire.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemRequestInquire.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemRequestStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemRequestWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperSystemWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperTest.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperTime.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperTiming.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperWrap.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrapperWrapperKind.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPCalibration.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPConfig.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPDist.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPRequest.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPStatus.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPTest.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPVersion.cpp" />
+    <ClCompile Include="WrapperManager\Messages\WrPPPWakeup.cpp" />
+    <ClCompile Include="WrapperManager\Source\EncoderPositionRange.cpp" />
+    <ClCompile Include="WrapperManager\Source\EvolWrapperErrorTranslator.cpp" />
+    <ClCompile Include="WrapperManager\Source\WrapBox.cpp" />
+    <ClCompile Include="WrapperManager\Source\WrapperManager.cpp" />
+    <ClCompile Include="RTCManager\Messages\AccessKeyActivation.cpp" />
+    <ClCompile Include="RTCManager\Messages\AccessKeyDeactivation.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemCalibrationSwitch.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemConfiguration.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemConfigureGCD.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemDisable.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemEEPBlockRead.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemEEPBlockWrite.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemEnable.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemGCDPowerOff.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemGCDPowerOn.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemGeneric.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemInquire.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemMode.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemRead.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemRequestInquire.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemRequestStatus.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemRequestWakeup.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemReset.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemStatus.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemStatusInfo.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemWakeup.cpp" />
+    <ClCompile Include="RTCManager\Messages\SystemWrite.cpp" />
+    <ClCompile Include="RTCManager\Messages\UsbKbdAttachChange.cpp" />
+    <ClCompile Include="RTCManager\Source\RealTimeController.cpp" />
+    <ClCompile Include="TimerManager\Messages\Timeout.cpp" />
+    <ClCompile Include="TimerManager\Messages\Timer.cpp" />
+    <ClCompile Include="TimerManager\Source\TimerManager.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererCloseSession.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererGeneric.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererRenderComplete.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererRenderStart.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererRequestRendering.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererRequestSession.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererSessionId.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererSetDestination.cpp" />
+    <ClCompile Include="RendererManager\Messages\RendererSetSource.cpp" />
+    <ClCompile Include="RendererManager\Source\BitMap.cpp" />
+    <ClCompile Include="RendererManager\Source\Blob.cpp" />
+    <ClCompile Include="RendererManager\Source\CopyOp.cpp" />
+    <ClCompile Include="RendererManager\Source\CRendererUtil.cpp" />
+    <ClCompile Include="RendererManager\Source\DrawingPrimitives.cpp" />
+    <ClCompile Include="RendererManager\Source\Ean128CBarcode.cpp" />
+    <ClCompile Include="RendererManager\Source\EanBarcode.cpp" />
+    <ClCompile Include="RendererManager\Source\FormRecord.cpp" />
+    <ClCompile Include="RendererManager\Source\GenericBarcode.cpp" />
+    <ClCompile Include="RendererManager\Source\GraphicHeader.cpp" />
+    <ClCompile Include="RendererManager\Source\GraphicImage.cpp" />
+    <ClCompile Include="RendererManager\Source\HobartLabel.cpp" />
+    <ClCompile Include="RendererManager\Source\ImageControl.cpp" />
+    <ClCompile Include="RendererManager\Source\OffSetRecord.cpp" />
+    <ClCompile Include="RendererManager\Source\Pen.cpp" />
+    <ClCompile Include="RendererManager\Source\Point.cpp" />
+    <ClCompile Include="RendererManager\Source\Rectangle.cpp" />
+    <ClCompile Include="RendererManager\Source\Renderer.cpp" />
+    <ClCompile Include="RendererManager\Source\RendererManager.cpp" />
+    <ClCompile Include="RendererManager\Source\RendererManagerUnitTester.cpp" />
+    <ClCompile Include="RendererManager\Source\ResourceHeader.cpp" />
+    <ClCompile Include="RendererManager\Source\RotateOp.cpp" />
+    <ClCompile Include="RendererManager\Source\Rss14.cpp" />
+    <ClCompile Include="RendererManager\Source\UpcBarcode.cpp" />
+    <ClCompile Include="RendererManager\Source\UpcD3Barcode.cpp" />
+    <ClCompile Include="RendererManager\Source\WordWrapLineMetrics.cpp" />
+    <ClCompile Include="USBCommManagers\Messages\CommHeader.cpp" />
+    <ClCompile Include="USBCommManagers\Messages\USBEvolHeader.cpp" />
+    <ClCompile Include="USBCommManagers\Source\APCCommManager.cpp" />
+    <ClCompile Include="USBCommManagers\Source\ESCCommManager.cpp" />
+    <ClCompile Include="USBCommManagers\Source\EvolWrapperCommManager.cpp" />
+    <ClCompile Include="USBCommManagers\Source\PrinterCommManager.cpp" />
+    <ClCompile Include="USBCommManagers\Source\WeigherCommManager.cpp" />
+    <ClCompile Include="USBManager\Source\AtmelDeviceHandler.cpp" />
+    <ClCompile Include="USBManager\Source\AtmelSambaUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\CUsbCommBase.cpp" />
+    <ClCompile Include="USBManager\Source\CUsbPipe.cpp" />
+    <ClCompile Include="USBManager\Source\CypressEzUsbUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\EvolPrinterCodeUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\EvolWeigherCodeUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\HIDDeviceEvent.cpp" />
+    <ClCompile Include="USBManager\Source\IntelHexParser.cpp" />
+    <ClCompile Include="USBManager\Source\IPeripheralUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\IUsbCodeUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\win32\usb_win_node.cpp" />
+    <ClCompile Include="USBManager\Source\UsbCodeUpdater.cpp" />
+    <ClCompile Include="USBManager\Source\UsbManager.cpp" />
+    <ClCompile Include="USBManager\Source\UsbManagerWin32.cpp" />
+    <ClCompile Include="USBManager\Source\UsbNode.cpp" />
+    <ClCompile Include="WeigherManager\Messages\UsbWeigherSystemStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherCachedStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherColdReset.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherControl.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherDisable.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherEnable.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherGeneric.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherInquire.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherLock.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherMode.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherNormal.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherRequestInquire.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherRequestStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherRequestWakeup.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherRequestWeigherKind.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherReset.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherRezero.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemCalibrationSwitch.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemConfiguration.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemInquire.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemRequestInquire.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemRequestStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemRequestWakeup.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemReset.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemStatus.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherSystemWakeup.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherWakeup.cpp" />
+    <ClCompile Include="WeigherManager\Messages\WeigherWeigherKind.cpp" />
+    <ClCompile Include="WeigherManager\Source\WeigherManager.cpp" />
+    <ClCompile Include="RFIDManager\messages\RFIDStatus.cpp" />
+    <ClCompile Include="RFIDManager\messages\TIRISReadOnlyId.cpp" />
+    <ClCompile Include="RFIDManager\source\RFIDManager.cpp" />
+    <ClCompile Include="RFIDManager\source\RFIDManagerWin32.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevDataMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevFileUploadMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevHeartbeatReqMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevLoadPlaylistMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevNoParamMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevSetPlaybackWaitTimeMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevSetTimeInfo.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevSetVolumeMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevStringParamMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDDevTestColorMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDFtpUpdateMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDGCDKind.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDLanguageAndWeighModeMsg.cpp" />
+    <ClCompile Include="GCDManager\Messages\GCDSystemMsg.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="GCDManager\Messages\GCDSystemStatus.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PAL\PAL.vcxproj">
+      <Project>{ce947c65-5841-4d63-a3f1-2c1cec227960}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CodeUpdater\AtmelAT91\APCFirmware.ini" />
+    <None Include="CodeUpdater\AtmelAT91\APCFirmware.zip" />
+    <None Include="CodeUpdater\AtmelAT91\AT91Boot_DLL.dll" />
+    <None Include="CodeUpdater\AtmelAT91\AT91Boot_DLL.tlb" />
+    <None Include="DiagnosticsManager\DBO\Makefile" />
+    <None Include="DiagnosticsManager\EdgeComm\Makefile" />
+    <None Include="ScannerManager\Messages\Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EvolutionRTC.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

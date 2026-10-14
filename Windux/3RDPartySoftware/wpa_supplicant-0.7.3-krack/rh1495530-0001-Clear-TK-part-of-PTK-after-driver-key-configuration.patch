@@ -1,0 +1,29 @@
+From 7d711541dced759b34313477d5d163e65c5b0131 Mon Sep 17 00:00:00 2001
+Message-Id: <7d711541dced759b34313477d5d163e65c5b0131.1507149260.git.dcaratti@redhat.com>
+From: Jouni Malinen <j@w1.fi>
+Date: Mon, 29 Dec 2014 13:03:01 +0200
+Subject: [PATCH] Clear TK part of PTK after driver key configuration
+
+There is no need for wpa_supplicant to maintain a copy of the TK part of
+PTK after this has been configured to the driver, so clear that from
+heap memory and only maintain KEK and KCK during association to allow
+additional EAPOL-Key handshakes.
+
+Signed-off-by: Jouni Malinen <j@w1.fi>
+---
+ src/rsn_supp/wpa.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -545,6 +545,10 @@ static int wpa_supplicant_install_ptk(st
+ 		return -1;
+ 	}
+ 
++	/* TK is not needed anymore in supplicant */
++	os_memset(sm->ptk.tk1, 0, sizeof(sm->ptk.tk1));
++	os_memset(sm->ptk.u.tk2, 0, sizeof(sm->ptk.u.tk2));
++
+ 	if (sm->wpa_ptk_rekey) {
+ 		eloop_cancel_timeout(wpa_sm_rekey_ptk, sm, NULL);
+ 		eloop_register_timeout(sm->wpa_ptk_rekey, 0, wpa_sm_rekey_ptk,

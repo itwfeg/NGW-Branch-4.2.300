@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>blackbox_device_users_manual</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js Dark theme for JavaScript, CSS and HTML
+ * Based on the slides of the talk “/Reg(exp){2}lained/”
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: white;
+	background: none;
+	text-shadow: 0 -.1em .2em black;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+pre[class*="language-"],
+:not(pre) > code[class*="language-"] {
+	background: hsl(30, 20%, 25%);
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border: .3em solid hsl(30, 20%, 40%);
+	border-radius: .5em;
+	box-shadow: 1px 1px .5em black inset;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .15em .2em .05em;
+	border-radius: .3em;
+	border: .13em solid hsl(30, 20%, 40%);
+	box-shadow: 1px 1px .3em -.1em black inset;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: hsl(30, 20%, 50%);
+}
+
+.token.punctuation {
+	opacity: .7;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+	color: hsl(350, 40%, 70%);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: hsl(75, 70%, 60%);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: hsl(40, 90%, 60%);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: hsl(350, 40%, 70%);
+}
+
+.token.regex,
+.token.important {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.token.deleted {
+	color: red;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">BLACK BOX DEVICE USER&#39;S MANUAL</h1>
+
+<p><strong>DOCUMENT DETAILS</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>ITEM</th>
+<th>VALUE</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>Author</strong></td>
+<td>ITW, Incorporated</td>
+</tr>
+<tr>
+<td><strong>Creation Date</strong></td>
+<td>12/4/2020</td>
+</tr>
+<tr>
+<td><strong>Version</strong></td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_1">OVERVIEW</h2>
+
+<p>The Black Box Device User&#39;s Manual contains information related to the installation, confi--guration, and maintenance of the Black Device device developed by <a href="https://www.itw.com">Illinois Tool Works (ITW)</a>.</p>
+
+<p>The device pictured below can operate as a gateway in a variety of products that <a href="https://www.itw.com">ITW</a> has developed.</p>
+
+<p><img src="blackbox_device.png" width="300" height="300"></p>
+
+<p>The Black Box device is at its core a gateway device that can relay information to/from devices that are connected to it via various network configuration (wired, wireless, cellular, bluetooth) and I/O protocols (rs485, rs232, modbus).  The device has the ability to display product application information on an HDMI display.  The device in a typical application would be installed in an existing network (wireless, wired, cellular) and would route each product solution&#39;s application data from a supported ITW product solution to other devices in that same network or a remote networked cloud solution via a cellular connection.</p>
+
+<h2 id="toc_2">DEVICE RESIDENT SOFTWARE SUPPORTED</h2>
+
+<p>The Black Box device is in an integral component in several <a href="https://www.itw.com">ITW</a> product solutions.  The device is uniquely configtured with software and hardware to meet the requirements of each of the ITW solutions below.  The device resident software described below is installed and executes in the Black Box device.</p>
+
+<h3 id="toc_3">HOBART SERVICE REMOTE GATEWAY DEVICE</h3>
+
+<hr>
+
+<p>This Black Box device resident software supports connecting the <a href="https://www.hobartcorp.com/products/weigh-wrap/wrapping-equipment/access-automatic-wrapping-system">Next Generation Wrapper</a> and <a href="https://www.hobartcorp.com/products/weigh-wrap/scales/ht-series">HT Retail Scales</a> to the <a href="https://www.hobartservice.com">Hobart Service</a> Hobart Service Remote Diagnostics Cloud solution (in pilot beta testing now) over a 4G LTE cellular connection.  This solution allows the <a href="https://www.hobartservice.com">Hobart Service</a> Product Support team to evaluate all of these connected products remotely via an Internet accessible cloud solution.  <a href="https://www.hobartservice.com">Hobart Service</a> can troubleshoot issues with the devices remotely in some cases without sending a service technician on-site and can evaluate the problem and recommend parts to be dispatched before sending a service technician on site.</p>
+
+<p>The <a href="https://www.hobartservice.com">Hobart Service</a> Cloud Solution application interface is shown below:</p>
+
+<p><img src="hobart_service_cloud_solution.png" width="800" height="400"></p>
+
+<p>Info on the Hobart Service Cloud solution and its capabilities are available by request.  <a href="https://www.hobartservice.com/contact-us-hobart-service">Contact Hobart Service</a> for more info.</p>
+
+<h3 id="toc_4">HOBART WEIGH WRAP NOW SERVING QUEUEING SYSTEM GATEWAY DEVICE</h3>
+
+<hr>
+
+<p>This Black Box device resident software centrally manages a queueing system of customers and routing of application data between multiple HT scales, large screen menuboard display, and a next in line ticketing system kiosk.  The device manages the queueing system and programmatically interacts with each of the devices to efficiently managed queued customers to each of the <a href="https://www.hobartcorp.com/products/weigh-wrap/scales/ht-series">HT Retail Scales</a> thereby optimizing order fulfillment.</p>
+
+<p>The Now Serving Queueing System components are shown below:</p>
+
+<p><img src="now_serving_system.png" width="400" height="400"></p>
+
+<p>The Now Serving Queueing System solution and its capabilities are available by request. Contact <a href="https://www.hobartcorp.com/contact-us">Hobart Weigh Wrap</a> for more info.</p>
+
+<h3 id="toc_5">PILLAR SYNC CORONA P6000 POWER SUPPLY GATEWAY DEVICE</h3>
+
+<hr>
+
+<p>This Black Box device resident software supports display of <a href="https://www.pillartech.com/surface-treatment/surface-treaters/power-supplies">Corona P6000 Power Supply</a> data via a web browser and the PillarSync device resident application software.  The PillarSync device resident application software provides this data via a web server.  The PillarSync application provides a view of the data via various plots and raw data formats.  The Black Box device can also relay <a href="https://www.pillartech.com/surface-treatment/surface-treaters/power-supplies">Corona P6000 Power Supply</a> data to other monitoring devices in a wired or wireless network via the <a href="https://mqtt.org">MQTT</a> protocol.  The Black Box device retrieves data from the Corona P6000 power supply via the RS485 and modbus protocols.  </p>
+
+<p>The PillarSync application interface is shown below:</p>
+
+<p><img src="pillarsync_screenshot.png" width="400" height="400"></p>
+
+<p>The PillarSync application software and its capabilities are available by request.  <a href="https://www.pillartech.com/surface-treatment/contact-us">Contact Pillar Technologies</a> for more info.</p>
+
+<h2 id="toc_6">HARDWARE</h2>
+
+<p>The Black Box device contains a system controller board with configurable network and Input/Output (I/O) components installed to support the ITW device resident software application described in this document. </p>
+
+<h3 id="toc_7">SPECIFICATIONS</h3>
+
+<h4 id="toc_8">SYSTEM CONTROLLER</h4>
+
+<p>The Black Box Device system controller is configured with the following hardware components:</p>
+
+<table>
+<thead>
+<tr>
+<th>COMPONENT</th>
+<th>SPECIFICATION</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>Processor</strong></td>
+<td>ARM Cortex-A9 1.0 GHz Single Core processor</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>1 GB DDR3 RAM</td>
+</tr>
+<tr>
+<td><strong>Clock</strong></td>
+<td>Battery Backed Real-Time Clock</td>
+</tr>
+<tr>
+<td><strong>Display</strong></td>
+<td>HDMI display port</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>8, 16, and 32 GB Micro SD Card options</td>
+</tr>
+<tr>
+<td><strong>Power Supply</strong></td>
+<td>120 VAC to 24 VDC converter external power supply</td>
+</tr>
+<tr>
+<td><strong>Enclosure</strong></td>
+<td>ABS construction with VESA mount</td>
+</tr>
+<tr>
+<td><strong>USB</strong></td>
+<td>USB 2.0 port</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_9">NETWORK AND I/O DEVICES</h4>
+
+<p>The Black Box Device can be configured with the following network and I/O capabilities to support a variety of gateway options to meet the needs of the supported device resident software applications:</p>
+
+<ul>
+<li><a href="https://www.ieee802.org/11/">802.11</a> a/b/g/n/ac Wireless</li>
+<li><a href="https://www.ieee802.org/3/">802.3</a> 10/100/1000 Mbps Ethernet Wired</li>
+<li><a href="https://en.wikipedia.org/wiki/LTE_telecommunication">LTE</a> Cat 4 cellular modem</li>
+<li><a href="https://www.bluetooth.com/bluetooth-resources/intro-to-bluetooth-low-energy/">Bluetooth Low Energy 4</a> 2.4 Ghz wireless</li>
+<li><a href="https://en.wikipedia.org/wiki/RS-485">RS485</a>/<a href="https://en.wikipedia.org/wiki/RS-232">RS232</a> serial protocols (<a href="https://modbus.org">Modbus</a>)</li>
+<li><a href="https://en.wikipedia.org/wiki/CAN_bus">CANbus</a> 2.0</li>
+</ul>
+
+<h4 id="toc_10">USB Flash Drive</h4>
+
+<table>
+<thead>
+<tr>
+<th>COMPONENT</th>
+<th>SPECIFICATION</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>Size</strong></td>
+<td>128 MB or larger</td>
+</tr>
+<tr>
+<td><strong>Filesystem</strong></td>
+<td>FAT16 or FAT32, <strong>NOTE</strong>: vFat and exFat not supported</td>
+</tr>
+<tr>
+<td><strong>USB Connector</strong></td>
+<td>USB Type-A</td>
+</tr>
+<tr>
+<td><strong>USB Protocol</strong></td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>The USB Flash Drive must be formatted as a FAT filesystem.  To determine if the drive is formatted 
+correctly insert the flash drive into the Windows 10 PC and right click on the device letter in 
+Windows Explorer and select <strong><em>Properties</em></strong> from the drop down menu.  The <strong><em>File System</em></strong> property in the popup window should be <strong><em>FAT</em></strong>.  See figure below for an example of what is displayed.</p>
+
+<p><img src="thumb_drive_filesystem_type.png" width="300" height="400"></p>
+
+<p>If it is any other type the flash drive needs to
+be reformatted with a FAT filesystem via the <strong><em>Format...</em></strong> drop down item when you right click on the device letter in Windows Explorer.</p>
+
+<h2 id="toc_11">GETTING STARTED</h2>
+
+<h3 id="toc_12">INSTALL ANTENNAS</h3>
+
+<hr>
+
+<p>Install all wireless and cellular antennas on the Black Box device as follows:</p>
+
+<ol>
+<li>Connect the black wireless and bluetooth cylindrical antennas to each of the device connectors on the side of the unit.<br></li>
+<li>If cellular is supported (required for the Hobart Service Remote Gateway Device) connect the two black cellular paddle antennas to the device enclosure connectors marked cellular on the side of the unit.  See figure below for guidance.</li>
+</ol>
+
+<p><img src="antenna_side_view.png" width="500' height="400"></p>
+
+<h3 id="toc_13">INSTALL MICRO SD CARD</h3>
+
+<hr>
+
+<p>Install a micro SD card if the device resident software application (Pillar Sync requires SD card to be inserted) requires it in the slot of the black box device marked <strong>SD CARD</strong>.  Push the SD card in to the slot gently.  You should feel a slight pressure when the card engages in the slot.  You should not be able to pull it out with your finger if installed correctly.  See figure below for location.</p>
+
+<p><img src="sd_card_hdmi_side_view.png" width="500' height="400"></p>
+
+<h3 id="toc_14">CONNECT HDMI DISPLAY</h3>
+
+<hr>
+
+<p>If the device resident software application (required by Now Serving with Menuboard display) requires an HDMI display to be connected insert an HDMI cable into the <strong>HDMI OUT</strong> on the side of the device.  Connect the other end of the HDMI cable to the HDMI display input connector.</p>
+
+<h3 id="toc_15">SUPPLY POWER</h3>
+
+<hr>
+
+<p>Supply power to the device as follows:</p>
+
+<ol>
+<li>Plug the provided power supply barrel jack connector into the Power Jack of the device.</li>
+<li>Plug the power supply wall unit into an 120 VAC power outlet.</li>
+</ol>
+
+<p>See figure below for proper power connections to make:</p>
+
+<p><img src="blackbox_device_sideview_1.png" width="400' height="400"></p>
+
+<p><img src="plug_in_power_supply.png" width="300' height="300"></p>
+
+<h3 id="toc_16">CONNECT ETHERNET CABLE (wired network configuration only)</h3>
+
+<hr>
+
+<p>Connect a CAT5e Ethernet cable to the Ethenet Jack 
+CAT5e cables can be purchased with RJ45 connectors to facilitate this.  If a wired Ethernet connection is desired connect the CAT5e cable to the Ethernet Jack marked in the photo above and the other end to the LAN network switch/hub.</p>
+
+<h3 id="toc_17">COLLECT NETWORK INFORMATION</h3>
+
+<hr>
+
+<p>The Black Box device initially needs to be configured to connect to a Local Area Network (LAN).  This connection can be either wireless via a Wireless Access Point (WAP) or wired via a CAT5e cable connected to a network switch/hub.<br>
+You must consult with the network administrator who manages the WAP or network switch/hub that you wish to connect the device to acquire necessary network configuration parameters for the device to communicate in the LAN.  This will be required in the <strong>BLACK BOX DEVICE SETUP UTILITY SECTION</strong> below in order for the device to communicate on the network.</p>
+
+<h2 id="toc_18">BLACK BOX DEVICE SETUP UTILITY</h2>
+
+<p>The Black Box Device Setup Utility software is used to configure and install device resident application software on the device as well as to configure network and I/O devices for the supported ITW products.</p>
+
+<p>ITW device resident application software can be obtained via the product support contacts in the <strong>DEVICE RESIDENT SOFTWARE SUPPORTED</strong> section of this document.  Contact <a href="mailto:scott.davis@itwfeg.com">Support</a> to acquire this software and for specifics on capabilities and release notes.</p>
+
+<h3 id="toc_19">REQUIREMENTS</h3>
+
+<hr>
+
+<p>This software must be installed on a computing system (laptop or desktop) meeting the following requirements:</p>
+
+<table>
+<thead>
+<tr>
+<th>COMPONENT</th>
+<th>REQUIREMENT</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>Processor</strong></td>
+<td>Intel or AMD processor</td>
+</tr>
+<tr>
+<td><strong>Operating System</strong></td>
+<td>Windows 10 (Home or Pro)</td>
+</tr>
+<tr>
+<td><strong>Physical RAM</strong></td>
+<td>8 GB (minimum)</td>
+</tr>
+<tr>
+<td><strong>Hard Disk</strong></td>
+<td>120 MB free space</td>
+</tr>
+<tr>
+<td><strong>Wireless Controller</strong></td>
+<td>802.11 a/b/g/n/ac</td>
+</tr>
+<tr>
+<td><strong>Wired Ethernet</strong></td>
+<td>802.3 compliant RJ45 connector</td>
+</tr>
+<tr>
+<td><strong>USB 2.0/3.0</strong></td>
+<td>One available port</td>
+</tr>
+</tbody>
+</table>
+
+<p>The computing system must be configured to function in the same LAN that the Black Box device will operate within.  The IP address of the computing system should be configured in the same network subnet as the Black Box device once it is configured.</p>
+
+<p>The software requires port 22 and 5076 to be open in Windows Firewall for connectivity to the Black Box device in the network.  Installation of the software package will attempt to open these ports automatically but if not successful consult the Windows administrator managing the Windows computer you are installing the application on to assist in this process.</p>
+
+<p>A USB Flash drive with 10 MB of free space will be required to intiially configure the Black Box device in a wireless or wired Ethernet network.</p>
+
+<h3 id="toc_20">INSTALLATION</h3>
+
+<hr>
+
+<p>The Black Box Device Setup Utility is installed via a Microsoft Installer package.  The name of the installer package is of the form:</p>
+
+<p><code>itw-win-black_box_device_setup_utility-X.X.X.exe</code></p>
+
+<p>The X.X.X in the filename is replaced with the specific version of the application you are installing.  The self-extracting executable installer will install on a 32-bit and 64-bit Windows 10 Home or Pro operating system.  </p>
+
+<p>The softare once stored on the Windows 10 computing system hard disk is installed by double clicking on the installer package and responding to some simple prompts to complete the installation.  </p>
+
+<p>Respond to the installation prompts as follows:</p>
+
+<p>When prompted as below to allow the application to install verify that the publisher is ITW Food Equipment Group.  If it is not do not install the application. Otherwise Select <strong>YES</strong> to install the application.</p>
+
+<p><img src="verify_publisher.png" width="300' height="300"></p>
+
+<p>When prompted to select a language as in the figure below select English and select <strong>OK</strong>.</p>
+
+<p><img src="select_language.png" width="200' height="200"></p>
+
+<p>The install welcome dialog will be displayed.  Select <strong>INSTALL</strong> to install the application.</p>
+
+<p><img src="welcome_install.png" width="300' height="300"></p>
+
+<p>Another dialog will be displayed showing the progress of the install and then the installation complete dialog will be displayed.  Select <strong>FINISH</strong> and the installation will be complete and the Black Box Device Setup Utility will execute and display its user interface.</p>
+
+<p><img src="complete_install.png" width="300' height="300"></p>
+
+<h3 id="toc_21">USING THE SOFTWARE</h3>
+
+<hr>
+
+<p>To launch the Black Box Device Setup Utility after it is installed select the Windows menu item <strong>ITW-&gt;Black Box Device Setup Utility</strong> from the Start Menu.  See figure below:</p>
+
+<p><img src="windows_menu_location.png" width="200' height="200"></p>
+
+<p>To view the ITW corporate website select <strong>ITW-&gt;Website</strong>.</p>
+
+<p>Once launched the Black Box Device Setup Utility user interface, shown in the figure below, supports several functions to enable the device to communicate on a network as well as install and setup device application resident software. </p>
+
+<p><img src="blackbox_device_setup_utility.png" width="600' height="500"></p>
+
+<h4 id="toc_22">FEATURES</h4>
+
+<hr>
+
+<p>This software is used to perform the following:</p>
+
+<ul>
+<li>Configure network and device resident application (Remote Dagnostics Gateway, PillarSync, Now Serving) settings via Disk (USB Flash drive) or over the network with a pre-configured device network accessible device</li>
+<li>Scan and detect devices in the LAN</li>
+<li>Set the current date/time of the device</li>
+<li>Interrogate and inspect software versions installed on a selected device</li>
+<li>Reboot a selected device</li>
+<li>Upgrade the device resident software application</li>
+</ul>
+
+<h4 id="toc_23">CONFIGURATION</h4>
+
+<hr>
+
+<p>The Black Box device must be setup on a LAN to enable the gateway device capabilites of its device resident software application.  To do this network settings must be specified.  If you do not know what the network settings should be for the LAN consult with your IT LAN network administrator you wish to connect the Black Box device in.  These settings will be critical to get the device on the network and communicating.  The network settings that are required are located on the Networking Tab under the Black Box Configuration Tab on the user interface.  See figure below of the <strong>Network Tab</strong> for the settings that need configured.  Not all are required.</p>
+
+<p><img src="network_settings.png" width=700 height=400></p>
+
+<p>The <strong>Configuration</strong> operations, see Figure below, that are possible include:</p>
+
+<ul>
+<li>Configure method drop down menu to select configuration via the Network</li>
+<li>Configure method drop down menua to select configuration via Disk (USB Flash Drive)</li>
+<li>Configure button which performs the actual write to Disk of all settings or transmits the settings to a black box device already on present on the LAN</li>
+<li>Load a previously save configuration from Disk (USB Flash Drive)</li>
+<li>Clear or reset all network and device resident application settings to their defaults</li>
+</ul>
+
+<p><img src="configuration_buttons.png" width=400 height=40></p>
+
+<p>Configurations with details and examples that are possible with this software are described below.</p>
+
+<h5 id="toc_24">NETWORK CONFIGURATION</h5>
+
+<hr>
+
+<p>Select the Wired or Wireless radio button located below to select how you want the Black Box device to connect to the LAN.</p>
+
+<p><img src="wired_wireless_selection.png" width="200' height="200"></p>
+
+<p>Once the desired selection is made the network settings that must be supplied are present on the screen on the Network Tab.</p>
+
+<p>Supply all of the network settings required and select the <strong>Networking</strong> checkbox in the <strong>Settings to Configure</strong> area so the settings will be included when you configure the device.</p>
+
+<h6 id="toc_25">WIRED CONFIGURATION</h6>
+
+<hr>
+
+<p>Select the Wired radio button to display all wired network settings that are possible.  Some are required and will need to be entered.</p>
+
+<p>For example for a wired DHCP network setup select the <strong>Wired</strong> radio button.  </p>
+
+<p>Select the DCHP radio button and Automatic DNS.  All other entries can be left alone.</p>
+
+<p>For a wired static IP address and manual DNS configuration select the Static IP radio button and enter the following:</p>
+
+<ul>
+<li>IP Address</li>
+<li>Subnet Mask</li>
+<li>Gateway</li>
+</ul>
+
+<p>Select the Manual DNS radio button and enter the following info:</p>
+
+<ul>
+<li>Primary DNS</li>
+<li>Secondary DNS</li>
+<li>Tertiary DNS</li>
+</ul>
+
+<h6 id="toc_26">WIRELESS CONFIGURATION</h6>
+
+<hr>
+
+<p>Select the Wireless radio button to display all wireless network settings that are possible.  Some are required and will need to be entered.</p>
+
+<p>For example for a wireless configuration select the <strong>Wireless</strong> radio button and additional network settings are provided.  </p>
+
+<p>For a wireless DHCP connection enter the following:</p>
+
+<ul>
+<li>Select the DHCP radio button</li>
+<li>Select the Automatic DNS radio button</li>
+<li>Enter the SSID of the WAP to connect to</li>
+<li>Security method to use for WAP connection</li>
+<li>Encryption method to use for the WAP connection</li>
+<li>Enter any keys required</li>
+</ul>
+
+<h6 id="toc_27">ADVANCED NETWORK CONFIGURATION</h6>
+
+<hr>
+
+<p>Advanced Network Configuration is not typically required. To view the advanced settings select the <strong>Advanced</strong> button in the Network tab.</p>
+
+<p>The advanced network settings include:</p>
+
+<ul>
+<li>Wireless Device Channel setting</li>
+<li>Wireless Device Link Rate selection</li>
+<li>Wireless Device Driver selection</li>
+<li>DNS suffixes assignment</li>
+</ul>
+
+<p>Entering these settings can cause network issues with the Black Box device if not considered carefully.  An IT network administrator and <a href="mailto:scott.davis@itwfeg.com">Support</a> should be contacted before entering these settings.</p>
+
+<h5 id="toc_28">HOSTNAME CONFIGURATION</h5>
+
+<hr>
+
+<p>To configure a network hostname for the Black Box device select the Hostname Tab under the Black Box Configuration tab.  See figure below.  </p>
+
+<p><img src="hostname_tab.png" width=500 height=300></p>
+
+<p>Enter a hostname in the Hostname Text box.  Select the Hostname checkbox under the <strong>Settings to Configure</strong> area of the user interface so this is included in the device configuration when the device programs itself. </p>
+
+<h5 id="toc_29">PILLARSYNC CONFIGURATION</h5>
+
+<hr>
+
+<p>To configure the PillarSync device resident software application settings select the PillarSync Tab on the Black Box Configuration Tab to display the PillarSync application settings that can be configured.  See figure below.</p>
+
+<p><img src="pillarsync.png" width=500 height=300></p>
+
+<p>The sample frequency setting established the time in seconds that the Pillar Sync applicaiton should sample over before recording a data point.  The minimum value is 30 seconds.  If PillarSync is to be configured to publish power supply data to an MQTT broker in the LAN select the <strong>Enable</strong> check box and enterh the Broker&#39;s IP Address, Username/Password if required to connect to the broker, and the port number that the broker is listening on.  Select the PillarSync checkbox under the <strong>Settings to Configure</strong> area of the user interface so this is included in the device configuration when the device programs itself.</p>
+
+<h5 id="toc_30">NOW SERVING CONFIGURATION</h5>
+
+<hr>
+
+<p>To configure the Now Serving device resident software application settings select the Now Serving Tab under the Black Box Configuration Tab.  See figure below.  </p>
+
+<p><img src="now_serving_tab.png" width=500 height=300></p>
+
+<p>Enter the IP Address of the Master scale, Now Serving Display 1, and the Now Serving Display 2.  See more information on this process in the Now Serving section of the HT Scale Operator&#39;s Manual.  Select the Now Serving checkbox under the <strong>Settings to Configure</strong> area of the user interface so this is included in the device configuration when the device programs itself.</p>
+
+<h5 id="toc_31">SETTINGS TO CONFIGURE</h5>
+
+<hr>
+
+<p>Once the above network or application settings are specified select the <strong>Network</strong>, <strong>Hostname</strong>, <strong>PillarSync</strong>, or <strong>Now Serving</strong> checkbox under the <strong>Settings to Confgure</strong> area on the user interface based on which settings you want stored in the black box device confiuration.  You must select these checkboxes to ensure the settings get configured.  Refer to the figure below for the location of this area.</p>
+
+<p><img src="setting_to_configure.png" width="400' height="400"></p>
+
+<h5 id="toc_32">CONFIGURE DEVICE</h5>
+
+<hr>
+
+<p>Once all configuration settings are specified and the <strong>Settings to Configure</strong> are selected you must select the configuration method.</p>
+
+<p>There are two methods to configure the Black Box device.  The two methods are via <strong>Network</strong> or <strong>Disk</strong>. The option menu location on the user interface and the methods are described below.</p>
+
+<p><img src="configuration_methods.png" width="200' height="200"></p>
+
+<p>For the first out of the box configuration of the Black Box device the <strong>Disk Configuration</strong> method must be used to initially setup the device on a network.</p>
+
+<h6 id="toc_33">DISK METHOD CONFIGURATION</h6>
+
+<hr>
+
+<p>The Disk Configuration method configures the Black Box device via a USB disk or Flash drive.  Insert a USB Flash Drive with 10 MB of free space into the laptop or desktop this software is installed on.  The USB Flash Drive must be formatted with the DOS FAT filesystem.  The USB Flash drive must have a directory named <strong><em>autoconfig</em></strong> at the root of the filesystem.  Also this is where you must store the <strong><em>hdconfig</em></strong> file when prompted.  This specific location is loaded by the black box device to configure itself.  See figure below as an example where the USB Flash Drive is mounted as drive <strong><em>F:</em></strong> on the Windows 10 PC. In the example once the <strong>Configure</strong> button, see below for more info, is pressed the configuration file <strong><em>hdconfig</em></strong> will be written to <strong><em>F:\autoconfig\hdconfig</em></strong>.</p>
+
+<p><img src="thumb_drive_location.png" width="400" height="200"></p>
+
+<p>Verify that all of the settings supported by this application are entered and the <strong>Settings to Configure</strong> area has all checkboxes selected that you want to include in the configure operation.  Depress the <strong>Configure</strong> button to write the confguration settings to the USB Flash drive.  The <strong>Configure</strong> button will be disabled if you have not entered any of the settings correctly.  Review your settings and modify until the <strong>Configure</strong> button is enabled.  Once the settings have been written eject the Flash drive from Windows 10 via the proper method.  </p>
+
+<p>Remove the USB Flash Drive and insert it into the powered on Black Box device to configure.  The Black Box device will detect that the USB Flash drive has network settings on it and will automatically configure the device and reboot.</p>
+
+<p>After the device reboots it will connect to the specified network defined by the user of this software.  </p>
+
+<p>At this point the Black Box device can operate as a gateway and if you perform a <strong>Device Discover Scan</strong> the Black Box device should now be present on the network.  </p>
+
+<p>Depending upon the application the Black Box device can also be accessed by other devices in the LAN based on the capabilities of the device resident applicaiton software.  </p>
+
+<p>For example the PillarSync application supports access via a web browser. Once networked futher configuration of the device can occur via the <strong>Network METHOD Configuration</strong> method below.</p>
+
+<h6 id="toc_34">NETWORK METHOD CONFIGURATION</h6>
+
+<hr>
+
+<p>The Network Configuration method configures a Black Box device that is already configured and is accessible over a network.  Use the <strong>Device Discovery</strong> option of the the software to determine which Black Box device(s) in the LAN can be configured in this manner.  With this configuration the network and application configuration of a black box device can be altered over the network.  No USB Flash drive is required in this configuration however the black box device must be operational in the LAN.</p>
+
+<p>If the Black Box device is not visible via a <strong>Device Discovery Scan</strong> the <strong>Disk Configuration</strong> method can be repeated to attempt to resolve the issue.</p>
+
+<h4 id="toc_35">DEVICE DISCOVERY</h4>
+
+<hr>
+
+<p>Once a Black Box device has been successfully configured via the <strong>Disk</strong> or <strong>Network Method</strong> it can be discovered by this software via the <strong>Scan</strong> button.  See the figure below.  When the <strong>Scan</strong> button is pressed the LAN is scanned to discovery all Black Box devices in the network and if found are listed in the <strong>Device Discovery</strong> list area. In the figure a Black Box device with the IP address of 192.168.0.230 was found in the network.  </p>
+
+<p><img src="scan_button.png" width="300' height="300"></p>
+
+<p>Any Black Box discovered during <strong>Device Discovery</strong> can be selected and the following operations performed:</p>
+
+<ul>
+<li><strong>Network Configuration</strong></li>
+<li><strong>Device Info</strong></li>
+<li><strong>Software Upgrade</strong></li>
+<li><strong>Set Date/Time</strong></li>
+<li><strong>Reboot Device</strong></li>
+</ul>
+
+<h4 id="toc_36">DEVICE INFO</h4>
+
+<hr>
+
+<p>A Black Box device that was found during <strong>Device Discovery</strong> can be selected and the <strong>Device Info</strong> button pressed to capture the software versions of the device resident software installed. See the figure below for where the device info is displayed.</p>
+
+<p><img src="device_info_area.png" width="300' height="300"></p>
+
+<p>See the figure below for the location of the Device Info button.</p>
+
+<p><img src="device_info_button.png" width="300' height="300"></p>
+
+<p>This is useful to determine if you need to perform a software update on the device to add new features or to resolve issues.</p>
+
+<h4 id="toc_37">DEVICE REBOOT</h4>
+
+<hr>
+
+<p>A Black Box device that was found during <strong>Device Discovery</strong> can be selected and the <strong>Reboot Device</strong> button pressed to reboot the selected device.  This is helpful if there is an issue with the device and it needs to be reset to its power on state.</p>
+
+<p><img src="reboot_button.png" width="300' height="300"></p>
+
+<h4 id="toc_38">SET DATE/TIME</h4>
+
+<hr>
+
+<p>A Black Box device that was found during <strong>Device Discovery</strong> can be selected and the <strong>Set Date/Time</strong> button pressed to set the current date/time on the black box device based on the date/time of the Windows computing system this software is executing on.  Verify that the Windows computer has the right date/time for the device before performing this operation.</p>
+
+<h4 id="toc_39">SOFTWARE UPGRADE</h4>
+
+<hr>
+
+<p>To update the device resident software application and operating system on a networked black box device that can be found during <strong>Device Discovery</strong> perform the following:</p>
+
+<p>Select the upgrade filename to transmit and install on the black box via the <strong>Software upgrade folder</strong> icon button. See figure below.</p>
+
+<p><img src="software_upgrade.png" width="300' height="300"></p>
+
+<p>A dialog will be displayed to select the software upgrade file to transmit and install on the device.</p>
+
+<p>Select the <strong>OK</strong> button to register the file to be installed.  Depress the <strong>Upgrade</strong> button and the file selected will be copied to the Black Box device over the network and installed.  </p>
+
+<p>The software upgrade can take quite a bit of time with some install files that over 800 MB in size.  A progress update will occur to let you know how the progress of the install.  </p>
+
+<p>Once the file has been transferred completely the device will install the software.  A subsequent <strong>Device Discovery Scan</strong> can be performed routinely to see if the device is discovered and if so means the upgrade is complete.  Select the device from the device discovery scan and select the <strong>Device Info</strong> button to verify the software versions.</p>
+
+<h4 id="toc_40">HELP</h4>
+
+<hr>
+
+<p>Depressing the <strong>Help</strong> menu button displays this help document.</p>
+
+<h4 id="toc_41">EXIT</h4>
+
+<hr>
+
+<p>Depressing the <strong>Exit</strong> button exits this software application.</p>
+
+<h2 id="toc_42">TROUBLESHOOTING</h2>
+
+<h3 id="toc_43">SUPPORT</h3>
+
+<p>Contact <a href="mailto:scott.davis@itwfeg.com">Support</a> for help troubleshooting issues with the product.</p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+
+</body>
+
+</html>

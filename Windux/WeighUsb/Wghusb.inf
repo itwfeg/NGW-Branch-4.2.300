@@ -1,0 +1,83 @@
+[Version]
+Signature=$CHICAGO$
+Class=USB
+Provider=%MFGNAME%
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+
+[SourceDisksFiles]
+WeighUsb.sys=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+;aws wrapper
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0300
+
+;weigher no code 
+;%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_8400
+
+;weigher with code
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0400
+
+;ARM weigher with code
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0401
+
+;evol printer bootloader
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_8200
+
+;evol printer 
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0200
+
+;new evol printer 
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0205
+
+;HLX APC
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0204
+
+;New USB Compact Label Applier
+%DESCRIPTION%=DriverInstall, USB\VID_128C&PID_0500
+
+;------------------------------------------------------------------------------
+;  Windows XP Sections
+;------------------------------------------------------------------------------
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverCopyFiles]
+WeighUsb.sys,,,2
+
+[DriverInstall.NT.Services]
+AddService=WGHUSB,2,DriverService
+
+[DriverService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\WeighUsb.sys
+
+[DriverInstall.nt.hw]
+AddReg=DriverHwAddReg
+
+[DriverHwAddReg]
+HKR,,FriendlyName,,%FRIENDLYNAME%
+HKLM,"System\Currentcontrolset\Services\WeighingUsb\Parameters","MaximumTransferSize",0x10001,4096
+HKLM,"System\Currentcontrolset\Services\WeighingUsb\Parameters","DebugLevel",0x10001,2
+HKLM,"System\Currentcontrolset\services\WeighingUsb\Parameters","WeighingUsbEnable",0x10001,1
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+
+[Strings]
+MFGNAME="Hobart"
+INSTDISK="Weighing Installation Directory"
+DESCRIPTION="Hobart Weigher"
+FRIENDLYNAME="Hobart USB Weighing Device"
+

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!-- eric project file for project wrapperNodeTester -->
+<!-- Copyright (C) 2017 ITW Hobart, scott.davis@hobartcorp.com -->
+<Project version="5.1">
+  <Language></Language>
+  <Hash>3908ce2872f622dc5b5e670df70aee6118a99948</Hash>
+  <ProgLanguage mixed="0">Python2</ProgLanguage>
+  <ProjectType>Qt4</ProjectType>
+  <Description>NGW Wrapper Node Board Tester</Description>
+  <Version>1.0.0</Version>
+  <Author>ITW Hobart</Author>
+  <Email>scott.davis@hobartcorp.com</Email>
+  <TranslationPattern>QScintilla-gpl-2.7/Qt3/qscintilla_%language%.ts</TranslationPattern>
+  <Eol index="-1"/>
+  <Sources>
+    <Source>Ui_wrapperNodeTester.py</Source>
+    <Source>__init__.py</Source>
+    <Source>buildWrapperNodeTester.bat</Source>
+    <Source>wrapperNodeTester.nsi</Source>
+    <Source>wrapperNodeTester.py</Source>
+    <Source>wrapperNodeTesterUi.py</Source>
+    <Source>wrapperNodeTester_rc.py</Source>
+  </Sources>
+  <Forms>
+    <Form>wrapperNodeTester.ui</Form>
+  </Forms>
+  <Translations/>
+  <Resources>
+    <Resource>wrapperNodeTester.qrc</Resource>
+  </Resources>
+  <Interfaces>
+    <Interface>dist/wrapperNodeTester/win32com/test/pippo.idl</Interface>
+  </Interfaces>
+  <Others/>
+  <MainScript>wrapperNodeTester.py</MainScript>
+  <Vcs>
+    <VcsType>None</VcsType>
+    <VcsOptions>
+      <dict>
+        <key>
+          <string>add</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>checkout</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>commit</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>diff</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>export</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>global</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>history</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>log</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>remove</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>status</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>tag</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+        <key>
+          <string>update</string>
+        </key>
+        <value>
+          <list>
+            <string></string>
+          </list>
+        </value>
+      </dict>
+    </VcsOptions>
+    <VcsOtherData>
+      <dict>
+        <key>
+          <string>standardLayout</string>
+        </key>
+        <value>
+          <bool>True</bool>
+        </value>
+      </dict>
+    </VcsOtherData>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES"/>
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.py2" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.pyw2" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.qrc" type="RESOURCES"/>
+    <FiletypeAssociation pattern="*.ts" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.ui" type="FORMS"/>
+  </FiletypeAssociations>
+</Project>

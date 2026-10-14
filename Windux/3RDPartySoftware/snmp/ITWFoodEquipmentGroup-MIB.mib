@@ -1,0 +1,345 @@
+HOBART-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+        OBJECT-TYPE, Integer32, NOTIFICATION-TYPE, enterprises
+                     FROM SNMPv2-SMI
+;
+ITWFoodEquipmentGroup         OBJECT IDENTIFIER ::= {enterprises 51478}
+HTGeneral      OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 1}
+HTNetwork      OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 2}
+HTSystem       OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 3}
+HTStats        OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 4}
+HTPLU          OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 5}
+HTDept         OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 6}
+HTLabel        OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 7}
+
+HTTraps        OBJECT IDENTIFIER ::= {ITWFoodEquipmentGroup 100}
+
+SystemDescription OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "HT Device"
+    ::= {HTGeneral 1}
+
+ConnectionStatus OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Offline or Online."
+    ::= {HTNetwork 1}
+
+Hostname OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Hostname of system - 15 character max."
+    ::= {HTNetwork 2}
+
+WiredMACAddress OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Wired MAC Address."
+    ::= {HTNetwork 3}
+
+WifiMACAddress OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Wifi MAC Address."
+    ::= {HTNetwork 4}
+
+IPAddress OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "IP Address of system."
+    ::= {HTNetwork 5}
+
+Gateway OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "IP Address of gateway."
+    ::= {HTNetwork 6}
+
+SignalStrength OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Signal Strength."
+    ::= {HTNetwork 7}
+
+DNSServers OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "DNS servers, space delimited."
+    ::= {HTNetwork 8}
+
+NICType OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "wired or wireless Network Interface Card being used."
+    ::= {HTNetwork 9}
+
+DHCPServerIP OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "IP Address of the DHCP server."
+    ::= {HTNetwork 10}
+	
+IPAddressType OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Static or DHCP Ip Addressing type."
+    ::= {HTNetwork 11}
+
+NTPServerIP OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "The IP address of the NTP server."
+    ::= {HTNetwork 12}
+	
+Bandwidth OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "The current bandwidth of ethernet or wireless connection."
+    ::= {HTNetwork 13}
+	
+DateAndTime OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "MM/DD/YYYY HH:MM"
+    ::= {HTSystem 1}
+
+UTCTime OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "UTC Time w/ microseconds."
+    ::= {HTSystem 2}
+
+MfgDate OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Manufacture date."
+    ::= {HTSystem 3}
+	
+SerialNumber OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Serial number."
+    ::= {HTSystem 4}
+	
+Model OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Device model."
+    ::= {HTSystem 5}
+
+SystemControllerVersion OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "System Controller Version."
+    ::= {HTSystem 6}
+
+SMBackendVersion OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "SM Backend Version."
+    ::= {HTSystem 7}
+	
+SoftwareVersion OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Application software version."
+    ::= {HTSystem 8}
+	
+PeripheralControllerVersion OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Version of the peripheral controller."
+	::= {HTSystem 9}
+	
+OSVersion OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Version of the operating system."
+	::= {HTSystem 10}
+	
+SNMPUptime OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "The duration that SNMP agent has been executing."
+    ::= {HTStats 1}
+	
+LastCommunicationOccurred OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "The last time a comm event of any type occurred."
+	::= {HTStats 2}
+	
+LastPLUReceived OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "The last time a product was updated."
+	::= {HTStats 3}
+	
+FreeMemory OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "The amount of free memory available in megabytes. "
+	::= {HTStats 4}
+
+PrinterStatus OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Current Printer Status code."
+	::= {HTStats 5}
+
+ChecksumConfig OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the scale configuration data."
+	::= {HTStats 6}
+	
+ChecksumLabels OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the labels data."
+	::= {HTStats 7}
+	
+ChecksumFlashkeys OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the flashkeys data."
+	::= {HTStats 8}
+
+ChecksumOperators OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the operators data."
+	::= {HTStats 9}
+
+ChecksumStore OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the store data."
+	::= {HTStats 10}
+	
+ChecksumSynchronization OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the synchronization data."
+	::= {HTStats 11}
+
+ChecksumPlaylists OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the playlists."
+	::= {HTStats 12}
+
+ChecksumPLUs OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the latest checksum of the PLU data."
+	::= {HTStats 13}
+	
+SecondCheckDigit OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the second Check Digit. Unchecked or checked."
+	::= {HTStats 14}
+	
+ScaleMode OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the second Check Digit. Unchecked or checked."
+	::= {HTStats 15}
+
+CurrentWeight OBJECT-TYPE
+    SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION "Contains the current weight of the scale as displayed."
+	::= {HTStats 16}
+
+TotalPLUs OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Total number of PLUs."
+    ::= {HTPLU 1}	
+	
+AllDepts OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Dept numbers separated by /"
+    ::= {HTDept 1}
+
+CurrentDept OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Currently selected Dept number."
+    ::= {HTDept 2}
+
+LabelType OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Label type of either die-cut or continuous."
+    ::= {HTLabel 1}
+
+LabelLength OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Length of label in inches."
+    ::= {HTLabel 2}
+
+LabelWidth OBJECT-TYPE
+    SYNTAX OCTET STRING
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Width of label in inches."
+    ::= {HTLabel 3}
+	
+ScaleConnected NOTIFICATION-TYPE
+    STATUS current
+    DESCRIPTION "Trap for when scale connects."
+    ::= {HTTraps 1}
+    
+END

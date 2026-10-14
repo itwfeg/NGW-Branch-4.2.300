@@ -1,0 +1,14 @@
+V	170903193730Z		1000	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software/emailAddress=HT.Support@itwfeg.com
+V	180202154135Z		1001	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 2.3/emailAddress=HT.Support@itwfeg.com
+V	180914175837Z		1002	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 2.7/emailAddress=ht.support@itwfeg.com
+V	190112200339Z		1003	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 3.0/emailAddress=HT.Support@itwfeg.com
+V	200814145607Z		1004	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 2.12/emailAddress=HT.support@itwfeg.com
+V	201204205024Z		1005	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 2.13/emailAddress=HT.Support@itwfeg.com
+V	210811145359Z		1006	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 3.4/emailAddress=HT.Support@itwfeg.com
+V	221119192700Z		1007	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.1.0/emailAddress=HT.Support@itwfeg.com
+V	230909215140Z		1008	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.1.200/emailAddress=HT.Support@itwfeg.com
+V	240505130808Z		1009	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.0.205/emailAddress=HT.Support@itwfeg.com
+V	250808143834Z		100A	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 5.2.100/emailAddress=HT.Support@itwfeg.com
+V	260423152517Z		100B	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.2.300/emailAddress=HT.Support@itwfeg.com
+V	270310193147Z		100C	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.2.301/emailAddress=HT.Support@itwfeg.com
+V	270312212324Z		1010	unknown	/C=US/ST=Ohio/L=Troy/O=ITW/OU=Hobart/CN=Verified Hobart Software 4.2.301D/emailAddress=HT.Support@itwfeg.com

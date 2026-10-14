@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>labelViewerTest</class>
+ <widget class="QDialog" name="labelViewerTest">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>labelViewerTest</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="LabelViewerWidget" name="labelViewer" native="true"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="first">
+       <property name="text">
+        <string>&lt;&lt; &amp;First</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="previous">
+       <property name="text">
+        <string>&lt; &amp;Previous</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="next">
+       <property name="text">
+        <string>&amp;Next &gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="last">
+       <property name="text">
+        <string>&amp;Last &gt;&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>LabelViewerWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">labelviewerwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

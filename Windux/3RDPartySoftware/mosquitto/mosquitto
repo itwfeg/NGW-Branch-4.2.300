@@ -1,0 +1,30 @@
+#!/bin/sh
+# chkconfig: 2345 85 15
+### BEGIN INIT INFO
+# Provides:          mosquitto
+# Required-Start:    $all
+# Required-Stop:
+# Should-Start:      
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Initialize MQTT
+# Description:       Initialize Mosquitto MQTT Droker Daemon
+# X-Start-Before:
+# X-Stop-After:
+# X-Timesys-Start-Number:  85
+# X-Timesys-Stop-Number:   15
+### END INIT INFO
+
+PATH=/usr/bin:/usr/sbin:/bin:/sbin
+
+case "$1" in
+  start)
+    mosquitto -d
+  ;;
+  stop)
+    pkill mosquitto
+  ;;
+  *)
+    echo "$0 [start|stop]"
+  ;;
+esac

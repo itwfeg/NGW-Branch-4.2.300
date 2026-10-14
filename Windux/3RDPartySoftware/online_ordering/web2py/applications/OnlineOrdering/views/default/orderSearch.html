@@ -1,0 +1,324 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+<link href="{{=URL('static', 'css/order_list.css')}}" rel="stylesheet" type="text/css" />
+{{end}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/order_search.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="statusModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Change the status of this order?</h4>
+        </div>
+      <div class="modal-body" id="statusModal-body">
+        <div class="form-group row justify-content-between">
+          <label for="statusModal-orderNumber" class="col-2">ID</label>
+          <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="statusModal-orderNumber" placeholder="" readonly>
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="statusModal-customer" class="col-2">Customer</label>
+          <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="statusModal-customer" placeholder="" readonly>
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="statusModal-deliveryTime" class="col-2">Time</label>
+          <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="statusModal-deliveryTime" placeholder="" readonly>
+        </div>
+        <div class="form-group row justify-content-between">
+          <select id="statusModal-select" class="form-control form-control-lg col-12">
+            <!--<option value="0">Received</option>-->
+            <option value="1">Waiting</option>
+            <option value="2">In progress</option>
+            <option value="3">Ready</option>
+            <!--<option value="4">Delivered</option>-->
+            <option value="5">Cancelled</option>
+            <!--<option value="6">Rejected</option>-->
+            <!--<option value="7">Error</option>-->
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-6"><button type="button" class="btn btn-danger btn-lg" id="statusModal-keep" data-dismiss="modal">Keep Status</button></div>
+          <div class="col-6"><button type="button" class="btn btn-hobart btn-lg" id="statusModal-status" data-dismiss="modal">Change Status</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="filterModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Filter Orders</h4>
+        </div>
+      <div class="modal-body" id="filterModal-body">
+        <div class="form-group row justify-content-between">
+          <label for="filterModal-orderNumber" class="col-2">Number</label>
+          <input type="text" class="form-control form-control-lg col-7" id="filterModal-orderNumber" placeholder="">
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="filterModal-customer" class="col-2">Name</label>
+          <input type="text" class="form-control form-control-lg col-7" id="filterModal-customer" placeholder="">
+        </div>
+        <div class="form-group row justify-content-between">
+          <label for="filterModal-deliveryTime" class="col-2">Time</label>
+          <input type="text" class="form-control form-control-lg col-7" id="filterModal-deliveryTime" placeholder="">
+        </div>
+        <div class="form-group row justify-content-between">
+          <select id="filterModal-select" class="form-control form-control-lg col-12">
+            <!--<option value="0">Received</option>-->
+            <option value="1">Waiting</option>
+            <option value="2">In progress</option>
+            <option value="3">Ready</option>
+            <!--<option value="4">Delivered</option>-->
+            <option value="5">Cancelled</option>
+            <!--<option value="6">Rejected</option>-->
+            <!--<option value="7">Error</option>-->
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-6"><button type="button" class="btn btn-danger btn-lg" id="filterModal-keep" data-dismiss="modal">Keep Status</button></div>
+          <div class="col-6"><button type="button" class="btn btn-hobart btn-lg" id="filterModal-status" data-dismiss="modal">Change Status</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container main-container">
+
+<div id="tableDataDivSearch" class="orderDataDivContent grayOut tableDataDivSearch">
+  <table id="tableOrderData" class="orderDataTableContent">
+    <thead id="tableHeader" class="orderDataTableTitle orderDataDivTitle">
+    <tr class="orderDataRowTitle">
+      <th class="orderIDCol sortNone" onmouseup="sortOrders(this, 'orderIDCol')">Order</th>
+      <th class="customerCol sortNone" onmouseup="sortOrders(this, 'customerCol')" >Customer</th>
+      <th class="createdTimeCol sortNone" onmouseup="sortOrders(this, 'createdTimeCol')">Created</th>
+      <th class="deliveryTimeCol sortNone" onmouseup="sortOrders(this, 'deliveryTimeCol')">Delivery</th>
+      <th class="originCol sortNone" onmouseup="sortOrders(this, 'originCol')">Type</th>
+      <th class="orderStatusCol sortNone" onmouseup="sortOrders(this, 'orderStatusCol')">Status</th>
+    </tr>
+  </thead>
+				<tbody id="orderData">
+          <tr id="0" class="orderDataRow" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+					<tr  id="1" class="orderDataRow" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+					<tr  id="2" class="orderDataRow" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+					<tr  id="3" class="orderDataRow" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+					<tr  id="4" class="orderDataRow" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+				</tbody>
+
+				<tbody style="display: none;">
+					<!-- This row is here in order to make clones of it to display in the orders table body above. -->
+					<tr id="orderDataRowToClone" onmouseup="selectRow(this)">
+            <td class="orderIDCol"></td>
+            <td class="customerCol"></td>
+            <td class="createdTimeCol"></td>
+            <td class="deliveryTimeCol"></td>
+            <td class="originCol"></td>
+            <td class="orderStatusCol"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        <div id="orderSearchDiv" class="orderDataSearchDiv">
+            <table id="tableSearch" class="orderSearchTable">
+                <tr id="orderSearchRow1">
+                    <td align = "center" class="orderIDCol"><input type="text" id="orderNumStart" name="orderNumStart" class="textInputSearch contrast-tw" placeholder="Number (min)"></td>
+                    <td align = "center"  rowspan="2" class="customerCol"><input type="text" id="orderName" name="orderName" class="textInputSearch contrast-rw" placeholder="Customer name"></td>
+                    <td align = "center" class="createdTimeCol">
+                        <select id="orderCreatedTimeStart" name="orderCreatedTimeStart" class="textInputSearch">
+                          <option value="-1">Creation Time (min)</option>
+                          <option value="12:00:00">12:00 AM</option>
+                          <option value="01:00:00">01:00 AM</option>
+                          <option value="02:00:00">02:00 AM</option>
+                          <option value="03:00:00">03:00 AM</option>
+                          <option value="04:00:00">04:00 AM</option>
+                          <option value="05:00:00">05:00 AM</option>
+                          <option value="06:00:00">06:00 AM</option>
+                          <option value="07:00:00">07:00 AM</option>
+                          <option value="08:00:00">08:00 AM</option>
+                          <option value="09:00:00">09:00 AM</option>
+                          <option value="10:00:00">10:00 AM</option>
+                          <option value="11:00:00">11:00 AM</option>
+                          <option value="12:00:00">12:00 PM</option>
+                          <option value="13:00:00">01:00 PM</option>
+                          <option value="14:00:00">02:00 PM</option>
+                          <option value="15:00:00">03:00 PM</option>
+                          <option value="16:00:00">04:00 PM</option>
+                          <option value="17:00:00">05:00 PM</option>
+                          <option value="18:00:00">06:00 PM</option>
+                          <option value="19:00:00">07:00 PM</option>
+                          <option value="20:00:00">08:00 PM</option>
+                          <option value="21:00:00">09:00 PM</option>
+                          <option value="22:00:00">10:00 PM</option>
+                          <option value="23:00:00">11:00 PM</option>
+                          <option value="23:59:59">11:59 PM</option>
+                        </select>
+                    </td>
+                    <td align = "center" class="deliveryTimeCol">
+                        <select id="orderPickupTimeStart" name="orderPickupTimeStart" class="textInputSearch">
+                          <option value="-1">Pickup Time (min)</option>
+                          <option value="12:00:00">12:00 AM</option>
+                          <option value="01:00:00">01:00 AM</option>
+                          <option value="02:00:00">02:00 AM</option>
+                          <option value="03:00:00">03:00 AM</option>
+                          <option value="04:00:00">04:00 AM</option>
+                          <option value="05:00:00">05:00 AM</option>
+                          <option value="06:00:00">06:00 AM</option>
+                          <option value="07:00:00">07:00 AM</option>
+                          <option value="08:00:00">08:00 AM</option>
+                          <option value="09:00:00">09:00 AM</option>
+                          <option value="10:00:00">10:00 AM</option>
+                          <option value="11:00:00">11:00 AM</option>
+                          <option value="12:00:00">12:00 PM</option>
+                          <option value="13:00:00">01:00 PM</option>
+                          <option value="14:00:00">02:00 PM</option>
+                          <option value="15:00:00">03:00 PM</option>
+                          <option value="16:00:00">04:00 PM</option>
+                          <option value="17:00:00">05:00 PM</option>
+                          <option value="18:00:00">06:00 PM</option>
+                          <option value="19:00:00">07:00 PM</option>
+                          <option value="20:00:00">08:00 PM</option>
+                          <option value="21:00:00">09:00 PM</option>
+                          <option value="22:00:00">10:00 PM</option>
+                          <option value="23:00:00">11:00 PM</option>
+                          <option value="23:59:59">11:59 PM</option>
+                        </select>
+                    </td>
+                    
+                      <td align = "center" rowspan="2" class="originCol">
+                        <select id="orderOriginSearch" name="orderOriginSearch" class="textInputSearch">
+                          <option value="-1">Type</option>
+                          <option value="1">Online</option>
+                          <option value="2">Kiosk</option>
+                          <option value="3">Number</option>
+                        </select>
+                    </td>
+                    <td align = "center" rowspan="2" class="orderStatusCol">
+                        <select id="orderStatusSearch" name="orderStatusSearch" class="textInputSearch">
+                          <option value="-1">Status</option>
+                          <option value="1">Waiting</option>
+                          <option value="2">In progress</option>
+                          <option value="3">Ready</option>
+                          <option value="5">Cancelled</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr id="orderSearchRow2">
+                    <td align = "center"><input type="text" id="orderNumEnd" name="orderNumEnd" class="textInputSearch contrast-rw" placeholder="Number (max)"></td>
+                    <td align = "center">
+                        <select id="orderCreatedTimeEnd" name="orderCreatedTimeEnd" class="textInputSearch">
+                            <option value="-1">Creation Time (max)</option>
+                            <option value="12:00:00">12:00 AM</option>
+                            <option value="01:00:00">01:00 AM</option>
+                            <option value="02:00:00">02:00 AM</option>
+                            <option value="03:00:00">03:00 AM</option>
+                            <option value="04:00:00">04:00 AM</option>
+                            <option value="05:00:00">05:00 AM</option>
+                            <option value="06:00:00">06:00 AM</option>
+                            <option value="07:00:00">07:00 AM</option>
+                            <option value="08:00:00">08:00 AM</option>
+                            <option value="09:00:00">09:00 AM</option>
+                            <option value="10:00:00">10:00 AM</option>
+                            <option value="11:00:00">11:00 AM</option>
+                            <option value="12:00:00">12:00 PM</option>
+                            <option value="13:00:00">01:00 PM</option>
+                            <option value="14:00:00">02:00 PM</option>
+                            <option value="15:00:00">03:00 PM</option>
+                            <option value="16:00:00">04:00 PM</option>
+                            <option value="17:00:00">05:00 PM</option>
+                            <option value="18:00:00">06:00 PM</option>
+                            <option value="19:00:00">07:00 PM</option>
+                            <option value="20:00:00">08:00 PM</option>
+                            <option value="21:00:00">09:00 PM</option>
+                            <option value="22:00:00">10:00 PM</option>
+                            <option value="23:00:00">11:00 PM</option>
+                            <option value="23:59:59">11:59 PM</option>
+                        </select>
+                    </td>
+                    <td align = "center">
+                        <select id="orderPickupTimeEnd" name="orderPickupTimeEnd" class="textInputSearch">
+                            <option value="-1">Pickup Time (max)</option>
+                            <option value="12:00:00">12:00 AM</option>
+                            <option value="01:00:00">01:00 AM</option>
+                            <option value="02:00:00">02:00 AM</option>
+                            <option value="03:00:00">03:00 AM</option>
+                            <option value="04:00:00">04:00 AM</option>
+                            <option value="05:00:00">05:00 AM</option>
+                            <option value="06:00:00">06:00 AM</option>
+                            <option value="07:00:00">07:00 AM</option>
+                            <option value="08:00:00">08:00 AM</option>
+                            <option value="09:00:00">09:00 AM</option>
+                            <option value="10:00:00">10:00 AM</option>
+                            <option value="11:00:00">11:00 AM</option>
+                            <option value="12:00:00">12:00 PM</option>
+                            <option value="13:00:00">01:00 PM</option>
+                            <option value="14:00:00">02:00 PM</option>
+                            <option value="15:00:00">03:00 PM</option>
+                            <option value="16:00:00">04:00 PM</option>
+                            <option value="17:00:00">05:00 PM</option>
+                            <option value="18:00:00">06:00 PM</option>
+                            <option value="19:00:00">07:00 PM</option>
+                            <option value="20:00:00">08:00 PM</option>
+                            <option value="21:00:00">09:00 PM</option>
+                            <option value="22:00:00">10:00 PM</option>
+                            <option value="23:00:00">11:00 PM</option>
+                            <option value="23:59:59">11:59 PM</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+<div id="bottomButtonRow" class="row justify-content-between">
+  <div class="col-2"><button type="button" class="bottomButton" id="homeButton"    name="homeButton"    onmouseup="selectBack(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/back_icon.svg')}}" draggable="false"><br>Back</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="searchButton"  name="searchButton"  onmouseup="selectSearchRefine(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/search_icon.svg')}}" draggable="false"><br>Search</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="clearButton"   name="clearButton"   onmouseup="clearSearch(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/broom_icon.svg')}}" draggable="false"><br>Clear</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="statusButton"  name="statusButton"  onmouseup="selectStatus(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/question_icon.svg')}}" draggable="false"><br>Status</button></div>
+  <div class="col-2"><button type="button" class="bottomButton" id="detailsButton" name="detailsButton" onmouseup="selectDetails(this)"><img class="btn-icon no-drag" src="{{=URL('static','images/details_icon.svg')}}" draggable="false"><br>Details</button></div>
+</div>
+
+</div>

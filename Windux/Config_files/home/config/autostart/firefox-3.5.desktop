@@ -1,0 +1,11 @@
+
+[Desktop Entry]
+Type=Application
+Exec="/home/hlx/prism/prism" -override "/home/hlx/.webapps/hlx.scale@prism.app/override.ini" -webapp hlx.scale@prism.app
+#Exec=/usr/bin/firefox-3.5 http://127.0.0.1/mainRunMode.asp?consoletype=1&browserType=2
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Firefox
+Name=Firefox
+Comment[en_US]=Web Browser
+Comment=Web Browser

@@ -1,0 +1,71 @@
+##############################################################
+#
+# File : makefile
+#
+# Make file used for building Core/VersionManager/
+#
+##############################################################
+
+###################################
+#defines
+###################################
+OS = linux
+
+HOBART_APP ?= $(HOME)/projects/Hobart/shared_code/Application
+export HOBART_APP
+export HOBART_OUT_DIR=$(HOBART_APP)/output
+
+
+##################################
+#make vars
+##################################
+
+#
+#Vars for Source and object files
+#
+SUB_DIRS := \
+    messages \
+    source
+
+C_SRCS :=
+CPP_SRCS :=
+
+INC_DIRS := \
+    -I$(HOBART_APP)/PAL \
+    -I$(HOBART_APP)/PAL/PAL_linux \
+    -I$(HOBART_APP)/inc/linux \
+    -I$(HOBART_APP)/source/app \
+    -I$(HOBART_APP)/source/comm \
+    -I$(HOBART_APP)/source/core \
+    -I$(HOBART_APP)/source/core/Synchronization \
+    -I$(HOBART_APP)/source/core/VersionManager/include \
+    -I$(HOBART_APP)/source/db \
+    -I$(HOBART_APP)/source/db/util \
+    -I$(HOBART_APP)/source/db/util/accountant \
+    -I$(HOBART_APP)/source/db/util/thread \
+    -I$(HOBART_APP)/source/EvolutionRTC/LabelApplierManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/MarqueeManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/MessageCenter \
+    -I$(HOBART_APP)/source/EvolutionRTC/NumericManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/OperatingModes/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/PngGraphics/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/PrinterManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/RendererManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/RTCManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/ScannerManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/TimerManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/WeigherManager/Include \
+    -I$(HOBART_APP)/source/EvolutionRTC/WrapperManager/Include \
+    -I$(HOBART_APP)/source/HFC \
+    -I$(HOBART_APP)/source/HFC/tags \
+    -I$(HOBART_APP)/source/HFC/devices \
+    -I$(HOBART_APP)/source/MetrologicallySignificant \
+    -I$(HOBART_APP)/source/util \
+    -I$(HOBART_APP)/source/util/Inc \
+
+
+##################################
+# makefile template
+##################################
+
+include $(HOBART_APP)/hobart.mk

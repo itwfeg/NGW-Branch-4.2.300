@@ -1,0 +1,137 @@
+#**     Firmbase System Registry File for AMD Salsa Board.
+#
+#       Functional Description.
+#       This file contains the system registry definitions needed by
+#       Firmbase components, including the kernel as well as firmware
+#       applications, to configure themselves.
+#
+#       Modification history.
+#       R. Spiegel      05/04/27.       #5.3, new for Salsa board.
+#       E. Khoruzhenko  05/05/18.       #1.3, updated for release.
+
+[SYSTEM]
+    Banner = "AMD "SALSA" (Geode GX3/CS5536) Development Platform"
+    Bypass = 1                          # bypass system security checks!
+    UserSecurity = 1                    # enable user-level security (TCB).
+    FileTimeout = 10000                 # wait 10 secs for programs to become ready.
+
+#   Application load (RUN and START) statements.  RUN statements cause the
+#   named application to be loaded and run without waiting for them to
+#   complete execution before going on to the next statement.  START statements
+#   cause the named application to be loaded and run with wait, before
+#   processing more RUN/START statements in the registry.
+
+    start = gx3.exe                     # launch GX3 chipset driver.
+    section = Bios                      # run BIOS section after loading of GX3 driver.
+
+[BIOS]
+
+#   BIOS creates its own keys in this section. This section is included in
+#   the system section at the appropriate place to run BIOS keys.
+
+[USBMASSSTORAGE]
+    start = usbd.exe
+    start = ohci.exe
+    start = usbms.exe
+    start = int13srv.exe                # launch Int13 server.
+
+[USBHID]
+    start = usbd.exe
+    start = ohci.exe
+    start = usbhid.exe
+
+[ATAMASSSTORAGE]
+    start = ata.exe
+    start = fat.exe
+
+[NETWORK]
+    start = rtl8110.exe
+    start = tcpip.exe
+    start = telnetd.exe
+    start = httpsrv.exe
+
+[APPLICATIONS]
+
+[SHELL]
+    run = demo.exe                      # run command line demonstration program.
+
+[USB20]
+    start = ehci.exe
+
+[TCB]
+    Authority = EB2K
+    EB2K.Class = Basic
+    EB2K.Realm = BIOS
+    EB2K.File = /dev/rom/romusers.txt
+
+    Authority = SystemConsole
+    SystemConsole.Class = Basic
+    SystemConsole.Realm = Local
+    SystemConsole.File = /dev/rom/romusers.txt
+
+    Authority = GuestServices
+    GuestServices.Class = Basic
+    GuestServices.Realm = Internet
+    GuestServices.File = /dev/rom/romusers.txt
+
+[HA]
+    /dev/console.detect.ostakeover = announce
+    /dev/console.listen.ostakeover = resume
+    /dev/console.listen.osdeath = resume
+
+    /dev/rtl8110/0.detect.ostakeover = announce
+    /dev/rtl8110/0.listen.ostakeover = resume
+    /dev/rtl8110/0.listen.osdeath = resume
+
+[DEMO]
+    Console             = /DEV/CONSOLE/STDOUT
+    Console             = /dev/telnetd/Net1/23
+
+[OHCI]
+    PciWait             = 1             # wait for PCI enumeration to run.
+
+[USBHID]
+    Bus                 = Bus1
+    Bus                 = Bus2
+    EmulationLevel      = 3
+    KbdRepeatRate       = 30
+    EmuControl          = on
+
+[USBMS]
+    MaxReadCapDuration  = 3000
+
+[TCPIP]
+    Debug               = 1
+    Network             = Net1
+    Net1.NetworkAccess  = /DEV/MAC/RTL8110/0
+    Net1.TargetAnnouncementInterval = 10        # seconds between tgt anncm'ts.
+
+[RTL8110]
+    Debug               = 1
+
+[TELNETD]
+    Debug               = 1
+    Network             = Net1
+
+[HTTPSRV]
+    Debug               = 1
+    Network             = Net1
+    ConnectTimeout      = 5
+    CacheTimeout        = 1
+    Resource            = gensw.gif, /dev/rom/gensw.gif, image/gif
+    CacheTimeout        = 3600
+    Sessions            = 10
+    DeviceListUpdatePeriod = 60
+    DebugMenu           = 1
+    FilerMenu           = 1
+    LoginMenu           = 1
+
+[GX3]
+    Debug               = 1
+    PwrBtnAction        = 3             # soft off.
+    MaxUarts            = 2             # support 2 UARTs.
+
+[EHCI]
+    PciWait             = 1             # wait for PCI enumeration to run.
+    InterruptType       = 1             # polled mode
+

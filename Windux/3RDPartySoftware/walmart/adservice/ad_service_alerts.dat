@@ -1,0 +1,14 @@
+# Ad Service Status Alerts with each alert having the following format
+# unique status code:severity:message text
+# Severity values are:
+# 0 - Success
+# 1 - Informational
+# 2 - Warning
+# 3 - Error
+# 4 - Fatal
+200:0:Web service reports successful request.
+400:3:Web service reports bad request.
+401:3:Web service reports unauthorized request.
+403:3:Web service reports forbidden request.
+404:3:Web service reports not found.
+500:4:Web service reports internal server error.

@@ -1,0 +1,8 @@
+{
+   "timestamp": "2021-05-24T15:34:54.623Z",
+   "status": 400,
+   "error": "Bad Request",
+   "exception": "org.springframework.http.converter.HttpMessageNotReadableException",
+   "message": "JSON parse error: Cannot deserialize value of type `com.walmart.retailtech.ssaefp.scales.smseventcontrollerservices.models.dao.enums.VendorType` from String \"HOB\": not one of the values accepted for Enum class: [HOBART, TOLEDO]; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `com.walmart.retailtech.ssaefp.scales.smseventcontrollerservices.models.dao.enums.VendorType` from String \"HOB\": not one of the values accepted for Enum class: [HOBART, TOLEDO]\n at [Source: (PushbackInputStream); line: 6, column: 22] (through reference chain: com.walmart.retailtech.ssaefp.scales.smseventcontrollerservices.models.dto.http.EventControllerRequest[\"scale\"]->com.walmart.retailtech.ssaefp.scales.smseventcontrollerservices.models.dto.Scale[\"scaleVendor\"])",
+   "path": "/EventController/Hobart/invoke"
+}

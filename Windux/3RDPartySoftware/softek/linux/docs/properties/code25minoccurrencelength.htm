@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Code25MinOccurrenceLength</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P class="MsoBodyText">
+		If the toolkit only finds one barcode in an image and it's hit count is less 
+		than PrefOccurrence, then it is only reported if the hit count is &gt;= 
+		MinOccurrence. With Code 25 barcodes this can sometimes yield false positive 
+		results and so a special property called Code25MinOccurrenceLength&nbsp;defines 
+		the smallest length for a Code 25 that will be reported if it's hit count is 
+		less than PrefOccurrence.
+		<P class="MsoBodyText">
+		Default value =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_CODE25_MIN_OCCURRENCE_LENGTH,&nbsp;uint16 
+		*value) ;
+		<P>void STGetParameter(hBarcode, ST_CODE25_MIN_OCCURRENCE_LENGTH,&nbsp;uint16 
+			*value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;3 ;<BR>
+		STSetParameter(hBarcode, 
+		ST_CODE25_MIN_OCCURRENCE_LENGTH,&nbsp;&amp;value)&nbsp;;
+		<P>
+		</P>
+	</body>
+</html>

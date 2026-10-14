@@ -1,0 +1,30 @@
+Microsoft Developer Studio Workspace File, Format Version 5.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "SampleBarcodeReader"=".\SampleBarcodeReader.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+    {D57637EC-D58F-42A8-8D1D-E890E8645813}
+}}}
+
+###############################################################################
+

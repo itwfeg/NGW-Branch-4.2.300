@@ -1,0 +1,11 @@
+Package: hobart-hbtemp-app
+Version: 1.0-0
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides BLE temperature sensor logging
+ and reporting for HT series scales.
+ .
+ This package contains the binary and base configuration. For
+ customization please use HTe.
+

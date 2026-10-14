@@ -1,0 +1,228 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">Softek Barcode Toolkit</FONT>&nbsp;
+		</p>
+		<P><STRONG>Note</STRONG></P>
+		<P>Within this documentation the following deffinitions apply:</P>
+		<UL>
+			<LI>
+			#define uint16 unsigned short
+			<LI>
+				#define uint32 unsigned int</LI></UL>
+		<P><STRONG>Shell Interface</STRONG></P>
+		<UL>
+			<LI>
+				<A href="shell/bardecode.htm">bardecode</A>
+			- Reading barcodes from TIF and JPG files.
+			<LI>
+				<A href="shell/code128draw.htm">code128draw</A>
+			- Creating JPG files containing Code 128 format barcodes.
+			<LI>
+				<A href="shell/code39draw.htm">code39draw</A> - Creating JPG files containing 
+				Code 39 format barcodes.</LI></UL>
+		<P><STRONG>Perl Interface</STRONG></P>
+		<UL>
+			<LI>
+				<A href="perl/softekbarcode.htm">SoftekBarcode.pm Module</A></LI></UL>
+		<P><STRONG></STRONG>&nbsp;</P>
+		<P><STRONG>'C' Programmers API for Barcode Reading</STRONG></P>
+		<P><A href="example/c_code.htm">Example Code</A></P>
+		<P><A href="perl/softekbarcode.htm"></A>&nbsp;</P>
+		<P>Methods:</P>
+		<UL>
+			<LI>
+				<A href="methods/createbarcodesession.htm">CreateBarcodeSession</A>
+			- Create an instance of the barcode toolkit.
+			<LI>
+				<A href="methods/exportxmlsettings.htm">Export XMLSettings</A>
+			- save the current property set to an XML file.
+			<LI>
+				<A href="methods/freebarcodesession.htm">FreeBarcodeSession</A>
+			- Release an instance of the barcode toolkit.
+			<LI>
+				<A href="methods/getbarcodedirection.htm">GetBarCodeDirection</A>
+			- Determine the orientation of a barcode
+			<LI>
+				<A href="methods/getbarcodepos.htm">GetBarCodePos</A>
+			- Get the page number and bounding rectangle of a barcode.
+			<LI>
+				<A href="methods/loadxmlsettings.htm">LoadXMLSettings</A>
+			- Load property sets from an XML file.
+			<LI>
+				<A href="methods/processxml.htm">ProcessXML</A>
+			- Load settings and process instructions from and XML file and save the results 
+			in CSV or XML format.
+			<LI>
+				<A href="methods/readbarcode.htm">ReadBarCode</A>
+			- Scan a TIF or JPG file for a barcode.
+			<LI>
+				<A href="methods/readbarcodefrombitmap.htm">ReadBarCodeFromBitmap</A>
+			- Scan a bitmap held in memory for a barcode.
+			<LI>
+				<A href="methods/saveresults.htm">SaveResults</A> - save the results to an XML 
+				or CSV file.</LI></UL>
+		<P>Properties:</P>
+		<UL>
+			<LI>
+				<A href="properties/allowduplicatevalues.htm">AllowDuplicateValues</A>
+			- Barcodes containing the same text on the same page.
+			<LI>
+				<A href="properties/code25checksum.htm">Code25Checksum</A>
+			- Code 25 barcodes include checksum character.
+			<LI>
+				<A href="properties/code25minoccurrencelength.htm">Code25MinLengthOccurrence</A>
+			- control for false positive readings for Code 25 barcodes.
+			<LI>
+				<A href="properties/code39checksum.htm">Code39Checksum</A>
+			- Code 39 barcodes include checksum character.
+			<LI>
+				<A href="properties/code39needstartstop.htm">Code39NeedStartStop</A>
+			- Require start and stop * characters for a Code 39 barcode.
+			<LI>
+				<a href="properties/colorprocessinglevel.htm">ColorProcessingLevel</a> - control 
+                the amount of processing time spent reading barcode values from color images.<LI>
+				<A href="properties/colorthreshold.htm">ColorThreshold</A>
+			- Contrast setting for color images.
+			<LI>
+				<A href="properties/convertupcetoean13.htm">ConvertUPCEToEAN13</A>
+			- Output UPC-E barcodes in EAN-13 format.
+			<LI>
+				<a href="properties/databaroptions.htm">DatabarOptions</a> - set the advanced 
+                options for reading GS1 Databar barcodes.<LI>
+				<A href="properties/despeckle.htm">Despeckle</A>
+			- Clean up images containing specks of black and white.
+			<LI>
+				<A href="properties/encoding.htm">Encoding</A>
+			- character encoding for barcode values.
+			<LI>
+				<A href="properties/errorcorrection.htm">ErrorCorrection</A>
+			- Correct errors in barcodes.
+			<LI>
+				<A href="properties/extendedcode39.htm">ExtendedCode39</A>
+			- Read Code 39 barcodes in the extended symbol set.
+			<LI>
+				<A href="properties/gammacorrection.htm">GammaCorrection</A>
+			- gamma correction value for color images.
+			<LI>
+				<A href="properties/index.htm"></A><A href="properties/linejump.htm">LineJump</A>
+			- Frequency of line sampling in an image.
+			<LI>
+				<A href="properties/maxlength.htm">MaxLength</A>
+			- Maximum string length&nbsp;of a barcode.
+			<LI>
+				<A href="properties/maxrectoverlap.htm">MaxRectOverlap</A>
+			- maximum overlap for bounding rectangles.
+			<LI>
+				<A href="properties/medianfilter.htm">MedianFilter</A>
+			- Apply a median filter to the image.
+			<LI>
+				<A href="properties/minlength.htm">MinLength</A>
+			- Minimum string length of a barcode.
+			<LI>
+				<A href="properties/minoccurrence.htm">MinOccurrence</A>
+			- Minimum number of hits needed to read a barcode.
+			<LI>
+				<A href="properties/minseparation.htm">MinSeparation</A>
+			- Minimum distance between similar barcodes.
+			<LI>
+				<A href="properties/minspacebarwidth.htm">MinSpaceBarWidth</A>
+			- Minimum width of a space in a barcode.
+			<LI>
+				<A href="properties/multipleread.htm">MultipleRead</A>
+			- Read more than one barcode.
+			<LI>
+				<A href="properties/noisereduction.htm">NoiseReduction</A>
+			- Clean up images containing un-wanted black marks.
+			<LI>
+				<A href="properties/pageno.htm">PageNo</A>
+			- Page number to scan in an image.
+			<LI>
+				<A href="properties/pattern.htm">Pattern</A>
+			- Regular expression to search for.
+			<LI>
+				<A href="properties/photometric.htm">Photometric</A>
+			- Photometric interpretation for a black and white bitmap.
+			<LI>
+				<A href="properties/prefoccurrence.htm">PrefOccurrence</A>
+			- Preferred number of hits for a barcode.
+			<LI>
+				<A href="properties/quietzonesize.htm">QuietZoneSize</A>
+			- Size of quiet zone around a barcode.
+			<LI>
+				<A href="properties/readcodabar.htm">ReadCodabar</A>
+			- Read Codabar barcodes.
+			<LI>
+				<A href="properties/readcode128.htm">ReadCode128</A>
+			- Read Code 128 barcodes.
+			<LI>
+				<A href="properties/readcode25.htm">ReadCode25</A>
+			- Read Code 25 (interlaced) barcodes.
+			<LI>
+				<A href="properties/readcode25ni.htm">ReadCode25ni</A>
+			- Read Code 25 (non-interlaced) barcodes.
+			<LI>
+				<A href="properties/readcode39.htm">ReadCode39</A>
+			- Read Code 39 barcodes.
+			<LI>
+				<a href="properties/readdatabar.htm">ReadDatabar</a> - Read GS1 Databar 
+                barcodes.<LI>
+				<A href="properties/readdatamatrix.htm">ReadDataMatrix</A> - Read Data Matrix barcodes.<LI>
+				<A href="properties/readcodeean13.htm">ReadEAN13</A>
+			- Read EAN-13 barcodes.
+			<LI>
+				<A href="properties/readcodeean8.htm">ReadEAN8</A>
+			- Read EAN-8 barcodes.
+			<LI>
+				<A href="properties/readmicropdf417.htm">ReadMicroPDF417</A>
+			- Read micro-PDF-417 barcodes.
+			<LI>
+				<A href="properties/readnumeric.htm">ReadNumeric</A>
+			- Only read numeric barcodes.
+			<LI>
+				<A href="properties/readpatchcodes.htm">ReadPatchCodes</A>
+			- Read Patch Codes.&nbsp;
+			<LI>
+				<A href="properties/readpdf417.htm">ReadPDF417</A>- Read PDF-417 barcodes.
+			</LI>
+			<LI>
+			<A href="properties/readshortcode128.htm">ReadShortCode128</A> - Read short Code 128 barcodes.
+			<LI>
+				<A href="properties/readcodeupca.htm">ReadUPCA</A>- Read UPC-A barcodes.
+			</LI>
+			<LI>
+				</A><A href="properties/readcodeupce.htm">ReadUPCE</A>- Read UPC-E barcodes.
+			</LI>
+			<LI>
+				<a href="properties/scandirection.htm">ScanDirection</a>
+			- Orientation to scan for a barcode.
+			<LI>
+				<A href="properties/shortcode128minlength.htm">ShortCode128MinLength</A>
+			- Minimum length for a barcode of type "SHORTCODE128".
+			<LI>
+				<A href="properties/showcheckdigit.htm">ShowCheckDigit</A>
+			- Display check digits.
+			<LI>
+				<A href="properties/skewlinejump.htm">SkewLineJump</A>
+			- Frequency of line sampling for skewed barcodes.
+			<LI>
+				<A href="properties/skewtolerance.htm">SkewTolerance</A>
+			- Search for barcodes at an angle to horizontal or vertical.
+			<LI>
+				<A href="properties/tifsplitmode.htm">TifSplitMode</A>
+			- Controls how a TIF file should be split.
+			<LI>
+				<A href="properties/tifsplitpath.htm">TifSplitPath</A>
+			- Split a TIF file into smaller parts based on the location of barcodes in the 
+			image.
+			<LI>
+				<A href="properties/useoversampling.htm">UseOverSampling</A>
+			- Another method for cleaning up 'noisy' images.
+			<LI>
+				<A href="properties/weightlongerbarcodes.htm">WeightLongerBarcodes</A> - boost 
+				the hit count for longer barcodes.</LI></UL>
+		<P>&nbsp;</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

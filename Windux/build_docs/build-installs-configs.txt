@@ -1,0 +1,45 @@
+Following need to be install on each new build:
+-----------------------------------------------
+$HOBART_APP=Your_app_location/Applications
+
+Usb interface(libusb):
+sudo apt-get libUsb-dev
+
+i2c tools:
+sudo apt-get source i2c-tools 
+
+Make the files downloaded by:
+-Entering the directory
+-Type 
+make
+-Then install the tools
+sudo make install
+
+HTTP/FTP etc support:
+sudo apt-get install libcurl4-openssl-dev
+
+inotify setup:
+Copy the file 10-local-rules into the following directory
+/etc/udev/rules.d/
+From
+config_files directory
+
+Config file setup:
+-create /etc/hobart/
+-link these files:
+bootParams.cfg -> 
+$HOBART_APP/bootParams.cfg
+config_linux.dat -> 
+$HOBART_APP/source/config_linux.dat
+defaults_linux.ini -> 
+$HOBART_APP/source/db/defaults_linux.ini
+
+create:/var/log/hobart and make it mode 777 for now
+Eventually our installer will create /var/log/Hobart
+
+Virutal Keyboard:
+Copy "Xdefaults" file from config_files directory to your home directory and rename it to ".Xdefaults" (notice the extra '.')
+Type xrdb -load .Xdefaults
+You can launch the VK by typing xvkbd
+
+

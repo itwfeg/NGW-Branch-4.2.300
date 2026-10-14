@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ReadDataMatrix</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			When set to TRUE the toolkit will search for data matrix barcodes.&nbsp;&nbsp;
+		</P>
+		<P>
+			Default value = &nbsp;FALSE&nbsp;
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_READ_DATAMATRIX,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_READ_DATAMATRIX,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Turn on data matrix recognition.<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;0 ;<BR>
+			STSetParameter(hBarcode, ST_READ_DATAMATRIX,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

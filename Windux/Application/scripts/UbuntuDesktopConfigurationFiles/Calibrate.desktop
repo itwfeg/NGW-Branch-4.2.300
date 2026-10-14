@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Calibrate
+Exec=/opt/tbupddlx/upddcalib
+Icon=/opt/tbupddlx/tbcalib.xpm
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility

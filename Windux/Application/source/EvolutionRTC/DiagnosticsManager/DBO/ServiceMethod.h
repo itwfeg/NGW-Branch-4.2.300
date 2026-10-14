@@ -1,0 +1,113 @@
+/**
+ * @file ServiceMethod.h
+ * @brief Service method table support.
+ *
+ * @copyright Copyright (c) 2016, ITW Hobart Food Equipment Group, U.S.A.
+ * @author Randy Blankley
+ */
+
+#ifndef DBOSERVICEMETHOD_H
+#define DBOSERVICEMETHOD_H
+
+#include "TableBase.h"
+
+#if defined ( __linux__ )
+#include <Util/Dict.h>
+#else
+#include "../Util/Dict.h"
+#endif // __linux__
+
+struct sqlite3_stmt;
+
+/// Database objects namespace.
+namespace dbo
+{
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Service method row.
+struct ServiceMethodRow
+{
+	int id;										///< Id.
+	std::string description;					///< Description.
+
+	/// Bind columns to sqlite statement.
+	/**
+	 * @param[in] stmt  sqlite statement
+	 * @return  @c true upon success, @c false otherwise
+	 */
+	bool bind( sqlite3_stmt *stmt ) const;
+
+	/// Extract column data from sqlite statement.
+	/**
+	 * @param[in] stmt  sqlite statement
+	 * @return  @c true upon success, @c false otherwise
+	 */
+	bool extract( sqlite3_stmt *stmt );
+
+	/// Retrieve row in dictionary format.
+	/**
+	 * @param[in,out] dict  row
+	 */
+	void retrieve( util::Dictionary &dict ) const;
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Service method.
+class ServiceMethod : public TableBase<ServiceMethodRow>
+{
+	typedef ServiceMethod _Myt;
+	typedef TableBase<ServiceMethodRow> _Mybase;
+
+public:
+
+	// ========================================================================
+	// CTOR / DTOR
+	// ========================================================================
+
+	/// Constructor.
+	/**
+	 * @param[in] db  pointer to database
+	 */
+	ServiceMethod( sqlite3 *db );
+
+	/// Destructor.
+	virtual ~ServiceMethod();
+
+	// ========================================================================
+	// Methods
+	// ========================================================================
+
+	/// Retrieve record.
+	/**
+	 * @param[in] id  id
+	 * @param[out] result  query result
+	 * @return  @c true upon success, @c false otherwise
+	 */
+	virtual bool retrieve( int id, row &result );
+
+private:
+
+#ifdef USE_ACCOUNTANT
+	static int dataType_;
+	static std::string dataTypeName_;
+#endif
+
+	// not implemented
+	ServiceMethod();
+
+	// not implemented
+	ServiceMethod( const _Myt& );
+
+	// not implemented
+	_Myt &operator = ( const _Myt& );
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+} // namespace
+
+#endif // DBOSERVICEMETHOD_H

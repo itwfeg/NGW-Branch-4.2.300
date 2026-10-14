@@ -1,0 +1,84 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/products.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_timeout.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="nothingModal" tabindex="-1" role="dialog" data-backdrop="static">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body" id="nothingModal-body">
+<h3>No products found!</h3>
+</div>
+<div class="row justify-content-around p-2">
+<!--<div class="col"><button type="button" class="btn bg-warning btn-custom-basics btn-lg btn-block" id="addedModal-startOver" onclick="start_over();">Start Over</button></div>-->
+<div class="col"><button type="button" class="btn btn-custom-color btn-lg btn-block bg-warning" id="addedModal-more" onclick="history.back();" data-dismiss="modal">Back</button></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-3 template-div" id="product-template">
+  <button class="btn btn-block btn-custom-color"><span></span></button>
+  <div class="product-price custom-inverted-thin-border row justify-content-center" style="margin-right: 0px;margin-left: 0px;">
+    <div class="normal-price col-6"></div>
+    <div class="sale-price col-6"></div>
+  </div>
+</div>
+
+<div class="col template-div" id="spacer-template"></div>
+
+<div class="container main-container">
+
+<div class="row products-row justify-content-between mb-4">
+</div>
+
+<div class="row products-row justify-content-between mb-4">
+</div>
+
+<div class="row products-row justify-content-between mb-4">
+</div>
+
+<div class="row kiosk-button-row justify-content-between">
+<div class="col" onclick="prev_page();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="prevButton"
+   class="grayOut">
+  <g transform="translate(-47,-94)" class="btn-custom-color">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 150,122 H 100 V 97 l -50,50 50,50 v -25 h 50 z"/>
+    <text x="80" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Previous</text>
+  </g>
+</svg>
+</div>
+
+<div class="col"><button class="btn btn-block btn-custom-color" onclick="window.location = '/OnlineOrdering/kiosk/categories?DeptNum='+getParams('DeptNum');">Categories</button></div>
+<div class="col"><button class="btn btn-block bg-warning btn-custom-basics" onclick="start_over_button()">Start Over</button></div>
+<div class="col"><button class="btn btn-block btn-custom-color" onclick="view_cart()">View Cart</button></div>
+
+<div class="col" onclick="next_page();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="nextButton"
+   class="grayOut">
+  <g transform="translate(-47,-94)" class="btn-custom-color">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50,122 H 100 V 97 l 50,50 -50,50 V 172 H 50 Z"/>
+    <text x="80" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Next</text>
+  </g>
+</svg>
+</div>
+</div>
+</div>
+
+</div>
+

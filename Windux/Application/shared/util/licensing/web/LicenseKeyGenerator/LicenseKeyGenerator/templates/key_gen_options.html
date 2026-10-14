@@ -1,0 +1,51 @@
+<h3>Key Generation Options</h3>
+
+<div>
+    <table>
+        <tr id="scale_serial_number_row">
+            <td class="text_field_cell" id="hte_serial_type_selection">
+                {{ form.hte_serial_type }}
+            </td>
+
+            <td class="text_field_cell" id="scale_serial_type_selection">
+                {{ form.scale_serial_type }}
+            </td>
+
+            <td class="text_field_cell" id="serial_number">
+                {{ form.serial_number }}
+            </td>
+
+            <td class="text_field_cell" id="usb_serial_errors">
+                {{ form.serial_number.errors }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text_field_cell">
+                {{ form.allotment.label_tag }}
+            </td>
+            
+            <td class="text_field_cell">
+               {{ form.allotment }}
+            </td>
+            
+            <td class="text_field_cell">
+               {{ form.allotment.errors }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text_field_cell">
+                {{ form.timeout.label_tag }}
+            </td>
+            
+            <td class="text_field_cell">
+                {{ form.timeout }}
+            </td>
+            
+            <td class="text_field_cell">
+                {{ form.timeout.errors }}
+            </td>
+        </tr>
+    </table>
+</div>

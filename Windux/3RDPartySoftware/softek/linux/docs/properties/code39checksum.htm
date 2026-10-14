@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<P><FONT size="5">Code39Checksum</FONT>&nbsp;
+		</P>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When True the toolkit will only report Code 39 barcodes where the last character 
+			is a valid checksum for the rest of the barcode.&nbsp;The toolkit expects a 
+			Code 39 checksum to be calculated using modulus-43.&nbsp;
+		</P>
+		<P>The following table shows the character and value used for the calculation... <FONT size="+1">
+				<B></B></FONT>
+		</P>
+		<PRE> 
+  Char Value        Char Value         Char Value         Char Value
+   0     0           B    11            M    22            X    33   
+   1     1           C    12            N    23            Y    34
+   2     2           D    13            O    24            Z    35
+   3     3           E    14            P    25            -    36
+   4     4           F    15            Q    26            .    37
+   5     5           G    16            R    27          space  38
+   6     6           H    17            S    28            $    39
+   7     7           I    18            T    29            /    40
+   8     8           J    19            U    30            +    41
+   9     9           K    20            V    31            %    42
+   A    10           L    21            W    32
+</PRE>
+		<P>e.g</P>
+		<DIV>Data =&nbsp;12345ABCDE+</DIV>
+		<DIV>Sum of values: 1 + 2 + 3 + 4 + 5 + 10 + 11 + 12 + 13 + 14 + 41 = 116
+			<BR>
+			115 / 43 = 2 rem 30, so&nbsp;U is the check digit.<BR>
+			Data&nbsp;and check digit =&nbsp;12345ABCDE+U</DIV>
+		<DIV><BR>
+			Default Value: False
+		</DIV>
+		<DIV>&nbsp;</DIV>
+		<DIV>void STSetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;uint16 *value) ;</DIV>
+		<P>void STGetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Turn&nbsp;on the Code39Checksum property<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_CODE39_CHECKSUM,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

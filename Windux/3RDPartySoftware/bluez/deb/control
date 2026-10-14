@@ -1,0 +1,9 @@
+Package: hobart-bluez
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides BlueZ, the official Linux Bluetooth
+ protocol stack.
+
+

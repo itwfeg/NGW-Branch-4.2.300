@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">ReadShortCode128</FONT>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When set to TRUE the toolkit will search for Code 128 barcodes of symbol set C, 
+			without the normal start and stop characters. The barcode type for these 
+			barcodes is set to "SHORTCODE128".
+		</P>
+		<P>
+		Default value =&nbsp;&nbsp;FALSE
+		<P>
+		void STSetParameter(hBarcode, ST_READ_SHORT_CODE128,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode,&nbsp; ST_READ_SHORT_CODE128,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_READ_SHORT_CODE128,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

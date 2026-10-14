@@ -1,0 +1,82 @@
+# list installed printers
+lpinfo -v
+
+# list installed printers with more detail
+lpinfo -l -v
+
+# add printer to system
+lpadmin -p EXT1 -E -v usb://EVOLIS/Primacy?serial=10000601477 -P /usr/share/cups/model/evolis-primacyE.ppd.gz
+lpadmin -p EXT1 -E -v socket://10.3.177.103 -P /usr/share/cups/model/evolis-primacyE.ppd.gz
+
+lpadmin -p EXT1 -E -v usb://EVOLIS/Edikio%20Duplex?serial=10000632032 -P /usr/share/cups/model/edduplexE.ppd.gz
+lpadmin -p EXT1 -E -v socket://10.3.177.72 -P /usr/share/cups/model/edduplexE.ppd.gz
+
+lpadmin -p RICOH -E -v socket://10.3.193.89 -P /usr/share/cups/model/Ricoh-MP_C4503-pxlcolor-Ricoh.ppd
+
+# remove printer from system
+lpadmin -x EXT1
+
+# set default printer
+lpoptions -d EXT1
+
+# get all printer options
+lpoptions -p EXT1 -l
+
+# set options
+lpoptions -p PRINTER -o GDuplexMode=SIMPLEX
+
+# get all printer drivers
+lpinfo -m
+
+# Options can be:
+#
+# -t : show all CUPS info
+# -d : show default printer
+# -p : show all printers
+# -a : show all printers that accept jobs
+# -o : show active print jobs
+lpstat <options>
+
+# test print
+lpr /usr/share/cups/data/testprint
+lpr -P EXT1 /usr/share/cups/data/testprint
+
+lpr -P PRINTER -o scaling=100 /path/to/bmp/checkerboardLabel2Count.bmp
+
+# convert two images to postscript then to raster format and print
+convert 1016_648_A.bmp 1016_648_B.bmp /tmp/test.ps
+gs -sDEVICE=cups -dNOPAUSE -dBATCH -sOutputFile=/tmp/test /tmp/test.ps
+lpr -P EXT1 -o scaling=100 -o landscape -o sides=two-sided-short-edge /tmp/test
+
+convert -units pixelsperinch -density 300 1016_648_A.bmp 1016_648_B.bmp /tmp/test.ps
+
+gs -dQUIET -dPARANOIDSAFER -dNOPAUSE -dBATCH -dNOINTERPOLATE -dNOMEDIAATTRS -sOutputFile=/tmp/test -sDEVICE=cups \
+	-dDuplex -g1016x648 -r300x300 -dcupsBitsPerColor=8 -dcupsColorOrder=0 -dcupsColorSpace=1 \
+	/tmp/test.ps
+
+lpr -P EXT1 -o scaling=100 -o landscape -o sides=two-sided-short-edge /tmp/test
+
+
+convert 1016_648_A.bmp 1016_648_B.bmp /tmp/test.pdf
+convert 1016_648_A.bmp 1016_648_B.bmp /tmp/test.tiff
+
+gs -sDEVICE=cups -dNOPAUSE -dBATCH -r300 -sOutputFile=/tmp/test /tmp/test.ps
+gs -sDEVICE=cups -dNOPAUSE -dBATCH -g1016x648 -r300 -sOutputFile=/tmp/test /tmp/test.ps
+
+gs -dQUIET -dPARANOIDSAFER -dNOPAUSE -dBATCH -dNOINTERPOLATE -dNOMEDIAATTRS -sOutputFile=/tmp/test -sDEVICE=cups \
+	-dDuplex -dUseFastColor -g1016x648 -r300x300 -dDEVICEWIDTHPOINTS=244 -dDEVICEHEIGHTPOINTS=156 -dcupsBitsPerColor=8 -dcupsColorOrder=0 -dcupsColorSpace=1 \
+	/tmp/test.ps \
+	-c "<</.HWMargins[0.0 0.0 0.0 0.0] /Margins[0 0]>>setpagedevice" -f
+
+# setup remote admin
+on scale run 'cupsctl --remote-admin'
+brose to http://10.3.177.106:631/admin
+
+# check printer job status
+lpstat -t -l
+
+# delete print job
+cancel EXT1-5
+
+# delete ALL print job
+cancel -a EXT1

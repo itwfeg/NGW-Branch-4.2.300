@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">ReadMicroPDF417</FONT>
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When set to TRUE the toolkit will search for micro-PDF-417 barcodes.
+		</P>
+		<P>
+		Default value =&nbsp;&nbsp;FALSE
+		<P>
+		void STSetParameter(hBarcode, ST_READ_MICRO_PDF417,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode,&nbsp; ST_READ_MICRO_PDF417,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_READ_MICRO_PDF417,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

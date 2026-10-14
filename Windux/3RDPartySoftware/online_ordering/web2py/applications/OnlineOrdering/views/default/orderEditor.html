@@ -1,0 +1,182 @@
+{{extend 'layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/editor.js')}}"></script>
+{{end}}
+
+{{block head}}
+{{end}}
+
+<div class="container main-container" id="editor-container">
+
+<div class="modal fade container" id="editModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="editModal-body">
+        <div class="form-group row justify-content-between"><label for="itemPrNum" class="col-4">PLU</label><input type="text" class="form-control contrast col-8" id="itemPrNum"></div>
+        <div class="form-group row justify-content-between"><label for="itemDeptNum" class="col-4">Dept</label><input type="text" class="form-control contrast col-8" id="itemDeptNum"></div>
+        <div class="form-group row justify-content-between"><label for="itemZoneNum" class="col-4">Zone</label><input type="text" class="form-control contrast col-8" id="itemZoneNum"></div>
+        <div class="form-group row justify-content-between"><label for="itemOrderNumId" class="col-4">OrderNumId</label><input type="text" class="form-control contrast col-8" id="itemOrderNumId" readonly></div>
+        <div class="form-group row justify-content-between"><label for="itemProductType" class="col-4">Type</label><input type="text" class="form-control contrast col-8" id="itemProductType"></div>
+        <div class="form-group row justify-content-between"><label for="itemPluPrice" class="col-4">Price</label><input type="text" class="form-control contrast col-8" id="itemPluPrice"></div>
+        <div class="form-group row justify-content-between"><label for="itemPluByCount" class="col-4">Count</label><input type="text" class="form-control contrast col-8" id="itemPluByCount"></div>
+        <div class="form-group row justify-content-between"><label for="itemPluWeight" class="col-4">Weight</label><input type="text" class="form-control contrast col-8" id="itemPluWeight"></div>
+        <div class="form-group row justify-content-between"><label for="itemPluDescription" class="col-4">Description</label><input type="text" class="form-control contrast col-8" id="itemPluDescription"></div>
+        <div class="form-group row justify-content-between"><label for="itemPluInstructions" class="col-4">Instructions</label><input type="text" class="form-control contrast col-8" id="itemPluInstructions"></div>
+        <div class="form-group row justify-content-between"><label for="itemReason" class="col-5">Reason Canc.</label><input type="text" class="form-control contrast col-7" id="itemReasonCancelled"></div>
+        <div class="form-group row justify-content-between"><label for="itemCancelled" class="col-4">Cancelled</label><input type="checkbox" id="itemCancelled" class="form-check-input col-8 ml-3"></div>
+        <div class="form-group row justify-content-between"><label for="itemFilled" class="col-4">Filled</label><input type="checkbox" id="itemFilled" class="form-check-input col-8 ml-3"></div>
+        <div class="form-group row justify-content-between"><label for="itemSubstituted" class="col-4">Substituted</label><input type="checkbox" id="itemSubstituted" class="form-check-input col-8 ml-3"></div>
+        <div class="form-group row justify-content-between"><label for="itemOriginalPrNum" class="col-4">Orig. PLU</label><input type="text" class="form-control contrast col-8" id="itemOriginalPrNum"></div>
+        <div class="form-group row justify-content-between"><label for="itemFinalPrice" class="col-4">Final Price</label><input type="text" class="form-control contrast col-8" id="itemFinalPrice"></div>
+        <div class="form-group row justify-content-between"><label for="itemFinalWeight" class="col-4">Final Weight</label><input type="text" class="form-control contrast col-8" id="itemFinalWeight"></div>
+        <div class="form-group row justify-content-between"><label for="itemFinalCount" class="col-4">Final Count</label><input type="text" class="form-control contrast col-8" id="itemFinalCount"></div>
+        <div class="form-group row justify-content-between"><label for="itemAllowSubstitutions" class="col-4">Substitution Allowed</label><input type="checkbox" id="itemAllowSubstitutions" class="form-check-input col-8 ml-3"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="editModal-submit" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-primary" id="editModal-lookup" onmouseup="lookupItem();">Lookup</button>
+        <button type="button" class="btn btn-primary" id="editModal-back" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1>Order Editor</h1>
+
+<div class="form-group row justify-content-between">
+<label for="OrderNumber" class="col-3" style="font-size: x-large; white-space: nowrap;">Order Number</label>
+<input type="text" class="form-control form-control-lg contrast col-3" id="OrderNumber" placeholder="">
+
+<button type="button" class="col-12 btn btn-primary btn-lg" id="lookup" onmouseup="lookup()">Lookup</button>
+</div>
+
+<hr />
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="order-tab" data-toggle="tab" href="#order" role="tab">order</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab">details</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active container" id="order" role="tabpanel">
+  
+<div class="form-group row justify-content-between">
+<label for="OrderStatus" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Status</label>
+<select id="OrderStatus" class="col-4" >
+  <option value="0">Received</option>
+  <option value="1" selected>Waiting</option>
+  <option value="2">In progress</option>
+  <option value="3">Ready</option>
+  <option value="4">Delivered</option>
+  <option value="5">Cancelled</option>
+  <option value="6">Rejected</option>
+  <option value="7">Error</option>
+</select>
+</div>
+
+<div class="form-group row justify-content-between">
+<label for="OrderOrigin" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Origin</label>
+<select id="OrderOrigin" class="col-4">
+  <option value="1" selected>Online</option>
+  <option value="2">Kiosk</option>
+  <option value="3">Number</option>
+</select>
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="OrderInstructions" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Instructions</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="OrderDetails" value="">
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="OrderCreation" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Creation</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="OrderCreation" value="2021-01-02 03:04:05.0000">
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="OrderPickup" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Pickup</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="OrderPickup" value="2021-01-02 03:07:09.0000">
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="OrderFinish" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Finish</label>
+  <input type="text" class="form-control form-control-lg col-7" id="OrderFinish" value="" readonly>
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="OrderStart" class="col-4" style="font-size: x-large; white-space: nowrap;">Order Start</label>
+  <input type="text" class="form-control form-control-lg col-7" id="OrderStart" value="" readonly>
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="CustomerName" class="col-4" style="font-size: x-large; white-space: nowrap;">Customer Name</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="CustomerName" value="Some Person">
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="Operators" class="col-4" style="font-size: x-large; white-space: nowrap;">Operators</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="Operators" value="" readonly>
+</div>
+
+<div class="form-group row justify-content-between">
+  <label for="ItemCount" class="col-4" style="font-size: x-large; white-space: nowrap;">Item Count</label>
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="ItemCount" value="" readonly>
+</div>
+
+<div class="form-group">
+<div class="form-check-inline">
+<input type="checkbox" id="AllowSubstitutions" class="form-check-input" checked="checked">
+<label for="AllowSubstitutions" class="form-check-label">Allow item substitutions</label>
+</div>
+</div>
+
+
+<div class="form-group row justify-content-between">
+  <label for="OrderSMS" class="col-4" style="font-size: x-large; white-space: nowrap;">Order SMS</label>
+  <!-- N.B. in the US, phone numbers 555-0100 through 555-0199 are reserved for fake use in all area codes -->
+  <input type="text" class="form-control form-control-lg contrast-readonly col-7" id="OrderSMS" value="9375550100">
+</div>
+
+<button type="button" class="btn btn-danger btn-lg" id="orderSubmit" onmouseup="orderSubmit()">Change/Create</button>
+<small class="form-text">This will update an existing order, or create an order if no order exists with that combination of department and order number.</small>
+
+</div>
+
+<div class="tab-pane fade container" id="details" role="tabpanel">
+
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>OrderNumId</th>
+<th>Dept</th>
+<th>Zone</th>
+<th>PLU</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="detailsTable">
+<tr id="detailsEmpty" style="display: none;">
+<td class="itemOrderNumId">0</td>
+<td class="itemDeptNum">0</td>
+<td class="itemZoneNum">0</td>
+<td class="itemPrNum">0</td>
+<td>
+<button type="button" class="btn btn-primary btn-lg" onmouseup="editItem(this)">Edit</button>
+<button type="button" class="btn btn-danger btn-lg" onmouseup="removeItem(this)">Remove</button>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<button type="button" class="btn btn-primary btn-lg" onmouseup="addItem()">Add New Item</button>
+
+</div>
+
+</div>
+</div>

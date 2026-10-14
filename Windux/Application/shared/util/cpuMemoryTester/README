@@ -1,0 +1,15 @@
+pip3 install fabric2
+pip3 install netaddr
+sudo pip3 install scapy
+pip3 install patchwork
+pip3 install pexpect-serial
+
+# serial port update of uboot with micro SD card that has u-boot-itw.imx file in / directory
+# After each command below wait for > prompt then send next command
+$ sf probe
+$ sf erase 0x0 0xc0000
+$ sf erase 0xc0000 0x2000
+$ mmc dev 1  # could dev 0
+$ ext2load mmc 1 10800000 u-boot-itw.imx # renmame u-boot-itw.imx to u-boot.imx and put in /
+$ sf write 10800000 0x400 $filesize
+$ reset

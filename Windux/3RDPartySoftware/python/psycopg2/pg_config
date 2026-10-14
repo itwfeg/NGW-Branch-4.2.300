@@ -1,0 +1,66 @@
+#!/bin/sh
+# Fake pg_config
+#  Postgresql normally builds a configuration binary, which
+# utterly fails in a cross environment.  Instead, try to
+# salvage some of the build-time options of postgresql
+# inside of a cross-platform script.
+
+# Import common build options
+export CC=armv7l-timesys-linux-gnueabihf-gcc AR=armv7l-timesys-linux-gnueabihf-ar LD=armv7l-timesys-linux-gnueabihf-ld NM=armv7l-timesys-linux-gnueabihf-nm AS=armv7l-timesys-linux-gnueabihf-as RANLIB=armv7l-timesys-linux-gnueabihf-ranlib STRIP=armv7l-timesys-linux-gnueabihf-strip CXX=armv7l-timesys-linux-gnueabihf-g++
+
+export PKG_CONFIG_PATH=/opt/hb6mxd_combo/toolchain/lib/pkgconfig:/opt/hb6mxd_combo/toolchain/share/pkgconfig
+export PKG_CONFIG_LIBDIR=/opt/hb6mxd_combo/toolchain/lib
+export PKG_CONFIG=/opt/hb6mxd_combo/toolchain/bin/pkg-config
+export CONFIG_SHELL=/bin/bash
+export LD_LIBRARY_PATH=/opt/hb6mxd_combo/toolchain/lib
+
+# Extracted values from config.log
+CPPFLAGS=' -D_GNU_SOURCE -I/opt/hb6mxd_combo/toolchain/include/libxml2 '
+CFLAGS='-Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -Os -g -pipe'
+LDFLAGS=' -L/opt/hb6mxd_combo/toolchain/lib '
+LDFLAGS_EX=''
+LDFLAGS_SL=''
+LIBS='-lxslt -lxml2 -lssl -lcrypto -lz -lreadline -lrt -lcrypt -ldl -lm '
+
+pc="$PKG_CONFIG libpq"
+
+for opt in $@; do
+ case $opt in
+ --cc)
+  echo $CC
+  ;;
+ --*includedir*)
+  $pc --cflags | sed -re 's/^.*-I([^ ]+).*$/\1/'
+  ;;
+ --*libdir*)
+  $pc --libs | sed -re 's/^.*-L([^ ]+).*$/\1/'
+  ;;
+ --configure)
+  echo ZIC=/usr/sbin/zic pgac_cv_type_locale_t=no --with-openssl --with-libxml --with-libxslt --with-python PYTHON=/opt/hb6mxd_combo/toolchain/bin/python python_includespec=-I/opt/hb6mxd_combo/toolchain/include/python3.6m python_libdir=/opt/hb6mxd_combo/toolchain/lib python_configdir=/opt/hb6mxd_combo/toolchain/lib/python3.6/config-3.6m-arm-linux-gnueabihf python_enable_shared=1
+  ;;
+ --cppflags)
+  echo $CPPFLAGS
+  ;;
+ --cflags)
+  echo $CFLAGS
+  ;;
+ --cflags_sl)
+  echo $CFLAGS_SL
+  ;;
+ --ldflags)
+  echo $LDFLAGS
+  ;;
+ --ldflags_ex)
+  echo $LDFLAGS_EX
+  ;;
+ --ldflags_sl)
+  echo $LDFLAGS_SL
+  ;;
+ --libs)
+  echo $LIBS
+  ;;
+ --version)
+  echo 9.4.9
+  ;;
+ esac
+done

@@ -1,0 +1,8 @@
+Package: hobart-fbvnc
+Version: 1.0-1
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides VNC support for framebuffer
+ devices.
+

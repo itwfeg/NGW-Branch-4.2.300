@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="58431126-1319-42b0-802a-7b6bf78e116e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="adservice" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>threshold</find>
+      <find>extract</find>
+      <find>tarball</find>
+      <find>mqtt</find>
+      <find>apps</find>
+      <find>make-debian.sh</find>
+      <find>fpplitewebapp</find>
+      <find>hbtemp</find>
+      <find>python build_fea</find>
+      <find>.deb</find>
+      <find>tar --c</find>
+      <find>tar --ex</find>
+      <find>bluenica</find>
+      <find>make-debia</find>
+      <find>tar</find>
+      <find>extractTar</find>
+      <find>preinstall</find>
+      <find>make-debian</find>
+      <find>adservice</find>
+      <find>isProductLicensed</find>
+      <find>requests.</find>
+      <find>response status code</find>
+      <find>status_code</find>
+      <find>setup_en</find>
+      <find>log_level</find>
+      <find>installFeature</find>
+      <find>features</find>
+      <find>filter_files</find>
+      <find>logging_level</find>
+      <find>set_active</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>AD_SERVICE</replace>
+      <replace>AD SERVICE</replace>
+      <replace>WEB SERVICE</replace>
+      <replace>logger.</replace>
+      <replace>self.logger.</replace>
+      <replace>logging.</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/../..</dir>
+      <dir>$PROJECT_DIR$/../../../Application/shared/sessionHandler/python</dir>
+      <dir>$PROJECT_DIR$/../../../Application</dir>
+    </dirStrings>
+  </component>
+  <component name="ProjectId" id="1cELubk9Z1ufvPjJglC4d67mI07" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myShowDebugConsoleByDefault" value="true" />
+  </component>
+  <component name="RunManager" selected="Python.ad_service testing log-file">
+    <configuration name="ad_service config-file not found" type="PythonConfigurationType" factoryName="Python">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="--config-file ad_service_not_found.cfg" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ad_service help" type="PythonConfigurationType" factoryName="Python">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="--help" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ad_service no arguments" type="PythonConfigurationType" factoryName="Python">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ad_service testing log-file" type="PythonConfigurationType" factoryName="Python">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="--config-file ad_service_testing.cfg --log-file ad_service_test.log" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ad_service testing" type="PythonConfigurationType" factoryName="Python">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="--config-file ad_service_testing.cfg" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ad_service walmart" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="adservice" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ad_service.py" />
+      <option name="PARAMETERS" value="--config-file ad_service_walmart.cfg" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.ad_service testing" />
+      <item itemvalue="Python.ad_service testing log-file" />
+      <item itemvalue="Python.ad_service no arguments" />
+      <item itemvalue="Python.ad_service config-file not found" />
+      <item itemvalue="Python.ad_service help" />
+      <item itemvalue="Python.ad_service walmart" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ad_service walmart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="58431126-1319-42b0-802a-7b6bf78e116e" name="Default Changelist" comment="" />
+      <created>1568834347008</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568834347008</updated>
+      <workItem from="1568834348150" duration="4110000" />
+      <workItem from="1568843680467" duration="8068000" />
+      <workItem from="1568909340228" duration="1018000" />
+      <workItem from="1568910380779" duration="13378000" />
+      <workItem from="1569329970313" duration="34880000" />
+      <workItem from="1569437740723" duration="6951000" />
+      <workItem from="1569500229093" duration="9917000" />
+      <workItem from="1569586066980" duration="15659000" />
+      <workItem from="1569847708879" duration="9732000" />
+      <workItem from="1569873620917" duration="53000" />
+      <workItem from="1569873693696" duration="5849000" />
+      <workItem from="1569931158453" duration="18500000" />
+      <workItem from="1570017439685" duration="14942000" />
+      <workItem from="1570191385050" duration="16199000" />
+      <workItem from="1570448927364" duration="781000" />
+      <workItem from="1570453446234" duration="9614000" />
+      <workItem from="1570558343673" duration="84000" />
+      <workItem from="1570558444043" duration="62000" />
+      <workItem from="1570558522439" duration="6969000" />
+      <workItem from="1570624757841" duration="5000" />
+      <workItem from="1570719229609" duration="15570000" />
+      <workItem from="1570795155504" duration="10343000" />
+      <workItem from="1571053609009" duration="11958000" />
+      <workItem from="1571140221873" duration="25707000" />
+      <workItem from="1571312822088" duration="10968000" />
+      <workItem from="1571330635283" duration="9158000" />
+      <workItem from="1571403391194" duration="18647000" />
+      <workItem from="1571778372449" duration="4073000" />
+      <workItem from="1571821945742" duration="15446000" />
+      <workItem from="1571918533779" duration="2227000" />
+      <workItem from="1572025624598" duration="855000" />
+      <workItem from="1572982820914" duration="5500000" />
+      <workItem from="1573068510881" duration="4932000" />
+      <workItem from="1573156834784" duration="43000" />
+      <workItem from="1573242980487" duration="2916000" />
+      <workItem from="1573403951326" duration="1055000" />
+      <workItem from="1590089030931" duration="1158000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/filebox.py</url>
+          <line>149</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../../../../../HTe/branch-walmart-cake-label/smBackend/scpCmd.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ad_service.py</url>
+          <line>594</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/adservice$ad_service_testing_log_file.coverage" NAME="ad_service testing log-file Coverage Results" MODIFIED="1571342998730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/adservice$ad_service_help.coverage" NAME="ad_service help Coverage Results" MODIFIED="1571326175984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/adservice$scpCmd.coverage" NAME="scpCmd Coverage Results" MODIFIED="1570739470384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../../../../../HTe/branch-walmart-cake-label/smBackend" />
+    <SUITE FILE_PATH="coverage/adservice$ad_service_no_arguments.coverage" NAME="ad_service no arguments Coverage Results" MODIFIED="1571326541028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/adservice$ad_service_config_file_not_found.coverage" NAME="ad_service config-file not found Coverage Results" MODIFIED="1571325736196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/adservice$ad_service.coverage" NAME="ad_service walmart Coverage Results" MODIFIED="1571325649818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>advertisement_filenames[i]['type']</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

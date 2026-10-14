@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Node Controller Tester
+Comment=ITW Hobart Node Controller Tester
+Exec=python3 /home/pi/wrapper_node_tester/wrapperNodeTester.py
+Icon=/home/pi/wrapper_node_tester/wrapperNodeTester.png
+Path=/home/pi/wrapper_node_tester
+Terminal=False
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true

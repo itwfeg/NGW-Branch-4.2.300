@@ -1,0 +1,187 @@
+<script type="text/javascript">
+$(document).ready(function(){
+
+	//------------------------------
+	// DYNAMIC SHOW/HIDE BASED ON LICENSE TYPE
+
+    $("#id_type").change(function(){
+
+        $( "#id_type option:selected").each(function() {
+
+            if($(this).attr("value")=="HTE") {
+                $("#id_allotment").prop("readonly", "True");
+                $("#id_allotment").spinner("option", "max", 1);
+                $("#id_allotment").spinner().val(1);
+
+                $("#scale_serial_type_selection").hide();
+                $("#hte_serial_type_selection").show();
+
+                $("#hte_product_names").show();
+                $("#scale_product_names").hide();
+            }
+
+            if($(this).attr("value")=="SCALE") {
+                $("#id_allotment").removeAttr("readonly");
+                $("#id_allotment").spinner("option", "max", 99999);
+
+                $("#hte_serial_type_selection").hide();
+                $("#scale_serial_type_selection").show();
+
+                $("#hte_product_names").hide();
+                $("#scale_product_names").show();
+            }
+        });
+    }).change();
+
+    //------------------------------
+    // DIV ACCORDION STYLING
+
+    $("#accordion").accordion();
+
+    //------------------------------
+    // FORCE NUMERIC ONLY
+
+    jQuery.fn.ForceNumericOnly = function() {
+	    return this.each(function() {
+			$(this).keydown(function(e) {
+	    		var key = e.charCode || e.keyCode || 0;
+	    		// allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+	    		// home, end, period, and numpad decimal
+	    		return (
+			        key == 8 || 
+			        key == 9 ||
+			        key == 13 ||
+			        key == 46 ||
+			        key == 110 ||
+			        key == 190 ||
+			        (key >= 35 && key <= 40) ||
+			        (key >= 48 && key <= 57) ||
+			        (key >= 96 && key <= 105));
+			}); // } this.keydown()
+	    }); // } this.each()
+	}; // } ForceNumericOnly()
+
+	//------------------------------
+	// TIMEOUT SPINNER STYLING
+
+	var timeout = $("#id_timeout");
+	var allotment = $("#id_allotment");
+
+	timeout.ForceNumericOnly();
+	allotment.ForceNumericOnly();
+
+	{% if form.timeout.errors %}
+		timeout_spinner = timeout.spinner({step: 30, min: 0, max: 360});
+		timeout_spinner.parent().css("border", "solid 2px red");
+	{% else %}
+		timeout_spinner = timeout.spinner({step: 30, min: 0, max: 360});
+	{% endif %}
+
+	timeout_spinner.val(0);
+
+	timeout.tooltip({content: "Timeout can only be a multiple of 30, use 0 for no timeout", items: "#id_timeout"});
+
+	//------------------------------
+	// ALLOTMENT SPINNER STYLING
+
+	{% if form.allotment.errors %}
+		allotment_spinner = allotment.spinner({min: 1});
+		allotment_spinner.parent().css("border", "solid 2px red");
+	{% else %}
+		allotment.spinner({min: 1});
+	{% endif %}
+
+	//------------------------------
+	// SUBMIT BUTTON STYLING
+
+	var submit = $("#form_submit");
+	submit.button();
+
+	//------------------------------
+	// CSID TOOLTIP STYLING
+
+	var csid = $("#id_csid");
+	var csid_tooltip = "The customer should provide this to you, otherwise";
+	csid_tooltip += " there is a standalone executable that retrieves it";
+	csid.tooltip({content: csid_tooltip, items: "#id_csid"});
+
+	//------------------------------
+	// DYNAMIC SHOW/HIDE OF PURCHASE ORDER FIELD
+
+	if (!$("#id_purchase_license").is(":checked")) {
+		$("#purchase_order_row").hide();
+	}
+
+	$("#id_purchase_license").change(function() {
+		if($(this).is(":checked")) {
+			$("#purchase_order_row").show();
+		}
+
+		else {
+			$("#purchase_order_row").hide();
+		}
+	}); // } $("#id_purchase_license").change()
+
+	//------------------------------
+	// DYNAMIC SHOW/HIDE OF IP-ADDRESS/USB SERIAL FIELD
+
+	$("#scale_id_type").change(function() {
+		$("#scale_id_type option:selected").each(function(){
+		     if($(this).attr("value") == "usb_serial") {
+			     $("#ip_address").hide();
+		         $("#ip_address_errors").hide();
+		         $("#usb_serial").show();
+		         $("#usb_serial_errors").show();
+		     }
+
+		     if($(this).attr("value") == "ip_address") {
+			     $("#ip_address").show();
+			     $("#ip_address_errors").show();
+			     $("#usb_serial").hide();
+			     $("#usb_serial_errors").hide();
+			 }
+		}); // } $(#scale_id_type option:selected").each()
+	}); // } $("#scale_id_type").change()
+
+	//------------------------------
+	// SAVE LICENSE BUTTON STYLING AND CLICK CODE
+
+	$("#save_license").button();
+	$("#save_license").click(function(){
+		var license_filename = $("#file_name_input").val();
+		if (license_filename.toLowerCase().indexOf(".lic") < 0) {
+			license_filename += ".lic";
+		}
+	    var license_data = "{% filter escapejs %}{{ license_data }}{% endfilter %}";
+	    var blob = new Blob([license_data], {type: "text/plain;charset=utf-8"});
+	    saveAs(blob, license_filename);
+	}) // } $("#save_license".click()
+
+	//------------------------------
+	// EMAIL LICENSE BUTTON STYLING AND CLICK CODE
+
+	var email_button = $("#email_license");
+	email_button.button();
+
+	email_button.click(function(){
+		var main_form = $("#main_form");
+		var email_address = $("#id_email_address").val();
+		alert('Email sent to ' + email_address);
+		main_form.attr("action", '{% url "LicenseKeyGenerator.views.send_email" %}');
+		main_form.submit();
+	}) // } $("#email_button").click()
+
+	$("#generate_new_button").button();
+
+	//------------------------------
+	// IMPORT REQUEST BUTTON STYLING AND CLICK CODE
+
+	var import_button = $("#import_request");
+    import_button.button();
+
+    import_button.click(function(){
+        $("#request_form").submit();
+    });
+
+}); // } $(document).ready
+</script>

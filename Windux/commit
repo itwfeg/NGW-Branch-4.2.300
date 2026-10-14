@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Script to do automated conditional commits.
+# If there is any problem with the build, the commit 
+# will not work.
+
+# usage:
+# ./commit notes
+# A typical usage:
+# ./commit Made change to foo.c to work with baz.c
+
+cd $HOBART_APP
+cd ..
+
+# We're now in the root dir of the project.
+
+echo "beginning root make"
+make >/dev/null
+if [ $? -eq 0 ] ; then
+    cd $HOBART_APP
+    cd source/app
+    rm chobart_d
+    echo "beginning daemon make"
+    make daemon >/dev/null
+    if [ $? -eq 0 ] ; then
+        echo "make successful.  commit"
+        cd $HOBART_APP
+        echo "SVN commit:"
+        echo "$*"
+        svn update -m "$*"
+    else
+        echo "make daemon failed - not committing."
+    fi 
+else
+    echo "make failed - not committing."
+fi

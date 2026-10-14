@@ -1,0 +1,13 @@
+
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name[en_US]=Return to Scale
+Comment[en_US]=Returns to the scale application
+Exec=/usr/bin/win_cmd.sh show HLX
+Icon[en_US]=www
+Name=Return to Scale
+Comment=Returns to the scale application
+Icon=www

@@ -1,0 +1,36 @@
+You will need the following packages to build:
+$ sudo apt-get install devscripts debhelper dh-autoreconf
+
+Source in the cross toolchain before building.
+
+Build the package from source:
+$ ./make-debian.sh
+
+Package generated is libclio_1.0.0_armhf.deb
+
+After building the first time you will need to install to your local toolchain
+so it can linked against with our projects:
+$ ar x libclio_1.0.0_armhf.deb data.tar.gz
+$ tar -xvf data.tar.gz
+$ sed -i 's,fix=/usr,fix=/opt/hb6mxd_combo/toolchain,g' usr/lib/pkgconfig/clio.pc
+$ sudo cp -RT ./usr /opt/hb6mxd_combo/toolchain/
+$ rm -rf usr
+$ rm data.tar.gz
+
+-------------------------------------------------------------------------------
+
+This package can be built and installed on local system also.
+$ cd libclio-master
+$ dpkg-buildpackage -us -uc -b
+
+Package will be in base folder. To install:
+$ cd ..
+$ sudo dpkg -i libclio_1.0.0_amd64.deb
+
+To uninstall:
+$ sudo dpkg -r libclio
+
+To cleanup after building:
+$ cd libclio-master
+$ git clean -fdx
+

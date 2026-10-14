@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>superChangeProductShelfLife</class>
+ <widget class="QWidget" name="superChangeProductShelfLife">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="hobart::numericLineEdit" name="leShelfLifeDays">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>210</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>14</y>
+     <width>251</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Product Number</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QFrame" name="gbNewProduct">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>360</y>
+     <width>991</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbNewProduct{
+	background-color: rgb(231, 231, 231);
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QRadioButton" name="rbRandomWeight">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>80</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Random Weight</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbByCount">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>160</y>
+      <width>390</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>By Count</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFixedWeight">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>80</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fixed Weight</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="rbFluidOunces">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>160</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fluid Ounces</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butOK">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblcreateNewProductQuestion">
+    <property name="geometry">
+     <rect>
+      <x>132</x>
+      <y>12</y>
+      <width>721</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string notr="true">Product</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="butCancel">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>240</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblDescription">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>74</y>
+     <width>251</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShelfLife">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>200</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Shelf Life</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leProductNumber">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>33</y>
+     <width>171</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDescriptionContent">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>97</y>
+     <width>671</width>
+     <height>89</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductLife">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>270</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Product Life</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leProductLifeDays">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>270</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductLifeHours">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>270</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>hours</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShelfLifeDays">
+   <property name="geometry">
+    <rect>
+     <x>387</x>
+     <y>210</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>days</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductLifeDays">
+   <property name="geometry">
+    <rect>
+     <x>387</x>
+     <y>270</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>days</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShelfLifeHours">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>210</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>hours</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="gbDontPrintCheckBoxes">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>350</y>
+     <width>921</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#gbDontPrintCheckBoxes{
+	background-color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QCheckBox" name="cbDontPrintBestBefore">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>95</y>
+      <width>911</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Don't print best before</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbDontPrintPackedOn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>15</y>
+      <width>911</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Don't print packed on</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbDontPrintSellBy">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>55</y>
+      <width>911</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Don't print sell by</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leShelfLifeHours">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>209</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="leProductLifeHours">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>270</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblProductLifeMins">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>270</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>minutes</string>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="txtShelfLifeMinutes">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>209</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>6</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblShelfLifeMins">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>210</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>19</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>minutes</string>
+   </property>
+  </widget>
+  <widget class="hobart::numericLineEdit" name="txtProductLifeMinutes">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>270</y>
+     <width>71</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="inputMask">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string notr="true"/>
+   </property>
+   <property name="maxLength">
+    <number>6</number>
+   </property>
+   <property name="placeholderText">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <zorder>lblProductLife</zorder>
+  <zorder>lblProductLifeHours</zorder>
+  <zorder>leProductLifeDays</zorder>
+  <zorder>leShelfLifeDays</zorder>
+  <zorder>lblProductNumber</zorder>
+  <zorder>lblDescription</zorder>
+  <zorder>lblShelfLife</zorder>
+  <zorder>leProductNumber</zorder>
+  <zorder>lblDescriptionContent</zorder>
+  <zorder>lblShelfLifeDays</zorder>
+  <zorder>lblProductLifeDays</zorder>
+  <zorder>lblShelfLifeHours</zorder>
+  <zorder>gbDontPrintCheckBoxes</zorder>
+  <zorder>leShelfLifeHours</zorder>
+  <zorder>leProductLifeHours</zorder>
+  <zorder>gbNewProduct</zorder>
+  <zorder>lblProductLifeMins</zorder>
+  <zorder>txtShelfLifeMinutes</zorder>
+  <zorder>lblShelfLifeMins</zorder>
+  <zorder>txtProductLifeMinutes</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>leProductNumber</tabstop>
+  <tabstop>leShelfLifeDays</tabstop>
+  <tabstop>cbDontPrintPackedOn</tabstop>
+  <tabstop>leProductLifeDays</tabstop>
+  <tabstop>rbRandomWeight</tabstop>
+  <tabstop>rbByCount</tabstop>
+  <tabstop>rbFixedWeight</tabstop>
+  <tabstop>rbFluidOunces</tabstop>
+  <tabstop>butCancel</tabstop>
+  <tabstop>butOK</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,6 @@
+Revision history for Perl extension SoftekBarcode.
+
+0.01  Wed Mar 21 14:05:32 2007
+	- original version; created by h2xs 1.23 with options
+		SoftekBarcode.h
+

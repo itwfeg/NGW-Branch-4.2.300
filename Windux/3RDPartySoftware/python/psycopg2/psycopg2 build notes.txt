@@ -1,0 +1,41 @@
+instructions for cross-compiling psycopg2
+=========================================
+this is really messy!  consider these instructions a starting point; python setup.py really doesn't play nicely with cross-compiling
+
+I'm working from psycopg2-2.8.6.tar.gz
+
+you need the toolchain with the correct version of python stuff
+
+edit setup.py where it detects the version, replace this line:
+
+pgversion = pg_config_helper.query("version").split()[1]
+
+with (adjusted for your version):
+
+pgversion = "9.4.9"
+
+in the toolchain, replace pg_config with the file in this directory (basically, fixing up the paths to the cc, ld, etc.)
+
+you may need to add some soft links in the toolchain directories to make sure it can locate everything
+
+I linked arm-linux-gnueabihf to . in toolchain/include
+
+also link python3.8 to python3.6m in toolchain/include (adjust for host and target python versions as needed)
+
+I made a script that manually runs the compiling and linking steps of the C code, which is a tweaked version of the commands setup.py generates; if you run that (c.sh, move it into the psycopg folder, then you can run the setup.py command below and it will wrap everything up
+
+how I did it:
+
+start compiling:
+
+. ~/buildARA.sh && CC=armv7l-timesys-linux-gnueabihf-gcc AR=armv7l-timesys-linux-gnueabihf-ar LD=armv7l-timesys-linux-gnueabihf-ld NM=armv7l-timesys-linux-gnueabihf-nm AS=armv7l-timesys-linux-gnueabihf-as RANLIB=armv7l-timesys-linux-gnueabihf-ranlib STRIP=armv7l-timesys-linux-gnueabihf-strip CXX=armv7l-timesys-linux-gnueabihf-g++ CROSS_COMPILE='yes' PYTHON=/opt/hb6mxd_combo/toolchain/bin/python python_includespec=-I/opt/hb6mxd_combo/toolchain/include/python3.6m python_libdir=/opt/hb6mxd_combo/toolchain/lib python_configdir=/opt/hb6mxd_combo/toolchain/lib/python3.6/config-3.6m-arm-linux-gnueabihf python3 ./setup.py --verbose bdist
+
+this will stop with an error like "couldn't link because wrong format" because it tries to link with x86 gcc
+
+so manually grab the gcc lines and make a script, replace -I/usr/include/python3.8 with -I/opt/hb6mxd_combo/toolchain/include/python3.6m and replace the gcc with the arm crosscompiler one
+then run the setup.py command again to actually package it all up:
+
+. ~/buildARA.sh && CC=armv7l-timesys-linux-gnueabihf-gcc AR=armv7l-timesys-linux-gnueabihf-ar LD=armv7l-timesys-linux-gnueabihf-ld NM=armv7l-timesys-linux-gnueabihf-nm AS=armv7l-timesys-linux-gnueabihf-as RANLIB=armv7l-timesys-linux-gnueabihf-ranlib STRIP=armv7l-timesys-linux-gnueabihf-strip CXX=armv7l-timesys-linux-gnueabihf-g++ CROSS_COMPILE='yes' PYTHON=/opt/hb6mxd_combo/toolchain/bin/python python_includespec=-I/opt/hb6mxd_combo/toolchain/include/python3.6m python_libdir=/opt/hb6mxd_combo/toolchain/lib python_configdir=/opt/hb6mxd_combo/toolchain/lib/python3.6/config-3.6m-arm-linux-gnueabihf python3 ./setup.py --verbose bdist
+
+then edit the resulting tarball to put everything in the right paths with the right names (replace 3.8 with 3.6, replace x86 with armv7l, rename the .so to _psycopg.so, etc.)
+

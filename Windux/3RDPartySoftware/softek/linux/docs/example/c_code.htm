@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">Example 'C' Code</FONT>
+		</p>
+		<P>The following code shows a typical way in which the toolkit can be used in a 'C' 
+			program. The toolkit also includes the source code for the bardecode.c program 
+			and a Makefile to show how you can build your program.</P>
+		<PRE>
+#include "barcode.h"
+
+main(int argc, char *argv[])
+{
+        void *hBarcode ;
+        uint16 i ;
+        char **bar_codes ;
+        char **bar_codes_type ;
+        int bar_count ;
+        int n ;
+
+        hBarcode = STCreateBarCodeSession() ;
+
+        /* Set some properties */
+        i = 0 ;
+        STSetParameter(hBarcode, ST_READ_CODE25, &amp;i) ;
+        i = 1 ;
+        STSetParameter(hBarcode, ST_MULTIPLE_READ, &amp;i) ;
+
+        /* Scan file for barcodes */
+        bar_count = STReadBarCode(hBarcode, "image.tif", 0, &amp;bar_codes, &amp;bar_codes_type) ;
+
+        for (n = 0; n &lt; bar_count; n++)
+        {
+                printf ("Found barcode %s\n", bar_codes[n]) ;
+        }
+
+        /* Free session */
+        STFreeBarCodeSession(hBarcode) ;
+}
+
+		</PRE>
+	</body>
+</html>

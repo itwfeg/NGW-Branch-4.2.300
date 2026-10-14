@@ -1,0 +1,22 @@
+POST_   SEGMENT        
+
+ExamplePciTbl label byte
+        PCITABLE_DEVICE <(bus SHL 8) OR (dev SHL 3) OR func)>, BYTE_SIZE
+        PCITABLE_BYTE registerbyte, data, mask ; comment
+        PCITABLE_END_SERIES
+        PCITABLE_END_TABLE
+
+        ENDSEG ; (POST_)
+
+;       In a routine or procedure somewhere add:
+
+        mov     si, OFFSET POST_GRP:ExamplePciTbl
+        mov     ax, POST_SEG
+        mov     es, ax
+        ASSUME  ES:POST_GRP
+        Rcall   PciWriteTable
+        
+;       In project include file set:
+
+OPTION_PCI_STACKLESS            = 1     ; enable stackless PCI Cfg code in core.
+

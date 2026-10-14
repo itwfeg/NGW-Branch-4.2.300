@@ -1,0 +1,112 @@
+{{extend 'kiosk_layout.html'}}
+
+{{block scripts}}
+<script src="{{=URL('static','js/cart.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_common.js')}}" type="text/javascript" charset="UTF-8"></script>
+<script src="{{=URL('static','js/kiosk_timeout.js')}}" type="text/javascript" charset="UTF-8"></script>
+{{end}}
+
+<div class="modal" id="removeModal" tabindex="-1" role="dialog" data-backdrop="static">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body" id="removeModal-body">
+<h3>Remove this item from the cart?</h3>
+<h3 id="removeItem"></h3>
+</div>
+<div class="row justify-content-around p-2">
+<div class="col"><button type="button" class="btn btn-custom-basics btn-lg btn-block btn-danger" id="removeModal-remove" data-dismiss="modal">Remove</button></div>
+<div class="col"><button type="button" class="btn btn-custom-color btn-lg btn-block" id="removeModal-keep" data-dismiss="modal">Keep</button></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal" id="pickupModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: 40vw;">
+      <div class="modal-header">
+        <h2>Choose Pickup Time</h2>
+      </div>
+      <div class="modal-body" id="pickupModal-body">
+        <div class="form-group row justify-content-between">
+          <!--<label for="phoneModal-phone" class="col-2">Phone Number</label>-->
+          <!--<input type="text" class="form-control form-control-lg col-12" id="phoneModal-phone" placeholder="(___) ___-____">-->
+          <div class="col-1"></div>
+          <select class="form-control form-control-lg col-10" id="pickupModal-times">
+            <option value="0">Loading...</option>
+          </select>
+          <div class="col-1"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-warning btn-custom-basics btn-lg" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-custom-color btn-lg" id="pickupModal-submit" onclick="place_order();">Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="cart-template-row" class="row custom-inverted-thin-border template-div mb-2 cart-row" style="height: 15vh; font-size: 4vh;">
+<div class="col-4" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><div class="name" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Example Item Name (very long example item name that won't fit)</div><div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-style: italic;"><small class="instructions">got Customer instructions which may also be extremely unreasonably long with a lot of stuff in here</small></div></div>
+<div class="col-2 amount" style="top: 50%;
+-moz-transform: translateY(-25%);
+-webkit-transform:translateY(-25%);
+transform: translateY(-25%);
+text-align: center;">7.457 lbs.</div>
+<div class="col-2 subtotal" style="top: 50%;
+-moz-transform: translateY(-25%);
+-webkit-transform:translateY(-25%);
+transform: translateY(-25%);
+text-align: center;">$199.99</div>
+<div class="col-2" style="height:14.5vh;"><button class="btn btn-custom-color btn-custom-basics examine" style="height:14.5vh; width:100%;"><img class="btn-icon no-drag" src="{{=URL('static','images/search_icon.svg')}}" draggable="false" style="height: 100%; width: auto; margin: 0; padding: 1vh;"></button></div>
+<div class="col-2" style="height:100%; max-height: 100%;"><button class="btn btn-block btn-danger btn-custom-basics remove" style="height:14.5vh; width:100%;"><img class="btn-icon no-drag" src="{{=URL('static','images/cancel_icon.svg')}}" draggable="false" style="height: 100%; width: auto; margin: 0; padding: 1vh;"></button></div>
+</div>
+
+<div class="container main-container">
+
+<h1 class="mb-2" style="text-align: center;">Cart</h1>
+
+<div id="cart-container" class="container" style="height: 62vh; overflow-y: scroll; overflow-x: clip; width: 100%; max-width: 90vw;">
+</div>
+
+<div class="row kiosk-button-row justify-content-between">
+<div class="col" onclick="start_over_button();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="prevButton">
+  <g transform="translate(-47,-94)" class="btn-custom-basics warning-btn">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+       d="M 150,122 H 100 V 97 l -50,50 50,50 v -25 h 50 z"/>
+    <text x="74" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Start Over</text>
+  </g>
+</svg>
+</div>
+
+<div class="col"><button class="btn btn-block btn-custom-color btn-custom-basics" onclick="add_more();">Add More</button></div>
+
+<div class="col" id="orderButton" onclick="show_times();">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 105 105"
+   id="addButton">
+  <g transform="translate(-47,-94)" class="bg-success btn-custom-basics">
+    <path
+       style="fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50,122 H 100 V 97 l 50,50 -50,50 V 172 H 50 Z"/>
+    <text x="58" y="152" class="btn-custom-color" style="stroke-width: 0; fill: #fff; font-size: small;">Place Order</text>
+  </g>
+</svg>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+

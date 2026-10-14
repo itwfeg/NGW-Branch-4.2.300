@@ -1,0 +1,42 @@
+HOW TO GENERATE SSL KEY TO START WEB2PY WITH HTTPS
+
+# openssl genrsa -out web_server.key 2048
+Generating RSA private key, 2048 bit long modulus
+..............................................................+++
+..............................................+++
+e is 65537 (0x10001)
+
+# openssl req -new -key web_server.key -out web_server.csr -subj "/C=US/ST=Wisconsin/L=Wisconsin/O=ITW/OU=Pillar Technologies/CN=pillartech.com"
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:Ohio
+Locality Name (eg, city) []:Troy
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:ITW
+Organizational Unit Name (eg, section) []:ITW
+Common Name (e.g. server FQDN or YOUR name) []:ITW
+Email Address []:scott.davis@itwfeg.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:itw
+string is too short, it needs to be at least 4 bytes long
+A challenge password []:remote_gateway_device
+string is too long, it needs to be less than  20 bytes long
+A challenge password []:rgd_server
+An optional company name []:ITW
+
+# openssl x509 -req -days 1825 -in web_server.csr -signkey web_server.key -out web_server.crt
+Signature ok
+subject=/C=US/ST=Ohio/L=Troy/O=ITW/OU=ITW/CN=ITW/emailAddress=scott.davis@itwfeg.com
+Getting Private key
+#
+
+Start web2py with command below
+# python web2py.py -i {ip_address_of_device} -p 443 -a {admin_password} -c web_server.crt -k web_server.key &
+

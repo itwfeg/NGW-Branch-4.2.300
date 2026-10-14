@@ -1,0 +1,82 @@
+commit aca016054885c17d58c41888698761f2e1ce2b39
+Author: Jouni Malinen <jouni.malinen@atheros.com>
+Date:   Mon Dec 13 21:08:53 2010 +0200
+
+    nl80211: Set cipher suites when using user space SME
+    
+    Previously, pairwise and group cipher suites were configured only
+    when kernel SME (nl80211 connect API) was used. However, mac80211
+    needs this information even in the user space SME case for one
+    thing: to disable HT when TKIP/WEP is used. Add
+    NL80211_ATTR_CIPHER_SUITES_PAIRWISE to fix this special case with
+    user space SME. This allows mac80211 to disable HT properly when
+    the AP is configured with configuration that is not allowed.
+
+diff --git a/src/drivers/driver_nl80211.c b/src/drivers/driver_nl80211.c
+index 9bd4061..7db3434 100644
+--- a/src/drivers/driver_nl80211.c
++++ b/src/drivers/driver_nl80211.c
+@@ -4562,6 +4562,50 @@ static int wpa_driver_nl80211_associate(
+ 		NLA_PUT(msg, NL80211_ATTR_IE, params->wpa_ie_len,
+ 			params->wpa_ie);
+ 
++	if (params->pairwise_suite != CIPHER_NONE) {
++		int cipher;
++
++		switch (params->pairwise_suite) {
++		case CIPHER_WEP40:
++			cipher = WLAN_CIPHER_SUITE_WEP40;
++			break;
++		case CIPHER_WEP104:
++			cipher = WLAN_CIPHER_SUITE_WEP104;
++			break;
++		case CIPHER_CCMP:
++			cipher = WLAN_CIPHER_SUITE_CCMP;
++			break;
++		case CIPHER_TKIP:
++		default:
++			cipher = WLAN_CIPHER_SUITE_TKIP;
++			break;
++		}
++		wpa_printf(MSG_DEBUG, "  * pairwise=0x%x\n", cipher);
++		NLA_PUT_U32(msg, NL80211_ATTR_CIPHER_SUITES_PAIRWISE, cipher);
++	}
++
++	if (params->group_suite != CIPHER_NONE) {
++		int cipher;
++
++		switch (params->group_suite) {
++		case CIPHER_WEP40:
++			cipher = WLAN_CIPHER_SUITE_WEP40;
++			break;
++		case CIPHER_WEP104:
++			cipher = WLAN_CIPHER_SUITE_WEP104;
++			break;
++		case CIPHER_CCMP:
++			cipher = WLAN_CIPHER_SUITE_CCMP;
++			break;
++		case CIPHER_TKIP:
++		default:
++			cipher = WLAN_CIPHER_SUITE_TKIP;
++			break;
++		}
++		wpa_printf(MSG_DEBUG, "  * group=0x%x\n", cipher);
++		NLA_PUT_U32(msg, NL80211_ATTR_CIPHER_SUITE_GROUP, cipher);
++	}
++
+ #ifdef CONFIG_IEEE80211W
+ 	if (params->mgmt_frame_protection == MGMT_FRAME_PROTECTION_REQUIRED)
+ 		NLA_PUT_U32(msg, NL80211_ATTR_USE_MFP, NL80211_MFP_REQUIRED);
+diff --git a/wpa_supplicant/sme.c b/wpa_supplicant/sme.c
+index 7312c65..7c4ff12 100644
+--- a/wpa_supplicant/sme.c
++++ b/wpa_supplicant/sme.c
+@@ -352,6 +352,8 @@ void sme_associate(struct wpa_supplicant *wpa_s, enum wpas_mode mode,
+ 	params.wpa_ie = wpa_s->sme.assoc_req_ie_len ?
+ 		wpa_s->sme.assoc_req_ie : NULL;
+ 	params.wpa_ie_len = wpa_s->sme.assoc_req_ie_len;
++	params.pairwise_suite = cipher_suite2driver(wpa_s->pairwise_cipher);
++	params.group_suite = cipher_suite2driver(wpa_s->group_cipher);
+ #ifdef CONFIG_IEEE80211R
+ 	if (auth_type == WLAN_AUTH_FT && wpa_s->sme.ft_ies) {
+ 		params.wpa_ie = wpa_s->sme.ft_ies;

@@ -1,0 +1,11 @@
+Package: hobart-hfpd-app
+Version: 1.0-0
+Priority: optional
+Architecture: armhf
+Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
+Description: This package provides Hands Free Login and Paging
+ Services and Setup.
+ .
+ This package contains the binary and base configuration. For
+ customization please use HTe.
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Modified 7/1/2011 FHA
+export LD_LIBRARY_PATH=/opt/tbupddlx:$LD_LIBRARY_PATH
+export DISPLAY=:0.0
+# Comment in the correct path depending on which users dir it is in
+#/home/administrator/opt/tbupddlx/aidaemon >/dev/null
+/home/hobartservice/opt/tbupddlx/aidaemon >/dev/null
+

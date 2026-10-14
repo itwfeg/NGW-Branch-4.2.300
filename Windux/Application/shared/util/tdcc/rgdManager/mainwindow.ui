@@ -1,0 +1,4237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>954</width>
+    <height>1473</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>950</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Black Box Device Setup Utility</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/images/bbIcon.png</normaloff>:/images/bbIcon.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTabWidget" name="bbConfigTab">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>928</width>
+      <height>550</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>928</width>
+      <height>550</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>931</width>
+      <height>550</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Black Box Configuration</string>
+     </attribute>
+     <widget class="QLineEdit" name="alertsLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>25</x>
+        <y>648</y>
+        <width>461</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+      </property>
+      <property name="inputMask">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true"/>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string notr="true"/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="addHostnameCheckbox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>490</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Select if hostname should be applied to Black Box configuration</string>
+      </property>
+      <property name="text">
+       <string>Hostname</string>
+      </property>
+     </widget>
+     <widget class="QTabWidget" name="BBtabWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>891</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 250);</string>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Networking</string>
+       </attribute>
+       <widget class="QLineEdit" name="leIP">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>46</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>56</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>IP Address</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="leSubnet">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>96</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>-50</x>
+          <y>106</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Subnet Mask</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>157</y>
+          <width>51</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Gateway</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="leGateway">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>147</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lePrimary">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>251</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>261</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Primary DNS</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>313</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Secondary DNS</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="leSecondary">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>303</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="leTertiary">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>354</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>364</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Tertiary DNS</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="wirelessGroupBox">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>40</y>
+          <width>341</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Wireless - Wifi</string>
+        </property>
+        <widget class="QLineEdit" name="SSID">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>20</y>
+           <width>221</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_15">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>91</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>SSID</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_16">
+         <property name="geometry">
+          <rect>
+           <x>1</x>
+           <y>69</y>
+           <width>101</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Security
+Method</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="securityCombo">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>70</y>
+           <width>221</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox#securityCombo{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+         </property>
+         <property name="maxVisibleItems">
+          <number>15</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::InsertAtBottom</enum>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>OPEN</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA-Personal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA EAP-TLS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA-Enterprise (PEAP)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA-Enterprise (LEAP)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA2-Personal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA2 EAP-TLS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA2-Enterprise (PEAP)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>WPA2-Enterprise (LEAP)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>802.1X (PEAP)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>802.1X (LEAP)</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="label_17">
+         <property name="geometry">
+          <rect>
+           <x>1</x>
+           <y>119</y>
+           <width>101</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Encryption</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="encryptionCombo">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>120</y>
+           <width>221</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox#encryptionCombo{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>WEP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>170</y>
+           <width>321</width>
+           <height>211</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Authentication</string>
+         </property>
+         <widget class="QFrame" name="wpaPassphraseFrame">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>3</y>
+            <width>321</width>
+            <height>201</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(234, 234, 234);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <widget class="QLabel" name="label_18">
+           <property name="geometry">
+            <rect>
+             <x>14</x>
+             <y>58</y>
+             <width>121</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">WPA Passphrase</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="WPAPassphrase">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>83</y>
+             <width>301</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="WPAShowPassphrase">
+           <property name="geometry">
+            <rect>
+             <x>175</x>
+             <y>59</y>
+             <width>131</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Show Passphrase</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QFrame" name="openWEPframe">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>3</y>
+            <width>320</width>
+            <height>201</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(234, 234, 234);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <widget class="QLineEdit" name="WEPKey1">
+           <property name="geometry">
+            <rect>
+             <x>43</x>
+             <y>57</y>
+             <width>271</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="WEPShowKeys">
+           <property name="geometry">
+            <rect>
+             <x>44</x>
+             <y>34</y>
+             <width>121</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Show Keys</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="wepKey1Radio">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>7</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="wepKey2Radio">
+           <property name="geometry">
+            <rect>
+             <x>158</x>
+             <y>7</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="wepKey3Radio">
+           <property name="geometry">
+            <rect>
+             <x>219</x>
+             <y>7</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>3</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="wepKey4Radio">
+           <property name="geometry">
+            <rect>
+             <x>274</x>
+             <y>7</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>4</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_19">
+           <property name="geometry">
+            <rect>
+             <x>3</x>
+             <y>9</y>
+             <width>81</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Default Key:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_20">
+           <property name="geometry">
+            <rect>
+             <x>-4</x>
+             <y>60</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Key 1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="WEPKey2">
+           <property name="geometry">
+            <rect>
+             <x>43</x>
+             <y>91</y>
+             <width>271</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_21">
+           <property name="geometry">
+            <rect>
+             <x>-4</x>
+             <y>94</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Key 2</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="WEPKey3">
+           <property name="geometry">
+            <rect>
+             <x>43</x>
+             <y>126</y>
+             <width>271</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_22">
+           <property name="geometry">
+            <rect>
+             <x>-4</x>
+             <y>129</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Key 3</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="WEPKey4">
+           <property name="geometry">
+            <rect>
+             <x>43</x>
+             <y>162</y>
+             <width>271</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_23">
+           <property name="geometry">
+            <rect>
+             <x>-4</x>
+             <y>165</y>
+             <width>41</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Key 4</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QFrame" name="eapFrame">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>3</y>
+            <width>320</width>
+            <height>201</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(234, 234, 234);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <widget class="QLineEdit" name="eapUsername">
+           <property name="geometry">
+            <rect>
+             <x>13</x>
+             <y>61</y>
+             <width>291</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="eapShowPassword">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>98</y>
+             <width>121</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Show Password</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_30">
+           <property name="geometry">
+            <rect>
+             <x>-3</x>
+             <y>40</y>
+             <width>101</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">EAP Username</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="eapPassword">
+           <property name="geometry">
+            <rect>
+             <x>13</x>
+             <y>119</y>
+             <width>291</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_31">
+           <property name="geometry">
+            <rect>
+             <x>-4</x>
+             <y>99</y>
+             <width>101</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">EAP Password</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QFrame" name="tlsFrame">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>3</y>
+            <width>320</width>
+            <height>201</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(239, 239, 239);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <widget class="QCheckBox" name="tlsShowPassword">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>141</y>
+             <width>121</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Show Password</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_32">
+           <property name="geometry">
+            <rect>
+             <x>13</x>
+             <y>27</y>
+             <width>191</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Trusted Root Certificate (pem)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_33">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>86</y>
+             <width>201</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string notr="true">Client Certificate (p12 or pfx)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="viewClientCertBut">
+           <property name="geometry">
+            <rect>
+             <x>280</x>
+             <y>74</y>
+             <width>31</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/resources/zoom_32.png</normaloff>:/resources/zoom_32.png</iconset>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="viewTrustedRootCertBut">
+           <property name="geometry">
+            <rect>
+             <x>280</x>
+             <y>14</y>
+             <width>31</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/resources/zoom_32.png</normaloff>:/resources/zoom_32.png</iconset>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_24">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>143</y>
+             <width>141</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Client Key Password</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="tlsCLientPassword">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>165</y>
+             <width>301</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="chooseRootCertBut">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>47</y>
+             <width>261</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Choose Root Certificate File</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="chooseClientCertBut">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>107</y>
+             <width>261</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Choose Client Certificate File</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_28">
+           <property name="geometry">
+            <rect>
+             <x>67</x>
+             <y>2</y>
+             <width>190</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Click filenames to change</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="deleteRoot">
+           <property name="geometry">
+            <rect>
+             <x>279</x>
+             <y>47</y>
+             <width>31</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="deleteClient">
+           <property name="geometry">
+            <rect>
+             <x>279</x>
+             <y>107</y>
+             <width>31</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QLabel" name="step2Label">
+         <property name="geometry">
+          <rect>
+           <x>112</x>
+           <y>0</y>
+           <width>171</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid rgb(170,0,0);
+background:white;
+color: rgb(170, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>You must enter an SSID</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="step2GraphicsView">
+         <property name="geometry">
+          <rect>
+           <x>18</x>
+           <y>29</y>
+           <width>41</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(170, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>*</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="frame">
+        <property name="geometry">
+         <rect>
+          <x>182</x>
+          <y>21</y>
+          <width>321</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QRadioButton" name="staticIPRadio">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>0</y>
+           <width>95</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Static IP</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="DHCPRadio">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>61</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>DHCP</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="frame_2">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>4</y>
+          <width>341</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QRadioButton" name="wiredRadio">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>4</y>
+           <width>91</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Wired</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="wirelessRadio">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>4</y>
+           <width>90</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Wireless</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="advancedWirelessBut">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>-1</y>
+           <width>101</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Advanced</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="frame_3">
+        <property name="geometry">
+         <rect>
+          <x>157</x>
+          <y>216</y>
+          <width>341</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QRadioButton" name="automaticDNSRadio">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>7</y>
+           <width>161</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Automatic DNS</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="manualDNSRadio">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>7</y>
+           <width>161</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Manual DNS</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="advancedWirelessFrame">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>440</y>
+          <width>890</width>
+          <height>430</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(233, 234, 234);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QGroupBox" name="gbWirelessChannel">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>331</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#gbWirelessChannel{
+	border: 3px solid rgb(139,209,0);
+	border-radius: 8px;
+    color: rgb(0,0,0);
+	margin-top: 8px;
+ 
+	background-color: rgb(255,255,255);
+
+}
+QGroupBox::title {
+     subcontrol-origin: margin;
+     subcontrol-position: top center; /* position at the top center */
+     padding: 0 3px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #FF0ECE, stop: 1 #FFFFFF);
+	background: rgb(0, 16, 24);
+	color: rgb(255,255,255);
+	border: 2px solid rgb(139,209,0);
+	border-radius: 4px;
+ }</string>
+         </property>
+         <property name="title">
+          <string>Channel</string>
+         </property>
+         <widget class="QComboBox" name="advancedWirelessChannelCombo">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>311</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox#advancedWirelessChannelCombo{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+          <item>
+           <property name="text">
+            <string>Auto : Roaming</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Channel : 2.412 GHz</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QGroupBox" name="coverupgbChannel">
+          <property name="geometry">
+           <rect>
+            <x>3</x>
+            <y>19</y>
+            <width>325</width>
+            <height>49</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(143, 143, 143, 218);
+</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+          <widget class="QLabel" name="label_29">
+           <property name="geometry">
+            <rect>
+             <x>3</x>
+             <y>12</y>
+             <width>321</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(0,0,0,0%);</string>
+           </property>
+           <property name="text">
+            <string>Disabled for Wired Connections</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="gbLinkRate">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>110</y>
+           <width>331</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#gbLinkRate{
+	border: 3px solid rgb(139,209,0);
+	border-radius: 8px;
+    color: rgb(0,0,0);
+	margin-top: 8px;
+ 
+	background-color: rgb(255,255,255);
+
+}
+QGroupBox::title {
+     subcontrol-origin: margin;
+     subcontrol-position: top center; /* position at the top center */
+     padding: 0 3px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #FF0ECE, stop: 1 #FFFFFF);
+	background: rgb(0, 16, 24);
+	color: rgb(255,255,255);
+	border: 2px solid rgb(139,209,0);
+	border-radius: 4px;
+ }</string>
+         </property>
+         <property name="title">
+          <string>Link Rate</string>
+         </property>
+         <widget class="QComboBox" name="advancedWirelessLinkRateCombo">
+          <property name="geometry">
+           <rect>
+            <x>13</x>
+            <y>25</y>
+            <width>210</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox#advancedWirelessLinkRateCombo{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Automatic</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1 Mbps</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>11 Mbps - Mode B</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QCheckBox" name="advancedWirelessAutoLinkRateCheckBox">
+          <property name="geometry">
+           <rect>
+            <x>236</x>
+            <y>24</y>
+            <width>81</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Auto</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="gbDNSSuffixes">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>190</y>
+           <width>331</width>
+           <height>210</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#gbDNSSuffixes{
+	border: 3px solid rgb(139,209,0);
+	border-radius: 8px;
+    color: rgb(0,0,0);
+	margin-top: 8px;
+ 
+	background-color: rgb(255,255,255);
+
+}
+QGroupBox::title {
+     subcontrol-origin: margin;
+     subcontrol-position: top center; /* position at the top center */
+     padding: 0 3px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #FF0ECE, stop: 1 #FFFFFF);
+	background: rgb(0, 16, 24);
+	color: rgb(255,255,255);
+	border: 2px solid rgb(139,209,0);
+	border-radius: 4px;
+ }</string>
+         </property>
+         <property name="title">
+          <string>DNS Suffixes : IPV4 or Hostnames, comma separated</string>
+         </property>
+         <widget class="QLineEdit" name="advancedWirelessDNSSuffix1">
+          <property name="geometry">
+           <rect>
+            <x>15</x>
+            <y>35</y>
+            <width>301</width>
+            <height>42</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="advancedWirelessDNSSuffix2">
+          <property name="geometry">
+           <rect>
+            <x>15</x>
+            <y>97</y>
+            <width>301</width>
+            <height>42</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="advancedWirelessDNSSuffix3">
+          <property name="geometry">
+           <rect>
+            <x>15</x>
+            <y>156</y>
+            <width>300</width>
+            <height>42</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="gbCustomSettings">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>20</y>
+           <width>500</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Custom Network Settings</string>
+         </property>
+         <widget class="QGroupBox" name="gbWirelessDriver">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>20</y>
+            <width>441</width>
+            <height>111</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox#gbWirelessDriver{
+	border: 3px solid rgb(139,209,0);
+	border-radius: 8px;
+    color: rgb(0,0,0);
+	margin-top: 8px;
+ 
+	background-color: rgb(255,255,255);
+
+}
+QGroupBox::title {
+     subcontrol-origin: margin;
+     subcontrol-position: top center; /* position at the top center */
+     padding: 0 3px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #FF0ECE, stop: 1 #FFFFFF);
+	background: rgb(0, 16, 24);
+	color: rgb(255,255,255);
+	border: 2px solid rgb(139,209,0);
+	border-radius: 4px;
+ }</string>
+          </property>
+          <property name="title">
+           <string>Wireless Driver</string>
+          </property>
+          <widget class="QComboBox" name="advancedWirelessDriverCombo">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>66</y>
+             <width>421</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox#advancedWirelessDriverCombo{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Default Wireless Driver</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Alternate Wireless Driver</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_25">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>22</y>
+             <width>421</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>(This setting is useful in resolving issues with some Access Points.
+Alternate Driver has resolved connectivity with Aruba products.)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignHCenter|Qt::AlignTop</set>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="coverupgbWirelessDriver">
+           <property name="geometry">
+            <rect>
+             <x>3</x>
+             <y>20</y>
+             <width>435</width>
+             <height>88</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(143, 143, 143, 218);
+</string>
+           </property>
+           <property name="title">
+            <string/>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+           <widget class="QLabel" name="label_35">
+            <property name="geometry">
+             <rect>
+              <x>2</x>
+              <y>29</y>
+              <width>431</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>9</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(0,0,0,0%);</string>
+            </property>
+            <property name="text">
+             <string>Disabled for Wired Connections</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="advancedWirelessApplyBut">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>360</y>
+           <width>111</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Apply</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="advancedWirelessCancelBut">
+         <property name="geometry">
+          <rect>
+           <x>512</x>
+           <y>360</y>
+           <width>111</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="advancedWirelessRevertDefaultsBut">
+         <property name="geometry">
+          <rect>
+           <x>650</x>
+           <y>360</y>
+           <width>211</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Revert All to Defaults</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="coverupgbLinkRate">
+         <property name="geometry">
+          <rect>
+           <x>23</x>
+           <y>130</y>
+           <width>325</width>
+           <height>48</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(143, 143, 143, 218);
+</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <widget class="QLabel" name="label_34">
+          <property name="geometry">
+           <rect>
+            <x>2</x>
+            <y>13</y>
+            <width>321</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(0,0,0,0%);</string>
+          </property>
+          <property name="text">
+           <string>Disabled for Wired Connections</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Hostname</string>
+       </attribute>
+       <widget class="QLineEdit" name="leHostname">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>178</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="inputMask">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>15</number>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">15 Character Maximum</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>188</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Hostname</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>PillarSync</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>381</width>
+          <height>271</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>MQTT</string>
+        </property>
+        <widget class="QLabel" name="label_43">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>30</y>
+           <width>41</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_44">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>70</y>
+           <width>111</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Broker IP Address</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="pillarSyncMqttEnabledCheckBox">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>30</y>
+           <width>30</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_45">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>120</y>
+           <width>101</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Broker Username</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_46">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>170</y>
+           <width>101</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Broker Password</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_47">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>220</y>
+           <width>71</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Broker Port</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="pillarSyncBrokerIpAddressLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>60</y>
+           <width>191</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+         </property>
+         <property name="inputMask">
+          <string>999.999.999.999</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="pillarSyncBrokerUsernameLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>110</y>
+           <width>191</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+         </property>
+         <property name="maxLength">
+          <number>12</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>12 Character Maximum</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="pillarSyncBrokerPasswordLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>160</y>
+           <width>191</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+         </property>
+         <property name="maxLength">
+          <number>20</number>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>20 Character Maximum</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="pillarSyncBrokerPortLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>210</y>
+           <width>51</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+         </property>
+         <property name="inputMask">
+          <string>9999</string>
+         </property>
+         <property name="text">
+          <string>1883</string>
+         </property>
+         <property name="maxLength">
+          <number>4</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="placeholderText">
+          <string>4 Digit Maximum</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLabel" name="label_49">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>50</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Sample Frequency (seconds)</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="pillarSyncSampleFrequencySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>50</y>
+          <width>71</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>30</number>
+        </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Now Serving</string>
+       </attribute>
+       <widget class="QLineEdit" name="masterLink">
+        <property name="geometry">
+         <rect>
+          <x>347</x>
+          <y>73</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>107</x>
+          <y>74</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Master Scale IP Address</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>387</x>
+          <y>115</y>
+          <width>231</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>(Format: IPV4 address)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="nowServingDisplay1IP">
+        <property name="geometry">
+         <rect>
+          <x>347</x>
+          <y>190</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="nowServingDisplay1FormatHelp">
+        <property name="geometry">
+         <rect>
+          <x>387</x>
+          <y>232</y>
+          <width>231</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>(Format: IPV4 address)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="nowServingDisplay1Label">
+        <property name="geometry">
+         <rect>
+          <x>107</x>
+          <y>191</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Now Serving Display 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="nowServingDisplay2Label">
+        <property name="geometry">
+         <rect>
+          <x>105</x>
+          <y>260</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Now Serving Display 2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="nowServingDisplay2IP">
+        <property name="geometry">
+         <rect>
+          <x>345</x>
+          <y>259</y>
+          <width>321</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="nowServingDisplay2FormatHelp">
+        <property name="geometry">
+         <rect>
+          <x>385</x>
+          <y>301</y>
+          <width>231</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>(Format: IPV4 address)</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>(NTP) Network Time Protocol</string>
+       </attribute>
+       <widget class="QLineEdit" name="ntpServerIP">
+        <property name="geometry">
+         <rect>
+          <x>335</x>
+          <y>60</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:white;</string>
+        </property>
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">Enter IPV4 IP Address or Hostname</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>70</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string comment="fsdfdf">NTP Server</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>122</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Update Frequency</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="ntpFrequency">
+        <property name="geometry">
+         <rect>
+          <x>335</x>
+          <y>112</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox#ntpFrequency{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Weekly</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Monthly</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Daylight Savings &amp; Standard Time</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QComboBox" name="ntpDayOfWeek">
+        <property name="geometry">
+         <rect>
+          <x>335</x>
+          <y>164</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox#ntpDayOfWeek{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Sunday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Monday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Tuesday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Wednesday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Thursday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Friday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Saturday</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>175</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Day Of Week</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>157</x>
+          <y>228</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Time of Day</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QTimeEdit" name="ntpTimeOfDay">
+        <property name="geometry">
+         <rect>
+          <x>336</x>
+          <y>218</y>
+          <width>311</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTimeEdit#ntpTimeOfDay{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+        </property>
+        <property name="displayFormat">
+         <string notr="true">hh:mm AP</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="ntpTimezone">
+        <property name="geometry">
+         <rect>
+          <x>197</x>
+          <y>293</y>
+          <width>451</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox#ntpTimezone{
+	color: black;
+border-radius: 5px;
+border: 1px solid black;
+	background: rgb(238, 255, 211); 
+}</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>271</y>
+          <width>171</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">Timezone</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="removeNTPSettings">
+        <property name="geometry">
+         <rect>
+          <x>345</x>
+          <y>340</y>
+          <width>341</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Remove existing NTP Settings</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="openBBFileName">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>32</y>
+        <width>401</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>MS Sans Serif</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <italic>true</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(85, 170, 0);
+font: italic 12pt &quot;MS Sans Serif&quot;;</string>
+      </property>
+      <property name="text">
+       <string notr="true"/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="addNetworkSetting">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>490</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Select if network settings should be applied to black box device</string>
+      </property>
+      <property name="text">
+       <string>Networking</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="saveFileFrame">
+      <property name="geometry">
+       <rect>
+        <x>497</x>
+        <y>651</y>
+        <width>411</width>
+        <height>100</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#saveFileFrame{
+border-radius: 10px;
+border: 2px solid gray;
+background:white;
+}
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="chooseTargetLabel">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>-7</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string notr="true">Choose a target Hobart Device for this configuration.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame_4">
+       <property name="geometry">
+        <rect>
+         <x>23</x>
+         <y>30</y>
+         <width>361</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QRadioButton" name="blackBoxTarget">
+        <property name="geometry">
+         <rect>
+          <x>37</x>
+          <y>0</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>BlackBox</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="printerTarget">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>0</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Printer</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="scaleTarget">
+        <property name="geometry">
+         <rect>
+          <x>158</x>
+          <y>0</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Scale</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="step1GraphicsView">
+       <property name="geometry">
+        <rect>
+         <x>18</x>
+         <y>29</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(170, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="helpFrame">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>660</y>
+        <width>931</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 21, 31, 255), stop:1 rgba(255, 255, 255, 255));</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_36">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>20</y>
+         <width>911</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>HT Device Setup Utility - Help</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QTextBrowser" name="helpTextBrowser">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>901</width>
+         <height>511</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOn</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="closeHelpBut">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>590</y>
+         <width>121</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(230, 230, 230);</string>
+       </property>
+       <property name="text">
+        <string>Close Help</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="certFrame">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>660</y>
+        <width>941</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 48, 70);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QTextBrowser" name="certTextBrowser">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>60</y>
+         <width>831</width>
+         <height>521</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOn</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOn</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>392</x>
+         <y>590</y>
+         <width>141</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(170, 255, 127);
+color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>Close View</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="createHDConfigurationFileBut">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>480</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Configure the selected networked black box device or save to USB drive</string>
+      </property>
+      <property name="text">
+       <string>Configure</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="configurationMethodComboBox">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>480</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Method of configuring Black Box device</string>
+      </property>
+      <property name="currentText">
+       <string/>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="maxVisibleItems">
+       <number>2</number>
+      </property>
+      <property name="maxCount">
+       <number>2</number>
+      </property>
+      <property name="insertPolicy">
+       <enum>QComboBox::InsertAtCurrent</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_40">
+      <property name="geometry">
+       <rect>
+        <x>505</x>
+        <y>480</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Configuration Method:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="addNTPSetting">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>490</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>NTP</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="loadPushButton">
+      <property name="geometry">
+       <rect>
+        <x>770</x>
+        <y>480</y>
+        <width>51</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string extracomment="Load existing network configuration file"/>
+      </property>
+      <property name="text">
+       <string>Load</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="clearPushbutton">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>480</y>
+        <width>61</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="addPillarSyncCheckbox">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>490</y>
+        <width>70</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PillarSync</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_48">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>470</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string> Settings to Configure:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="addMasterLinkCheckbox">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>490</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Now Serving</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="testingFrame">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>910</y>
+      <width>865</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(170, 255, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>368</y>
+       <width>181</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close Testing Frame</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="testingLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>821</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="plainText">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="areYouSureFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>880</y>
+      <width>931</width>
+      <height>670</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,200);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>206</x>
+       <y>166</y>
+       <width>531</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 44);</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="label_27">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>50</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Are you sure you want
+to edit Advanced settings?</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="areYouSureYes">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>140</y>
+        <width>351</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background: gray;
+color: rgb(255,255,255);</string>
+      </property>
+      <property name="text">
+       <string>Yes, I want to edit Advanced Settings</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="areYouSureNo">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>220</y>
+        <width>351</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+border: 2px solid gray;
+background:gray;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string>No, go back to Main screen</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>931</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <widget class="QListWidget" name="rgdListWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>25</y>
+       <width>381</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>List of all discovered Black Box Devices</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rebootPushButton">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>80</y>
+       <width>62</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Reboot Selected Black Box Device</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/reboot.png</normaloff>:/resources/reboot.png</iconset>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="scanPushButton">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>130</y>
+       <width>62</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Scan Network for Black Box Devices</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/netscan.png</normaloff>:/resources/netscan.png</iconset>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="infoPushButton">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>30</y>
+       <width>62</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Get Selected Black Box Device Version Info</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/resources/info.png</normaloff>:/resources/info.png</iconset>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Device Discovery</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>515</x>
+       <y>0</y>
+       <width>271</width>
+       <height>88</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="ubootVersionLabel">
+        <property name="text">
+         <string>Uboot Version:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="ubootVersionLineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Bootstrap loader version of selected Black Box Device</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="applicationVersionLabel">
+        <property name="text">
+         <string>Application Version:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="applicationVersionLineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Software Application version of the selected Black Box Device</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="oVersionLabel">
+        <property name="text">
+         <string>OS Version:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="osVersionLineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Operating System Version of selected Black Box Device</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>381</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777212</width>
+       <height>15</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Percentage of devices found on network that have been scanned</string>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>0</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_39">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Version:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="versionLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Version number of the Black Box Setup Utility</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QFrame" name="verticalFrame">
+     <property name="geometry">
+      <rect>
+       <x>505</x>
+       <y>100</y>
+       <width>381</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_26">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Software Upgrade</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="softwareUpgradeFilenameLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Software upgrade filename to update selected Black Box device</string>
+          </property>
+          <property name="placeholderText">
+           <string>Software Upgrade Filename</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="selectSoftwareUpgradePushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Select Upgrade File</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/resources/folder.png</normaloff>:/resources/folder.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="softwareUpgradePushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Upgrade Software On Selected Black Box Device</string>
+          </property>
+          <property name="text">
+           <string>Upgrade</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLineEdit" name="startIpLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>195</x>
+       <y>0</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Start IP Address</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>155</x>
+       <y>0</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Range:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="endIpLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>0</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>End IP Address</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>0</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>-</string>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="softwareUpgradeProgressBar">
+     <property name="geometry">
+      <rect>
+       <x>515</x>
+       <y>170</y>
+       <width>356</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="format">
+      <string>%p%</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="setDateTimePushButton">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>45</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Set Date/Time</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="aboutFrame">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>1060</y>
+      <width>361</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(0, 170, 0, 145), stop:0.45 rgba(0, 170, 0, 208), stop:0.477581 rgba(0, 170, 0, 130), stop:0.518717 rgba(171, 255, 74, 130), stop:0.55 rgba(0, 170, 127, 255), stop:0.57754 rgba(0, 170, 0, 130), stop:0.625 rgba(0, 170, 0, 69), stop:1 rgba(255, 255, 0, 69));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 21, 31, 255), stop:1 rgba(255, 255, 255, 255));</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="aboutBigFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>961</width>
+       <height>661</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0, 27, 40, 50);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_38">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>241</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string>Black Box Setup Utility</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="aboutVersion">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>60</y>
+        <width>221</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>17</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255,0);</string>
+      </property>
+      <property name="text">
+       <string>Version 1.0</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>aboutVersion</zorder>
+     <zorder>label_38</zorder>
+    </widget>
+   </widget>
+   <zorder>frame_5</zorder>
+   <zorder>bbConfigTab</zorder>
+   <zorder>testingFrame</zorder>
+   <zorder>areYouSureFrame</zorder>
+   <zorder>aboutFrame</zorder>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string notr="true">HT Device Setup Utility</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <action name="actionHD_Config">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">HD Config</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

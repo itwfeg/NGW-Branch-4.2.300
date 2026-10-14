@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"Cover\" to=\"Chapter 5\" num=\"6\"/></cki>";

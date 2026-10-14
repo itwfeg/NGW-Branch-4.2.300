@@ -1,0 +1,50 @@
+From 5df058e911caacadf3534fc9ee9ce7c47d01fc56 Mon Sep 17 00:00:00 2001
+From: Robert Shade <robert.shade@gmail.com>
+Date: Sun, 11 Nov 2012 14:21:16 +0000
+Subject: [PATCH] dbus: Do not quote scan_freq and freq_list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+scan_freq and freq_list are not parsed by wpa_config_parse_freqs if
+quoted.
+
+Signed-hostap: Robert Shade <robert.shade@gmail.com>
+
+Updated by jklimes@redhat.com to do the same for dbus_old_handlers.c.
+
+Signed-off-by: Jiří Klimeš <jklimes@redhat.com>
+---
+ wpa_supplicant/dbus/dbus_new_handlers.c | 2 +-
+ wpa_supplicant/dbus/dbus_old_handlers.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/wpa_supplicant/dbus/dbus_new_handlers.c b/wpa_supplicant/dbus/dbus_new_handlers.c
+index 6296440..03a8e25 100644
+--- a/wpa_supplicant/dbus/dbus_new_handlers.c
++++ b/wpa_supplicant/dbus/dbus_new_handlers.c
+@@ -192,7 +192,7 @@ DBusMessage * wpas_dbus_error_invalid_args(DBusMessage *message,
+ static const char *dont_quote[] = {
+ 	"key_mgmt", "proto", "pairwise", "auth_alg", "group", "eap",
+ 	"opensc_engine_path", "pkcs11_engine_path", "pkcs11_module_path",
+-	"bssid", NULL
++	"bssid", "scan_freq", "freq_list", NULL
+ };
+ 
+ static dbus_bool_t should_quote_opt(const char *key)
+diff --git a/wpa_supplicant/dbus/dbus_old_handlers.c b/wpa_supplicant/dbus/dbus_old_handlers.c
+index d914697..0413b05 100644
+--- a/wpa_supplicant/dbus/dbus_old_handlers.c
++++ b/wpa_supplicant/dbus/dbus_old_handlers.c
+@@ -886,7 +886,7 @@ out:
+ static const char *dont_quote[] = {
+ 	"key_mgmt", "proto", "pairwise", "auth_alg", "group", "eap",
+ 	"opensc_engine_path", "pkcs11_engine_path", "pkcs11_module_path",
+-	"bssid", NULL
++	"bssid", "scan_freq", "freq_list", NULL
+ };
+ 
+ 
+-- 
+2.1.0
+

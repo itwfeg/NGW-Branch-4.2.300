@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">PrefOccurrence</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When the OCX scans the image for barcode it counts the number of times each 
+			barcode string occurrs. If the count for a string is the same or greater than <B>PrefOccurrence</B>
+			then the barcode string is counted as a positive match. If no string can be 
+			found this way then the OCX looks for strings that occurred with a count of at 
+			least <A href="#MINOCCURRENCE">MinOccurrence</A> and counts these as positive 
+			matches.&nbsp;&nbsp;
+		</P>
+		<P>Default value = &nbsp;&nbsp;&nbsp;5
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_PREF_OCCURRENCE,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_PREF_OCCURRENCE,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Set a value of&nbsp;3&nbsp;for PrefOccurrence&nbsp;<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;3 ;<BR>
+			STSetParameter(hBarcode, ST_PREF_OCCURRENCE,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

@@ -1,0 +1,6 @@
+# List for what hooks need to be loaded by the Apphook manager
+# If certain apphooks do not need to be loaded put "#" in front of them
+# For these changes to take effect a reboot is needed
+# Example of format to load a hook: /usr/lib/libHobartCustomerHookRfid.so
+# The RFID hook will always be installed but disabled by default
+/usr/lib/libHobartCustomerHookRfid.so

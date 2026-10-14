@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <title>Chapter 5</title>
+
+ <link rel="stylesheet" href="../../F35549_Rev_D.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+//window.onpageshow = function(e){alert("hi. - " + e.persisted)};
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+ <meta name="generator" content="Adobe FrameMaker 2017" />
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "5";
+</script>
+ <meta name="brsprev" value="F35549_Rev_D/SupervisorVideos/SupervisorVideos.htm">
+</head>
+
+<body dir="ltr">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+ <div dir="ltr">
+  <!-- <p dir="ltr" class="FM_Chapter_Title">Supervisor Training Videos</p> -->
+  <p dir="ltr" class="FM_Anchor_for_tables">&#160;&#160;&#160;&#160;</p>
+<div width="100%" align="left">
+<p>&nbsp;</p>
+
+<h3 class="TOC-header">Supervisor Training Videos</h3>
+
+<!-- hidden iframe. Setting the src will pop up the video -->
+<iframe id="cont" style="display:none;" src=""></iframe>
+
+<!-- Add function for setting the src attribute of the iframe -->
+<script type="text/javascript">
+
+function setIframeSrc(a) {
+	//alert(a.href);
+
+	var iframe = document.getElementById('cont');
+	iframe.src = a.href;
+
+	return false;
+}
+
+</script>
+
+
+<!-- 
+use the onclick event to call the function and set the iframe src attribute.
+This loads the video player, as expected, without affecting the manual.
+Return false at the end to prevent normal navigation.
+The function reads the href attribute of the anchor, so that attribute must be set.
+The onclick event must be applied to every anchor, but the text is always the same.
+The iframe and "setIframeSrc" function must be present on every video index page.
+
+-->
+<p><a onclick="setIframeSrc(this); return false;" href="../../../../videos/Super_OpScreen_Video.mp4" class="Index">Configuring Operator Display</a></p>
+<p><a onclick="setIframeSrc(this); return false;" href="../../../../videos/Super_Overview_Video.mp4" class="Index">Customer Display Overview</a></p>
+<p><a onclick="setIframeSrc(this); return false;" href="../../../../videos/Super_ConfigOp_Video.mp4" class="Index">Configuring Operators</a></p>
+<p><a onclick="setIframeSrc(this); return false;" href="../../../../videos/Super_Cool_Video.mp4" class="Index">COOL Overview</a></p>
+<p><a onclick="setIframeSrc(this); return false;" href="../../../../videos/Super_FlashkeyEd_Video.mp4" class="Index">Flashkey Editing</a></p>
+
+<p>&nbsp;</p>
+</body>
+
+</html>
+

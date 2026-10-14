@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>steps/step0.png</file>
+        <file>steps/step1.png</file>
+        <file>steps/step2.png</file>
+        <file>steps/step3.png</file>
+        <file>steps/step4.png</file>
+        <file>steps/step5.png</file>
+        <file>steps/step6.png</file>
+        <file>steps/step7.png</file>
+        <file>steps/step8.png</file>
+        <file>steps/step9.png</file>
+        <file>steps/step10.png</file>
+        <file>steps/step11.png</file>
+        <file>steps/step12.png</file>
+        <file>steps/step13.png</file>
+        <file>steps/step14.png</file>
+        <file>steps/step15.png</file>
+        <file>steps/step16.png</file>
+        <file>steps/step17.png</file>
+        <file>steps/step18.png</file>
+        <file>steps/step19.png</file>
+        <file>steps/step20.png</file>
+        <file>steps/step21.png</file>
+        <file>steps/step22.png</file>
+        <file>steps/step23.png</file>
+        <file>steps/step23_fail.png</file>
+        <file>steps/step23_pass.png</file>
+    </qresource>
+</RCC>

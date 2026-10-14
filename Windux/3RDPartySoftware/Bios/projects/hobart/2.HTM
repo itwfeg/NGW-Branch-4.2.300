@@ -1,0 +1,48 @@
+<html><title>Platform Notes</title>
+<body bgcolor="blue" text="grey" link="white" alink="yellow">
+<b>Platform Notes for Embedded BIOS 2000 for the AMD Geode LXDB800
+"Salsa" Development Platform</b>.
+<p>
+
+<b>Revision History:</b><P>
+
+  04/01/06.       original version.<br>
+  04/02/10.       updated for release.<br>
+  04/09/28.       updated for V5.3 release.<br>
+  05/07/01.       updated for v5.3.3B release<br>
+  06/03/24.       updated for v5.3.3F release<br>
+
+Board Module Name: Salsa<br>
+Project Name: Salsa<br>
+Chipset Module Name: GX3<br>
+CPU Module Name: GX3<br>
+
+The Demonstration BIOS is called Salsa.BIN and is 512K in size,
+filling the ROM on the system board. It was created with the
+following tools:<br>
+<pre>
+  Microsoft Macro Assembler 6.14.8444
+  Microsoft Segmented Executable Linker version 5.31.009
+  Microsoft 32-Bit Incremental Linker Version 5.00.7022
+</pre><p>
+
+BUILD NOTES: This module builds with MASM.
+TASM builds will overflow F000h.<p>
+
+<b>NOTES ON EB2K533 FEATURES</b><p>
+
+<li>ACPI. Includes S0, S1, S3 (STR), S4 (OS), S5 states.
+<li>APM. Full on, Standby, Suspend (STR), Soft-Off.
+<li>PS2 keyboard, USB keyboard, PS2 mouse, and USB mouse.
+<li>UDMA modes 0-4
+<li>USB Mass Storage (available seperately)
+<li>Firmbase Technology with 1-256ms (variable) timebase
+<li>Quick boot (~2 seconds typical)
+<li>Plug-n-Play
+<li>Reflash
+<li>Manufacturing Mode: MM is available on this platform.
+<li>WinCE: The standard integrated WinCE loader is enabled.<p>
+</ul><p>
+
+<b>ERRATA</b><p>
+</body></html>

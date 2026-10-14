@@ -1,0 +1,675 @@
+.tableHeaderTitle
+{
+  height: 30px;
+  vertical-align: top;
+  background-color: rgb(68, 114, 196);
+  color: White;
+}
+
+.orderDataTableTitle
+{
+   font-size: large;
+   width: 100%;
+   table-layout: fixed;
+   vertical-align: top;
+   color: White;
+   background-color: rgb(68, 114, 196);
+   border: 1px solid black;
+}
+
+.orderDataRowTitle
+{
+	word-wrap : break-word;
+	vertical-align: top;
+	text-align: center;
+}
+
+#tableDataDiv
+{
+  height: 400px;
+}
+
+#tableDataDivDetails
+{
+  height: 300px;
+}
+
+#tableDataDivSearch
+{
+  height: 320px;
+}
+
+#tableDataDiv th, #tableDataDivDetails th, #tableDataDivSearch th
+{
+  position: -webkit-sticky; 
+  position: sticky;
+  top: -1px;
+  z-index: 10;
+  background-color: rgb(68, 114, 196);
+  /*border-top: 1px solid rgb(68, 114, 196);*/
+}
+
+.orderDataDivContent tr:nth-child(even) {
+  background-color: #CFD5EA;
+}
+
+.orderDataDivContent td, .orderDataDivContent tr
+{
+  border: 1px solid black;
+  text-overflow: ellipsis;
+}
+
+.selectedRow
+{
+  background-color: yellow !important;
+}
+
+.unavailableRow
+{
+  color: gray;
+}
+
+.unavailableRow .fillButton
+{
+  display: none;
+}
+
+.unavailableRow .XButton
+{
+  display: block;
+}
+
+.unavailableRow .substituteButton
+{
+  display: none;
+}
+
+.filledRow
+{
+  color: gray;
+}
+
+.filledRow .fillButton
+{
+  display: none;
+}
+
+.filledRow .XButton
+{
+  display: none;
+}
+
+.filledRow .doneButton
+{
+  display: block;
+}
+
+.filledRow .fillButton
+{
+  display: none;
+}
+
+.orderDataRow
+{
+   background-color: rgb(233, 235, 245);
+   height: 60px;
+   font-size: small;
+   font-weight: bold;
+   white-space: nowrap;
+}
+
+.orderDataDivContent
+{
+   overflow : auto;
+   width: 100%;
+}
+
+.orderDataTableContent
+{
+   font-size: small;
+   width: 100%;
+   background-color: White;
+   color: Black;
+   table-layout: fixed;
+   text-align: center;
+}
+
+
+.orderDataTableContent th, td
+{
+  overflow: hidden;
+}
+
+.orderIDCol
+{
+   width: 120px;
+}
+.customerCol
+{
+   width: 200px;
+}
+.prettyDeliveryTimeCol
+{
+   width: 175px;
+}
+
+.originCol
+{
+  width: 100px;
+}
+
+.createdTimeCol
+{
+   width: 175px;
+}
+.orderStatusCol
+{
+   /* leaving this one open lets it responsively fill the rest of the space */
+   /*width: 23%;*/
+   /*width: 120px;*/
+}
+
+.itemNumberCol
+{
+   width: 10%;
+}
+
+.byCountCol
+{
+  width: 10%;
+}
+
+.priceCol
+{
+  width: 15%;
+}
+
+.deliveryTimeCol
+{
+   width: 20%;
+}
+
+.orderQtyCol
+{
+    width: 10%;
+}
+
+.hiddenCol
+{
+  display: none;
+  width: 0px;
+}
+
+.fillOrderCol
+{
+   width: 65px;
+}
+
+.sortDesc::after
+{
+  content: " ▼";
+}
+
+.sortAsc::after
+{
+  content: " ▲";
+}
+
+.sortNone::after
+{
+  content: " ▼▲";
+}
+
+/****** End Table ******/
+
+/****** Search Table ******/
+
+.orderDataSearchDiv
+{
+   margin-top: 10px;
+   width: 100%;
+   vertical-align: top;
+   height: 70px;
+}
+
+.orderSearchTable
+{
+   font-size: small;
+   width: 100%;
+/*   height: 60px;*/
+   table-layout: fixed;
+   vertical-align: top;
+}
+
+/* End Search Table */
+
+/****** Buttons ******/
+
+button.bottomButton
+{
+   font-size: medium;
+   word-wrap : break-word;
+   overflow: hidden;
+   width: 120px;
+   background-color: rgb(68, 114, 196);
+   color: White;
+   border: 3px solid DarkGrey;
+   border-radius: 8px;
+   /*min-height: 75px;*/
+   height: 75px;
+   margin-top: 15px;
+   text-align: center;
+}
+
+button.bottomButton:active
+{
+   background-color: rgb(28, 74, 156);
+}
+
+button.bottomButtonRed
+{
+  background-color: #dc3545 !important;
+}
+
+button.bottomButton:active
+{
+   background-color: rgb(28, 74, 156);
+}
+
+button.bottomButtonRed:active
+{
+   background-color: rgb(200, 0, 0) !important;
+}
+
+button.bottomButtonGreen
+{
+  background-color: Green !important;
+}
+
+button.bottomButtonGreen:active
+{
+   background-color: DarkGreen !important;
+}
+
+button.bottomButtonOrange
+{
+  background-color: Orange !important;
+}
+
+button.bottomButtonOrange:active
+{
+   background-color: DarkOrange !important;
+}
+
+button.bottomButton:disabled
+{
+  opacity: 0.2 !important;
+}
+
+.fillButton
+{
+   font-size: large;
+   word-wrap : break-word;
+   background-color: rgb(68, 114, 196);
+   color: White;
+   border: 3px solid DarkGrey;
+   border-radius: 10px;
+   font-weight: bold;
+   height: 60px;
+   width: 60px;
+}
+
+.fillButton:active
+{
+   background-color: rgb(28, 74, 156);
+}
+
+.XButton
+{
+   font-size: x-large;
+   font-weight: bold;
+   width: 60px;
+   height: 60px;
+   background-color: rgb(68, 114, 196);
+   color: White;
+   border: 3px solid DarkGrey;
+   border-radius: 10px;
+   display: none;
+}
+
+.XButton:active
+{
+  background-color: rgb(28, 74, 156);
+}
+
+.unavailableRow .XButton
+{
+  background-color: #dc3545;
+}
+
+.unavailableRow .XButton:active
+{
+  background-color: rgb(200, 0, 0);
+}
+
+.doneButton
+{
+   font-size: xx-large;
+   font-weight: bold;
+   width: 60px;
+   height: 60px;
+   background-color: Green;
+   color: White;
+   border: 3px solid DarkGrey;
+   border-radius: 10px;
+   display: none;
+}
+
+.doneButton:active
+{
+  background-color: DarkGreen;
+}
+
+.substituteButton
+{
+   font-size: xx-large;
+   font-weight: bold;
+   width: 60px;
+   height: 60px;
+   background-color: orange;
+   color: White;
+   border: 3px solid DarkGrey;
+   border-radius: 10px;
+   display: none;
+}
+
+.substituteButton:active
+{
+  background-color: darkorange;
+}
+
+.substitutedRow .substituteButton
+{
+  display: block;
+}
+
+.substitutedRow .fillButton
+{
+  display: none;
+}
+
+.substitutedRow .XButton
+{
+  display: none;
+}
+
+.substitutedRow.filledRow .doneButton
+{
+  display: none !important;
+}
+
+.substitutedRow.unavailableRow .XButton
+{
+  display: block;
+}
+
+.substitutedRow.unavailableRow .substituteButton
+{
+  display: none;
+}
+
+.substitutedRow.filledRow .substituteButton
+{
+  background-color: Green;
+}
+
+.btn-hobart
+{
+   background-color: rgb(68, 114, 196);
+   color: White;
+}
+
+.btn-hobart:active
+{
+   background-color: rgb(28, 74, 156);
+}
+
+.modal-content
+{
+   font-size: x-large;
+   background-color: Linen;
+}
+
+.modal-content button
+{
+   border: 3px solid DarkGrey;
+   border-radius: 10px;
+}
+
+.tableDiv
+{
+   font-size: small;
+   width: 100%;
+   height: 50%;
+}
+
+.orderDetailsDiv
+{
+   margin-bottom: 13px;
+}
+
+.orderDetailsTable
+{
+   font-size: large;
+   color: Black;
+   margin-left: auto;
+   margin-right: auto;
+   border: none;
+   border-collapse: collapse;
+}
+
+.orderDetailsTable td
+{
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ max-width: 120px;
+ width: 120px;
+}
+
+@media (min-width: 920px)
+{
+  .orderDetailsDiv
+  {
+     max-width: 900px !important;
+  }
+  
+  .orderDetailsTable
+  {
+     width: 100%;
+  }
+  
+  #reportButton
+  {
+    position: absolute;
+    right: 80px;
+    top: 15px;
+    margin-top: 0;
+  }
+}
+
+/* changes to fit the order details page nicely on the center panel */
+@media (max-width: 919px)
+{
+  .orderDetailsTable
+  {
+     width: 100%;
+  }
+  
+  #reportButton
+  {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    margin-top: 0;
+    width: 100px;
+  }
+  
+  .byCountCol
+  {
+     width: 15%;
+  }
+  
+  .priceCol
+  {
+    display: none;
+  }
+  
+  .itemNumberCol
+  {
+    display: none;
+  }
+  
+  #tableDataDivDetails
+  {
+    margin-left: 35px;
+    height: 255px;
+    width: 580px;
+  }
+  
+  #bottomButtonRow
+  {
+    margin-left: 25px;
+  }
+  
+  .hideOnCenter
+  {
+    display: none;
+  }
+  
+  #searchModal-results
+  {
+    max-height: 250px !important;
+  }
+}
+
+.orderDetailsTable .tableSpacer
+{
+  width: 10%;
+}
+
+div.showDialog
+{
+   position: absolute;
+   z-index: 1;
+   top: 50px;
+   width:450px;
+   margin-left: auto;
+   margin-right: auto;
+   left:0px;
+   right:0px;
+   font-weight: normal;
+   overflow: hidden;
+}
+
+div.orderDetailsFillDiv
+{
+   background-color: SkyBlue;
+   border: 3px solid black;
+   padding: 10px;
+   border-radius: 10px;
+}
+
+.orderFillTable
+{
+   font-size: large;
+   width: 100%;
+   color: Black;
+   vertical-align: top;
+   border: none;
+   border-collapse: collapse;
+}
+
+
+.keepOrderButton
+{
+  font-size: small;
+  width: 100px;
+  background-color: rgb(68, 114, 196);
+  color: White;
+  border: 3px solid DarkGrey;
+  border-radius: 8px;
+  min-height: 36px;
+}
+
+.fillOrderTitle
+{
+   width: 50%;
+   font-size: x-large;
+   text-align: center;
+}
+
+.fillButtonDialog
+{
+  font-size: large;
+  word-wrap : break-word;
+  width: 90%;
+  height: 80px;
+  background-color: rgb(68, 114, 196);
+  color: White;
+  border: 4px solid DarkGrey;
+  border-radius: 10px;
+}
+
+.textInputSearch
+{
+  display: block;
+  width: 90%;
+  height: 60%;
+}
+
+.descDetails
+{
+  font-size: medium;
+  vertical-align: top;
+}
+
+.prepDetails
+{
+  vertical-align: bottom;
+  text-align: left;
+}
+
+#tableDataDivDetails .btn-icon
+{
+  margin-right: 0px;
+}
+
+.contrast-readonly
+{
+  color: black !important;
+  outline: none;
+  resize: none;
+  background-color: rgb(233, 235, 245) !important;
+  text-overflow: ellipsis;
+  /*text-align: right;*/
+}
+
+.contrast-rw
+{
+  color: black !important;
+  text-overflow: ellipsis;
+}
+
+.input-group-text
+{
+  color: black !important; 
+  background-color: #CFD5EA !important;
+}
+
+.listButton
+{
+  border: 3px solid DarkGrey;
+  width: 160px;
+  display: none;
+}

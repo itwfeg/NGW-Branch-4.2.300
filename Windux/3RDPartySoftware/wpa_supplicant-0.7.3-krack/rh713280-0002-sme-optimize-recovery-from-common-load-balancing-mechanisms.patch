@@ -1,0 +1,145 @@
+commit f47d639d495b32f0348c09a0fd0ff5b5791720d4
+Author: Jouni Malinen <jouni.malinen@atheros.com>
+Date:   Thu Nov 25 22:51:56 2010 +0200
+
+    SME: Optimize recovery from common load balancing mechanisms
+    
+    When authentication or association fails when trying to connect to
+    a BSS in an ESS that has multiple BSSes based on previous scans,
+    limit the first recovery scan to only the known channels that has
+    been seen previously. This speeds up recovery in some of the most
+    commonly used load balancing mechanisms in enterprise WLAN
+    networks.
+
+diff --git a/wpa_supplicant/scan.c b/wpa_supplicant/scan.c
+index 2769c2f..68c8ce0 100644
+--- a/wpa_supplicant/scan.c
++++ b/wpa_supplicant/scan.c
+@@ -448,6 +448,14 @@ static void wpa_supplicant_scan(void *eloop_ctx, void *timeout_ctx)
+ 	}
+ #endif /* CONFIG_WPS */
+ 
++	if (params.freqs == NULL && wpa_s->next_scan_freqs) {
++		wpa_printf(MSG_DEBUG, "Optimize scan based on previously "
++			   "generated frequency list");
++		params.freqs = wpa_s->next_scan_freqs;
++	} else
++		os_free(wpa_s->next_scan_freqs);
++	wpa_s->next_scan_freqs = NULL;
++
+ 	params.filter_ssids = wpa_supplicant_build_filter_ssids(
+ 		wpa_s->conf, &params.num_filter_ssids);
+ 
+diff --git a/wpa_supplicant/sme.c b/wpa_supplicant/sme.c
+index 55788de..604b0a5 100644
+--- a/wpa_supplicant/sme.c
++++ b/wpa_supplicant/sme.c
+@@ -33,9 +33,30 @@
+ #include "scan.h"
+ #include "sme.h"
+ 
+-static int sme_another_bss_in_ess(struct wpa_supplicant *wpa_s)
++static void add_freq(int *freqs, int *num_freqs, int freq)
++{
++	int i;
++
++	for (i = 0; i < *num_freqs; i++) {
++		if (freqs[i] == freq)
++			return;
++	}
++
++	freqs[*num_freqs] = freq;
++	(*num_freqs)++;
++}
++
++
++static int * sme_another_bss_in_ess(struct wpa_supplicant *wpa_s)
+ {
+ 	struct wpa_bss *bss, *cbss;
++	const int max_freqs = 10;
++	int *freqs;
++	int num_freqs = 0;
++
++	freqs = os_zalloc(sizeof(int) * (max_freqs + 1));
++	if (freqs == NULL)
++		return NULL;
+ 
+ 	cbss = wpa_s->current_bss;
+ 
+@@ -44,11 +65,19 @@ static int sme_another_bss_in_ess(struct wpa_supplicant *wpa_s)
+ 			continue;
+ 		if (bss->ssid_len == cbss->ssid_len &&
+ 		    os_memcmp(bss->ssid, cbss->ssid, bss->ssid_len) == 0 &&
+-		    wpa_blacklist_get(wpa_s, bss->bssid) == NULL)
+-			return 1;
++		    wpa_blacklist_get(wpa_s, bss->bssid) == NULL) {
++			add_freq(freqs, &num_freqs, bss->freq);
++			if (num_freqs == max_freqs)
++				break;
++		}
+ 	}
+ 
+-	return 0;
++	if (num_freqs == 0) {
++		os_free(freqs);
++		freqs = NULL;
++	}
++
++	return freqs;
+ }
+ 
+ 
+@@ -57,6 +86,7 @@ static void sme_connection_failed(struct wpa_supplicant *wpa_s,
+ {
+ 	int timeout;
+ 	int count;
++	int *freqs = NULL;
+ 
+ 	/*
+ 	 * Add the failed BSSID into the blacklist and speed up next scan
+@@ -74,10 +104,18 @@ static void sme_connection_failed(struct wpa_supplicant *wpa_s,
+ 		 * next. Otherwise, we may as well try this one once more
+ 		 * before allowing other, likely worse, ESSes to be considered.
+ 		 */
+-		if (sme_another_bss_in_ess(wpa_s)) {
++		freqs = sme_another_bss_in_ess(wpa_s);
++		if (freqs) {
+ 			wpa_printf(MSG_DEBUG, "SME: Another BSS in this ESS "
+ 				   "has been seen; try it next");
+ 			wpa_blacklist_add(wpa_s, bssid);
++			/*
++			 * On the next scan, go through only the known channels
++			 * used in this ESS based on previous scans to speed up
++			 * common load balancing use case.
++			 */
++			os_free(wpa_s->next_scan_freqs);
++			wpa_s->next_scan_freqs = freqs;
+ 		}
+ 	}
+ 
+diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
+index 0a603af..e990911 100644
+--- a/wpa_supplicant/wpa_supplicant.c
++++ b/wpa_supplicant/wpa_supplicant.c
+@@ -433,6 +433,9 @@ static void wpa_supplicant_cleanup(struct wpa_supplicant *wpa_s)
+ #ifdef CONFIG_AP
+ 	wpa_supplicant_ap_deinit(wpa_s);
+ #endif /* CONFIG_AP */
++
++	os_free(wpa_s->next_scan_freqs);
++	wpa_s->next_scan_freqs = NULL;
+ }
+ 
+ 
+diff --git a/wpa_supplicant/wpa_supplicant_i.h b/wpa_supplicant/wpa_supplicant_i.h
+index 853968c..4c6fa4f 100644
+--- a/wpa_supplicant/wpa_supplicant_i.h
++++ b/wpa_supplicant/wpa_supplicant_i.h
+@@ -404,6 +404,7 @@ struct wpa_supplicant {
+ 	int scan_req; /* manual scan request; this forces a scan even if there
+ 		       * are no enabled networks in the configuration */
+ 	int scan_runs; /* number of scan runs since WPS was started */
++	int *next_scan_freqs;
+ 
+ 	struct wpa_client_mlme mlme;
+ 	unsigned int drv_flags;

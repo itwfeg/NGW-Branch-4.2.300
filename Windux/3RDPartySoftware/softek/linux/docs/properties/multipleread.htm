@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MultipleRead</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>Normally the OCX stops at the first positive match for a barcode. When <B>MultipleRead</B>
+			is TRUE the OCX will check the entire image for barcode strings and record each 
+			positive match.
+		</P>
+		<P>Default value = &nbsp;&nbsp;FALSE
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_MULTIPLE_READ,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_MULTIPLE_READ,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Read multiple barcodes on an image<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_MULTIPLE_READ,&nbsp;&amp;value) ;</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

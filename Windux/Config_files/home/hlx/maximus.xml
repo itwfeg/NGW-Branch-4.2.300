@@ -1,0 +1,39 @@
+<gconfentryfile>
+  <entrylist base="/apps/maximus">
+    <entry>
+      <key>binding</key>
+      <schema_key>/schemas/apps/maximus/binding</schema_key>
+      <value>
+        <string>disabled</string>
+      </value>
+    </entry>
+    <entry>
+      <key>exclude_class</key>
+      <schema_key>/schemas/apps/maximus/exclude_class</schema_key>
+      <value>
+        <list type="string">
+            <value>
+              <string>Totem</string>
+            </value>
+            <value>
+              <string>xvkbd</string>
+            </value>
+        </list>
+      </value>
+    </entry>
+    <entry>
+      <key>no_maximize</key>
+      <schema_key>/schemas/apps/maximus/no_maximize</schema_key>
+      <value>
+        <bool>false</bool>
+      </value>
+    </entry>
+    <entry>
+      <key>undecorate</key>
+      <schema_key>/schemas/apps/maximus/undecorate</schema_key>
+      <value>
+        <bool>true</bool>
+      </value>
+    </entry>
+  </entrylist>
+</gconfentryfile>

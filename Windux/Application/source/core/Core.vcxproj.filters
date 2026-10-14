@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="VersionManager">
+      <UniqueIdentifier>{3a2ecdf2-f16b-4c75-9f8f-067c4e5c202e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionManager\Include">
+      <UniqueIdentifier>{4f8d1cbd-9c6c-4583-8d51-b4999a7c450c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionManager\Messages">
+      <UniqueIdentifier>{ca9e17be-3be8-4789-9dab-7f6f512fba9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionManager\Source">
+      <UniqueIdentifier>{0642567b-79e9-4924-b8c8-5d79be9b8317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{0bfdcb77-54f8-4303-b86f-115e0d61f72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Synchronization">
+      <UniqueIdentifier>{082fc449-b1c4-423b-94e0-fa6de2fed2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Synchronization\Messages">
+      <UniqueIdentifier>{43aedca9-4d17-45bb-895c-5712eb861cc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Synchronization\Commands">
+      <UniqueIdentifier>{c6f47f2c-e1d2-4866-b11f-f0e90b3fe244}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bootParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LeapStatusWrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainBoardEEPROM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Smbus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\PeripheralCodeUpdate.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\PeripheralRequestCodeUpdate.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\ProcessDBFilesRequest.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\ShutdownSystemRequest.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\ShutdownSystemResponse.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpdateSoftwareAutomatically.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpdateSoftwareManually.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpgradeList.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpgradePeripheral.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpgradeTransferStatus.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UpgradeVersions.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\UsbAddComponent.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\usbRemoveComponent.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\VmStatusMsg.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\messages\WriteFileToSCEEPMsg.cpp">
+      <Filter>VersionManager\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\source\HobComplexVersion.cpp">
+      <Filter>VersionManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\source\HobDependency.cpp">
+      <Filter>VersionManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\source\HobVersion.cpp">
+      <Filter>VersionManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\source\SoftwareSystem.cpp">
+      <Filter>VersionManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VersionManager\source\VersionManager.cpp">
+      <Filter>VersionManager\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\StateMachineBase.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\CommunicationSynchronizer.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\DatabaseSynchronizer.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\DownloadLocalBatchesUseCase.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\NotifyLocalBatchesPresentUseCase.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\NotifyOnlineUseCase.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\PrimaryCommSession.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\PrimarySynchronizationManager.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\QueueManager.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\RequestRegistrationUseCase.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SecondaryCommSession.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SecondarySynchronizationManager.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SynchronizationCommSession.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SynchronizationManager.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SynchronizationManagerProxy.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SynchronizationManagerUnitTester.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Synchronizer.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\SynchronizeSecondaryScaleUseCase.cpp">
+      <Filter>Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\AbortBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\AbortBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\AddRecordToBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\AddRecordToBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ApplyBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ApplyBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ComingUpOnLineMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\CompleteBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\CompleteBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\CompleteCommandMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\CreateBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\CreateBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DeleteBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DeleteBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DeregisterSecondaryScaleMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DeregisterSecondaryScaleProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DownloadLocalBatchesMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\DownloadLocalBatchesProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\EmptyQueueMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ExecuteCommandMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\GoingOffLineMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\NewSynchronizationStatusMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\NotifyLocalBatchesLazilyMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\NotifyOnlineProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessHQBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessHQBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessRemoteBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessRemoteBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessScaleOnlineMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessSynchronizedBatchMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessSynchronizedBatchProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessUserChangesMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessUserChangesProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessUserFileMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\ProcessUserFileProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\RegisterSecondaryScaleMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\RegisterSecondaryScaleProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\RequestRegistrationProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\RetryCommandMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\StartSyncManagerMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\StartSyncManagerProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\StopSynchronizerMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\SynchronizePrimaryScaleProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScaleMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScaleProcessedMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Messages\SynchronizeSecondaryScalesLazilyMessage.cpp">
+      <Filter>Synchronization\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\AbortBatchCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\ApplyAndDeleteBatchCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\ApplyBatchCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\Command.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\CommandWrapper.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\CommCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\DeleteBatchCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\DownloadLocalBatchesCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\NotifyLocalBatchesPresentCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\NotifyOnlineCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\PurgeBatchesCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\RequestDeregistrationCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\RequestRegistrationCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\SynchronizePrimaryScaleCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Synchronization\Commands\SynchronizeSecondaryScaleCommand.cpp">
+      <Filter>Synchronization\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="FpmManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdManufacturingData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdScaleHwCfg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdScaleSWConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdSectionStatistics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdNGWWrapperData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MtdScaleData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bootParameters.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleSpecialKeys.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LeapStatusWrite.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainBoardEEPROM.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Smbus.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\HobComplexVersion.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\HobDependency.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\HobVersion.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\PeripheralCodeUpdate.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\PeripheralRequestCodeUpdate.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\ProcessDBFilesRequest.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\ShutdownSystemRequest.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\ShutdownSystemResponse.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\SoftwareSystem.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpdateSoftwareAutomatically.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpdateSoftwareManually.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpgradeList.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpgradePeripheral.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpgradeTransferStatus.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UpgradeVersions.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\UsbAddComponent.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\usbRemoveComponent.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\VersionManager.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\VersionManagerEvent.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\VmStatusMsg.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="VersionManager\include\WriteFileToSCEEPMsg.h">
+      <Filter>VersionManager\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Action.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\State.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateMachineBase.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateMachineController.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Transition.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\CommSessionErrorEvent.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\CommunicationSynchronizer.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\CommunicationSynchronizerError.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\CommunicationSynchronizerEvent.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\DatabaseSynchronizer.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\DownloadLocalBatchesUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\ISynchronizationUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\NotifyLocalBatchesPresentUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\NotifyOnlineUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\PrimaryCommSession.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\PrimarySynchronizationManager.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\QueueManager.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\RequestRegistrationUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\ScaleSynchronizationType.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SecondaryCommSession.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SecondarySynchronizationManager.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SynchronizationCommSession.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SynchronizationManager.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SynchronizationManagerProxy.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SynchronizationManagerUnitTester.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Synchronizer.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\SynchronizeSecondaryScaleUseCase.h">
+      <Filter>Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\AbortBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\AbortBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\AddRecordToBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\AddRecordToBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ApplyBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ApplyBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ComingUpOnLineMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\CompleteBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\CompleteBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\CompleteCommandMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\CreateBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\CreateBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DeleteBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DeleteBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DeregisterSecondaryScaleMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DeregisterSecondaryScaleProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DownloadLocalBatchesMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\DownloadLocalBatchesProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\EmptyQueueMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ExecuteCommandMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\GoingOffLineMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\NewSynchronizationStatusMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\NotifyLocalBatchesLazilyMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\NotifyOnlineProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessHQBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessHQBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessRemoteBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessRemoteBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessScaleOnlineMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessSynchronizedBatchMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessSynchronizedBatchProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessUserChangesMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessUserChangesProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessUserFileMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\ProcessUserFileProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\RegisterSecondaryScaleMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\RegisterSecondaryScaleProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\RequestRegistrationProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\RetryCommandMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\StartSyncManagerMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\StartSyncManagerProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\StopSynchronizerMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\SynchronizationDevEvent.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\SynchronizePrimaryScaleProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScaleMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScaleProcessedMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Messages\SynchronizeSecondaryScalesLazilyMessage.h">
+      <Filter>Synchronization\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\AbortBatchCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\ApplyAndDeleteBatchCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\ApplyBatchCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\Command.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\CommandWrapper.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\CommCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\DeleteBatchCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\DownloadLocalBatchesCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\NotifyLocalBatchesPresentCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\NotifyOnlineCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\PurgeBatchesCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\RequestDeregistrationCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\RequestRegistrationCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\SynchronizePrimaryScaleCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronization\Commands\SynchronizeSecondaryScaleCommand.h">
+      <Filter>Synchronization\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="FpmEvent.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FpmManager.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdManufacturingData.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdScaleHwCfg.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdScaleSWConfig.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdSectionStatistics.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdNGWWrapperData.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MtdScaleData.h">
+      <Filter>Source Files\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,70 @@
+If you are signing a third party's csr copy the request to the csr folder and skip ahead to signing a certificate.
+
+Remember to replace intermediate with your ca name.
+
+Sign server and client certificates
+-----------------------------------
+
+Certificates signed by a CA can be used in a variety of situations, such as securing connections to a web server or to authenticate clients connecting to a service.
+
+The steps below are performed from the perspective of the certificate authority. However, a third-party can instead create their own private key and certificate signing request (CSR). They would give the CSR to you, and you would give back a signed certificate. In that scenario, you can skip the genrsa and req commands. Note that the third-party doesn’t have to reveal their private key to you.
+
+Create a key
+------------
+
+Our root and intermediate pairs are 4096 bits. Since server and client certificates normally expire after one year, we can safely use 2048 bits instead.
+
+Note
+Although 4096 bits is slightly more secure than 2048 bits, it also reduces TLS handshake speed and significantly increases processor load during handshakes. For this reason, most websites use 2048-bit pairs.
+
+If you’re creating a cryptographic pair for use with a web server (eg, Apache), you’ll need to enter this password every time you restart the web server. You may want to omit the -aes256 option to create a key without a password.
+
+# cd /root/ca/intermediate
+# openssl genrsa -aes256 \
+      -out private/companykey.pem 2048
+
+Create a certificate
+--------------------
+
+Use the private key to create a certificate signing request (CSR). The CSR details don’t need to match the intermediate CA. For server certificates, the Common Name must be a fully qualified domain name (eg, www.example.com), whereas for client certificates it can be any unique identifier (eg, e-mail address). Note that the Common Name cannot be the same as either your root or intermediate certificate.
+
+# cd /root/ca/intermediate
+# CADIR=/root/ca openssl req -config openssl.cnf \
+      -key private/companykey.pem \
+      -new -sha256 -out csr/companycsr.pem
+
+Enter pass phrase for companykey.pem: secretpassword
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+-----
+Country Name (2 letter code) [US]:US
+State or Province Name [Ohio]:Ohio
+Locality Name [Troy]:Troy
+Organization Name [ITW]:ITW
+Organizational Unit Name [Hobart]:Hobart
+Common Name []:Verified Company Software
+Email Address []:person@company.com
+
+To create a certificate, use the intermediate CA to sign the CSR. If the certificate is going to be used on a server, use the server_cert extension. If the certificate is going to be used for user authentication, use the usr_cert extension. Certificates are usually given a validity of one year, though a CA will typically give a few days extra for convenience. We will use two years.
+
+# cd /root/ca/intermediate
+# CADIR=/root/ca openssl ca -config openssl.cnf \
+      -extensions usr_cert -days 730 -notext -md sha256 \
+      -in csr/companycsr.pem \
+      -out certs/companycert.pem
+
+Enter pass phrase for intermediatekey.pem: secretpassword (for hobart code signing this is code1signer)
+
+Verify the certificate
+----------------------
+
+# openssl x509 -noout -text \
+      -in certs/companycert.pem
+
+Use the CA certificate chain file (ca-chaincert.pem) to verify that the new certificate has a valid chain of trust.
+
+# openssl verify -CAfile certs/ca-chaincert.pem \
+      certs/companycert.pem
+
+companycert.pem: OK
+

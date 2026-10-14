@@ -1,0 +1,79 @@
+# Playlist template for the Hobart Graphical Customer Display Scale 
+
+#
+# Copyright 2012 by
+# ITW Food Equipment Group
+# Troy, Ohio 
+
+#
+# All lines started with a "#" character are considered comments only. 
+
+# This files name must be a text only file saved with a filename in Windows extended format
+# using the extension of .txt; <filename.txt>
+# The filename can only consist of the lower case characters a - z, 0 - 9, and the 
+# special character "_" (underline).
+# The filename used to save a completed playlist should be the filename configured in the 
+# scales you wish the playlist to be applied to.
+# The total size of all files contained in this playlist cannot exceed 1.5Gbytes.
+# All filenames used to describe video, image, or audio files must be in Windows extended 
+# format only using lowercase characters a - z, 0 - 9, and the special
+# character "_" (underline).
+# Make sure you follow the insructions for each of the three (3) sections of this
+# template. 
+
+
+# VIDEO Section
+# Make sure each video is preceded with the word video followed with a unique number from
+# 1 to 99 and surrounded in brackets [].
+# 
+
+[video1]
+freescale.mp4
+
+[video2]
+Operator_Training_HLX.mp4
+
+[video3]
+SDV_0162_3rdCut.mp4
+
+[video4]
+albertsons.mp4
+
+# SLIDE SHOW Section
+# Make sure each slide show is preceded with the word slideshow followed with a unique 
+# number 1 to 99 surrounded by brackets [], and consisting of the following on 
+# separate lines;
+# The audio filename to play during this slide show preceded with the text "audio=".
+# The time, in seconds, to display each image in the slide show preceded with the
+# text "delay=".
+# The filenames, one per line, of each image to be used in this slide show listed 
+# in the order they are to de displayed. 
+
+[slideshow1]
+delay=20
+Fruit_01.jpg
+Fruit_02.jpg
+Fruit_03.jpg
+Fruit_04.jpg 
+
+[slideshow2]
+audio=Kalimba.mp3
+delay=15
+Fruit_01.jpg
+Fruit_02.jpg
+Fruit_03.jpg
+Fruit_04.jpg 
+
+#PLAY LIST Section
+# Make sure the first line is the word playlist surrounded by brackets [].
+# List the previously defined video and slide shows in the order they are to be played
+# one per line. 
+
+[playlist] 
+
+#slideshow1
+video1
+video2
+#slideshow1
+video3
+video4

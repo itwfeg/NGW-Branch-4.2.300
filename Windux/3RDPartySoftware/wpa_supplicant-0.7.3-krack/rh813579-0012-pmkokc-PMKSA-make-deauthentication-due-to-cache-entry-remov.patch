@@ -1,0 +1,182 @@
+From 83d4667cc3834c88feb761d2f9543f40f0229b49 Mon Sep 17 00:00:00 2001
+From: Dan Williams <dcbw@redhat.com>
+Date: Mon, 13 Aug 2012 16:27:29 -0500
+Subject: [PATCH] PMKSA: make deauthentication due to cache entry removal more
+ granular
+
+Expiry can always trigger a deauthentication, but otherwise, deauthentication
+should only happen when the *current* cache entry is removed and not being
+replaced.  It should not happen when the current PMK just happens to match
+the PMK of the entry being removed, since multiple entries can have the same
+PMK and are often removed at different times.
+
+This fixes an issue where eviction of the oldest inactive entry due to adding
+a newer entry to a full cache caused a deauthentication when the entry being
+removed had the same PMK as the current entry.
+
+Signed-hostap: Dan Williams <dcbw@redhat.com>
+---
+ src/rsn_supp/pmksa_cache.c | 16 ++++++++--------
+ src/rsn_supp/pmksa_cache.h | 10 ++++++++--
+ src/rsn_supp/wpa.c         | 34 +++++++++++++++++++++++-----------
+ 3 files changed, 39 insertions(+), 21 deletions(-)
+
+diff --git a/src/rsn_supp/pmksa_cache.c b/src/rsn_supp/pmksa_cache.c
+index 9783e7c..d2e2da5 100644
+--- a/src/rsn_supp/pmksa_cache.c
++++ b/src/rsn_supp/pmksa_cache.c
+@@ -25,7 +25,7 @@ struct rsn_pmksa_cache {
+ 	struct wpa_sm *sm; /* TODO: get rid of this reference(?) */
+ 
+ 	void (*free_cb)(struct rsn_pmksa_cache_entry *entry, void *ctx,
+-			int replace);
++			int reason);
+ 	void *ctx;
+ };
+ 
+@@ -41,11 +41,11 @@ static void _pmksa_cache_free_entry(struct rsn_pmksa_cache_entry *entry)
+ 
+ static void pmksa_cache_free_entry(struct rsn_pmksa_cache *pmksa,
+ 				   struct rsn_pmksa_cache_entry *entry,
+-				   int replace)
++				   int reason)
+ {
+ 	wpa_sm_remove_pmkid(pmksa->sm, entry->aa, entry->pmkid);
+ 	pmksa->pmksa_count--;
+-	pmksa->free_cb(entry, pmksa->ctx, replace);
++	pmksa->free_cb(entry, pmksa->ctx, reason);
+ 	_pmksa_cache_free_entry(entry);
+ }
+ 
+@@ -61,7 +61,7 @@ static void pmksa_cache_expire(void *eloop_ctx, void *timeout_ctx)
+ 		pmksa->pmksa = entry->next;
+ 		wpa_printf(MSG_DEBUG, "RSN: expired PMKSA cache entry for "
+ 			   MACSTR, MAC2STR(entry->aa));
+-		pmksa_cache_free_entry(pmksa, entry, 0);
++		pmksa_cache_free_entry(pmksa, entry, PMKSA_EXPIRE);
+ 	}
+ 
+ 	pmksa_cache_set_expiration(pmksa);
+@@ -179,7 +179,7 @@ pmksa_cache_add(struct rsn_pmksa_cache *pmksa, const u8 *pmk, size_t pmk_len,
+ 			}
+ 			wpa_printf(MSG_DEBUG, "RSN: Replace PMKSA entry for "
+ 				   "the current AP");
+-			pmksa_cache_free_entry(pmksa, pos, 1);
++			pmksa_cache_free_entry(pmksa, pos, PMKSA_REPLACE);
+ 
+ 			/*
+ 			 * If OKC is used, there may be other PMKSA cache
+@@ -214,7 +214,7 @@ pmksa_cache_add(struct rsn_pmksa_cache *pmksa, const u8 *pmk, size_t pmk_len,
+ 				   "PMKSA cache entry (for " MACSTR ") to "
+ 				   "make room for new one",
+ 				   MAC2STR(pos->aa));
+-			pmksa_cache_free_entry(pmksa, pos, 0);
++			pmksa_cache_free_entry(pmksa, pos, PMKSA_FREE);
+ 		}
+ 	}
+ 
+@@ -265,7 +265,7 @@ void pmksa_cache_flush(struct rsn_pmksa_cache *pmksa, void *network_ctx)
+ 				pmksa->pmksa = entry->next;
+ 			tmp = entry;
+ 			entry = entry->next;
+-			pmksa_cache_free_entry(pmksa, tmp, 0);
++			pmksa_cache_free_entry(pmksa, tmp, PMKSA_FREE);
+ 			removed++;
+ 		} else {
+ 			prev = entry;
+@@ -507,7 +507,7 @@ int pmksa_cache_list(struct rsn_pmksa_cache *pmksa, char *buf, size_t len)
+  */
+ struct rsn_pmksa_cache *
+ pmksa_cache_init(void (*free_cb)(struct rsn_pmksa_cache_entry *entry,
+-				 void *ctx, int replace),
++				 void *ctx, int reason),
+ 		 void *ctx, struct wpa_sm *sm)
+ {
+ 	struct rsn_pmksa_cache *pmksa;
+diff --git a/src/rsn_supp/pmksa_cache.h b/src/rsn_supp/pmksa_cache.h
+index 9245aab..90c46c6 100644
+--- a/src/rsn_supp/pmksa_cache.h
++++ b/src/rsn_supp/pmksa_cache.h
+@@ -38,11 +38,17 @@ struct rsn_pmksa_cache_entry {
+ 
+ struct rsn_pmksa_cache;
+ 
++enum {
++	PMKSA_FREE,
++	PMKSA_REPLACE,
++	PMKSA_EXPIRE,
++};
++
+ #if defined(IEEE8021X_EAPOL) && !defined(CONFIG_NO_WPA2)
+ 
+ struct rsn_pmksa_cache *
+ pmksa_cache_init(void (*free_cb)(struct rsn_pmksa_cache_entry *entry,
+-				 void *ctx, int replace),
++				 void *ctx, int reason),
+ 		 void *ctx, struct wpa_sm *sm);
+ void pmksa_cache_deinit(struct rsn_pmksa_cache *pmksa);
+ struct rsn_pmksa_cache_entry * pmksa_cache_get(struct rsn_pmksa_cache *pmksa,
+@@ -66,7 +72,7 @@ void pmksa_cache_flush(struct rsn_pmksa_cache *pmksa, void *network_ctx);
+ 
+ static inline struct rsn_pmksa_cache *
+ pmksa_cache_init(void (*free_cb)(struct rsn_pmksa_cache_entry *entry,
+-				 void *ctx, int replace),
++				 void *ctx, int reason),
+ 		 void *ctx, struct wpa_sm *sm)
+ {
+ 	return (void *) -1;
+diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+index d7d7963..a2c0773 100644
+--- a/src/rsn_supp/wpa.c
++++ b/src/rsn_supp/wpa.c
+@@ -2007,24 +2007,36 @@ int wpa_sm_get_mib(struct wpa_sm *sm, char *buf, size_t buflen)
+ 
+ 
+ static void wpa_sm_pmksa_free_cb(struct rsn_pmksa_cache_entry *entry,
+-				 void *ctx, int replace)
++				 void *ctx, int reason)
+ {
+ 	struct wpa_sm *sm = ctx;
++	int deauth = 0;
+ 
+-	if (sm->cur_pmksa == entry ||
+-	    (sm->pmk_len == entry->pmk_len &&
+-	     os_memcmp(sm->pmk, entry->pmk, sm->pmk_len) == 0)) {
++	if (sm->cur_pmksa == entry) {
+ 		wpa_printf(MSG_DEBUG, "RSN: removed current PMKSA entry");
+-		sm->cur_pmksa = NULL;
++		pmksa_cache_clear_current (sm);
+ 
+-		if (replace) {
+-			/* A new entry is being added, so no need to
+-			 * deauthenticate in this case. This happens when EAP
+-			 * authentication is completed again (reauth or failed
+-			 * PMKSA caching attempt). */
+-			return;
++		/* If an entry is simply being replaced, there's no need to
++		 * deauthenticate because it will be immediately re-added.
++		 * This happens when EAP authentication is completed again
++		 * (reauth or failed PMKSA caching attempt). */
++		if (reason != PMKSA_REPLACE) {
++			wpa_printf(MSG_DEBUG,
++				   "RSN: deauthenticating due to removed entry");
++			deauth = 1;
+ 		}
++	}
++
++	if (reason == PMKSA_EXPIRE &&
++	    (sm->pmk_len == entry->pmk_len &&
++	     os_memcmp(sm->pmk, entry->pmk, sm->pmk_len) == 0)) {
++		wpa_printf(MSG_DEBUG,
++			   "RSN: deauthenticating due to expired PMK");
++		pmksa_cache_clear_current (sm);
++		deauth = 1;
++	}
+ 
++	if (deauth) {
+ 		os_memset(sm->pmk, 0, sizeof(sm->pmk));
+ 		wpa_sm_deauthenticate(sm, WLAN_REASON_UNSPECIFIED);
+ 	}
+-- 
+1.7.11.2
+

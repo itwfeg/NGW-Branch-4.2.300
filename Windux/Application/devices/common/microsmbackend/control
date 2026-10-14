@@ -1,0 +1,11 @@
+Package: hobart-microsmbackend
+Version: 2.0-0
+Priority: optional
+Architecture: arm
+Maintainer: Randy Blankley <randy.blankley@itwfeg.com>
+Description: Auto configuration and scale management backend
+ capabilities.
+ .
+ This package contains the binary and base configuration. For
+ customization please use HTe.
+

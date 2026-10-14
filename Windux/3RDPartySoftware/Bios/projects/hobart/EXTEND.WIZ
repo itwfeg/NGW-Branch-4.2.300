@@ -1,0 +1,94 @@
+#**     EXTEND.WIZ - BIOStart extension file for Embedded BIOS 2000.
+#
+#1.     Functional Description.
+#       This file describes all the design specific options invented for
+#       this specific project to BIOStart.  It also defines a user
+#       interface that BIOStart can use to guide the OEM through setting
+#       design specific options.
+#
+#2.     Modification history.
+#       K. C. Taylor    05/07/15.       #5.3.3, new.
+#
+#3.     NOTICE: Copyright (C) 2005 General Software, Inc.
+
+##############################################################################
+#                               SALSA EXTENSIONS                             #
+##############################################################################
+
+Include ..\\PACKAGES\\GX3\\EXTEND
+Include ..\\PACKAGES\\CMOSDFLT\\EXTEND
+Include ..\\BOARDS\\SALSA\\EXTEND
+Include ..\\CHIPSETS\\GX3\\EXTEND
+Include ..\\SIO\\W83627\\EXTEND
+Include ..\\SIO\\GX553X\\EXTEND
+
+Feature MENU_PROJECT_SALSA "Design Specific Configuration"
+  Type Menu
+  Read MENU_PACKAGE_GX3
+  Read MENU_BOARD_SALSA
+  Read MENU_CHIPSET_GX3
+  Read FIRMBASE_FEATURE
+  Read CONFIG_FB_FEATURE_DEFAULT
+  Read SIO_INCLUDE
+  Read MENU_SIO_W83627
+  Read MENU_SIO_GX553X
+  Help
+    This menu provides access to design specific options that can be used
+    to configure platforms based on the AMD DB533 Development Board.
+  End Help
+End Feature
+
+Symbol PLATFORM_ID "Platform Identifier"
+  Type Table
+  Value Enum "Platform ID" AMDSAL1
+  Help
+    Platform identification table.
+  End Help
+End Symbol
+
+Symbol OVERRIDE_PROCEDURE "Core Code Override Table"
+  Type Table
+  Value Enum "Function Name" TestDiskOp WriteTestInProg RunTests SetupScreenDiag 
+  Help
+    This table specifies functions in the core BIOS that are being overridden
+    with custom code for this design.
+  End Help
+End Symbol
+
+Symbol PACKAGE "Core Package Table"
+  Type Table
+  Value Enum "Core Package" GX3 SIOPWR2 CMOSDFLT DPRNDRX DPRNMMX
+  Help
+    This table specifies the unique packages included as extensions to this
+    BIOS build.  Packages act as core extensions and provide additional
+    optional functionality.
+  End Help
+End Symbol
+
+Symbol DEFINE_ISR_PROC "Define Custom Interrupt Service Handler"
+  Type Table
+  Value Enum "Interrupt" _15
+  Value Enum "Procedure" BoardInt15Isr
+  Help
+    This table specifies custom interrupt service handlers.  It may be used
+    to extend BIOS APIs to add design specific functionality.
+  End Help
+End Symbol
+
+Symbol SIO_INCLUDE "Included SIO Packages"
+  Type Table
+  Value Enum "SIO Module" w83627 Gx553X
+  Help
+    This table specifies which SIO parts are supported by the current build.
+    A single build may support multiple SIO parts.  Table entries do not need
+    to be removed if the board does not support a particular SIO listed in the
+    table, unless the space is required for other features.  The SIO modules
+    are designed to detect the part they are supporting and fail gracefully
+    if the part is not detected.
+  End Help
+End Symbol
+
+Symbol CONFIG_BOARD_BUILD_NUM "Current Board Build Number"
+  Type Unsigned16
+  Default 0
+End Symbol

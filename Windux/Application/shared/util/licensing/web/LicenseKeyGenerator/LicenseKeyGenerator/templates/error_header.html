@@ -1,0 +1,8 @@
+{% if form.errors %}
+<h3 style="color: red;'">
+	There were errors with your submission, please double check all fields!
+</h3>
+<p style="color: red;">
+	{{ form.non_field_errors }}
+</p>
+{% endif%}

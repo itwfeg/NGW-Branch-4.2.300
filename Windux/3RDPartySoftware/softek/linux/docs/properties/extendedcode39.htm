@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ExtendedCode39</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When True the toolkit will attempt to decode Code 39 barcodes using the extended 
+			symbol set. The extended symbol set uses 2 normal Code 39 characters to 
+			represent each character and contains the full ASCII character set.
+		</P>
+		<P>Note that if the toolkit is unable to decode the string in the extended symbol 
+			set then it is left as a normal Code 39 barcode.</P>
+		<P>Default Value: False
+		</P>
+		<P>void STSetParameter(hBarcode, ST_EXTENDED_CODE39,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_EXTENDED_CODE39,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Read Extended Code 39 barcodes<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_EXTENDED_CODE39,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+commit 5471c3434e86dd4a6d1f3912facd78351f626ba2
+Author: Jouni Malinen <jouni.malinen@atheros.com>
+Date:   Fri Nov 26 11:23:50 2010 +0200
+
+    Blacklist BSS on first failure if only a single network is enabled
+    
+    The special case of requiring blacklisting count to be 2 or higher
+    is only needed when more than a single network is currently enabled.
+    As such, we should not do that when only a single network is enabled.
+    This make the station more likely to follow network side load
+    balancing attempts where the current AP may disassociate us with
+    an assumption that we would move to another AP.
+
+diff --git a/wpa_supplicant/events.c b/wpa_supplicant/events.c
+index 125f52e..8b2979c 100644
+--- a/wpa_supplicant/events.c
++++ b/wpa_supplicant/events.c
+@@ -443,9 +443,24 @@ wpa_supplicant_select_bss_wpa(struct wpa
+ 			   wpa_ie_len, rsn_ie_len, bss->caps);
+ 
+ 		e = wpa_blacklist_get(wpa_s, bss->bssid);
+-		if (e && e->count > 1) {
+-			wpa_printf(MSG_DEBUG, "   skip - blacklisted");
+-			continue;
++		if (e) {
++			int limit = 1;
++			if (wpa_supplicant_enabled_networks(wpa_s->conf) == 1) {
++				/*
++				 * When only a single network is enabled, we can
++				 * trigger blacklisting on the first failure. This
++				 * should not be done with multiple enabled networks to
++				 * avoid getting forced to move into a worse ESS on
++				 * single error if there are no other BSSes of the
++				 * current ESS.
++				 */
++				limit = 0;
++			}
++			if (e->count > limit) {
++				wpa_printf(MSG_DEBUG, "   skip - blacklisted "
++					   "(count=%d limit=%d)", e->count, limit);
++				continue;
++			}
+ 		}
+ 
+ 		if (ssid_len == 0) {
+diff --git a/wpa_supplicant/scan.c b/wpa_supplicant/scan.c
+index 68c8ce0..074d75b 100644
+--- a/wpa_supplicant/scan.c
++++ b/wpa_supplicant/scan.c
+@@ -79,12 +79,13 @@ static int wpas_wps_in_use(struct wpa_config *conf,
+ int wpa_supplicant_enabled_networks(struct wpa_config *conf)
+ {
+ 	struct wpa_ssid *ssid = conf->ssid;
++	int count = 0;
+ 	while (ssid) {
+ 		if (!ssid->disabled)
+-			return 1;
++			count++;
+ 		ssid = ssid->next;
+ 	}
+-	return 0;
++	return count;
+ }
+ 
+ 

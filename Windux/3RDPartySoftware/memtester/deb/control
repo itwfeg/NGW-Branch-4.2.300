@@ -1,0 +1,7 @@
+Package: hobart-memtester
+Version: VERSION
+Priority: optional
+Architecture: armhf
+Maintainer: Scott Davis <scott.davis@hobartcorp.com>
+Description: This package provides memtester
+

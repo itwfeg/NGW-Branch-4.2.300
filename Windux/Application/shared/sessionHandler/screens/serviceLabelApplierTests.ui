@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>serviceLabelApplierTests</class>
+ <widget class="QWidget" name="serviceLabelApplierTests">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>0</y>
+     <width>971</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Label Applier Tests</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cboxLabelApplier">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>60</y>
+     <width>421</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>41</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMotorCycle">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>110</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cycle</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBeltsUp">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>170</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWandUp">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>230</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnApplierUp">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>290</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGateUp">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>350</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCompressorOn">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>410</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWandVacuumOn">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>470</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCLARunInOn">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>530</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>On</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBeltsDown">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>170</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWandDown">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>230</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnApplierDown">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>290</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnGateDown">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>350</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Down</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCompressorOff">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>410</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnWandVacuumOff">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>470</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCLARunInOff">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>530</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>151</width>
+     <height>51</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMotor">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>110</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Motor</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblBelts">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>170</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Belts</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWand">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>230</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Wand</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblApplier">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>290</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Applier</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblGate">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>350</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gate</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCompressor">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>410</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Compressor</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblWandVacuum">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>470</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Wand Vacuum</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblCLARunIn">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>530</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CLA Run-In</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

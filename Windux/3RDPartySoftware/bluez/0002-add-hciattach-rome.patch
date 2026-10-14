@@ -1,0 +1,53 @@
+diff -Naur bluez-5.19.orig/Makefile.in bluez-5.19/Makefile.in
+--- bluez-5.19.orig/Makefile.in	2014-05-19 04:52:41.000000000 -0400
++++ bluez-5.19/Makefile.in	2018-04-30 17:07:35.900404115 -0400
+@@ -1122,7 +1122,7 @@
+ tools_hci_tester_DEPENDENCIES =
+ am__tools_hciattach_SOURCES_DIST = tools/hciattach.c tools/hciattach.h \
+ 	tools/hciattach_st.c tools/hciattach_ti.c \
+-	tools/hciattach_tialt.c tools/hciattach_ath3k.c \
++	tools/hciattach_tialt.c tools/hciattach_ath3k.c tools/hciattach_rome.c \
+ 	tools/hciattach_qualcomm.c tools/hciattach_intel.c \
+ 	tools/hciattach_bcm43xx.c
+ @TOOLS_TRUE@am_tools_hciattach_OBJECTS = tools/hciattach.$(OBJEXT) \
+@@ -1130,6 +1130,7 @@
+ @TOOLS_TRUE@	tools/hciattach_ti.$(OBJEXT) \
+ @TOOLS_TRUE@	tools/hciattach_tialt.$(OBJEXT) \
+ @TOOLS_TRUE@	tools/hciattach_ath3k.$(OBJEXT) \
++@TOOLS_TRUE@	tools/hciattach_rome.$(OBJEXT) \
+ @TOOLS_TRUE@	tools/hciattach_qualcomm.$(OBJEXT) \
+ @TOOLS_TRUE@	tools/hciattach_intel.$(OBJEXT) \
+ @TOOLS_TRUE@	tools/hciattach_bcm43xx.$(OBJEXT)
+@@ -2206,6 +2207,7 @@
+ @TOOLS_TRUE@						tools/hciattach_ti.c \
+ @TOOLS_TRUE@						tools/hciattach_tialt.c \
+ @TOOLS_TRUE@						tools/hciattach_ath3k.c \
++@TOOLS_TRUE@						tools/hciattach_rome.c \
+ @TOOLS_TRUE@						tools/hciattach_qualcomm.c \
+ @TOOLS_TRUE@						tools/hciattach_intel.c \
+ @TOOLS_TRUE@						tools/hciattach_bcm43xx.c
+@@ -4062,6 +4064,8 @@
+ 	tools/$(DEPDIR)/$(am__dirstamp)
+ tools/hciattach_ath3k.$(OBJEXT): tools/$(am__dirstamp) \
+ 	tools/$(DEPDIR)/$(am__dirstamp)
++tools/hciattach_rome.$(OBJEXT): tools/$(am__dirstamp) \
++	tools/$(DEPDIR)/$(am__dirstamp)
+ tools/hciattach_qualcomm.$(OBJEXT): tools/$(am__dirstamp) \
+ 	tools/$(DEPDIR)/$(am__dirstamp)
+ tools/hciattach_intel.$(OBJEXT): tools/$(am__dirstamp) \
+@@ -4748,6 +4752,7 @@
+ 	-rm -f tools/hci-tester.$(OBJEXT)
+ 	-rm -f tools/hciattach.$(OBJEXT)
+ 	-rm -f tools/hciattach_ath3k.$(OBJEXT)
++	-rm -f tools/hciattach_rome.$(OBJEXT)
+ 	-rm -f tools/hciattach_bcm43xx.$(OBJEXT)
+ 	-rm -f tools/hciattach_intel.$(OBJEXT)
+ 	-rm -f tools/hciattach_qualcomm.$(OBJEXT)
+@@ -5144,6 +5149,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hci-tester.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach_ath3k.Po@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach_rome.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach_bcm43xx.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach_intel.Po@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@tools/$(DEPDIR)/hciattach_qualcomm.Po@am__quote@

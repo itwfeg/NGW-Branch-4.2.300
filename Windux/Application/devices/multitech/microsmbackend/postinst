@@ -1,0 +1,26 @@
+#!/bin/sh
+
+echo "postinst: installing pycrypto..."
+tar xvzf /tmp/pycrypto-2.6.1-armle.tar.gz -C /
+
+echo "postinst: installing autoconfig..."
+update-rc.d autoconfig start 80 3 4 5 . stop 80 0 1 6 .
+
+echo "postinst: installing gatewayDiscovery..."
+update-rc.d gatewayDiscovery start 80 3 4 5 . stop 80 0 1 6 .
+
+echo "postinst: installing microSmBackend..."
+update-rc.d microSmBackend start 80 3 4 5 . stop 80 0 1 6 .
+
+echo "postinst: starting services..."
+chmod +x /etc/init.d/autoconfig
+/etc/init.d/autoconfig start
+
+chmod +x /etc/init.d/gatewayDiscovery
+/etc/init.d/gatewayDiscovery start
+
+chmod +x /etc/init.d/microSmBackend
+/etc/init.d/microSmBackend start
+
+echo "postinst: done!"
+

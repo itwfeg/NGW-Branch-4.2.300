@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Messages">
+      <UniqueIdentifier>{ca9db9c6-4dc3-42c8-a65d-b6999339589c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildNumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DBSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GCDSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionManagerHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionPrinter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WSSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\AddNewSessionMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\ChangePrimaryScaleMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\ChangeSynchronizationTypeMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\DisableInputProcessingMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\RebootMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\RemoveSessionStarterMessage.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\UIDialogMsg.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessKeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="evolution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GCDSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scaleModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionManagerHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WSSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\AddNewSessionMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\ChangePrimaryScaleMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\ChangeSynchronizationTypeMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\DisableInputProcessingMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\RebootMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\RemoveSessionStarterMessage.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\UIDialogMsg.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HobartCustomerHook\HobartCustomerHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

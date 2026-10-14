@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><FONT size="5">code128draw</FONT>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG></P>
+		<P>code128draw -f jpeg_file -b barstring -w width -h height</P>
+		<P>
+			Code128draw creates a jpg format file containing a Code&nbsp;128 format barcode 
+			in any one of the symbol sets A, B or C.</P>
+		<P><STRONG>Options</STRONG></P>
+		<P>
+			<TABLE id="Table1" cellSpacing="1" cellPadding="1" width="100%" border="0">
+				<TR>
+					<TD width="247">-b barstring</TD>
+					<TD>Text to encode.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-c charset</TD>
+					<TD>Code 128 symbol set. Must be either a, b or c. Note that symbol set c requires 
+						an even number of digits.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-f jpegfile</TD>
+					<TD>Path of jpg file to create.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-h height</TD>
+					<TD>Height of image in pixels.</TD>
+				</TR>
+				<TR>
+					<TD width="247">-w width</TD>
+					<TD>
+						Width of image in pixels.</TD>
+				</TR>
+			</TABLE>
+		</P>
+		<P><STRONG>Example</STRONG></P>
+		<P>Create an alpha-numeric barcode in symbol set b:</P>
+		<P>code128draw -f file.jpg -b&nbsp;"ABC12345678" -c&nbsp;b -w 300 -h 100</P>
+		<P>
+			Create a double density numeric barcode in symbol set c:</P>
+		<P>code128draw -f file.jpg -b&nbsp;"12345678" -c c -w 200 -h 100</P>
+		<P>&nbsp;</P>
+	</body>
+</html>

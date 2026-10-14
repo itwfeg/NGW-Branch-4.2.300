@@ -1,0 +1,5327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SuperProductDefaults</class>
+ <widget class="QWidget" name="SuperProductDefaults">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>22</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTabWidget" name="tabProductDefaults">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>941</width>
+     <height>561</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>941</width>
+     <height>561</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>941</width>
+     <height>561</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTabWidget#mainTab{
+/* whatever you want here */
+}
+QTabWidget::pane{
+	border-top: 2px solid rgb(0,176,240);
+	border: 3px solid rgb(0,176,240);
+}
+
+QTabWidget::tab-bar{
+	left: 10px;
+}
+
+QTabBar::tab{
+	border: 2px solid #C4C4C3;
+    border-color: rgb(0, 176, 240);
+	border-bottom-color: rgb(0,176,240);
+	height: 50px; 
+	width: 177px;
+	background: rgb(227, 227, 227); 
+	border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+}
+QTabBar::tab:selected{
+background:qlineargradient(spread:reflect, x1:0.005, y1:0, x2:1, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(66, 66, 66, 255));
+	border-color: rgb(0,176,240);
+	color:rgb(0,200,255);
+	/*border-bottom-color: rgb(0,176,240);*/
+	/*border-bottom-color: rgb(0,286,245);*/
+	border-bottom-color: rgb(0, 255, 255);
+
+    margin-top: 2px;
+	height: 48px;
+}
+
+QTabBar::tab:!selected{
+background:qlineargradient(spread:reflect, x1:0.005, y1:0, x2:1, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(66, 66, 66, 255));
+	border-color: rgb(0,176,240);
+	/*border-bottom-color: rgb(255,255,255);*/
+	color:rgb(255,255,255); 
+    margin-top: 2px;
+	height: 48px;
+}
+
+QTabBar::tab:first:selected{
+	margin-left: 0px;
+}
+
+QTabBar::tab:last:selected{
+	margin-right: 0px;
+}
+
+</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab0">
+    <attribute name="title">
+     <string>Main</string>
+    </attribute>
+    <widget class="QLabel" name="lblDescription">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>330</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Description</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblProductType">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>18</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Product type</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::NoTextInteraction</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cboProductType">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>261</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblReportingClass">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>256</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Reporting Class</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtReportingClass">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>250</y>
+       <width>261</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>7</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl1UPCType">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>UPC type</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cboUPCType">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>90</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>111</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>111</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="txtDescription">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>320</y>
+       <width>701</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>701</width>
+       <height>171</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>701</width>
+       <height>171</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="html">
+      <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:15pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="acceptRichText">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl1EANPrefix">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>110</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>181</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>181</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>EAN prefix</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtEANNumberSystem">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>90</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>111</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>111</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>3</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblEanFormatString">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>179</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>191</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>EAN format</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butEanFormatString">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>170</y>
+       <width>231</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>231</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>231</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblEan128FormatString">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>180</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>181</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>181</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>EAN128C format</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butEan128FormatString">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>170</y>
+       <width>261</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>261</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab1">
+    <attribute name="title">
+     <string>Pricing</string>
+    </attribute>
+    <widget class="QWidget" name="gbExceptionPrice" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>440</y>
+       <width>551</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblExceptionPrice">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>5</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Exception price</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtExceptionPrice">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="maxLength">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblExceptionPriceCurrSymbol">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>5</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>21</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>21</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">$</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbByCount" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>300</y>
+       <width>621</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblByCount">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>9</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>By count</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtByCount">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>3</number>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chkForcedByCount">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>10</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>191</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>191</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Forced by count</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbProportionalTare" native="true">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>300</y>
+       <width>551</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblProportionalTare">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>4</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Proportional tare</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtProportionalTare">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="maxLength">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl2ProportionalTarePercent">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>20</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">%</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbNetWeight" native="true">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>370</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblNetWeight">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>8</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Net weight</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtNetWeight">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="maxLength">
+       <number>5</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblNetWeightUnitSymbol">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>20</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>51</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>51</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true">oz</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbUnitPrice" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>160</y>
+       <width>621</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QCheckBox" name="chkForcedUnitPrice">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>10</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>201</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>201</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Forced price</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUnitPriceCurrSymbol">
+      <property name="geometry">
+       <rect>
+        <x>172</x>
+        <y>10</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>21</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>21</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">$</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtUnitPrice">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="maxLength">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUnitPriceUnitSymbol">
+      <property name="geometry">
+       <rect>
+        <x>312</x>
+        <y>20</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">lb</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUnitPrice">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Unit price</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbTare" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>621</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblTare">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>9</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string notr="true">Tare</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtTare">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+      <property name="maxLength">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chkForcedTare">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>10</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>201</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>201</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Forced tare</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblTareUnitSymbol">
+      <property name="geometry">
+       <rect>
+        <x>312</x>
+        <y>20</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>31</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="statusTip">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string notr="true">lb</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gbPoints" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>370</y>
+       <width>551</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblPoints">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Points</string>
+      </property>
+     </widget>
+     <widget class="hobart::numericLineEdit" name="txtPoints">
+      <property name="geometry">
+       <rect>
+        <x>192</x>
+        <y>5</y>
+        <width>111</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>111</width>
+        <height>41</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>19</pointsize>
+       </font>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="gb2Discount" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>871</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <widget class="QLabel" name="lblDiscount">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Discount</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="QWidget" name="gbGoldsilverBronze" native="true">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>2</y>
+        <width>663</width>
+        <height>65</height>
+       </rect>
+      </property>
+      <widget class="QFrame" name="goldFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>221</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#goldFrame{
+	background-color: rgb(0, 0, 0);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl2Discount1">
+        <property name="geometry">
+         <rect>
+          <x>46</x>
+          <y>0</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>141</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>141</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="statusTip">
+         <string notr="true"/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl2Discount1{
+	color: rgb(255, 255, 255);
+}</string>
+        </property>
+        <property name="text">
+         <string>Gold</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="silverFrame">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>0</y>
+         <width>221</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#silverFrame{
+	background-color: rgb(0, 0, 0);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl2Discount2">
+        <property name="geometry">
+         <rect>
+          <x>34</x>
+          <y>0</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>141</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>141</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="statusTip">
+         <string notr="true"/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl2Discount2{
+color: rgb(255, 255, 255);
+}</string>
+        </property>
+        <property name="text">
+         <string>Silver</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="bronzeFrame">
+       <property name="geometry">
+        <rect>
+         <x>441</x>
+         <y>0</y>
+         <width>221</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#bronzeFrame{
+	background-color: rgb(0,0,0);
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl2Discount3">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>0</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>141</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>141</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel#lbl2Discount3{
+	color: rgb(255, 255, 255);
+}</string>
+        </property>
+        <property name="text">
+         <string>Bronze</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>17</y>
+         <width>221</width>
+         <height>44</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblDisc1CurrSymbol">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>5</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>41</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>41</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">$</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="hobart::numericLineEdit" name="txtDiscount1">
+        <property name="geometry">
+         <rect>
+          <x>58</x>
+          <y>2</y>
+          <width>121</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+         </font>
+        </property>
+        <property name="maxLength">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl2Discount1PercentSymbol">
+        <property name="geometry">
+         <rect>
+          <x>184</x>
+          <y>5</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">%</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_2">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>17</y>
+         <width>221</width>
+         <height>44</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblDisc2CurrSymbol">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="statusTip">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">$</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="hobart::numericLineEdit" name="txtDiscount2">
+        <property name="geometry">
+         <rect>
+          <x>52</x>
+          <y>2</y>
+          <width>121</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+         </font>
+        </property>
+        <property name="maxLength">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl2Discount2PercentSymbol">
+        <property name="geometry">
+         <rect>
+          <x>177</x>
+          <y>5</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">%</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_3">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>17</y>
+         <width>221</width>
+         <height>44</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lblDisc3CurrSymbol">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>5</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>41</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>41</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string notr="true"/>
+        </property>
+        <property name="statusTip">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">$</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="hobart::numericLineEdit" name="txtDiscount3">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>2</y>
+          <width>121</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>121</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+         </font>
+        </property>
+        <property name="maxLength">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl2Discount3PercentSymbol">
+        <property name="geometry">
+         <rect>
+          <x>179</x>
+          <y>6</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>31</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">%</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </widget>
+      <zorder>frame</zorder>
+      <zorder>frame_2</zorder>
+      <zorder>silverFrame</zorder>
+      <zorder>goldFrame</zorder>
+      <zorder>frame_3</zorder>
+      <zorder>bronzeFrame</zorder>
+     </widget>
+    </widget>
+    <widget class="QComboBox" name="cboDiscountType">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>20</y>
+       <width>441</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>441</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>441</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblDiscountType">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>24</y>
+       <width>191</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Discount type</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab2">
+    <attribute name="title">
+     <string>Product Life</string>
+    </attribute>
+    <widget class="QLabel" name="lblShelfLifeDays">
+     <property name="geometry">
+      <rect>
+       <x>487</x>
+       <y>40</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>days</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QFrame" name="gbDontPrintCheckBoxes">
+     <property name="geometry">
+      <rect>
+       <x>89</x>
+       <y>280</y>
+       <width>741</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget#gbDontPrintCheckBoxes{
+	background-color: rgb(255, 255, 255);
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <widget class="QCheckBox" name="chkDontPrintBestBefore">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>92</y>
+        <width>721</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Don't print best before</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chkDontPrintPackedOn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>12</y>
+        <width>721</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Don't print packed on</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chkDontPrintSellBy">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>52</y>
+        <width>721</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QCheckBox::indicator{
+	width: 30px;
+	height: 30px;
+}</string>
+      </property>
+      <property name="text">
+       <string>Don't print sell by</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="lblProductLifeDays">
+     <property name="geometry">
+      <rect>
+       <x>487</x>
+       <y>110</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>days</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblProductLife">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>391</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Product Life</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtProductLifeHours">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>106</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>3</number>
+     </property>
+     <property name="placeholderText">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtShelfLifeHours">
+     <property name="geometry">
+      <rect>
+       <x>589</x>
+       <y>35</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>3</number>
+     </property>
+     <property name="placeholderText">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtShelfLifeDays">
+     <property name="geometry">
+      <rect>
+       <x>412</x>
+       <y>35</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>4</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblShelfLifeHours">
+     <property name="geometry">
+      <rect>
+       <x>667</x>
+       <y>40</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>hours</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="hobart::numericLineEdit" name="txtProductLifeDays">
+     <property name="geometry">
+      <rect>
+       <x>413</x>
+       <y>106</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="inputMask">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="maxLength">
+      <number>4</number>
+     </property>
+     <property name="placeholderText">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblProductLifeHours">
+     <property name="geometry">
+      <rect>
+       <x>667</x>
+       <y>110</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>hours</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblShelfLife">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>39</y>
+       <width>391</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Shelf Life</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblProdPlanningType">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>170</y>
+       <width>391</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Production Data Type</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cboProductionPlanningType">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>180</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>141</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>141</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab3">
+    <attribute name="title">
+     <string>Labeling</string>
+    </attribute>
+    <widget class="QTabWidget" name="tabSubLabelTypes">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>921</width>
+       <height>491</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabWidget#mainTab{
+/* whatever you want here */
+}
+QTabWidget::pane{
+	border-top: 2px solid rgb(0,176,240);
+	border: 3px solid rgb(0,176,240);
+}
+
+QTabWidget::tab-bar{
+	left: 10px;
+}
+
+QTabBar::tab{
+	border: 2px solid #C4C4C3;
+    border-color: rgb(0, 176, 240);
+	border-bottom-color: rgb(0,176,240);
+	height: 50px; 
+	min-width: 191px;
+	background: rgb(227, 227, 227); 
+	border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+}
+QTabBar::tab:selected{
+background:qlineargradient(spread:reflect, x1:0.005, y1:0, x2:1, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(66, 66, 66, 255));
+	border-color: rgb(0,176,240);
+	color:rgb(0,200,255);
+	/*border-bottom-color: rgb(0,176,240);*/
+	/*border-bottom-color: rgb(0,286,245);*/
+	border-bottom-color: rgb(0, 255, 255);
+
+    margin-top: 2px;
+	height: 48px;
+}
+
+QTabBar::tab:!selected{
+background:qlineargradient(spread:reflect, x1:0.005, y1:0, x2:1, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(66, 66, 66, 255));
+	border-color: rgb(0,176,240);
+	/*border-bottom-color: rgb(255,255,255);*/
+	color:rgb(255,255,255); 
+    margin-top: 2px;
+	height: 48px;
+}
+
+QTabBar::tab:first:selected{
+	margin-left: 0px;
+}
+
+QTabBar::tab:last:selected{
+	margin-right: 0px;
+}
+
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabLabelTypes">
+      <attribute name="title">
+       <string>Types</string>
+      </attribute>
+      <widget class="QLabel" name="lblLabelType">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Default type</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtDefaultPriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>40</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtDefaultSecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>40</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtDefaultTriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>40</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblManualLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Manual</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblPrepackLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>160</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Prepack</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblProdEntryLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Production entry</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblSelfServLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>280</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Self service</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtManualSecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>100</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtManualTriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>100</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtManualPriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPrepackSecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>160</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPrepackTriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>160</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPrepackPriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>160</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtProdEntryPriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>220</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtProdEntrySecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>220</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtProdEntryTriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>220</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtSelfServPriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>280</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtSelfServSecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>280</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtSelfServTriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>280</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblPrimaryLabelTitle">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>20</y>
+         <width>199</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lblPrimaryLabelTitle{
+	color: white;
+    background-color: black;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="text">
+        <string>Primary</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblSecondaryLabelTitle">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>20</y>
+         <width>199</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lblSecondaryLabelTitle{
+	color: white;
+    background-color: black;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="text">
+        <string>Second</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblThirdLabelTitle">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>20</y>
+         <width>199</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel#lblThirdLabelTitle{
+	color: white;
+    background-color: black;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="text">
+        <string>Third</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPick5PriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>340</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPick5TriLabelType">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>340</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="hobart::numericLineEdit" name="txtPick5SecLabelType">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>340</y>
+         <width>201</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblPick5Label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>340</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Pick 5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabLabelSupport">
+      <attribute name="title">
+       <string>Support</string>
+      </attribute>
+      <widget class="QWidget" name="wgtIntake" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>380</y>
+         <width>871</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="lblIntakeMode">
+        <property name="geometry">
+         <rect>
+          <x>3</x>
+          <y>5</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Intake mode  </string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboIntakeMode">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>0</y>
+          <width>621</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="wgtWrapper" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>871</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="lblApplierRotation">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Applier rotation</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboSecondApplierRotation">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>10</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboThirdLabelPlacement">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>57</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboPrimaryApplierRotation">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboSecondLabelPlacement">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>57</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboThirdApplierRotation">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>10</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblLabelPlacement">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>60</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Label placement</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboPrimaryLabelPlacement">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>57</y>
+          <width>201</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="wgtLabelGraphics" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>871</width>
+         <height>191</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="lblGraphic1">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Graphic 1</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboGraphic1">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>15</y>
+          <width>621</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>621</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblGraphic3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>109</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Graphic 3</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblGraphic2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>65</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Graphic 2</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboGraphic4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>150</y>
+          <width>621</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>621</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboGraphic3">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>105</y>
+          <width>621</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>621</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblGraphic4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>150</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Graphic 4</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cboGraphic2">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>60</y>
+          <width>621</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>621</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>621</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="butPlacementView">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>323</y>
+         <width>171</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>51</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>51</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Placement View</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab4">
+    <attribute name="title">
+     <string notr="true">Barcodes</string>
+    </attribute>
+    <widget class="QLabel" name="lblFW_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fixed Weight GTIN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblBC_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>By Count GTIN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblRW_AI">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Random Weight AI</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblRW_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Random Weight GTIN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFW_AI">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fixed Weight AI</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblBC_AI">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>By Count AI</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butRW_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>40</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFW_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>40</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butRW_AI">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>120</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butBC_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>40</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butBC_AI">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>120</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFW_AI">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>120</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFL_AI">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fluid Ounce AI</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFL_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>130</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fluid Ounce GTIN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFL_AI">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>120</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFL_GTIN">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>40</y>
+       <width>351</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butBC_QR">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>250</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFL_QR">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>250</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFW_QR">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>250</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butRW_QR">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>250</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butRW_DM">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>340</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFW_DM">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>340</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butFL_DM">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>340</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="butBC_DM">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>340</y>
+       <width>551</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>351</width>
+       <height>51</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblBC_QR">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>By Count QR Code</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblBC_DM">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>350</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>By Count Data Matrix</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFL_QR">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fluid Ounce QR Code</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFL_DM">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>350</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fluid Oz Data Matrix</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFW_QR">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fixed Weight QR Code</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblFW_DM">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>350</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Fixed Wt Data Matrix</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblRW_QR">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>260</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Random Wt. QR Code</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblRW_DM">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>350</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>301</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Random Wt Data Matrix</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>hobart::numericLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">numericlineedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

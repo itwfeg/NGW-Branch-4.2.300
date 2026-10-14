@@ -1,0 +1,1294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B37D8EB8-4B06-44F3-8906-E73280225D89}</ProjectGuid>
+    <RootNamespace>HFC</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\e_string;..\..\source\db\util\thread;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\drivers;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\source\comm\email;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4244;4102;4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\e_string;..\..\source\db\util\thread;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\drivers;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\HobartCustomerHook;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\source\comm\email;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;_CRT_SECURE_NO_DEPRECATE;Q_OS_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4100;4244;4102;4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\e_string;..\..\source\db\util\thread;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\drivers;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\HobartCustomerHook;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\source\comm\email;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\e_string;..\..\source\db\util\thread;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\VersionManager\include;..\..\source\core\Synchronization;..\..\source\db;..\..\source\db\util;..\..\source\db\util\filesys;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\HandsFreeDevice\Include;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\drivers;..\..\source\HFC\messages;..\..\source\HFC\reports;..\..\source\HFC\tags;..\..\HobartCustomerHook;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\source\comm\email;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;WIN32_OS;EVOL_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <AdditionalDependencies>Iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractGraphicManager.cpp" />
+    <ClCompile Include="AccessKeys.cpp" />
+    <ClCompile Include="AllBarcodeScanners.cpp" />
+    <ClCompile Include="AllCat3AuditTrailRecords.cpp" />
+    <ClCompile Include="AllCategories.cpp" />
+    <ClCompile Include="AllCoolCategories.cpp" />
+    <ClCompile Include="AllCoolCountries.cpp" />
+    <ClCompile Include="AllCoolPretexts.cpp" />
+    <ClCompile Include="AllCoolProductionSteps.cpp" />
+    <ClCompile Include="AllCoolTexts.cpp" />
+    <ClCompile Include="AllDepts.cpp" />
+    <ClCompile Include="AllEmailAlerts.cpp" />
+    <ClCompile Include="AllExpirationLabels.cpp" />
+    <ClCompile Include="AllExternalPrinters.cpp" />
+    <ClCompile Include="AllGenericLabelTexts.cpp" />
+    <ClCompile Include="AllOperators.cpp" />
+    <ClCompile Include="AllProductTextCfgs.cpp" />
+    <ClCompile Include="AllRecalls.cpp" />
+    <ClCompile Include="AllSpecials.cpp" />
+    <ClCompile Include="BackupRestoreErrors.cpp" />
+    <ClCompile Include="BackupRestoreInitiateReadAllMsg.cpp" />
+    <ClCompile Include="BackupRestoreManager.cpp" />
+    <ClCompile Include="BackupRestoreProgress.cpp" />
+    <ClCompile Include="BackupRestoreSelections.cpp" />
+    <ClCompile Include="BarCodeNumber.cpp" />
+    <ClCompile Include="BarcodeScannerManager.cpp" />
+    <ClCompile Include="Batch.cpp" />
+    <ClCompile Include="BatchManager.cpp" />
+    <ClCompile Include="Cat3AuditTrailRecord.cpp" />
+    <ClCompile Include="Category.cpp" />
+    <ClCompile Include="CategoryGraphicManager.cpp" />
+    <ClCompile Include="CategoryManager.cpp" />
+    <ClCompile Include="CfgAccumulateItems.cpp" />
+    <ClCompile Include="CfgAll.cpp" />
+    <ClCompile Include="CfgBase.cpp" />
+    <ClCompile Include="CfgCommInterface.cpp" />
+    <ClCompile Include="CfgCommScheduled.cpp" />
+    <ClCompile Include="CfgCurrency.cpp" />
+    <ClCompile Include="CfgEmail.cpp" />
+    <ClCompile Include="CfgFrequentShopper.cpp" />
+    <ClCompile Include="CfgFTP.cpp" />
+    <ClCompile Include="CfgGCD.cpp" />
+    <ClCompile Include="CfgGenericLabelText.cpp" />
+    <ClCompile Include="CfgInternal.cpp" />
+    <ClCompile Include="CfgItem.cpp" />
+    <ClCompile Include="CfgMarquee.cpp" />
+    <ClCompile Include="CfgNetwork.cpp" />
+    <ClCompile Include="CfgOperatorAccess.cpp" />
+    <ClCompile Include="CfgPrepack.cpp" />
+    <ClCompile Include="CfgPrintedFields.cpp" />
+    <ClCompile Include="CfgScale.cpp" />
+    <ClCompile Include="CfgSelfService.cpp" />
+    <ClCompile Include="CfgStoreInfo.cpp" />
+    <ClCompile Include="CfgSupportedLabelLengths.cpp" />
+    <ClCompile Include="CfgSynchronization.cpp" />
+    <ClCompile Include="Class.cpp" />
+    <ClCompile Include="ClassManager.cpp" />
+    <ClCompile Include="ClassTotal.cpp" />
+    <ClCompile Include="ClassTotalManager.cpp" />
+    <ClCompile Include="ClassTree.cpp" />
+    <ClCompile Include="ClassTreeBranch.cpp" />
+    <ClCompile Include="CommHistory.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="ConfigurationAccess.cpp" />
+    <ClCompile Include="ConfigurationManager.cpp" />
+    <ClCompile Include="COOLCategory.cpp" />
+    <ClCompile Include="COOLCategoryCountry.cpp" />
+    <ClCompile Include="COOLCategoryCountryManager.cpp" />
+    <ClCompile Include="COOLCategoryManager.cpp" />
+    <ClCompile Include="COOLCategoryPretext.cpp" />
+    <ClCompile Include="COOLCategoryPretextManager.cpp" />
+    <ClCompile Include="COOLCategoryProdStep.cpp" />
+    <ClCompile Include="COOLCategoryProdStepManager.cpp" />
+    <ClCompile Include="COOLCountry.cpp" />
+    <ClCompile Include="COOLCountryManager.cpp" />
+    <ClCompile Include="COOLList.cpp" />
+    <ClCompile Include="COOLListText.cpp" />
+    <ClCompile Include="COOLListTextManager.cpp" />
+    <ClCompile Include="COOLManager.cpp" />
+    <ClCompile Include="COOLManagerCategory.cpp" />
+    <ClCompile Include="COOLManagerCategoryCountry.cpp" />
+    <ClCompile Include="COOLManagerCategoryPretext.cpp" />
+    <ClCompile Include="COOLManagerCategoryProductionStep.cpp" />
+    <ClCompile Include="COOLManagerCountry.cpp" />
+    <ClCompile Include="COOLManagerPretext.cpp" />
+    <ClCompile Include="COOLManagerProductionStep.cpp" />
+    <ClCompile Include="COOLManagerShortlist.cpp" />
+    <ClCompile Include="COOLManagerText.cpp" />
+    <ClCompile Include="COOLPretext.cpp" />
+    <ClCompile Include="COOLPretextManager.cpp" />
+    <ClCompile Include="COOLProductionStep.cpp" />
+    <ClCompile Include="COOLProductionStepManager.cpp" />
+    <ClCompile Include="COOLShortlist.cpp" />
+    <ClCompile Include="COOLShortlistManager.cpp" />
+    <ClCompile Include="COOLText.cpp" />
+    <ClCompile Include="COOLTextManager.cpp" />
+    <ClCompile Include="CoolTotal.cpp" />
+    <ClCompile Include="COOLTotalManager.cpp" />
+    <ClCompile Include="CutTestDetailsOption1.cpp" />
+    <ClCompile Include="CutTestHistoryListing.cpp" />
+    <ClCompile Include="CutTestTotal.cpp" />
+    <ClCompile Include="CutTestTotalManager.cpp" />
+    <ClCompile Include="CuttingTest.cpp" />
+    <ClCompile Include="CuttingTestReport.cpp" />
+    <ClCompile Include="DataManager.cpp" />
+    <ClCompile Include="DBAccess.cpp" />
+    <ClCompile Include="Dept.cpp" />
+    <ClCompile Include="DeptManager.cpp" />
+    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="DeviceManager.cpp" />
+    <ClCompile Include="DevicesList.cpp" />
+    <ClCompile Include="devices\HfcCLARemoveUpgradeFiles.cpp" />
+    <ClCompile Include="devices\HfcCLASysInfo.cpp" />
+    <ClCompile Include="devices\HfcCLASysInfoWrite.cpp" />
+    <ClCompile Include="devices\HfcCLASysStatus.cpp" />
+    <ClCompile Include="devices\HfcCLATestComplete.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperEventCapture.cpp" />
+    <ClCompile Include="devices\HfcKPCBootLoaderStatus.cpp" />
+    <ClCompile Include="devices\HfcKPCBootUpgraderStatus.cpp" />
+    <ClCompile Include="devices\HfcKPCLoaderInfo.cpp" />
+    <ClCompile Include="devices\HfcKPCLoaderProgress.cpp" />
+    <ClCompile Include="devices\HfcKPCUpgradeInfo.cpp" />
+    <ClCompile Include="devices\HfcKPCUpgradeProgress.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierSetup.cpp" />
+    <ClCompile Include="devices\HfcLabelPrintingCounts.cpp" />
+    <ClCompile Include="devices\HfcNGWDimensionOverrides.cpp" />
+    <ClCompile Include="devices\HfcNGWStartUpgrade.cpp" />
+    <ClCompile Include="devices\HfcNGWUpgradeInfo.cpp" />
+    <ClCompile Include="devices\HfcNGWUpgradeProgress.cpp" />
+    <ClCompile Include="devices\HfcNGWUpgradeRequired.cpp" />
+    <ClCompile Include="devices\HfcNGWUpgradeStatus.cpp" />
+    <ClCompile Include="devices\HfcNGWWrapperPause.cpp" />
+    <ClCompile Include="devices\HfcNGWWrapperResume.cpp" />
+    <ClCompile Include="devices\HfcPrinterCutterStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterDefaultsComplete.cpp" />
+    <ClCompile Include="devices\HfcPrinterGapCalStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterHeadDotStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterHeadDotWear.cpp" />
+    <ClCompile Include="devices\HfcPrinterHeadType.cpp" />
+    <ClCompile Include="devices\HfcPrinterHeadWear.cpp" />
+    <ClCompile Include="devices\HfcPrinterRequestLabelSizing.cpp" />
+    <ClCompile Include="devices\HfcPrinterTest.cpp" />
+    <ClCompile Include="devices\HfcPrinterTestCassette.cpp" />
+    <ClCompile Include="devices\HfcPrinterUseContinuousStock.cpp" />
+    <ClCompile Include="devices\HfcRequestPrinterLabelCount.cpp" />
+    <ClCompile Include="devices\HfcWeigherCat3AuditRecords.cpp" />
+    <ClCompile Include="devices\HfcWeigherCat3RecordStatus.cpp" />
+    <ClCompile Include="devices\HfcWeigherCat3Statistics.cpp" />
+    <ClCompile Include="devices\HfcProductLookupMsg.cpp" />
+    <ClCompile Include="devices\HfcScannerProductRead.cpp" />
+    <ClCompile Include="devices\HfcWeigherDefaultsComplete.cpp" />
+    <ClCompile Include="devices\HfcWeigherSystemValueMax.cpp" />
+    <ClCompile Include="devices\HfcWeigherValueMaxFitParams.cpp" />
+    <ClCompile Include="devices\HfcWriteFpmManData.cpp" />
+    <ClCompile Include="devices\HfcWrPPPCalibration.cpp" />
+    <ClCompile Include="devices\HfcWrPPPConfig.cpp" />
+    <ClCompile Include="devices\HfcWrPPPDistance.cpp" />
+    <ClCompile Include="devices\HfcWrPPPRequest.cpp" />
+    <ClCompile Include="devices\HfcWrPPPStatus.cpp" />
+    <ClCompile Include="devices\HfcWrPPPTest.cpp" />
+    <ClCompile Include="devices\HfcWrPPPVersion.cpp" />
+    <ClCompile Include="DirectoryList.cpp" />
+    <ClCompile Include="drivers\HobBarCodeFormatter.cpp" />
+    <ClCompile Include="drivers\stringformatter.cpp" />
+    <ClCompile Include="EmailAlertsManager.cpp" />
+    <ClCompile Include="EvolWrapperErrorHistoryManager.cpp" />
+    <ClCompile Include="EvolWrapperKnifeHistory.cpp" />
+    <ClCompile Include="EvolWrapperKnifeHistoryManager.cpp" />
+    <ClCompile Include="EvolWrapperTimingsManager.cpp" />
+    <ClCompile Include="ExpirationLabel.cpp" />
+    <ClCompile Include="ExpirationLabelManager.cpp" />
+    <ClCompile Include="ExternalCommSupport.cpp" />
+    <ClCompile Include="FeaturedCategory.cpp" />
+    <ClCompile Include="FlashFile.cpp" />
+    <ClCompile Include="FlashFileManager.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FooterRecord.cpp" />
+    <ClCompile Include="FrequentShopper.cpp" />
+    <ClCompile Include="GenericHfcObject.cpp" />
+    <ClCompile Include="GenericLabelText.cpp" />
+    <ClCompile Include="GenericLabelTextManager.cpp" />
+    <ClCompile Include="Graphic.cpp" />
+    <ClCompile Include="GraphicFileNames.cpp" />
+    <ClCompile Include="GraphicManager.cpp" />
+    <ClCompile Include="HeaderRecord.cpp" />
+    <ClCompile Include="HfcError.cpp" />
+    <ClCompile Include="HfcErrorClass.cpp" />
+    <ClCompile Include="HfcErrorFont.cpp" />
+    <ClCompile Include="HfcErrorGraphic.cpp" />
+    <ClCompile Include="HfcErrorIndexNum.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperSystemInfo.cpp" />
+    <ClCompile Include="HfcHidDeviceEvent.cpp" />
+    <ClCompile Include="HFCManagerContainer.cpp" />
+    <ClCompile Include="HfcObject.cpp" />
+    <ClCompile Include="HfcPeripheralList.cpp" />
+    <ClCompile Include="HfcPingResponse.cpp" />
+    <ClCompile Include="HfcProductDescLookup.cpp" />
+    <ClCompile Include="HfcProductLabelFormSizeMsg.cpp" />
+    <ClCompile Include="HfcRequestPeripheralList.cpp" />
+    <ClCompile Include="HfcRequestPing.cpp" />
+    <ClCompile Include="HfcResponse.cpp" />
+    <ClCompile Include="HfcStartReport.cpp" />
+    <ClCompile Include="HfcUpdateStatus.cpp" />
+    <ClCompile Include="HobAllAccumulatedItems.cpp" />
+    <ClCompile Include="HobDateTime.cpp" />
+    <ClCompile Include="HobEmailAlert.cpp" />
+    <ClCompile Include="HobIpAddress.cpp" />
+    <ClCompile Include="HobList.cpp" />
+    <ClCompile Include="HobOperator.cpp" />
+    <ClCompile Include="HobString.cpp" />
+    <ClCompile Include="HobToken.cpp" />
+    <ClCompile Include="HobTokenizer.cpp" />
+    <ClCompile Include="HobTokenizerBar.cpp" />
+    <ClCompile Include="HobTokenizerCSV.cpp" />
+    <ClCompile Include="HobTokenizerTSV.cpp" />
+    <ClCompile Include="HobTokenizerUS.cpp" />
+    <ClCompile Include="HobTokenTagged.cpp" />
+    <ClCompile Include="HourlyTotal.cpp" />
+    <ClCompile Include="HourlyTotalManager.cpp" />
+    <ClCompile Include="ImportManager.cpp" />
+    <ClCompile Include="ImportSelections.cpp" />
+    <ClCompile Include="KnifeTimeHistory.cpp" />
+    <ClCompile Include="LabelGraphicManager.cpp" />
+    <ClCompile Include="LabelStockDescriptor.cpp" />
+    <ClCompile Include="LabelType.cpp" />
+    <ClCompile Include="LabelTypeManager.cpp" />
+    <ClCompile Include="messages\ListCameraSystemPredictions.cpp" />
+    <ClCompile Include="messages\NowServingQueueManagementMessage.cpp" />
+    <ClCompile Include="MultiLanguageText.cpp" />
+    <ClCompile Include="NotifyLocalBatches.cpp" />
+    <ClCompile Include="NutriDataColumn.cpp" />
+    <ClCompile Include="Nutrifacts.cpp" />
+    <ClCompile Include="NutrifactsManager.cpp" />
+    <ClCompile Include="OnlineOrderProduct.cpp" />
+    <ClCompile Include="OperatorChange.cpp" />
+    <ClCompile Include="OperatorChangeManager.cpp" />
+    <ClCompile Include="OperatorChangeSummary.cpp" />
+    <ClCompile Include="OperatorManager.cpp" />
+    <ClCompile Include="OperatorNote.cpp" />
+    <ClCompile Include="OperatorNoteManager.cpp" />
+    <ClCompile Include="OperatorTotal.cpp" />
+    <ClCompile Include="OperatorTotalManager.cpp" />
+    <ClCompile Include="Peripheral.cpp" />
+    <ClCompile Include="PeripheralManager.cpp" />
+    <ClCompile Include="PlanogramGraphicManager.cpp" />
+    <ClCompile Include="PresentationMethod.cpp" />
+    <ClCompile Include="PresentationMethodManager.cpp" />
+    <ClCompile Include="PrinterInfo.cpp" />
+    <ClCompile Include="Product.cpp" />
+    <ClCompile Include="ProductDefault.cpp" />
+    <ClCompile Include="ProductDefaultManager.cpp" />
+    <ClCompile Include="ProductGraphicManager.cpp" />
+    <ClCompile Include="ProductManager.cpp" />
+    <ClCompile Include="ProductRunTotal.cpp" />
+    <ClCompile Include="ProductStatistic.cpp" />
+    <ClCompile Include="ProductText.cpp" />
+    <ClCompile Include="ProductTextCfg.cpp" />
+    <ClCompile Include="ProductTextCfgManager.cpp" />
+    <ClCompile Include="ProductTextManager.cpp" />
+    <ClCompile Include="ProductTotal.cpp" />
+    <ClCompile Include="ProductTotalManager.cpp" />
+    <ClCompile Include="ProductTransaction.cpp" />
+    <ClCompile Include="ProductTransactionMaster.cpp" />
+    <ClCompile Include="ProductTree.cpp" />
+    <ClCompile Include="ProductTreeBranch.cpp" />
+    <ClCompile Include="ReadBatchesRecord.cpp" />
+    <ClCompile Include="ReadSoftKeyParams.cpp" />
+    <ClCompile Include="Recall.cpp" />
+    <ClCompile Include="RecallManager.cpp" />
+    <ClCompile Include="RecordTreeBranch.cpp" />
+    <ClCompile Include="RegisterSecondaryScale.cpp" />
+    <ClCompile Include="RemotePrintRequest.cpp" />
+    <ClCompile Include="RemotePrintTemplateRequest.cpp" />
+    <ClCompile Include="reports\GenericTextReport.cpp" />
+    <ClCompile Include="reports\OperatorChangesReport.cpp" />
+    <ClCompile Include="reports\SupervisorChangesReport.cpp" />
+    <ClCompile Include="reports\WeigherAuditTrailReport.cpp" />
+    <ClCompile Include="ResponseMessageManager.cpp" />
+    <ClCompile Include="Scale.cpp" />
+    <ClCompile Include="ScaleManager.cpp" />
+    <ClCompile Include="ScaleStatus.cpp" />
+    <ClCompile Include="Softkey.cpp" />
+    <ClCompile Include="SoftkeyFeature.cpp" />
+    <ClCompile Include="SoftkeyFeatureManager.cpp" />
+    <ClCompile Include="SoftkeyGraphicManager.cpp" />
+    <ClCompile Include="SoftkeyGroup.cpp" />
+    <ClCompile Include="SoftkeyGroupManager.cpp" />
+    <ClCompile Include="SoftkeyManager.cpp" />
+    <ClCompile Include="SoftkeyScriptManager.cpp" />
+    <ClCompile Include="SoftkeyStyle.cpp" />
+    <ClCompile Include="SoftkeyStyleManager.cpp" />
+    <ClCompile Include="Special.cpp" />
+    <ClCompile Include="SpecialsGraphicManager.cpp" />
+    <ClCompile Include="SpecialsManager.cpp" />
+    <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="StreamingGraphic.cpp" />
+    <ClCompile Include="StreamingGraphicManager.cpp" />
+    <ClCompile Include="StreamingGraphicsList.cpp" />
+    <ClCompile Include="SynchronizationChange.cpp" />
+    <ClCompile Include="SynchronizationChangeManager.cpp" />
+    <ClCompile Include="SynchronizationRecord.cpp" />
+    <ClCompile Include="SynchronizationStatus.cpp" />
+    <ClCompile Include="SystemFontConversionTable.cpp" />
+    <ClCompile Include="SystemPrinters.cpp" />
+    <ClCompile Include="tags\BarcodeScannerTags.cpp" />
+    <ClCompile Include="tags\DeptTags.cpp" />
+    <ClCompile Include="tags\DeviceTags.cpp" />
+    <ClCompile Include="tags\ProductTextCfgTags.cpp" />
+    <ClCompile Include="tags\PrinterTags.cpp" />
+    <ClCompile Include="tags\WeigherTags.cpp" />
+    <ClCompile Include="Tare.cpp" />
+    <ClCompile Include="TerminateMessage.cpp" />
+    <ClCompile Include="TextLinks.cpp" />
+    <ClCompile Include="Total.cpp" />
+    <ClCompile Include="TouchScreenCalibrationStep.cpp" />
+    <ClCompile Include="Transaction.cpp" />
+    <ClCompile Include="TransactionManager.cpp" />
+    <ClCompile Include="TransactionType.cpp" />
+    <ClCompile Include="TransactionTypeManager.cpp" />
+    <ClCompile Include="VersionInfo.cpp" />
+    <ClCompile Include="WeigherInfo.cpp" />
+    <ClCompile Include="WeighModeTotalType.cpp" />
+    <ClCompile Include="WindowsConfigurationManager.cpp" />
+    <ClCompile Include="WriteSingleField.cpp" />
+    <ClCompile Include="CutTestManager.cpp" />
+    <ClCompile Include="devices\EVMMemoryStatistics.cpp" />
+    <ClCompile Include="devices\HfcAccessKeyActivation.cpp" />
+    <ClCompile Include="devices\HfcAccessKeyDeactivation.cpp" />
+    <ClCompile Include="devices\HfcCUEvolWrapperStatus.cpp" />
+    <ClCompile Include="devices\HfcEVMMemoryStatistics.cpp" />
+    <ClCompile Include="devices\HfcEvolLabelApplierConfig.cpp" />
+    <ClCompile Include="devices\HfcEvolLabelApplierInquire.cpp" />
+    <ClCompile Include="devices\HfcEvolLabelApplierPositionInfo.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperAllHtBoxesOneParam.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperAllTrayTypes.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCameraCalibration.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCameraHeightScan.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCameraScan.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCamerasTracking.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCameraThreshold.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperChangeTrayTypePrecedence.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperConfig.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperConfigLabelWidthUpdate.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperControl.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperCycleCount.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperErrorHistory.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperErrorHistoryList.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperHeightBox.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperHeightBoxParam.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperInquire.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperKnifeTimeHistory.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperLoad.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperMotorProfile.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperPackageDesc.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperPackageHistory.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperPackageTimings.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperPackageTimingsPointer.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperPkgDetectorStatus.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperRemoveUpgradeFiles.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperRenameHeightBox.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperReqUIModel.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperSensors.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperSettings.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperStatus.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperSystemInfoWrite.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperTest.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperTestComplete.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperTrayType.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperUIModel.cpp" />
+    <ClCompile Include="devices\HfcEvolWrapperWrapBox.cpp" />
+    <ClCompile Include="devices\HfcGCDDevError.cpp" />
+    <ClCompile Include="devices\HfcGCDDevFileInfo.cpp" />
+    <ClCompile Include="devices\HfcGCDDevRequestFileUpload.cpp" />
+    <ClCompile Include="devices\HfcGCDDevStatus.cpp" />
+    <ClCompile Include="devices\HfcGCDSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcILARequestSpeed.cpp" />
+    <ClCompile Include="devices\HfcILASpeed.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierConfig.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierInquire.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierMode.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierSensors.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierSensorsTracking.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierStatus.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierSystemRequestStatus.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcLabelApplierTest.cpp" />
+    <ClCompile Include="devices\HfcMarqueeSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcMarqueeTest.cpp" />
+    <ClCompile Include="devices\HfcNetworkStatus.cpp" />
+    <ClCompile Include="devices\HfcNumericSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcNumericTest.cpp" />
+    <ClCompile Include="devices\HfcOperationModeStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterAdvanceLabelStock.cpp" />
+    <ClCompile Include="devices\HfcPrinterConfig.cpp" />
+    <ClCompile Include="devices\HfcPrinterInquire.cpp" />
+    <ClCompile Include="devices\HfcPrinterNewAddress.cpp" />
+    <ClCompile Include="devices\HfcPrinterPrinterType.cpp" />
+    <ClCompile Include="devices\HfcPrinterPrinterTypeTracking.cpp" />
+    <ClCompile Include="devices\HfcPrinterPrintTestLabel.cpp" />
+    <ClCompile Include="devices\HfcPrinterRequestCalibrate.cpp" />
+    <ClCompile Include="devices\HfcPrinterRequestInquire.cpp" />
+    <ClCompile Include="devices\HfcPrinterRequestPrintheadPower.cpp" />
+    <ClCompile Include="devices\HfcPrinterRequestStockMetrics.cpp" />
+    <ClCompile Include="devices\HfcPrinterSensors.cpp" />
+    <ClCompile Include="devices\HfcPrinterSensorsTracking.cpp" />
+    <ClCompile Include="devices\HfcPrinterSetPrinters.cpp" />
+    <ClCompile Include="devices\HfcPrinterStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterStockMetrics.cpp" />
+    <ClCompile Include="devices\HfcPrinterSystemConfig.cpp" />
+    <ClCompile Include="devices\HfcPrinterSystemInquire.cpp" />
+    <ClCompile Include="devices\HfcPrinterSystemRequestStatus.cpp" />
+    <ClCompile Include="devices\HfcPrinterSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcPrintheadPower.cpp" />
+    <ClCompile Include="devices\HfcProductChangeMsg.cpp" />
+    <ClCompile Include="devices\HfcProductCompleteMsg.cpp" />
+    <ClCompile Include="devices\HfcProductPackageCompleteMsg.cpp" />
+    <ClCompile Include="devices\HfcProductStartPrintForTransactionMsg.cpp" />
+    <ClCompile Include="devices\HfcProductSupportDataMsg.cpp" />
+    <ClCompile Include="devices\HfcProductUpdateMsg.cpp" />
+    <ClCompile Include="devices\HfcProductUpdateValuesMsg.cpp" />
+    <ClCompile Include="devices\HfcRFIDStatus.cpp" />
+    <ClCompile Include="devices\HfcRFIDTIRISReadOnlyId.cpp" />
+    <ClCompile Include="devices\HfcSystemCalibrationSwitch.cpp" />
+    <ClCompile Include="devices\HfcSystemConfig.cpp" />
+    <ClCompile Include="devices\HfcSystemInquire.cpp" />
+    <ClCompile Include="devices\HfcTimeout.cpp" />
+    <ClCompile Include="devices\HfcUpgradeList.cpp" />
+    <ClCompile Include="devices\HfcUpgradePeripheral.cpp" />
+    <ClCompile Include="devices\HfcUpgradeTransferStatus.cpp" />
+    <ClCompile Include="devices\HfcUsbWeigherSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcVmStatusMsg.cpp" />
+    <ClCompile Include="devices\HfcWeigherInquire.cpp" />
+    <ClCompile Include="devices\HfcWeigherMode.cpp" />
+    <ClCompile Include="devices\HfcWeigherSystemCalibrationSwitch.cpp" />
+    <ClCompile Include="devices\HfcWeigherSystemConfig.cpp" />
+    <ClCompile Include="devices\HfcWeigherSystemInquire.cpp" />
+    <ClCompile Include="devices\HfcWeigherSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcWrapperConfig.cpp" />
+    <ClCompile Include="devices\HfcWrapperControl.cpp" />
+    <ClCompile Include="devices\HfcWrapperCycle.cpp" />
+    <ClCompile Include="devices\HfcWrapperCycleMode.cpp" />
+    <ClCompile Include="devices\HfcWrapperErrorHistory.cpp" />
+    <ClCompile Include="devices\HfcWrapperErrorHistoryTracking.cpp" />
+    <ClCompile Include="devices\HfcWrapperErrorTotals.cpp" />
+    <ClCompile Include="devices\HfcWrapperInquire.cpp" />
+    <ClCompile Include="devices\HfcWrapperIntakeMode.cpp" />
+    <ClCompile Include="devices\HfcWrapperIntakePkgSize.cpp" />
+    <ClCompile Include="devices\HfcWrapperLoad.cpp" />
+    <ClCompile Include="devices\HfcWrapperPackageHistory.cpp" />
+    <ClCompile Include="devices\HfcWrapperPackageTotals.cpp" />
+    <ClCompile Include="devices\HfcWrapperPackCodeInfo.cpp" />
+    <ClCompile Include="devices\HfcWrapperPackCodeNames.cpp" />
+    <ClCompile Include="devices\HfcWrapperSensors.cpp" />
+    <ClCompile Include="devices\HfcWrapperSensorsTracking.cpp" />
+    <ClCompile Include="devices\HfcWrapperSettings.cpp" />
+    <ClCompile Include="devices\HfcWrapperStatus.cpp" />
+    <ClCompile Include="devices\HfcWrapperStatusInfo.cpp" />
+    <ClCompile Include="devices\HfcWrapperStatusTracking.cpp" />
+    <ClCompile Include="devices\HfcWrapperSystemRequestStatus.cpp" />
+    <ClCompile Include="devices\HfcWrapperSystemStatus.cpp" />
+    <ClCompile Include="devices\HfcWrapperTest.cpp" />
+    <ClCompile Include="devices\HfcWrapperTestTracking.cpp" />
+    <ClCompile Include="reports\AbstractReport.cpp" />
+    <ClCompile Include="reports\ConfigurationReport.cpp" />
+    <ClCompile Include="reports\ProductRunTotalsReport.cpp" />
+    <ClCompile Include="reports\ReportManager.cpp" />
+    <ClCompile Include="reports\ReportTerminatedMessage.cpp" />
+    <ClCompile Include="reports\WrapperSettingsReport.cpp" />
+    <ClCompile Include="reports\WrapperTotalsReport.cpp" />
+    <ClCompile Include="tags\BatchTags.cpp" />
+    <ClCompile Include="tags\CategoryTags.cpp" />
+    <ClCompile Include="tags\ClassTags.cpp" />
+    <ClCompile Include="tags\ClassTotalTags.cpp" />
+    <ClCompile Include="tags\ConfigurationTags.cpp" />
+    <ClCompile Include="tags\COOLTags.cpp" />
+    <ClCompile Include="tags\COOLTotalTags.cpp" />
+    <ClCompile Include="tags\CutTestTotalTags.cpp" />
+    <ClCompile Include="tags\CuttingTestTags.cpp" />
+    <ClCompile Include="tags\EmailAlertTags.cpp" />
+    <ClCompile Include="tags\ExpandedTextTags.cpp" />
+    <ClCompile Include="tags\ExpirationLabelTags.cpp" />
+    <ClCompile Include="tags\FlashFileTags.cpp" />
+    <ClCompile Include="tags\GenericLabelTextTags.cpp" />
+    <ClCompile Include="tags\HeaderRecordTags.cpp" />
+    <ClCompile Include="tags\HfcErrorTags.cpp" />
+    <ClCompile Include="tags\HobOperatorTags.cpp" />
+    <ClCompile Include="tags\HourlyTotalTags.cpp" />
+    <ClCompile Include="tags\LabelTypeTags.cpp" />
+    <ClCompile Include="tags\MarqueeTextTags.cpp" />
+    <ClCompile Include="tags\NutrifactsDataTags.cpp" />
+    <ClCompile Include="tags\OperatorChangeTags.cpp" />
+    <ClCompile Include="tags\OperatorTotalTags.cpp" />
+    <ClCompile Include="tags\PeripheralTags.cpp" />
+    <ClCompile Include="tags\PresentationMethodTags.cpp" />
+    <ClCompile Include="tags\ProductNotesTags.cpp" />
+    <ClCompile Include="tags\ProductStatisticTags.cpp" />
+    <ClCompile Include="tags\ProductTags.cpp" />
+    <ClCompile Include="tags\ProductText5Tags.cpp" />
+    <ClCompile Include="tags\ProductText6Tags.cpp" />
+    <ClCompile Include="tags\ProductText7Tags.cpp" />
+    <ClCompile Include="tags\ProductText8Tags.cpp" />
+    <ClCompile Include="tags\ProductText9Tags.cpp" />
+    <ClCompile Include="tags\ProductTotalTags.cpp" />
+    <ClCompile Include="tags\ReadBatchesRecordTags.cpp" />
+    <ClCompile Include="tags\RecallTags.cpp" />
+    <ClCompile Include="tags\ResourceTags.cpp" />
+    <ClCompile Include="tags\ScaleStatusTags.cpp" />
+    <ClCompile Include="tags\ScaleTags.cpp" />
+    <ClCompile Include="tags\SoftkeyTags.cpp" />
+    <ClCompile Include="tags\SpecialMessageTags.cpp" />
+    <ClCompile Include="tags\SpecialsTags.cpp" />
+    <ClCompile Include="tags\StatisticsTags.cpp" />
+    <ClCompile Include="tags\StreamingGraphicTags.cpp" />
+    <ClCompile Include="tags\SynchronizationChangeTags.cpp" />
+    <ClCompile Include="tags\SynchronizationRecordTags.cpp" />
+    <ClCompile Include="tags\Tags.cpp" />
+    <ClCompile Include="tags\TotalsTags.cpp" />
+    <ClCompile Include="tags\TransactionTags.cpp" />
+    <ClCompile Include="tags\TransactionTypeTags.cpp" />
+    <ClCompile Include="tags\WrapperTags.cpp" />
+    <ClCompile Include="Messages\ListSoftkeyScriptsMessage.cpp" />
+    <ClCompile Include="Messages\SoftkeyScriptResultMessage.cpp" />
+    <ClCompile Include="Messages\OperatorChangesSummaryMessage.cpp" />
+    <ClCompile Include="messages\ReadFilteredCutTestTotalsMessage.cpp" />
+    <ClCompile Include="Messages\ReadFilteredHourlyTotalsMessage.cpp" />
+    <ClCompile Include="Messages\ReadFilteredOperatorTotalsMessage.cpp" />
+    <ClCompile Include="Messages\ReadFilteredProductTotalsMessage.cpp" />
+    <ClCompile Include="Messages\ReadOperatorChangeGroupMessage.cpp" />
+    <ClCompile Include="Messages\ReadOperatorChangeSummaryMessage.cpp" />
+    <ClCompile Include="Messages\ReadTransactionGroupMessage.cpp" />
+    <ClCompile Include="Messages\TransactionDatesMessage.cpp" />
+    <ClCompile Include="Messages\TransactionTypeNamesMessage.cpp" />
+    <ClCompile Include="Messages\VoidTransactionsMessage.cpp" />
+    <ClCompile Include="Messages\WirelessProfilesSelections.cpp" />
+    <ClCompile Include="Messages\WriteHourlyTotalsMessage.cpp" />
+    <ClCompile Include="Messages\WriteOperatorChangeGroupMessage.cpp" />
+    <ClCompile Include="Messages\WriteOperatorTotalsMessage.cpp" />
+    <ClCompile Include="Messages\WriteProductTotalsMessage.cpp" />
+    <ClCompile Include="Messages\WriteTransactionGroupMessage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractGraphicManager.h" />
+    <ClInclude Include="AllBarcodeScanners.h" />
+    <ClInclude Include="AllCat3AuditTrailRecords.h" />
+    <ClInclude Include="AllCategories.h" />
+    <ClInclude Include="AllCoolCategories.h" />
+    <ClInclude Include="AllCoolCountries.h" />
+    <ClInclude Include="AllCoolPretexts.h" />
+    <ClInclude Include="AllCoolProductionSteps.h" />
+    <ClInclude Include="AllCoolTexts.h" />
+    <ClInclude Include="AllDepts.h" />
+    <ClInclude Include="AllEmailAlerts.h" />
+    <ClInclude Include="AllExpirationLabels.h" />
+    <ClInclude Include="AllExternalPrinters.h" />
+    <ClInclude Include="AllGenericLabelTexts.h" />
+    <ClInclude Include="AllOperators.h" />
+    <ClInclude Include="AllProductTextCfgs.h" />
+    <ClInclude Include="AllRecalls.h" />
+    <ClInclude Include="AllSpecials.h" />
+    <ClInclude Include="BackupRestore.h" />
+    <ClInclude Include="BackupRestoreErrors.h" />
+    <ClInclude Include="BackupRestoreEvent.h" />
+    <ClInclude Include="BackupRestoreInitiateReadAllMsg.h" />
+    <ClInclude Include="BackupRestoreManager.h" />
+    <ClInclude Include="BackupRestoreProgress.h" />
+    <ClInclude Include="BackupRestoreSelections.h" />
+    <ClInclude Include="BarCodeNumber.h" />
+    <ClInclude Include="BarcodeScannerEvent.h" />
+    <ClInclude Include="BarcodeScannerManager.h" />
+    <ClInclude Include="Batch.h" />
+    <ClInclude Include="BatchManager.h" />
+    <ClInclude Include="Cat3AuditTrailRecord.h" />
+    <ClInclude Include="Category.h" />
+    <ClInclude Include="CategoryEvent.h" />
+    <ClInclude Include="CategoryGraphicManager.h" />
+    <ClInclude Include="CategoryManager.h" />
+    <ClInclude Include="CfgAccumulateItems.h" />
+    <ClInclude Include="CfgAll.h" />
+    <ClInclude Include="CfgBase.h" />
+    <ClInclude Include="CfgBaseFieldOffsets.h" />
+    <ClInclude Include="CfgCommInterface.h" />
+    <ClInclude Include="CfgCommScheduled.h" />
+    <ClInclude Include="CfgCurrency.h" />
+    <ClInclude Include="CfgEmail.h" />
+    <ClInclude Include="CfgFrequentShopper.h" />
+    <ClInclude Include="CfgFTP.h" />
+    <ClInclude Include="CfgGCD.h" />
+    <ClInclude Include="CfgGenericLabelText.h" />
+    <ClInclude Include="CfgInternal.h" />
+    <ClInclude Include="CfgItem.h" />
+    <ClInclude Include="CfgMarquee.h" />
+    <ClInclude Include="CfgNetwork.h" />
+    <ClInclude Include="CfgOperatorAccess.h" />
+    <ClInclude Include="CfgPrepack.h" />
+    <ClInclude Include="CfgPrintedFields.h" />
+    <ClInclude Include="CfgScale.h" />
+    <ClInclude Include="CfgSelfService.h" />
+    <ClInclude Include="CfgStoreInfo.h" />
+    <ClInclude Include="CfgSupportedLabelLengths.h" />
+    <ClInclude Include="CfgSynchronization.h" />
+    <ClInclude Include="Class.h" />
+    <ClInclude Include="ClassEvent.h" />
+    <ClInclude Include="ClassManager.h" />
+    <ClInclude Include="ClassTotal.h" />
+    <ClInclude Include="ClassTotalManager.h" />
+    <ClInclude Include="ClassTree.h" />
+    <ClInclude Include="ClassTreeBranch.h" />
+    <ClInclude Include="CommHistory.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="ConfigurationAccess.h" />
+    <ClInclude Include="ConfigurationEvent.h" />
+    <ClInclude Include="ConfigurationManager.h" />
+    <ClInclude Include="COOLCategory.h" />
+    <ClInclude Include="COOLCategoryCountry.h" />
+    <ClInclude Include="COOLCategoryCountryManager.h" />
+    <ClInclude Include="COOLCategoryManager.h" />
+    <ClInclude Include="COOLCategoryPretext.h" />
+    <ClInclude Include="COOLCategoryPretextManager.h" />
+    <ClInclude Include="COOLCategoryProdStep.h" />
+    <ClInclude Include="COOLCategoryProdStepManager.h" />
+    <ClInclude Include="COOLCountry.h" />
+    <ClInclude Include="COOLCountryManager.h" />
+    <ClInclude Include="COOLDevEvent.h" />
+    <ClInclude Include="COOLList.h" />
+    <ClInclude Include="COOLListText.h" />
+    <ClInclude Include="COOLListTextManager.h" />
+    <ClInclude Include="COOLManager.h" />
+    <ClInclude Include="COOLPretext.h" />
+    <ClInclude Include="COOLPretextManager.h" />
+    <ClInclude Include="COOLProductionStep.h" />
+    <ClInclude Include="COOLProductionStepManager.h" />
+    <ClInclude Include="COOLShortlist.h" />
+    <ClInclude Include="COOLShortlistManager.h" />
+    <ClInclude Include="COOLText.h" />
+    <ClInclude Include="COOLTextManager.h" />
+    <ClInclude Include="CoolTotal.h" />
+    <ClInclude Include="COOLTotalManager.h" />
+    <ClInclude Include="Cron.h" />
+    <ClInclude Include="CronTask.h" />
+    <ClInclude Include="CutTestDetailsOption1.h" />
+    <ClInclude Include="CutTestDevEvent.h" />
+    <ClInclude Include="CutTestHistoryListing.h" />
+    <ClInclude Include="CutTestManager.h" />
+    <ClInclude Include="CutTestTotal.h" />
+    <ClInclude Include="CutTestTotalManager.h" />
+    <ClInclude Include="CuttingTest.h" />
+    <ClInclude Include="CuttingTestReport.h" />
+    <ClInclude Include="DataManager.h" />
+    <ClInclude Include="DataTypeEvent.h" />
+    <ClInclude Include="DBAccess.h" />
+    <ClInclude Include="Dept.h" />
+    <ClInclude Include="DeptEvent.h" />
+    <ClInclude Include="DeptManager.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="DeviceEvent.h" />
+    <ClInclude Include="DeviceManager.h" />
+    <ClInclude Include="DevicesList.h" />
+    <ClInclude Include="devices\HfcCLARemoveUpgradeFiles.h" />
+    <ClInclude Include="devices\HfcCLASysInfo.h" />
+    <ClInclude Include="devices\HfcCLASysInfoWrite.h" />
+    <ClInclude Include="devices\HfcCLASysStatus.h" />
+    <ClInclude Include="devices\HfcCLATestComplete.h" />
+    <ClInclude Include="devices\HfcEvolWrapperEventCapture.h" />
+    <ClInclude Include="devices\HfcKPCBootLoaderStatus.h" />
+    <ClInclude Include="devices\HfcKPCBootUpgraderStatus.h" />
+    <ClInclude Include="devices\HfcKPCLoaderInfo.h" />
+    <ClInclude Include="devices\HfcKPCLoaderProgress.h" />
+    <ClInclude Include="devices\HfcKPCUpgradeInfo.h" />
+    <ClInclude Include="devices\HfcKPCUpgradeProgress.h" />
+    <ClInclude Include="devices\HfcLabelApplierSetup.h" />
+    <ClInclude Include="devices\HfcLabelPrintingCounts.h" />
+    <ClInclude Include="devices\HfcNGWDimensionOverrides.h" />
+    <ClInclude Include="devices\HfcNGWStartUpgrade.h" />
+    <ClInclude Include="devices\HfcNGWUpgradeInfo.h" />
+    <ClInclude Include="devices\HfcNGWUpgradeProgress.h" />
+    <ClInclude Include="devices\HfcNGWUpgradeRequired.h" />
+    <ClInclude Include="devices\HfcNGWUpgradeStatus.h" />
+    <ClInclude Include="devices\HfcNGWWrapperPause.h" />
+    <ClInclude Include="devices\HfcNGWWrapperResume.h" />
+    <ClInclude Include="devices\HfcPrinterCutterStatus.h" />
+    <ClInclude Include="devices\HfcPrinterDefaultsComplete.h" />
+    <ClInclude Include="devices\HfcPrinterGapCalStatus.h" />
+    <ClInclude Include="devices\HfcPrinterHeadDotStatus.h" />
+    <ClInclude Include="devices\HfcPrinterHeadDotWear.h" />
+    <ClInclude Include="devices\HfcPrinterHeadType.h" />
+    <ClInclude Include="devices\HfcPrinterHeadWear.h" />
+    <ClInclude Include="devices\HfcPrinterRequestLabelSizing.h" />
+    <ClInclude Include="devices\HfcPrinterTest.h" />
+    <ClInclude Include="devices\HfcPrinterTestCassette.h" />
+    <ClInclude Include="devices\HfcPrinterUseContinuousStock.h" />
+    <ClInclude Include="devices\HfcRequestPrinterLabelCount.h" />
+    <ClInclude Include="devices\HfcWeigherCat3AuditRecords.h" />
+    <ClInclude Include="devices\HfcWeigherCat3RecordStatus.h" />
+    <ClInclude Include="devices\HfcWeigherCat3Statistics.h" />
+    <ClInclude Include="devices\HfcWeigherDefaultsComplete.h" />
+    <ClInclude Include="devices\HfcWeigherSystemValueMax.h" />
+    <ClInclude Include="devices\HfcWeigherValueMaxFitParams.h" />
+    <ClInclude Include="devices\HfcWriteFpmManData.h" />
+    <ClInclude Include="devices\HfcProductLookupMsg.h" />
+    <ClInclude Include="devices\HfcScannerProductRead.h" />
+    <ClInclude Include="devices\HfcWrPPPCalibration.h" />
+    <ClInclude Include="devices\HfcWrPPPConfig.h" />
+    <ClInclude Include="devices\HfcWrPPPDistance.h" />
+    <ClInclude Include="devices\HfcWrPPPRequest.h" />
+    <ClInclude Include="devices\HfcWrPPPStatus.h" />
+    <ClInclude Include="devices\HfcWrPPPTest.h" />
+    <ClInclude Include="devices\HfcWrPPPVersion.h" />
+    <ClInclude Include="Diagnostic.h" />
+    <ClInclude Include="DirectoryList.h" />
+    <ClInclude Include="drivers\HobBarCodeFormatter.h" />
+    <ClInclude Include="drivers\stringformatter.h" />
+    <ClInclude Include="EmailAlertsManager.h" />
+    <ClInclude Include="EvolWrapperErrorHistoryManager.h" />
+    <ClInclude Include="EvolWrapperKnifeHistory.h" />
+    <ClInclude Include="EvolWrapperKnifeHistoryManager.h" />
+    <ClInclude Include="EvolWrapperTimingsManager.h" />
+    <ClInclude Include="ExpandedTextEvent.h" />
+    <ClInclude Include="ExpirationLabel.h" />
+    <ClInclude Include="ExpirationLabelManager.h" />
+    <ClInclude Include="ExternalCommSupport.h" />
+    <ClInclude Include="FeaturedCategory.h" />
+    <ClInclude Include="FlashFile.h" />
+    <ClInclude Include="FlashFileManager.h" />
+    <ClInclude Include="Flashkey.h" />
+    <ClInclude Include="FlashkeyManager.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FontEvent.h" />
+    <ClInclude Include="FontFileNames.h" />
+    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="FooterRecord.h" />
+    <ClInclude Include="FrequentShopper.h" />
+    <ClInclude Include="GenericHfcObject.h" />
+    <ClInclude Include="GenericLabelText.h" />
+    <ClInclude Include="GenericLabelTextManager.h" />
+    <ClInclude Include="GenericTextEvent.h" />
+    <ClInclude Include="Graphic.h" />
+    <ClInclude Include="GraphicEvent.h" />
+    <ClInclude Include="GraphicFileNames.h" />
+    <ClInclude Include="GraphicManager.h" />
+    <ClInclude Include="HeaderRecord.h" />
+    <ClInclude Include="HfcError.h" />
+    <ClInclude Include="HfcErrorClass.h" />
+    <ClInclude Include="HfcErrorFont.h" />
+    <ClInclude Include="HfcErrorGraphic.h" />
+    <ClInclude Include="HfcErrorIndexNum.h" />
+    <ClInclude Include="devices\HfcEvolWrapperSystemInfo.h" />
+    <ClInclude Include="HfcHidDeviceEvent.h" />
+    <ClInclude Include="HFCManager.h" />
+    <ClInclude Include="HFCManagerContainer.h" />
+    <ClInclude Include="HfcObject.h" />
+    <ClInclude Include="HfcPeripheralList.h" />
+    <ClInclude Include="HfcPingResponse.h" />
+    <ClInclude Include="HfcProductDescLookup.h" />
+    <ClInclude Include="HfcProductLabelFormSizeMsg.h" />
+    <ClInclude Include="HfcRequestPeripheralList.h" />
+    <ClInclude Include="HfcRequestPing.h" />
+    <ClInclude Include="HfcResponse.h" />
+    <ClInclude Include="HfcStartReport.h" />
+    <ClInclude Include="HfcUpdateStatus.h" />
+    <ClInclude Include="HobAllAccumulatedItems.h" />
+    <ClInclude Include="HobDateTime.h" />
+    <ClInclude Include="HobEmailAlert.h" />
+    <ClInclude Include="HobIpAddress.h" />
+    <ClInclude Include="HobList.h" />
+    <ClInclude Include="HobOperator.h" />
+    <ClInclude Include="HobString.h" />
+    <ClInclude Include="HobToken.h" />
+    <ClInclude Include="HobTokenizer.h" />
+    <ClInclude Include="HobTokenizerBar.h" />
+    <ClInclude Include="HobTokenizerCSV.h" />
+    <ClInclude Include="HobTokenizerUS.h" />
+    <ClInclude Include="HobTokenizerTSV.h" />
+    <ClInclude Include="HobTokenTagged.h" />
+    <ClInclude Include="HourlyTotal.h" />
+    <ClInclude Include="HourlyTotalManager.h" />
+    <ClInclude Include="ImportEvent.h" />
+    <ClInclude Include="ImportManager.h" />
+    <ClInclude Include="ImportSelections.h" />
+    <ClInclude Include="KnifeTimeHistory.h" />
+    <ClInclude Include="LabelGraphicManager.h" />
+    <ClInclude Include="LabelStockDescriptor.h" />
+    <ClInclude Include="LabelType.h" />
+    <ClInclude Include="LabelTypeEvent.h" />
+    <ClInclude Include="LabelTypeManager.h" />
+    <ClInclude Include="MarqueeTextEvent.h" />
+    <ClInclude Include="MessageFormat.h" />
+    <ClInclude Include="messages\ListCameraSystemPredictions.h" />
+    <ClInclude Include="messages\NowServingQueueManagementMessage.h" />
+    <ClInclude Include="MultiLanguageText.h" />
+    <ClInclude Include="NotifyLocalBatches.h" />
+    <ClInclude Include="NutriDataColumn.h" />
+    <ClInclude Include="Nutrifacts.h" />
+    <ClInclude Include="NutrifactsEvent.h" />
+    <ClInclude Include="NutrifactsManager.h" />
+    <ClInclude Include="OnlineHelp.h" />
+    <ClInclude Include="OnlineOrderProduct.h" />
+    <ClInclude Include="OperatorAccess.h" />
+    <ClInclude Include="OperatorChange.h" />
+    <ClInclude Include="OperatorChangeManager.h" />
+    <ClInclude Include="OperatorChangeSummary.h" />
+    <ClInclude Include="OperatorEvent.h" />
+    <ClInclude Include="OperatorFunctions.h" />
+    <ClInclude Include="OperatorManager.h" />
+    <ClInclude Include="OperatorNote.h" />
+    <ClInclude Include="OperatorNoteManager.h" />
+    <ClInclude Include="OperatorTotal.h" />
+    <ClInclude Include="OperatorTotalManager.h" />
+    <ClInclude Include="Peripheral.h" />
+    <ClInclude Include="PeripheralEvent.h" />
+    <ClInclude Include="PeripheralManager.h" />
+    <ClInclude Include="PlanogramGraphicManager.h" />
+    <ClInclude Include="PresentationMethod.h" />
+    <ClInclude Include="PresentationMethodManager.h" />
+    <ClInclude Include="PrintedLabelFields.h" />
+    <ClInclude Include="PrinterInfo.h" />
+    <ClInclude Include="Product.h" />
+    <ClInclude Include="ProductDefault.h" />
+    <ClInclude Include="ProductDefaultManager.h" />
+    <ClInclude Include="ProductDevEvent.h" />
+    <ClInclude Include="ProductGraphicManager.h" />
+    <ClInclude Include="ProductManager.h" />
+    <ClInclude Include="ProductRunTotal.h" />
+    <ClInclude Include="ProductStatistic.h" />
+    <ClInclude Include="ProductText.h" />
+    <ClInclude Include="ProductTextCfg.h" />
+    <ClInclude Include="ProductTextCfgEvent.h" />
+    <ClInclude Include="ProductTextCfgManager.h" />
+    <ClInclude Include="ProductTextEvent.h" />
+    <ClInclude Include="ProductTextManager.h" />
+    <ClInclude Include="ProductTotal.h" />
+    <ClInclude Include="ProductTotalManager.h" />
+    <ClInclude Include="ProductTransaction.h" />
+    <ClInclude Include="ProductTransactionMaster.h" />
+    <ClInclude Include="ProductTree.h" />
+    <ClInclude Include="ProductTreeBranch.h" />
+    <ClInclude Include="QuickDiagnostic.h" />
+    <ClInclude Include="ReadBatchesRecord.h" />
+    <ClInclude Include="ReadSoftKeyParams.h" />
+    <ClInclude Include="Recall.h" />
+    <ClInclude Include="RecallEvent.h" />
+    <ClInclude Include="RecallManager.h" />
+    <ClInclude Include="RecordTreeBranch.h" />
+    <ClInclude Include="RegisterSecondaryScale.h" />
+    <ClInclude Include="RemotePrintRequest.h" />
+    <ClInclude Include="RemotePrintTemplateRequest.h" />
+    <ClInclude Include="reports\GenericTextReport.h" />
+    <ClInclude Include="reports\SupervisorChangesReport.h" />
+    <ClInclude Include="reports\WeigherAuditTrailReport.h" />
+    <ClInclude Include="ResponseMessageManager.h" />
+    <ClInclude Include="Scale.h" />
+    <ClInclude Include="ScaleManager.h" />
+    <ClInclude Include="ScaleStatus.h" />
+    <ClInclude Include="SlowDiagnostic.h" />
+    <ClInclude Include="Softkey.h" />
+    <ClInclude Include="SoftkeyBasics.h" />
+    <ClInclude Include="SoftkeyDevEvent.h" />
+    <ClInclude Include="SoftkeyFeature.h" />
+    <ClInclude Include="SoftkeyFeatureManager.h" />
+    <ClInclude Include="SoftkeyGraphicManager.h" />
+    <ClInclude Include="SoftkeyGroup.h" />
+    <ClInclude Include="SoftkeyGroupManager.h" />
+    <ClInclude Include="SoftKeyLists.h" />
+    <ClInclude Include="SoftkeyManager.h" />
+    <ClInclude Include="SoftkeyScriptManager.h" />
+    <ClInclude Include="SoftkeyStyle.h" />
+    <ClInclude Include="SoftkeyStyleManager.h" />
+    <ClInclude Include="Special.h" />
+    <ClInclude Include="SpecialMessageEvent.h" />
+    <ClInclude Include="SpecialsEvent.h" />
+    <ClInclude Include="SpecialsGraphicManager.h" />
+    <ClInclude Include="SpecialsManager.h" />
+    <ClInclude Include="Speedkey.h" />
+    <ClInclude Include="Statistics.h" />
+    <ClInclude Include="Store.h" />
+    <ClInclude Include="StreamingGraphic.h" />
+    <ClInclude Include="StreamingGraphicEvent.h" />
+    <ClInclude Include="StreamingGraphicManager.h" />
+    <ClInclude Include="StreamingGraphicsList.h" />
+    <ClInclude Include="SupervisorFunctions.h" />
+    <ClInclude Include="SynchronizationChange.h" />
+    <ClInclude Include="SynchronizationChangeManager.h" />
+    <ClInclude Include="SynchronizationRecord.h" />
+    <ClInclude Include="SynchronizationStatus.h" />
+    <ClInclude Include="SystemFontConversionTable.h" />
+    <ClInclude Include="SystemFontsList.h" />
+    <ClInclude Include="SystemPrinters.h" />
+    <ClInclude Include="tags\BarcodeScannerTags.h" />
+    <ClInclude Include="tags\DeptTags.h" />
+    <ClInclude Include="tags\DeviceTags.h" />
+    <ClInclude Include="tags\ProductTextCfgTags.h" />
+    <ClInclude Include="tags\PrinterTags.h" />
+    <ClInclude Include="tags\WeigherTags.h" />
+    <ClInclude Include="Tare.h" />
+    <ClInclude Include="TerminateMessage.h" />
+    <ClInclude Include="TextLinks.h" />
+    <ClInclude Include="Total.h" />
+    <ClInclude Include="TouchScreenCalibrationStep.h" />
+    <ClInclude Include="TouchScreenEvent.h" />
+    <ClInclude Include="Transaction.h" />
+    <ClInclude Include="TransactionManager.h" />
+    <ClInclude Include="TransactionType.h" />
+    <ClInclude Include="TransactionTypeManager.h" />
+    <ClInclude Include="VersionInfo.h" />
+    <ClInclude Include="WeigherInfo.h" />
+    <ClInclude Include="WeighModeTotalType.h" />
+    <ClInclude Include="WindowsConfigurationEvents.h" />
+    <ClInclude Include="WindowsConfigurationManager.h" />
+    <ClInclude Include="WriteSingleField.h" />
+    <ClInclude Include="devices\EVMMemoryStatistics.h" />
+    <ClInclude Include="devices\HfcAccessKeyActivation.h" />
+    <ClInclude Include="devices\HfcAccessKeyDeactivation.h" />
+    <ClInclude Include="devices\HfcCUEvolWrapperStatus.h" />
+    <ClInclude Include="devices\HfcEVMMemoryStatistics.h" />
+    <ClInclude Include="devices\HfcEvolLabelApplierConfig.h" />
+    <ClInclude Include="devices\HfcEvolLabelApplierInquire.h" />
+    <ClInclude Include="devices\HfcEvolLabelApplierPositionInfo.h" />
+    <ClInclude Include="devices\HfcEvolWrapperAllHtBoxesOneParam.h" />
+    <ClInclude Include="devices\HfcEvolWrapperAllTrayTypes.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCameraCalibration.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCameraHeightScan.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCameraScan.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCamerasTracking.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCameraThreshold.h" />
+    <ClInclude Include="devices\HfcEvolWrapperChangeTrayTypePrecedence.h" />
+    <ClInclude Include="devices\HfcEvolWrapperConfig.h" />
+    <ClInclude Include="devices\HfcEvolWrapperConfigLabelWidthUpdate.h" />
+    <ClInclude Include="devices\HfcEvolWrapperControl.h" />
+    <ClInclude Include="devices\HfcEvolWrapperCycleCount.h" />
+    <ClInclude Include="devices\HfcEvolWrapperErrorHistory.h" />
+    <ClInclude Include="devices\HfcEvolWrapperErrorHistoryList.h" />
+    <ClInclude Include="devices\HfcEvolWrapperHeightBox.h" />
+    <ClInclude Include="devices\HfcEvolWrapperHeightBoxParam.h" />
+    <ClInclude Include="devices\HfcEvolWrapperInquire.h" />
+    <ClInclude Include="devices\HfcEvolWrapperKnifeTimeHistory.h" />
+    <ClInclude Include="devices\HfcEvolWrapperLoad.h" />
+    <ClInclude Include="devices\HfcEvolWrapperMotorProfile.h" />
+    <ClInclude Include="devices\HfcEvolWrapperPackageDesc.h" />
+    <ClInclude Include="devices\HfcEvolWrapperPackageHistory.h" />
+    <ClInclude Include="devices\HfcEvolWrapperPackageTimings.h" />
+    <ClInclude Include="devices\HfcEvolWrapperPackageTimingsPointer.h" />
+    <ClInclude Include="devices\HfcEvolWrapperPkgDetectorStatus.h" />
+    <ClInclude Include="devices\HfcEvolWrapperRemoveUpgradeFiles.h" />
+    <ClInclude Include="devices\HfcEvolWrapperRenameHeightBox.h" />
+    <ClInclude Include="devices\HfcEvolWrapperReqUIModel.h" />
+    <ClInclude Include="devices\HfcEvolWrapperSensors.h" />
+    <ClInclude Include="devices\HfcEvolWrapperSettings.h" />
+    <ClInclude Include="devices\HfcEvolWrapperStatus.h" />
+    <ClInclude Include="devices\HfcEvolWrapperSystemInfoWrite.h" />
+    <ClInclude Include="devices\HfcEvolWrapperSystemStatus.h" />
+    <ClInclude Include="devices\HfcEvolWrapperTest.h" />
+    <ClInclude Include="devices\HfcEvolWrapperTestComplete.h" />
+    <ClInclude Include="devices\HfcEvolWrapperTrayType.h" />
+    <ClInclude Include="devices\HfcEvolWrapperUIModel.h" />
+    <ClInclude Include="devices\HfcEvolWrapperWrapBox.h" />
+    <ClInclude Include="devices\HfcGCDDevError.h" />
+    <ClInclude Include="devices\HfcGCDDevFileInfo.h" />
+    <ClInclude Include="devices\HfcGCDDevRequestFileUpload.h" />
+    <ClInclude Include="devices\HfcGCDDevStatus.h" />
+    <ClInclude Include="devices\HfcGCDSystemStatus.h" />
+    <ClInclude Include="devices\HfcILARequestSpeed.h" />
+    <ClInclude Include="devices\HfcILASpeed.h" />
+    <ClInclude Include="devices\HfcLabelApplierConfig.h" />
+    <ClInclude Include="devices\HfcLabelApplierInquire.h" />
+    <ClInclude Include="devices\HfcLabelApplierMode.h" />
+    <ClInclude Include="devices\HfcLabelApplierSensors.h" />
+    <ClInclude Include="devices\HfcLabelApplierSensorsTracking.h" />
+    <ClInclude Include="devices\HfcLabelApplierStatus.h" />
+    <ClInclude Include="devices\HfcLabelApplierSystemRequestStatus.h" />
+    <ClInclude Include="devices\HfcLabelApplierSystemStatus.h" />
+    <ClInclude Include="devices\HfcLabelApplierTest.h" />
+    <ClInclude Include="devices\HfcMarqueeSystemStatus.h" />
+    <ClInclude Include="devices\HfcMarqueeTest.h" />
+    <ClInclude Include="devices\HfcNetworkStatus.h" />
+    <ClInclude Include="devices\HfcNumericSystemStatus.h" />
+    <ClInclude Include="devices\HfcNumericTest.h" />
+    <ClInclude Include="devices\HfcOperationModeStatus.h" />
+    <ClInclude Include="devices\HfcPrinterAdvanceLabelStock.h" />
+    <ClInclude Include="devices\HfcPrinterConfig.h" />
+    <ClInclude Include="devices\HfcPrinterInquire.h" />
+    <ClInclude Include="devices\HfcPrinterNewAddress.h" />
+    <ClInclude Include="devices\HfcPrinterPrinterType.h" />
+    <ClInclude Include="devices\HfcPrinterPrinterTypeTracking.h" />
+    <ClInclude Include="devices\HfcPrinterPrintTestLabel.h" />
+    <ClInclude Include="devices\HfcPrinterRequestCalibrate.h" />
+    <ClInclude Include="devices\HfcPrinterRequestInquire.h" />
+    <ClInclude Include="devices\HfcPrinterRequestPrintheadPower.h" />
+    <ClInclude Include="devices\HfcPrinterRequestStockMetrics.h" />
+    <ClInclude Include="devices\HfcPrinterSensors.h" />
+    <ClInclude Include="devices\HfcPrinterSensorsTracking.h" />
+    <ClInclude Include="devices\HfcPrinterSetPrinters.h" />
+    <ClInclude Include="devices\HfcPrinterStatus.h" />
+    <ClInclude Include="devices\HfcPrinterStockMetrics.h" />
+    <ClInclude Include="devices\HfcPrinterSystemConfig.h" />
+    <ClInclude Include="devices\HfcPrinterSystemInquire.h" />
+    <ClInclude Include="devices\HfcPrinterSystemRequestStatus.h" />
+    <ClInclude Include="devices\HfcPrinterSystemStatus.h" />
+    <ClInclude Include="devices\HfcPrintheadPower.h" />
+    <ClInclude Include="devices\HfcProductChangeMsg.h" />
+    <ClInclude Include="devices\HfcProductCompleteMsg.h" />
+    <ClInclude Include="devices\HfcProductPackageCompleteMsg.h" />
+    <ClInclude Include="devices\HfcProductStartPrintForTransactionMsg.h" />
+    <ClInclude Include="devices\HfcProductSupportDataMsg.h" />
+    <ClInclude Include="devices\HfcProductUpdateMsg.h" />
+    <ClInclude Include="devices\HfcProductUpdateValuesMsg.h" />
+    <ClInclude Include="devices\HfcRFIDStatus.h" />
+    <ClInclude Include="devices\HfcRFIDTIRISReadOnlyId.h" />
+    <ClInclude Include="devices\HfcSystemCalibrationSwitch.h" />
+    <ClInclude Include="devices\HfcSystemConfig.h" />
+    <ClInclude Include="devices\HfcSystemInquire.h" />
+    <ClInclude Include="devices\HfcTimeout.h" />
+    <ClInclude Include="devices\HfcUpgradeList.h" />
+    <ClInclude Include="devices\HfcUpgradePeripheral.h" />
+    <ClInclude Include="devices\HfcUpgradeTransferStatus.h" />
+    <ClInclude Include="devices\HfcUsbWeigherSystemStatus.h" />
+    <ClInclude Include="devices\HfcVmStatusMsg.h" />
+    <ClInclude Include="devices\HfcWeigherInquire.h" />
+    <ClInclude Include="devices\HfcWeigherMode.h" />
+    <ClInclude Include="devices\HfcWeigherSystemCalibrationSwitch.h" />
+    <ClInclude Include="devices\HfcWeigherSystemConfig.h" />
+    <ClInclude Include="devices\HfcWeigherSystemInquire.h" />
+    <ClInclude Include="devices\HfcWeigherSystemStatus.h" />
+    <ClInclude Include="devices\HfcWrapperConfig.h" />
+    <ClInclude Include="devices\HfcWrapperControl.h" />
+    <ClInclude Include="devices\HfcWrapperCycle.h" />
+    <ClInclude Include="devices\HfcWrapperCycleMode.h" />
+    <ClInclude Include="devices\HfcWrapperErrorHistory.h" />
+    <ClInclude Include="devices\HfcWrapperErrorHistoryTracking.h" />
+    <ClInclude Include="devices\HfcWrapperErrorTotals.h" />
+    <ClInclude Include="devices\HfcWrapperInquire.h" />
+    <ClInclude Include="devices\HfcWrapperIntakeMode.h" />
+    <ClInclude Include="devices\HfcWrapperIntakePkgSize.h" />
+    <ClInclude Include="devices\HfcWrapperLoad.h" />
+    <ClInclude Include="devices\HfcWrapperPackageHistory.h" />
+    <ClInclude Include="devices\HfcWrapperPackageTotals.h" />
+    <ClInclude Include="devices\HfcWrapperPackCodeInfo.h" />
+    <ClInclude Include="devices\HfcWrapperPackCodeNames.h" />
+    <ClInclude Include="devices\HfcWrapperSensors.h" />
+    <ClInclude Include="devices\HfcWrapperSensorsTracking.h" />
+    <ClInclude Include="devices\HfcWrapperSettings.h" />
+    <ClInclude Include="devices\HfcWrapperStatus.h" />
+    <ClInclude Include="devices\HfcWrapperStatusInfo.h" />
+    <ClInclude Include="devices\HfcWrapperStatusTracking.h" />
+    <ClInclude Include="devices\HfcWrapperSystemRequestStatus.h" />
+    <ClInclude Include="devices\HfcWrapperSystemStatus.h" />
+    <ClInclude Include="devices\HfcWrapperTest.h" />
+    <ClInclude Include="devices\HfcWrapperTestTracking.h" />
+    <ClInclude Include="reports\AbstractReport.h" />
+    <ClInclude Include="reports\ConfigurationReport.h" />
+    <ClInclude Include="reports\CuttingTestReport.h" />
+    <ClInclude Include="reports\ExpandedTextReport.h" />
+    <ClInclude Include="reports\GraphicsReport.h" />
+    <ClInclude Include="reports\LabelTypesReport.h" />
+    <ClInclude Include="reports\OperatorChangesReport.h" />
+    <ClInclude Include="reports\OperatorReport.h" />
+    <ClInclude Include="reports\ProductInformationReport.h" />
+    <ClInclude Include="reports\ProductRunTotalsReport.h" />
+    <ClInclude Include="reports\Report.h" />
+    <ClInclude Include="reports\ReportEvent.h" />
+    <ClInclude Include="reports\ReportManager.h" />
+    <ClInclude Include="reports\ReportTerminatedMessage.h" />
+    <ClInclude Include="reports\SpecialMessageReport.h" />
+    <ClInclude Include="reports\TotalsReport.h" />
+    <ClInclude Include="reports\WrapperSettingsReport.h" />
+    <ClInclude Include="reports\WrapperTotalsReport.h" />
+    <ClInclude Include="tags\BatchTags.h" />
+    <ClInclude Include="tags\CategoryTags.h" />
+    <ClInclude Include="tags\ClassTags.h" />
+    <ClInclude Include="tags\ClassTotalTags.h" />
+    <ClInclude Include="tags\ConfigurationTags.h" />
+    <ClInclude Include="tags\COOLTags.h" />
+    <ClInclude Include="tags\COOLTotalTags.h" />
+    <ClInclude Include="tags\CutTestTotalTags.h" />
+    <ClInclude Include="tags\CuttingTestTags.h" />
+    <ClInclude Include="tags\EmailAlertTags.h" />
+    <ClInclude Include="tags\ExpandedTextTags.h" />
+    <ClInclude Include="tags\ExpirationLabelTags.h" />
+    <ClInclude Include="tags\FlashFileTags.h" />
+    <ClInclude Include="tags\GenericLabelTextTags.h" />
+    <ClInclude Include="tags\HeaderRecordTags.h" />
+    <ClInclude Include="tags\HfcErrorTags.h" />
+    <ClInclude Include="tags\HobOperatorTags.h" />
+    <ClInclude Include="tags\HourlyTotalTags.h" />
+    <ClInclude Include="tags\LabelTypeTags.h" />
+    <ClInclude Include="tags\MarqueeTextTags.h" />
+    <ClInclude Include="tags\NutrifactsDataTags.h" />
+    <ClInclude Include="tags\OperatorChangeTags.h" />
+    <ClInclude Include="tags\OperatorTotalTags.h" />
+    <ClInclude Include="tags\PeripheralTags.h" />
+    <ClInclude Include="tags\PresentationMethodTags.h" />
+    <ClInclude Include="tags\ProductNotesTags.h" />
+    <ClInclude Include="tags\ProductStatisticTags.h" />
+    <ClInclude Include="tags\ProductTags.h" />
+    <ClInclude Include="tags\ProductText5Tags.h" />
+    <ClInclude Include="tags\ProductText6Tags.h" />
+    <ClInclude Include="tags\ProductText7Tags.h" />
+    <ClInclude Include="tags\ProductText8Tags.h" />
+    <ClInclude Include="tags\ProductText9Tags.h" />
+    <ClInclude Include="tags\ProductTotalTags.h" />
+    <ClInclude Include="tags\ReadBatchesRecordTags.h" />
+    <ClInclude Include="tags\RecallTags.h" />
+    <ClInclude Include="tags\ResourceTags.h" />
+    <ClInclude Include="tags\ScaleStatusTags.h" />
+    <ClInclude Include="tags\ScaleTags.h" />
+    <ClInclude Include="tags\SoftkeyTags.h" />
+    <ClInclude Include="tags\SpecialMessageTags.h" />
+    <ClInclude Include="tags\SpecialsTags.h" />
+    <ClInclude Include="tags\StatisticsTags.h" />
+    <ClInclude Include="tags\StreamingGraphicTags.h" />
+    <ClInclude Include="tags\SynchronizationChangeTags.h" />
+    <ClInclude Include="tags\SynchronizationRecordTags.h" />
+    <ClInclude Include="tags\Tags.h" />
+    <ClInclude Include="tags\TotalsTags.h" />
+    <ClInclude Include="tags\TransactionTags.h" />
+    <ClInclude Include="tags\TransactionTypeTags.h" />
+    <ClInclude Include="tags\WrapperTags.h" />
+    <ClInclude Include="Messages\COOLTotalEvent.h" />
+    <ClInclude Include="Messages\HourlyTotalEvent.h" />
+    <ClInclude Include="Messages\ListSoftkeyScriptsMessage.h" />
+    <ClInclude Include="Messages\SoftkeyScriptResultMessage.h" />
+    <ClInclude Include="Messages\OperatorChangeEvent.h" />
+    <ClInclude Include="Messages\OperatorChangesSummaryMessage.h" />
+    <ClInclude Include="Messages\OperatorTotalEvent.h" />
+    <ClInclude Include="Messages\ProductTotalEvent.h" />
+    <ClInclude Include="messages\ReadFilteredCutTestTotalsMessage.h" />
+    <ClInclude Include="Messages\ReadFilteredHourlyTotalsMessage.h" />
+    <ClInclude Include="Messages\ReadFilteredOperatorTotalsMessage.h" />
+    <ClInclude Include="Messages\ReadFilteredProductTotalsMessage.h" />
+    <ClInclude Include="Messages\ReadOperatorChangeGroupMessage.h" />
+    <ClInclude Include="Messages\ReadOperatorChangeSummaryMessage.h" />
+    <ClInclude Include="Messages\ReadTransactionGroupMessage.h" />
+    <ClInclude Include="Messages\TransactionDatesMessage.h" />
+    <ClInclude Include="Messages\TransactionDevEvent.h" />
+    <ClInclude Include="Messages\TransactionTypeEvent.h" />
+    <ClInclude Include="Messages\TransactionTypeNamesMessage.h" />
+    <ClInclude Include="Messages\VoidTransactionsMessage.h" />
+    <ClInclude Include="Messages\WirelessProfilesSelections.h" />
+    <ClInclude Include="Messages\WriteHourlyTotalsMessage.h" />
+    <ClInclude Include="Messages\WriteOperatorChangeGroupMessage.h" />
+    <ClInclude Include="Messages\WriteOperatorTotalsMessage.h" />
+    <ClInclude Include="Messages\WriteProductTotalsMessage.h" />
+    <ClInclude Include="Messages\WriteTransactionGroupMessage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

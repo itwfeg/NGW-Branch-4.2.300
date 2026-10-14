@@ -1,0 +1,117 @@
+From 6dc9883173109edf09c172bc0d607ffb4e36da7e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ji=C5=99=C3=AD=20Klime=C5=A1?= <jklimes@redhat.com>
+Date: Fri, 15 May 2015 09:53:59 +0200
+Subject: [PATCH 5/5] Include peer certificate always in EAP events
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This makes it easier for upper layer applications to get information
+regarding the server certificate without having to use a special
+certificate probing connection. This provides both the SHA256 hash of
+the certificate (to be used with ca_cert="hash://server/sha256/<hash>",
+if desired) and the full DER encoded X.509 certificate so that upper
+layer applications can parse and display the certificate easily or
+extract fields from it for purposes like configuring an altsubject_match
+or domain_suffix_match.
+
+The old behavior can be configured by adding cert_in_cb=0 to
+wpa_supplicant configuration file.
+
+- backport of upstream commit 483dd6a5e0069d0646505c26a5194eda15472858
+- fix for #1186806 - counterpart of RHEL 7.2 commit
+  http://pkgs.devel.redhat.com/cgit/rpms/wpa_supplicant/diff/0014-rh1178263-cert_in_cb.patch?h=rhel-7.2&id=a353a0f3d7670d3eb62162f7afd2e20f40dc68c3
+
+Signed-off-by: Jiří Klimeš <jklimes@redhat.com>
+---
+ wpa_supplicant/config.c            | 1 +
+ wpa_supplicant/config.h            | 9 +++++++++
+ wpa_supplicant/config_file.c       | 2 ++
+ wpa_supplicant/wpa_supplicant.conf | 6 ++++++
+ wpa_supplicant/wpas_glue.c         | 1 +
+ 5 files changed, 19 insertions(+)
+
+diff --git a/wpa_supplicant/config.c b/wpa_supplicant/config.c
+index 3213d31..22e85b0 100644
+--- a/wpa_supplicant/config.c
++++ b/wpa_supplicant/config.c
+@@ -2136,6 +2136,7 @@ struct wpa_config * wpa_config_alloc_empty(const char *ctrl_interface,
+ 	config->ap_scan = DEFAULT_AP_SCAN;
+ 	config->fast_reauth = DEFAULT_FAST_REAUTH;
+ 	config->bss_max_count = DEFAULT_BSS_MAX_COUNT;
++	config->cert_in_cb = DEFAULT_CERT_IN_CB;
+ 
+ 	if (ctrl_interface)
+ 		config->ctrl_interface = os_strdup(ctrl_interface);
+diff --git a/wpa_supplicant/config.h b/wpa_supplicant/config.h
+index 754e4be..69d7cce 100644
+--- a/wpa_supplicant/config.h
++++ b/wpa_supplicant/config.h
+@@ -23,6 +23,7 @@
+ #endif /* CONFIG_NO_SCAN_PROCESSING */
+ #define DEFAULT_FAST_REAUTH 1
+ #define DEFAULT_BSS_MAX_COUNT 200
++#define DEFAULT_CERT_IN_CB 1
+ 
+ #include "config_ssid.h"
+ 
+@@ -345,6 +346,14 @@ struct wpa_config {
+ 	 *   1 = only include configured SSIDs in scan results/BSS table
+ 	 */
+ 	int filter_ssids;
++
++	/**
++	 * cert_in_cb - Whether to include a peer certificate dump in events
++	 *
++	 * This controls whether peer certificates for authentication server and
++	 * its certificate chain are included in EAP peer certificate events.
++	 */
++	int cert_in_cb;
+ };
+ 
+ 
+diff --git a/wpa_supplicant/config_file.c b/wpa_supplicant/config_file.c
+index f2bc209..7d4fe28 100644
+--- a/wpa_supplicant/config_file.c
++++ b/wpa_supplicant/config_file.c
+@@ -897,6 +897,8 @@ static void wpa_config_write_global(FILE *f, struct wpa_config *config)
+ 		fprintf(f, "bss_max_count=%u\n", config->bss_max_count);
+ 	if (config->filter_ssids)
+ 		fprintf(f, "filter_ssids=%d\n", config->filter_ssids);
++	if (config->cert_in_cb != DEFAULT_CERT_IN_CB)
++		fprintf(f, "cert_in_cb=%d\n", config->cert_in_cb);
+ }
+ 
+ #endif /* CONFIG_NO_CONFIG_WRITE */
+diff --git a/wpa_supplicant/wpa_supplicant.conf b/wpa_supplicant/wpa_supplicant.conf
+index 2484bed..dca4db0 100644
+--- a/wpa_supplicant/wpa_supplicant.conf
++++ b/wpa_supplicant/wpa_supplicant.conf
+@@ -110,6 +110,12 @@ eapol_version=1
+ # networks are found, a new IBSS or AP mode network is created.
+ ap_scan=1
+ 
++# cert_in_cb - Whether to include a peer certificate dump in events
++# This controls whether peer certificates for authentication server and
++# its certificate chain are included in EAP peer certificate events. This is
++# enabled by default.
++#cert_in_cb=1
++
+ # EAP fast re-authentication
+ # By default, fast re-authentication is enabled for all EAP methods that
+ # support it. This variable can be used to disable fast re-authentication.
+diff --git a/wpa_supplicant/wpas_glue.c b/wpa_supplicant/wpas_glue.c
+index a129751..ff5fbdf 100644
+--- a/wpa_supplicant/wpas_glue.c
++++ b/wpa_supplicant/wpas_glue.c
+@@ -614,6 +614,7 @@ int wpa_supplicant_init_eapol(struct wpa_supplicant *wpa_s)
+ 	ctx->port_cb = wpa_supplicant_port_cb;
+ 	ctx->cb = wpa_supplicant_eapol_cb;
+ 	ctx->cert_cb = wpa_supplicant_cert_cb;
++	ctx->cert_in_cb = wpa_s->conf->cert_in_cb;
+ 	ctx->cb_ctx = wpa_s;
+ 	wpa_s->eapol = eapol_sm_init(ctx);
+ 	if (wpa_s->eapol == NULL) {
+-- 
+2.1.0
+

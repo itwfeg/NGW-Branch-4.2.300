@@ -1,0 +1,11 @@
+# folder connected users have read access
+rootdir=c:\sshd\public
+
+# folder connected user have read/write access (must be same or sub-folder of root)
+uploaddir=c:\sshd\public
+
+# folder connected user is placed in when connecting
+homedir=c:\sshd\public
+
+# maximum number of connections allowed (0 to disable)
+maxconnections=32

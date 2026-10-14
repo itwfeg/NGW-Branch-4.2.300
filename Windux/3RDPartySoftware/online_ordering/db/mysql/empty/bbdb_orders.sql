@@ -1,0 +1,70 @@
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: localhost    Database: bbdb
+-- ------------------------------------------------------
+-- Server version	8.0.23
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `DeptNum` int NOT NULL,
+  `OrderNumber` int NOT NULL,
+  `OrderDetails` varchar(50) DEFAULT NULL,
+  `OrderStatus` int DEFAULT NULL,
+  `CustomerName` varchar(128) DEFAULT NULL,
+  `OrderSMS` varchar(10) DEFAULT NULL,
+  `OrderEmail` varchar(128) DEFAULT NULL,
+  `OrderOrigin` int DEFAULT NULL,
+  `StoreNumber` int DEFAULT NULL,
+  `OrderCreation` timestamp(4) NULL DEFAULT NULL,
+  `OrderPickup` timestamp(4) NULL DEFAULT NULL,
+  `OrderStart` timestamp(4) NULL DEFAULT NULL,
+  `OrderFinish` timestamp(4) NULL DEFAULT NULL,
+  `OrderTotal` timestamp(4) NULL DEFAULT NULL,
+  `BlockOrder` int DEFAULT NULL,
+  `OperatorNumber` int DEFAULT NULL,
+  `ReasonCanceled` text,
+  `DeniedCancelReq` int DEFAULT NULL,
+  `NumOfTimesPrinted` int DEFAULT NULL,
+  PRIMARY KEY (`DeptNum`,`OrderNumber`),
+  UNIQUE KEY `Orders_PK` (`DeptNum`,`OrderNumber`),
+  CONSTRAINT `DeptNum_fk` FOREIGN KEY (`DeptNum`) REFERENCES `depts` (`DeptNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (0,17,'none',5,'Mark S.','9379649136',NULL,0,187,'2021-03-06 14:15:43.0000','2021-03-06 15:50:00.0000',NULL,NULL,NULL,0,2,'no showed',NULL,NULL),(0,19,'none',3,'Mary M.','9379642526',NULL,0,187,'2021-03-06 16:00:08.0000','2021-03-06 16:20:00.0000','2021-03-06 16:06:59.0000','2021-03-06 16:11:37.0000',NULL,0,3,NULL,NULL,NULL),(0,20,'dp not mix',3,'Judy G.','9379642645',NULL,0,187,'2021-03-06 15:25:31.0000','2021-03-06 17:20:00.0000','2021-03-06 16:14:42.0000','2021-03-06 16:19:15.0000',NULL,0,3,NULL,NULL,NULL),(0,24,'no labels on zip seal',1,'Joe E','9379649741',NULL,0,187,'2021-03-06 16:30:48.0000','2021-03-06 17:00:00.0000',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL),(0,25,'thin as possible',1,'Cherie B.','9379648741',NULL,0,187,'2021-03-06 15:05:00.0000','2021-03-06 17:30:00.0000',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL),(0,26,'single bagged',3,'John D.','9379649134',NULL,0,187,'2021-03-06 18:22:00.0000','2021-03-06 21:50:00.0000','2021-03-06 21:35:13.0000','2021-03-06 21:40:13.0000',NULL,0,3,NULL,NULL,NULL),(0,27,'none',2,'Kathy A.','9373322092',NULL,0,187,'2021-03-06 15:30:27.0000','2021-03-06 16:20:00.0000','2021-03-06 16:10:21.0000',NULL,NULL,1,2,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-03-23  8:33:02

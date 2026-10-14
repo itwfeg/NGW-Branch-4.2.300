@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<LINK REL="StyleSheet" HREF="..\style.css" TYPE="text/css">
+	</head>
+	<body>
+		<p>
+			<font face="Verdana, Geneva, Arial, Helvetica" size="5">LoadXMLSettings</font>
+		</p>
+		<p>
+			<b>Overview </b>
+		</p>
+		<P><b> int STLoadXMLSettings (void *hBarcode, char *filePath, int silent)&nbsp; </b>
+		</P>
+		<P><STRONG>hBarcode</STRONG> is a handle to a barcode session.<BR>
+			<STRONG>filePath</STRONG> is the path of the XML file to load.<BR>
+			<STRONG>silent </STRONG>controls whether the function writes to standard output 
+			or displays a message box (win32).&nbsp;</P>
+		<p>
+			Load&nbsp;settings from the&nbsp;specified XML file. This method can also be 
+			used to define sets of properties to be applied sequentially to an image until 
+			a barcode is located. It's also possible to specify properties that only apply 
+			to particular pages&nbsp;of an image. The silent parameter controls whether 
+			message message boxes will be displayed if there is a parsing error. If silent 
+			is non zero then no messages will be displayed.
+		</p>
+		<P>The simplest format for the xml is as follows:</P>
+		<P>
+		</P>
+		<P>&lt;xml&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;<EM>PropertyName</EM>&gt;<EM>PropertyValue</EM>&lt;/<EM>PropertyName</EM>&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>Example:
+		</P>
+		<P>Set MedianFilter to 1 (True) and set ReadCode25 to 0 (False).</P>
+		<P>&lt;xml&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;MedianFilter&gt;1&lt;/MedianFilter&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;ReadCode25&gt;0&lt;/ReadCode25&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>The xml file can also be used to apply sets of properties sequentially to an 
+			image until a barcode is found:</P>
+		<P>This example first applies default values to an image. If no barcode is found 
+			then a MedianFilter is applied.</P>
+		<P>&lt;xml&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&lt;MedianFilter&gt;1&lt;/MedianFilter&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>This example restricts the search to the first 3 pages of an image, until a 
+			barcode is located:</P>
+		<P>&lt;xml&gt;<BR>
+			&nbsp;&nbsp; &lt;SoftekBarcode&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;PageNo&gt;1&lt;/PageNo&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;PageNo&gt;2&lt;/PageNo&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Properties&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;PageNo&gt;3&lt;/PageNo&gt;<BR>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Properties&gt;<BR>
+			&nbsp;&nbsp; &lt;/SoftekBarcode&gt;<BR>
+			&lt;/xml&gt;</P>
+		<P>The default set of properties is as follows:</P>
+		<pre>&lt;xml version='1.0' encoding='iso-8859-1'&gt;
+	&lt;SoftekBarcode&gt;
+		&lt;Properties&gt;
+			&lt;AllowDuplicateValues&gt;1&lt;/AllowDuplicateValues&gt;
+			&lt;Code39Checksum&gt;0&lt;/Code39Checksum&gt;
+			&lt;Code39NeedStartStop&gt;1&lt;/Code39NeedStartStop&gt;
+			&lt;ColorThreshold&gt;0&lt;/ColorThreshold&gt;
+			&lt;ConvertUPCEToEAN13&gt;1&lt;/ConvertUPCEToEAN13&gt;
+			&lt;Despeckle&gt;0&lt;/Despeckle&gt;
+			&lt;ErrorCorrection&gt;0&lt;/ErrorCorrection&gt;
+			&lt;ExtendedCode39&gt;0&lt;/ExtendedCode39&gt;
+			&lt;LineJump&gt;1&lt;/LineJump&gt;
+			&lt;MaxLength&gt;999&lt;/MaxLength&gt;
+			&lt;MedianFilter&gt;0&lt;/MedianFilter&gt;
+			&lt;MinSeparation&gt;180&lt;/MinSeparation&gt;
+			&lt;MinLength&gt;4&lt;/MinLength&gt;
+			&lt;MinOccurrence&gt;2&lt;/MinOccurrence&gt;
+			&lt;MinSpaceBarWidth&gt;1&lt;/MinSpaceBarWidth&gt;
+			&lt;MultipleRead&gt;0&lt;/MultipleRead&gt;
+			&lt;NoiseReduction&gt;0&lt;/NoiseReduction&gt;
+			&lt;Pattern&gt;&lt;/Pattern&gt;
+			&lt;PageNo&gt;0&lt;/PageNo&gt;
+			&lt;PrefOccurrence&gt;5&lt;/PrefOccurrence&gt;
+			&lt;QuietZoneSize&gt;0&lt;/QuietZoneSize&gt;
+			&lt;ReadCodabar&gt;1&lt;/ReadCodabar&gt;
+			&lt;ReadCode128&gt;1&lt;/ReadCode128&gt;
+			&lt;ReadCode25ni&gt;0&lt;/ReadCode25ni&gt;
+			&lt;ReadCode25&gt;1&lt;/ReadCode25&gt;
+			&lt;ReadCode39&gt;1&lt;/ReadCode39&gt;
+			&lt;ReadEAN13&gt;1&lt;/ReadEAN13&gt;
+			&lt;ReadNumeric&gt;0&lt;/ReadNumeric&gt;
+			&lt;ReadPatchCodes&gt;0&lt;/ReadPatchCodes&gt;
+			&lt;ReadPDF417&gt;1&lt;/ReadPDF417&gt;
+			&lt;ReadUPCA&gt;0&lt;/ReadUPCA&gt;
+			&lt;ReadUPCE&gt;1&lt;/ReadUPCE&gt;
+			&lt;ScanDirection&gt;15&lt;/ScanDirection&gt;
+			&lt;SkewTolerance&gt;0&lt;/SkewTolerance&gt;
+			&lt;ShowCheckDigit&gt;0&lt;/ShowCheckDigit&gt;
+			&lt;UseOverSampling&gt;0&lt;/UseOverSampling&gt;
+		&lt;/Properties&gt;
+	&lt;/SoftekBarcode&gt;
+&lt;/xml&gt;
+</pre>
+		<p></p>
+		<b>Return Value</b>
+		<p>1 on success and 0 on failure.</p>
+	</body>
+</html>

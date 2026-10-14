@@ -1,0 +1,111 @@
+#!/bin/sh
+# chkconfig: 2345 55 45
+### BEGIN INIT INFO
+# Provides:          hydra
+# Required-Start:    $network
+# Required-Stop:     $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start hydra blackbox online ordering interfaces.
+# Description:       Stop hydra blackbox online ordering interfaces.
+# X-Start-Before:    
+# X-Stop-After:      
+# X-Timesys-Start-Number:  55
+# X-Timesys-Stop-Number:  45
+### END INIT INFO
+
+umask 022
+
+# Qt5DBus requires a DISPLAY environment variable
+export DISPLAY=:0
+
+stop_service() {
+    printf "Stopping hydra booda: "
+    kill $(/usr/bin/ps ax | grep booda | grep -v grep | grep -v hydra | awk '{print $1}') 2>/dev/null
+    kill $(/usr/bin/ps ax | grep hobartcomms | grep -v grep | awk '{print $1}') 2>/dev/null
+    kill $(/usr/bin/ps ax | grep "hobartsessionman" | grep -v grep | awk '{print $1}') 2>/dev/null
+    kill $(/usr/bin/ps ax | grep "hydramc" | grep -v grep | awk '{print $1}') 2>/dev/null
+    # sometimes it doesn't quite die right away, or even after 1
+    sleep 2
+    printf "[ OK ]\n"
+}
+
+start_service() {
+    printf "Starting hydra booda: "
+
+    count=`/usr/bin/ps ax | grep hydramc | grep -v grep | wc -l`
+    if [ "$count" -lt "1" ]
+    then
+      /usr/bin/hydramc > /tmp/hydramc.log 2>&1 &
+
+      count=`/usr/bin/ps ax | grep hydramc | grep -v grep | wc -l`
+      if [ "$count" -lt "1" ]
+      then
+        printf "[ FAIL ]\n"
+        exit 1
+      fi
+    fi
+
+    count=`/usr/bin/ps ax | grep hobartsessionman | grep -v grep | wc -l`
+    if [ "$count" -lt "1" ]
+    then
+      /usr/bin/hobartsessionman > /tmp/hobartsessionman.log 2>&1 &
+
+      count=`/usr/bin/ps ax | grep hobartsessionman | grep -v grep | wc -l`
+      if [ "$count" -lt "1" ]
+      then
+        printf "[ FAIL ]\n"
+        exit 1
+      fi
+    fi
+
+    count=`/usr/bin/ps ax | grep hobartcomms | grep -v grep | wc -l`
+    if [ "$count" -lt "1" ]
+    then
+      /usr/bin/hobartcomms > /tmp/hobartcomms.log 2>&1 &
+
+      count=`/usr/bin/ps ax | grep hobartcomms | grep -v grep | wc -l`
+      if [ "$count" -lt "1" ]
+      then
+        printf "[ FAIL ]\n"
+        exit 1
+      fi
+    fi
+
+    sleep 1
+    
+    count=`/usr/bin/ps ax | grep booda | grep -v grep | grep -v hydra | wc -l`
+    if [ "$count" -lt "1" ]
+    then
+      /usr/bin/booda > /tmp/booda.log 2>&1 &
+
+      count=`/usr/bin/ps ax | grep booda | grep -v grep | grep -v hydra | wc -l`
+      if [ "$count" -lt "1" ]
+      then
+        printf "[ FAIL ]\n"
+        exit 1
+      fi
+    fi
+
+    printf "[ OK ]\n"
+}
+
+case $1 in
+
+'start')
+    start_service
+    ;;
+
+'stop')
+    stop_service
+    ;;
+
+'restart')
+    stop_service
+    start_service
+    ;;
+
+*)
+    echo "Usage: $0 [start|stop|restart]"
+    ;;
+esac

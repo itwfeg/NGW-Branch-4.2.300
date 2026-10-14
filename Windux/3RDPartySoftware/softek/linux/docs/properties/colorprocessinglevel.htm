@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">ColorProcessingLevel</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>The <b>ColorProcessingLevel</b> property controls the amount of processing time spent 
+                                reading barcode values from color images. Values range from 0 to 5, with a 
+                                default of 2. A low value will process color images faster but accuracy and 
+                                read-rate levels will be lower than if a high value is used.</P>
+		<P>Please note that setting the ColorThreshold property to a non-zero value 
+                                effectively sets ColorProcessingLevel to 0.</P>
+		<P>Default value = 2
+		</P>
+		<P>void STSetParameter(hBarcode, ST_PROCESSING_LEVEL,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_PROCESSING_LEVEL,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>// Set the color processing level to 3<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;3 ;<BR>
+			STSetParameter(hBarcode, ST_PROCESSING_LEVEL,&nbsp;&amp;value) ;</P>
+		<P>
+		</P>
+	</body>
+</html>

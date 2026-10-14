@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Test Station Server
+Comment=ITW Hobart Test Station Server
+Exec=python3 /home/pi/test_station_server/boardTestStationExecutive.py
+Icon=/home/pi/test_station_server/test_server_window_icon.png
+Path=/home/pi/test_station_server
+Terminal=False
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true

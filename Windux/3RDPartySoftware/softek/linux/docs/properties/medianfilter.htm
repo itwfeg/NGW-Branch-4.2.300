@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">MedianFilter</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>When True the toolkit will apply a median filter to the image before checking 
+			for barcodes. This is a useful option for high resolution images that contain 
+			speckles of black and white. It is not recommended for images where the black 
+			bars or white spaces are less than 2 pixels wide.
+		</P>
+		<P>Default Value: 0
+		</P>
+		<P>void STSetParameter(hBarcode, ST_MEDIAN_FILTER,&nbsp;uint16 *value) ;
+		</P>
+		<P>void STGetParameter(hBarcode, ST_MEDIAN_FILTER,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Enable the&nbsp;median filter<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_MEDIAN_FILTER,&nbsp;&amp;value) ;</P>
+		<P class="MsoBodyText">&nbsp;</P>
+	</body>
+</html>

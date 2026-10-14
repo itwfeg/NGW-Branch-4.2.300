@@ -1,0 +1,13 @@
+configure
+delete interfaces ethernet eth1
+delete interfaces ethernet eth2
+delete interfaces ethernet eth3
+set interfaces ethernet eth1
+set interfaces ethernet eth2
+set interfaces ethernet eth3
+commit
+set interfaces bridge br0 address 192.168.1.1/24
+set interfaces ethernet eth1 bridge-group bridge br0
+set interfaces ethernet eth2 bridge-group bridge br0
+set interfaces ethernet eth3 bridge-group bridge br0
+commit ; save

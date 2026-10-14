@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">WeightLongerBarcodes</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			When set to TRUE the toolkit will increase the hit count for a barcode in 
+			proportion to it's length (on the basis that a longer barcode is less likely to 
+			be a false positive reading).&nbsp;
+		</P>
+		<P>
+			Default value = &nbsp;TRUE
+		</P>
+		<P>void STSetParameter(hBarcode, ST_WEIGHT_LONG_BARCODES,&nbsp;uint16 *value) ;</P>
+		<P>void STGetParameter(hBarcode, ST_WEIGHT_LONG_BARCODES,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;1 ;<BR>
+			STSetParameter(hBarcode, ST_WEIGHT_LONG_BARCODES,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

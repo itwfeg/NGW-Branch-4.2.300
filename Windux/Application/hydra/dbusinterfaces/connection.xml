@@ -1,0 +1,15 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+        "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/com/hobartcorp/connection">
+    <interface name="com.hobartcorp.Connection">
+        <method name="id">
+            <arg name="r" type="s" direction="out"/>
+        </method>
+        <method name="bytesSent">
+            <arg name="r" type="t" direction="out"/>
+        </method>
+        <method name="bytesReceived">
+            <arg name="r" type="t" direction="out"/>
+        </method>
+    </interface>
+</node>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="gauge_6.svg"
+   inkscape:export-filename="/home/hobart/Desktop/gauge.png"
+   inkscape:export-xdpi="260.09601"
+   inkscape:export-ydpi="260.09601">
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="copy_rotate"
+       starting_point="49.25,323.81873"
+       origin="50,322.51969"
+       id="path-effect6165"
+       is_visible="true"
+       copies_to_360="false"
+       fuse_paths="false"
+       starting_angle="240"
+       rotation_angle="30"
+       num_copies="11" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2810465"
+     inkscape:cx="104.4754"
+     inkscape:cy="207.4396"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1918"
+     inkscape:window-height="897"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-197)">
+    <g
+       id="g829"
+       transform="rotate(-162,50,247)"
+       inkscape:transform-center-y="7.1329239"
+       inkscape:transform-center-x="2.3176274">
+      <circle
+         r="5"
+         inkscape:export-ydpi="260.09601"
+         inkscape:export-xdpi="260.09601"
+         cy="247"
+         cx="50"
+         id="path2439"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:9.03225803;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="222"
+         x="47.5"
+         height="35"
+         width="5"
+         id="rect825"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5.65052128;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

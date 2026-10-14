@@ -1,0 +1,10 @@
+This is code written by Hobart for testing Bluenica sensor devices.
+
+What this code does:
+1) Opens the HTi bluetooth adapter and listen passively for BLE advert messages.
+2) Filters for Bluenica sensor messages and queues them for processing.
+3) Every 5m will upload sensor data to the Bluenica servers.
+
+This code could be easily adapted to listen for Hobart hands free login tags also.
+
+This code will eventually need to be merged into chobart_d.

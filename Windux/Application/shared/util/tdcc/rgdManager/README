@@ -1,0 +1,32 @@
+Install python 3.5.4
+
+In windows 10 command prompt run as administrator perform the following
+
+python -m pip install --upgrade pip
+pip install pyqt5
+pip install pyqt5-tools
+pip install wmi
+pip install pywin32
+pip install fabric2
+pip install patchwork
+pip install netaddr
+pip install tzlocal
+pip install pytz
+pip install python-dateutil
+
+Need to install Windows 10 SDK to get Visual C++ 14.0 for pycryptodome
+Download it from here:
+  https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15
+  Select only the Windows 10 SDK under Individual Components
+  Add or fix PATH variable in build_bbm.bat to point where signtool.exe is located
+
+pip install pycryptodome
+pip install pyinstaller
+pip install https://github.com/pyinstaller/pyinstaller/archive/develop.zip
+
+add the following paths to PATH environment variable
+C:\Program Files\Python35\Lib\site-packages\PyQt5
+C:\Program Files\Python35\Lib\site-packages\PyQt5\Qt\bin
+C:\Program Files\Python35\Scripts
+
+MacDown was used as the MarkDown editor to create the users manual.

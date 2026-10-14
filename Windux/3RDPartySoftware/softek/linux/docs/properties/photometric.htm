@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<LINK href="style.css" type="text/css" rel="StyleSheet"></head>
+	<body>
+		<p><font size="5">Photometric</font>&nbsp;
+		</p>
+		<P><STRONG>Overview</STRONG>
+		</P>
+		<P>
+			The Photometric property determines how the toolkit interprets a pixel value in 
+			a bitmap.&nbsp;A photometric value of 0 means that a pixel value of 0 if 
+			considered to&nbsp;represent the color black. A photometric value of 1 means 
+			that a pixel value of 0 is considered to represent the color white. This 
+			property is only used in conjunction with the ScanBarcodeFromBitmap method. The 
+			ScanBarcodeFromDIB method does not refer to this property because the color map 
+			is stored within the DIB.
+		</P>
+		<P>
+			Default value = &nbsp;&nbsp;&nbsp;0
+		</P>
+		<P class="MsoBodyText">
+		void STSetParameter(hBarcode, ST_CONTRAST,&nbsp;uint16 *value) ;
+		<P>void STGetParameter(hBarcode, ST_CONTRAST,&nbsp;uint16 *value) ;</P>
+		<P>e.g</P>
+		<P>//&nbsp;Set a photometric value of 140<BR>
+			#include "barcode.h"<BR>
+			uint16 value =&nbsp;140 ;<BR>
+			STSetParameter(hBarcode, ST_CONTRAST,&nbsp;&amp;value) ;</P>
+	</body>
+</html>

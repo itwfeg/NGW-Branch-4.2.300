@@ -178,9 +178,8 @@ class AtmelDeviceHandler  : public Hobart::CEvolMsgReceiver, public Hobart::CHob
         bool bGotCodeUpdate;
         bool bNodesRemoved;
         bool needsUpdate;
-		//SOF-TIME-71
-        int prCounter;
-	int hobDevice;
+
+		int hobDevice;
 
 #ifdef UDEV_PATCH
         // int hobDevice;		// this was hidden in this UDEV_PATCH but its used everywhere in SetVersionInfo. So I moved it.

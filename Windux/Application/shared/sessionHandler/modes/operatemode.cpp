@@ -2016,18 +2016,14 @@ void OperateMode::handleFlashkey( QWidget *w, QWidget *f, int action, const QStr
 
             session_->send( SoftkeyDev, ExecuteSoftkey, QString::number( action ) + "," + param + "," + QString::number( feature ) );
         }
-        break;
 
+        break;
+		
     case Action_Toggle2ndLabelEnable:
     {
         //SOF-5092 Disable secondary label Flashkey
         session_->send( SoftkeyDev, ExecuteSoftkey, QString::number( action ) + "," + param + "," + QString::number( feature ) );
-    }
-    break;
 
-    case Action_ToggleRfidPrinting:
-    {
-        session_->send( SoftkeyDev, ExecuteSoftkey, QString( "%1" ).arg( QString::number( action ) ) );
     }
     break;
 

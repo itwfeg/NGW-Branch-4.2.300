@@ -4078,8 +4078,8 @@ QTabBar::tab:last:selected{
       <widget class="QPushButton" name="butPlacementView">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>323</y>
+         <x>690</x>
+         <y>320</y>
          <width>171</width>
          <height>51</height>
         </rect>

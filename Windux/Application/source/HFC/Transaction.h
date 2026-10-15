@@ -449,9 +449,6 @@ namespace hfc
 			std::string getLabelOutputFilename() const { return labelOutputFilename; }
 			void setLabelOutputFilename(const std::string filename) { labelOutputFilename = filename; }
 
-			bool isRfidVoidLabelPrinted() const { return rfidVoidLabelPrinted_; }
-			void setRfidVoidLabelPrinted(bool rfidVoidLabelPrinted) { rfidVoidLabelPrinted_ = rfidVoidLabelPrinted; }
-
 			const char * serialize(int format) const;
 			void show() const;
 
@@ -565,8 +562,6 @@ namespace hfc
 			Product * myProduct;
 
 			std::string labelOutputFilename;	// Used for printing labels to Zebra printer.
-
-			bool rfidVoidLabelPrinted_;  // This is not stored in the database.
 
 
 			/* --- Class Data members --- */

@@ -1646,33 +1646,6 @@ void SoftkeyManager::handleExecute(Softkey *msgSoftkey)
 			break;
 		}
 
-		case Action_ToggleRfidPrinting:
-		{
-			Configuration* cfg = Configuration::getInstance();
-			if (!cfg)
-				break;
-
-			if (mySession)
-			{
-				Session* s = dynamic_cast<Session*> (mySession);
-				if (s)
-				{
-					if (cfg->toBoolCfg(fieldOffsetCfgEnableRfidPrinting))
-					{
-						cfg->setCfg(fieldOffsetCfgEnableRfidPrinting, "0");
-						mySession->addDialogMessage(ErrSessionDev, SessionDevRfidPrintingDisabled, HfcResponse::RESPONSESTYLE_OK);
-					}
-					else
-					{
-						cfg->setCfg(fieldOffsetCfgEnableRfidPrinting, "1");
-						mySession->addDialogMessage(ErrSessionDev, SessionDevRfidPrintingEnabled, HfcResponse::RESPONSESTYLE_OK);
-					}
-					cfg->saveField(fieldOffsetCfgEnableRfidPrinting, s);
-				}
-			}
-			break;
-		}
-
 		case Action_TogglePick5Active:
 		{
 			Configuration *cfg = Configuration::getInstance();

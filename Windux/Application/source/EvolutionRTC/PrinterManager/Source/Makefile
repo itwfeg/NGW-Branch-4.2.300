@@ -29,7 +29,6 @@ CPP_SRCS := \
     CommandOperationList.cpp \
     EssPrinterTeachTable.cpp \
     EvolPrinterTeachTable.cpp \
-    StEppPrinterTeachTable.cpp \
     PrinterManager.cpp \
     PrinterManagerUnit.cpp \
     PrinterTeachTable.cpp \
@@ -81,7 +80,6 @@ INC_DIRS := \
     -I$(HOBART_APP)/source/MetrologicallySignificant \
     -I$(HOBART_APP)/source/util \
     -I$(HOBART_APP)/source/util/Inc \
-    -I$(HOBART_APP)/HobartCustomerHook \
     -I$(HOBART_APP)/../Smbus/driver
 
 ##################################

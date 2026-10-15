@@ -1116,7 +1116,7 @@ QString SessionErrorDialog::messageStringT<ErrPrinterDevice>( int code, int isSc
     case 7025:
         return printer + ": " + SessionErrorDialog::tr( "\nThe Security label applier is out of labels." );
     case 7026:
-        return SessionErrorDialog::tr( "Primary printer:\nPlease move the printer lever forward.\n\nMove the lever back\nto engage the printhead.\n\nEngage the printhead or disable printing on the Primary Printer." );
+        return printer + ": " + SessionErrorDialog::tr( "Printer lever forward.\n\nMove printer lever back\nto engage the printhead." );
     case 7027:
         return SessionErrorDialog::tr( "Invalid character in printer name.\nThe printer name may not contain a space in the name." );
     case 7028:
@@ -1141,20 +1141,8 @@ QString SessionErrorDialog::messageStringT<ErrPrinterDevice>( int code, int isSc
         return SessionErrorDialog::tr( "\nLabel Cutter Interlock Open.\n\nClose side door when finished.\n\nCutter cannot operate while door is open." ); //SOF-5065
     case 7038:
         return SessionErrorDialog::tr( "\nPrinter Door Interlock Open.\n\nClose side door when finished." ); //SOF-5060
-	case 7039:
-        return SessionErrorDialog::tr( "\nSecondary Printer:\nPlease move the printer lever forward.\n\nMove the lever back\nto engage the printhead.\n\nEngage the printhead or disable printing on the Secondary Printer.");
-	
-	case 7040:
-        return SessionErrorDialog::tr( "\nPrimary Printing or Wrapping Error:\nPlease check the Primary Printhead for any jams or errors.\n\nCycle the lever of the Primary printhead and size labels.\n\nCycle the wrapper if necessary.\n\nContact Hobart Service if the problem continues." );
-	case 7041:
-        return SessionErrorDialog::tr( "\nSecondary Printing or Wrapping Error:\nPlease check the Secondary Printhead for any jams or errors.\n\nCycle the lever of the Secondary printhead and size labels.\n\nCycle the wrapper if necessary.\n\nContact Hobart Service if the problem continues.");
-    case 7042:
-        return SessionErrorDialog::tr( "Unknown Printing or Wrapping Error.\n\nPlease check both printers for any errors or jams.\n\nCycle the printhead on both printers and cycle the wrapper if necessary.\n\nContact Hobart Service if the problem continues." );
-    case 7043:
-        return SessionErrorDialog::tr( "Printer firmware is being prepared to upgrade.  Please wait ..." );
-    case 7044:
-        return SessionErrorDialog::tr( "EPP Printer firmware has been prepared to upgrade.\n\nPlease reboot the system to finish the upgrade process." );
-
+    case 7126:
+        return printer + ": " + SessionErrorDialog::tr( "Printer lever forward.\n\nMove printer lever back\nto engage the printhead." );
     case 7501:
         return SessionErrorDialog::tr( "Printer communication lost. Check printer cable.\nThis scale is out of service.  Please contact store personnel." );
     case 7502:
@@ -1730,17 +1718,15 @@ QString SessionErrorDialog::messageStringT<ErrWrapperDevice>( int code, int isSc
         return SessionErrorDialog::tr( "There was an error saving the device timings to a file.\nPlease try again." );
     case 9728:
         return SessionErrorDialog::tr( "Operating System error while saving device timings.\nPlease try again." );
-    case 9729:
-        return SessionErrorDialog::tr( "Unsaved Device Timings.\nPlease save the existing wrapper timings before leaving.\nClick the SAVE button to save the current timings\nor CANCEL to ignore them." );
-    case 9730:
-        return SessionErrorDialog::tr( "The Run-In and Actuator Tests have been skipped.\nThese tests, in addition to the checklist tests,\nhelp in troubleshooting the wrapper." );
-
         // SOF-5463: Error and Status Dialogs for NEW 2P Project with single sliding 2nd Printer
-    // All of these previous errors are no longer needed so we should not even be firing the WrPPPStatus,
-    // unless it is decided to be used with the new 2P Project.  In any case, the following messages
-    // can be reclaimed and used again
-    // 9729, 9730, 9731, 9732, 9733, 9734, 9735, 9736, 9737, 9738, 9739, 9740, 9741
-
+        // All of these previous errors are no longer needed so we should not even be firing the WrPPPStatus,
+        // unless it is decided to be used with the new 2P Project.  In any case, the following messages
+        // can be reclaimed and used again
+        // 9729, 9730, 9731, 9732, 9733, 9734, 9735, 9736, 9737, 9738, 9739, 9740, 9741
+    //case 9729:
+    //    return SessionErrorDialog::tr( "Primary Printer Plate Sensor needs calibration." );
+    //case 9730:
+    //    return SessionErrorDialog::tr( "Secondary Printer Plate Sensor needs calibration." );
     //case 9731:
     //    return SessionErrorDialog::tr( "Primary Printer Plate Sensor failed internal calibration.\n\nIf problem persists please call service" );
     //case 9732:
@@ -1998,10 +1984,7 @@ QString SessionErrorDialog::messageStringT<ErrSessionDevice>( int code, int isSc
 		return SessionErrorDialog::tr("Add an Extra Sell by Day is a configured Flashkey in Operate Mode.  The Sell By Time can be updated but enabling or disabling the feature will not be saved. The feature can only be changed with the Flashkey in Operate Mode.");
     case SessionDevError::SessionDevSecLabelEnableToggleStatus:
 		return SessionErrorDialog::tr("Second Label is %s");
-    case SessionDevError::SessionDevRfidPrintingEnabled:
-        return SessionErrorDialog::tr("RFID Printing is enabled.");
-    case SessionDevError::SessionDevRfidPrintingDisabled:
-        return SessionErrorDialog::tr("RFID Printing is disabled.");
+
     
     default:
         break;
@@ -2412,10 +2395,6 @@ QString SessionErrorDialog::messageStringT<ErrProductDevice>( int code, int isSc
          return SessionErrorDialog::tr( "Please Click the Done button to leave the Label Placement Screen." );
     case ProductDevError::ProductDevWaitForLabelToPrintOn2P:
          return SessionErrorDialog::tr( "Allow the wrapper to print the current label before requesting new products.\n\nPlease check the last wrapped product and make sure it is labeled correctly." );
-    case 101200:
-        return SessionErrorDialog::tr( "There was an error when writing to the RFID tag.\nThe label is void. 101200" );
-    case 101202:
-        return SessionErrorDialog::tr( "There was an error when writing to the RFID tag.\nThe label is void. 101202" );
     case 101505:
         return SessionErrorDialog::tr( "Invalid label type for this product.\nPlease contact store personnel." );
     default:
@@ -3444,7 +3423,7 @@ QString SessionErrorDialog::messageString(int code , int isScale)
     }
 
     if ( !m.length() )
-        m = tr( "You have received a critical error, but I don't recognize the error code:\n\n" ) + QString::number( code ) + tr( "\n" ) + QString::number( event );
+        m = tr( "You have received a critical error, but I don't recognize the error code:\n\n" ) + QString::number( code );
 
     return m;
 }

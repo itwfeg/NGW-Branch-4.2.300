@@ -885,8 +885,6 @@ Transaction::Transaction(const Transaction& rhs)
 	oldShelfLifeMinutes_      = rhs.oldShelfLifeMinutes_;
 	oldProductLifeMinutes_    = rhs.oldProductLifeMinutes_;
      
-	rfidVoidLabelPrinted_     = rhs.rfidVoidLabelPrinted_;
-
 	serializedField_.clear();
 }
 
@@ -995,8 +993,6 @@ void Transaction::init()
     sweetheartWeight_ = 0;
     
 	labelOutputFilename = "";	// Used for printing labels to Zebra printer.
-
-	rfidVoidLabelPrinted_ = false;
 
 	initFieldLists();
 }
@@ -1386,21 +1382,14 @@ void Transaction::associateOperator(const HobOperator* oper)
 	if ( oper )
 	{
 		setOperatorId(oper->getOpNum());
-
-		// Mod for saving RFID label print to transaction's opRFID field
-		if ( !oper->getOpRFID().empty() )
-			setOperatorRFID( oper->getOpRFID() );
-
+		setOperatorRFID(oper->getOpRFID());
 		setOperatorName(oper->getOpName());
 		setOperatorAccessLevel(util_string::inttostring(oper->getAccessLevel()));
 	}
 	else
 	{
 		setOperatorId("");
-
-		// Mod for saving RFID label print to transaction's opRFID field
-		//setOperatorRFID("");
-
+		setOperatorRFID("");
 		setOperatorName("");
 		setOperatorAccessLevel("");
 	}

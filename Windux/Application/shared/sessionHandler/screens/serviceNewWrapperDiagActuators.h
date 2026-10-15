@@ -107,7 +107,6 @@ private:
     QPushButton *saveHistory_;
     QPushButton *clearHistory_;
     QPushButton *saveTimings_;
-    QPushButton *backToTimings_;
 
     //
     // sensors
@@ -244,7 +243,7 @@ private:
 
     bool diagActive_;
     bool testActive_;
-    bool screenLoaded_;
+
     QTimer *statusRequestTimer_;
 
     QMap<int, QList<SessionMessage>* > history_;            // make it a pointer to the list

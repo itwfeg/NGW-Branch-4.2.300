@@ -118,8 +118,6 @@ void WrapperAuditLogRow::retrieve( util::Dictionary &d ) const
 			sourceExtStr = "Timings Reset";
 		else if ( Timings_Modified == sourceExt )
 			sourceExtStr = "Timings Modified";
-		else if ( Timings_Unlocked == sourceExt )
-			sourceExtStr = "Timings Unlocked";
 		break;
 	case Film:
 		d.appendString( "sourceStr", "Film" );

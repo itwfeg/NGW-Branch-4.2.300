@@ -246,8 +246,8 @@
 		WrEvolBackupPackageTimings,
 		WrNGWWrapperDetached,				// 255
 
-		WrEvolSavePackageTimingsToDisc,
-		WrEvolUnlockPackageTimings
+		WrNextEvent5,
+		WrNextEvent6
 	} WrEvent_t;
 
 #endif // WRAPPEREVENT_H

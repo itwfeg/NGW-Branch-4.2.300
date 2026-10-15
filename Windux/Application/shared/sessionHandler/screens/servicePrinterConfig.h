@@ -60,58 +60,58 @@ public slots:
      * Sets property indicating that the setup needs to be saved
      * when exiting.
      */
-    void setupChanged();
+    void SetupChanged();
 
     /**
      * Slot for when the Printer selection is changed.
      */
-    void printerChanged(int index);
+    void PrinterChanged(int index);
 
     /**
      * Slot for when the Test Label Pattern selection is changed.
      */
-    void updateTestPatternLabel(int index);
+    void UpdateTestPatternLabel(int index);
 
     /**
      * Slot for Printing single test label.
      */
-    void printSingleTestLabel();
+    void PrintSingleTestLabel();
 
     /**
      * Slot for continuously printing single test labels.
      */
-    void printMultipleTestLabels();
+    void PrintMultipleTestLabels();
 
     /**
      * Slot for stopping the printing of continous test labels.
      */
-    void stopMultipleTestLabels();
+    void StopMultipleTestLabels();
 
     /**
      * Slot for calibrating the Media Sensor.
      */
-    void calibrateMediaSensor();
+    void CalibrateMediaSensor();
 
     /**
      * Slot for calibrating the Label Taken Sensor.
      */
-    void calibrateLabelTakenSensor();
+    void CalibrateLabelTakenSensor();
 
     /**
      * Slot to advance the label stock.
      */
-    void advanceLabelStock();
+    void AdvanceLabelStock();
 
     /**
      * Slot to calibrate shoot through (gap) sensor.
      */
-    void calibrateShootThrough();
+    void CalibrateShootThrough();
 
     /**
      * Slot for when the Printer Settings button is clicked.
      */
     // FT-636
-    void printerSettings();
+    void PrinterSettings();
 
     /**
      * Slot to move on to next shoot through calibration step when dialog clears
@@ -152,14 +152,12 @@ private:
     Ui::servicePrinterConfig *ui;
 
     QString currentPrinter;
-    QString slaValue;
 
     QString currentTestLabel;
 
     bool bSetupChanged;
     bool shootThroughCalStarted;
     bool printheadDisengaged_;
-    int isShootThruSensor_;                // set if we have  set thru printer set from the PrinterInquire message
 
     MessageBoxDialog *calDialog;
     MessageBoxDialog *calInitDialog;
@@ -194,32 +192,32 @@ private:
      * Hide all fields on the screen.
      *
      */
-    void hideAllFields();
+    void HideAllFields();
 
     /**
      * Show all fields on the screen.
      *
      */
-    void showAllFields();
+    void ShowAllFields();
 
     /**
      * Determines if Label Width field should enabled.
      *
      * @param[in] Printer to request
      */
-    void labelWidthEnabledEnabled(QString printerType);
+    void LabelWidthEnabledEnabled(QString printerType);
 
     /**
      * Builds the parameter string and saves the setup.
      *
      */
-    void saveDataOnExit();
+    void SaveDataOnExit();
 
     /**
      * Send messages to turn off sensor tracking and turn off continuous test labels.
      *
      */
-    void clearMessages();
+    void ClearMessages();
 
     /**
      * Determine if either an EPP Printer (old style-running out of parts) or EPP 2 Printer (New Style - Atmel) is attached.
@@ -232,12 +230,6 @@ private:
      *
      */
     bool isFirstPrinterEpp();
-
-    /**
-     * Determine if any printer is an EPP ST printer and if it is attached
-     *
-     */
-    bool isSTEppPrinter();
 
     /**
      * Determine if either an USB Printer is attached.

@@ -1,3 +1,0 @@
-[2024-10-01 11:40:50.957] [debug] Loading settings from INIReader
-[2024-10-01 11:40:50.958] [debug] Loaded log level: DEBUG
-[2024-10-01 11:40:50.959] [info] Config logger initialized. Log file: /usr/share/rfid-hook/config.log

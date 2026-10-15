@@ -455,6 +455,13 @@ void SuperNormalScaleOperation::translate()
 
         ui->cboLabelPlacement->setItemText(0, tr("Upper Right"));
         ui->cboLabelPlacement->setItemText(1, tr("Upper Left"));
+        /*
+        ui->cboLabelPlacement->setItemText(3, tr("Lower Right"));
+        ui->cboLabelPlacement->setItemText(4, tr("Lower Left"));
+        */
+
+        //ui->cboLabelPlacement_2->setItemText(0, tr("Upper Right"));
+        //ui->cboLabelPlacement_2->setItemText(1, tr("Upper Left"));
 
         ui->cboFilmTension->setItemText(0, tr("Low"));
         ui->cboFilmTension->setItemText(1, tr("Medium"));
@@ -559,9 +566,6 @@ void SuperNormalScaleOperation::initialize()
     alreadyReceivedCfpPrepackMessage = false;
 
     isShelfLifeAmSelected = true;
-
-    origPrimaryPlacement = "";                                      // when blank we havent read the original default value yet
-    origSecondyPlacement = "";                                      // ditto
 
     currencyData_    = &session_->scaleConfig->currencySettings;
     scaleConfigData_ = &session_->scaleConfig->scaleConfig;
@@ -1193,9 +1197,21 @@ void SuperNormalScaleOperation::setupWidgets()
 		ui->cboLabelPlacement->clear();
         ui->cboLabelPlacement->addItem(tr("Upper Right"), "0");
         ui->cboLabelPlacement->addItem(tr("Upper Left"), "1");
+        //ui->cboLabelPlacement->addItem(tr("Lower Right"), "3");
+        //ui->cboLabelPlacement->addItem(tr("Lower Left"), "4");
 
         populateSecondaryPositions();
-
+/*
+        ui->cboLabelPlacement_2->clear();
+        ui->cboLabelPlacement_2->addItem(tr("Upper Right"), "0");
+        ui->cboLabelPlacement_2->addItem(tr("Upper Left"), "1");
+        ui->cboLabelPlacement_2->addItem(tr("Lower Right"), "3");
+        ui->cboLabelPlacement_2->addItem(tr("Lower Left"), "4");
+        ui->cboLabelPlacement_2->addItem(tr("Right of Primary"), "5");
+        ui->cboLabelPlacement_2->addItem(tr("Left of Primary"), "6");
+        ui->cboLabelPlacement_2->addItem(tr("Above Primary"), "7");
+        ui->cboLabelPlacement_2->addItem(tr("Below Primary"), "8");
+*/
 		ui->cboFilmTension->clear();
 	    ui->cboFilmTension->addItem(tr("Low"), "0");
 	    ui->cboFilmTension->addItem(tr("Medium"), "1");
@@ -1810,38 +1826,14 @@ void SuperNormalScaleOperation::saveDataOnExit()
     if( tabAccumHasChanged )
         saveAccumulateItems();
 
-    if( origPrimaryPlacement.length() == 0 )
-    {
-        origPrimaryPlacement = scaleConfigData_->defaultLabelPlacementRaw();
-        origSecondyPlacement = scaleConfigData_->secondaryLabelPlacementRaw();
-    }
-
     QString priLabelplacement = normalScaleOperation_->labelPlacement();
     QString secLabelplacement = QString::number( normalScaleOperation_->secondaryLabelPlacement() );
 
-    // Found 3 sets of global vars that I think mean the same thing. Adding X at end so they dont show up in searchs
-    // used for label placement - on normalScaleOps - but not ProductDefaults or ChangeProductAllFields.  What do they use?
-    // NO NO NO - use in the placement VIEW screen ONLY
-    //session_->scaleConfig->primaryPlacementSystemX  = priLabelplacement.toInt();
-    //session_->scaleConfig->secondaryPlacementSystemX = secLabelplacement.toInt();
+    session_->scaleConfig->primaryPlacementSystem = normalScaleOperation_->labelPlacement().toInt();
+    session_->scaleConfig->secondaryPlacementSystem = normalScaleOperation_->secondaryLabelPlacement();
 
-    // Added this - save to ScaleConfig class
-    scaleConfigData_->defaultLabelPlacementRaw()    = priLabelplacement;
-    scaleConfigData_->secondaryLabelPlacementRaw()  = secLabelplacement;
-
-    // now need to save it to the Configs db table
-    QString param = "";
-    param += "," + QString::number( fieldOffsetCfgDefWrLabelPlacement );
-    param += "," + scaleConfigData_->defaultLabelPlacementRaw();
-    param += "," + origPrimaryPlacement;
-    session_->send( ConfigurationDev, CfgSaveSingleField, param );
-
-    param = "";
-    param += "," + QString::number( fieldOffsetCfgDefWrSecLabelPlacement );
-    param += "," + scaleConfigData_->secondaryLabelPlacementRaw();
-    param += "," + origSecondyPlacement;
-    session_->send( ConfigurationDev, CfgSaveSingleField, param );
     LOG_DEBUG( "Bottom of saveDataOnExit", NULL );
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2094,8 +2086,6 @@ void SuperNormalScaleOperation::updateNormalScaleOperations( const SessionMessag
             }
 
             // SOF-2755: Do not allow "00" to be entered for extra shelf life hour
-            if( shelfLifeHoursValidator_ == NULL )
-                shelfLifeHoursValidator_ = new QIntValidator(0, INT_MAX, this);
             shelfLifeHoursValidator_->setBottom( 1 );
         }
 
@@ -6042,18 +6032,14 @@ void SuperNormalScaleOperation::currentChangeTab(int tabNum)
             {
                 // 5.5 WRAPPER SETTINGS
                 normalScaleOperation_->intakeMode()         = (ui->cboIntakeMode->itemData( ui->cboIntakeMode->currentIndex() )).toString();
-
+                //normalScaleOperation_->labelPlacement()     = (ui->cboLabelPlacement->itemData( ui->cboLabelPlacement->currentIndex() )).toString();
+                //normalScaleOperation_->secondaryLabelPlacementRaw()     = (ui->cboLabelPlacement_2->itemData( ui->cboLabelPlacement_2->currentIndex() )).toString();
+				// replaced by
                 QString priLabelplacement = (ui->cboLabelPlacement->itemData( ui->cboLabelPlacement->currentIndex() )).toString();
                 QString secLabelplacement = (ui->cboLabelPlacement_2->itemData( ui->cboLabelPlacement_2->currentIndex() )).toString();
-                if( origPrimaryPlacement.length() == 0 )
-                {
-                    origPrimaryPlacement = scaleConfigData_->defaultLabelPlacementRaw();
-                    origSecondyPlacement = scaleConfigData_->secondaryLabelPlacementRaw();
-                }
-                normalScaleOperation_->labelPlacement()                 = priLabelplacement;
+
+                normalScaleOperation_->labelPlacement()     = priLabelplacement;
                 normalScaleOperation_->secondaryLabelPlacementRaw()     = secLabelplacement;
-                scaleConfigData_->defaultLabelPlacementRaw()            = priLabelplacement;
-                scaleConfigData_->secondaryLabelPlacementRaw()          = secLabelplacement;
                 normalScaleOperation_->filmTension()        = (ui->cboFilmTension->itemData( ui->cboFilmTension->currentIndex() )).toString();
                 normalScaleOperation_->tensionFrontToBack() = (ui->cboTensionFront2Back->itemData( ui->cboTensionFront2Back->currentIndex() )).toString();
                 normalScaleOperation_->tensionLeftToRight() = (ui->cboTensionLeft2Right->itemData( ui->cboTensionLeft2Right->currentIndex() )).toString();
@@ -6691,6 +6677,48 @@ void SuperNormalScaleOperation::populateSecondaryPositions()
             ui->cboLabelPlacement_2->setItemText(4, tr("Below Primary"));
 
             if( currentSecondaryData != upperLeft && currentSecondaryData != leftOfPrimary && currentSecondaryData != abovePrimary )
+            {
+                ui->cboLabelPlacement_2->setCurrentIndex( currentSecondaryIndex );
+            }
+            break;
+        }
+        case lowerRight:
+        {
+            ui->cboLabelPlacement_2->clear();
+            ui->cboLabelPlacement_2->addItem(tr("Upper Right"), "0");
+            ui->cboLabelPlacement_2->addItem(tr("Upper Left"), "1");
+            ui->cboLabelPlacement_2->addItem(tr("Lower Left"), "4");
+            ui->cboLabelPlacement_2->addItem(tr("Left of Primary"), "6");
+            ui->cboLabelPlacement_2->addItem(tr("Above Primary"), "7");
+
+            ui->cboLabelPlacement_2->setItemText(0, tr("Upper Right"));
+            ui->cboLabelPlacement_2->setItemText(1, tr("Upper Left"));
+            ui->cboLabelPlacement_2->setItemText(2, tr("Lower Left"));
+            ui->cboLabelPlacement_2->setItemText(3, tr("Left of Primary"));
+            ui->cboLabelPlacement_2->setItemText(4, tr("Above Primary"));
+
+            if( currentSecondaryData != lowerRight && currentSecondaryData != rightOfPrimary && currentSecondaryData != belowPrimary )
+            {
+                ui->cboLabelPlacement_2->setCurrentIndex( currentSecondaryIndex );
+            }
+            break;
+        }
+        case lowerLeft:
+        {
+            ui->cboLabelPlacement_2->clear();
+            ui->cboLabelPlacement_2->addItem(tr("Upper Right"), "0");
+            ui->cboLabelPlacement_2->addItem(tr("Upper Left"), "1");
+            ui->cboLabelPlacement_2->addItem(tr("Lower Right"), "3");
+            ui->cboLabelPlacement_2->addItem(tr("Right of Primary"), "5");
+            ui->cboLabelPlacement_2->addItem(tr("Above Primary"), "7");
+
+            ui->cboLabelPlacement_2->setItemText(0, tr("Upper Right"));
+            ui->cboLabelPlacement_2->setItemText(1, tr("Upper Left"));
+            ui->cboLabelPlacement_2->setItemText(2, tr("Lower Right"));
+            ui->cboLabelPlacement_2->setItemText(3, tr("Right of Primary"));
+            ui->cboLabelPlacement_2->setItemText(4, tr("Above Primary"));
+
+            if( currentSecondaryData != lowerLeft && currentSecondaryData != leftOfPrimary && currentSecondaryData != belowPrimary )
             {
                 ui->cboLabelPlacement_2->setCurrentIndex( currentSecondaryIndex );
             }

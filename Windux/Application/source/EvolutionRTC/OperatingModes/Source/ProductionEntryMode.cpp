@@ -108,8 +108,6 @@ ProductionEntryMode::ProductionEntryMode(Product *pCurrentProduct,
 	startedPrintingLabels = false;
 	pausedPrintingLabels = false;
 	
-	numOfVoidLabelsPrinted = 0;
-
 	waitForInterlock = false;				//SOF-3885
 		
 	receivedPrStockMetricsAfterError = true;
@@ -424,8 +422,6 @@ void ProductionEntryMode::handleProductMessage(ProductEvent productEvent, const 
 				{
 					totalLabelsCount = 0;
 					currentLabelCount = 0;
-					numOfVoidLabelsPrinted = 0;
-
 					if (!productTransactionQ.empty())
 					{
 						std::deque<ProductTransaction*>::iterator pos = productTransactionQ.begin();
@@ -775,13 +771,6 @@ void ProductionEntryMode::handlePrinterMessage(PrEvent prEvent, const char *recv
 				Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - transaction=") + HobString(Hex::toString((long long) pPT)) + HobString(" - current transaction=") + HobString(Hex::toString((long long) pCurrentProductTransaction)));
 				Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - printOk=") + HobString(Bool::toString(printOk)));
 
-				Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - transaction=") + HobString(Hex::toString((long long)pPT)) + HobString(" - current transaction=") + HobString(Hex::toString((long long)pCurrentProductTransaction)));
-				Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - printOk=") + HobString(Bool::toString(printOk)));
-
-				int maxPERfidVoidLabels = Configuration::getInstance()->toIntCfg(fieldOffsetCfgMaxPERfidVoidLabels);
-				Debug::trace("PrinterManager.rfid", "pem - 1 maxPERfidVoidLabels: " + inttostring(maxPERfidVoidLabels));
-				Debug::trace("PrinterManager.rfid", "pem - 1 numOfVoidLabelsPrinted: " + inttostring(numOfVoidLabelsPrinted));
-
 				if (printOk)
 				{
 					LabelPrintingCounts lpc(this, ++currentLabelCount, totalLabelsCount);
@@ -796,19 +785,12 @@ void ProductionEntryMode::handlePrinterMessage(PrEvent prEvent, const char *recv
 						//Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - increment number of labels printed"));
 						//pPT->incrementNumOfLabelsPrinted();
 
-						if (pPT->isRfidVoidLabelPrinted())
-						{
-							numOfVoidLabelsPrinted++;
-							Debug::trace("PrinterManager.rfid", "pem - incremented numOfVoidLabelsPrinted: " + inttostring(numOfVoidLabelsPrinted));
-						}
-
-						if (!receivedCancelCommand && numOfVoidLabelsPrinted < maxPERfidVoidLabels && pPT->getNumOfLabelsPrinted() < pPT->getNumOfLabelsToPrint())
+						if (!receivedCancelCommand && pPT->getNumOfLabelsPrinted() < pPT->getNumOfLabelsToPrint())
 						{
 							Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - before calling sendPackageComplete(), not all labels printed for current transaction, printing ") +
 												HobString(Integer::toString(pPT->getNumOfLabelsPrinted())) + HobString(" of ") + HobString(Integer::toString(pPT->getNumOfLabelsToPrint())));
 
-							if ( !pPT->isRfidVoidLabelPrinted() )
-								sendPackageComplete(pPT);
+							sendPackageComplete(pPT);
 
 							if (Configuration::getInstance()->toIntCfgI("productionEntryPrintDelay") > 0)
 								PAL_absclass::PAL_sleep(Configuration::getInstance()->toIntCfgI("productionEntryPrintDelay"));
@@ -817,16 +799,13 @@ void ProductionEntryMode::handlePrinterMessage(PrEvent prEvent, const char *recv
 						}
 						else
 						{
-							Debug::trace("PrinterManager.rfid", "pem - 2 maxPERfidVoidLabels: " + inttostring(maxPERfidVoidLabels));
-							Debug::trace("PrinterManager.rfid", "pem - 2 numOfVoidLabelsPrinted: " + inttostring(numOfVoidLabelsPrinted));
-
 							Debug::trace("ProductionEntryMode", HobString("pem - handling PrLabelComplete - before calling sendProductComplete() for this transaction"));
 							Debug::trace("ProductionEntryMode", HobString("pem - PrLabelComplete - Printed ") +
 								HobString(Integer::toString(pPT->getNumOfLabelsPrinted())) + HobString(" of ") + HobString(Integer::toString(pPT->getNumOfLabelsToPrint())));
 
-							sendProductComplete(pPT, ((pPT->getNumOfLabelsPrinted() == pPT->getNumOfLabelsToPrint() && numOfVoidLabelsPrinted < maxPERfidVoidLabels) ? true : false));
+							sendProductComplete(pPT, ((pPT->getNumOfLabelsPrinted() == pPT->getNumOfLabelsToPrint()) ? true : false));
 
-							if (receivedCancelCommand || numOfVoidLabelsPrinted >= maxPERfidVoidLabels)
+							if (receivedCancelCommand)
 							{
 								receivedCancelCommand = false;
 								emptyProductTransactionQ();

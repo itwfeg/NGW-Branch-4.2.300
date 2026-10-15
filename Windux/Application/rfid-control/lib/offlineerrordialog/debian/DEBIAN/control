@@ -1,7 +1,0 @@
-Package: hobart-walmart-offline-error-dialog
-Version: 1.0-0
-Priority: optional
-Architecture: armhf
-Maintainer: Randy Blankley <randy.blankley@hobartcorp.com>
-Description: This package provides Walmart Offline Error Dialog support.
-

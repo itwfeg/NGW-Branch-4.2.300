@@ -795,7 +795,6 @@ void Session::init(CommMechanism *UNUSED(uiClient))
 	selfServeIgnoreWeightChangeForPrintToScreen = false;
 	
     hasProcessedWrStatusMsg = false;
-    hasProcessedPrSystemMsg = false;
 	
 	setStatus(STATUS_ACTIVE);
 
@@ -1640,8 +1639,8 @@ void Session::noMessageFromMessengerProcessing()
 
         else if (currentModeOp == OP_SENDWRAPPERDATATOAPPHOOK)
         {
-            Debug::trace("Session.sendWrapperDataToHook", "Handling OP_SENDWRAPPERDATATOHOOK session mode");
-            
+            Debug::trace("SendWrapperDataToHook", "Handling OP_SENDWRAPPERDATATOHOOK session mode");
+
             Session *primarySession = SessionManager::getInstance()->getPrimaryConsoleSession();
 
             // We'll grab what we can from the Configuration and FPM managers, since that data is readily accessible.
@@ -1656,39 +1655,19 @@ void Session::noMessageFromMessengerProcessing()
             // Ideally we'd fetch this directly from some other object, as seen above, but I don't think that's an option at present.
             registerEvent(Wrapper, WrEvolStatus);
             sendWrapperWrReqStatusMsg();
-            
-            Debug::trace("Session.sendWrapperDataToHook", "Sending messages to printers to get version information.");
-            registerEvent(PrinterSystem, SysStatus);
-            sendPrinterSysReqStatusMsgs(this);
-            // PrinterSystemRequestStatus pr1Msg(this, FirstPrinter);
-            // PrinterSystemRequestStatus pr2Msg(this, SecondPrinter);
-            // dispatchEvent(&pr1Msg);
-            // dispatchEvent(&pr2Msg);
 
-            // See whether the session processed the messages we just sent (or at least *some* messages).
+            // See whether the session processed the WrEvolStatus message we just sent (or at least *some* WrEvolStatus message).
             // If so, great; if not, we'll wait a little bit and see whether it's processed sometime shortly thereafter.
             // We don't want to keep this session running forever though -- hence the relatively short 15-second wait.
-            int statusAttempts = 0;
+            int attempts = 0;
             while ( !hasProcessedWrStatusMsg )
             {
-                Debug::trace("Session.sendWrapperDataToHook", "Waiting on WrEvolStatus message to be processed...");
+                Debug::trace("SendWrapperDataToHook", "Waiting on WrEvolStatus message to be processed...");
                 PAL_absclass::PAL_sleep(5000);
-                statusAttempts++;
-                if (statusAttempts == 3)
+                attempts++;
+                if (attempts == 3)
                 {
-                    Debug::trace("Session.sendWrapperDataToHook", "Tired of waiting on WrEvolStatus message; moving on");
-                    break;
-                }
-            }
-            int prSystemAttempts = 0;
-            while ( !hasProcessedPrSystemMsg )
-            {
-                Debug::trace("Session.sendWrapperDataToHook", "Waiting on Printer SysStatus message to be processed...");
-                PAL_absclass::PAL_sleep(5000);
-                prSystemAttempts++;
-                if (prSystemAttempts == 3)
-                {
-                    Debug::trace("Session.sendWrapperDataToHook", "Tired of waiting on Printer SysStatus message; moving on");
+                    Debug::trace("SendWrapperDataToHook", "Tired of waiting on WrEvolStatus message; moving on");
                     break;
                 }
             }
@@ -1748,7 +1727,7 @@ void Session::sessionMessageProcess( SessionMessage * msg )
 				HobString h = getName() + HobString(" - message received: ") + HobString(Hex::toString(m.data(), (int)m.size()));
 				Debug::trace("Session.receiveAll", h);
 			}
-        } 
+        }
 
         if (currentModeOp == OP_SCALESHUTDOWN)
         {
@@ -2022,17 +2001,7 @@ void Session::handleMessage(SessionMessage *msg)
             case ProductDev:
 			{
 				Debug::trace("Session", getName() + HobString(" - handling PRODUCT DataType"));
-                Debug::trace("Session.ProductDev", getName() + HobString(" - handling PRODUCT DataType"));
-
 				UINT8 ev = msg->getEventType();
-
-                Debug::trace("Session.ProductDev", getName() + " event type = " + std::to_string(ev));
-
-                if(ev == ProductRead)
-                {
-                    Debug::trace("Session.ProductDev", getName() + HobString(" - handling ProductRead event"));
-                }
-
 				if ((ev == ProductReadAll || ev == ProductReadAllExpirationLabels) && isCommSession())
 					handleReadAll(msg);
 				else
@@ -2452,10 +2421,6 @@ void Session::handleMessage(SessionMessage *msg)
             case Error:
             {
 				Debug::trace("Session", getName() + " - handling Error | ErrEOF message");
-                Debug::trace("Session.Error", "event type = " + util_string::uinttostring(msg->getEventType()));
-                Debug::trace("Session.Error", "device type = " + util_string::uinttostring(msg->getDeviceType()));
-
-
 				if (msg->getEventType() == ErrEOF)
                 {
 					// Since smBackend can just close the socket connection (for remote print sessions)
@@ -2482,11 +2447,7 @@ void Session::handleMessage(SessionMessage *msg)
 
                 if (msg->getEventType() == ErrRemoveAnyModalDialog)
                 {
-                    Debug::trace("Session.Error", "ErrRemoveAnyModalDialog received");
-
                     responseMessageManager->manageResponseAnswer(response);
-
-                    Debug::trace("Session.Error", "response getCode = " + util_string::uinttostring(response->getCode()));
 
                     if (response->getCode() == OperatorErrEnterIDorRFID)
                     {

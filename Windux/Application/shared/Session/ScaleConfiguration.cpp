@@ -16,7 +16,6 @@
 #include "Session.h"
 #include "Devices.h"                                                // why cant I put these in ScaleConfiguration.h? I get errors
 #include "Events.h"
-#include "ScaleClasses.h"
 #include "../sessionHandlerWidgets/softkeybutton.h"
 #include "../sessionHandlerWidgets/softkeytogglemanager.h"
 #include "../platform/python.h"
@@ -87,15 +86,6 @@ ScaleConfiguration::ScaleConfiguration( Session *session ) :
     cutTestPlu.meatSpecSheet = 0;                                   // any longer and we are processing sub primal PLUs for the cut test.
     cutTestPlu.cutTestNumber = 0;                                   // tie the primal plu to a meat spec sheet too.
 
-    wrTimingsTestResults.testFilmLoadProperly = 0;
-    wrTimingsTestResults.testFilmRollerClean = 0;
-    wrTimingsTestResults.testFilmRollerTensioned = 0;
-    wrTimingsTestResults.testGripperFilmSelectorHeight = 0;
-    wrTimingsTestResults.testGripperSlideBlocks = 0;
-    wrTimingsTestResults.testElevatorHeight = 0;
-    wrTimingsTestResults.testBrakeGap = 0;
-    wrTimingsTestResults.testBrakeTorque = 0;
-
     pickFiveActive_  = false;
     pickFiveEnabled_ = false;
     startingCutTest = false;
@@ -164,19 +154,6 @@ ScaleConfiguration::ScaleConfiguration( Session *session ) :
     internalConfig.isOkToLookUpPlu = true;							// By default we can look up a PLU
     internalConfig.poppedRezero = false;                            // did we pop a dialog?
     internalConfig.isOkDroppedPLU = 0;
-
-    internalConfig.isTimingsActive = false;
-    internalConfig.returningFromTabs = false;
-    internalConfig.actuatorTestState = TimingsTestState::Test_Not_Performed;
-    internalConfig.runInTestState = TimingsTestState::Test_Not_Performed;
-    internalConfig.runInFailures = "";
-    internalConfig.actuatorFailures = "";
-    internalConfig.runInSensorFailures = "";
-    internalConfig.actuatorSensorFailures = "";
-
-    internalConfig.priVertPrintPosition = 0;
-    internalConfig.secVertPrintPosition = 0;
-
     internalConfig.printerCycleCounts.append("0");                  // set the default cycle counts for the 3 printers
     internalConfig.printerCycleCounts.append( "0" );
     internalConfig.printerCycleCounts.append( "0" );
@@ -184,8 +161,20 @@ ScaleConfiguration::ScaleConfiguration( Session *session ) :
     // 2 is no label placement
     primaryLabelPlacement = 2;
     secondaryLabelPlacement = 2;
+    primaryLabelPlacementDefault = 2;
+    secondaryLabelPlacementDefault = 2;
+
     primaryLabelRotation = 0;
     secondaryLabelRotation = 0;
+    primaryLabelRotationDefault = 0;
+    secondaryLabelRotationDefault = 0;
+
+    primaryPlacementSystem = 0;
+    secondaryPlacementSystem = 1;
+
+    primaryDefaultLabelType = 0;
+    secondaryDefaultLabelType = 0;
+
 
     scriptsToExec << "sdCardSize" << "getBoardType" << "cpuCount" << "getMac" << "getModelName" << "getSerialFlashInfo"
     << "getNetworkInfo" << "getHostname";

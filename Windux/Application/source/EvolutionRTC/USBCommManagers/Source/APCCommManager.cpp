@@ -1268,7 +1268,7 @@ bool APCCommManager::handlePrinterEvent(PrEvent prEventType, const char *buffer)
 	{
 		case PrConfig:
 							{
-								Debug::trace("APCCommManager.Printer.Message.Out", "APCCommManager::handlePrinterEvent() PrConfig");	
+								Debug::trace("APCCommManager.Printer.Message.Out", "PrConfig");	
 
 								PrinterConfiguration prConfig(buffer);
 								PrConfigMsg prConfigMsg;
@@ -1285,8 +1285,8 @@ bool APCCommManager::handlePrinterEvent(PrEvent prEventType, const char *buffer)
 								prConfigMsg.prConfiguration.printContrast = htons(prConfig.getPrintContrast());
 								prConfigMsg.prConfiguration.configWord0 = htons(prConfig.getConfigWord0());			// Used on "European" labels
 								prConfigMsg.prConfiguration.configWord1 = htons(prConfig.getConfigWord1());			// Used on "European" labels
-								prConfigMsg.prConfiguration.configWord2 = htons(prConfig.getConfigWord2());			// Used on "European" labels
-								prConfigMsg.prConfiguration.configWord3 = htons(prConfig.getConfigWord3());			// Used on "European" labels
+								prConfigMsg.prConfiguration.configWord2 = htons(prConfig.getConfigWord2());		// Used on "European" labels
+								prConfigMsg.prConfiguration.configWord3 = htons(prConfig.getConfigWord3());	// Used on "European" labels
 								prConfigMsg.prConfiguration.configWord4 = htons(prConfig.getConfigWord4());
 								prConfigMsg.prConfiguration.configWord5 = htons(prConfig.getConfigWord5());
 								prConfigMsg.prConfiguration.configWord6 = htons(prConfig.getConfigWord6());
@@ -1300,15 +1300,6 @@ bool APCCommManager::handlePrinterEvent(PrEvent prEventType, const char *buffer)
 								prConfigMsg.prConfiguration.mediaSensorType = (UINT16)((MediaSensorType) htons((u_short)prConfig.getMediaSensorType()));
 								prConfigMsg.prConfiguration.slaEjectLine = htons(prConfig.getSLAEjectLine());
 								prConfigMsg.prConfiguration.printPosition = htons(prConfig.getPrintPositionAbsolute());
-
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.printerType: ") + HobString( Integer::toString(  prConfigMsg.prConfiguration.printerType) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.getLabelWidth: ") + HobString(Integer::toString( prConfigMsg.prConfiguration.labelWidth) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.mediaSensorAdjustment: ") + HobString(Integer::toString( prConfigMsg.prConfiguration.mediaSensorAdjustment) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.outOfMediaCount: ") + HobString(Integer::toString( prConfigMsg.prConfiguration.outOfMediaCount) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.printContrast: ") + HobString(Integer::toString(   prConfigMsg.prConfiguration.printContrast) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.mediaSensorType: ") + HobString(Integer::toString( prConfigMsg.prConfiguration.mediaSensorType) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.slaEjectLine: ") + HobString(Integer::toString(  prConfigMsg.prConfiguration.slaEjectLine) ));
-								//Debug::trace("APCCommManager.PrConfig", HobString("APCCommManager::handlePrinterEvent PrConfig.printPosition: ") + HobString(Integer::toString( prConfigMsg.prConfiguration.printPosition) ));
 
 								usbEvolHdr_.setDestinationLogicalAddress(USBEvolHeader::EVOL_PRINTER);
 								usbEvolHdr_.setMessageLength(sizeof(prConfigMsg));

@@ -54,7 +54,6 @@
 #include "../screens/serviceNewWrapperPkgHistory.h"
 #include "../screens/serviceNewWrapperCalibration.h"
 #include "../screens/serviceSecurityLabels.h"
-#include "../screens/serviceRFIDConfiguration.h"
 
 #include "../screens/systemDiagnostics.h"   // HT-141
 #include "../screens/serviceRemoveLabels.h" // HT-142
@@ -272,8 +271,6 @@ void WrapperServiceModePanel::onPushButtonPressed( QWidget *widget )
         mainWindow_->switchToModeScreen<ServiceMode, printerLocations>();
     else if ( "serviceSecurityLabels" == screen )
         mainWindow_->switchToModeScreen<ServiceMode, serviceSecurityLabels>();
-    else if ( "rfidConfiguration" == screen )
-        mainWindow_->switchToModeScreen<ServiceMode, serviceRFIDConfiguration>();
 
 
     // weigher
@@ -577,8 +574,6 @@ void WrapperServiceModePanel::initializeButtons()
 
             createNamedButton( printer_, tr( "Set Printer\nLocation" ), "printerLocations" );
             createNamedButton( printer_, tr( "Security\nLabel Applier" ), "serviceSecurityLabels" );	//	HA-117
-
-            createNamedButton( printer_, tr( "RFID\nConfiguration" ), "rfidConfiguration" );
         }
 
     	LOG_DEBUG( "WSMP initializeButtons() Printer Done", NULL );
@@ -609,7 +604,7 @@ void WrapperServiceModePanel::initializeButtons()
     {
         createNamedButton( wrapper_, tr( "Configure" ), "wrapperConfig" );
         createNamedButton( wrapper_, tr( "Package\nHistory" ), "wrapperPackageHistory" );
-        createNamedButton( wrapper_, tr( "Wrap\nQuality" ), "wrapperTimings" );
+        createNamedButton( wrapper_, tr( "Timings" ), "wrapperTimings" );
         createNamedButton( wrapper_, tr( "Error History" ), "wrapperErrorHistory" );
 
         bool haveBLDCBoards = true;

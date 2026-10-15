@@ -497,34 +497,65 @@ void superLabelPlacementView::updateInterface()
         return;
     }
 
-    if( session_->scaleConfig->primaryLabelPlacement == none )
+    if( supervisorMode_->cameFromProductDefaults() )
     {
-        primaryLabelPos_ = ( corner )session_->scaleConfig->scaleConfig.defaultLabelPlacement();        // if None - get fetch from 112,21 ScaleConFig DOM
+        //int primary = session_->scaleConfig->primaryDefaultLabelType;
+        if( session_->scaleConfig->primaryLabelPlacementDefault == none )
+        {
+            primaryLabelPos_ = ( corner )session_->scaleConfig->primaryPlacementSystem;
+        }
+        else
+        {
+            primaryLabelPos_ = ( corner )session_->scaleConfig->primaryLabelPlacementDefault;
+        }
+
+        //int secondary = session_->scaleConfig->secondaryDefaultLabelType;
+        if( session_->scaleConfig->secondaryLabelPlacementDefault == none ) // system default
+        {
+            secondaryLabelPos_ = ( corner )session_->scaleConfig->secondaryPlacementSystem;
+        }
+        else
+        {
+            secondaryLabelPos_ = ( corner )session_->scaleConfig->secondaryLabelPlacementDefault;
+        }
+
+        primaryRotation_ = session_->scaleConfig->primaryLabelRotationDefault;
+        secondaryRotation_ = session_->scaleConfig->secondaryLabelRotationDefault;
+        printers_[0].rotation = session_->scaleConfig->primaryLabelRotationDefault;
+        printers_[1].rotation = session_->scaleConfig->secondaryLabelRotationDefault;
     }
     else
     {
-        primaryLabelPos_ = ( corner )session_->scaleConfig->primaryLabelPlacement;
-    }
 
-    if( session_->scaleConfig->secondaryLabelPlacement == none )                                        // if None - get fetch from 112,21 ScaleConFig DOM
-    {
-        secondaryLabelPos_ = ( corner )session_->scaleConfig->scaleConfig.secondaryLabelPlacement();
-    }
-    else
-    {
-        secondaryLabelPos_ = ( corner )session_->scaleConfig->secondaryLabelPlacement;
-    }
+        if( product_->primaryLabelPlacement() == none ) // system default
+        {
+            primaryLabelPos_ = (corner)session_->scaleConfig->primaryPlacementSystem;
+        }
+        else
+        {
+            primaryLabelPos_ = ( corner )product_->primaryLabelPlacement();
+        }
 
-    printers_[0].rotation = session_->scaleConfig->primaryLabelRotation;     // FROM saved config value
-    printers_[1].rotation = session_->scaleConfig->secondaryLabelRotation;   // FROM saved config value
+        if( product_->secondLabelType() > 0 || product_->secondDefaultLabelType() > 0 )
+        {
+            if( product_->secondLabelPlacement() == none ) // system default
+            {
+                secondaryLabelPos_ = ( corner )session_->scaleConfig->secondaryPlacementSystem;
+            }
+            else
+            {
+                secondaryLabelPos_ = ( corner )product_->secondLabelPlacement();
+            }
+        }
 
-    primaryRotation_ = session_->scaleConfig->primaryLabelRotation;          // FROM saved config value
-    secondaryRotation_ = session_->scaleConfig->secondaryLabelRotation;      // FROM saved config value
+        printers_[0].rotation = product_->primaryLabelRotation();
+        printers_[1].rotation = product_->secondLabelRotation();
 
-    if( supervisorMode_->cameFromChangeProductAllFields() )
-    {
-        printers_[0].labelStockUpsideDown = (0 != product_->labelStockRotation1());     // COMPARES currentPLU (default PLU does not have this. Should it?
-        printers_[1].labelStockUpsideDown = (0 != product_->labelStockRotation2());     // COMPARES currentPLU
+        printers_[0].labelStockUpsideDown = (0 != product_->labelStockRotation1());
+        printers_[1].labelStockUpsideDown = (0 != product_->labelStockRotation2());
+
+        primaryRotation_   = product_->primaryLabelRotation();
+        secondaryRotation_ = product_->secondLabelRotation();
     }
 
     // update interface
@@ -860,15 +891,37 @@ void superLabelPlacementView::doneButtonClicked()
     doneButton->setEnabled( false );
     doneButtonClicked_ = true;
 
-    session_->scaleConfig->primaryLabelPlacement = primaryLabelPos_;
-    session_->scaleConfig->secondaryLabelPlacement = secondaryLabelPos_;
-    session_->scaleConfig->primaryLabelRotation = primaryRotation_;
-    session_->scaleConfig->secondaryLabelRotation = secondaryRotation_;
+    if( supervisorMode_->cameFromProductDefaults() )
+    {
+        session_->scaleConfig->primaryLabelPlacementDefault = primaryLabelPos_;
+        session_->scaleConfig->secondaryLabelPlacementDefault = secondaryLabelPos_;
+        session_->scaleConfig->primaryLabelRotationDefault = primaryRotation_;
+        session_->scaleConfig->secondaryLabelRotationDefault = secondaryRotation_;
 
-    supervisorMode_->setCameFromLabelPlacementView(true);
-    supervisorMode_->setCameFromProductMarqueeEditor(false);
-    supervisorMode_->setCameFromProductNutritionEditor(false);
+        supervisorMode_->setCameFromLabelPlacementView(true);
+        supervisorMode_->setCameFromProductMarqueeEditor(false);
+        supervisorMode_->setCameFromProductNutritionEditor(false);
 
+        //mainWindow_->switchToModeScreen<SupervisorMode, SuperProductDefaults>();
+    }
+    else
+    {
+        session_->scaleConfig->primaryLabelPlacement = primaryLabelPos_;
+        session_->scaleConfig->secondaryLabelPlacement = secondaryLabelPos_;
+        session_->scaleConfig->primaryLabelRotation = primaryRotation_;
+        session_->scaleConfig->secondaryLabelRotation = secondaryRotation_;
+
+        supervisorMode_->setCameFromLabelPlacementView(true);
+        supervisorMode_->setCameFromProductMarqueeEditor(false);
+        supervisorMode_->setCameFromProductNutritionEditor(false);
+
+        //mainWindow_->switchToModeScreen<SupervisorMode, superChangeProductAllFields>();
+    }
+
+    product_->primaryLabelPlacementRaw() = QString::number( session_->scaleConfig->primaryLabelPlacement );
+    product_->secondLabelPlacementRaw()  = QString::number( session_->scaleConfig->secondaryLabelPlacement );
+    product_->primaryLabelRotationRaw()  = QString::number( session_->scaleConfig->primaryLabelRotation );
+    product_->secondLabelRotationRaw()   = QString::number( session_->scaleConfig->secondaryLabelRotation );
 
     if( supervisorMode_->cameFromProductDefaults() )
     {

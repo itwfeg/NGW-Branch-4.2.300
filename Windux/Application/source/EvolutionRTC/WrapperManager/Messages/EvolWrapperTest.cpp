@@ -226,17 +226,8 @@ void EvolWrapperTest::getTestName(WrEvolTestCode test, HobString &result)
 		case WrapperCycle:
 			result = "WrapperCycleTest";
 			break;
-		case WrapperMechResetTest:
-			result = "WrapperMechResetTest";
-			break;
 		case CalibrateWrapper:
 			result = "CalibrateWrapperTest";
-			break;
-		case SecondLabelApplierTest:
-			result = "SecondLabelApplierTest";
-			break;
-		case WrWrapperCleanTest:
-			result = "WrWrapperCleanTest";
 			break;
 		default:
 			result = "Unknown test";

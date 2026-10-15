@@ -31,8 +31,7 @@ typedef enum PrinterKind
 	KPCPrinter,		// Support new CAN KPC (Weigher / Printer)
 	ARKPrinterOnly, // Supports new CAN printer only
 	KPPPrinter,		// Supports new CAN prepack printer
-	SSKPCPrinter,	// supports new CAN self service printer
-	Epp3Printer		// Supports new printer with Shoot Through Sensor
+	SSKPCPrinter	// supports new CAN self service printer
 }   PrinterKind_t;
 
 typedef enum PrinterType
@@ -42,7 +41,6 @@ typedef enum PrinterType
 	ThirdPrinter,
 	MaxPrinterTypes, // needs to be last
 	ExtraPrinter_UsedForSelfServeScreenBarcodeLabel,   // PJR-383 - Needed another one, but I didn't want to put before Max... in case that would impact current functionality
-	ExtraPrinter_UsedForRFIDVoidLabel,
 	NewMaxPrinterTypes // PJR-383 - New Max created, needs to be last
 }   PrinterType_t;
 

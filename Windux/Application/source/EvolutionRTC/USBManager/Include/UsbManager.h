@@ -204,8 +204,7 @@ protected:
 #define HOBART_FASTRACK_FPC				0x0208
 
 #define HOBART_FASTRACK_KPC				0x0210
-#define HOBART_XPE_ST_PRINTER_ID        0x0212                      // New Shoot Through Sensor Printer
-#define HOBART_XPE_ST_PRINTER_ID_CU     0x8212 
+
 
 #define HOBART_EVO_WRAPPER_ID           0x0300
 #define HOBART_EVO_WRAPPER_ID_CU        0x8300

@@ -976,12 +976,6 @@ bool EvolWrapperCommManager::handleWrapperEvent(WrEvent wrEventType, const char 
 			break;
 		}
 
-		case WrEvolUnlockPackageTimings:
-		{
-			Debug::trace("WrapperManager.Message", "WrEvolUnlockPackageTimings");
-			break;
-		}
-
 		case WrTest:
 		{
 			Debug::trace("EvolWrapperCommManager.Wrapper.Message.Out", "WrTest");

@@ -1293,11 +1293,6 @@ void AtmelDeviceHandler::SetVersionInfo(AT91ProductInfo& info, HobVersion& hwver
         swver.setVersionType(HobVersion::Epp2PrinterSW);
         hobDevice = HOBART_XPE_PRINTER_ID;
         break;
-    case HOBART_XPE_ST_PRINTER_ID:
-        hwver.setVersionType(HobVersion::Epp3PrinterHW);
-        swver.setVersionType(HobVersion::Epp3PrinterSW);
-        hobDevice = HOBART_XPE_ST_PRINTER_ID;
-        break;
     case HOBART_FASTRACK_FPC:
         hwver.setVersionType(HobVersion::FpcPrinterHW);
         swver.setVersionType(HobVersion::FpcPrinterSW);

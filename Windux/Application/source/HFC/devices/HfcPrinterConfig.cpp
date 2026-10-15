@@ -59,7 +59,7 @@ HfcPrinterConfig::HfcPrinterConfig(const char *data)
 	initFieldList();
 
 	horizPrintPosition = Configuration::getInstance()->getHorizLabelSkew(getPrinterType());
-	Debug::trace("HfcPrinterConfig", HobString("HfcPrinterConfig CTOR()"));
+	Debug::trace("HfcPrinterConfig", HobString("HfcPrinterConfig2()"));
 }
 
 HfcPrinterConfig::HfcPrinterConfig(const char *data, int len, int formatType)
@@ -166,10 +166,10 @@ HfcPrinterConfig::HfcPrinterConfig(const char *data, int len, int formatType)
 					case fieldOffsetPrConfigWord13:
 						setConfigWord13((UINT16)Integer::valueOf(token.c_str()));
 						break;
-*/
 					case fieldOffsetPrMediaSensorType:
 						setMediaSensorType((MediaSensorType)Integer::valueOf(token.c_str()));
 						break;
+*/
 					case fieldOffsetPrSlaEjectLine:
 						setSLAEjectLine((UINT16)Integer::valueOf(token.c_str()));
 						break;
@@ -461,11 +461,10 @@ const char *HfcPrinterConfig::serialize(int format) const
 					case fieldOffsetPrConfigWord13:
 						HfcObject::serializedData.append(Integer::toString(getConfigWord13()));
 						break;
-*/
-
 					case fieldOffsetPrMediaSensorType:
 						HfcObject::serializedData.append(Integer::toString(getMediaSensorType()));
 						break;
+*/
 					case fieldOffsetPrSlaEjectLine:
 						HfcObject::serializedData.append(Integer::toString(getSLAEjectLine()));
 						break;
@@ -586,8 +585,6 @@ void HfcPrinterConfig::getFieldAsString(int fieldCode, HobString &result) const
 
 void HfcPrinterConfig::update(HfcPrinterConfig *printerConfig)
 {
-	//Debug::trace("HfcPrinterConfig", "HfcPrinterConfig update() START");
-
 	if (getPrinterType() != printerConfig->getPrinterType())
 		return;
 
@@ -612,19 +609,19 @@ void HfcPrinterConfig::update(HfcPrinterConfig *printerConfig)
 					}
 					break;
 
-				case fieldOffsetPrVertPrintPosition:
-					if (getPrintPosition() != printerConfig->getPrintPosition())
-					{
-						setPrintPosition(printerConfig->getPrintPosition());
-						eepConfigNeeded = true;
-					}
-					break;
-
 				case fieldOffsetPrHorizPrintPosition:
 					if (getHorizPrintPosition() != printerConfig->getHorizPrintPosition())
 					{
 						setHorizPrintPosition(printerConfig->getHorizPrintPosition());
 						dbSaveNeeded = true;
+						eepConfigNeeded = true;
+					}
+					break;
+
+				case fieldOffsetPrVertPrintPosition:
+					if (getPrintPosition() != printerConfig->getPrintPosition())
+					{
+						setPrintPosition(printerConfig->getPrintPosition());
 						eepConfigNeeded = true;
 					}
 					break;
@@ -637,7 +634,7 @@ void HfcPrinterConfig::update(HfcPrinterConfig *printerConfig)
 					}
 					break;
 
-				case fieldOffsetPrExpelPosition:
+				case fieldOffsetPrExpelPosition:	//	ConfigWord3
 					if (getExpelPosition() != printerConfig->getExpelPosition())
 					{
 						setExpelPosition(printerConfig->getExpelPosition());
@@ -699,12 +696,10 @@ void HfcPrinterConfig::update(HfcPrinterConfig *printerConfig)
 				case fieldOffsetPrConfigWord13:
 					setConfigWord4(printerConfig->getConfigWord13());
 					break;
-*/
-
 				case fieldOffsetPrMediaSensorType:
 					setMediaSensorType(printerConfig->getMediaSensorType());
-					eepConfigNeeded = true;
 					break;
+*/
 				case fieldOffsetPrSlaEjectLine:
 					setSLAEjectLine(printerConfig->getSLAEjectLine());
 					eepConfigNeeded = true;
@@ -741,9 +736,6 @@ void HfcPrinterConfig::updateField(int fieldCode, const HobString &token)
 
 		case fieldOffsetPrPrintContrast:
 			setPrintContrast(Integer::valueOf(token));
-			break;
-		case fieldOffsetPrMediaSensorType:		
-			setMediaSensorType( (MediaSensorType) Integer::valueOf(token.c_str()) );		// added but do I even need?
 			break;
 
 		default:
@@ -807,15 +799,6 @@ void HfcPrinterConfig::show()
 
 	PrinterConfiguration::show();
 
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal PrinterType: ") + HobString(Integer::toString((UINT16) getPrinterType() )));
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal PrintContrast: ") + HobString(Integer::toString((UINT16) getPrintContrast() )));
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal VertPrintPosition: ") + HobString(Integer::toString((UINT16) getPrintPosition() )));
-
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal HorizPrintPosition: ") + HobString(Integer::toString((UINT16) horizPrintPosition )));			// ORIGINAL ONLY ONE HERE
-
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal LabelWidth: ") + HobString(Integer::toString((UINT16) getLabelWidth() )));
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal ExpelPosition: ") + HobString(Integer::toString((UINT16) getExpelPosition() )));
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal MediaSensorType: ") + HobString(Integer::toString((UINT16) getMediaSensorType() )));
-	Debug::trace("HfcPrinterConfig", HobString("Horizsontal SLAEjectLine: ") + HobString(Integer::toString((UINT16) getSLAEjectLine() )));
-
-}	
+	Debug::trace("HfcPrinterConfig", HobString("Horizsontal printPosition: ") +
+									 HobString(Integer::toString((UINT16) horizPrintPosition)));
+}

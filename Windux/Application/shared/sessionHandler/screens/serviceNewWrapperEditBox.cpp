@@ -4,14 +4,12 @@
  * @copyright Copyright (c) 2014, ITW Hobart Food Equipment Group, U.S.A.
  * @Author: Clare Dickey
  */
-#if 1
+#if 0
 #define USE_QDEBUG
 #endif
-
 #if 0
 #define USE_MIN_MAX
 #endif
-
 #if 0
 #define TEST_WRAPPER_OPERATION
 #endif
@@ -21,6 +19,8 @@
 #include "serviceNewWrapperEditBox.h"
 #include "ui_serviceNewWrapperEditBox.h"
 #include "serviceNewWrapperSetTimings.h"
+#include "serviceNewWrapperAdvancedTimings.h"
+#include "serviceNewWrapperOtherTimings.h"
 
 #include "../sessionmainwindow.h"
 #include "../sessionmainwindowimpl.h"
@@ -31,43 +31,22 @@
 #include "../dialogs/numericinputboxdialog.h"
 #include "../dialogs/wrapperforcetraysizedialog.h"
 
-#include "serviceNewWrapperDiagActuators.h"
-#include "operateNewWrapperRunIn.h"
-
-
-
 #include <Messages.h>
 #include <ScaleConfiguration.h>
 #include <UiUtilities.h>
 #include <TokenParser.h>
 
-#include <QCoreApplication>
 #include <QtGui>
 #include <QtCore>
-#include <QFile>
-#include <QFileInfo>
 #include <QIntValidator>
 #include <QSignalMapper>
 #include <palette.h>
 #include <backgroundwidgetstyles.h>
 #include <numericlineedit.h>
 
-#include "../sessionmainwindow.h"
-#include "../dialogs/filedialog.h"
-#include "../dialogs/messageboxdialog.h"
-#include "python.h"
-#include "filesystem.h"
-#include "python.h"
-
-
 #define xstr(s) str(s)
 #define str(s) #s
 
-const bool TEST_WRAPPER = false;
-const bool OG = false;
-
-static const int DONE_STATE = 0;
-static const int CANCEL_STATE = 1;
 
 namespace hobart{
     class numericLineEdit;
@@ -76,7 +55,8 @@ namespace hobart{
 //		pageMode = 1	//	View/Edit a tray
 //		pageMode = 2 	//	Auto-configure a new tray
 //		pageMode = 3	//	Auto detect a tray
-//		pageMode = 4	//	New tray with a PLUExcption (GONE)
+//		pageMode = 4	//	New tray with a PLUException
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -88,15 +68,12 @@ serviceNewWrapperEditBox::serviceNewWrapperEditBox(SessionMainWindow *mainWindow
     _Mybase( mainWindow, parent ),
     ui(new Ui::serviceNewWrapperEditBox),
     wrTimingsData_(NULL),
-    cycleWrapperTestLabel_( NULL ),
     leadingEdge(false),
-    savedExport_(false)
+    cycleWrapperTestLabel_( NULL )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "serviceEditBox" );
+    LOG_CLASS_INFO( "snwEditBox", "snwEditBox" );
 
-    setObjectName( "serviceEditBox" );
-
-    LOG_DEBUG( "serviceEditBox CTOR", NULL );
+    setObjectName( "serviceNewWrapperEditBox" );
 
 //	Retrieve config object
     if ( mainWindow_->isServiceMode() )
@@ -107,82 +84,119 @@ serviceNewWrapperEditBox::serviceNewWrapperEditBox(SessionMainWindow *mainWindow
     ui->setupUi(this);
     scaleScreen();
 
+    if ( !isUsingSimplifiedTimings() )
+    {
+        // 2P and 4.2.0-5.2.0 merge notes.  
+        // 2P branch changes this row value from 6 to 7
+        // 4.2.0-5.2.0 changed this row value from 7 to 6.
+        // so I have no way of knowing which is going to be
+        // actually correct until we test. Not sure if 2P
+        // tested AWS, I know 4.2.0-5.2.0 did. So I did that one
+        ui->tblBasicTimingsList->setRowCount( 6 );//AWS style timings
+    }
+    else
+    {
+        // followed the  4.2.0-5.2.0 branch here too since it had early 2p
+        // the 2P nums are as follows; 7, 15:14 (no else so 12:11 good ), 
+        // then 12:11 for final else
+        if ( isNGWWrapper() )
+        {
+            if(session_->scaleConfig->isWrapperTwoPrinter())
+                ui->tblBasicTimingsList->setRowCount( isDualRollWrapper() ? 15 : 14 );
+            else
+                ui->tblBasicTimingsList->setRowCount( isDualRollWrapper() ? 12 : 11 );
+        }
+        else
+            ui->tblBasicTimingsList->setRowCount( isDualRollWrapper() ? 11 : 10 );      // why this not 12:11 as previously implemented?
+    }
+
+    modifyPaletteHighlight setHighlight( hobart::colorPalette::blue );
+    setHighlight( ui->tblBasicTimingsList );
+
     initialize();
     translate();
 
-    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure )
-        ui->txtTrayName->setFocus();
+    if ( timerAutoConfigTrayNameEntry_ && (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure) )	//&& firstPass )
+    {
+        LOG_TRACE( "Set up timerAutoConfigTrayNameEntry_", NULL );
+        //	HTA-79:  Schedule a timer to activate Tray name entry
+        timerAutoConfigTrayNameEntry_->setSingleShot( true );
+        timerAutoConfigTrayNameEntry_->start( 0 );
+    }
 }
 
 serviceNewWrapperEditBox::~serviceNewWrapperEditBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "DTOR" );
-
-    LOG_DEBUG( "serviceEditBox() START", NULL );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::~serviceNewWrapperEditBox()";
+#endif
     if ( !mainWindow_->isServiceMode() )
         delete wrTimingsData_;
 
     delete ui;
-
-    pythonProcess->cleanup();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::initialize()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "initialize" );
+    LOG_CLASS_INFO( "snwEditBox", "initialize" );
 
-    LOG_DEBUG( "initialize() START", NULL );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::initialize()";
+#endif
     firstPass = true;
     gotNewTrayName_ = false;
+    currentTrayName_ = wrTimingsData_->trayName;
     activeRow = wrTimingsData_->precedence;
     numOfItems = 0;
     boxCount = 0;
     wrTimingsData_->exitByMenu = true;      //  We'll set this to false when we change to another Timings page.
+    clampOnRow = 0;
 
     viewCurrentTimings_ = wrTimingsData_->viewCurrentTimings;
     heightBoxSelected_ = wrTimingsData_->heightBoxSelected;
 
+    le_PercentStretchClampOn_ = NULL;
     heightBox_ = NULL;
+    
+    saveAnyChanges_ = false;
 
+    cycleButtonStyle = "";
     cycleWrapperInProgress_ = false;
 
     // SOF-2550
     if( session_->scaleConfig->isWrapperTwoPrinter() )
     {
         // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
-        ui->butCycleWrapperLeadingTab1->hide();
-        ui->butCycleWrapperTrailingTab1->hide();
-        ui->butCycleWrapperLeadingTab2->hide();
-        ui->butCycleWrapperTrailingTab2->hide();
-        ui->butCycleWrapperLeadingTab3->hide();
-        ui->butCycleWrapperTrailingTab3->hide();
-        ui->butCycleWrapperLeadingTab4->hide();
-        ui->butCycleWrapperTrailingTab4->hide();
-        ui->butCycleWrapperLeadingTab5->hide();
-        ui->butCycleWrapperTrailingTab5->hide();
+        ui->butCycleWrapperLeading->hide();
+        ui->butCycleWrapperTrailing->hide();
     }
     else
     {
         // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
-        ui->butCycleWrapperLeadingTab1->show();
-        ui->butCycleWrapperTrailingTab1->show();
-        ui->butCycleWrapperLeadingTab2->show();
-        ui->butCycleWrapperTrailingTab2->show();
-        ui->butCycleWrapperLeadingTab3->show();
-        ui->butCycleWrapperTrailingTab3->show();
-        ui->butCycleWrapperLeadingTab4->show();
-        ui->butCycleWrapperTrailingTab4->show();
-        ui->butCycleWrapperLeadingTab5->show();
-        ui->butCycleWrapperTrailingTab5->show();
+        ui->butCycleWrapperLeading->show();
+        ui->butCycleWrapperTrailing->show();
     }
 
-    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure )
+    //Before we start, lets hide the other timing and advanced timings pages for the AWS Enhanced
+    if ( isUsingSimplifiedTimings() )
     {
-        LOG_DEBUG( "initialize() pageMode = pmAutoConfigure so Hide Advanced and Other Timings", NULL );
+        ui->butOtherTimings->hide();
+        ui->butAdvancedTimings->hide();
+    }
+    else
+    {
+        // SOF-2550 - added in 2P
+        if( false == session_->scaleConfig->isWrapperTwoPrinter() )
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->show();
+            ui->butCycleWrapperTrailing->show();
+        }
+    }
 
+    if (( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure) || ( wrTimingsData_->pageMode == WrapperTimingsData::pmPLUException))
+    {
         if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure)
         {
             //  Hide these items since they can't be used in this mode.
@@ -192,305 +206,177 @@ void serviceNewWrapperEditBox::initialize()
             ui->butNewHeightBox->hide();
             ui->butDeleteHeightBox->hide();
 
-            ui->txtMinHeight->hide();
-            ui->txtMaxHeight->hide();
+            ui->le_MinHeight->hide();
+            ui->le_MaxHeight->hide();
 
             ui->lblHeightBox->hide();
-            ui->cboHeightBox->hide();
+            ui->cbo_HeightBox->hide();
 
-            ui->lblTrayFound->hide();
+            ui->label_trayFound->hide();
 
             //  Disable these fields until a tray name is entered and they cycle a package.
-            ui->txtMinLength->setEnabled(false);
-            ui->txtMaxLength->setEnabled(false);
-            ui->txtMinWidth->setEnabled(false);
-            ui->txtMaxWidth->setEnabled(false);
-            ui->txtMaxLip->setEnabled(false);
+            ui->le_MinLength->setEnabled(false);
+            ui->le_MaxLength->setEnabled(false);
+            ui->le_MinWidth->setEnabled(false);
+            ui->le_MaxWidth->setEnabled(false);
+            ui->le_MaxLip->setEnabled(false);
 
             hideShowForNewTray(true);       //  Hide all the other items until the tray name is entered.
         }
+        //  Hide the table and buttons below it.
+        ui->tblBasicTimingsList->hide();
+        ui->butCycleWrapper->hide();
+        ui->butOtherTimings->hide();
+        ui->butAdvancedTimings->hide();
+        ui->butSaveChanges->hide();
 
-        ui->butCycleWrapperTab1->hide();
-        ui->butCycleWrapperTab2->hide();
-        ui->butCycleWrapperTab3->hide();
-        ui->butCycleWrapperTab4->hide();
-        ui->butCycleWrapperTab5->hide();
-
-        ui->butSave->hide();   
+        // SOF-2550
+        if( session_->scaleConfig->isWrapperTwoPrinter() )
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->hide();
+            ui->butCycleWrapperTrailing->hide();
+        }
+        else
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->show();
+            ui->butCycleWrapperTrailing->show();
+        }
     }
 
     if ( wrTimingsData_->pageMode != WrapperTimingsData::pmAutoConfigure)
     {
         ui->butAutoConfig->hide();
-        ui->lblPromptTrayName->hide();
 
-        if (!viewCurrentTimings_)
+        ui->label_PromptTrayName->hide();
+
+        if (viewCurrentTimings_)
+        {
+            connect(ui->butSetMin,    				SIGNAL(clicked()),              	this,       SLOT(setMinValues()));
+
+            connect(ui->butSetMinAndMax,    		SIGNAL(clicked()),              	this,       SLOT(setMinMaxValues()));
+
+            connect(ui->butSetMax,    				SIGNAL(clicked()),      			this,       SLOT(setMaxValues()));
+
+            connect(ui->butNewHeightBox,            SIGNAL(clicked()),                  this,       SLOT(newHeightBox()));
+
+            connect(ui->cbo_AvailableHeightBoxes,   SIGNAL(currentIndexChanged(int)),   this,       SLOT(addNewHeightBox()));
+
+            connect(ui->butCancelNewHeightBox,      SIGNAL(clicked()),                  this,       SLOT(cancelNewHeightBox()));
+
+            connect(ui->butDeleteHeightBox,			SIGNAL(clicked()),              	this,       SLOT(deleteSelectedHeight()));
+
+            connect(ui->butSaveChanges,    			SIGNAL(clicked()),      			this,       SLOT(saveChanges()));
+        }
+        else
         {
             ui->butSetMin->hide();
             ui->butSetMinAndMax->hide();
             ui->butSetMax->hide();
             ui->butNewHeightBox->hide();
             ui->butDeleteHeightBox->hide();
-            ui->butSave->hide();
+            ui->butSaveChanges->hide();
         }
+
+        connect(ui->cbo_HeightBox,              SIGNAL(currentIndexChanged(int)),   this,       SLOT(requestHeightBox()));
+
+        connect(ui->butCycleWrapper,			SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));		//	HA-80
+
+        // SOF-2550
+        connect(ui->butCycleWrapperLeading,     SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
+        connect(ui->butCycleWrapperTrailing,	SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
+
+        connect(ui->tblBasicTimingsList,        SIGNAL(cellClicked(int,int)),       this,       SLOT(onCellClicked(int,int))); // SOF-204
+
+#ifndef TEST_WRAPPER_OPERATION
+        if ( !mainWindow_->isPrimarySessionType() || (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect) )
+        {
+            ui->butCycleWrapper->setEnabled(false);
+        }
+#endif
     }
 
-    connect(ui->butSetMin,    				   SIGNAL(clicked()),              	   this,       SLOT(setMinValues()));
-    connect(ui->butSetMinAndMax,    		   SIGNAL(clicked()),              	   this,       SLOT(setMinMaxValues()));
-    connect(ui->butSetMax,    				   SIGNAL(clicked()),      			   this,       SLOT(setMaxValues()));
-    connect(ui->butNewHeightBox,               SIGNAL(clicked()),                  this,       SLOT(newHeightBox()));
-    connect(ui->butCancelNewHeightBox,         SIGNAL(clicked()),                  this,       SLOT(cancelNewHeightBox()));
-    connect(ui->butDeleteHeightBox,			   SIGNAL(clicked()),              	   this,       SLOT(deleteSelectedHeight()));
-    connect(ui->cboAvailableHeightBoxes,       SIGNAL(currentIndexChanged(int)),   this,       SLOT(addNewHeightBox()));
-    connect(ui->cboHeightBox,                  SIGNAL(currentIndexChanged(int)),   this,       SLOT(requestHeightBox()));
-
-    connect(ui->butCycleWrapperTab1,           SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));
-    connect(ui->butCycleWrapperLeadingTab1,    SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
-    connect(ui->butCycleWrapperTrailingTab1,   SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
-    connect(ui->butCycleWrapperTab2,           SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));
-    connect(ui->butCycleWrapperLeadingTab2,    SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
-    connect(ui->butCycleWrapperTrailingTab2,   SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
-    connect(ui->butCycleWrapperTab3,           SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));
-    connect(ui->butCycleWrapperLeadingTab3,    SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
-    connect(ui->butCycleWrapperTrailingTab3,   SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
-    connect(ui->butCycleWrapperTab4,           SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));
-    connect(ui->butCycleWrapperLeadingTab4,    SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
-    connect(ui->butCycleWrapperTrailingTab4,   SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
-    connect(ui->butCycleWrapperTab5,           SIGNAL(clicked()),                  this,       SLOT(cycleWrapper()));
-    connect(ui->butCycleWrapperLeadingTab5,    SIGNAL(clicked()),                  this,       SLOT(cycleWrapperLeadingEdge() ) );
-    connect(ui->butCycleWrapperTrailingTab5,   SIGNAL(clicked()),                  this,       SLOT(cycleWrapperTrailingEdge() ) );
-
-    connect(ui->butExportTimingsTab2,           SIGNAL(clicked()),                  this,       SLOT(onExportTimings() ) );
-    connect(ui->butExportTimingsTab3,           SIGNAL(clicked()),                  this,       SLOT(onExportTimings()));
-    connect(ui->butExportTimingsTab4,           SIGNAL(clicked()),                  this,       SLOT(onExportTimings() ) );
-    connect(ui->butExportTimingsTab5,           SIGNAL(clicked()),                  this,       SLOT(onExportTimings() ) );
-
-    connect(ui->butPromptTraySize,      SIGNAL(clicked()),      			this,       SLOT(promptForcedTraySize()));
-    connect(ui->txtMinLength,           SIGNAL(editingFinished()),          this,       SLOT(updateMinLength()));
-    connect(ui->txtMaxLength,           SIGNAL(editingFinished()),          this,       SLOT(updateMaxLength()));
-    connect(ui->txtMinWidth,            SIGNAL(editingFinished()),          this,       SLOT(updateMinWidth()));
-    connect(ui->txtMaxWidth,            SIGNAL(editingFinished()),          this,       SLOT(updateMaxWidth()));
-    connect(ui->txtMaxLip,              SIGNAL(editingFinished()),          this,       SLOT(updateMaxLip()));
-
     if (( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect) || ( wrTimingsData_->canEditTrayName == false ))
-        ui->txtTrayName->setEnabled(false);
+        ui->le_TrayName->setEnabled(false);
     else
-        ui->txtTrayName->setEnabled(true);
+        ui->le_TrayName->setEnabled(true);
+    ui->le_PLUNumber->setEnabled(false);    //  Allow entry only upon selecting PLU Exception in Set timings page.
 
-    ui->tabServiceTimings->setCurrentIndex(0);
-    ui->butPrintTab->setVisible( true );
+    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect)
+    {
+        ui->tblBasicTimingsList->hide();
+    }
 
-    connect(ui->butCancelDone,          SIGNAL(clicked()),                  this,       SLOT(onCancelChanges()));
-    connect(ui->butSave,                SIGNAL(clicked()),      			this,       SLOT(onSaveChanges()));
+    ui->butPrint->setVisible( isUsingSimplifiedTimings() );
 
-    // INITIALIZE COMBO
-    ui->param14->addItem( tr("Narrow roll"), QString( "100" ) );    // ***
-    ui->param14->addItem( tr("Wide roll"),   QString( "200" ) );    // ***
-    ui->param14->setCurrentIndex( 0 );                              // ***
 
-    if ( !viewCurrentTimings_ )
-        ui->param14->setEnabled( false );
+    connect(ui->butOtherTimings,            	SIGNAL(clicked()),                  this,       SLOT(goToOtherTimings()));
 
-    // Connect the main Timings inputs
-    // Label Tab connections - need to do a single field write on entering a label to determine validity signal mapper for label fields
-    editingFinishedSignal_ = new QSignalMapper( this );
-    connect( editingFinishedSignal_,    SIGNAL( mapped(QWidget*) ), SLOT( onEditingFinished(QWidget*) ) );
+    connect(ui->butAdvancedTimings,         	SIGNAL(clicked()),                  this,       SLOT(goToAdvancedTimings()));
 
-    editingFinishedSignal_->setMapping( ui->param3, ui->param3 );
-    connect(ui->param3,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param0, ui->param0 );
-    connect(ui->param0,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param2, ui->param2 );
-    connect(ui->param2,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param9, ui->param9 );
-    connect(ui->param9,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param5, ui->param5 );
-    connect(ui->param5,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param15, ui->param15 );
-    connect(ui->param15,            SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param10, ui->param10 );
-    connect(ui->param10,            SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param16, ui->param16 );
-    connect(ui->param16,            SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param7, ui->param7 );
-    connect(ui->param7,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param8, ui->param8 );
-    connect(ui->param8,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param20, ui->param20 );
-    connect(ui->param20,            SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
-    editingFinishedSignal_->setMapping( ui->param4, ui->param4 );
-    connect(ui->param4,             SIGNAL(editingFinished()),          editingFinishedSignal_, SLOT( map() ) );
+    connect(ui->butCancel,                  	SIGNAL(clicked()),                  this,       SLOT(cancelChanges()));
 
-    // combo box index changed
-    connect( ui->param14,           SIGNAL( currentIndexChanged(int) ),     SLOT( onComboBoxChanged(int) ) );
+    connect(ui->butDone,                    	SIGNAL(clicked()),                  this,       SLOT(doneWithChanges()));
 
-    // Connect the up and down buttons
-    connect( ui->butLeftParam3,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam3,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam0,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam0,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam2,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam2,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam9,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam9,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam5,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam5,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam15,        SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam15,       SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam10,        SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam10,       SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam16,        SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam16,       SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam7,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam7,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam8,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam8,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam6,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam6,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam20,        SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam20,       SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
-    connect( ui->butLeftParam4,         SIGNAL(clicked()),      this,       SLOT(onStepDown()) );
-    connect( ui->butRightParam4,        SIGNAL(clicked()),      this,       SLOT(onStepUp()) );
+    connect(ui->butPrint,                       SIGNAL(clicked()),      			this,       SLOT(printTimings()));
+    connect(ui->butPromptTraySize,              SIGNAL(clicked()),      			this,       SLOT(promptForcedTraySize()));
 
-    connect( ui->butParam3,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam0,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam2,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam9,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam5,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam15,            SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam10,            SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam16,            SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam7,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam8,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam6,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam20,            SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
-    connect( ui->butParam4,             SIGNAL(clicked()),      this,       SLOT(onDisplayHelpText()) );
+    connect(ui->le_MinLength,             SIGNAL(editingFinished()),          this,       SLOT(updateMinLength()));
+    connect(ui->le_MaxLength,             SIGNAL(editingFinished()),          this,       SLOT(updateMaxLength()));
+    connect(ui->le_MinWidth,              SIGNAL(editingFinished()),          this,       SLOT(updateMinWidth()));
+    connect(ui->le_MaxWidth,              SIGNAL(editingFinished()),          this,       SLOT(updateMaxWidth()));
+    connect(ui->le_MaxLip,                SIGNAL(editingFinished()),          this,       SLOT(updateMaxLip()));
 
-    // connect the tray information
-    connect(ui->butPrintTab,            SIGNAL(clicked()),      			this,       SLOT(printTimings()));
-    connect(ui->tabServiceTimings,      SIGNAL(currentChanged(int)),        this,       SLOT(currentChangeTab(int)));
-
-    // Validators for timing parameters
-    ui->param3->setValidator( baseTen40IntValidator = new QIntValidator(0, 40, this) );      // 10-40
-    ui->param3->setDecimalPlaces(0);
-    ui->param3->setInputWrapping( true );
-    ui->param3->setInputTruncation( true );
-    baseTen40IntValidator->setTop(40);
-    baseTen40IntValidator->setBottom(0);
-
-    ui->param0->setValidator( baseZero60IntValidator = new QIntValidator(0, 60, this) );      // 0-60
-    ui->param0->setDecimalPlaces(0);
-    ui->param0->setInputWrapping( true );
-    ui->param0->setInputTruncation( true );
-    baseZero60IntValidator->setTop(60);
-    baseZero60IntValidator->setBottom(0);
-
-    ui->param2->setValidator( baseNegFive10IntValidator = new QIntValidator(-5, 10, this) );      // -5-10
-    ui->param2->setDecimalPlaces(0);
-    ui->param2->setInputWrapping( true );
-    ui->param2->setInputTruncation( true );
-    baseNegFive10IntValidator->setTop(10);
-    baseNegFive10IntValidator->setBottom(-5);
-
-    ui->param9->setValidator( baseZero10IntValidator = new QIntValidator(0, 10, this) );      // 0-10
-    ui->param9->setDecimalPlaces(0);
-    ui->param9->setInputWrapping( true );
-    ui->param9->setInputTruncation( true );
-    baseZero10IntValidator->setTop(10);
-    baseZero10IntValidator->setBottom(0);
-    //
-    ui->param5->setValidator( baseNegFive10IntValidator );      // -5-10
-    ui->param5->setDecimalPlaces(0);
-    ui->param5->setInputWrapping( true );
-    ui->param5->setInputTruncation( true );
-
-    ui->param15->setValidator( baseZero5IntValidator = new QIntValidator(0, 5, this) );      // 0-5
-    ui->param15->setDecimalPlaces(0);
-    ui->param15->setInputWrapping( true );
-    ui->param15->setInputTruncation( true );
-    baseZero5IntValidator->setTop(5);
-    baseZero5IntValidator->setBottom(0);
-
-    ui->param10->setValidator( baseZero10IntValidator );      // 0-10
-    ui->param10->setDecimalPlaces(0);
-    ui->param10->setInputWrapping( true );
-    ui->param10->setInputTruncation( true );
-
-    ui->param16->setValidator( baseZero10IntValidator );      // 0-10
-    ui->param16->setDecimalPlaces(0);
-    ui->param16->setInputWrapping( true );
-    ui->param16->setInputTruncation( true );
-    //
-    //ui->param7->setValidator( baseTwelve30IntValidator = new QIntValidator(HB_MIN_12, HB_MAX_30, this) );      // 12-30
-    ui->param7->setValidator( baseTwelve30IntValidator = new QIntValidator(0, 30, this) );      // 12-30
-    ui->param7->setDecimalPlaces(0);
-    ui->param7->setInputWrapping( true );
-    ui->param7->setInputTruncation( true );
-    baseTwelve30IntValidator->setTop(30);
-    baseTwelve30IntValidator->setBottom(0);
-
-    ui->param8->setValidator( baseOne30IntValidator = new QIntValidator(0, 30, this) );      // 1-30
-    ui->param8->setDecimalPlaces(0);
-    ui->param8->setInputWrapping( true );
-    ui->param8->setInputTruncation( true );
-    baseOne30IntValidator->setTop(30);
-    baseOne30IntValidator->setBottom(0);
-
-    ui->param6->setValidator( baseZero10IntValidator );      // 0-10
-    ui->param6->setDecimalPlaces(0);
-    ui->param6->setInputWrapping( true );
-    ui->param6->setInputTruncation( true );
-
-    ui->param20->setValidator( baseZero10IntValidator );      // 0-10
-    ui->param20->setDecimalPlaces(0);
-    ui->param20->setInputWrapping( true );
-    ui->param20->setInputTruncation( true );
-
-    ui->param4->setValidator( baseZero10IntValidator );      // 0-10
-    ui->param4->setDecimalPlaces(0);
-    ui->param4->setInputWrapping( true );
-    ui->param4->setInputTruncation( true );
+    connect(ui->le_TrayName,              SIGNAL(editingFinished()),          this,       SLOT(updateTrayName()));
 
     if (viewCurrentTimings_)
     {
-        LOG_DEBUG( "initialize() if( viewCurrentTimings_ )", NULL );
+        ui->le_MinLength->setValidator( lengthValidator_ = new QIntValidator(-5, WB_MAX_LENGTH, this) );
+        ui->le_MinLength->setDecimalPlaces(1);
+        ui->le_MinLength->setInputTruncation( true );
+        ui->le_MinLength->setInputWrapping( true );
 
-        ui->txtMinLength->setValidator( lengthValidator_ = new QIntValidator(-5, WB_MAX_LENGTH, this) );
-        ui->txtMinLength->setDecimalPlaces(1);
-        ui->txtMinLength->setInputWrapping( true );
-        ui->txtMinLength->setInputTruncation( true );
-        lengthValidator_->setTop(WB_MAX_LENGTH);
+        ui->le_MaxLength->setValidator( lengthValidator_ );
+        ui->le_MaxLength->setDecimalPlaces(1);
+        ui->le_MaxLength->setInputTruncation( true );
+        ui->le_MaxLength->setInputWrapping(true);
 
-        ui->txtMaxLength->setValidator( lengthValidator_ );
-        ui->txtMaxLength->setDecimalPlaces(1);
-        ui->txtMaxLength->setInputTruncation( true );
-        ui->txtMaxLength->setInputWrapping(true);
+        ui->le_MinWidth->setValidator( widthValidator_ = new QIntValidator(-5, WB_MAX_WIDTH, this) );
+        ui->le_MinWidth->setDecimalPlaces(1);
+        ui->le_MinWidth->setInputTruncation( true );
+        ui->le_MinWidth->setInputWrapping(true);
 
-        ui->txtMinWidth->setValidator( widthValidator_ = new QIntValidator(-5, WB_MAX_WIDTH, this) );
-        ui->txtMinWidth->setDecimalPlaces(1);
-        ui->txtMinWidth->setInputTruncation( true );
-        ui->txtMinWidth->setInputWrapping(true);
-        widthValidator_->setTop(WB_MAX_WIDTH);
+        ui->le_MaxWidth->setValidator( widthValidator_ );
+        ui->le_MaxWidth->setDecimalPlaces(1);
+        ui->le_MaxWidth->setInputTruncation( true );
+        ui->le_MaxWidth->setInputWrapping(true);
 
-        ui->txtMaxWidth->setValidator( widthValidator_ );
-        ui->txtMaxWidth->setDecimalPlaces(1);
-        ui->txtMaxWidth->setInputTruncation( true );
-        ui->txtMaxWidth->setInputWrapping(true);
+        ui->le_MaxLip->setValidator( lipValidator_ = new QIntValidator(-5, WB_MAX_LIP, this) );
+        ui->le_MaxLip->setDecimalPlaces(1);
+        ui->le_MaxLip->setInputTruncation( true );
+        ui->le_MaxLip->setInputWrapping(true);
 
-        ui->txtMaxLip->setValidator( lipValidator_ = new QIntValidator(-5, WB_MAX_LIP, this) );
-        ui->txtMaxLip->setDecimalPlaces(1);
-        ui->txtMaxLip->setInputTruncation( true );
-        ui->txtMaxLip->setInputWrapping(true);
-        widthValidator_->setTop(WB_MAX_WIDTH);
+        ui->le_MinLength->installEventFilter( this );
+        ui->le_MaxLength->installEventFilter( this );
+        ui->le_MinWidth->installEventFilter( this );
+        ui->le_MaxWidth->installEventFilter( this );
+        ui->le_MaxLip->installEventFilter( this );
     }
     else
     {
-        ui->txtMinLength->setEnabled(false);
-        ui->txtMaxLength->setEnabled(false);
-        ui->txtMinWidth->setEnabled(false);
-        ui->txtMaxWidth->setEnabled(false);
-        ui->txtMaxLip->setEnabled(false);
+        ui->le_MinLength->setEnabled(false);
+        ui->le_MaxLength->setEnabled(false);
+        ui->le_MinWidth->setEnabled(false);
+        ui->le_MaxWidth->setEnabled(false);
+        ui->le_MaxLip->setEnabled(false);
     }
+
+//    if ( wrTimingsData_->canEditTrayName == 0 )
+//    {
+//        ui->le_TrayName->setEnabled(false);
+//        ui->le_PLUNumber->setEnabled(false);
+//    }
 
     ServiceMode *serviceMode( mainWindow_->retrieveMode<ServiceMode>() );
     if (viewCurrentTimings_)
@@ -505,34 +391,39 @@ void serviceNewWrapperEditBox::initialize()
     }
 
     //	Setup All Height Boxes combo.
-    ui->cboAllHeightBoxes->clear();
-    ui->cboAllHeightBoxes->addItem("0.5","0.5");
-    ui->cboAllHeightBoxes->addItem("0.7","0.7");
-    ui->cboAllHeightBoxes->addItem("1.0","1.0");
-    ui->cboAllHeightBoxes->addItem("1.2","1.2");
-    ui->cboAllHeightBoxes->addItem("1.5","1.5");
-    ui->cboAllHeightBoxes->addItem("1.7","1.7");
-    ui->cboAllHeightBoxes->addItem("2.0","2.0");
-    ui->cboAllHeightBoxes->addItem("2.2","2.2");
-    ui->cboAllHeightBoxes->addItem("2.5","2.5");
-    ui->cboAllHeightBoxes->addItem("3.0","3.0");
-    ui->cboAllHeightBoxes->addItem("3.5","3.5");
-    ui->cboAllHeightBoxes->addItem("4.0","4.0");
-    ui->cboAllHeightBoxes->addItem("4.5","4.5");
-    ui->cboAllHeightBoxes->addItem("5.0","5.0");
-    ui->cboAllHeightBoxes->addItem("6.0","6.0");
+    ui->cbo_AllHeightBoxes->clear();
+    ui->cbo_AllHeightBoxes->addItem("0.5","0.5");
+    ui->cbo_AllHeightBoxes->addItem("0.7","0.7");
+    ui->cbo_AllHeightBoxes->addItem("1.0","1.0");
+    ui->cbo_AllHeightBoxes->addItem("1.2","1.2");
+    ui->cbo_AllHeightBoxes->addItem("1.5","1.5");
+    ui->cbo_AllHeightBoxes->addItem("1.7","1.7");
+    ui->cbo_AllHeightBoxes->addItem("2.0","2.0");
+    ui->cbo_AllHeightBoxes->addItem("2.2","2.2");
+    ui->cbo_AllHeightBoxes->addItem("2.5","2.5");
+    ui->cbo_AllHeightBoxes->addItem("3.0","3.0");
+    ui->cbo_AllHeightBoxes->addItem("3.5","3.5");
+    ui->cbo_AllHeightBoxes->addItem("4.0","4.0");
+    ui->cbo_AllHeightBoxes->addItem("4.5","4.5");
+    ui->cbo_AllHeightBoxes->addItem("5.0","5.0");
+    ui->cbo_AllHeightBoxes->addItem("6.0","6.0");
 
     if ( wrTimingsData_->updateActualPkg )
     {
-        ui->lblTrayFound->setText(wrTimingsData_->cycledTrayName);
+        ui->label_trayFound->setText(wrTimingsData_->cycledTrayName);
+    }
+    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmPLUException )
+    {
+        //  Show the tray name for the PLU exception to be entered.
+        ui->le_TrayName->setText(wrTimingsData_->trayName);
     }
 
-    ui->cboAllHeightBoxes->hide();
-    ui->cboAvailableHeightBoxes->hide();
+    ui->cbo_AllHeightBoxes->hide();
+    ui->cbo_AvailableHeightBoxes->hide();
     ui->butCancelNewHeightBox->hide();
     ui->lblAddHeightBox->hide();
 
-    wrapParamOrdering_.clear();
+    buildParamTable();      // added 13 items to the table initially set to 15, if 1P system
 
     update();
 
@@ -542,22 +433,46 @@ void serviceNewWrapperEditBox::initialize()
     }
     else if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure)
     {
+        //  Disable PLUException
         //  Create a new Tray name
         connect(ui->butAutoConfig,            SIGNAL(clicked()),                  this,       SLOT(autoConfigureTray()));
     }
     else if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect )
     {
-        LOG_DEBUG(  "serviceEditBox::initialize():  session_->send(Wrapper, WrEvolAutoDetectTrayType)", NULL );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::initialize():  session_->send(Wrapper, WrEvolAutoDetectTrayType)";
+#endif
         session_->send(Wrapper, WrEvolAutoDetectTrayType);              // 9,232
     }
 
-    LOG_DEBUG( "wrTimingsData_->heightBoxSelected = %s", qPrintable(wrTimingsData_->heightBoxSelected) );
+    LOG_TRACE( "wrTimingsData_->heightBoxSelected = %s", qPrintable(wrTimingsData_->heightBoxSelected) );
     if ( wrTimingsData_->heightBoxSelected != "" )
     {
         QString msg2 = QString::number( activeRow ) + "," + wrTimingsData_->heightBoxSelected;
-
-        LOG_DEBUG(  "serviceEditBox::initialize():  session_->send(Wrapper, WrEvolReadHeightBox) %s ", qPrintable(msg2) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::initialize():  session_->send(Wrapper, WrEvolReadHeightBox, " << msg2 << ")";
+#endif
         session_->send(Wrapper, WrEvolReadHeightBox, msg2);              // 9,246,precedence,heightBox
+    }
+
+    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmPLUException )
+    {
+        //  Force entry of a PLU number for the PLU Exception
+        saveAnyChanges_ = true;
+        promptPLUException();
+    }
+    cycleButtonStyle = ui->butCycleWrapper->styleSheet();	//	Get the original style of this button.
+
+    if ( wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure )		//	HTA-79
+    {
+        LOG_TRACE( "Create timerAutoConfigTrayNameEntry_", NULL );
+        timerAutoConfigTrayNameEntry_ = new QTimer( this );
+        connect( timerAutoConfigTrayNameEntry_, SIGNAL( timeout() ), SLOT( activateTrayName() ) );
+    }
+    else
+    {
+        LOG_TRACE( "Did NOT create timerAutoConfigTrayNameEntry_", NULL );
+        timerAutoConfigTrayNameEntry_ = NULL;
     }
 
     cycleWrapperTestLabel_ = new QTimer( this );
@@ -565,41 +480,13 @@ void serviceNewWrapperEditBox::initialize()
 
     // SOF-2808: Need to hide the Print button when in Auto Config mode
     if( WrapperTimingsData::pmAutoConfigure == wrTimingsData_->pageMode )
-    {
-        // TODO - will need whole list
-        ui->butPrintTab->hide();
-    }
-
-   if( !session_->scaleConfig->isWrapperTwoPrinter() )
-   {
-       ui->butParam20->setVisible(false);
-       ui->lblMove20->setVisible(false);
-       ui->butLeftParam20->setVisible(false);
-       ui->param20->setVisible(false);
-       ui->lblOrigParam20->setVisible(false);
-       ui->butRightParam20->setVisible(false);
-
-       ui->butParam4->setVisible(false);
-       ui->lblMove4->setVisible(false);
-       ui->butLeftParam4->setVisible(false);
-       ui->param4->setVisible(false);
-       ui->lblOrigParam4->setVisible(false);
-       ui->butRightParam4->setVisible(false);
-   }
+        ui->butPrint->hide();
 
     pLabelSize_ = "0";
     sLabelSize_ = "0";
 
     session_->send( Printer, PrReqStockMetrics, QString::number( 0 ) );         // 7,40,0 - send in case we decide to cycle wrapper, 0 = Primary Printer
-
-    hasChanged_ = false;
-    finishedState = DONE_STATE;
-    pythonProcess = new python();
-
-    update();
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 bool serviceNewWrapperEditBox::helpText( QString& title, QString& description ) const
@@ -615,9 +502,6 @@ void serviceNewWrapperEditBox::translate()
 {
     ui->retranslateUi( this );
 
-    ui->param14->setItemText(0, tr("Narrow roll") );
-    ui->param14->setItemText(1, tr("Wide roll") );
-
     update();
 }
 
@@ -631,9 +515,10 @@ void serviceNewWrapperEditBox::translate()
 
 void serviceNewWrapperEditBox::writeHeightBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "writeHeightBox" );
-    //LOG_DEBUG( "writeHeightBox() START", NULL );
-    //LOG_DEBUG( "writeHeightBox() Num ofParams %d", wrTimingsData_->wrapParameterList.count() );
+    LOG_CLASS_INFO( "snwEditBox", "writeHeightBox" );
+
+    //LOG_INFO( "writeHeightBox() START", NULL );
+    //LOG_INFO( "writeHeightBox() Num ofParams %d", wrTimingsData_->wrapParameterList.count() );
 
     if (wrTimingsData_->pageMode != WrapperTimingsData::pmAutoConfigure)
     {
@@ -644,7 +529,6 @@ void serviceNewWrapperEditBox::writeHeightBox()
             msg2 += "," + heightBox_->maxHeight();
             msg2 += "," + QString::number(numOfParams);
             msg2 += ",\"";
-            LOG_DEBUG( "writeHeightBox() saveParams() msg2 #1: %s", qPrintable(msg2) );
 
             for (int j = 0; j < numOfParams; j++)
             {
@@ -652,13 +536,10 @@ void serviceNewWrapperEditBox::writeHeightBox()
                     msg2 += ",";
 
                 int value( wrTimingsData_->wrapParameterList[j]->getData() );
-
-                //LOG_DEBUG( "writeHeightBox() saveParams() value: d", value );
-
-                // LOG_DEBUG( "writeHeightBox() for loop value[%d]: %d", j, value);
+                // LOG_INFO( "writeHeightBox() for loop value[%d]: %d", j, value);
                 // Right now, the 2 new values for 2P, Pri and Sec VERT
                 // offsets are saving, so I'm not going to touch the 4.2.0 mods made.
-                if ( ( WrapParameter::FRONT_UF_ADJUST == j ) || ( WrapParameter::FORCE_OUTSIDE_ELEVATOR == j ) )
+                if ( isNGWWrapper() && ( ( WrapParameter::FRONT_UF_ADJUST == j ) || ( WrapParameter::FORCE_OUTSIDE_ELEVATOR == j ) ) )
                 {
                     if( ( value > 0 ) && ( value <= 100 )  )
                     {
@@ -667,7 +548,7 @@ void serviceNewWrapperEditBox::writeHeightBox()
                 }
 
                 //                                     [2]Side to Side wrap tension(2)            [5]Front to Back Wrap Tension(5)
-                if ( ( WrapParameter::CLAMP_HEIGHT == j ) || ( WrapParameter::GRIPPER_ADJUST == j ) )
+                if ( isNGWWrapper() && ( ( WrapParameter::CLAMP_HEIGHT == j ) || ( WrapParameter::GRIPPER_ADJUST == j ) ) )
                 {
                     if( ( value >= -5 ) && ( value < 0 ) )
                         value = ( ( value * -1 ) + 100 );
@@ -675,68 +556,67 @@ void serviceNewWrapperEditBox::writeHeightBox()
 
                 if( ( WrapParameter::PRIMARY_LABEL_VERT_OFFSET == j ) || ( WrapParameter::SECONDARY_LABEL_VERT_OFFSET == j ) )
                 {
-                    if( session_->scaleConfig->isWrapperTwoPrinter() )
+                    if( isNGWWrapper() && session_->scaleConfig->isWrapperTwoPrinter() )
                         msg2 += QString::number(value);     // so dont send the current last 2 params if we are not 2P. Could of sent them as the same
                 }
                 else
                     msg2 += QString::number(value);
-
-                LOG_DEBUG( "writeHeightBox() Loop[%d] msg2 #2: %s", j, qPrintable(msg2) );
             }
 
             msg2 += "\"";
 
-            LOG_DEBUG( "writeHeightBox() sending msg2: %s", qPrintable(msg2) );
+            //LOG_INFO( "writeHeightBox() sending msg2: %s", qPrintable(msg2) );
 
             session_->send(Wrapper, WrEvolWriteHeightBox, msg2);              // 9,247,precedence,maxHeight,heightBoxes list
         }
     }
 
-    //LOG_DEBUG( "writeHeightBox() END", NULL );
+    //LOG_INFO( "writeHeightBox() END", NULL );
 }
 
 void serviceNewWrapperEditBox::writeWrapBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "writeWrapBox" );
-
-    LOG_DEBUG(  "writeWrapBox() START ", NULL );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::writeWrapBox()";
+#endif
 
     // SOF-2734
-    QString trayNameQuotedForCSV( ui->txtTrayName->text() );
+    QString trayNameQuotedForCSV( ui->le_TrayName->text() );
     trayNameQuotedForCSV.replace( "\"", "\"\"" );
     trayNameQuotedForCSV.prepend( "\"" );
     trayNameQuotedForCSV.append( "\"" );
 
     QString msg2 = QString::number(activeRow);
     msg2 += "," + trayNameQuotedForCSV;
-    msg2 += ",0";                                              // once was the plu excption - now just 0
-    msg2 += "," + ui->txtMinLength->text();
-    msg2 += "," + ui->txtMaxLength->text();
-    msg2 += "," + ui->txtMinWidth->text();
-    msg2 += "," + ui->txtMaxWidth->text();
-    msg2 += "," + ui->txtMaxLip->text();
-    msg2 += "," + QString::number(ui->cboHeightBox->count());
+    msg2 += "," + ui->le_PLUNumber->text();
+    msg2 += "," + ui->le_MinLength->text();
+    msg2 += "," + ui->le_MaxLength->text();
+    msg2 += "," + ui->le_MinWidth->text();
+    msg2 += "," + ui->le_MaxWidth->text();
+    msg2 += "," + ui->le_MaxLip->text();
+    msg2 += "," + QString::number(ui->cbo_HeightBox->count());
     msg2 += ",\"";
-    for (int j = 0; j < ui->cboHeightBox->count(); j++)
+    for (int j = 0; j < ui->cbo_HeightBox->count(); j++)
     {
         if (j > 0)
             msg2 += ",";
-        msg2 += ui->cboHeightBox->itemData(j).toString();
+        msg2 += ui->cbo_HeightBox->itemData(j).toString();
     }
     msg2 += "\"";
 
-
-    LOG_DEBUG(  "writeWrapBox():  send(9,241) %s ", qPrintable(msg2) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::writeWrapBox():  session_->send(Wrapper, WrEvolWriteWrapBox, " << msg2 << ")";
+#endif
 
     session_->send(Wrapper, WrEvolWriteWrapBox, msg2);              // 9,241,precedence,trayName,...
-    LOG_DEBUG(  "writeWrapBox() DONE ", NULL );
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 int serviceNewWrapperEditBox::makeValidatorTop( int digits )
-{   LOG_CLASS_INFO( "serviceEditBox", "makeValidatorTop" );
-
-    LOG_DEBUG("makeValidatorTop() digits %d ", digits );
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::makeValidatorTop()";
+#endif
     int top = 0;
 
     while ( digits-- )
@@ -744,28 +624,27 @@ int serviceNewWrapperEditBox::makeValidatorTop( int digits )
         top *= 10;
         top += 9;
     }
-
-    LOG_DEBUG(  "makeValidatorTop() digits %d ", top );
     return top;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::saveDataOnExit()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "saveDataOnExit" );
-    LOG_DEBUG( "saveDataOnExit() wrTimingsData_->pageMode: %d", wrTimingsData_->pageMode );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::saveDataOnExit():  wrTimingsData_->pageMode = " << QString::number(wrTimingsData_->pageMode);
+#endif
     if ((wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure) || (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect))
     {
         if (firstPass == false)
-            onSaveChanges();
+            saveChanges();
     }
     else
     {
-        onSaveChanges();
+        saveChanges();
     }
-
-    LOG_DEBUG( "saveDataOnExit() DONE", NULL);
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::saveDataOnExit():  Done.";
+#endif
 }
 
 
@@ -778,72 +657,54 @@ void serviceNewWrapperEditBox::saveDataOnExit()
 
 void serviceNewWrapperEditBox::setMinValues()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "setMinValues" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     QString msg2 = QString::number( activeRow );
-
-    LOG_DEBUG( "setMinValues() session_->send(Wrapper, WrEvolSetMinTrayDims): %s", qPrintable(msg2) );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::setMinValues():  session_->send(Wrapper, WrEvolSetMinTrayDims, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolSetMinTrayDims, msg2);			// 9,147,precedence
+//	waitForTrayUpdates = true;
 }
 
 void serviceNewWrapperEditBox::setMaxValues()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "setMaxValues" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     QString msg2 = QString::number( activeRow );
-
-    LOG_DEBUG( "setMaxValues() session_->send(Wrapper, WrEvolSetMinTrayDims): %s", qPrintable(msg2) );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::setMaxValues():  session_->send(Wrapper, WrEvolSetMaxTrayDims, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolSetMaxTrayDims, msg2);			// 9,148,precedence
+//	waitForTrayUpdates = true;
 }
 
 void serviceNewWrapperEditBox::setMinMaxValues()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "setMinMaxValues" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     QString msg2 = QString::number( activeRow );
-
-    LOG_DEBUG( "setMinMaxValues() session_->send(Wrapper, WrEvolSetMinTrayDims): %s", qPrintable(msg2) );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::setMinMaxValues():  session_->send(Wrapper, WrEvolSetMinMaxTrayDims, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolSetMinMaxTrayDims, msg2);			// 9,149,precedence
+//	waitForTrayUpdates = true;
 }
 
 void serviceNewWrapperEditBox::cycleWrapper()
 {
-    LOG_CLASS_INFO("serviceEditBox", "cycleWrapper");
+    LOG_CLASS_INFO("serviceNewWrapperEditBox", "setMinMaxValues");
+
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::cycleWrapper()";
+#endif
 
     if ( cycleWrapperInProgress_ )
         return;
 
-    ui->butCycleWrapperTab1->setStyleSheet("background-color: red;");
-    ui->butCycleWrapperTab2->setStyleSheet("background-color: red;");
-    ui->butCycleWrapperTab3->setStyleSheet("background-color: red;");
-    ui->butCycleWrapperTab4->setStyleSheet("background-color: red;");
-    ui->butCycleWrapperTab5->setStyleSheet("background-color: red;");
+    ui->butCycleWrapper->setStyleSheet("background-color: red;");
 
-    if (hasChanged_)
+    if (saveAnyChanges_)
     {
         //  Only save if we are viewing current timings - not default timings.
         writeWrapBox();
@@ -869,24 +730,20 @@ void serviceNewWrapperEditBox::cycleWrapper()
         QString sRotateLabel = QString::number( operatorDisplayFields->secLabelStockRotated() );
 
         QString setup = pLabelSize + pRotation + pPlacement + sLabelSize + sRotation + sPlacement + sRotateLabel;
-        LOG_DEBUG( "cycleWrapper() if setup: %s", qPrintable(setup) );
         session_->send( LabelApplier, LaSetup, setup );                                         // SEND #1: 5,14(LaSetup)
 
         QString printer = "0,";
         QString testLabel = "2,";
         QString qty = "0";
         QString label = printer + testLabel + qty;
-        LOG_DEBUG( "cycleWrapper() if label: %s", qPrintable(label) );
         session_->send( Printer, PrTestLabel, label );                                          // SEND #2: 7,31,test label checkboard
 
         QString verifyMsg = QString::number( activeRow ) + "," + heightBoxSelected_;
-        LOG_DEBUG( "cycleWrapper() if verifyMsg: %s", qPrintable(verifyMsg) );
         session_->send(Wrapper, WrEvolVerifyInHeightBox, verifyMsg);                            // SEND #3: 9,250 (print label)
-        session_->send(Wrapper, WrEvolTest, "24,0,0");           // SEND #4: 9,108,24,plu,printer (primary)     WrapperCycle, PLU Excption( now just 0) (this fires the Label Ready Message on the Application Side
+        session_->send(Wrapper, WrEvolTest, "24," + ui->le_PLUNumber->text() + ",0");           // SEND #4: 9,108,24,plu,printer (primary)     WrapperCycle, PLU Exception (this fires the Label Ready Message on the Application Side
 
         printer = "1,";
         label = printer + testLabel + qty;
-        LOG_DEBUG( "cycleWrapper() if label: %s", qPrintable(label) );
         session_->send( Printer, PrTestLabel, label );                                          // SEND #5: 7,31,test label checkboard
     }
     else
@@ -900,24 +757,43 @@ void serviceNewWrapperEditBox::cycleWrapper()
         QString label = printer + testLabel + qty;
 
         session_->send( Printer, PrTestLabel, label );
-        LOG_DEBUG( "cycleWrapper() else label: %s", qPrintable(label) );
+
         QString verifyMsg = QString::number( activeRow ) + "," + heightBoxSelected_;        //	HA-135
         session_->send(Wrapper, WrEvolVerifyInHeightBox, verifyMsg);
-        LOG_DEBUG( "cycleWrapper() else verifyMsg: %s", qPrintable(verifyMsg) );
-        session_->send(Wrapper, WrEvolTest, "24,0," + printer);				// 9,108, WrapperCycle, PLU Excption (0 NOW - excption gone)
+        session_->send(Wrapper, WrEvolTest, "24," + ui->le_PLUNumber->text() + "," + printer);				// 9,108, WrapperCycle, PLU Exception
     }
     cycleWrapperInProgress_ = true;
 }
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::currentChangeTab(int tabNum)
+void serviceNewWrapperEditBox::cancelChanges()
 {
-    // dont have anything for now, but I will
-    // could use it to save tab data
-    Q_UNUSED(tabNum);
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::cancelChanges()";
+#endif
+    QString msg2 = QString::number( activeRow );
+    saveAnyChanges_ = false;
+    wrTimingsData_->exitByMenu = false;
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::cancelChanges():  session_->send(Wrapper, WrEvolCancelWrapBoxChanges, " << msg2 << ")";
+#endif
+    session_->send(Wrapper, WrEvolCancelWrapBoxChanges, msg2);		// 9,243,precedence
+    mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
+}
 
-    return;
+void serviceNewWrapperEditBox::saveChanges()
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::saveChanges():  saveAnyChanges_ = " + QString::number(saveAnyChanges_);
+#endif
+
+    if( saveAnyChanges_ )
+    {
+        QString msg2 = QString::number( activeRow );
+        writeWrapBox();
+        writeHeightBox();                                       // save timings
+
+        session_->send(Wrapper, WrEvolDoneWrapBox, msg2);		// 9,244,precedence
+    }
 }
 
 // SOF-2550
@@ -996,504 +872,66 @@ void serviceNewWrapperEditBox::cycleWrapperTrailingEdge()
     }
 }
 
-void serviceNewWrapperEditBox::onExportTimings()
+void serviceNewWrapperEditBox::doneWithChanges()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onExportTimings" );
-
-    LOG_DEBUG( "onExportTimings() - START", NULL );
-
-    QString startDirStr = "";
-    QString formatStr( "CSV (*.csv);;*.* (*)" );
-
-    FileDialog filepicker( mainWindow_ );
-    filepicker.setFilter( formatStr );
-    filepicker.setOptions( QFileDialog::DontConfirmOverwrite );
-
-    LOG_DEBUG( "onExportTimings() - set up filepicker", NULL );
-
-    QStringList folders;
-
-#if defined( Q_OS_LINUX )
-    folders.push_back( "/media/thumb" );
-    folders.push_back( "/media/" );
-    folders.push_back( "/home/" );
-#elif defined( Q_OS_WIN )
-    folders.push_back( "C:\\Hobart\\Timings" );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::doneWithChanges()";
 #endif
+//  Don't call this here as it will be called when switching pages.    saveDataOnExit();
+    wrTimingsData_->exitByMenu = false;
+    mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
+}
 
-    LOG_DEBUG( "onExportTimings() - set up folders", NULL );
-
-    // find existing folder
-    foreach ( const QString& f, folders )
-        if ( QDir( startDirStr = f ).exists() )
-            break;
-
-    LOG_DEBUG( "onExportTimings() - found existing folder", NULL );
-
-    filepicker.setAcceptMode( QFileDialog::AcceptOpen );
-    filepicker.setDirectory( startDirStr );
-    filepicker.setWindowTitle( tr( "Save file" ) );
-
-    LOG_DEBUG( "onExportTimings() - Pop Filedialog", NULL );
-
-
-    if ( QDialog::Accepted == filepicker.exec() )
-    {
-        qApp->processEvents();
-
-        QStringList selected( filepicker.selectedFiles() );
-        QString fileName;
-
-        if ( 1 == selected.count() )
-            fileName = selected[0];
-
-        bool hasGoodFileName = checkFileName( fileName, 1 );  // the 2nd arg, 1 = file, 2 = folder, here we are checking a file
-
-        if ( hasGoodFileName )
-        {
-#if defined( Q_OS_WIN )
-            fileName.replace( "/", "\\\\" );
+void serviceNewWrapperEditBox::goToOtherTimings()
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::goToOtherTimings()";
 #endif
-            //session_->send(Wrapper, WrEvolSavePackageTimingsToDisc, fileName);
+    wrTimingsData_->pageMode = WrapperTimingsData::pmViewEdit;
+    wrTimingsData_->exitByMenu = false;
+    mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperOtherTimings>();
+}
 
-            QStringList args;
-            args.append(fileName);
-            args.append(QString::number(session_->scaleConfig->internalConfig.priVertPrintPosition));
-            args.append(QString::number(session_->scaleConfig->internalConfig.secVertPrintPosition));
-            args.append(session_->scaleConfig->evolWrapperStatus.sealerBeltTemp());
-
-            LOG_DEBUG( "onExportTimings() - WHAT IS the fileName: '%s'", qPrintable(args[0]) );
-            //LOG_DEBUG( "onExportTimings() - WHAT IS the fileName: '%s'", qPrintable(args[1]) );
-            //LOG_DEBUG( "onExportTimings() - WHAT IS the fileName: '%s'", qPrintable(args[2]) );
-            //LOG_DEBUG( "onExportTimings() - WHAT IS the fileName: '%s'", qPrintable(args[3]) );
-
-            if( pythonProcess->execCommand("exportWrapperTimings", args))
-            {
-
-                DomCurrentScaleSetup *versioninfo_ = &session_->scaleConfig->currentScaleSetup;
-                QString ipAddr = versioninfo_->scaleIpAddress();
-                ipAddr = ipAddr.replace('.', '_');
-                QString fileExt = ".csv";
-                QString savedFile = fileName + '_' + ipAddr + fileExt;
-
-                if(QFile::exists( savedFile ))
-                    ui->lblHelpTab2->setText("* Timings report saved as: " + savedFile);
-                else
-                    ui->lblHelpTab2->setText("* Problem saving timings report: " + savedFile);
-            }
-
-#if defined( Q_OS_LINUX )
-                system("sync");         // flush the file to disc
+void serviceNewWrapperEditBox::goToAdvancedTimings()
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::goToAdvancedTimings()";
 #endif
-        }
-    }
-
-    LOG_DEBUG( "onExportTimings() - END", NULL );
+    wrTimingsData_->pageMode = WrapperTimingsData::pmViewEdit;
+    wrTimingsData_->exitByMenu = false;
+    mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperAdvancedTimings>();
 }
 
-/** checkFileName()
- *
- *  checkFileName checks to determine if a valid file was entered. If the filename
- *  is an empty string, or one of a number of illegal characters, a warning will
- *  be displayed to the user indicating the problem.
- *  \param: myfile       - the file name the user entered
- *          fileOrFolder - indicates if a filename or foldername was entered
- *  \return: bool - indicating if a valid file was entered, or not.
- *  \Bugs\Issues: None
- *  \sa Version 1
- */
-bool serviceNewWrapperEditBox::checkFileName(QString &myfile, int fileOrFolder)
-{
-    // fileOrFolder = 1 if checking a file, fileOrFolder = 2 if checking a folder
-
-    bool validFile = false;
-    QString errStr = "";
-
-    if(myfile == "")
-        errStr = tr( "A file was not selected. Please select a valid file to continue." );          // This is the string part of the error message,
-    else
-    {
-        int filelen = myfile.length();
-
-        if(filelen == 0)
-            errStr = tr( "A file was not selected. Please select a valid file to continue." );
-        else if(myfile.at(filelen - 1) == ('/'))
-            errStr = tr( "The filename ends in a slash [/].  Please enter a valid file name." );
-        else
-        {
-            if(fileOrFolder == 1)
-                myfile = getFileName(myfile);				//checking a file
-            else if(fileOrFolder == 2)
-                myfile = myfile;							// checking a folder
-
-            if(filelen <= 0)
-                errStr = tr( "A valid file name has not been given.  The file name has no length." );
-            else
-            {
-                if(fileOrFolder == 1 && myfile.indexOf("\\") > 0)
-                    errStr = tr( "The \\ [slash] character is not allowed in the filename." );
-                else if(myfile.indexOf(";") > 0)
-                    errStr = tr( "The ; [semi-colon] character is not allowed in the filename." );
-                else if(myfile.indexOf("*") > 0)
-                    errStr = tr( "The * [asterisk] character is not allowed in the filename." );
-                else if(myfile.indexOf("?") > 0)
-                    errStr = tr( "The ? [question mark] character is not allowed in the filename." );
-                else if((myfile.indexOf("\"") > 0) || (myfile.indexOf("\'") > 0))
-                    errStr = tr( "The \" or \' [single or double quotes] character is not allowed in the filename." );
-                else if((myfile.indexOf("<") > 0) || (myfile.indexOf(">") > 0))
-                    errStr = tr( "The < or > [qreater or less than] character is not allowed in the filename." );
-                else if((myfile.indexOf("+") > 0) || (myfile.indexOf("-") > 0))
-                    errStr = tr( "The + or - [plus or minus] character is not allowed in the filename." );
-                else if(myfile.indexOf("|") > 0)
-                    errStr = tr( "The | [separator bar] character is not allowed in the filename." );
-                else
-                    validFile = true;
-            }
-        }
-
-        int tabIndex = ui->tabServiceTimings->currentIndex();
-        savedExport_ = true;
-        if ( validFile )
-        {
-            if( ( tabIndex >= 2 ) && ( tabIndex <= 4 ) )
-                ui->lblHelpTab2->setText("* Timings report has been saved.");
-        }
-        else
-        {
-            if( 2 == tabIndex)
-                ui->lblHelpTab2->setText( errStr );
-            else if( 3 == tabIndex )
-                ui->lblHelpTab3->setText( errStr );
-            else if( 4 == tabIndex )
-                ui->lblHelpTab4->setText( errStr );
-            else if( 5 == tabIndex )
-                ui->lblHelpTab5->setText( errStr );
-        }
-    }
-
-    return validFile;
-}
-
-/** getFileName()
- *
- *  getFileName determines if a filename was entered with an extension. The extension
- *  is displayed in the file type combo box, and is automatically append the extension
- *  selected by default. However, without question some user will add the extension
- *  while entering the file name itself. This method fixes any issues that may be
- *  encountered if the user adds the entension themselves.
- *  \param: myfile       - the file name the user entered
- *  \return: String - the valid file name with the extension properly appended.
- *  \Bugs\Issues: None
- *  \sa Version 1
- */
-// Need to figure out, what this is trying to figure out.
-QString serviceNewWrapperEditBox::getFileName(QString myfile)
-{
-    //var fileObj;
-    QString strippedFileName = "";
-    QString retFile = "";
-
-   // FT-101 Backing up a database results in a file with no extension
-   // Still may have to make some more additions for LINUX. Needs seriously tested
-
-    bool doesFileAlreadyExist = QFile::exists(myfile);
-
-    if( doesFileAlreadyExist )
-    {
-        retFile = myfile;                                           // then file name already exists and we can return it as is
-    }
-    else                                                            // we have to create a new one then
-    {
-        if(myfile.indexOf(".") > 0)
-        {
-            QFileInfo fileInfo1(myfile);
-            QString strippedFileName = fileInfo1.completeBaseName();
-            retFile = strippedFileName;
-        }
-        else
-        {
-            retFile = myfile;
-        }
-    }
-
-
-    return retFile;
-}
-
-void serviceNewWrapperEditBox::onCancelChanges()
-{
-    LOG_CLASS_INFO( "serviceEditBox", "onCancelChanges" );
-
-    if( finishedState == DONE_STATE )
-    {
-        LOG_DEBUG( "serviceEditBox::onCancelChanges() DONE_STATE so just leave", NULL );
-        hasChanged_ = false;
-        wrTimingsData_->exitByMenu = false;
-        session_->scaleConfig->internalConfig.returningFromTabs = true;
-        finishedState = DONE_STATE;
-        ui->butCancelDone->setText( tr("Done"));
-        mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
-    }
-    else if( finishedState == CANCEL_STATE )
-    {
-        LOG_DEBUG( "serviceEditBox::onCancelChanges() CANCEL_STATE so CANCEL save", NULL );
-        hasChanged_ = false;
-        wrTimingsData_->exitByMenu = true;
-        ui->butCancelDone->setText( tr("Done") );
-        finishedState = DONE_STATE;
-
-        // original cancel message
-        QString msg2 = QString::number( activeRow );
-
-        session_->send(Wrapper, WrEvolCancelWrapBoxChanges, msg2);                      // 9,243,precedence
-        mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
-    }
-}
-
-void serviceNewWrapperEditBox::onSaveChanges()
-{
-    LOG_CLASS_INFO( "serviceEditBox", "onSaveChanges" );
-
-    if( hasChanged_ )
-    {
-        LOG_DEBUG( "onSaveChanges() hasChanged_ = TRUE so CALL writeWrapBox() and writeHeightBox()", NULL );
-        QString msg2 = QString::number( activeRow );
-
-        writeWrapBox();
-        writeHeightBox();                                       // save timings
-
-        session_->send(Wrapper, WrEvolDoneWrapBox, msg2);		// 9,244,precedence
-
-        if( finishedState == CANCEL_STATE )
-        {
-            finishedState = DONE_STATE;
-            ui->butCancelDone->setText( tr("Done"));
-        }
-
-        // save current values over to the originals now
-        ui->lblOrigParam0->setText(ui->param0->text());
-        ui->lblOrigParam2->setText(ui->param2->text());
-        ui->lblOrigParam9->setText(ui->param9->text());
-
-        ui->lblOrigParam5->setText(ui->param5->text());
-        ui->lblOrigParam15->setText(ui->param15->text());
-        ui->lblOrigParam10->setText(ui->param10->text());
-        ui->lblOrigParam3->setText(ui->param3->text());
-
-        ui->lblOrigParam6->setText(ui->param6->text());
-        ui->lblOrigParam4->setText(ui->param4->text());
-        ui->lblOrigParam20->setText(ui->param20->text());
-
-        ui->lblOrigParam7->setText(ui->param7->text());
-        ui->lblOrigParam8->setText(ui->param8->text());
-        ui->lblOrigParam16->setText(ui->param16->text());
-        ui->lblOrigParam14->setText( QString::number(ui->param14->currentIndex()) );
-
-        hasChanged_ = false;
-    }
-
-    if( savedExport_ )
-    {
-        // means we saved an export and we changed the help text someplace.  Reset them all
-        ui->lblHelpTab2->setText("* Click any text link to see HELP and a full description how the modified Timing change affects the Wrapper. ");
-        ui->lblHelpTab3->setText("* Click any text link to see HELP and a full description how the modified Timing change affects the Wrapper. ");
-        ui->lblHelpTab4->setText("* Click any text link to see HELP and a full description how the modified Timing change affects the Wrapper. ");
-        ui->lblHelpTab5->setText("* Click any text link to see HELP and a full description how the modified Timing change affects the Wrapper. ");
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::onEditingFinished( QWidget *widget )
-{
-    LOG_CLASS_INFO( "serviceEditBox", "onEditingFinished" );
-
-    // on clicking [ ENTER ] key on keyboard
-    QLineEdit* new_label = (QLineEdit*) widget;
-
-    LOG_DEBUG( "serviceEditBox::onEditingFinished() incoming Text: %s", qPrintable( new_label->text() ) );
-
-    int value = new_label->text().toInt();
-
-    if( widget == ui->param3 )
-    {
-        // debug - in case I want to do something to an individual parameter - if not, clean all this up
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param3", NULL );
-        if ( value < 10 )
-            new_label->setText("10");
-        else if( value > 40)
-            new_label->setText("40");
-
-        validateEntry( WrapParameter::DISTANCE, value );
-    }
-    else if( widget == ui->param0 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param0", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 60)
-            new_label->setText("60");
-
-        validateEntry( WrapParameter::PERCENT_STRETCH_CLAMP_ON, value );
-    }
-    else if( widget == ui->param2 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param2", NULL );
-        if ( value < -5)
-            new_label->setText("-5");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::CLAMP_HEIGHT, value );
-    }
-    else if( widget == ui->param9 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param9", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::SIDE_UF_ADJUST, value );
-    }
-    else if( widget == ui->param5 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param5", NULL );
-        if ( value < -5 )
-            new_label->setText("-5");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::GRIPPER_ADJUST, value );
-    }
-    else if( widget == ui->param15 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param15", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 5)
-            new_label->setText("5");
-
-        validateEntry( WrapParameter::REAR_UF_TRIP_DELAY, value );
-    }
-    else if( widget == ui->param10 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param10", NULL );
-        if ( value < 0 )
-            new_label->setText("10");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::HEIGHT_RESTRICT, value );
-    }
-    else if( widget == ui->param16 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param16", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 10)
-            new_label->setText("10");
-
-         validateEntry( WrapParameter::BRAKE_TIMING, value );
-    }
-    else if( widget == ui->param7 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param7", NULL );
-        if ( value < 12 )
-            new_label->setText("12");
-        else if( value > 30)
-            new_label->setText("30");
-
-        validateEntry( WrapParameter::WRAP_SPEED, value );
-    }
-    else if( widget == ui->param8 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param8", NULL );
-        if ( value < 1 )
-            new_label->setText("1");
-        else if( value > 30)
-            new_label->setText("30");
-
-       validateEntry( WrapParameter::DISCHARGE_SPEED, value );
-    }
-    else if( widget == ui->param6 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param6", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::FRONT_UF_ADJUST, value );
-    }
-    else if( widget == ui->param4 )
-    {
-        LOG_DEBUG( "serviceEditBox::onEditingFinished() param4", NULL );
-        if ( value < 0 )
-            new_label->setText("0");
-        else if( value > 10)
-            new_label->setText("10");
-
-        validateEntry( WrapParameter::FORCE_OUTSIDE_ELEVATOR, value );
-    }
-    else if( widget == ui->param20 )
-    {
-        if( session_->scaleConfig->isWrapperTwoPrinter() )
-        {
-            LOG_DEBUG( "serviceEditBox::onEditingFinished() param20", NULL );
-            if ( value < 0 )
-                new_label->setText("0");
-            else if( value > 10)
-                new_label->setText("10");
-
-            validateEntry( WrapParameter::SECONDARY_LABEL_VERT_OFFSET, value );
-        }
-    }
-
-
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
-
-    hasChanged_ = true;
-}
-
-// come back to check hasChanged_
 void serviceNewWrapperEditBox::requestHeightBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "requstHeightBox" );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::requestHeightBox()";
+#endif
 
-    LOG_DEBUG( "serviceEditBox::requestHeightBox() occurs on keyboard entered data and clicking [ ENTER ] key", NULL);
-
-    heightBoxSelected_ = ui->cboHeightBox->itemText(ui->cboHeightBox->currentIndex());
+    heightBoxSelected_ = ui->cbo_HeightBox->itemText(ui->cbo_HeightBox->currentIndex());
 
     QString msg2 = QString::number( activeRow ) + "," + heightBoxSelected_;
 
-    if( hasChanged_ )
+    if( saveAnyChanges_ )
         writeHeightBox();
 
-    LOG_DEBUG("serviceEditBox::requestHeightBox():  session_->send(Wrapper, WrEvolReadHeightBox msg2: %s", qPrintable(msg2));
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::requestHeightBox():  session_->send(Wrapper, WrEvolReadHeightBox, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolReadHeightBox, msg2);
-
-    finishedState = CANCEL_STATE;
-    ui->butCancelDone->setText( tr("Cancel"));
 }
 
 void serviceNewWrapperEditBox::newHeightBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "newHeightBox" );
+    saveAnyChanges_ = true;
 
-    hasChanged_ = true;
-
-
-    LOG_DEBUG(  "serviceEditBox::newHeightBox()", NULL);
-
-    ui->cboHeightBox->hide();              //  Hide the current height box list
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::newHeightBox()";
+#endif
+    ui->cbo_HeightBox->hide();              //  Hide the current height box list
     ui->butNewHeightBox->hide();            //  Hide the New height box button
     ui->butDeleteHeightBox->hide();         //  Hide the Delete height box button
-    ui->cboAvailableHeightBoxes->show();   //  Show the other heights available
+    ui->cbo_AvailableHeightBoxes->show();   //  Show the other heights available
     ui->butCancelNewHeightBox->show();      //  Allow them to cancel without adding a new height
     ui->butCancelNewHeightBox->blockSignals(false);
     ui->lblAddHeightBox->show();
@@ -1501,82 +939,74 @@ void serviceNewWrapperEditBox::newHeightBox()
 
 void serviceNewWrapperEditBox::addNewHeightBox()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "addNewHeightBox" );
+    saveAnyChanges_ = true;
 
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
-
-    LOG_DEBUG( "serviceEditBox::addNewHeightBox()", NULL);
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::addNewHeightBox()";
+#endif
     //  Get the new height string
-    QString newHeight = ui->cboAvailableHeightBoxes->itemText(ui->cboAvailableHeightBoxes->currentIndex());
-    QString currHeight = ui->cboHeightBox->itemText(ui->cboHeightBox->currentIndex());
+    QString newHeight = ui->cbo_AvailableHeightBoxes->itemText(ui->cbo_AvailableHeightBoxes->currentIndex());
+    QString currHeight = ui->cbo_HeightBox->itemText(ui->cbo_HeightBox->currentIndex());
 
-    ui->cboAvailableHeightBoxes->blockSignals(true);
-    ui->cboHeightBox->blockSignals(true);
+    ui->cbo_AvailableHeightBoxes->blockSignals(true);
+    ui->cbo_HeightBox->blockSignals(true);
 
     //  Remove the height from the available list
-    ui->cboAvailableHeightBoxes->removeItem(ui->cboAvailableHeightBoxes->currentIndex());
+    ui->cbo_AvailableHeightBoxes->removeItem(ui->cbo_AvailableHeightBoxes->currentIndex());
 
     //  Add the height to the current list
-    ui->cboHeightBox->addItem(newHeight, newHeight);
+    ui->cbo_HeightBox->addItem(newHeight, newHeight);
 
     //  Put the fields back to normal
-    ui->cboAvailableHeightBoxes->hide();   //  Hide the other heights available
+    ui->cbo_AvailableHeightBoxes->hide();   //  Hide the other heights available
     ui->butCancelNewHeightBox->hide();      //  Hide the cancel new height button
     ui->lblAddHeightBox->hide();
     ui->butDeleteHeightBox->show();         //  Show the Delete height box button
     ui->butNewHeightBox->show();            //  Show the New height box button
-    ui->cboHeightBox->show();              //  Show the current height box list
+    ui->cbo_HeightBox->show();              //  Show the current height box list
 
-    ui->cboAvailableHeightBoxes->blockSignals(false);
-    ui->cboHeightBox->blockSignals(false);
+    ui->cbo_AvailableHeightBoxes->blockSignals(false);
+    ui->cbo_HeightBox->blockSignals(false);
 
     QString msg2 = QString::number( activeRow ) + "," + newHeight + "," + currHeight;
-    LOG_DEBUG( "send: Wrapper, WrEvolCreateHeightBox, %s", qPrintable(msg2) );
-
+//	LOG_TRACE( "send: Wrapper, WrEvolCreateHeightBox, %s", qPrintable(msg2) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::addNewHeightBox():  session_->send(Wrapper, WrEvolCreateHeightBox, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolCreateHeightBox, msg2);
 //    heightBoxChanged = true;
 }
 
 void serviceNewWrapperEditBox::cancelNewHeightBox()
 {
+    saveAnyChanges_ = false;
+
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::cancelNewHeightBox()";
+#endif
     //  Put the fields back to normal
-    ui->cboAvailableHeightBoxes->hide();   //  Hide the other heights available
+    ui->cbo_AvailableHeightBoxes->hide();   //  Hide the other heights available
     ui->butCancelNewHeightBox->hide();      //  Hide the cancel new height button
     ui->lblAddHeightBox->hide();
     ui->butDeleteHeightBox->show();         //  Show the Delete height box button
     ui->butNewHeightBox->show();            //  Show the New height box button
-    ui->cboHeightBox->show();              //  Show the current height box list
+    ui->cbo_HeightBox->show();              //  Show the current height box list
 }
 
 void serviceNewWrapperEditBox::deleteSelectedHeight()
 {
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::deleteSelectedHeight()";
+#endif
     //	Send message to verify deletion of the tray
     session_->send(Error, Wrapper, "9709,1");              // 103,9,9709,1
 }
 
 void serviceNewWrapperEditBox::autoConfigureTray()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "autoConfigureTray" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     // SOF-2734
     QString trayNameQuotedForCSV( wrTimingsData_->trayName );
@@ -1586,98 +1016,150 @@ void serviceNewWrapperEditBox::autoConfigureTray()
 
     QString msg2 = QString::number( activeRow ) + "," + trayNameQuotedForCSV;
 
-    LOG_DEBUG( "autoConfigureTray msg2 %s", qPrintable(msg2) );
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::autoConfigureTray():  session_->send(Wrapper, WrEvolAutoConfigTrayType, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolAutoConfigTrayType, msg2);
 }
 
 void serviceNewWrapperEditBox::updateTrayName()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateTrayName" );
+    LOG_CLASS_INFO( "snwEditBox", "updateTrayName" );
 
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateTrayName()";
+#endif
     if ((wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure) && !gotNewTrayName_)
     {
-
-        LOG_DEBUG("serviceEditBox::updateTrayName(): Requesting a new tray", NULL);
-
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::updateTrayName(): Requesting a new tray";
+#endif
         //	HTA-79
-        if (ui->txtTrayName->text().isEmpty())
+        if (ui->le_TrayName->text().isEmpty())
         {
             //	This will force them to either reselect the Tray name field
             //	of press "Cancel" or "Done". There are no other options.
-            LOG_DEBUG( "Tray name is null. Not sending Auto config message.", NULL );
+            LOG_TRACE( "Tray name is null. Not sending Auto config message.", NULL );
         }
         else
         {
             gotNewTrayName_ = true;
-            wrTimingsData_->trayName = ui->txtTrayName->text();
+            wrTimingsData_->trayName = ui->le_TrayName->text();
 
-            LOG_DEBUG( "1) wrTimingsData_->trayName = [%s]", qPrintable( wrTimingsData_->trayName ) );
+            LOG_TRACE( "1) wrTimingsData_->trayName = [%s]", qPrintable( wrTimingsData_->trayName ) );
             autoConfigureTray();
             hideShowForNewTray(false);      //  Show all the fields for AutoConfig mode
         }
     }
+#if 0	//	HA-85, HA-133:	When we request timings after saving Temporary, we get back the data before the temporary changes.
+        //					This seems to be a bug in the Wrapper, but we don't request it in Windux either and the new names or PLU exceptions
+        //					show up in the list without having to request the timings again [CCD Jan 2015].
+    else if (currentTrayName_ != ui->le_TrayName->text())
+    {
+        QString msg2 = QString::number( activeRow ) + "," + ui->le_TrayName->text();
+        wrTimingsData_->trayName = ui->le_TrayName->text();
+
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::updateTrayName(): Updating the tray name";
+        qDebug() << "serviceNewWrapperEditBox::updateTrayName():  session_->send(Wrapper, WrEvolWriteTrayType, " << msg2 << ")";
+#endif
+        session_->send(Wrapper, WrEvolWriteTrayType, msg2);
+        wrTimingsData_->loadTrays = true;
+  //      session_->send(Wrapper, WrEvolLoadPackageTimings, "1");   // 9,226,CurrentTimings
+    }
+#endif
+    currentTrayName_ = ui->le_TrayName->text();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::activateTrayName()	//	HTA-79
+{
+    LOG_CLASS_INFO( "snwEditBox", "activateTrayName" );
+
+//        ui->le_TrayName->setFocusPolicy(Qt::StrongFocus);
+    LOG_TRACE( "ui->le_TrayName->setFocus()", NULL );
+    ui->le_TrayName->setFocus();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::cycleWrapperSetupTime()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "cycleWrapperSetupTime" );
+    LOG_CLASS_INFO( "snwEditBox", "cycleWrapperSetupTime" );
 
     // have to give the wrapper time to set up, make sure everyone is good to go and ready, and then cycle wrapper
-    LOG_DEBUG( "cycleWrapperSetupTime(): Finish up cycling the wrapper after the delay to allow object setup on Firmware Side", NULL );
+    LOG_TRACE( "cycleWrapperSetupTime(): Finish up cycling the wrapper after the delay to allow object setup on Firmware Side", NULL );
 
     QString printer = "0,";
     QString testLabel = "2,";
     QString qty = "0";
     QString label = printer + testLabel + qty;
-    LOG_DEBUG("Label = %s", label.toStdString().c_str());
+    LOG_INFO("Label = %s", label.toStdString().c_str());
     session_->send( Printer, PrTestLabel, label );                                          // 7,31,test label checkboard
 
     QString verifyMsg = QString::number( activeRow ) + "," + heightBoxSelected_;            //	HA-135
     session_->send(Wrapper, WrEvolVerifyInHeightBox, verifyMsg);                            // 9,250
-    session_->send(Wrapper, WrEvolTest, "24,0," + printer);  // 9,108      WrapperCycle, PLU Excption (0 NOW - excption gone) (this fires the Label Ready Message on the Application Side
+    session_->send(Wrapper, WrEvolTest, "24," + ui->le_PLUNumber->text() + "," + printer);  // 9,108      WrapperCycle, PLU Exception (this fires the Label Ready Message on the Application Side
 
     printer = "1,";
     label = printer + testLabel + qty;
-    LOG_DEBUG("Label = %s", label.toStdString().c_str());
+    LOG_INFO("Label = %s", label.toStdString().c_str());
     session_->send( Printer, PrTestLabel, label );
 
     cycleWrapperInProgress_ = true;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::onDisplayHelpText()
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::onWidgetUpdated()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onDisplayHelpText" );
+    saveAnyChanges_ = true;
 
+    onWidgetUpdatedInternal( qobject_cast<QWidget*>( sender() ) );
+}
 
-    QString dialogText;
-    QPushButton* paramWidget = qobject_cast<QPushButton*>(sender());        // get label clicked
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::onWidgetUpdatedInternal( QWidget *widget )
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::onWidgetUpdated()";
+#endif
 
-    if( !paramWidget )
-        return;
+    QSpinBox *spinBox;
+    QComboBox *comboBox;
 
-    QString name = paramWidget->objectName();                               // get label name
-    QString nameNumStr = name.replace("butParam", "");
-    int paramNum = nameNumStr.toInt();
+    const int offset( offsetMap_[widget] );
 
-    LOG_DEBUG( "onDisplayHelpText() - get the HELP tetext", NULL);
-
-    MessageBoxDialog *dialog( new MessageBoxDialog( mainWindow_ ) );
-
-    // setup help text for popup
-    switch ( paramNum )
+    //
+    // spin box edits
+    //
+    if ( (spinBox = qobject_cast<QSpinBox*>( widget )) )
     {
+        validateEntry( offset, spinBox );
+    }
+
+    //
+    // combo box edits
+    //
+    else if ( (comboBox = qobject_cast<QComboBox*>( widget )) )
+    {
+        const int valIs( comboBox->currentData().toString().toInt() );
+
+        wrTimingsData_->wrapParameterList[offset]->setData( valIs );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::onCellClicked( int row, int column )
+{
+    if (( isUsingSimplifiedTimings() ) && ( 0 == column ) && ( row < wrapParamOrdering_.count() ))
+    {
+        QString dialogText;
+
+        // setup help text for popups
+        switch ( wrapParamOrdering_[row] )
+        {
         case WrapParameter::DISTANCE:
-            dialog->setTitle( tr( "Package Position on Elevator" ) );
             dialogText =
                 tr( "The distance the package travels past the elevator sensor across the intake\n"
                     "\n"
@@ -1686,45 +1168,19 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "Adjust position on the elevator until the rear and front flap are gathered the same changes the length of the rear and front flap" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_DISTANCE) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_DISTANCE) );
-        break;
+            break;
 
-        case WrapParameter::PERCENT_STRETCH_CLAMP_ON:                       // Used by SideToSidePreStretch
-            dialog->setTitle( tr( "Side to Side Pre-Stretch" ) );
+        case WrapParameter::FORCE_OUTSIDE_ELEVATOR:
             dialogText =
-                tr( "Controls the distance the side clamps move in before closing on the film\n"
+                tr( "Adjusts the label placement right or left when leading edge\n"
                     "\n"
-                    "Use this parameter to adjust the prestretch of the film\n"
-                    "Range $HB_MIN - $HB_MAX, $HB_MIN is least film in clamps; least prestretch, tension, $HB_MAX is the most film in clamps; most prestretch" );
-            dialogText.replace( "$HB_MIN", xstr(HB_MIN_PERCENT) );
-            dialogText.replace( "$HB_MAX", xstr(HB_MAX_PERCENT) );
-        break;
-
-        case WrapParameter::CLAMP_HEIGHT:
-            dialog->setTitle( tr( "Side to Side Wrap Tension" ) );
-            dialogText =
-                tr( "Controls when the side clamps open\n"
-                    "\n"
-                    "Use this parameter to control side to side tension\n"
-                    "Range $HB_MIN - $HB_MAX, $HB_MIN is the earliest release; looser, and $HB_MAX being the latest release; tighter\n"
-                    "* Use in conjunction with side to side pre-stretch.  The higher the prestretch the earlier you can open the side clamps" );
-            dialogText.replace( "$HB_MIN", xstr(HB_MIN_CLAMP_OPEN) );
-            dialogText.replace( "$HB_MAX", xstr(HB_MAX_CLAMP_OPEN) );
-        break;
-
-        case WrapParameter::SIDE_UF_ADJUST:
-            dialog->setTitle( tr( "Side Folder Travel" ) );
-            dialogText =
-                tr( "Controls the distance the side underfolders travel in toward the center\n"
-                    "\n"
-                    "Use this parameter to guide the film under the footprint of the tray, usually deep trays require additional travel\n"
-                    "Use this parameter to increase support of wide trays such as 10s, 16s, 7s\n"
-                    "Range $HB_MIN - $HB_MAX, $HB_MIN is the least travel and $HB_MAX the most travel" );
-            dialogText.replace( "$HB_MIN", xstr(HB_MIN_SIDE_FOLD_ADJ) );
-            dialogText.replace( "$HB_MAX", xstr(HB_MAX_SIDE_FOLD_ADJ) );
-        break;
+                    "Use this parameter to control label placement in quarter inch increments\n"
+                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_TRAILEDGE_LABEL_OFFSET) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_TRAILEDGE_LABEL_OFFSET) );
+            break;
 
         case WrapParameter::GRIPPER_ADJUST:
-            dialog->setTitle( tr( "Front to Back Wrap Tension" ) );
             dialogText =
                 tr( "Controls the brake pulse rate as the package is pushed up through the film plane and as the rear underfolder moves under the package before the knife cuts the film\n"
                     "\n"
@@ -1733,10 +1189,9 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "* Wrap tension in service is medium, if wrap tension is set to high in operate, packages set up in service may crush" );
             dialogText.replace( "$HB_MIN", xstr(HB_NEG_MIN_GRIPPER_ADJ) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_GRIPPER_ADJ) );
-        break;
+            break;
 
         case WrapParameter::REAR_UF_TRIP_DELAY:
-            dialog->setTitle( tr( "Rear Underfolder Travel" ) );
             dialogText =
                 tr( "Controls how far the rear underfolder travels under the package before cutting\n"
                     "\n"
@@ -1748,10 +1203,9 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "Normally rear underfolder travel is 0 for short trays, 2 or 3 for medium length trays" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_REAR_TRIP_DELAY) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_REAR_TRIP_DELAY) );
-        break;
+            break;
 
-        case WrapParameter::HEIGHT_RESTRICT:                            // Used by GripperRelax
-            dialog->setTitle( tr( "Gripper Relax" ) );
+        case WrapParameter::HEIGHT_RESTRICT:
             dialogText =
                 tr( "Controls the distance the gripper moves back toward the elevator to relax the front flap tension\n"
                     "\n"
@@ -1761,10 +1215,9 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "* This parameter will increase tension front to back as the height overide value is reduced" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_HEIGHT_RESTRICT) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_HEIGHT_RESTRICT) );
-        break;
+            break;
 
-        case WrapParameter::BRAKE_TIMING:                               // Used by FilmPullLength
-            dialog->setTitle( tr( "Film Pull Length" ) );
+        case WrapParameter::BRAKE_TIMING:
             dialogText =
                 tr( "Controls the gripper travel on film pull to get more or less film front to back\n"
                     "\n"
@@ -1772,10 +1225,41 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "Range $HB_MIN - $HB_MAX, $HB_MIN being the shortest lengtn of film pulled and $HB_MAX being the longest length of film pulled" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_BRAKE_TIME) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_BRAKE_TIME) );
-        break;
+            break;
+
+        case WrapParameter::PERCENT_STRETCH_CLAMP_ON:
+            dialogText =
+                tr( "Controls the distance the side clamps move in before closing on the film\n"
+                    "\n"
+                    "Use this parameter to adjust the prestretch of the film\n"
+                    "Range $HB_MIN - $HB_MAX, $HB_MIN is least film in clamps; least prestretch, tension, $HB_MAX is the most film in clamps; most prestretch" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_PERCENT) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_PERCENT) );
+            break;
+
+        case WrapParameter::CLAMP_HEIGHT:
+            dialogText =
+                tr( "Controls when the side clamps open\n"
+                    "\n"
+                    "Use this parameter to control side to side tension\n"
+                    "Range $HB_MIN - $HB_MAX, $HB_MIN is the earliest release; looser, and $HB_MAX being the latest release; tighter\n"
+                    "* Use in conjunction with side to side pre-stretch.  The higher the prestretch the earlier you can open the side clamps" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_CLAMP_OPEN) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_CLAMP_OPEN) );
+            break;
+
+        case WrapParameter::SIDE_UF_ADJUST:
+            dialogText =
+                tr( "Controls the distance the side underfolders travel in toward the center\n"
+                    "\n"
+                    "Use this parameter to guide the film under the footprint of the tray, usually deep trays require additional travel\n"
+                    "Use this parameter to increase support of wide trays such as 10s, 16s, 7s\n"
+                    "Range $HB_MIN - $HB_MAX, $HB_MIN is the least travel and $HB_MAX the most travel" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_SIDE_FOLD_ADJ) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_SIDE_FOLD_ADJ) );
+            break;
 
         case WrapParameter::FILM_ROLL_TO_USE:
-            dialog->setTitle( tr( "" ) );
             dialogText =
                 tr( "Controls the film selector to force the machine to use upper or lower film\n"
                     "\n"
@@ -1784,10 +1268,39 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "When narrow is selected the machine will select whichever roll width is less as defined in operate / wrapper settings or service /wrapper configuration\n"
                     "When wide is selected the machine will select whichever roll width is greater as defined in operate / wrapper settings or service /wrapper configuration\n"
                     "* If film width has been overridden in wrapper settings, wrapper will select that film in service regardless of what the wrap parameter says" );
-        break;
+            break;
+
+        case WrapParameter::FRONT_UF_ADJUST:
+            dialogText =
+                tr( "Adjusts the label placement right or left when trailing edge\n"
+                    "\n"
+                    "Use this parameter to control label placement in quarter inch increments\n"
+                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_TRAILEDGE_LABEL_OFFSET) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_TRAILEDGE_LABEL_OFFSET) );
+            break;
+/*
+        case WrapParameter::PRIMARY_LABEL_VERT_OFFSET:
+            dialogText =
+                tr( "Adjusts the label placement up or down vertically\n"
+                    "\n"
+                    "Use this parameter to control label placement in quarter inch increments\n"
+                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_VERTICAL_LABEL_OFFSET) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_VERTICAL_LABEL_OFFSET) );
+            break;
+*/
+        case WrapParameter::SECONDARY_LABEL_VERT_OFFSET:
+            dialogText =
+                tr( "Adjusts the label placement  up or down vertically\n"
+                    "\n"
+                    "Use this parameter to control label placement in quarter inch increments\n"
+                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
+            dialogText.replace( "$HB_MIN", xstr(HB_MIN_VERTICAL_LABEL_OFFSET) );
+            dialogText.replace( "$HB_MAX", xstr(HB_MAX_VERTICAL_LABEL_OFFSET) );
+            break;
 
         case WrapParameter::WRAP_SPEED:
-            dialog->setTitle( tr( "Wrap Speed" ) );
             dialogText =
                 tr( "Controls the speed of the intake and the speed of the elevator\n"
                     "\n"
@@ -1795,10 +1308,9 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is slowest, $HB_MAX is fastest, usually not less than 20 and not greater than 26" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_WRAP_SPEED) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_WRAP_SPEED) );
-        break;
+            break;
 
         case WrapParameter::DISCHARGE_SPEED:
-            dialog->setTitle( tr( "Discharge Speed" ) );
             dialogText =
                 tr( "Controls the speed of the upper pusher during discharge of the package\n"
                     "\n"
@@ -1807,69 +1319,36 @@ void serviceNewWrapperEditBox::onDisplayHelpText()
                     "* You may have different wrap and discharge speeds" );
             dialogText.replace( "$HB_MIN", xstr(HB_MIN_DISCHARGE_SPEED) );
             dialogText.replace( "$HB_MAX", xstr(HB_MAX_DISCHARGE_SPEED) );
-        break;
+            break;
 
-        case WrapParameter::FRONT_UF_ADJUST:                                // Used by PrimaryLabelOffse
-            dialog->setTitle( tr( "Primary Label Offset" ) );
-            dialogText =
-                tr( "Adjusts the label placement right or left when trailing edge\n"
-                    "\n"
-                    "Use this parameter to control label placement in quarter inch increments\n"
-                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
-            dialogText.replace( "$HB_MIN", xstr(HB_MIN_TRAILEDGE_LABEL_OFFSET) );
-            dialogText.replace( "$HB_MAX", xstr(HB_MAX_TRAILEDGE_LABEL_OFFSET) );
-        break;
+        default:
+            break;
+        }
 
-        case WrapParameter::FORCE_OUTSIDE_ELEVATOR:                         // USED by SecondaryLabelOffset
-            dialog->setTitle( tr( "Secondary Label Offset" ) );
-            dialogText =
-                tr( "Adjusts the label placement right or left when leading edge\n"
-                    "\n"
-                    "Use this parameter to control label placement in quarter inch increments\n"
-                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
-            dialogText.replace( "$HB_MIN", xstr(HB_MIN_TRAILEDGE_LABEL_OFFSET) );
-            dialogText.replace( "$HB_MAX", xstr(HB_MAX_TRAILEDGE_LABEL_OFFSET) );
-        break;
+        if ( dialogText.length() )
+        {
+            MessageBoxDialog *dialog( new MessageBoxDialog( mainWindow_ ) );
+            dialog->setSizeToFit( true );
+            dialog->setTitle( tr( "Timings Help" ) );
+            dialog->setText( dialogText );
+            dialog->setStandardButtons( QDialogButtonBox::Ok );
 
-        case WrapParameter::SECONDARY_LABEL_VERT_OFFSET:
-            if( session_->scaleConfig->isWrapperTwoPrinter() )
-            {
-	            dialog->setTitle( tr( "" ) );
-	            dialogText =
-	                tr( "Adjusts the label placement  up or down vertically\n"
-	                    "\n"
-	                    "Use this parameter to control label placement in quarter inch increments\n"
-	                    "Range $HB_MIN - $HB_MAX ppm, $HB_MIN is left most, $HB_MAX is right most, default setting is 5" );
-	            dialogText.replace( "$HB_MIN", xstr(HB_MIN_VERTICAL_LABEL_OFFSET) );
-	            dialogText.replace( "$HB_MAX", xstr(HB_MAX_VERTICAL_LABEL_OFFSET) );
-            }
-        break;
-
-    }
-
-    if ( dialogText.length() )
-    {
-        dialog->setSizeToFit( true );
-        dialog->setText( dialogText );
-        dialog->setStandardButtons( QDialogButtonBox::Ok );
-
-        dialog->exec();
+            dialog->exec();
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool serviceNewWrapperEditBox::onScreenChanging()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onScreenChanging" );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::onScreenChanging()";
+#endif
 
     if (wrTimingsData_->exitByMenu)
-    {
-        LOG_DEBUG( "IF onScreenChanging() exitByMenu IS true then return FALSE and dont exit", NULL);
         return false;
-    }
     else
     {
-        LOG_DEBUG( "ELSE onScreenChanging() exitByMenu IS false, so CALL saveDataOnExit()", NULL);
         wrTimingsData_->heightBoxSelected = heightBoxSelected_;     //  Save the current height box.
         saveDataOnExit();
     }
@@ -1879,28 +1358,25 @@ bool serviceNewWrapperEditBox::onScreenChanging()
 
 void serviceNewWrapperEditBox::buildWrapDimensions(const SessionMessage& msg)
 {
-    LOG_CLASS_INFO( "serviceEditBox", "buildWrapDimensions" );
-    LOG_DEBUG( "buildWrapDimensions() START", NULL);
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::buildWrapDimensions()";
+#endif
     DomWrapBoxParams wrapBoxParams( msg );
 
     wrTimingsData_->precedence = wrapBoxParams.precedence().toInt();
     wrTimingsData_->trayName = wrapBoxParams.trayName();
-    wrTimingsData_->pluException = "0";             // now 0, could it be blank too?
+    wrTimingsData_->pluException = wrapBoxParams.pluException();
 
     activeRow = wrTimingsData_->precedence;
 
-    ui->txtTrayName->setText(wrTimingsData_->trayName);
-    ui->lblTraySizeTab2->setText(wrTimingsData_->trayName);
-    ui->lblTraySizeTab3->setText(wrTimingsData_->trayName);
-    ui->lblTraySizeTab4->setText(wrTimingsData_->trayName);
-    ui->lblTraySizeTab5->setText(wrTimingsData_->trayName);
+    ui->le_TrayName->setText(wrTimingsData_->trayName);
+    ui->le_PLUNumber->setText(wrTimingsData_->pluException);
 
-    ui->txtMinLength->setText(wrapBoxParams.minLength());
-    ui->txtMaxLength->setText(wrapBoxParams.maxLength());
-    ui->txtMinWidth->setText(wrapBoxParams.minWidth());
-    ui->txtMaxWidth->setText(wrapBoxParams.maxWidth());
-    ui->txtMaxLip->setText(wrapBoxParams.maxLip());
+    ui->le_MinLength->setText(wrapBoxParams.minLength());
+    ui->le_MaxLength->setText(wrapBoxParams.maxLength());
+    ui->le_MinWidth->setText(wrapBoxParams.minWidth());
+    ui->le_MaxWidth->setText(wrapBoxParams.maxWidth());
+    ui->le_MaxLip->setText(wrapBoxParams.maxLip());
 
     //  Set up our copy of the wrap box dimensions
     wrapBoxData_.setMinLength(getIntFromString(wrapBoxParams.minLength()));
@@ -1911,11 +1387,11 @@ void serviceNewWrapperEditBox::buildWrapDimensions(const SessionMessage& msg)
 
     if (wrTimingsData_->canEditTrayName)
     {
-        ui->txtMinLength->setDisabled(false);
-        ui->txtMaxLength->setDisabled(false);
-        ui->txtMinWidth->setDisabled(false);
-        ui->txtMaxWidth->setDisabled(false);
-        ui->txtMaxLip->setDisabled(false);
+        ui->le_MinLength->setDisabled(false);
+        ui->le_MaxLength->setDisabled(false);
+        ui->le_MinWidth->setDisabled(false);
+        ui->le_MaxWidth->setDisabled(false);
+        ui->le_MaxLip->setDisabled(false);
     }
 
     buildHeightCombo(wrapBoxParams);
@@ -1923,28 +1399,28 @@ void serviceNewWrapperEditBox::buildWrapDimensions(const SessionMessage& msg)
 
 void serviceNewWrapperEditBox::buildHeightCombo(DomWrapBoxParams &wrapBoxParams)
 {
-    LOG_CLASS_INFO( "serviceEditBox", "buildHeightCombo" );
-    LOG_DEBUG( "serviceEditBox::buildHeightCombo()", NULL);
-
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::buildHeightCombo()";
+#endif
     boxCount = wrapBoxParams.numHeightBoxes().toInt();
     if (boxCount > 0)
     {
         //  Block the signals on these combo boxes until they are set up.
-        ui->cboAvailableHeightBoxes->blockSignals(true);
-        ui->cboHeightBox->blockSignals(true);
+        ui->cbo_AvailableHeightBoxes->blockSignals(true);
+        ui->cbo_HeightBox->blockSignals(true);
 
-        ui->cboHeightBox->clear();
-        ui->cboAvailableHeightBoxes->clear();
+        ui->cbo_HeightBox->clear();
+        ui->cbo_AvailableHeightBoxes->clear();
 
         //  Get the current list of height boxes for this wrap box
         QVector<QString> heightArray = TokenParser::splitStringTokens( wrapBoxParams.heightBoxes() );
 
         int x, index;
-        int totalHeightBoxes = ui->cboAllHeightBoxes->count();
+        int totalHeightBoxes = ui->cbo_AllHeightBoxes->count();
         QString allHeightStr, currHeightStr;
         for (x = 0, index = 0; x < totalHeightBoxes; x++)
         {
-            allHeightStr = ui->cboAllHeightBoxes->itemText(x);
+            allHeightStr = ui->cbo_AllHeightBoxes->itemText(x);
             if (index < boxCount)
             {
                 currHeightStr = heightArray.at(index);
@@ -1952,11 +1428,11 @@ void serviceNewWrapperEditBox::buildHeightCombo(DomWrapBoxParams &wrapBoxParams)
 
             if (allHeightStr != currHeightStr)
             {
-                ui->cboAvailableHeightBoxes->addItem(allHeightStr, allHeightStr);
+                ui->cbo_AvailableHeightBoxes->addItem(allHeightStr, allHeightStr);
             }
             else if (index < boxCount)
             {
-                ui->cboHeightBox->addItem(currHeightStr, currHeightStr);
+                ui->cbo_HeightBox->addItem(currHeightStr, currHeightStr);
                 ++index;
             }
         }
@@ -1964,22 +1440,26 @@ void serviceNewWrapperEditBox::buildHeightCombo(DomWrapBoxParams &wrapBoxParams)
         if (heightBoxSelected_.isEmpty())
             index = 0;
         else
-            index = ui->cboHeightBox->findText(heightBoxSelected_);
-        ui->cboHeightBox->setCurrentIndex(index);
+            index = ui->cbo_HeightBox->findText(heightBoxSelected_);
+        ui->cbo_HeightBox->setCurrentIndex(index);
 
-        ui->cboHeightBox->setEnabled(true);
+        ui->cbo_HeightBox->setEnabled(true);
 
-        ui->cboAvailableHeightBoxes->hide();
-        ui->cboAllHeightBoxes->hide();
+        ui->cbo_AvailableHeightBoxes->hide();
+        ui->cbo_AllHeightBoxes->hide();
 
-        ui->cboAvailableHeightBoxes->blockSignals(false);
-        ui->cboHeightBox->blockSignals(false);
+        ui->cbo_AvailableHeightBoxes->blockSignals(false);
+        ui->cbo_HeightBox->blockSignals(false);
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::setupHeightBox(const SessionMessage& msg)
 {
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::setupHeightBox()";
+#endif
+
     if ( heightBox_ )
         delete heightBox_;
 
@@ -1992,59 +1472,243 @@ void serviceNewWrapperEditBox::setupHeightBox(const SessionMessage& msg)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::selectHeight()
 {
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::selectHeight()";
+#endif
+
     if ( boxCount <= 0 )
         return;
 
-    const int index( ui->cboHeightBox->findData( heightBox_->maxHeight() ) );
+    const int index( ui->cbo_HeightBox->findData( heightBox_->maxHeight() ) );
 
     if ( index < 0 )
         return;
 
-    ui->cboHeightBox->blockSignals( true );
-    ui->cboHeightBox->setCurrentIndex( index );
-    ui->cboHeightBox->blockSignals( false );
+    ui->cbo_HeightBox->blockSignals( true );
+    ui->cbo_HeightBox->setCurrentIndex( index );
+    ui->cbo_HeightBox->blockSignals( false );
 
 
     //  Set the Min height value
-    ui->txtMinHeight->setText( 0 < index ? ui->cboHeightBox->itemData( index - 1 ).toString() : QString( "0" ) );
+    ui->le_MinHeight->setText( 0 < index ? ui->cbo_HeightBox->itemData( index - 1 ).toString() : QString( "0" ) );
 
     //  Set the Max height value
-    ui->txtMaxHeight->setText( ui->cboHeightBox->itemData( index ).toString() );
+    ui->le_MaxHeight->setText( ui->cbo_HeightBox->itemData( index ).toString() );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::buildParamTable()
+{
+    if ( WrapperTimingsData::pmAutoConfigure == wrTimingsData_->pageMode )
+        return;
+
+    //Set the default table size parameters for the column widths
+    setDefaultTableSize( ui->tblBasicTimingsList );
+
+    //Clear the previous wrap parameters
+    ui->tblBasicTimingsList->clear();
+
+    wrapParamOrdering_.clear();
+
+    //Create timings
+    if ( isUsingSimplifiedTimings() )
+    {
+        const QColor orange( 255, 230, 153);
+        const QColor blue( 217, 225, 242 );
+        const QColor red( 248, 203, 173 );
+        const QColor yellow( 255, 230, 153 );
+
+        addWrapParameter( WrapParameter::DISTANCE, ui->tblBasicTimingsList, HB_MIN_DISTANCE, HB_MAX_DISTANCE, orange );
+
+        //addWrapParameter( WrapParameter::GRIPPER_ADJUST, ui->tblBasicTimingsList, HB_MIN_GRIPPER_ADJ, HB_MAX_GRIPPER_ADJ, blue );        // 0 to 10
+        addWrapParameter( WrapParameter::GRIPPER_ADJUST, ui->tblBasicTimingsList, HB_NEG_MIN_GRIPPER_ADJ, HB_MAX_GRIPPER_ADJ, blue );      // NGW2: -5 to 10
+        addWrapParameter( WrapParameter::REAR_UF_TRIP_DELAY, ui->tblBasicTimingsList, HB_MIN_REAR_TRIP_DELAY, HB_MAX_REAR_TRIP_DELAY, blue );
+        addWrapParameter( WrapParameter::HEIGHT_RESTRICT, ui->tblBasicTimingsList, HB_MIN_HEIGHT_RESTRICT, HB_MAX_HEIGHT_RESTRICT, blue );
+        addWrapParameter( WrapParameter::BRAKE_TIMING, ui->tblBasicTimingsList, HB_MIN_BRAKE_TIME, HB_MAX_BRAKE_TIME, blue );
+
+        addWrapParameter( WrapParameter::PERCENT_STRETCH_CLAMP_ON, ui->tblBasicTimingsList, HB_MIN_PERCENT, HB_MAX_PERCENT, red );
+        //addWrapParameter( WrapParameter::CLAMP_HEIGHT, ui->tblBasicTimingsList, HB_MIN_CLAMP_OPEN, HB_MAX_CLAMP_OPEN, red );              // 0 to 10
+        addWrapParameter( WrapParameter::CLAMP_HEIGHT, ui->tblBasicTimingsList, HB_NEG_MIN_CLAMP_OPEN, HB_MAX_CLAMP_OPEN, red );            // NGW2: -5 to 10
+        addWrapParameter( WrapParameter::SIDE_UF_ADJUST, ui->tblBasicTimingsList, HB_MIN_SIDE_FOLD_ADJ, HB_MAX_SIDE_FOLD_ADJ, red );
+
+        if ( isDualRollWrapper() )
+            addWrapParameter( WrapParameter::FILM_ROLL_TO_USE, ui->tblBasicTimingsList, 0, 0, yellow );
+
+        if ( isNGWWrapper() )
+        {
+            // moved to 2P section ( WrapParameter::FORCE_OUTSIDE_ELEVATOR, ui->tblBasicTimingsList, HB_MIN_TRAILEDGE_LABEL_OFFSET, HB_MAX_TRAILEDGE_LABEL_OFFSET, yellow );
+            addWrapParameter( WrapParameter::FRONT_UF_ADJUST, ui->tblBasicTimingsList, HB_MIN_TRAILEDGE_LABEL_OFFSET, HB_MAX_TRAILEDGE_LABEL_OFFSET, yellow );
+
+            if(session_->scaleConfig->isWrapperTwoPrinter())//Only NGW2P has Vertical offset params SOF-5094
+            {
+                addWrapParameter( WrapParameter::FORCE_OUTSIDE_ELEVATOR, ui->tblBasicTimingsList, HB_MIN_TRAILEDGE_LABEL_OFFSET, HB_MAX_TRAILEDGE_LABEL_OFFSET, yellow );
+                //addWrapParameter( WrapParameter::PRIMARY_LABEL_VERT_OFFSET, ui->tblBasicTimingsList, HB_MIN_VERTICAL_LABEL_OFFSET, HB_MAX_VERTICAL_LABEL_OFFSET, yellow );
+                addWrapParameter( WrapParameter::SECONDARY_LABEL_VERT_OFFSET, ui->tblBasicTimingsList, HB_MIN_VERTICAL_LABEL_OFFSET, HB_MAX_VERTICAL_LABEL_OFFSET, yellow );
+            }
+        }
+
+        addWrapParameter( WrapParameter::WRAP_SPEED, ui->tblBasicTimingsList, HB_MIN_WRAP_SPEED, HB_MAX_WRAP_SPEED, yellow );
+        addWrapParameter( WrapParameter::DISCHARGE_SPEED, ui->tblBasicTimingsList, HB_MIN_DISCHARGE_SPEED, HB_MAX_DISCHARGE_SPEED, yellow );
+
+    }
+    else
+    {
+        //  These fields are all integers, so no need to check the type.
+        addWrapParameter( WrapParameter::PERCENT_STRETCH_CLAMP_ON, ui->tblBasicTimingsList, HB_MIN_PERCENT, HB_MAX_PERCENT_AWS1_AND_2 );
+        addWrapParameter( WrapParameter::KNIFE_HEIGHT, ui->tblBasicTimingsList, HB_MIN_KNIFE_UP, HB_MAX_KNIFE_UP );
+
+        // SOF-4434 Need to allow larger range for AWS1 and AWS2
+        DomEvolWrapperSystemInformation *evolWrapperSystemInformation( &session_->scaleConfig->evolWrapperSystemInformation );
+        if ( evolWrapperSystemInformation->awsModelNumber() < DomEvolWrapperSystemInformation::reducedTimingModels )
+            addWrapParameter( WrapParameter::CLAMP_HEIGHT, ui->tblBasicTimingsList, HB_MIN_CLAMP_OPEN, HB_MAX_CLAMP_OPEN_AWS1_AND_2 );      // 0 to 1230
+        else
+        {
+            //addWrapParameter( WrapParameter::CLAMP_HEIGHT, ui->tblBasicTimingsList, HB_MIN_CLAMP_OPEN, HB_MAX_CLAMP_OPEN );                 // 0 to 10
+            addWrapParameter( WrapParameter::CLAMP_HEIGHT, ui->tblBasicTimingsList, HB_NEG_MIN_CLAMP_OPEN, HB_MAX_CLAMP_OPEN );                 // -5 to 10
+        }
+        addWrapParameter( WrapParameter::DISTANCE, ui->tblBasicTimingsList, HB_MIN_DISTANCE_AWS1_AND_2, HB_MAX_DISTANCE_AWS1_AND_2 );
+        addWrapParameter( WrapParameter::GRIPPER_ADJUST, ui->tblBasicTimingsList, HB_MIN_GRIPPER_ADJ_AWS1_AND_2, HB_MAX_GRIPPER_ADJ_AWS1_AND_2 );
+        addWrapParameter( WrapParameter::INSIDE_GRIPPER_RELEASE, ui->tblBasicTimingsList, HB_MIN_INSIDE_GRIPPER_RELEASE, HB_MAX_INSIDE_GRIPPER_RELEASE );
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::setDefaultTableSize( QTableWidget* table )
+{
+    if ( !table )
+        return;
+
+    if ( isUsingSimplifiedTimings() )
+    {
+        // Leave 32px for the scroll bar
+        const int tableWidth( table->width() - 32 );
+
+        table->setColumnCount( 4 );
+        table->setColumnWidth( 0, (tableWidth * 45) / 100 );
+        table->setColumnWidth( 1, (tableWidth * 15) / 100 );
+        table->setColumnWidth( 2, (tableWidth * 25) / 100 );
+        table->setColumnWidth( 3, (tableWidth * 15) / 100 );
+    }
+    else
+    {
+        table->setColumnCount( 2 );
+        table->setColumnWidth( 0, (table->width() * 55) / 100 );
+        table->setColumnWidth( 1, (table->width() * 45) / 100 );
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::addWrapParameter( int wrapParam, QTableWidget* table, int min, int max, const QColor &c )
+{
+    const unsigned int row( wrapParamOrdering_.size() );
+
+    wrapParamOrdering_.push_back( wrapParam );              // list of enums
+
+    if ( WrapParameter::PERCENT_STRETCH_CLAMP_ON == wrapParam )
+        clampOnRow = row;
+
+    //Set the font size
+    QFont textFont( font() );
+    textFont.setPointSize( 20 );
+
+    QTableWidgetItem *paramNameItem( new QTableWidgetItem );
+    paramNameItem->setBackgroundColor( c );
+
+    paramNameItem->setText( wrTimingsData_->wrapParameterList[wrapParam]->getName() );
+
+    paramNameItem->setFont( textFont );
+
+    table->setItem( row, 0, paramNameItem );
+
+    //Set the value widget
+    QWidget *valueWidget( NULL );
+    bool isSpinBox( false );
+
+    if ( WrapParameter::FILM_ROLL_TO_USE == wrapParam )
+        valueWidget = createFilmRollToUseCombo( wrapParam, 0 );
+    else
+    {
+        valueWidget = createQSpinBox( wrapParam, min, max, 0 );
+        isSpinBox = true;
+    }
+
+    if ( valueWidget )
+    {
+        if ( isUsingSimplifiedTimings() )
+        {
+            table->setCellWidget( row, 2, valueWidget );
+
+            if ( isSpinBox )
+            {
+                QSpinBox *spinBox( qobject_cast<QSpinBox*>( valueWidget ) );
+                spinBox->installEventFilter( this );
+
+                QFont buttonFont( font() );
+                buttonFont.setPointSize( 14 );
+
+                QString decreaseName( wrTimingsData_->wrapParameterList[wrapParam]->getDecreaseName() + " [" + QString::number(min) + "]" );
+                QString increaseName( "[" + QString::number(max) + "] " + wrTimingsData_->wrapParameterList[wrapParam]->getIncreaseName() );
+
+                QPushButton *decrease( new QPushButton( decreaseName ) );
+                decrease->setFont( buttonFont );
+                decrease->setMinimumHeight( 16 );
+
+                QPushButton *increase( new QPushButton( increaseName ) );
+                increase->setFont( buttonFont );
+                increase->setMinimumHeight( 16 );
+
+                table->setCellWidget( row, 1, decrease );
+                table->setCellWidget( row, 3, increase );
+
+                connect( decrease, SIGNAL(clicked(bool)), SLOT(onStepDown()) );
+                connect( increase, SIGNAL(clicked(bool)), SLOT(onStepUp()) );
+
+                incDecMap_[decrease] = spinBox;
+                incDecMap_[increase] = spinBox;
+            }
+        }
+        else
+        {
+            table->setCellWidget( row, 1, valueWidget );
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::setupHeightBoxParams()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "setupHeightBoxParams" );
+    LOG_CLASS_INFO( "snwEditBox", "setupHeightBoxParams" );
 
-    LOG_DEBUG( "setupHeightBoxParams() START box.attributes string from 9,147 msg: %s", qPrintable(heightBox_->wrapAttributes()) );
+    //LOG_INFO( "snw_EditBox() initial box.attributes string from 9,147 msg: %s", qPrintable(heightBox_->wrapAttributes()) );
 
     QString test_attribs = heightBox_->wrapAttributes();
 
-    LOG_DEBUG( "setupHeightBoxParams() create paramArray Vector with enum of params: %d", wrTimingsData_->wrapParameterList.count());
     QVector<QString> paramArray( TokenParser::splitStringTokens( heightBox_->wrapAttributes() ) );
-    LOG_DEBUG( "setupHeightBoxParams() Num of Params split on paramArray Vector: %d", paramArray.count() );
+    //LOG_INFO( "snwEditBox() Num of Params split on paramArray Vector: %d", paramArray.count() );
 
     //Update our wrapParameterList with the height box params
     int numOfParams = wrTimingsData_->wrapParameterList.count();
-    LOG_DEBUG( "setupHeightBoxParams() Num of Params of wrapParameterList: %d", wrTimingsData_->wrapParameterList.count() );
+    //LOG_INFO( "snwEditBox() Num of Params of wrapParameterList: %d", wrTimingsData_->wrapParameterList.count() );
 
     for ( unsigned int i( numOfParams ); i--; )
     {
         WrapParameter *tmpParam;
 
-        if ( (tmpParam = wrTimingsData_->wrapParameterList[i]) )                            // can /*trim this list down to only required elements
+        //int tester1 = wrTimingsData_->wrapParameterList[i]->getData();
+        //LOG_INFO( "snwEditBox() tester1[i]: %d", tester1 );
+
+        if ( (tmpParam = wrTimingsData_->wrapParameterList[i]) )
         {
             int value( paramArray[i].toInt() );
-            LOG_DEBUG( "setupHeightBoxParams() for loop value[%d]: %d", i, value);
+            //LOG_INFO( "snwEditBox() for loop value[%d]: %d", i, value);
 
-            if ( ( ( WrapParameter::FRONT_UF_ADJUST == i ) && ( 100 <= value ) ) ||
-                 ( ( WrapParameter::FORCE_OUTSIDE_ELEVATOR == i ) && ( 100 <= value ) ) )
+            if ( ( ( WrapParameter::FRONT_UF_ADJUST == i ) && ( isNGWWrapper() ) && ( 100 <= value ) ) ||
+                 ( ( WrapParameter::FORCE_OUTSIDE_ELEVATOR == i ) && ( isNGWWrapper() ) && ( 100 <= value ) ) )
             {
                 paramArray[i] = QString::number( value -= 100 );
             }
 
-            if ( ( WrapParameter::CLAMP_HEIGHT == i ) || ( WrapParameter::GRIPPER_ADJUST == i ) )
+            if ( isNGWWrapper() && ( ( WrapParameter::CLAMP_HEIGHT == i ) || ( WrapParameter::GRIPPER_ADJUST == i ) ) )
             {
                 if( ( value > 100 ) && ( value <= 105 ) )
                 {
@@ -2057,108 +1721,57 @@ void serviceNewWrapperEditBox::setupHeightBoxParams()
         }
     }
 
-    LOG_DEBUG( "setupHeightBoxParams() wrapParamOrdering_.count(): %d", wrapParamOrdering_.count() );
+    //int tester2 = wrapParamOrdering_.count();
+    //LOG_INFO( "snwEditBox() wrapParamOrdering_.count(): %d", wrapParamOrdering_.count() );
+
     //Now update the wrap parameters for the height box
+    for ( unsigned int i( wrapParamOrdering_.count() ); i--; )
+        updateWrapParam( ui->tblBasicTimingsList, wrapParamOrdering_[i], paramArray, i );
 
-    // Tab 2
-    updateWrapParamNew(WrapParameter::DISTANCE, HB_MIN_10, HB_MAX_40,                   paramArray, ui->param3,  ui->lblOrigParam3);
-    updateWrapParamNew(WrapParameter::PERCENT_STRETCH_CLAMP_ON, HB_MIN_00, HB_MAX_60,   paramArray, ui->param0,  ui->lblOrigParam0);
-    updateWrapParamNew(WrapParameter::CLAMP_HEIGHT, HB_MIN_NEG_05, HB_MAX_10,           paramArray, ui->param2,  ui->lblOrigParam2);
-    updateWrapParamNew(WrapParameter::SIDE_UF_ADJUST, HB_MIN_00, HB_MAX_10,             paramArray, ui->param9,  ui->lblOrigParam9);
-
-    // tab3
-    updateWrapParamNew(WrapParameter::GRIPPER_ADJUST, HB_MIN_NEG_05, HB_MAX_10,         paramArray, ui->param5,  ui->lblOrigParam5);
-    updateWrapParamNew(WrapParameter::REAR_UF_TRIP_DELAY, HB_MIN_00, HB_MAX_05,         paramArray, ui->param15, ui->lblOrigParam15);
-    updateWrapParamNew(WrapParameter::HEIGHT_RESTRICT, HB_MIN_00, HB_MAX_10,            paramArray, ui->param10, ui->lblOrigParam10);
-    updateWrapParamNew(WrapParameter::BRAKE_TIMING, HB_MIN_00, HB_MAX_10,               paramArray, ui->param16, ui->lblOrigParam16);
-    // ui->param14 COMBO at the bottom);
-
-    // tab4
-    updateWrapParamNew(WrapParameter::WRAP_SPEED, HB_MIN_12, HB_MAX_30,                  paramArray, ui->param7,  ui->lblOrigParam7);
-    updateWrapParamNew(WrapParameter::DISCHARGE_SPEED, HB_MIN_01, HB_MAX_30,             paramArray, ui->param8,  ui->lblOrigParam8);
-    updateWrapParamNew(WrapParameter::FRONT_UF_ADJUST, HB_MIN_00, HB_MAX_10,             paramArray, ui->param6,  ui->lblOrigParam6);
-    updateWrapParamNew(WrapParameter::FORCE_OUTSIDE_ELEVATOR, HB_MIN_00, HB_MAX_10,      paramArray, ui->param4,  ui->lblOrigParam4);
-    if( session_->scaleConfig->isWrapperTwoPrinter() )
-    	updateWrapParamNew(WrapParameter::SECONDARY_LABEL_VERT_OFFSET, HB_MIN_00, HB_MAX_10, paramArray, ui->param20, ui->lblOrigParam20);
-
-    int index( ui->param14->findData( paramArray.at( WrapParameter::FILM_ROLL_TO_USE ) ) );
-    LOG_DEBUG( "setupHeightBoxParams comboBox Original Parameter index=%d", index );
-
-    if( ( index < 0 ) || ( index != 100 ) || index != 200 )
-    {
-        index = 0;
-        wrTimingsData_->wrapParameterList[WrapParameter::FILM_ROLL_TO_USE]->setData( 100 );     // index0 = 100, index1 = 200, no idea why.
-        LOG_DEBUG( "setupHeightBoxParams comboBox index out of range reset to ZERO", NULL );
-    }
-
-    if( index == 100 )
-
-    LOG_DEBUG( "setupHeightBoxParams comboBox: at index=%d", index );
-
-    ui->param14->blockSignals( true );
-    if( index == 100 )
-        ui->param14->setCurrentIndex( 0 );
-    else if( index == 200 )
-        ui->param14->setCurrentIndex( 1 );
-
-    ui->param14->blockSignals( false );
-
-    ui->lblOrigParam14->setText( QString::number(index) );
-    LOG_DEBUG( "setupHeightBoxParams() if comboBox index: %d", index );
-
-    LOG_DEBUG( "setupHeightBoxParams() END", NULL);
+    //LOG_INFO( "snwEditBox", "setupHeightBoxParams END");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 bool serviceNewWrapperEditBox::isUsingSimplifiedTimings()
 {
-    // SHOULD ALWAYS BE TRUE
-    LOG_CLASS_INFO( "serviceEditBox", "isUsingSimplifiedTimings" );
-
-    LOG_DEBUG( "isUsingSimplifiedTimings() is TRUE if model >= 10, model: %d ", wrTimingsData_->wrapperModelNum );
-
-    return ( wrTimingsData_->wrapperModelNum >= DomEvolWrapperSystemInformation::reducedTimingModels );
+    return ( DomEvolWrapperSystemInformation::reducedTimingModels <= wrTimingsData_->wrapperModelNum );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateWrapParam( QTableWidget* table, int wrapParam, QVector<QString> &paramArray, unsigned int row )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateWrapParam" );
+    //LOG_CLASS_INFO( "snwEditBox", "updateWrapParam START" );
 
     if ( !table )
         return;
 
-    int column( 2 );
+    int column( 1 );
+
+    if ( isUsingSimplifiedTimings() )
+        column = 2;
 
     QSpinBox *spinBox;
     QComboBox *comboBox;
 
     if ( (spinBox = qobject_cast<QSpinBox*>( table->cellWidget( row, column ) )) )
     {
-        LOG_DEBUG( "updateWrapParam() if spinBox: row[%d] x column[%d]", row, column );
-
         int value = 0;
         QString strVal = "";
 
         strVal = paramArray.at( wrapParam );
         value = paramArray.at( wrapParam ).toInt();
 
-        LOG_DEBUG( "updateWrapParam() if spinBox: strVal=%s amd value=%d", qPrintable(strVal), value );
-
         // enforce min/max values
         if ( value < spinBox->minimum() )
             value = spinBox->minimum();
         else if ( spinBox->maximum() < value )
             value = spinBox->maximum();
-        LOG_DEBUG( "updateWrapParam() if spinBox value: %d", value );
 
         spinBox->setValue( value );
     }
 
     else if ( (comboBox = qobject_cast<QComboBox*>( table->cellWidget( row, column ) )) )
     {
-        LOG_DEBUG( "updateWrapParam() if comboBox: row[%d] x column[%d]", row, column );
-
         const int index( comboBox->findData( paramArray.at( wrapParam ) ) );
         if ( 0 <= index )
         {
@@ -2166,78 +1779,105 @@ void serviceNewWrapperEditBox::updateWrapParam( QTableWidget* table, int wrapPar
             comboBox->setCurrentIndex( index );
             comboBox->blockSignals( false );
         }
-        LOG_DEBUG( "updateWrapParam() if comboBox index: %d", index );
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::updateWrapParamNew(int wrapParam, int paramMin, int paramMax, QVector<QString> &paramArray, hobart::numericLineEdit* paramWidget, QLabel *labelWidget)
+void serviceNewWrapperEditBox::validateEntry( int offset, QSpinBox *intField )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateWrapParamNew" );
+    //LOG_CLASS_INFO( "snwEditBox", "validateEntry START" );
 
-    int value = 0;
-    QString strVal = "";
+    const int valWas( wrTimingsData_->wrapParameterList[offset]->getData() );
+    const int valIs( intField->value() );
 
+    //LOG_INFO( "validateEntry() valWas =  %d,    valIs = %d", valWas, valIs);
 
-    strVal = paramArray.at( wrapParam );
-    value = paramArray.at( wrapParam ).toInt();
-
-    LOG_DEBUG( "updateWrapParamNew(): at wrapParam=%d for value=%d", wrapParam, value );
-    LOG_DEBUG( "updateWrapParamNew() min: %d x max: %d", paramMin, paramMax );
-
-    if ( ( ( WrapParameter::FRONT_UF_ADJUST == wrapParam ) && ( 100 <= value ) ) ||
-         ( ( WrapParameter::FORCE_OUTSIDE_ELEVATOR == wrapParam ) && ( 100 <= value ) ) )
-    {
-        value -= 100;
-        paramArray[wrapParam] = QString::number( value );
-        LOG_DEBUG( "updateWrapParamNew() if value UPDATED1 value = %d", qPrintable(strVal), value );
-    }
-
-    if ( ( WrapParameter::CLAMP_HEIGHT == wrapParam ) || ( WrapParameter::GRIPPER_ADJUST == wrapParam ) )
-    {
-        if( ( value > 100 ) && ( value <= 105 ) )
-        {
-            value = ( ( value - 100 ) * -1 );
-            paramArray[wrapParam] = QString::number( value );
-            LOG_DEBUG( "updateWrapParamNew() if value UPDATED2 value = %d", qPrintable(strVal), value );
-        }
-    }
-
-    // enforce min/max values
-    if ( value < paramMin )
-        value = paramMin;
-    else if ( value > paramMax )
-        value = paramMax;
-
-    LOG_DEBUG( "updateWrapParamNew() value: %d", value );
-
-    paramWidget->setText( QString::number( value ) );
-    labelWidget->setText( QString::number(value) );
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::validateEntry(int offset, int value )
-{
-    LOG_CLASS_INFO( "serviceEditBox", "validateEntry" );
-
-    const int oldValue( wrTimingsData_->wrapParameterList[offset]->getData() );
-
-    LOG_DEBUG( "validateEntry() oldValue =  %d,    value = %d", oldValue, value);
-
-    if ( oldValue == value )
+    if ( valWas == valIs )
         return;
 
-    LOG_DEBUG( "validateEntry() update wrapParameterList[offset][%d]: %d", offset, value);
+    //LOG_INFO( "validateEntry() update wrapParameterList[offset][%d]: %d", offset, valIs);
 
-    wrTimingsData_->wrapParameterList[offset]->setData( value );
+    wrTimingsData_->wrapParameterList[offset]->setData( valIs );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QSpinBox *serviceNewWrapperEditBox::createQSpinBox( int offset, int minVal, int maxVal, QString currVal )
+{
+    LOG_CLASS_INFO( "snwEditBox", "createQSpinBox" );
+
+    LOG_TRACE( "offset = %d, minVal = %d, maxVal = %d, currVal = %s", offset, minVal, maxVal, qPrintable(currVal) );
+
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::createQSpinBox(" << QString::number(offset) << ", " << QString::number(minVal) << ", " << QString::number(maxVal) << ", " << currVal << ")";
+
+#endif
+    QSpinBox *integerField( new QSpinBox( this ) );
+
+    if ( !integerField )
+        return NULL;
+
+    integerField->setObjectName( "param" + offset );
+    integerField->setStyleSheet( "background-color: white; font: 20pt \"MS Shell Dlg 2\";" );
+
+    integerField->setRange( minVal, maxVal );		//	HA-129: Set up the integerField regardless of Current or Default settings.
+    integerField->setValue( currVal.toInt() );
+    integerField->setButtonSymbols( QAbstractSpinBox::NoButtons );
+
+    if ( !viewCurrentTimings_ )
+        integerField->setEnabled( false );
+    else
+    {
+        connect( integerField, SIGNAL( editingFinished() ), SLOT( onWidgetUpdated() ) );
+    }
+
+    offsetMap_[integerField] = offset;
+
+    if ( WrapParameter::PERCENT_STRETCH_CLAMP_ON == offset )
+        le_PercentStretchClampOn_ = integerField;
+
+    LOG_TRACE( "Done", NULL );
+    return integerField;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+QComboBox *serviceNewWrapperEditBox::createFilmRollToUseCombo(int offset, QString currVal )
+{
+    QFont cboFont( font() );
+    cboFont.setPointSize( 20 );		//	HA-87
+
+    QComboBox *cbo_FilmRoll( new QComboBox( this ) );
+
+    if ( !cbo_FilmRoll )
+        return NULL;
+
+    cbo_FilmRoll->setFont( cboFont );
+
+    cbo_FilmRoll->setObjectName( "param" + offset );
+    cbo_FilmRoll->addItem( tr("Narrow roll"), QString( "100" ) );
+    cbo_FilmRoll->addItem( tr("Wide roll"), QString( "200" ) );
+
+    const int index( cbo_FilmRoll->findData( currVal ) );
+    if ( 0 <= index )
+        cbo_FilmRoll->setCurrentIndex( index );
+
+    if ( !viewCurrentTimings_ )
+        cbo_FilmRoll->setEnabled( false );
+    else
+    {
+        connect( cbo_FilmRoll, SIGNAL( currentIndexChanged(int) ), SLOT( onWidgetUpdated() ) );
+    }
+
+    offsetMap_[cbo_FilmRoll] = offset;
+
+    return cbo_FilmRoll;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 int serviceNewWrapperEditBox::validateField( int oldValue, int newValue, int MinValue, int MaxValue )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "validateField" );
+    LOG_CLASS_INFO( "snwEditBox", "validateField" );
 
-    LOG_DEBUG( "oldValue = %d, newValue = %d, MinValue = %d, MaxValue = %d", oldValue, newValue, MinValue, MaxValue );
+    LOG_TRACE( "oldValue = %d, newValue = %d, MinValue = %d, MaxValue = %d", oldValue, newValue, MinValue, MaxValue );
 
     if ( oldValue != newValue )
     {
@@ -2252,113 +1892,130 @@ int serviceNewWrapperEditBox::validateField( int oldValue, int newValue, int Min
 #endif
     }
 
-    LOG_DEBUG( "Returning %d", newValue );
+    LOG_TRACE( "Returning %d", newValue );
 
     return newValue;
 }
 
+
 void serviceNewWrapperEditBox::updateWrapperPkgDescription(const SessionMessage& msg)
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateWrapperPkgDescription" );
+    LOG_CLASS_INFO( "snwEditBox", "updateWrapperPkgDescription" );
 
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateWrapperPkgDescription()";
+#endif
     DomEvolWrapperPkgDesc pkgDescription( msg );
 
-    LOG_DEBUG( "updateWrapperPkgDescription() trayName = %s", qPrintable( pkgDescription.trayName() ) );
+    LOG_TRACE( "trayName = %s", qPrintable( pkgDescription.trayName() ) );
 
-    ui->txtActualHeight->setText( pkgDescription.height() );
-    ui->txtActualLength->setText( pkgDescription.length() );
-    ui->txtActualLip->setText( pkgDescription.lip() );
-    ui->txtActualWidth->setText( pkgDescription.width() );
-
-    ui->lblActualLengthTab2->setText( pkgDescription.length() );
-    ui->lblActualLengthTab3->setText( pkgDescription.length() );
-    ui->lblActualLengthTab4->setText( pkgDescription.length() );
-    ui->lblActualLengthTab5->setText( pkgDescription.length() );
-    ui->lblActualWidthTab2->setText( pkgDescription.length() );
-    ui->lblActualWidthTab3->setText( pkgDescription.length() );
-    ui->lblActualWidthTab4->setText( pkgDescription.length() );
-    ui->lblActualWidthTab5->setText( pkgDescription.length() );
-    ui->lblActualHeightTab2->setText( pkgDescription.length() );
-    ui->lblActualHeightTab3->setText( pkgDescription.length() );
-    ui->lblActualHeightTab4->setText( pkgDescription.length() );
-    ui->lblActualHeightTab5->setText( pkgDescription.length() );
-    ui->lblActualLipTab2->setText( pkgDescription.length() );
-    ui->lblActualLipTab3->setText( pkgDescription.length() );
-    ui->lblActualLipTab4->setText( pkgDescription.length() );
-    ui->lblActualLipTab5->setText( pkgDescription.length() );
+    ui->le_ActualHeight->setText( pkgDescription.height() );
+    ui->le_ActualLength->setText( pkgDescription.length() );
+    ui->le_ActualLip->setText( pkgDescription.lip() );
+    ui->le_ActualWidth->setText( pkgDescription.width() );
 
     if (wrTimingsData_->pageMode != WrapperTimingsData::pmAutoConfigure)
     {
+//        if (oLengthActual.value != "0" || oWidthActual.value != "0" || oHeightActual.value != "0" || oLipActual.value != "0")
+//        {
+//            enableButton(osetMinButton);
+//            enableButton(osetMinMaxButton);
+//            enableButton(osetMaxButton);
+//        }
+
         ui->butSetMin->setEnabled(true);
         ui->butSetMinAndMax->setEnabled(true);
         ui->butSetMax->setEnabled(true);
     }
 
-    LOG_DEBUG( "updateWrapperPkgDescription() pkgDescription.usedWrapBoxBestFit() = %s", qPrintable(pkgDescription.usedWrapBoxBestFit()) );
+    LOG_TRACE( "pkgDescription.usedWrapBoxBestFit() = %s", qPrintable(pkgDescription.usedWrapBoxBestFit()) );
 
     static const QString fieldStyleHighlight("background-color: yellow;");
     static const QString fieldStyleNormal("background-color: white;");
 
     if ( pkgDescription.usedWrapBoxBestFit() == "1")
     {
-        ui->txtActualHeight->setStyleSheet( fieldStyleHighlight );
-        ui->txtActualLength->setStyleSheet( fieldStyleHighlight );
-        ui->txtActualLip->setStyleSheet( fieldStyleHighlight );
-        ui->txtActualWidth->setStyleSheet( fieldStyleHighlight );
+        ui->le_ActualHeight->setStyleSheet( fieldStyleHighlight );
+        ui->le_ActualLength->setStyleSheet( fieldStyleHighlight );
+        ui->le_ActualLip->setStyleSheet( fieldStyleHighlight );
+        ui->le_ActualWidth->setStyleSheet( fieldStyleHighlight );
     }
     else
     {
-        ui->txtActualHeight->setStyleSheet( fieldStyleNormal );
-        ui->txtActualLength->setStyleSheet( fieldStyleNormal );
-        ui->txtActualLip->setStyleSheet( fieldStyleNormal );
-        ui->txtActualWidth->setStyleSheet( fieldStyleNormal );
+        ui->le_ActualHeight->setStyleSheet( fieldStyleNormal );
+        ui->le_ActualLength->setStyleSheet( fieldStyleNormal );
+        ui->le_ActualLip->setStyleSheet( fieldStyleNormal );
+        ui->le_ActualWidth->setStyleSheet( fieldStyleNormal );
     }
 
     static const QString spinBoxStyleHighlight("background-color: yellow; font: 20pt \"MS Shell Dlg 2\";");
     static const QString spinBoxStyleNormal("background-color: white; font: 20pt \"MS Shell Dlg 2\";");
 
     const int wrModel( wrTimingsData_->wrapperModelNum );
-    LOG_DEBUG( "updateWrapperPkgDescription() wrModel = %d", wrModel );
+    LOG_TRACE( "wrModel = %d", wrModel );
 
     if ( WrapperTimingsData::pmAutoConfigure != wrTimingsData_->pageMode )
     {
-        ui->lblTrayFound->setText( (wrTimingsData_->cycledTrayName = pkgDescription.trayName()) );
+        //	HTA-8:  We only check & set the table if we are NOT in Auto Config.
+        // SOF-240: disable yellow highlight
+        //if (( DomEvolWrapperSystemInformation::None < wrModel ) && ( wrModel < DomEvolWrapperSystemInformation::endWrapperModels ))
+        //{
+        //    if (( ui->tblBasicTimingsList->rowCount() ) && ( clampOnRow < ui->tblBasicTimingsList->columnCount() ))
+        //    {
+        //        QTableWidgetItem *item;
+
+        //        if ( (item = ui->tblBasicTimingsList->item( clampOnRow, 0 )) )
+        //            item->setBackgroundColor( QColor( pkgDescription.modifiedNetStretch() ? "yellow" : "white" ) );
+        //    }
+
+        //    if ( le_PercentStretchClampOn_ )
+        //        le_PercentStretchClampOn_->setStyleSheet( pkgDescription.modifiedNetStretch() ? spinBoxStyleHighlight : spinBoxStyleNormal ); // HA-132
+        //}
+
+        ui->label_trayFound->setText( (wrTimingsData_->cycledTrayName = pkgDescription.trayName()) );
         wrTimingsData_->updateActualPkg = true;
     }
 
     if ((wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure) || (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect))
     {
+        LOG_TRACE( "firstPass == true", NULL );
         if (firstPass == true)
         {
-            LOG_DEBUG( "updateWrapperPkgDescription() firstPass == true", NULL );
             if (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoDetect)
             {
-                ui->butCycleWrapperTab1->setEnabled(true);
-                ui->butCycleWrapperTab2->setEnabled(true);
-                ui->butCycleWrapperTab3->setEnabled(true);
-                ui->butCycleWrapperTab4->setEnabled(true);
-                ui->butCycleWrapperTab5->setEnabled(true);
-                ui->txtTrayName->setEnabled(true);
+                ui->tblBasicTimingsList->show();
+                activeRow = pkgDescription.wrapBoxIndex().toInt();
+                ui->butCycleWrapper->setEnabled(true);      //  TODO: What about a remote connection?
+                ui->le_TrayName->setEnabled(true);
+                ui->le_PLUNumber->setEnabled(true);
             }
             else if (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure)
             {
-                ui->txtMinLength->setEnabled(true);
-                ui->txtMaxLength->setEnabled(true);
-                ui->txtMinWidth->setEnabled(true);
-                ui->txtMaxWidth->setEnabled(true);
-                ui->txtMaxLip->setEnabled(true);
+                //  Enable these fields now.
+                ui->le_MinLength->setEnabled(true);
+                ui->le_MaxLength->setEnabled(true);
+                ui->le_MinWidth->setEnabled(true);
+                ui->le_MaxWidth->setEnabled(true);
+                ui->le_MaxLip->setEnabled(true);
             }
             firstPass = false;
         }
+//        if (wrTimingsData_->pageMode == WrapperTimingsData::pmAutoConfigure)
+//        {
+//            wrapperWasCycled = true;
+//        }
     }
 
-    LOG_DEBUG( "updateWrapperPkgDescription DONE", NULL );
+    LOG_TRACE( "done", NULL );
 }
 
 void serviceNewWrapperEditBox::processReturnedWrapperErrors(const SessionMessage& msg)
 {
     returnedErrorsWrapperDev m( msg );
 
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::processReturnedWrapperErrors():  errCode = " << m.errorCode();
+#endif
     if (9709 == m.errorCode())
     {
         bool okPressed( 0 < m.errorData2() );
@@ -2369,90 +2026,190 @@ void serviceNewWrapperEditBox::processReturnedWrapperErrors(const SessionMessage
 
 void serviceNewWrapperEditBox::continueDeleteSelectedHeight()
 {
-    int theIndex = ui->cboHeightBox->currentIndex();
-    QString currHeightStr = ui->cboHeightBox->itemText(theIndex);
-    int currHeightVal = (int) (ui->cboHeightBox->itemData(theIndex).toFloat() * 10);
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::continueDeleteSelectedHeight()";
+#endif
+    int theIndex = ui->cbo_HeightBox->currentIndex();
+    QString currHeightStr = ui->cbo_HeightBox->itemText(theIndex);
+    int currHeightVal = (int) (ui->cbo_HeightBox->itemData(theIndex).toFloat() * 10);
 
-    ui->cboAvailableHeightBoxes->blockSignals(true);
-    ui->cboHeightBox->blockSignals(true);
+    ui->cbo_AvailableHeightBoxes->blockSignals(true);
+    ui->cbo_HeightBox->blockSignals(true);
 
     //  Remove the Height from the current list.
-    ui->cboHeightBox->removeItem(theIndex);
+    ui->cbo_HeightBox->removeItem(theIndex);
 
     //  Add the Height back to the available list.
     int j = 0;
     int availHeightVal;
     do
     {
-        availHeightVal = (int) (ui->cboAvailableHeightBoxes->itemData(j).toFloat() * 10);
+        availHeightVal = (int) (ui->cbo_AvailableHeightBoxes->itemData(j).toFloat() * 10);
         if (availHeightVal < currHeightVal)
             ++j;
         else
             break;
-    } while (j < ui->cboAvailableHeightBoxes->count());
+    } while (j < ui->cbo_AvailableHeightBoxes->count());
 
 
     //  Add the Height to the available list.
-    ui->cboAvailableHeightBoxes->insertItem(j, currHeightStr, currHeightStr);
+    ui->cbo_AvailableHeightBoxes->insertItem(j, currHeightStr, currHeightStr);
 
     //  Tell the session to remove this height box.
     QString msg2 = QString::number( activeRow ) + "," + currHeightStr;
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::continueDeleteSelectedHeight():  session_->send(Wrapper, WrEvolDeleteHeightBox, " << msg2 << ")";
+#endif
     session_->send(Wrapper, WrEvolDeleteHeightBox, msg2);
 
-    ui->cboAvailableHeightBoxes->blockSignals(false);
-    ui->cboHeightBox->blockSignals(false);
+    ui->cbo_AvailableHeightBoxes->blockSignals(false);
+    ui->cbo_HeightBox->blockSignals(false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::autoDetectTray()
 {
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::autoDetectTray():  session_->send(Wrapper, WrEvolAutoDetectTrayType)";
+#endif
+
     session_->send( Wrapper, WrEvolAutoDetectTrayType );          //  9,232
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::wrapperCycleComplete( const SessionMessage& msg )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "wrapperCycleComplete" );
+    LOG_CLASS_INFO( "snwEditBox", "wrapperCycleComplete" );
+
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::wrapperCycleComplete()";
+#endif
 
     DomEvolWrapperTestComplete m( msg );
 
-    LOG_DEBUG( "wrapperCycleComplete() Test number = %s", qPrintable(m.testNum()) );
+    LOG_TRACE( "Test number = %s. Normal style = [%s]", qPrintable(m.testNum()), qPrintable(cycleButtonStyle) );
 
     if ( 24 == m.testNum().toInt() )
+    {
+        ui->butCycleWrapper->setStyleSheet( cycleButtonStyle );
         cycleWrapperInProgress_ = false;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::showTablesAndButtons()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "showTablesAndButtons" );
+    // Show the table and buttons below it.
+    ui->tblBasicTimingsList->show();
+    ui->butCycleWrapper->show();
 
-    ui->butCycleWrapperTab1->show();
-    ui->butCycleWrapperTab1->show();
-    ui->butCycleWrapperTab2->show();
-    ui->butCycleWrapperTab3->show();
-    ui->butCycleWrapperTab4->show();
-    ui->butCycleWrapperTab5->show();
-
-    LOG_DEBUG( "showTablesAndButtons() isUsingSimplifiedTimings() must be TRUE", NULL );
-    // SOF-2550 - added in 2P
-    if( session_->scaleConfig->isWrapperTwoPrinter() == false  )
+    if ( !isUsingSimplifiedTimings() )
     {
-        LOG_DEBUG( "showTablesAndButtons() isWrapperTwoPrinter is FALSE", NULL );
-        // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
-        ui->butCycleWrapperLeadingTab1->show();
-        ui->butCycleWrapperTrailingTab1->show();
-        ui->butCycleWrapperLeadingTab2->show();
-        ui->butCycleWrapperTrailingTab2->show();
-        ui->butCycleWrapperLeadingTab3->show();
-        ui->butCycleWrapperTrailingTab3->show();
-        ui->butCycleWrapperLeadingTab4->show();
-        ui->butCycleWrapperTrailingTab4->show();
-        ui->butCycleWrapperLeadingTab5->show();
-        ui->butCycleWrapperTrailingTab5->show();
+        if( session_->scaleConfig->isWrapperTwoPrinter() )
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->hide();
+            ui->butCycleWrapperTrailing->hide();
+        }
+        else
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->show();
+            ui->butCycleWrapperTrailing->show();
+        }
+    }
+    else
+    {
+        // SOF-2550 - added in 2P
+        if( false == session_->scaleConfig->isWrapperTwoPrinter() )
+        {
+            // on two applier systems we only want the Cycle Wrapper Button per agreement b/t JHC, Kraig, and Carlos 8-15-23
+            ui->butCycleWrapperLeading->show();
+            ui->butCycleWrapperTrailing->show();
+        }
     }
 
-    ui->butSave->show();
+    ui->butSaveChanges->show();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::promptPLUException()
+{
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::promptPLUException()";
+#endif
+
+    const QString trayName( wrTimingsData_->trayName );
+
+    NumericInputBoxDialog dialog( mainWindow_ );
+    dialog.setText( tr("Please enter PLU Exception number for tray") + " [" + trayName + "] ");
+    dialog.setRequired( true );
+
+    if ( QDialog::Accepted != dialog.exec() )
+    {
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::promptPLUException():  User cancelled the PLU exception.";
+#endif
+
+        saveAnyChanges_ = false;
+    }
+
+    const QString result( dialog.inputText() );
+
+    if (( result.isEmpty() ) || ( 0 == result.toInt() ))
+    {
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::promptPLUException():  No PLU exception entered.";
+#endif
+
+        saveAnyChanges_ = false;
+    }
+
+    //  Enable this after an attempt to get a PLU exception.
+    connect( ui->le_PLUNumber, SIGNAL(editingFinished()), SLOT(pluExceptionChanged()) );
+
+    if ( saveAnyChanges_ )
+    {
+        showTablesAndButtons();
+
+        // SOF-2734
+        QString trayNameQuotedForCSV( trayName );
+        trayNameQuotedForCSV.replace( "\"", "\"\"" );
+        trayNameQuotedForCSV.prepend( "\"" );
+        trayNameQuotedForCSV.append( "\"" );
+
+        const QString msg2( QString::number( activeRow ) + "," + trayNameQuotedForCSV + "," + result );
+
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::promptPLUException():  session_->send(Wrapper, WrEvolCreateTrayType, " << msg2 << ")";
+#endif
+
+        session_->send( Wrapper, WrEvolCreateTrayType, msg2 );              // 9,234,activeRow,trayName,pluException
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void serviceNewWrapperEditBox::pluExceptionChanged()
+{
+    const QString pluExceptionStr( ui->le_PLUNumber->text() );
+    saveAnyChanges_ = true;
+
+    showTablesAndButtons();
+
+    // SOF-2734
+    QString trayNameQuotedForCSV( wrTimingsData_->trayName );
+    trayNameQuotedForCSV.replace( "\"", "\"\"" );
+    trayNameQuotedForCSV.prepend( "\"" );
+    trayNameQuotedForCSV.append( "\"" );
+
+    const QString msg2( QString::number( activeRow ) + "," + trayNameQuotedForCSV + "," + pluExceptionStr );
+
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::pluExceptionChanged():  session_->send(Wrapper, WrEvolCreateTrayType, " << msg2 << ")";
+
+#endif
+
+    session_->send( Wrapper, WrEvolCreateTrayType, msg2 );     // 9,234,activeRow,trayName,pluException
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2473,20 +2230,15 @@ int serviceNewWrapperEditBox::getIntFromString( QString &decimalStr )
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateMinLength()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateMinLength" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     const int valWas( wrapBoxData_.getMinLength() );
 
-    LOG_DEBUG( "updateMinLength() to %s ", qPrintable(ui->txtMinLength->text() ) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMinLength() to " << ui->le_MinLength->text();
+#endif
 
-    int valIs( ui->txtMinLength->toInt() );
+    int valIs( ui->le_MinLength->toInt() );
 
     if ( valIs == valWas )
         return;
@@ -2496,29 +2248,26 @@ void serviceNewWrapperEditBox::updateMinLength()
 
     valIs = validateField( valWas, valIs, WB_MIN_LENGTH, maxVal );
 
-    LOG_DEBUG( "updateMinLength(): ui->txtMinLength: %d", valIs );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMinLength():  ui->le_MinLength->fromInt(" << QString::number(valIs) << ")";
+#endif
 
-    ui->txtMinLength->fromInt( valIs );
+    ui->le_MinLength->fromInt( valIs );
     wrapBoxData_.setMinLength( valIs );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateMaxLength()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateMaxLength" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     const int valWas( wrapBoxData_.getMaxLength() );
 
-    LOG_DEBUG( "serviceEditBox::updateMaxLength() to %s", qPrintable(ui->txtMaxLength->text()) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMaxLength() to " << ui->le_MaxLength->text();
+#endif
 
-    int valIs( ui->txtMaxLength->toInt() );
+    int valIs( ui->le_MaxLength->toInt() );
 
     if ( valIs == valWas )
         return;
@@ -2528,31 +2277,26 @@ void serviceNewWrapperEditBox::updateMaxLength()
 
     valIs = validateField( valWas, valIs, minVal, WB_MAX_LENGTH );
 
-    LOG_DEBUG( "serviceEditBox::updateMaxLength(): ui->txtMinLength: %d", valIs );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMaxLength():  ui->le_MinLength->fromInt(" << QString::number(valIs) << ")";
+#endif
 
-    ui->txtMaxLength->fromInt( valIs );
+    ui->le_MaxLength->fromInt( valIs );
     wrapBoxData_.setMaxLength( valIs );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateMinWidth()
 {
-    //LOG_CLASS_INFO( "serviceEditBox", "updateMinWidth" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     const int valWas( wrapBoxData_.getMinWidth() );
 
 #ifdef USE_QDEBUG
-    qDebug() << "serviceEditBox::updateMinWidth() to " << ui->txtMinWidth->text();
+    qDebug() << "serviceNewWrapperEditBox::updateMinWidth() to " << ui->le_MinWidth->text();
 #endif
 
-    int valIs( ui->txtMinWidth->toInt() );
+    int valIs( ui->le_MinWidth->toInt() );
 
     if ( valIs == valWas )
         return;
@@ -2563,31 +2307,24 @@ void serviceNewWrapperEditBox::updateMinWidth()
     valIs = validateField( valWas, valIs, WB_MIN_WIDTH, maxVal );
 
 #ifdef USE_QDEBUG
-    qDebug() << "serviceEditBox::updateMinWidth():  ui->txtMinWidth->fromInt(" << QString::number(valIs) << ")";
+    qDebug() << "serviceNewWrapperEditBox::updateMinWidth():  ui->le_MinWidth->fromInt(" << QString::number(valIs) << ")";
 #endif
 
-    ui->txtMinWidth->fromInt( valIs );
+    ui->le_MinWidth->fromInt( valIs );
     wrapBoxData_.setMinWidth( valIs );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateMaxWidth()
 {
-    //LOG_CLASS_INFO( "serviceEditBox", "updateMaxWidth" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     const int valWas( wrapBoxData_.getMaxWidth() );
 
 #ifdef USE_QDEBUG
-    qDebug() << "serviceEditBox::updateMaxWidth() to " << ui->txtMaxWidth->text();
+    qDebug() << "serviceNewWrapperEditBox::updateMaxWidth() to " << ui->le_MaxWidth->text();
 #endif
-    int valIs( ui->txtMaxWidth->toInt() );
+    int valIs( ui->le_MaxWidth->toInt() );
 
     if ( valIs == valWas )
         return;
@@ -2598,84 +2335,86 @@ void serviceNewWrapperEditBox::updateMaxWidth()
     valIs = validateField( valWas, valIs, minVal, WB_MAX_WIDTH );
 
 #ifdef USE_QDEBUG
-    qDebug() << "serviceEditBox::updateMaxWidth():  ui->txtMaxWidth->fromInt(" << QString::number(valIs) << ")";
+    qDebug() << "serviceNewWrapperEditBox::updateMaxWidth():  ui->le_MaxWidth->fromInt(" << QString::number(valIs) << ")";
 #endif
 
-    ui->txtMaxWidth->fromInt( valIs );
+    ui->le_MaxWidth->fromInt( valIs );
     wrapBoxData_.setMaxWidth( valIs );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::updateMaxLip()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "updateMaxLip" );
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    saveAnyChanges_ = true;
 
     const int valWas( wrapBoxData_.getMaxLip() );
 
-    LOG_DEBUG("serviceEditBox::updateMaxLip() to %s", qPrintable(ui->txtMaxLip->text() ) );
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMaxLip() to " << ui->le_MaxLip->text();
+#endif
 
-    int valIs( ui->txtMaxLip->toInt() );
+    int valIs( ui->le_MaxLip->toInt() );
 
     if ( valIs == valWas )
         return;
 
     valIs = validateField( valWas, valIs, WB_MIN_LIP, WB_MAX_LIP );
 
-    LOG_DEBUG("updateMaxLip() to %d", valIs);
+#ifdef USE_QDEBUG
+    qDebug() << "serviceNewWrapperEditBox::updateMaxLip():  ui->le_MaxLip->fromInt(" << QString::number(valIs) << ")";
+#endif
 
-    ui->txtMaxLip->fromInt(valIs);
+    ui->le_MaxLip->fromInt(valIs);
     wrapBoxData_.setMaxLip(valIs);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::hideShowForNewTray( bool hideThem )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "hideShowForNewTray" );
-
-    LOG_DEBUG("onSessionMessage() Hide a bunch of stuff for new tray creation", NULL);
-
     ui->lblTitleMin->setVisible( !hideThem );
     ui->lblTitleActual->setVisible( !hideThem );
     ui->lblTitleMax->setVisible( !hideThem );
 
     ui->lblLength->setVisible( !hideThem );
-    ui->txtMinLength->setVisible( !hideThem );
-    ui->txtActualLength->setVisible( !hideThem );
-    ui->txtMaxLength->setVisible( !hideThem );
+    ui->le_MinLength->setVisible( !hideThem );
+    ui->le_ActualLength->setVisible( !hideThem );
+    ui->le_MaxLength->setVisible( !hideThem );
 
     ui->lblWidth->setVisible( !hideThem );
-    ui->txtMinWidth->setVisible( !hideThem );
-    ui->txtActualWidth->setVisible( !hideThem );
-    ui->txtMaxWidth->setVisible( !hideThem );
+    ui->le_MinWidth->setVisible( !hideThem );
+    ui->le_ActualWidth->setVisible( !hideThem );
+    ui->le_MaxWidth->setVisible( !hideThem );
 
     ui->lblLip->setVisible( !hideThem );
-    ui->txtActualLip->setVisible( !hideThem );
-    ui->txtMaxLip->setVisible( !hideThem );
+    ui->le_ActualLip->setVisible( !hideThem );
+    ui->le_MaxLip->setVisible( !hideThem );
 
     ui->lblHeight->setVisible( !hideThem );
-    ui->txtActualHeight->setVisible( !hideThem );
+    ui->le_ActualHeight->setVisible( !hideThem );
+
+    ui->lblPLUNumber->setVisible( !hideThem );
+    ui->le_PLUNumber->setVisible( !hideThem );
 
     ui->butAutoConfig->setVisible( !hideThem );
 
-    ui->lblPromptTrayName->setVisible( hideThem );
+    ui->label_PromptTrayName->setVisible( hideThem );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::onSessionMessage( const SessionMessage& msg )
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onSessionMessage" );
+    LOG_CLASS_INFO( "snwEditBox", "onSessionMessage" );
 
     const int device( msg[0].toInt() );
     const int event( msg[1].toInt() );
 
-    LOG_DEBUG( "onSessionMessage() device = %d,  event = %d", device, event );
+    if (( Wrapper == device ) && (WrEvolStatus != event ) && ( WrEvolSensors != event ))
+    {
+        LOG_TRACE( "device = %d,  event = %d", device, event );
+#ifdef USE_QDEBUG
+        qDebug() << "serviceNewWrapperEditBox::onSessionMessage():  device = " << msg[0] << ",  event = " << msg[1];
+#endif
+    }
 
     if (( Wrapper == device ) && ( WrEvolWriteWrapBox == event ))
     {
@@ -2703,7 +2442,7 @@ void serviceNewWrapperEditBox::onSessionMessage( const SessionMessage& msg )
     }
     else if ((Printer == msg[0].toInt() ) && ( PrStockMetrics == msg[1].toInt() ))
     {
-        LOG_DEBUG("onSessionMessage() PrStockMetrics received", NULL);
+        LOG_INFO("PrStockMetrics received", NULL);
         DomPrinterStockMetrics m( msg );
 
         if( m.printerType() == 0 )
@@ -2716,501 +2455,136 @@ void serviceNewWrapperEditBox::onSessionMessage( const SessionMessage& msg )
         {
             sLabelSize_ = m.stockLengthInLinesRaw();
         }
+
+/*      ORIGINAL CODE
+        QString pLabelSize = m.stockLengthInLinesRaw() + ",";
+        QString pRotation = "0,";
+        QString pPlacement = "0,";
+
+        QString sLabelSize = m.stockLengthInLinesRaw() + ",";
+        QString sRotation = "0,";
+        QString sPlacement = "0";
+
+        // set other size to 0
+        if( !leadingEdge )
+        {
+            pPlacement = "1,";
+            sLabelSize = "0,";
+        }
+        else
+        {
+            pLabelSize = "0,";
+        }
+
+        // for some reason the rotation values were being overwritten??? so just hardcoding in 0s
+        QString setup = pLabelSize + pRotation + pPlacement + sLabelSize + sRotation + sPlacement;
+
+        //LOG_INFO("Label Applier setup: %s", setup.toStdString().c_str());
+        session_->send( LabelApplier, LaSetup, setup );
+*/
+#if 0 //Fix SOF-5150 Unprompted Wrapper cycling in timings
+        // Now cycle the wrapper with this setup
+        cycleWrapper();
+#endif
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 bool serviceNewWrapperEditBox::isDualRollWrapper() const
 {
-     LOG_CLASS_INFO( "serviceEditBox", "isDualRollWrapper" );
+    if (( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS2RL ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS2LR ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS3RL ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS3LR ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS4RL ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::AWS4LR ) ||
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::NGW2_C_RL ) || // SOF-2926
+        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::NGW2_C_LR ))   // SOF-2926
+        return true;
 
-    if( ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::NGW2_C_RL ) ||   // 20 SOF-2926
-        ( wrTimingsData_->wrapperModelNum == DomEvolWrapperSystemInformation::NGW2_C_LR ) )    // 21 SOF-2926
-        {
-            LOG_DEBUG("isDualRollWrapper() isDualRollWrapper IS TRUE model: %d",  wrTimingsData_->wrapperModelNum);
-            return true;
-        }
-
-    LOG_DEBUG("isDualRollWrapper() isDualRollWrapper IS FALSE model: %d", wrTimingsData_->wrapperModelNum );
     return false;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-void serviceNewWrapperEditBox::onComboBoxChanged(int index)
+bool serviceNewWrapperEditBox::isNGWWrapper() const
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onComboBoxChanged" );
-
-    // TODO: update any vars with index if needed
-
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
-
-    //index
-    int indexData = ui->param14->currentData().toInt();
-    LOG_DEBUG("onComboBoxChanged() data for combo (0=100, 1=200): %d", indexData );
-
-    wrTimingsData_->wrapParameterList[WrapParameter::FILM_ROLL_TO_USE]->setData( indexData );
-
-    LOG_DEBUG("onComboBoxChanged() new index for file: %d", index );
+    return (DomEvolWrapperSystemInformation::nextGenModels <= wrTimingsData_->wrapperModelNum);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::onStepDown()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onStepDown" );
-    LOG_DEBUG("onStepDown() START", NULL );
+    saveAnyChanges_ = true;
 
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    QSpinBox *spinBox( incDecMap_[ qobject_cast<QWidget*>( sender() ) ] );
 
-    QPushButton* paramWidget = qobject_cast<QPushButton*>(sender());
-
-    if( ui->butLeftParam3 == paramWidget )
-    {
-        int value = ui->param3->text().toInt();
-        LOG_DEBUG("onStepDown() param3 with value: %d", value );
-        if( value > HB_MIN_10 )
-        {
-            value = value - 1;
-            ui->param3->setText( QString::number( value ) );
-            validateEntry( WrapParameter::DISTANCE, value );
-        }
-    }
-    else if( ui->butLeftParam0 == paramWidget )
-    {
-        int value = ui->param0->text().toInt();
-        LOG_DEBUG("onStepDown() param0 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param0->setText( QString::number( value ) );
-            validateEntry( WrapParameter::PERCENT_STRETCH_CLAMP_ON, value );
-        }
-    }
-    else if( ui->butLeftParam2 == paramWidget )
-    {
-        int value = ui->param2->text().toInt();
-        LOG_DEBUG("onStepDown() param2 with value: %d", value );
-        if( value > HB_MIN_NEG_05 )
-        {
-            value = value - 1;
-            ui->param2->setText( QString::number( value ) );
-            validateEntry( WrapParameter::CLAMP_HEIGHT, value );
-        }
-    }
-    else if( ui->butLeftParam9 == paramWidget )
-    {
-        int value = ui->param9->text().toInt();
-        LOG_DEBUG("onStepDown() param9 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param9->setText( QString::number( value ) );
-            validateEntry( WrapParameter::SIDE_UF_ADJUST, value );
-        }
-    }
-    else if( ui->butLeftParam5 == paramWidget )
-    {
-        int value = ui->param5->text().toInt();
-        LOG_DEBUG("onStepDown() param5 with value: %d", value );
-        if( value > HB_MIN_NEG_05 )
-        {
-            value = value - 1;
-            ui->param5->setText( QString::number( value ) );
-            validateEntry( WrapParameter::GRIPPER_ADJUST, value );
-        }
-    }
-    else if( ui->butLeftParam15 == paramWidget )
-    {
-        int value = ui->param15->text().toInt();
-        LOG_DEBUG("onStepDown() param15 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param15->setText( QString::number( value ) );
-            validateEntry( WrapParameter::REAR_UF_TRIP_DELAY, value );
-        }
-    }
-    else if( ui->butLeftParam10 == paramWidget )
-    {
-        int value = ui->param10->text().toInt();
-        LOG_DEBUG("onStepDown() param10 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param10->setText( QString::number( value ) );
-            validateEntry( WrapParameter::HEIGHT_RESTRICT, value );
-        }
-    }
-    else if( ui->butLeftParam16 == paramWidget )
-    {
-        int value = ui->param16->text().toInt();
-        LOG_DEBUG("onStepDown() param16 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param16->setText( QString::number( value ) );
-            validateEntry( WrapParameter::BRAKE_TIMING, value );
-        }
-    }
-    else if( ui->butLeftParam7 == paramWidget )
-    {
-        int value = ui->param7->text().toInt();
-        LOG_DEBUG("onStepDown() param7 with value: %d", value );
-        if( value > HB_MIN_12 )
-        {
-            value = value - 1;
-            ui->param7->setText( QString::number( value ) );
-            validateEntry( WrapParameter::WRAP_SPEED, value );
-        }
-    }
-    else if( ui->butLeftParam8 == paramWidget )
-    {
-        int value = ui->param8->text().toInt();
-        LOG_DEBUG("onStepDown() param8 with value: %d", value );
-        if( value > HB_MIN_01 )
-        {
-            value = value - 1;
-            ui->param8->setText( QString::number( value ) );
-            validateEntry( WrapParameter::DISCHARGE_SPEED, value );
-        }
-    }
-    else if( ui->butLeftParam6 == paramWidget )
-    {
-        int value = ui->param6->text().toInt();
-        LOG_DEBUG("onStepDown() param6 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param6->setText( QString::number( value ) );
-            validateEntry( WrapParameter::FRONT_UF_ADJUST, value );
-        }
-    }
-    else if( ui->butLeftParam4 == paramWidget )
-    {
-        int value = ui->param4->text().toInt();
-        LOG_DEBUG("onStepDown() param4 with value: %d", value );
-        if( value > HB_MIN_00 )
-        {
-            value = value - 1;
-            ui->param4->setText( QString::number( value ) );
-            validateEntry( WrapParameter::FORCE_OUTSIDE_ELEVATOR, value );
-        }
-    }
-    else if( ui->butLeftParam20 == paramWidget )
-    {
-        if( session_->scaleConfig->isWrapperTwoPrinter() )
-        {
-	        int value = ui->param20->text().toInt();
-	        LOG_DEBUG("onStepDown() param20 with value: %d", value );
-	        if( value > HB_MIN_00 )
-	        {
-	            value = value - 1;
-	            ui->param20->setText( QString::number( value ) );
-	            validateEntry( WrapParameter::SECONDARY_LABEL_VERT_OFFSET, value );
-	        }
-        }
-    }
-
-    LOG_DEBUG("onStepDown() END", NULL );
+    spinBox->stepDown();
+    onWidgetUpdatedInternal( spinBox );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::onStepUp()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "onStepUp" );
-    LOG_DEBUG("onStepUp() START", NULL );
+    saveAnyChanges_ = true;
 
-    hasChanged_ = true;
-    if( finishedState == DONE_STATE )
-    {
-        finishedState = CANCEL_STATE;
-        ui->butCancelDone->setText( tr("Cancel"));
-    }
+    QSpinBox *spinBox( incDecMap_[ qobject_cast<QWidget*>( sender() ) ] );
 
-    QPushButton* paramWidget = qobject_cast<QPushButton*>(sender());
-
-    if( ui->butRightParam3 == paramWidget )
-    {
-        int value = ui->param3->text().toInt();
-        LOG_DEBUG("onStepUp() param3 with value: %d", value );
-        if( value < HB_MAX_40 )
-        {
-            value = value + 1;
-            ui->param3->setText( QString::number( value ) );
-            validateEntry( WrapParameter::DISTANCE, value );
-        }
-    }
-    else if( ui->butRightParam0 == paramWidget )
-    {
-        int value = ui->param0->text().toInt();
-        LOG_DEBUG("onStepUp() param0 with value: %d", value );
-        if( value < HB_MAX_60 )
-        {
-            value = value + 1;
-            ui->param0->setText( QString::number( value ) );
-            validateEntry( WrapParameter::PERCENT_STRETCH_CLAMP_ON, value );
-        }
-    }
-    else if( ui->butRightParam2 == paramWidget )
-    {
-        int value = ui->param2->text().toInt();
-        LOG_DEBUG("onStepUp() param2 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param2->setText( QString::number( value ) );
-            validateEntry( WrapParameter::CLAMP_HEIGHT, value );
-        }
-    }
-    else if( ui->butRightParam9 == paramWidget )
-    {
-        int value = ui->param9->text().toInt();
-        LOG_DEBUG("onStepUp() param9 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param9->setText( QString::number( value ) );
-            validateEntry( WrapParameter::SIDE_UF_ADJUST, value );
-        }
-    }
-    else if( ui->butRightParam5 == paramWidget )
-    {
-        int value = ui->param5->text().toInt();
-        LOG_DEBUG("onStepUp() param5 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param5->setText( QString::number( value ) );
-            validateEntry( WrapParameter::GRIPPER_ADJUST, value );
-        }
-    }
-    else if( ui->butRightParam15 == paramWidget )
-    {
-        int value = ui->param15->text().toInt();
-        LOG_DEBUG("onStepUp() param15 with value: %d", value );
-        if( value < HB_MAX_05 )
-        {
-            value = value + 1;
-            ui->param15->setText( QString::number( value ) );
-            validateEntry( WrapParameter::REAR_UF_TRIP_DELAY, value );
-        }
-    }
-    else if( ui->butRightParam10 == paramWidget )
-    {
-        int value = ui->param10->text().toInt();
-        LOG_DEBUG("onStepUp() param10 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param10->setText( QString::number( value ) );
-            validateEntry( WrapParameter::HEIGHT_RESTRICT, value );
-        }
-    }
-    else if( ui->butRightParam16 == paramWidget )
-    {
-        int value = ui->param16->text().toInt();
-        LOG_DEBUG("onStepUp() param16 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param16->setText( QString::number( value ) );
-            validateEntry( WrapParameter::BRAKE_TIMING, value );
-        }
-    }
-    else if( ui->butRightParam7 ==  paramWidget )
-    {
-        int value = ui->param7->text().toInt();
-        LOG_DEBUG("onStepUp() param7 with value: %d", value );
-        if( value < HB_MAX_30 )
-        {
-            value = value + 1;
-            ui->param7->setText( QString::number( value ) );
-            validateEntry( WrapParameter::WRAP_SPEED, value );
-        }
-    }
-    else if( ui->butRightParam8 ==  paramWidget )
-    {
-        int value = ui->param8->text().toInt();
-        LOG_DEBUG("onStepUp() param8 with value: %d", value );
-        if( value < HB_MAX_30 )
-        {
-            value = value + 1;
-            ui->param8->setText( QString::number( value ) );
-            validateEntry( WrapParameter::DISCHARGE_SPEED, value );
-        }
-    }
-    else if( ui->butRightParam6 ==  paramWidget )
-    {
-        int value = ui->param6->text().toInt();
-        LOG_DEBUG("onStepUp() param6 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param6->setText( QString::number( value ) );
-            validateEntry( WrapParameter::FRONT_UF_ADJUST, value );
-        }
-    }
-    else if( ui->butRightParam4 ==  paramWidget )
-    {
-        int value = ui->param4->text().toInt();
-        LOG_DEBUG("onStepUp() param4 with value: %d", value );
-        if( value < HB_MAX_10 )
-        {
-            value = value + 1;
-            ui->param4->setText( QString::number( value ) );
-            validateEntry( WrapParameter::FORCE_OUTSIDE_ELEVATOR, value );
-        }
-    }
-    else if( ui->butRightParam20 ==  paramWidget )
-    {
-        if( session_->scaleConfig->isWrapperTwoPrinter() )
-        {
-	        int value = ui->param20->text().toInt();
-	        LOG_DEBUG("onStepUp() param20 with value: %d", value );
-	        if( value < HB_MAX_10 )
-	        {
-	            value = value + 1;
-	            ui->param20->setText( QString::number( value ) );
-	            validateEntry( WrapParameter::SECONDARY_LABEL_VERT_OFFSET, value );
-	        }
-        }
-    }
-
-    LOG_DEBUG("onStepUp() END", NULL );
+    spinBox->stepUp();
+    onWidgetUpdatedInternal( spinBox );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperEditBox::printTimings()
 {
-    LOG_CLASS_INFO( "serviceEditBox", "printTimings" );
-
     // Send message to generate the Summary Report
-    QString title( "TRAY: " + ui->txtTrayName->text() );
+    QString title( "TRAY: " + ui->le_TrayName->text() );
+
+    if ( "0" != ui->le_PLUNumber->text() )
+        title += "  PLU EXCEPTION: " + ui->le_PLUNumber->text();
+
     QString msg;
 
     msg += "Length MIN:  ";
-    msg += ui->txtMinLength->text();
+    msg += ui->le_MinLength->text();
     msg += "\n";
 
     msg += "Length MAX:  ";
-    msg += ui->txtMaxLength->text();
+    msg += ui->le_MaxLength->text();
     msg += "\n";
 
     msg += "\n";
 
     msg += "Width MIN:  ";
-    msg += ui->txtMinWidth->text();
+    msg += ui->le_MinWidth->text();
     msg += "\n";
 
     msg += "Width MAX:  ";
-    msg += ui->txtMaxWidth->text();
+    msg += ui->le_MaxWidth->text();
     msg += "\n";
 
     msg += "\n";
 
     msg += "Lip MAX:  ";
-    msg += ui->txtMaxLip->text();
+    msg += ui->le_MaxLip->text();
     msg += "\n";
 
     msg += "\n";
 
     msg += "Height MIN:  ";
-    msg += ui->txtMinHeight->text();
+    msg += ui->le_MinHeight->text();
     msg += "\n";
 
     msg += "Height MAX:  ";
-    msg += ui->txtMaxHeight->text();
+    msg += ui->le_MaxHeight->text();
     msg += "\n";
 
     msg += "\n";
 
     msg += "HEIGHT BOX ";
-    msg += ui->cboHeightBox->currentText();
+    msg += ui->cbo_HeightBox->currentText();
     msg += " TIMINGS:";
     msg += "\n";
 
-    LOG_DEBUG("printTimings() msg 1: %s", qPrintable(msg));
-
-    //----- TAB 2
-    msg += "Side to Side Pre-Stretch:  ";
-    msg += ui->param0->text();
-    msg += "\n";
-
-    msg += "Side to Side Wrap Tension:  ";
-    msg += ui->param2->text();
-    msg += "\n";
-
-    msg += "Side to Side Pre-Stretch:  ";
-    msg += ui->param9->text();
-    msg += "\n";
-
-    //----- TAB 3
-    msg += "Front to Back Wrap Tension:  ";
-    msg +=ui->param5->text();
-    msg += "\n";
-
-    msg += "Rear Underfolder Travel:  ";
-    msg += ui->param15->text();
-    msg += "\n";
-
-    msg += "Gripper Relax:  ";
-    msg += ui->param10->text();
-    msg += "\n";
-
-    msg += "Package Position on Elevator:  ";
-    msg += ui->param3->text();
-    msg += "\n";
-
-    //----- TAB 4
-    msg += "Primary Label Offset:  ";
-    msg +=  ui->param6->text();
-    msg += "\n";
-
-    msg += "Secondary Label Offset:  ";
-    msg += ui->param4->text();
-    msg += "\n";
-
-    msg += "Secondary Label Vertical Offsets:  ";
-    msg += ui->param20->text();
-    msg += "\n";
-
-    // TAB 5
-    msg += "Wrap Speed:  ";
-    msg += ui->param7->text();
-    msg += "\n";
-
-    msg += "Discharge Speed:  ";
-    msg += ui->param8->text();
-    msg += "\n";
-
-    msg += "Film Length Pull:  ";
-    msg += ui->param16->text();
-    msg += "\n";
-
-    msg += "Film Width to Use:  ";
-    int filmWidth(  ui->param14->currentIndex() );
-
-    if( filmWidth == 0 )
-        msg += "Narrow Film";
-    else
-        msg += "Wide Film";
-    msg += "\n";
-
-    // TODO
-    // LEGACY - I will have to come up with my own print routine - dont delete this I hopefully can use idea of it
-    // Need the order of the original table, that I no longer have, so I can build message and send off
-    // LEGACY -
-    /*
     for ( int i( 0 ); i < ui->tblBasicTimingsList->rowCount(); i++ )
     {
         QSpinBox *spinBox;
@@ -3221,28 +2595,18 @@ void serviceNewWrapperEditBox::printTimings()
             msg += ui->tblBasicTimingsList->item( i, 0 )->text();
             msg += ":  ";
 
-            LOG_DEBUG( "printTimings() isUsingSimplefiedTimings() is TRUE so access cellWidget 2", NULL );
-            QWidget *w( ui->tblBasicTimingsList->cellWidget( i, 2 ));
+            QWidget *w( ui->tblBasicTimingsList->cellWidget( i, isUsingSimplifiedTimings() ? 2 : 1 ) );
 
             if ( (spinBox = qobject_cast<QSpinBox*>( w )) )
-            {
                 msg += QString::number( spinBox->value() );
-                LOG_DEBUG( "printTimings() widget is spinBox, name = %s and value = %s", qPrintable( spinBox->objectName() ), qPrintable( spinBox->value() ) );
-            }
             else if ( (comboBox = qobject_cast<QComboBox*>( w )) )
-            {
                 msg += comboBox->currentText();
-                LOG_DEBUG( "printTimings() widget is spinBox, name = %s and value = %s", qPrintable( comboBox->objectName() ), qPrintable( comboBox->currentText() ) );
-            }
 
             msg += "\n";
         }
     }
-    */
 
-    LOG_DEBUG("printTimings() msg 2: %s", qPrintable(msg));
-
-    session_->send(ReportManagerDev, StartReport, "2,0,0,0,0,\"" + title + "\",\"" + msg + "\"" );
+    session_->send(ReportManagerDev,StartReport,"2,0,0,0,0,\"" + title + "\",\"" + msg + "\"" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3260,4 +2624,26 @@ void serviceNewWrapperEditBox::promptForcedTraySize()
 
         dialog.exec();
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+bool serviceNewWrapperEditBox::eventFilter( QObject *obj, QEvent *e )
+{
+   // NGW-144
+    if ( QEvent::FocusIn == e->type() )
+    {
+        QSpinBox *spinBox( qobject_cast<QSpinBox*>( obj ) );
+
+        if ( spinBox )
+        {
+            QTimer *t( new QTimer( this ) );
+
+            connect( t, SIGNAL(timeout()), spinBox, SLOT(selectAll()) );
+
+            t->setSingleShot( true );
+            t->start( 0 );
+        }
+    }
+
+    return _Mybase::eventFilter( obj, e );
 }

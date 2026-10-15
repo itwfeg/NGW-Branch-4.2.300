@@ -46,7 +46,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblPackageSensor">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>290</y>
      <width>121</width>
      <height>31</height>
@@ -70,7 +70,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_4">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>290</y>
      <width>431</width>
      <height>31</height>
@@ -91,7 +91,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblPrimaryStation">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>109</x>
      <y>230</y>
      <width>561</width>
      <height>51</height>
@@ -188,7 +188,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_6">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>530</x>
      <y>170</y>
      <width>201</width>
      <height>41</height>
@@ -266,7 +266,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_3">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>530</x>
      <y>70</y>
      <width>201</width>
      <height>41</height>
@@ -418,19 +418,19 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>270</x>
      <y>120</y>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </size>
    </property>
@@ -445,7 +445,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>270</x>
      <y>170</y>
-     <width>241</width>
+     <width>221</width>
      <height>51</height>
     </rect>
    </property>
@@ -505,7 +505,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>270</x>
      <y>70</y>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -517,13 +517,13 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="minimumSize">
     <size>
-     <width>241</width>
+     <width>221</width>
      <height>31</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </size>
    </property>
@@ -536,7 +536,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_8">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>330</y>
      <width>431</width>
      <height>31</height>
@@ -557,7 +557,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblRotationHomeSensor">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>330</y>
      <width>121</width>
      <height>31</height>
@@ -581,7 +581,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_9">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>530</x>
      <y>120</y>
      <width>201</width>
      <height>41</height>
@@ -602,7 +602,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_10">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>370</y>
      <width>431</width>
      <height>31</height>
@@ -623,7 +623,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_11">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>410</y>
      <width>431</width>
      <height>31</height>
@@ -644,7 +644,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_12">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>450</y>
      <width>431</width>
      <height>31</height>
@@ -665,7 +665,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblProductNumber_13">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>110</x>
      <y>490</y>
      <width>431</width>
      <height>31</height>
@@ -686,7 +686,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblWandUpSensor">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>370</y>
      <width>121</width>
      <height>31</height>
@@ -710,7 +710,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblWandDownSensor">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>410</y>
      <width>121</width>
      <height>31</height>
@@ -734,7 +734,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblApplierHomeSensor">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>450</y>
      <width>121</width>
      <height>31</height>
@@ -758,7 +758,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblApplierVacuum">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>550</x>
      <y>490</y>
      <width>121</width>
      <height>31</height>
@@ -779,9 +779,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblPrimaryStation_2">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>680</x>
      <y>230</y>
-     <width>301</width>
+     <width>231</width>
      <height>51</height>
     </rect>
    </property>
@@ -804,9 +804,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblWandUpEvent">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>680</x>
      <y>370</y>
-     <width>301</width>
+     <width>231</width>
      <height>31</height>
     </rect>
    </property>
@@ -825,9 +825,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblWandDownEvent">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>680</x>
      <y>410</y>
-     <width>301</width>
+     <width>231</width>
      <height>31</height>
     </rect>
    </property>
@@ -846,9 +846,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="lblApplierHomeEvent">
    <property name="geometry">
     <rect>
-     <x>650</x>
+     <x>680</x>
      <y>450</y>
-     <width>301</width>
+     <width>231</width>
      <height>31</height>
     </rect>
    </property>

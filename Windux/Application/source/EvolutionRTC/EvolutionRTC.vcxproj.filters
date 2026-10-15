@@ -2490,12 +2490,6 @@
     <ClInclude Include="OperatingModes\Include\LabelPrintingCounts.h">
       <Filter>OperatingModes\Include</Filter>
     </ClInclude>
-    <ClInclude Include="PrinterManager\Include\StEppPrinterTeachTable.h">
-      <Filter>PrinterManager\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="WrapperManager\Include\EvolWrapperUnlockPackageTimings.h">
-      <Filter>WrapperManager\Include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeUpdater\PrinterManager\Source\CUPrinterCommManager.cpp">
@@ -4435,12 +4429,6 @@
     </ClCompile>
     <ClCompile Include="OperatingModes\Messages\LabelPrintingCounts.cpp">
       <Filter>OperatingModes\Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="PrinterManager\Source\StEppPrinterTeachTable.cpp">
-      <Filter>PrinterManager\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="WrapperManager\Messages\EvolWrapperUnlockPackageTimings.cpp">
-      <Filter>WrapperManager\Messages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

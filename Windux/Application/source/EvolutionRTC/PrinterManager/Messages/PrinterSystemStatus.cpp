@@ -64,11 +64,6 @@ PrinterSystemStatus::PrinterSystemStatus(
 		softwareVersion.setVersionType(HobVersion::Epp2PrinterSW);
 		hardwareVersion.setVersionType(HobVersion::Epp2PrinterHW);
 	}
-	else if (prKind == Epp3Printer)	// EPP Shoot Thru Printing Device
-	{
-		softwareVersion.setVersionType(HobVersion::Epp3PrinterSW);
-		hardwareVersion.setVersionType(HobVersion::Epp3PrinterHW);
-	}
 	else if (prKind == EssPrinter)
 	{
 		softwareVersion.setVersionType(HobVersion::EssPrinterSW);
@@ -308,7 +303,6 @@ void PrinterSystemStatus::setSoftwareVersion(const HobVersion &softwareVersion)
 {
 	if (((softwareVersion.getVersionType() == HobVersion::EppPrinterSW) && (this->softwareVersion.getVersionType() == HobVersion::EppPrinterSW)) ||
 	    ((softwareVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->softwareVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
-		((softwareVersion.getVersionType() == HobVersion::Epp3PrinterSW) && (this->softwareVersion.getVersionType() == HobVersion::Epp3PrinterSW)) ||
 		((softwareVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->softwareVersion.getVersionType() == HobVersion::EssPrinterSW)))
 	{
 		this->softwareVersion.setMajorRevision(softwareVersion.getMajorRevision());
@@ -351,7 +345,6 @@ void PrinterSystemStatus::setSoftwareWeigherVersion(const HobVersion &softwareVe
 {
 	if (((softwareWeigherVersion.getVersionType() == HobVersion::EppPrinterSW) && (this->softwareWeigherVersion.getVersionType() == HobVersion::EppPrinterSW)) ||
 	    ((softwareWeigherVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->softwareWeigherVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
-		((softwareWeigherVersion.getVersionType() == HobVersion::Epp3PrinterSW) && (this->softwareWeigherVersion.getVersionType() == HobVersion::Epp3PrinterSW)) ||
 		((softwareWeigherVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->softwareWeigherVersion.getVersionType() == HobVersion::EssPrinterSW)))
 	{
 		this->softwareWeigherVersion.setMajorRevision(softwareWeigherVersion.getMajorRevision());
@@ -386,7 +379,6 @@ void PrinterSystemStatus::setHardwareVersion(const HobVersion &hardwareVersion)
 {
 	if (((hardwareVersion.getVersionType() == HobVersion::EppPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EppPrinterSW)) ||
         ((hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
-		((hardwareVersion.getVersionType() == HobVersion::Epp3PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp3PrinterSW)) ||
 		((hardwareVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EssPrinterSW)))
 	{
 		this->hardwareVersion.setMajorRevision(hardwareVersion.getMajorRevision());

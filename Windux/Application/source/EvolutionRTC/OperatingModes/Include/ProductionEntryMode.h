@@ -85,8 +85,6 @@ private:
 	int totalLabelsCount;
 	int currentLabelCount;
 
-	int numOfVoidLabelsPrinted;
-
 #ifdef USE_ACCOUNTANT
 	static int dataType;
 	static std::string dataTypeName;

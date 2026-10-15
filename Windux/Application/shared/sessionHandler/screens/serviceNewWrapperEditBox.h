@@ -12,11 +12,8 @@
 
 #include <QWidget>
 #include <QSpinBox>
-#include <QLabel>
 #include <QTableWidget>
 #include "screenwidget.h"
-#include <numericlineedit.h>
-#include "python.h"
 
 //wrap box parameters
 #define WB_MAX_NUMBER_OF_WRAP_BOXES       34
@@ -28,18 +25,6 @@
 #define WB_MAX_LIP                        60
  
 //height box min / max validation parameters
-
-#define HB_MIN_NEG_05                   -5
-#define HB_MIN_00                        0
-#define HB_MIN_01                        1
-#define HB_MIN_10                       10
-#define HB_MIN_12                       12
-#define HB_MAX_05                        5
-#define HB_MAX_10                       10
-#define HB_MAX_30                       30
-#define HB_MAX_40                       40
-#define HB_MAX_60                       60
-
 #define HB_MIN_DISTANCE                   10        // was 5
 #define HB_MAX_DISTANCE                   40        // was 50
 #define HB_MIN_DISTANCE_AWS1_AND_2         5
@@ -126,7 +111,6 @@
 class DomNewWrapperAllTrays;
 class MadpPeripheralList;
 class WrapperTimingsData;
-class DomEvolWrapperStatus;
 class DomWrapBoxParams;
 class DomHeightBox;
 class QIntValidator;
@@ -135,8 +119,6 @@ class WrapParameter;
 class QComboBox;
 class WrapParameter;
 class QComboBox;
-class QRegExpValidator;
-class QSignalMapper;
 
 namespace hobart {
 class numericLineEdit;
@@ -225,39 +207,41 @@ private slots:
     void cycleWrapper();
 
     /**
-    * SLOT method called when the Save changes button is clicked
+    * SLOT method called when the 'Advanced timings' button has been clicked
     *
+    * @param[in] none
     * @returns  none
     */
-    void onSaveChanges();
+    void goToAdvancedTimings();
+
+    /**
+    * SLOT method called when the 'Basic timings' button has been clicked
+    *
+    * @param[in] none
+    * @returns  none
+    */
+    void goToOtherTimings();
 
     /**
     * SLOT method called when the Cancel button is clicked
     *
     * @returns  none
     */
-    void onCancelChanges();
+    void cancelChanges();
 
     /**
-    * SLOT method called when text inputs are finished edited
+    * SLOT method called when the Save changes button is clicked
     *
     * @returns  none
     */
-    void onEditingFinished( QWidget *widget );
+    void saveChanges();
 
     /**
-    * SLOT method called when the ComboBox is changed
+    * SLOT method called when the Done button is clicked
     *
     * @returns  none
     */
-    void onComboBoxChanged(int index);
-
-    /**
-    * SLOT method called Export is clicked
-    *
-    * @returns  none
-    */
-    void onExportTimings();
+    void doneWithChanges();
 
     /**
     * SLOT method called when the 'New Height box' button has been clicked
@@ -291,6 +275,13 @@ private slots:
     */
     void deleteSelectedHeight();
 
+    /**
+    * SLOT method called when the Height box list changes its selection.
+    *
+    * @param[in] none
+    * @returns  none
+    */
+
     // SOF-2550
     /**
     * SLOT method called when the Cycle Wrapper with Leading Edge button has been clicked
@@ -311,6 +302,8 @@ private slots:
 
     void requestHeightBox();
 
+	void pluExceptionChanged();
+
 	void updateMinLength();
 	void updateMaxLength();
 	void updateMinWidth();
@@ -319,13 +312,15 @@ private slots:
 
     void autoConfigureTray();
     void updateTrayName();
-
+    void activateTrayName();	//	HTA-79
 
     void cycleWrapperSetupTime();       // have to give the wrapper time to set up, make sure everyone is good to go and ready, and then cycle wrapper
 
     void printTimings();
 
     void promptForcedTraySize();
+
+    void onWidgetUpdated();
 
 protected:
     /**
@@ -345,29 +340,36 @@ protected:
      */
     virtual void onSessionMessage( const SessionMessage& msg );
 
+    /**
+     * Event filter.
+     * @param[in,out] obj  object being filtered
+     * @param[in,out] e  event
+     * @return  @c true to filter, @c false otherwise
+     */
+    virtual bool eventFilter( QObject *obj, QEvent *e );
+
 private Q_SLOTS:
 
     void onStepDown();
     void onStepUp();
-    void onDisplayHelpText();
 
-    /**
-    * SLOT method called when user selects a new tab.
-    *
-    * @param[in] tabNum  tabNum is the new tab selected.
-    * @returns  none
-    */
-    void currentChangeTab(int tabNum);
+    void onWidgetUpdatedInternal( QWidget *w );
+
+    void onCellClicked( int row, int column );
 
 private:
 
+	void promptPLUException();
 	void buildWrapDimensions(const SessionMessage& msg);
 	void buildHeightCombo(DomWrapBoxParams &wrapBoxParams);
 	void setupHeightBox(const SessionMessage& msg);
 	void selectHeight();
+	void buildParamTable();
 	void setupHeightBoxParams();
+    QSpinBox* createQSpinBox(int offset, int minVal, int maxVal, QString currVal);
+    QComboBox *createFilmRollToUseCombo(int offset, QString currVal );
 	int validateField(int valWas, int valIs, int MinValue, int MaxValue);
-    void validateEntry(int offset, int val);
+    void validateEntry(int offset, QSpinBox *intField);
     int getIntFromString(QString &decimalStr);
     void updateWrapperPkgDescription(const SessionMessage& msg);
 	void writeWrapBox();
@@ -375,14 +377,14 @@ private:
 	void wrapperCycleComplete(const SessionMessage& msg);
     void showTablesAndButtons();
     bool isDualRollWrapper() const;
-
+    bool isNGWWrapper() const;
+	
+	//NEW! For AWS Enhanced project
     void updateWrapParam(QTableWidget* table, int wrapParam, QVector<QString> &paramArray, unsigned int row);
-    void updateWrapParamNew(int wrapParam, int paramMin, int paramMax, QVector<QString> &paramArray, hobart::numericLineEdit* paramWidget, QLabel *labelWidget);
+    void addWrapParameter(int wrapParam, QTableWidget* table, int min, int max, const QColor &c = Qt::white);
+    void setDefaultTableSize(QTableWidget* table);
     void buildSmallWrapParameterTable();
     bool isUsingSimplifiedTimings();
-
-    bool checkFileName(QString &myfile, int fileOrFolder);
-    QString getFileName(QString myfile);
 
     Ui::serviceNewWrapperEditBox *ui;
 	WrapperTimingsData *wrTimingsData_;
@@ -390,14 +392,14 @@ private:
     QIntValidator *widthValidator_;                          // enforce limits on the plu number
     QIntValidator *lipValidator_;                          // enforce limits on the plu number
 	DomHeightBox *heightBox_;
+//	No longer used.	QObject *currentField_;
 
-    //QSpinBox *txtPercentStretchClampOn_;
+    QSpinBox *le_PercentStretchClampOn_;
 
     QMap<QWidget*, int> offsetMap_;
-    QMap<QWidget*, QSpinBox*> incDecMapLegacy_;
     QMap<QWidget*, QSpinBox*> incDecMap_;
 
-    //QTimer *timerAutoConfigTrayNameEntry_;		//	HTA-79
+    QTimer *timerAutoConfigTrayNameEntry_;		//	HTA-79
     QTimer *cycleWrapperTestLabel_;
 
 	bool firstPass;													// First time to this page.
@@ -408,37 +410,20 @@ private:
 	int clampOnRow;
 
 	bool viewCurrentTimings_;
+	bool saveAnyChanges_;
 	bool gotNewTrayName_;
 
     bool cycleWrapperInProgress_;
-    bool leadingEdge;
-    bool savedExport_;
-
-    QLabel *lblActuatorPassFail_;
-    QLabel *lblRunInPassFail_;
 
 	QString	heightBoxSelected_;
+	QString cycleButtonStyle;
 	QString sizeValue_;
+    QString currentTrayName_;
     QString pLabelSize_;
     QString sLabelSize_;
-
     QVector<int> wrapParamOrdering_;
 
-    QSignalMapper *editingFinishedSignal_;
-    QIntValidator *baseNegFive10IntValidator;
-    QIntValidator *baseZero5IntValidator;
-    QIntValidator *baseZero10IntValidator;
-    QIntValidator *baseZero60IntValidator;
-    QIntValidator *baseTen40IntValidator;
-    QIntValidator *baseTwelve30IntValidator;
-    QIntValidator *baseOne30IntValidator;
-
-    python *pythonProcess;
-
-    int finishedState;
-
-    bool hasChanged_;                            // lets us know something has changed and we need to SAVE Timings, unless we CANCEL
-
+    bool leadingEdge;
 
     /**
      * Method to initialize all variables, sets components visible or hidden, and creates all signals and slots

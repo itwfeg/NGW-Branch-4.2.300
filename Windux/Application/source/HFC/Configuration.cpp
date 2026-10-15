@@ -22,7 +22,6 @@
 #include "FpmManager.h"
 #include "CuttingTest.h"
 #include "BackupRestoreEvent.h"
-#include "LabelType.h"
 
 #include "DBAccess.h"
 
@@ -1088,7 +1087,7 @@ bool Configuration::isConserveContinuousStockByNotSizingEnabled()
 	bool result = false;
 	if ( !isPrepackScale() && toBoolCfgI(fieldOffsetCfgIConserveContinuousStockByNotSizing) && toBoolCfg(fieldOffsetCfgChoseToUseContinuousStock) )
 		result = true;
-	Debug::trace("PrinterTeachTable", string("isConserveContinuousStockByNotSizingEnabled():  returning ") + Bool::toString(result));
+	Debug::trace("PrinterManager.PrinterSize", string("isConserveContinuousStockByNotSizingEnabled():  returning ") + Bool::toString(result));
 	return result;
 }
 
@@ -1098,7 +1097,7 @@ bool Configuration::isConserveLinerlessStock()
 	bool result = false;
 	if ( !isPrepackScale() && toBoolCfgI(fieldOffsetCfgIsConserveLinerLess) && toBoolCfg(fieldOffsetCfgChoseToUseContinuousStock) )
 		result = true;
-	Debug::trace("PrinterTeachTable", string("fieldOffsetCfgIsConserveLinerLess():  returning ") + Bool::toString(result));
+	Debug::trace("PrinterManager.PrinterSize", string("fieldOffsetCfgIsConserveLinerLess():  returning ") + Bool::toString(result));
 	return result;
 }
 
@@ -1475,8 +1474,6 @@ void Configuration::init()
 	tempValue_ = "";
 
 	licensedPackagesInit_ = false;
-
-	rfidVoidLabelType = 0;
 
 	if ((int)cfgItems_.size() != endCfgFieldOffsets)
 	{
@@ -2235,10 +2232,10 @@ void Configuration::init()
 	cfgItems_[fieldOffsetCfgSelfServeFlashkeyCatNum3]		 = new CfgItem("selfServeFlashkeyCatNum3",                   fieldOffsetCfgSelfServeFlashkeyCatNum3,               CfgItem::STRING, "0");
 	cfgItems_[fieldOffsetCfgSelfServeFlashkeyCatNum4]		 = new CfgItem("selfServeFlashkeyCatNum4",                   fieldOffsetCfgSelfServeFlashkeyCatNum4,               CfgItem::STRING, "0");
 	cfgItems_[fieldOffsetCfgSelfServeFreshServeLabelOffset]  = new CfgItem("SelfServeFreshServeLabelOffset",             fieldOffsetCfgSelfServeFreshServeLabelOffset,         CfgItem::INT,    "0");
-	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText0]		 = new CfgItem("selfServeFlashkeySecText0",                  fieldOffsetCfgSelfServeFlashkeySecText0,              CfgItem::STRING, "Mï¿½s vendidos");
+	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText0]		 = new CfgItem("selfServeFlashkeySecText0",                  fieldOffsetCfgSelfServeFlashkeySecText0,              CfgItem::STRING, "Más vendidos");
 	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText1]       = new CfgItem("selfServeFlashkeySecText1",                  fieldOffsetCfgSelfServeFlashkeySecText1,              CfgItem::STRING, "Frutas");
 	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText2]       = new CfgItem("selfServeFlashkeySecText2",                  fieldOffsetCfgSelfServeFlashkeySecText2,              CfgItem::STRING, "Verduas");
-	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText3]       = new CfgItem("selfServeFlashkeySecText3",                  fieldOffsetCfgSelfServeFlashkeySecText3,              CfgItem::STRING, "Orgï¿½nico");
+	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText3]       = new CfgItem("selfServeFlashkeySecText3",                  fieldOffsetCfgSelfServeFlashkeySecText3,              CfgItem::STRING, "Orgánico");
 	cfgItems_[fieldOffsetCfgSelfServeFlashkeySecText4]       = new CfgItem("selfServeFlashkeySecText4",                  fieldOffsetCfgSelfServeFlashkeySecText4,              CfgItem::STRING, "Otro");
 	cfgItems_[fieldOffsetCfgReadBarcodeFromCloud]			 = new CfgItem("readBarcodeFromCloud",			             fieldOffsetCfgReadBarcodeFromCloud,				   CfgItem::BOOL, "0");
 	cfgItems_[fieldOffsetCfgBarcodeServerAddress]			 = new CfgItem("barcodeServerAddress",			             fieldOffsetCfgBarcodeServerAddress,				   CfgItem::STRING, "example: url/scale/v1/{countryCode}/{storeNbr}/mips/generate-barcode");
@@ -2246,12 +2243,6 @@ void Configuration::init()
 	cfgItems_[fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag] = new CfgItem("ignoreVendorAndProductNumTagsWhenUpcNumTag", fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag, CfgItem::BOOL, "0");
 
 	cfgItems_[fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight] = new CfgItem("allowKeyboardNetWeightItemAsRandomWeight", fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight, CfgItem::BOOL, "0");
-	cfgItems_[fieldOffsetCfgFieldExclusions]                 = new CfgItem("fieldExclusions",                            fieldOffsetCfgFieldExclusions,                         CfgItem::STRING, "");
-
-	cfgItems_[fieldOffsetCfgEnableRfidPrinting]                             = new CfgItem("enableRfidPrinting",  fieldOffsetCfgEnableRfidPrinting,                             CfgItem::BOOL, "0");
-	cfgItems_[fieldOffsetCfgMaxPERfidVoidLabels]                            = new CfgItem("maxPERfidVoidLabels", fieldOffsetCfgMaxPERfidVoidLabels,                            CfgItem::INT,  "3");
-	cfgItems_[fieldOffsetCfgRfidEncodeMethod]                               = new CfgItem("rfidEncodeMethod",    fieldOffsetCfgRfidEncodeMethod,                               CfgItem::INT,  "0");
-	cfgItems_[fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled] = new CfgItem("rfidIgnore",          fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled, CfgItem::BOOL, "1");
 
 }
 
@@ -2308,8 +2299,6 @@ void Configuration::load(DBAccess *dbAccess)
 	updatedPrimaryLocale_ = true;
 	updatedSecondaryLocale_ = true;
 	setupLanguages();
-
-	rfidVoidLabelType = LabelType::findRecord(toIntCfgI(fieldOffsetCfgIRFIDVoidLabelTypeNumber), 0, dbAccess);
 }
 
 
@@ -3241,18 +3230,6 @@ void Configuration::setMinSweetheartWeight( std::string weight )
 	setCfg( fieldOffsetCfgMinSweetheartWeight, Long::toString(newWeight) );
 }
 
-string Configuration::readProductFieldExclusions()
-{
-	Configuration* cfg = Configuration::getInstance();
-	if (!cfg)
-		return "";
-
-	std::string taglist = getExcludedTagList();
-	Debug::trace("Configuration.readProductFieldExclusions", "Configuration taglist: " + taglist );
-
-	return taglist;
-}
-
 void Configuration::validateTareEntryPrecision()
 {
 	// As of April 2017, we have to set the tare entry precision to the same precision as the scale's capability.
@@ -3303,6 +3280,7 @@ string Configuration::buildPrintToScreenBarcodeFilename(int filenameCounter) con
 								cfg->toStringCfgI(fieldOffsetCfgIPrintToScreenBarcodeExtension);
 	return filenameString;
 }
+
 
 bool Configuration::isIgnoreVendorAndProductNumTagsWhenUpcNumTag() const
 {
@@ -3447,13 +3425,6 @@ bool Configuration::isGCDCategoryPromotion() const
 	}
 	Debug::trace("ProductManager.GCD", "Configuration::isGCDCategoryPromotion():  Returning false.");
 	return false;
-}
-
-
-LabelType* Configuration::getRFIDVoidLabelType()
-{
-	//return ( toBoolCfg(fieldOffsetCfgEnableRfidPrinting) ) ? rfidVoidLabelType : 0;
-	return rfidVoidLabelType;
 }
 
 

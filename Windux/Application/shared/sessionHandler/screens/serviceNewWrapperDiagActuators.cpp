@@ -26,9 +26,6 @@
 #include <ScaleConfiguration.h>
 #include <UiUtilities.h>
 
-#include "serviceNewWrapperSetTimings.h"
-#include "serviceNewWrapperEditBox.h"
-
 #include <QDir>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -40,22 +37,21 @@
 
 const static int    MAX_TIMINGS = 27;
 const static bool   TESTING = false;
-static const bool DEMO_ALL_GOOD_MODE = false;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 serviceNewWrapperActuatorDiag::serviceNewWrapperActuatorDiag( SessionMainWindow *mainWindow, ModeWidget *parent ) :
     _Mybase( mainWindow, parent ),
     diagActive_( false ),
-    testActive_( false ),
-    screenLoaded_( false )
+    testActive_( false )
 {
     setObjectName( "serviceNewWrapperActuatorDiag" );
 
+    // initialize
     initialize();
     createLayout();
+
     translate();
 
-    screenLoaded_ = true;
     //if ( TESTING )
     //    createFakeData();
 }
@@ -79,7 +75,6 @@ void serviceNewWrapperActuatorDiag::translate()
 
     saveHistory_->setText( tr( "Save History to USB" ) );
     clearHistory_->setText( tr( "Clear History" ) );
-    backToTimings_->setText( tr( "Back To Timings" ) );
 
     //
     // last time calibrated
@@ -134,14 +129,6 @@ void serviceNewWrapperActuatorDiag::translate()
     inputVoltageLabel_->setText( tr( "Main AC Input Voltage" ) );
     mainPressureLabel_->setText( tr( "Tank Pressure" ) );
     linePressureLabel_->setText( tr( "Regulated Pressure" ) );
-
-    if( DEMO_ALL_GOOD_MODE )
-        backToTimings_->setVisible( true );
-    else
-    {
-        if( session_->scaleConfig->internalConfig.isTimingsActive )
-            backToTimings_->setVisible( true );
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,11 +154,8 @@ void serviceNewWrapperActuatorDiag::resizeEvent( QResizeEvent *e )
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 bool serviceNewWrapperActuatorDiag::onScreenChanging()
 {
-    if ( session_->scaleConfig->internalConfig.isTimingsActive )
-        return false;
-
     // cannot leave this screen until test complete
-    if ( ( diagActive_ ) || ( testActive_ ) )
+    if (( diagActive_ ) || ( testActive_ ))
         return false;
 
     return _Mybase::onScreenChanging();
@@ -180,8 +164,6 @@ bool serviceNewWrapperActuatorDiag::onScreenChanging()
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperActuatorDiag::onSessionMessage( const SessionMessage& msg )
 {
-    LOG_CLASS_INFO( "serviceActuatorDiag", "onSessionMessage" );
-
     const int device( msg[0].toInt() );
     const int event( msg[1].toInt() );
 
@@ -268,18 +250,6 @@ void serviceNewWrapperActuatorDiag::onSessionMessage( const SessionMessage& msg 
             testActive_ = false;
         }
     }
-    else if ( ( Error == device )  && ( Wrapper == event )   )
-    {
-        QString code( msg[2] );
-
-        if( session_->scaleConfig->internalConfig.actuatorFailures.length() > 0 )
-            session_->scaleConfig->internalConfig.actuatorFailures.append(",");                         // format: 9522,9572,####,...
-
-        if( !session_->scaleConfig->internalConfig.actuatorFailures.contains(code) )
-            session_->scaleConfig->internalConfig.actuatorFailures.append(code);                        // only add new code if not already listed
-
-        //LOG_DEBUG("onSessionMessage() added to failures: %s", qPrintable( session_->scaleConfig->internalConfig.actuatorFailures) );
-    }
      
     _Mybase::onSessionMessage( msg );
 }
@@ -287,16 +257,10 @@ void serviceNewWrapperActuatorDiag::onSessionMessage( const SessionMessage& msg 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperActuatorDiag::onPushButtonClicked()
 {
-    LOG_CLASS_INFO( "serviceActuatorDiag", "onPushButtonClicked" );
-
-    LOG_DEBUG("onPushButtonClicked() START", NULL);
-
     QPushButton *pushButtonWrapperTest( NULL );
 
     if (( diagStart_ == sender() ) && ( !testActive_ ))
     {
-        LOG_DEBUG("onPushButtonClicked() IF diagStart_", NULL);
-
         // start actuation
         session_->send( Wrapper, WrEvolTest, "28,1" ); // CycleActuatorsTest, Start (1)     // 9,108
         pushButtonWrapperTest = diagStart_;
@@ -313,7 +277,6 @@ void serviceNewWrapperActuatorDiag::onPushButtonClicked()
     }
     else if (( diagStop_ == sender()  ) && ( !testActive_ ))
     {
-        LOG_DEBUG("onPushButtonClicked() IF diagStop_", NULL);
         // stop actuation
         session_->send( Wrapper, WrEvolTest, "28,0" ); // CycleActuatorsTest, Stop (0)
         pushButtonWrapperTest = diagStop_;
@@ -323,12 +286,10 @@ void serviceNewWrapperActuatorDiag::onPushButtonClicked()
     }
     else if ( saveTimings_ == sender() )
     {
-         LOG_DEBUG("onPushButtonClicked() IF saveTimings", NULL);
         saveTimingsToFile();
     }
     else if ( saveHistory_ == sender() )
     {
-        LOG_DEBUG("onPushButtonClicked() IF saveHistory", NULL);
         QStringList folders;
         QString folder;
 
@@ -427,7 +388,6 @@ void serviceNewWrapperActuatorDiag::onPushButtonClicked()
     }
     else if ( clearHistory_ == sender() )
     {
-         LOG_DEBUG("onPushButtonClicked() IF clearHistory_", NULL);
         for ( QMap<int, QList<SessionMessage>* >::iterator i( history_.begin() ); i != history_.end(); i++ )
             i.value()->clear();
 
@@ -441,27 +401,13 @@ void serviceNewWrapperActuatorDiag::onPushButtonClicked()
                 l->clear();
         }
     }
-    else if ( backToTimings_ == sender() )
-    {
-        //LOG_DEBUG("onPushButtonClicked() IF backToTimings_", NULL);
-        //LOG_DEBUG("onPushButtonClicked() what are my failures: %s", qPrintable(session_->scaleConfig->internalConfig.actuatorFailures) );           // 9522, 9572
-
-        // lets you leave the screen
-        session_->scaleConfig->internalConfig.isTimingsActive = false;
-
-        session_->send( Wrapper, WrEvolTest, "28,0" ); // CycleActuatorsTest, Stop (0);
-
-        pushButtonWrapperTest = diagStop_;
-        mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
-    }
-    //else
-    //    LOG_DEBUG("onPushButtonClicked() I dont know", NULL);
 
     // disable test button button temporarily...
     if ( pushButtonWrapperTest )
     {
         QPalette p( pushButtonPalette_ );
-        p.setBrush( QPalette::Button, QColor( 255, 0, 0 ) );
+        // p.setBrush( QPalette::Button, hobart::colorPalette::red );       // cant use red, network connectivity
+        p.setBrush( QPalette::Button, QColor( 255, 0, 255 ) );
 
         pushButtonWrapperTest->setEnabled( false );
         pushButtonWrapperTest->setPalette( p );
@@ -536,13 +482,6 @@ void serviceNewWrapperActuatorDiag::initialize()
     clearHistory_->setObjectName( "clearHistory" );
 
     connect( clearHistory_, SIGNAL( clicked() ), SLOT( onPushButtonClicked() ) );
-
-    backToTimings_ = new QPushButton( this );
-    backToTimings_->setEnabled( true );
-    backToTimings_->setFont( f );
-    backToTimings_->setObjectName( "backToTimings" );
-
-    connect( backToTimings_, SIGNAL( clicked() ), SLOT( onPushButtonClicked() ) );
 
     // save off palette for future use
     pushButtonPalette_ = diagStart_->palette();
@@ -745,13 +684,13 @@ void serviceNewWrapperActuatorDiag::initialize()
     validateRange_[DomEvolWrapperEventCapture::SideClampRightCloseEvent][1]           =  70;
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenEvent][0]            = 120; // Side Clamp Right OPEN
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenEvent][1]            = 160;
-    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][0]                        = 200; // Wand UP 400->200 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][1]                        = 325; // Wand UP 525->325 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::WandDownEvent][0]                      = 625; // Wand DOWN 675->625 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][0]                        = 400; // Wand UP
+    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][1]                        = 525;
+    validateRange_[DomEvolWrapperEventCapture::WandDownEvent][0]                      = 675; // Wand DOWN
     validateRange_[DomEvolWrapperEventCapture::WandDownEvent][1]                      = 775;
-    validateRange_[DomEvolWrapperEventCapture::SecondWandUpEvent][0]                  = 200; // Second Wand UP 400->200 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::SecondWandUpEvent][1]                  = 325; // Second Wand UP 525->325 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::SecondWandDownEvent][0]                = 625; // Second Applier Wand DOWN 675->625 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::SecondWandUpEvent][0]                  = 400; // Second Applier Wand UP
+    validateRange_[DomEvolWrapperEventCapture::SecondWandUpEvent][1]                  = 525;
+    validateRange_[DomEvolWrapperEventCapture::SecondWandDownEvent][0]                = 675; // Second Applier Wand DOWN
     validateRange_[DomEvolWrapperEventCapture::SecondWandDownEvent][1]                = 775;
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpEvent][0]                = 300; // Film Selector UP
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpEvent][1]                = 400;
@@ -765,10 +704,10 @@ void serviceNewWrapperActuatorDiag::initialize()
     validateRange_[DomEvolWrapperEventCapture::ApplierVacuumReadingEvent][1]          =  30;
     validateRange_[DomEvolWrapperEventCapture::SecondApplierVacuumReadingEvent][0]    =   4; // Second Vacuum
     validateRange_[DomEvolWrapperEventCapture::SecondApplierVacuumReadingEvent][1]    =  30;
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][0]               =  60; // Applier Hand 120->60 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][1]               = 220; // 200->220 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeEvent][0]         =  60; // Second Applier Hand 120->60 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeEvent][1]         = 220; // 200->220 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][0]               = 120; // Applier Hand
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][1]               = 200;
+    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeEvent][0]         = 120; // Second Applier Hand
+    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeEvent][1]         = 200;
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingEvent][0]          = 198; // Main AC Input Voltage
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingEvent][1]          = 242;
     // Saved Items              // Saved Items                  // Saved Items               // Saved Items
@@ -779,15 +718,15 @@ void serviceNewWrapperActuatorDiag::initialize()
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowCloseSavedEvent][0]       =  20;
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowCloseSavedEvent][1]       =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenSavedEvent][0]        =  65;
-    validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenSavedEvent][1]        =  95;
+    validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenSavedEvent][1]        =  85;
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftCloseSavedEvent][0]     =  20;
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftCloseSavedEvent][1]     =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenSavedEvent][0]      =  75;
-    validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenSavedEvent][1]      = 110;
+    validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenSavedEvent][1]      = 105;
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightCloseSavedEvent][0]    =  20;
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightCloseSavedEvent][1]    =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenSavedEvent][0]     =  75;
-    validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenSavedEvent][1]     = 110;
+    validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenSavedEvent][1]     = 105;
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftCloseSavedEvent][0]       =  40;
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftCloseSavedEvent][1]       =  70;
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftOpenSavedEvent][0]        = 120;
@@ -796,13 +735,13 @@ void serviceNewWrapperActuatorDiag::initialize()
     validateRange_[DomEvolWrapperEventCapture::SideClampRightCloseSavedEvent][1]      =  70;
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenSavedEvent][0]       = 120;
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenSavedEvent][1]       = 160;
-    validateRange_[DomEvolWrapperEventCapture::WandUpSavedEvent][0]                   = 200;        // Wand UP 400->200 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::WandUpSavedEvent][1]                   = 325;        // Wand UP 525->325 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::WandDownSavedEvent][0]                 = 625;        // 675->625 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::WandUpSavedEvent][0]                   = 400;
+    validateRange_[DomEvolWrapperEventCapture::WandUpSavedEvent][1]                   = 525;
+    validateRange_[DomEvolWrapperEventCapture::WandDownSavedEvent][0]                 = 675;
     validateRange_[DomEvolWrapperEventCapture::WandDownSavedEvent][1]                 = 775;
-    validateRange_[DomEvolWrapperEventCapture::SecondWandUpSavedEvent][0]             = 200;        // Wand UP 400->200 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::SecondWandUpSavedEvent][1]             = 325;        // Wand UP 525->325 04-13-2016
-    validateRange_[DomEvolWrapperEventCapture::SecondWandDownSavedEvent][0]           = 625;        // Wand UP 675->625 04-14-2016
+    validateRange_[DomEvolWrapperEventCapture::SecondWandUpSavedEvent][0]             = 400;
+    validateRange_[DomEvolWrapperEventCapture::SecondWandUpSavedEvent][1]             = 525;
+    validateRange_[DomEvolWrapperEventCapture::SecondWandDownSavedEvent][0]           = 675;
     validateRange_[DomEvolWrapperEventCapture::SecondWandDownSavedEvent][1]           = 775;
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpSavedEvent][0]           = 300;
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpSavedEvent][1]           = 400;
@@ -814,12 +753,12 @@ void serviceNewWrapperActuatorDiag::initialize()
     validateRange_[DomEvolWrapperEventCapture::RegulatedPressureReadingSavedEvent][1] =  55;
     validateRange_[DomEvolWrapperEventCapture::ApplierVacuumReadingSavedEvent][0]     =   4;
     validateRange_[DomEvolWrapperEventCapture::ApplierVacuumReadingSavedEvent][1]     =  30;
-    validateRange_[DomEvolWrapperEventCapture::SecondApplierVacuumReadingSavedEvent][0]    =  4;
+    validateRange_[DomEvolWrapperEventCapture::SecondApplierVacuumReadingSavedEvent][0]    =   4;
     validateRange_[DomEvolWrapperEventCapture::SecondApplierVacuumReadingSavedEvent][1]    =  30;
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeSavedEvent][0]               =  60;   // Applier Hand 120->60 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeSavedEvent][1]               = 220;   // Applier Hand 200->220 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeSavedEvent][0]         =  60;   // Applier Hand 120->60 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeSavedEvent][1]         = 220;   // Applier Hand 200->220 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeSavedEvent][0]          = 120;
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeSavedEvent][1]          = 200;
+    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeSavedEvent][0]         = 120;
+    validateRange_[DomEvolWrapperEventCapture::SecondApplierHandHomeSavedEvent][1]         = 200;
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingSavedEvent][0]     = 198;
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingSavedEvent][1]     = 242;
 
@@ -876,19 +815,6 @@ void serviceNewWrapperActuatorDiag::initialize()
     savedTimings_[DomEvolWrapperEventCapture::MainACVoltageReadingSavedEvent] = "0";
 
     readTimingsFromFile();
-
-    // by default, we are going to say we passed the Run In Tests - up until we dont
-    session_->scaleConfig->internalConfig.actuatorTestState = TimingsTestState::Test_Passed;
-    session_->scaleConfig->internalConfig.actuatorFailures = "";
-    session_->scaleConfig->internalConfig.actuatorSensorFailures = "";
-
-    if( DEMO_ALL_GOOD_MODE )
-        backToTimings_->setVisible( true );
-    else
-    {
-        if( session_->scaleConfig->internalConfig.isTimingsActive )
-            backToTimings_->setVisible( true );
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -908,15 +834,6 @@ void serviceNewWrapperActuatorDiag::createLayout()
     buttonLayout->addStretch();
     buttonLayout->addWidget( clearHistory_ );
     buttonLayout->addStretch();
-    buttonLayout->addWidget( backToTimings_ );
-
-    if( DEMO_ALL_GOOD_MODE )
-        backToTimings_->setVisible( true );
-    else
-    {
-        if( session_->scaleConfig->internalConfig.isTimingsActive )
-            backToTimings_->setVisible( true );
-    }
 
     // ---- //
 
@@ -1211,8 +1128,6 @@ QLabel *serviceNewWrapperActuatorDiag::createSimpleLabel( const QString &name, Q
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperActuatorDiag::outOfRangeLabel(int index, int curValue, QLabel *checkLabel )
 {
-    LOG_CLASS_INFO( "serviceActuatorDiag", "outOfRangeLabel #1" );
-
     // I was exiting based on this condition, but if it was previously red (which we wont know)
     // then we need to turn it back white again so if else it.
 
@@ -1223,7 +1138,7 @@ void serviceNewWrapperActuatorDiag::outOfRangeLabel(int index, int curValue, QLa
 
     // If it's not in the current range, which lets you exit this method - it must INVALID
 
-    static const modifyPaletteBackground redBackground( QColor( 255, 0, 0 ) );     // cant use red, network connectivity
+    static const modifyPaletteBackground redBackground( QColor( 255, 0, 255 ) );     // cant use red, network connectivity
     static const modifyPaletteBackground whiteBackground( hobart::colorPalette::white );
 
     static const modifyPaletteForeground whiteForeground( modifyPaletteForeground::createPalette( hobart::colorPalette::white ) );
@@ -1239,39 +1154,8 @@ void serviceNewWrapperActuatorDiag::outOfRangeLabel(int index, int curValue, QLa
     }
     else
     {
-        if( !screenLoaded_ )
-            return;
-
-        // by default, we are going to say we passed the Run In Tests - up until we dont
-        //LOG_DEBUG("outOfRangeLabel() Flip ActuatorTest red START", NULL );
-        session_->scaleConfig->internalConfig.actuatorTestState = TimingsTestState::Test_Failed;
-
-        const QString indexStr( QString::number(index));
-        if( !session_->scaleConfig->internalConfig.actuatorSensorFailures.contains( indexStr ) )
-        {
-            //LOG_DEBUG("outOfRangeLabel() actuatorSensorFailures DOES NOT contain this code so add it: ", qPrintable(indexStr) );
-            if( session_->scaleConfig->internalConfig.actuatorSensorFailures.length() > 0 )
-                session_->scaleConfig->internalConfig.actuatorSensorFailures.append(",");                   // format: 9522,9572,####,...
-
-            session_->scaleConfig->internalConfig.actuatorSensorFailures.append( indexStr );                // only add new code if not already listed
-        }
-        //else
-        //{
-        //    LOG_DEBUG("outOfRangeLabel() actuatorSensorFailures contains this string so do NOTHING: %s", qPrintable(indexStr) );
-        //}
-        //LOG_DEBUG("outOfRangeLabel() actuatorSensorFailures contains this string so do NOTHING: %s", qPrintable(session_->scaleConfig->internalConfig.actuatorSensorFailures) );
-
-        if( DEMO_ALL_GOOD_MODE )
-        {
-            whiteBackground( checkLabel );
-            blackForeground( checkLabel );
-        }
-        else
-        {
-            redBackground( checkLabel );
-            whiteForeground( checkLabel );
-        }
-        //LOG_DEBUG("outOfRangeLabel() Flip ActuatorTest red DONE", NULL );
+        redBackground( checkLabel );
+        whiteForeground( checkLabel );
     }
 }
 
@@ -1402,10 +1286,7 @@ void serviceNewWrapperActuatorDiag::inRangeByTenLabel(int index, bool curVal)
 
         int l_minus_r = left - right;
 
-        if( ( l_minus_r < 10 )  && ( l_minus_r > -10 ) )
-            return;
-
-        if( DEMO_ALL_GOOD_MODE )
+        if( l_minus_r < 10 && l_minus_r > -10)
             return;
 
         QLabel *leftLabel( valueLabels_[leftIndex] );
@@ -1413,7 +1294,7 @@ void serviceNewWrapperActuatorDiag::inRangeByTenLabel(int index, bool curVal)
 
         // If the 2 values are not within 10, which lets you exit this method - it must INVALID
 
-        static const modifyPaletteBackground redBackground( QColor( 255, 0, 0 ) );     // cant use red, network connectivity
+        static const modifyPaletteBackground redBackground( QColor( 255, 0, 255 ) );     // cant use red, network connectivity
         static const modifyPaletteForeground whiteForeground( modifyPaletteForeground::createPalette( hobart::colorPalette::white ) );
 
         leftLabel->setAutoFillBackground( true );
@@ -1429,7 +1310,7 @@ void serviceNewWrapperActuatorDiag::inRangeByTenLabel(int index, bool curVal)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperActuatorDiag::saveTimingsToFile()
 {
-    LOG_CLASS_INFO( "serviceActuatorDiag", "saveTimingsToFile" );
+    LOG_CLASS_INFO( "serviceNewWrapperActuatorDiag", "saveTimingsToFile" );
 
     LOG_DEBUG("saveTimingsToFile() START", NULL);
 
@@ -1651,13 +1532,13 @@ void serviceNewWrapperActuatorDiag::createFakeData()
     outOfRangeLabel(DomEvolWrapperEventCapture::SideClampRightOpenEvent, 152, label10);
     inRangeByTenLabel( DomEvolWrapperEventCapture::SideClampRightOpenEvent );
 
-    wandUp_->setText("272");
+    wandUp_->setText("465");
     QLabel *label14( valueLabels_[DomEvolWrapperEventCapture::WandUpEvent] );
-    outOfRangeLabel(DomEvolWrapperEventCapture::WandUpEvent, 272, label14);
+    outOfRangeLabel(DomEvolWrapperEventCapture::WandUpEvent, 465, label14);
 
-    wand2Up_->setText("269");
+    wand2Up_->setText("466");
     QLabel *label14b( valueLabels_[DomEvolWrapperEventCapture::SecondWandUpEvent] );
-    outOfRangeLabel(DomEvolWrapperEventCapture::SecondWandUpEvent, 269, label14b);
+    outOfRangeLabel(DomEvolWrapperEventCapture::SecondWandUpEvent, 465, label14b);
 
     wandDown_->setText("704");
     QLabel *label30( valueLabels_[DomEvolWrapperEventCapture::WandDownEvent] );
@@ -1722,9 +1603,9 @@ void serviceNewWrapperActuatorDiag::createFakeData()
     currentTimings_[DomEvolWrapperEventCapture::SideClampLeftOpenEvent] = "127";
     currentTimings_[DomEvolWrapperEventCapture::SideClampRightCloseEvent] = "67";
     currentTimings_[DomEvolWrapperEventCapture::SideClampRightOpenEvent] = "152";
-    currentTimings_[DomEvolWrapperEventCapture::WandUpEvent] = "272";
+    currentTimings_[DomEvolWrapperEventCapture::WandUpEvent] = "465";
     currentTimings_[DomEvolWrapperEventCapture::WandDownEvent] = "704";
-    currentTimings_[DomEvolWrapperEventCapture::SecondWandUpEvent] = "269";                      // pos 24 in file
+    currentTimings_[DomEvolWrapperEventCapture::SecondWandUpEvent] = "466";                      // pos 24 in file
     currentTimings_[DomEvolWrapperEventCapture::SecondWandDownEvent] = "705";                    // 25
     currentTimings_[DomEvolWrapperEventCapture::FilmSelectorUpEvent] = "381";
     currentTimings_[DomEvolWrapperEventCapture::FilmSelectorDownEvent] = "154";

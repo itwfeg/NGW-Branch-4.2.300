@@ -131,20 +131,7 @@ typedef enum PrEvent
 	PrDonePostImagingSelfServeBarcodeLabelImage,
 	PrStartGapCalibration,				//SOF-4727 freestanding scale
 	PrGapCalStatus,						//SOF-4727 freestanding scale
-	PrGapCalNext,						//SOF-4727 freestanding scale
-	PrRfidTestRequest,
-	PrRfidTestPassed,
-	PrRfidTestFailed,
-	PrRfidCalRequest,
-    PrRfidCalPassed,
-    PrRfidCalFailed,
-	PrRfidUpgradeRequest,
-    PrRfidUpgradePassed,
-    PrRfidUpgradeFailed,
-	PrRfidQryRequest,
-	PrRfidQryBusy,
-	PrRfidQryPassed,
-    PrRfidQryFailed
+	PrGapCalNext						//SOF-4727 freestanding scale
 
 #if 0
 	PrLabelTransferStatus,
@@ -167,47 +154,41 @@ typedef enum PrinterErrors
 	PrinterErrManagerDeleted,
 	PrinterErrHeadUp,
 	PrinterErrLabelSizing,
-	PrinterErrTakeLabel,						// 7005
+	PrinterErrTakeLabel,
 	PrinterErrTakeLabelBeep,
 	PrinterErrLabelJammed,
 	PrinterErrLabelMissing,
 	PrinterErrOutOfMedia,
-	PrinterErrCassetteMissing,					// 7010
+	PrinterErrCassetteMissing,
 	PrinterErrHardwareError,
 	PrinterErrThermalOverload,
 	PrinterErrThermalShutdown,
 	PrinterErrInvalidTypeSetup,
-	PrinterErrMSDisengage,						// 7015
+	PrinterErrMSDisengage,
 	PrinterErrMSSituateLabelStock,
 	PrinterErrMSEngage,
 	PrinterErrMSLabelStockTaut,
 	PrinterErrMSCalibrating,
-	PrinterErrMSComplete,						// 7020
+	PrinterErrMSComplete,
 	PrinterErrLTClearSensor,
 	PrinterErrLTCalibrating,
 	PrinterErrLTComplete,
 	PrinterErrSLAIsOff,
-	PrinterErrSLAOutOfLabels,					// 7025
+	PrinterErrSLAOutOfLabels,
 	PrinterErrHeadUpForEpp,
     PrinterErrNoSpaceAllowedInName,
 	PrinterErrInvalidCharInName,
 	PrinterErrNoSizingDueToContinuous,
-	PrinterErrSizedContinuousOK,				// 7030
+	PrinterErrSizedContinuousOK,
 	PrinterErrLabelCutterJammed,
 	PrinterErrLabelCutterInterlockOpen,
 	PritnerErrLabelCutterTimedOut,
 	PrinterErrProductionEntryInterlockOpen,
-	PrinterErrLowStock,							// 7035
+	PrinterErrLowStock,
 	PrinterErrOutOfStock,
 	PrinterErrFSSLabelCutterInterlockOpen,
-	PrinterErrFSSLabelDoorInterlockOpen,
-	PrinterErrHeadUpForSecondEpp,
-	PrinterErrUnknownFirstPrinterError,			// 7040
-	PrinterErrUnknownSecondPrinterError,
-	PrinterErrUnknownWrapperPrinterError,
-	PrinterErrFirmwareUpgradeUpdate,
-	PrinterErrFirmwareUpgradeReboot,            // 7044
-	PrinterErrMaxError	
+	PrinterErrFSSLabelDoorInterlockOpen
+	
 } PrinterErrors_t;
 
 #endif // PRINTEREVENT_H

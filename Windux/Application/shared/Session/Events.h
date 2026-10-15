@@ -141,22 +141,22 @@ typedef enum OpModeEvent
     OpModeIdle                  = 0,    // 0 - initial operating mode
     OpModeOperate               = 1,
     OpModePluEntry              = 2,
-    OpModeAutoWeigh             = 3,    // 3 - NGW: Apply | Wrap | Label
-    OpModeSemiWeigh             = 4,    // 4 - NGW: Apply | Label
-    OpModeManualWeigh           = 5,    // 5 -  "Manual Operation" on Mode Dialog Counter Scale. ALSO selected "Normal" button while in Product Entry on Counter Scale
+    OpModeAutoWeigh             = 3,
+    OpModeSemiWeigh             = 4,
+    OpModeManualWeigh           = 5,    // 5    // Chose "Manual Operation" on Mode Dialog Counter Scale. ALSO selected "Normal" button while in Product Entry on Counter Scale
     OpModeSupervisor            = 6,
     OpModeService               = 7,
     OpModeServiceLogin          = 8,
     OpModePowerDown             = 9,
     OpModeMonitor               = 10,   // 10
-    OpModeWrapOnly              = 11,   // 11 - NGW: WRAP ONLY mode
+    OpModeWrapOnly              = 11,
     OpModeStatus                = 12,
-    OpModeSelfService           = 13,   // "Self Service Operation" on Mode Dialog Counter Scale
+    OpModeSelfService           = 13,           // Chose "Self Service Operation" on Mode Dialog Counter Scale
     // When there is a label applier,
     // OpModeAutoManualApply will automatically print a label,
     // but will not run the machine.
-    OpModeAutoManualApply       = 14,   // "Prepack Operation" on Mode Dialog Counter Scale
-    OpModeProductionEntry       = 15,   // "Production Entry" on Mode Dialog Counter Scale
+    OpModeAutoManualApply       = 14,           // Chose "Prepack Operation" on Mode Dialog Counter Scale
+    OpModeProductionEntry       = 15,           // Chose "Production Entry" on Mode Dialog Counter Scale
     OpModePrintMultipleLabels   = 16,
     OpModeAccumulateItems		= 17,
     OpModeMealBuilder           = 18,
@@ -316,21 +316,7 @@ typedef enum PrEvent
     PrCutterBitDflt,                // SOF-3887
     PrStartGapCalibration = 188,
     PrGapCalStatus,
-    PrGapCalNext,
-    PrRfidTestRequest,
-    PrRfidTestPassed,
-    PrRfidTestFailed,
-    PrRfidCalRequest,
-    PrRfidCalPassed,
-    PrRfidCalFailed,
-    PrRfidUpgradeRequest,
-    PrRfidUpgradePassed,
-    PrRfidUpgradeFailed,
-    PrRfidQryRequest,
-    PrRfidQryBusy,
-    PrRfidQryPassed,
-    PrRfidQryFailed
-
+    PrGapCalNext
 
 #if 0
     PrLabelTransferStatus,
@@ -563,8 +549,8 @@ typedef enum WrEvent
     WrEvolBackupPackageTimings,
     WrNGWWrapperDetached,				// 255
 
-    WrEvolSavePackageTimingsToDisc,
-    WrEvolUnlockPackageTimings
+    WrNextEvent5,
+    WrNextEvent6
 
 } WrEvent_et;
 
@@ -804,7 +790,6 @@ typedef enum SessionEvent
     SnRdpInactive                   = 186,
     SnSelfServReimageLabels         = 187,          // used for BigY print to screen and label
     snMergeNow                      = 188,          // SOF-4769
-	snMergeNowAfterComm             = 189,
     SnExecuteTask                   = 200,
     SnInvalidModeDetected           = 201
 } SessionEvent_et;

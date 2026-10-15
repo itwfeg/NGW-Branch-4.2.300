@@ -44,7 +44,6 @@ WrapperModeDialog::WrapperModeDialog( modeFlags mf, QWidget *parent, Qt::WindowF
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 WrapperModeDialog::~WrapperModeDialog()
 {
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,9 +287,6 @@ void WrapperModeDialog::updateCurrentMode() const
 
     session_->send( SessionDev, SnWriteWeighModeTransactionType, QString::number( mode ) );
     session_->send( SessionDev, SnReadWeighModeTransactionType );
-
-    if( session_->scaleConfig->currentPLU.itemNumber().toInt() > 0)
-        session_->send( ProductDev, ProductRead, session_->scaleConfig->currentPLU.itemNumber() + ",3" );       // didnt have to clear it, just refresh
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

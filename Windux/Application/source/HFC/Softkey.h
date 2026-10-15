@@ -152,9 +152,6 @@ typedef enum SoftkeyActions
 	Action_ToggleExtraShelfLifeDay,         // 65 from 65 Stayed the same
 	Action_Swipe,	                        // 66 from 64 -> -> moved back to 64 3-7-24	
 	Action_ChangeDepartment,				// 67 from 67 Stayed the same  
-
-	Action_ToggleRfidPrinting,
-
     Action_LastAction
 	//	END - Defined softkey actions
 } SoftkeyActions_t;

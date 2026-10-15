@@ -14,12 +14,9 @@
 
 class DomNewWrapperAllTrays;
 class WrapperTimingsData;
-class WrapperTimingsTestResults;
-
 class QIntValidator;
 class QTableWidgetItem;
 class MadpInternalConfig;
-class MadpWrapperTimingsTestResults;
 class QTimer;
 
 namespace Ui {
@@ -90,6 +87,7 @@ private slots:
 	void viewEditTray();
 	void deleteTray();
 	void viewEditOneParamForAll();
+	void pluExceptionTray();
 
     /**
     * SLOT method called when the Cancel button is clicked
@@ -104,35 +102,6 @@ private slots:
 	void moveDown();
 	void toggleViewDefaultSettings();
 	void resetToFactoryDefaults();
-    void setStackTestLevel();
-
-    void onEnabledTimerTimeout();
-    void onIgnoreTests();
-    void onRunElevatorUp();
-    void onReturnToTests();
-
-    void onFilmLoadedChecked(int state);
-    void onFilmSelectorCleanChecked(int state);
-    void onFilmRollerTensionedChecked(int state);
-    void onMeasureGripperChecked(int state);
-    void onMeasureGripperSlideBlocksChecked(int state);
-    void onElevatorHeightChecked(int state);
-    void onBrakeGapChecked(int state);
-    void onBrakeTorqueChecked(int state);
-
-    /**
-    * SLOT method called we need to go run the Actuators Test
-    *
-    * @returns  none
-    */
-    void onActualtorsClicked();
-
-    /**
-    * SLOT method called we need to go run the Run In
-    *
-    * @returns  none
-    */
-    void onRunInClicked();
 
     /**
     * SLOT method called when the <ENTER> key is pressed after entering a number in the number field
@@ -197,10 +166,10 @@ private:
 
     Ui::serviceNewWrapperSetTimings *ui;
 	WrapperTimingsData *wrTimingsData_;
+
     QIntValidator *txtRecordNumValidator_;                          // enforce limits on the plu number
 
     QStringList canChangeArray;
-    QString errorCodeStr_;
 
     bool requestingData;                                            // so we dont overload and fat finger click
     int activeRow;                                                  // the current row selected
@@ -262,6 +231,7 @@ private:
      */
 	void setActiveRow(int row);
 	QString getCurrentTrayName();
+	QString getCurrentTrayPLUException();
 	void prepareTimingsPageSwitch();
 
 	void move(bool up);
@@ -279,17 +249,10 @@ private:
     void disableForViewDefault();
     void enableForViewCurrent();
 
-    void updateTestResults();
-    void updateFailureList();
-
     // SOF-1142 / SOF-1279
     MadpInternalConfig *internalConfigData_;
-    MadpWrapperTimingsTestResults *wrTimingsTestResults_;
-
     QTimer *startScreenExitTimer;
     bool okToCheckForWaitMessage;
-
-    QTimer *enabledTimer;
 
     void sleepFor( int milliseconds ) const;
 };

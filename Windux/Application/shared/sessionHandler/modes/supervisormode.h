@@ -86,16 +86,10 @@ public:
     virtual bool cameFromLabelPlacementView();
 
     /**
-      * Retrieve bool is we came from Product Defaults Screen
-      * @returns boolean of whether we started from Product Defaults screen
+      * Retrieve bool is we came from Label Placement View only
+      * @returns boolean of whether we came from just using the label placement view screen
       */
     bool cameFromProductDefaults();
-
-    /**
-      * Retrieve bool is we came from ChangeProduct All Fields Screen
-      * @returns boolean of whether we started from All Fields screen
-      */
-    bool cameFromChangeProductAllFields();
 
     ///////////////////////////////////////////////////////////////////////////
     // Methods
@@ -136,18 +130,10 @@ public:
     /**
      * Set the state of whether we came from the label placement editor or not.
      *
-     * @param[in] productDefaults boolean
+     * @param[in] nutritionVisit boolean
      * @returns nothing
      */
      void setCameFromProductDefaults(bool productDefaultsVisit);
-
-     /**
-      * Set the state of whether we came from the superChangeProductAllFields editor or not.
-      *
-      * @param[in] allFieldsVisit boolean
-      * @returns nothing
-      */
-      void setCameFromChangeProductAllFields(bool allFieldsVisit);
 
     ///////////////////////////////////////////////////////////////////////////
     // Variables
@@ -208,7 +194,6 @@ private:
     bool cameFromProductNutritionEditor_;
     bool cameFromLabelPlacementView_;
     bool cameFromProductDefaults_;
-    bool cameFromChangeProductAllFields_;
 
     /**
      * Initialize.

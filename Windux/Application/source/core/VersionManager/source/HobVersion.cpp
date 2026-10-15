@@ -210,9 +210,6 @@ void HobVersion::getTypeDescriptor(string& typeDesc) const
 		case Epp2PrinterSW:
 			typeDesc = "EPP2 Printer";
 			break;
-		case Epp3PrinterSW:
-			typeDesc = "EPP3 Printer";
-			break;
 		case EscPrinterSW:
 			typeDesc = "ESC Printer";
 			break;

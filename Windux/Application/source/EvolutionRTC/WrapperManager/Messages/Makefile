@@ -61,7 +61,6 @@ CPP_SRCS := \
     EvolWrapperReqSystemReset.cpp \
     EvolWrapperRequestPackageTimings.cpp \
     EvolWrapperResetDefaultPackageTimings.cpp \
-	EvolWrapperUnlockPackageTimings.cpp \
     EvolWrapperSaveCycleCount.cpp \
     EvolWrapperSensors.cpp \
     EvolWrapperSettings.cpp \

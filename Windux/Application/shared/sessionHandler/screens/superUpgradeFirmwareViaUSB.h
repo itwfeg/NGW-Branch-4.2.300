@@ -13,7 +13,6 @@
 
 #include "screenwidget.h"
 #include "python.h"
-#include <QTimer>
 
 class MadpScaleConfig;
 class MadpInternalConfig;
@@ -84,14 +83,6 @@ private slots:
      */
     void notice();
 
-    /**
-     * Slot kill a dialog and pop another.
-     *
-     * @param[in] none
-     * @returns  none
-     */
-    void onDialogTimeout();
-
 protected:
     /**
      * Handle screen changing.
@@ -125,7 +116,6 @@ private:
     MadpScaleConfig *scaleConfigData;
     MadpInternalConfig *internalConfigData;
 
-    QTimer *updateTimer_;
     QString firmwareFilename;
     bool loading;
 

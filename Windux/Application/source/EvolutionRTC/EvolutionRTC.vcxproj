@@ -81,7 +81,7 @@
     </PreBuildEvent>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;..\..\HobartCustomerHook;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\PAL;..\..\PAL\PAL_win32;..\..\inc\win32;..\..\source\db\util\thread;..\..\..\3rdPartySoftware\sqlite-3071401;..\..\source\app;..\..\source\comm;..\..\source\core;..\..\source\core\Synchronization;..\..\source\core\VersionManager\include;..\..\source\db;..\..\source\db\util;..\..\source\db\util\e_string;..\..\source\db\util\filesys;..\..\source\EvolutionRTC;..\..\source\EvolutionRTC\BoardSite\Include;..\..\source\EvolutionRTC\CanManager\Include;..\..\source\EvolutionRTC\CanManager\Messages\Include;..\..\source\EvolutionRTC\CodeUpdater\CLA\Include;..\..\source\EvolutionRTC\CodeUpdater\atmelAT91;..\..\source\EvolutionRTC\CodeUpdater\PrinterManager\Include;..\..\source\EvolutionRTC\CodeUpdater\Wrapper\Include;..\..\source\EvolutionRTC\KPCBootManager\Include;..\..\source\EvolutionRTC\KPCBootManager\Messages\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Include;..\..\source\EvolutionRTC\KPCBootUpgrader\Messages\Include;..\..\source\EvolutionRTC\DiagnosticsManager\Messages;..\..\source\EvolutionRTC\LabelApplierManager\Include;..\..\source\EvolutionRTC\MarqueeManager\Include;..\..\source\EvolutionRTC\GCDManager\Include;..\..\source\EvolutionRTC\MessageCenter;..\..\source\EvolutionRTC\NumericManager\Include;..\..\source\EvolutionRTC\OperatingModes\Include;..\..\source\EvolutionRTC\PngGraphics\Include;..\..\source\EvolutionRTC\PrinterManager\Include;..\..\source\EvolutionRTC\ProductDev\Include;..\..\source\EvolutionRTC\RendererManager\Include;..\..\source\EvolutionRTC\RendererManager\Common;..\..\source\EvolutionRTC\RFIDManager\Include;..\..\source\EvolutionRTC\RTCManager\Include;..\..\source\EvolutionRTC\ScannerManager\Include;..\..\source\EvolutionRTC\TimerManager\Include;..\..\source\EvolutionRTC\USBCommManagers\Include;..\..\source\EvolutionRTC\USBManager\Include;..\..\source\EvolutionRTC\USBManager\Include\win32;..\..\source\EvolutionRTC\WeigherManager\Include;..\..\source\EvolutionRTC\WrapperManager\Include;..\..\source\HFC;..\..\source\HFC\devices;..\..\source\HFC\tags;..\..\source\MetrologicallySignificant;..\..\source\util;..\..\source\util\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;WIN32_OS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -544,7 +544,6 @@
     <ClInclude Include="PrinterManager\Include\PrintheadPower.h" />
     <ClInclude Include="PrinterManager\Include\RS485Manager.h" />
     <ClInclude Include="PrinterManager\Include\SSPrinterManager.h" />
-    <ClInclude Include="PrinterManager\Include\StEppPrinterTeachTable.h" />
     <ClInclude Include="PrinterManager\Include\VoidLabelBits.h" />
     <ClInclude Include="ProductDev\Include\ProductChangeMsg.h" />
     <ClInclude Include="ProductDev\Include\ProductCompleteMsg.h" />
@@ -691,7 +690,6 @@
     <ClInclude Include="WrapperManager\Include\EvolWrapperTestComplete.h" />
     <ClInclude Include="WrapperManager\Include\EvolWrapperTrayNames.h" />
     <ClInclude Include="WrapperManager\Include\EvolWrapperUIModel.h" />
-    <ClInclude Include="WrapperManager\Include\EvolWrapperUnlockPackageTimings.h" />
     <ClInclude Include="WrapperManager\Include\EvolWrapperWakeup.h" />
     <ClInclude Include="WrapperManager\Include\EvolWrapperWrap.h" />
     <ClInclude Include="WrapperManager\Include\EvolWrapperWriteCameraThreshold.h" />
@@ -1220,7 +1218,6 @@
     <ClCompile Include="PrinterManager\Source\PrinterTeachTable.cpp" />
     <ClCompile Include="PrinterManager\Source\RS485Manager.cpp" />
     <ClCompile Include="PrinterManager\Source\SSPrinterManager.cpp" />
-    <ClCompile Include="PrinterManager\Source\StEppPrinterTeachTable.cpp" />
     <ClCompile Include="PrinterManager\Source\VoidLabelBits.cpp" />
     <ClCompile Include="ProductDev\Messages\ProductChangeMsg.cpp" />
     <ClCompile Include="ProductDev\Messages\ProductCompleteMsg.cpp" />
@@ -1337,7 +1334,6 @@
     <ClCompile Include="WrapperManager\Messages\EvolWrapperTestComplete.cpp" />
     <ClCompile Include="WrapperManager\Messages\EvolWrapperTrayNames.cpp" />
     <ClCompile Include="WrapperManager\Messages\EvolWrapperUIModel.cpp" />
-    <ClCompile Include="WrapperManager\Messages\EvolWrapperUnlockPackageTimings.cpp" />
     <ClCompile Include="WrapperManager\Messages\EvolWrapperWakeup.cpp" />
     <ClCompile Include="WrapperManager\Messages\EvolWrapperWrap.cpp" />
     <ClCompile Include="WrapperManager\Messages\EvolWrapperWriteCameraThreshold.cpp" />

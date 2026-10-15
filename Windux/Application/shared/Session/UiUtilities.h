@@ -23,7 +23,6 @@ class Session;
 class ScaleConfiguration;
 
 class MadpInternalConfig;
-class MadpWrapperTimingsTestResults;
 
 class MadpScaleConfig;
 class MadpCurrencySettings;
@@ -131,7 +130,6 @@ private:
     MadpPeripheralList& peripheralList;
     DomCurrentPLU& currentPLU;
     DomDefaultCurrentPLU& defaultCurrentPLU;
-    MadpWrapperTimingsTestResults& wrTimingsTestResults;
 
     int theScaleModel;
     // SOF-5319

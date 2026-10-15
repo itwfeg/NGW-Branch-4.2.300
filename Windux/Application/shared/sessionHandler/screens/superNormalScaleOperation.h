@@ -892,9 +892,6 @@ private:
     bool isLicensed_MealBuilder_;
     bool isLicensed_Enhanced_CenterScreen_;
 
-    QString origPrimaryPlacement;
-    QString origSecondyPlacement;
-
     QLineEdit *sundayOnTime_;
     QLineEdit *mondayOnTime_;
     QLineEdit *tuesdayOnTime_;

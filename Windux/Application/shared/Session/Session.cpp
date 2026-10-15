@@ -181,12 +181,6 @@ void Session::handleMessage( const SessionMessage& victor )
         switch ( SessionEvent )
         {
         case PrInquire:          						// 7,2
-            // Need to save off some values to maybe use later
-            scaleConfig->printerConfigRead = victor;
-            if( scaleConfig->printerConfigRead.printerType() == 0 )
-                scaleConfig->internalConfig.priVertPrintPosition = scaleConfig->printerConfigRead.vertPrintPosition();
-            else if(  scaleConfig->printerConfigRead.printerType() == 1 )
-                scaleConfig->internalConfig.secVertPrintPosition = scaleConfig->printerConfigRead.vertPrintPosition();
             break;
         case PrSensors:          						// 7,8
             break;

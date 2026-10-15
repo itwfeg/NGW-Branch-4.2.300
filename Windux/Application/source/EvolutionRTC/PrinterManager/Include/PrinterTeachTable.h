@@ -39,9 +39,6 @@ class PrinterTeachTable
 		virtual void createCommandList();
 		virtual void createTeachTable();
 		
-		virtual void createSTEppCommandList();
-		virtual void createSTEppTeachTable();
-
 
 		// Specific Printer Command Lists
 		CommandOperationList genericAdvance;
@@ -106,69 +103,42 @@ class PrinterTeachTable
 
 		CommandOperationList speedKeyPrintMode;
 
-		// JHC NEW - Command Operation List (list of commands to complete for task)
-		CommandOperationList printSTWithExpel;
-		CommandOperationList findSTandReflective;
-		CommandOperationList sizeSTandReflective;
-
 		// Generic Printer Operations
 		static const CommandIdleOperation		idleOp;
-        static const CommandPrintOperation		printLabelOp;
-        static const CommandPrintOperation		reversePrintLabelOp;
-        // End Generic
-		static const CommandTestOperation		abortSizeTestOp;
-		static const CommandStepOperation		advanceLabelOp;
-		static const CommandStepOperation		adjustLabelUpOp;
-		static const CommandStepOperation		adjustLabelBackOp;
-		static const CommandStepOperation		backupLabelOp;
-		static const CommandTestOperation		checkStockOp;
-		static const CommandStatusOperation		clearTakingOp;
-		static const CommandOperation		    cutOp;
-		static const CommandStepOperation		cutterEjectLabelOp;
-		static const CommandStepOperation		cutterEjectShootLabelOp;
-		static const CommandCounterOperation	enableCounterOp;
-		
+		static const CommandPrintOperation		printLabelOp;
+		static const CommandPrintOperation		reversePrintLabelOp;
+		static const CommandStepUntilOperation	syncLabelOp;
+		static const CommandStepUntilOperation	syncBarOp;
+		static const CommandStepUntilOperation	findLabel2000Op;
 		static const CommandStepOperation		ejectLabelOp;
 		static const CommandStepOperation		ejectShootOp;
-		
-		static const CommandCounterOperation	disableCounterOp;
-		static const CommandStepUntilOperation	findLabel2000Op;
-		
-		static const CommandTestOperation		jammedLabelTestOp;
-		static const CommandTestOperation		jammedLabelTestOp0;
-		static const CommandTestOperation		missingLabelTestOp;
-		static const CommandStepOperation		peelLabelOp;
-		
+		static const CommandStepOperation		backupLabelOp;
+		static const CommandStepOperation		advanceLabelOp;
+		static const CommandStepOperation		startLabelOp;
 		static const CommandStepOperation		retractLabelOp;
 		static const CommandStepOperation		retractShootLabelOp;
-		static const CommandCounterOperation	resetCounterOp;
-		static const CommandStatusOperation		setTakingOp;
-		static const CommandStepOperation		startLabelOp;
-		static const CommandStepUntilOperation	syncBarOp;
-						
-		static const CommandStepUntilOperation	syncLabelOp;
-		
-		static const CommandWaitUntilOperation	takeLabelOp;						
+		static const CommandStepOperation		cutterEjectLabelOp;
+		static const CommandStepOperation		cutterEjectShootLabelOp;
+		static const CommandStepOperation		adjustLabelUpOp;
+		static const CommandStepOperation		adjustLabelBackOp;
+		static const CommandStepOperation		peelLabelOp;
+		static const CommandWaitUntilOperation	takeLabelOp;
 		static const CommandWaitOperation		waitLabelOp;
 		static const CommandWaitOperation		waitShootLabelOp;
-
-		// JHC NEW - ALL NEW STEPS
-		//static const CommandPrintOperation      printLabelHeelFirstOp;			// Xtra 1 - This was supposed to already exist. Cant find it really, but it could be reversePrintLabelOp. QUESTION
-		static const CommandStepUntilOperation  syncLabelSTandReflecOp;				// 1 new class var on existing Command
-		//static const CommandStepOperation		ejectLabelOp;						// 2 email says this is NEW - BUT WE HAVE THIS ONE
-		static const CommandStepOperation		retractSTLabelOp;					// 3 NEW - but same one above. DID USE CONFIG_2 QUESTION??? JHC ADDED ST 
-		static const CommandStepUntilOperation	detectLabelOp;						// Xtra 2 - HAD TO CREATE tho its supposed to exist
-																					// 4 is just using #1 again
-		static const CommandTestOperation       abortIfNotSynchronizedOp;			// Xtra 3. HAD TO CREATE tho its supposed to exist
-		static const CommandStepOperation	    findPrintPositionMinusEjectOp;		// 5 new class var - used RAM15
-		static const CommandStepUntilOperation	syncBarSTandReflecOp;				// 6 new class var on existing Command
-		static const CommandCounterOperation	enableCounterAutoDisableOp;			// 7 new class var on existing Command
-																					// 8 is just using #6 again
-		
+		static const CommandTestOperation		abortSizeTestOp;
+		static const CommandTestOperation		missingLabelTestOp;
+		static const CommandTestOperation		jammedLabelTestOp;
+		static const CommandTestOperation		jammedLabelTestOp0;
+		static const CommandTestOperation		checkStockOp;
+		static const CommandCounterOperation	resetCounterOp;
+		static const CommandCounterOperation	enableCounterOp;
+		static const CommandCounterOperation	disableCounterOp;
+		static const CommandStatusOperation		setTakingOp;
+		static const CommandStatusOperation		clearTakingOp;
+		static const CommandOperation		    cutOp;
 
 		
-		
-		
+
 	private:
 		virtual void createGenericAdvance();
 		virtual void createGenericPrintHead();
@@ -176,7 +146,6 @@ class PrinterTeachTable
 		virtual void createGenericSync();
 		virtual void createGenericFind();
 		virtual void createGenericSize();
-		virtual void createGTGenericSize();
 		virtual void createGenericFindwoLabelTaken();
 
 		virtual void createDieCutSize();
@@ -227,11 +196,6 @@ class PrinterTeachTable
 
 		virtual void createSpeedKeyPrintMode();
 
-		// JHC NEW createCommands I guess - I think these are for EvolPrinterTeachTable()
-		// WHERE are 1,2,3,5,6 commands?
-		virtual void createSTEppPrintWithExpel();			// #4
-		virtual void createSTEppFindSTandReflective();		// #7
-		virtual void createSTEppSizeSTandReflective();		// #8
 
 		std::vector<CommandOperationList *>	ops;
 		std::vector<PrinterCommandType>		command;

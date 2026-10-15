@@ -44,10 +44,6 @@ class EvolWrapperTest : public EvolMessage
 			WrapperMechResetTest,		//	No parameters needed. Resets wrapper mechs.
 			CalibrateWrapper,			//	Takes parameters Mechanism # and tray length
 			SecondLabelApplierTest,		//	Takes parameters WrEvolLATestParam
-			WrReservedForFirmware_1,	// DO NOT USE INTERNAL TEST ONLY = CYCLE_ACTUATOR_TEST              
-			WrReservedForFirmware_2,    // DO NOT USE INTERNAL TEST ONLY = CYCLE_ACTUATOR_STARTUP_TEST  
-			WrReservedForFirmware_3,    // DO NOT USE INTERNAL TEST ONLY = Verify 24v and 170v powered up properly
-			WrWrapperCleanTest,
 			endWrEvolTestCode
 		}WrEvolTestCode_t;
 

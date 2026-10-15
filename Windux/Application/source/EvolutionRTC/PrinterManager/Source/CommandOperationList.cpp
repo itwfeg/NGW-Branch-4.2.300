@@ -174,7 +174,7 @@ UINT16 CommandOperationList::getCommandBlock(CommandOperationMsg *pCOM, bool inB
 
 void CommandOperationList::show()
 {
-	Debug::trace("CommandOperationList", "CommandOperationList::show() size: " + Integer::toString( size()));
+	Debug::trace("CommandOperationList", "CommandOperationList size: " + Integer::toString( size()));
 
 	CommandOperationList::iterator i = begin();
 

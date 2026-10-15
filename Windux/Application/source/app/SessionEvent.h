@@ -281,8 +281,6 @@
 		SessionDevWillNotDisableExtraDay,
 		SessionDevSecLabelEnableToggleStatus,
         
-		SessionDevRfidPrintingEnabled,
-		SessionDevRfidPrintingDisabled,
 
 		SessionDevErrorLastEror
 

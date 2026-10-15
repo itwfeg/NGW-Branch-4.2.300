@@ -354,12 +354,6 @@ public:
 	 */
 	virtual bool checkServiceVisit();
 
-	/// Create service visit record in the audit log.
-	/**
-	 * @return  @c true upon success, @c false otherwise
-	 */
-	virtual bool createUnlockTimings();
-
 	/// Create head status event.
 	/**
 	 * @param[in] printerNum  printer number

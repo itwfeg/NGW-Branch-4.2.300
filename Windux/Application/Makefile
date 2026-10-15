@@ -18,7 +18,7 @@ export HOBART_OUT_DIR=$(HOBART_APP)/output
 #
 #Vars for Source and object files
 #
-SUB_DIRS = PAL source XpdfWidgetQt shared HobartCustomerHook HobartHandsFree hydra rfid-control
+SUB_DIRS = PAL source XpdfWidgetQt shared HobartCustomerHook HobartHandsFree hydra
 
 C_SRCS :=
 CPP_SRCS :=

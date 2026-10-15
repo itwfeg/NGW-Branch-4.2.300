@@ -3449,7 +3449,7 @@ void SessionMainWindow::onSessionMessageReceive( const SessionMessage& msg )
         }
         else if ( WgStatus == event )
         {
-            //LOG_INFO( "received a tilt status", NULL );
+            LOG_INFO( "received a tilt status", NULL );
 
             //MadpWeightData *weightData( &config_->weightData );
             MadpWeightData m( msg );

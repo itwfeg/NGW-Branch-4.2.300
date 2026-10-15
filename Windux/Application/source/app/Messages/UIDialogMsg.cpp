@@ -156,7 +156,6 @@ void UIDialogMsg::show()
 
 	EvolMessage::show();
 
-	Debug::trace("VmStatusMsg", HobString("errorDevice: ") + HobString(Integer::toString(errorDevice)));
 	Debug::trace("VmStatusMsg", HobString("statusCode: ") + HobString(Integer::toString(statusCode)));
 	Debug::trace("VmStatusMsg", HobString("responseType: ") + HobString(Integer::toString(responseType)));
 	Debug::trace("VmStatusMsg", HobString("removeDialog: ") + HobString(Bool::toString(removeDialog)));

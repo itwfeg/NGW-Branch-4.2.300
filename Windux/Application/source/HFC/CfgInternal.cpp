@@ -1000,11 +1000,6 @@ void CfgInternal::init()
 	configNames_[fieldOffsetSelfServeTimeout							- INTERNAL_CONFIGURATION_FIRST_FIELDCODE] = SELFSERVETIMEOUT;
 	configNames_[fieldOffsetCfgBarcodeFormatToUseOffline				- INTERNAL_CONFIGURATION_FIRST_FIELDCODE] = BARCODEFORMATTOUSEOFFLINE;
 	configNames_[fieldOffsetCfgBarcodeRequestTimeout					- INTERNAL_CONFIGURATION_FIRST_FIELDCODE] = BARCODEREQUESTTIMEOUT;
-	
-	//CK-RFID
-	configNames_[fieldOffsetCfgIRFIDVoidLabelTypeNumber                 - INTERNAL_CONFIGURATION_FIRST_FIELDCODE] = RFIDVOIDLABELTYPENUMBER;
-
-
 
 	// Some internal config items aren't in config.dat (either intentionally or not).
 	// The methods toString(name/fieldOffsetCfg), toInt(...), and toBool(...) first look
@@ -1551,10 +1546,6 @@ const string CfgInternal::SELFSERVETIMEOUT("selfServeTimeout");
 const string CfgInternal::BARCODEFORMATTOUSEOFFLINE				 ("barcodeToUseOffline");
 const string CfgInternal::BARCODEREQUESTTIMEOUT					 ("barcodeRequestTimeout");
 
-//CK-RFID
-const string CfgInternal::RFIDVOIDLABELTYPENUMBER ("RFIDVoidLabelTypeNumber");
-
-
 
 HobString CfgInternal::getWebPagesDir() const
 {
@@ -1593,7 +1584,6 @@ void CfgInternal::initIndividualCfgItems()
 	
 	cfgIDefaults_.insert(make_pair(UTILIZECUSTOMERHOOKFOROPERATEMODEONLY, "T"));
 
-	cfgIDefaults_.insert(make_pair(RFIDVOIDLABELTYPENUMBER, "900"));
 }
 
 void CfgInternal::loadIndividualCfgItems()

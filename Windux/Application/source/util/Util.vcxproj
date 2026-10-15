@@ -131,7 +131,6 @@
     <ClCompile Include="CHobartTimer.cpp" />
     <ClCompile Include="CZip.cpp" />
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="epcrfid.cpp" />
     <ClCompile Include="Hex.cpp" />
     <ClCompile Include="MemShow.cpp" />
     <ClCompile Include="MessageLogger.cpp" />
@@ -147,7 +146,6 @@
     <ClInclude Include="CZip.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Double.h" />
-    <ClInclude Include="epcrfid.h" />
     <ClInclude Include="Hex.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="ITimerHandler.h" />

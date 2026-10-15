@@ -24,8 +24,7 @@
 #include "RealTimeController.h"
 
 #include "SessionManagerHelper.h"
-//SOF-TIME-71
-#include "FpmManager.h"
+
 
 
 extern "C"
@@ -143,9 +142,7 @@ AtmelDeviceHandler::AtmelDeviceHandler() : Hobart::CEvolMsgReceiver("AtmelDevice
     patchComplete = false;
     hobDevice = 0;
 #endif
-	//SOF-TIME-71
-	Debug::trace("AtmelDeviceHandler", "prCounter: " + Integer::toString( prCounter ) );  
-	prCounter = 0;
+
 	chipRev = NoRevision;
 
 	// COM initialization must occur on the worker thread context,
@@ -633,36 +630,12 @@ void AtmelDeviceHandler::RunFSM()
 					nextState = S_DETACH;
 				}
 			}
-			// ORIGINAL CODE
-			// 1: Commenting out this block made both printers upgrade
-			// 2: Leaving this block in just updated a single printer
-			// 
-			//Debug::trace("AtmelDeviceHandler", "remove file: " + FirmwareFilename);
-			//File firmwareFile(FirmwareFilename);
-			//if (firmwareFile.exists()) {
-			//	Debug::trace("AtmelDeviceHandler", "remove file: " + FirmwareFilename);
-			//	firmwareFile.remove();
-			//}
 
-			// NEW CODE
-			// SOF-TIME-71 for upgrade of 2 printer (Epp2PrinterSW) system of the same type!	isWrapperTwoPrinter()		 
-			if( FpmManager::getInstance()->isWrapperTwoPrinter() ) {
-				Debug::trace("AtmelDeviceHandler", "prCounter: " + Integer::toString( prCounter ) ); 
-				if( prCounter == 2 ) {
-					File firmwareFile(FirmwareFilename);
-					if (firmwareFile.exists()) {
-						Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
-						firmwareFile.remove();
-					}
-					prCounter = 0;
-				}
-			} else {
+			Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
+			File firmwareFile(FirmwareFilename);
+			if (firmwareFile.exists()) {
 				Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
-				File firmwareFile(FirmwareFilename);
-				if (firmwareFile.exists()) {
-					Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
-					firmwareFile.remove();
-				}
+				firmwareFile.remove();
 			}
 
 			CloseDevice(hOpenDevice);
@@ -866,30 +839,13 @@ bool AtmelDeviceHandler::handleDevicesOnBus()
 								ReportStatusToVersionManager(VersionManagerUsbDeviceDownloading, true);
 								ReportStatusToVersionManager(VersionManagerUsbDeviceDownloadSucceeded);
 							}
-							//SOF-5375	
-							// SOF-TIME-71 for upgrade of 2 printer (Epp2PrinterSW) system of the same type!	isWrapperTwoPrinter()		 
-							if( FpmManager::getInstance()->isWrapperTwoPrinter() )
-							{
-								if( prCounter == 2 )
-								{	
-									Debug::trace("AtmelDeviceHandler", "( B ) prCounter: " + Integer::toString( prCounter ) ); 					
-									File firmwareFile(FirmwareFilename);
-									if (firmwareFile.exists())
-									{
-										Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
-										firmwareFile.remove();
-									}							
-								}
-							} else
-							{
-									File firmwareFile(FirmwareFilename);
-									if (firmwareFile.exists())
-									{
-										Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
-										firmwareFile.remove();
-									}							
-							}
-						} 
+							//SOF-5375							
+							File firmwareFile(FirmwareFilename);
+							if (firmwareFile.exists()) {
+								Debug::trace("AtmelDeviceHandler", "remove file: "+ FirmwareFilename );
+								firmwareFile.remove();
+							}							
+						}
 					} else {
 						Debug::trace("AtmelDeviceHandler.process","Error: Failed to download firmware!");
 						if( isPrepack ) {
@@ -920,8 +876,6 @@ bool AtmelDeviceHandler::handleDevicesOnBus()
 	deviceList.clear();
 	usbNodeList.clear();	//just in case anything has been added to this list.
 	procState = S_IDLE;
-
-	return 0;
 }
 
 // Call the DLL to scan for connected AT91 devices. The DLL
@@ -2020,24 +1974,6 @@ bool AtmelDeviceHandler::RequestCodeUpdate(AT91ProductInfo& info)
 		}
 		return true;
 	}
-	else if( swver.getVersionType() == HobVersion::	Epp3PrinterSW ) //SOF-TIME-71
-	{		
-		Debug::trace("AtmelDeviceHandler", "RequestCodeUpdate - software dev is Epp3PrinterSW");
-		Directory directoryFromWhereFirmwareGetsBurnedToDevice("");
-		HobComplexVersion::getExtractionDir(swver.getVersionType(), directoryFromWhereFirmwareGetsBurnedToDevice, 0);
-
-		File firmwareFile( directoryFromWhereFirmwareGetsBurnedToDevice.getFullPath(), Configuration::getInstance()->toStringCfgI(CfgInternal::FIRMWAREGENERICFILENAME ) );
-		if( firmwareFile.exists() ) {
-			FirmwareFilename = firmwareFile.getFullPath();
-			Debug::trace("AtmelDeviceHandler", "Epp3PrinterSW: "+ FirmwareFilename );
-			bGotCodeUpdate = true;
-		} else {
-			bGotCodeUpdate = false;
-		}
-		prCounter++;
-		Debug::trace("AtmelDeviceHandler", "prCounter: " + Integer::toString( prCounter ) ); 
-		return true;
-	}
 	else
 	{
 		Debug::trace("AtmelDeviceHandler", "RequestCodeUpdate - software dev is some other device, sending request to VersionManager : " + inttostring(swver.getVersionType()));
@@ -2091,13 +2027,6 @@ void AtmelDeviceHandler::SetVersionInfo(AT91ProductInfo& info, HobVersion& hwver
 	        hwver.setVersionType(HobVersion::FpcPrinterHW);
 	        swver.setVersionType(HobVersion::FpcPrinterSW);
 	        break;
-		case HOBART_XPE_ST_PRINTER_ID:	//SOF-TIME-71
-			hwver.setVersionType(HobVersion::Epp3PrinterHW);
-			swver.setVersionType(HobVersion::Epp3PrinterSW);
-#ifdef UDEV_PATCH
-			hobDevice = HOBART_XPE_ST_PRINTER_ID;
-#endif			
-
 	}
 }
 

@@ -42,6 +42,8 @@ EvolPrinterCodeUpdater::EvolPrinterCodeUpdater(USBD_NODE_ID usbNodeId,
 
     responseStateMachine_ = waitingForResponses;
 	Debug::trace("EvolPrinterCodeUpdater", HobString("EvolPrinterCodeUpdater my Mutex: ") + Integer::toString64((long long)update_lock) );
+	//PeripheralRequestCodeUpdate reqCodeUpdate(usbNodeId, hardwareVersion, HobVersion(HobVersion::Epp2PrinterSW, 0, 0));
+    //dispatchEvent(&reqCodeUpdate);
 
 #ifdef USE_ACCOUNTANT
     if (dataType == 0)

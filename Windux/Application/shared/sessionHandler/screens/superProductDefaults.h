@@ -230,13 +230,10 @@ private slots:
     */
     void comboboxChanged(int newIndex);
 
-    void onPrimaryPlacementComboChanged(int newIndex);
-    void onSecondaryPlacementComboChanged(int newIndex);
-    void onThirdPlacementComboChanged(int newIndex);
-
-    void onPrimaryRotationComboChanged(int newIndex);
-    void onSecondaryRotationComboChanged(int newIndex);
-    void onThirdRotationComboChanged(int newIndex);
+    void primaryPlacementComboChanged(int newIndex);
+    void secondaryPlacementComboChanged(int newIndex);
+    void primaryRotationComboChanged(int newIndex);
+    void secondaryRotationComboChanged(int newIndex);
 
     /**
     * SLOT method called when text in a text field is modified
@@ -361,6 +358,8 @@ private:
     QString unitSeparator;                                          // decimal or comma
     QString unitSymbol;                                             // lb or kg
 
+    bool cameFromLabelPlacement_;
+
     QIntValidator *eanNumberSystemValidator_,
     *reportingClassValidator_,
     *discountValidator1_,
@@ -421,8 +420,6 @@ private:
      * @returns  none
      */
     void updateDefaultPluData(const SessionMessage &msg);
-
-    //void populateSecondaryPlacementComboBox();
 
     /**
      * Method to update the combo boxes on the Labeling tab with the names of the graphics.
@@ -551,14 +548,6 @@ private:
      * @returns none
      */
      void enableFluidWtBarcodes(bool isEnabled);
-
-     /**
-     * Method set up secondary placement dialog depending of the choice of the primary
-     *
-     * @param[in] none
-     * @returns none
-     */
-     void populateSecondaryPositions();
 };
 
 #endif // SUPERPRODUCTDEFAULTS

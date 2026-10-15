@@ -26,9 +26,6 @@
 #define HOBART_XPE_PRINTER_ID           0x0205
 #define HOBART_XPE_PRINTER_ID_CU        0x8205
 
-//SOF-TIME-71 
-#define HOBART_EP3_PRINTER_ID           0x212
-
 
 #define HOBART_EVO_WRAPPER_ID           0x0300
 #define HOBART_EVO_WRAPPER_ID_CU        0x8300

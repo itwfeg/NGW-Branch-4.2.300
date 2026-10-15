@@ -1573,11 +1573,7 @@ void ConfigurationManager::handlePrinterConfig(SessionMessage *msg)
 		{
 			if (traceOn)
 				Debug::trace("ConfigurationManager.PrinterConfig", "Updating printer " + inttostring(printerType) + " configuration.");
-
-			//Debug::trace("ConfigurationManager.PrinterConfig", "Just BEFORE currrentPrinterConfig->update() which sets all of the HfcFields.");
 			currentPrinterConfig[printerType]->update(printerConfig);
-			//Debug::trace("ConfigurationManager.PrinterConfig", "Just AFTER currrentPrinterConfig->update() which sets all of the HfcFields.");
-
 			if (traceOn)
 			{
 				Debug::trace("ConfigurationManager.PrinterConfig", "****  Show updated printer configuration.  ****");
@@ -1622,7 +1618,7 @@ void ConfigurationManager::handlePrinterConfig(SessionMessage *msg)
 																	HobString(Hex::toString(msgdata, msglen)));
 			}
 
-			mySession->send(&response, Messenger::DEST_RTC);				// WHO CATCHES THIS? I think PrinterCommManager.
+			mySession->send(&response, Messenger::DEST_RTC);
 			recordPrinterUpdated = true;
 		}
 		if (recordPrinterUpdated)

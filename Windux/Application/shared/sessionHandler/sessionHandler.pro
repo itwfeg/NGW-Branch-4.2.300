@@ -159,7 +159,6 @@ SOURCES += \
     screens/servicePrinterPowerupTests.cpp \
     screens/servicePrinterSensors.cpp \
     screens/serviceRemoveLabels.cpp \
-    screens/serviceRFIDConfiguration.cpp \
     screens/serviceSecurityLabels.cpp \
     screens/serviceSupervisorOsAccess.cpp \
     screens/serviceWeigherCalibrate.cpp \
@@ -426,7 +425,6 @@ HEADERS += \
     screens/servicePrinterPowerupTests.h \
     screens/servicePrinterSensors.h \
     screens/serviceRemoveLabels.h \
-    screens/serviceRFIDConfiguration.h \
     screens/serviceSecurityLabels.h \
     screens/serviceSupervisorOsAccess.h \
     screens/serviceWeigherCalibrate.h \
@@ -616,7 +614,6 @@ FORMS += \
     screens/servicePrinterPowerupTests.ui \
     screens/servicePrinterSensors.ui \
     screens/serviceRemoveLabels.ui \
-    screens/serviceRFIDConfiguration.ui \
     screens/serviceSecurityLabels.ui \
     screens/serviceSupervisorOsAccess.ui \
     screens/serviceWeigherConfig.ui \

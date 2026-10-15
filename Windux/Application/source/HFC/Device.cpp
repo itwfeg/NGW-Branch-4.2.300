@@ -359,7 +359,7 @@ void Device::updateDevice(Device *newDevice)
 					// The UI only really deals with 'kind' set to EppPrinter (1), so if we get the kind field back from the UI,
 					// and it comes back as either type of EPP printer, and this Device is also either type of EPP printer,
 					// then don't update it, leave it alone.
-					if ( ( kind == EppPrinter || kind == Epp2Printer || kind == Epp3Printer ) && (newDevice->getKind() == EppPrinter || newDevice->getKind() == Epp2Printer || newDevice->getKind() == Epp3Printer ) )
+					if ( (kind == EppPrinter || kind == Epp2Printer) && (newDevice->getKind() == EppPrinter || newDevice->getKind() == Epp2Printer) )
 						;
 					else
 						setKind(newDevice->getKind());
@@ -685,10 +685,11 @@ bool Device::isANonHobartLabelPrinter() const
 
 bool Device::isAHobartLabelPrinter() const
 {
-	if (deviceType == (int)Printer &&
-		(kind == (int)EppPrinter || kind == (int)EssPrinter || kind == (int)EscPrinter ||
-			kind == (int)ApcPrinter || kind == (int)Epp2Printer || kind >= (int)KPCPrinter))
-	    return true;
+	if ( deviceType == (int)Printer && 
+		 ( kind == (int)EppPrinter || kind == (int)EssPrinter || kind == (int)EscPrinter ||
+		   kind == (int)ApcPrinter || kind == (int)Epp2Printer || kind == (int)KPCPrinter || 
+		   kind == (int)ARKPrinterOnly || kind == (int)KPPPrinter || kind == (int)SSKPCPrinter ) )
+		return true;
 	else
 		return false;
 }

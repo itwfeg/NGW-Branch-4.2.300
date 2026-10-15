@@ -91,7 +91,6 @@ enum SoftkeyActions
     Action_ToggleExtraShelfLifeDay,                 // 65 SAME
     Action_Swipe,                                   // 66 from 64 2-11-25 - CUSTOMERS WILL HAVE TO UPDATE DBs to ACCOMODATE
     Action_ChangeDepartment,						// 67 from 67
-    Action_ToggleRfidPrinting,
     Action_LastAction
 };
 

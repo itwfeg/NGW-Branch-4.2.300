@@ -39,10 +39,10 @@ typedef enum HfcPrinterConfigFieldOffsets
 	fieldOffsetPrConfigWord11,
 	fieldOffsetPrConfigWord12,
 	fieldOffsetPrConfigWord13,
-	*/
-	fieldOffsetPrMediaSensorType,				// I need this
+	fieldOffsetPrMediaSensorType,
+*/
 	fieldOffsetPrSlaEjectLine,
-	endHfcPrinterConfigFieldOffsets				//	MUST be last!
+	endHfcPrinterConfigFieldOffsets		//	MUST be last!
 } HfcPrinterConfigFieldOffsets_t;
 
 class HfcPrinterConfig : public PrinterConfiguration, public HfcObject

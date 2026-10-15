@@ -767,11 +767,7 @@ void PluMainScreen::resetFlashkeys( bool force )
 
     if( !session_->scaleConfig->internalConfig.ssactive_lock )
     {
-        if( mainWindow_->getIsHeadingToHome() )
-            dcaPrimary_->resetFlashkeys( true );
-        else
-            dcaPrimary_->resetFlashkeys( force );
-
+        dcaPrimary_->resetFlashkeys( force );
         dcaSecondary_->resetFlashkeys( force );
         dcaEnhancedCenterScreen_->resetFlashkeys( force );
     }

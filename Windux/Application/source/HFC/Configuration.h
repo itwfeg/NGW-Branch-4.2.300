@@ -199,8 +199,6 @@ class Configuration
 
 		bool isGCDCategoryPromotion() const;
 
-		LabelType* getRFIDVoidLabelType();
-
 
 		// Read the configuration data from the database into memory.
 		void loadCfgNetwork()  {cfgNetwork.load();}
@@ -675,9 +673,6 @@ class Configuration
 
 		bool isOpModeStreamingLabelTestEnabled() const { return false; }
 
-		HobString getExcludedTagList() const { return toStringCfg(fieldOffsetCfgFieldExclusions); }
-		void setExcludedTagList(unsigned int offset) { setCfg(fieldOffsetCfgFieldExclusions, inttostring(offset)); }
-
 /*****************************************************************************
  *  CfgGenericLabelText
  ****************************************************************************/
@@ -1057,7 +1052,9 @@ class Configuration
 		string buildPrintToScreenBarcodeFilename(int filenameCounter) const;
 
 		bool isIgnoreVendorAndProductNumTagsWhenUpcNumTag() const;
-		string readProductFieldExclusions();
+
+
+
 
 		void testCfgI();
 
@@ -1106,8 +1103,6 @@ class Configuration
 		Util::CSmartCriticalSection  cfgLicensingCS_;
 
 		Graphic storeGraphic;
-
-		LabelType* rfidVoidLabelType;
 
 		bool licensedPackagesInit_;
 		std::string licensedPackages_;

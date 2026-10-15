@@ -102,7 +102,6 @@ INC_DIRS := \
     -I$(HOBART_APP)/source/util \
     -I$(HOBART_APP)/source/util/Inc \
     -I$(HOBART_APP)/source/MetrologicallySignificant \
-    -I$(HOBART_APP)/HobartCustomerHook \
     -I$(HOBART_APP)/../Smbus/driver
 
 export INC_DIRS

@@ -173,8 +173,7 @@ private slots:
     void onShortListEditorDoneClicked(bool didAddRecord);
 
     void onPrimaryPlacementChanged(int newIndex);
-    void onSecondPlacementChanged(int newIndex);
-    void onThirdPlacementChanged(int newIndex);
+
     void saveEntireProduct();
 
 protected:

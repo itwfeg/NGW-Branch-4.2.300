@@ -11,7 +11,7 @@
 //#include "DispatchEvent.h"
 #include "EvolWrapperRequestPackageTimings.h"
 #include "EvolWrapperResetDefaultPackageTimings.h"
-#include "EvolWrapperUnlockPackageTimings.h"
+
 #include "HfcEvolWrapperTrayType.h"
 #include "HfcEvolWrapperAllTrayTypes.h"
 #include "HfcEvolWrapperChangeTrayTypePrecedence.h"
@@ -352,16 +352,6 @@ void EvolWrapperTimingsManager::handleMessage(SessionMessage *msg)
 					if ( debugging )
 						Debug::trace("EvolWrapperTimingsManager", "WrEvolResetDefaultPackageTimings: reqCurrentWhenWrapperIsFinished_ = true");
 				}
-				break;
-			}
-			case WrEvolUnlockPackageTimings:
-			{
-				// The User Interface requests to reset wrapper timings to manufacturing defaults.
-				if (debugging)
-					Debug::trace("EvolWrapperTimingsManager", msgDebug + "Received WrEvolUnlockPackageTimings from UI.");
-
-				// Send the message to the wrapper
-				EvolWrapperUnlockPackageTimings unlockMessage;
 				break;
 			}
 			case WrEvolDonePackageTimings:

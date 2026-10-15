@@ -1246,12 +1246,6 @@ const std::string ConfigurationTags::enableVariableShelfLifeTime    = "1D";
 const std::string ConfigurationTags::ignoreVendorAndProductNumTagsWhenUpcNumTag = "VP";
 
 const std::string ConfigurationTags::allowKeyboardNetWeightItemAsRandomWeight = "TR";
-const std::string ConfigurationTags::fieldExclusions = "fe";
-
-const std::string ConfigurationTags::enableRfidPrinting  = "RP";
-const std::string ConfigurationTags::maxPERfidVoidLabels = "RV";
-const std::string ConfigurationTags::rfidEncodeMethod    = "RE";
-const std::string ConfigurationTags::rfidIgnore          = "rI";
 
 const std::string ConfigurationTags::emptyN = "";
 
@@ -2490,13 +2484,6 @@ ConfigurationTags::ConfigurationTags(FieldOffsetsList *pFieldList)
 		configurationTags[fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag] = ignoreVendorAndProductNumTagsWhenUpcNumTag;
 
 		configurationTags[fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight] = allowKeyboardNetWeightItemAsRandomWeight;
-		configurationTags[fieldOffsetCfgFieldExclusions]               = fieldExclusions;
-		
-		configurationTags[fieldOffsetCfgEnableRfidPrinting]                             = enableRfidPrinting;
-   		configurationTags[fieldOffsetCfgMaxPERfidVoidLabels]                            = maxPERfidVoidLabels;
-		configurationTags[fieldOffsetCfgRfidEncodeMethod]                               = rfidEncodeMethod;
-		configurationTags[fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled] = rfidIgnore;
-
 
 		_tagsInitialized_ = true;
 	}

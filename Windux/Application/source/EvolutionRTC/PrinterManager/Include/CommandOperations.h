@@ -24,7 +24,7 @@ typedef enum CommandDirective
 	IdleDirective,
 	PrintDirective,
 	StepDirective,
-    StepUntilDirective,
+	StepUntilDirective,
 	WaitDirective,
 	WaitUntilDirective,
 	TestDirective,
@@ -68,8 +68,7 @@ typedef enum CounterOperator
 {
 	ResetCounter,
 	EnableCounter,
-	DisableCounter,
-    EnableCounterAutoDisable
+	DisableCounter
 } CounterOperator_t;
 
 /* Label Orientation Identifiers */

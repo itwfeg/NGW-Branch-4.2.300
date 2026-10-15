@@ -35,7 +35,6 @@
 #include <QFontDatabase>
 #include <QXmlStreamReader>
 #include <QMessageBox>
-#include <logmanager.h>
 
 #define TEXT_EDITOR_MAX_CHARS 2000
 #define ESC_CHAR 0x1B
@@ -46,11 +45,6 @@ static const int PRICING_TAB_POINTS_H          = 41;
 static const int PRICING_TAB_GROUP_BOX_SPACING = 3;
 
 static const int DEBUG_PLACEMENT_VIEW = false;
-static const int UPPER_RIGHT = 0;
-static const int UPPER_LEFT = 1;
-static const int NONE = 2;
-static const int LEFT_OF_PRIMARY = 6;
-static const int RIGHT_OF_PRIMARY = 5;
 
 namespace hobart {
 class numericLineEdit;
@@ -72,7 +66,7 @@ superChangeProductAllFields::superChangeProductAllFields(SessionMainWindow *main
     LOG_CLASS_INFO("superChangeProductAllFields", "superChangeProductAllFields");
     // saveOnExit_(false),
     supervisorMode_ = dynamic_cast<SupervisorMode*>(parent);
-    LOG_INFO("Constructor START", NULL);
+    LOG_INFO("Constructor being", NULL);
 
     QFontDatabase::addApplicationFont("/usr/share/fonts/truetype/SPLarge/SPLarge.ttf");
     ui->setupUi(this);
@@ -266,10 +260,8 @@ superChangeProductAllFields::superChangeProductAllFields(SessionMainWindow *main
     connect(ui->pasteButton,SIGNAL(clicked()),ui->textEditRegion,SLOT(paste()));
     connect(ui->doneButton,SIGNAL(clicked()),this,SLOT(doneEditing()));
 
-    // only sets the placement - but product defaults saves too.  Im gonna add that here too
     connect(ui->cboPrimaryLabelPlacement, SIGNAL( currentIndexChanged(int) ), SLOT( onPrimaryPlacementChanged(int) ));
-    connect(ui->cboSecondLabelPlacement,  SIGNAL( currentIndexChanged(int) ), SLOT( onSecondPlacementChanged(int) ));
-    connect(ui->cboThirdLabelPlacement,  SIGNAL( currentIndexChanged(int) ), SLOT( onThirdPlacementChanged(int) ));
+
 
     //conenct(ui->textEditRegion, SIGNAL(textChanged()), this, SLOT(textEditorLimitInputToSize()));
 
@@ -345,38 +337,6 @@ superChangeProductAllFields::superChangeProductAllFields(SessionMainWindow *main
 
     ui->watermark->hide();
 
-    if(supervisorMode_->cameFromLabelPlacementView())
-    {
-        // had to move this up here bc it needs to happen before the initialize()
-        this->ui->tabChangeProductAllFields->setCurrentIndex(3);
-        this->ui->tabSubLabelTypes->setCurrentIndex(1);
-
-        // Global saved value - saved here from the Label Viewer App
-        int primaryLabelPlacement = session_->scaleConfig->primaryLabelPlacement;
-        int secondyLabelPlacement = session_->scaleConfig->secondaryLabelPlacement;
-        //int thirdyLabelPlacement  = currentPLUData->thirdLabelPlacement();                  // get from PLU bc this didnt go through the Label Viewer App
-
-        int primaryLabelRotation = session_->scaleConfig->primaryLabelRotation;
-        int secondyLabelRotation = session_->scaleConfig->secondaryLabelRotation;
-        //int thirdyLabelRotation  = currentPLUData->thirdLabelRotation();                    // get from PLU bc this didnt go through the Label Viewer App
-
-        if ( primaryLabelPlacement > 2 )
-            primaryLabelPlacement = 2;                                                      // SET TO UPPER RIGHT if out of range
-
-        // take the vals from the Label Viewer and save them to the local DOM (currentPLU)
-        currentPLUData->primaryLabelPlacementRaw() = QString::number( primaryLabelPlacement );      // save placement
-        currentPLUData->secondLabelPlacementRaw()  = QString::number( secondyLabelPlacement );
-
-        currentPLUData->primaryLabelRotationRaw()  = QString::number( primaryLabelRotation  );      // save rotation
-        currentPLUData->secondLabelRotationRaw()   = QString::number( secondyLabelRotation  );
-
-        // Save the data to the db
-        saveEntireProduct();
-
-        supervisorMode_->setCameFromLabelPlacementView( false );
-        supervisorMode_->setCameFromChangeProductAllFields( false );
-    }
-
     realInitialize();
     initialize();
 
@@ -423,11 +383,45 @@ superChangeProductAllFields::superChangeProductAllFields(SessionMainWindow *main
         // FT-1033
         restoreReuseTextType = "nutrifacts";
     }
+    else if(supervisorMode_->cameFromLabelPlacementView())
+    {
+        LOG_INFO("cameFromLabelPlacementView begin", NULL);
+
+        this->ui->tabChangeProductAllFields->setCurrentIndex(3);
+        this->ui->tabSubLabelTypes->setCurrentIndex(1);
+
+        supervisorMode_->setCameFromLabelPlacementView( false );
+
+        // enum placememntLoc   IN COMBO IS
+        // UPPER_RIGHT = 0      SYSTEM DEFAULT index = 0 + USER DATA = 2
+        // UPPER_LEFT  = 1      UpperRight     index = 1 + USER_DATA = 0
+        // NONE        = 2      UpperLeft      index = 2 + USER DATA = 1
+        QString primaryLabelPlacementRaw = currentPLUData->primaryLabelPlacementRaw();
+        if( primaryLabelPlacementRaw.length() == 0 )                // IF BLANK
+            primaryLabelPlacementRaw = "2";                         // SET to SYS DEF - USER DATA = 2
+        else if( primaryLabelPlacementRaw.toInt() == 0 )            // IF UPPER RIGHT
+            primaryLabelPlacementRaw = "0";                         // SET TO UPPER RIGHT - USER DATA 0
+        else if( primaryLabelPlacementRaw.toInt() == 1 )            // IF UPPER LEFT
+            primaryLabelPlacementRaw = "1";                         // SET UPPER LEFT
+        else if( primaryLabelPlacementRaw.toInt() == 2 )            // IF NONE OPTION
+            primaryLabelPlacementRaw = "2";                         // SET to SYS DEF - USER DATA = 2
+        else if ( primaryLabelPlacementRaw.toInt() > 2 )            // THESE are P1 values from slide in slide out systems. Obsolete now
+            primaryLabelPlacementRaw = "0";                         // SET TO UPPER RIGHT - USER DATA 0 - DB needs updated.
+
+        ui->cboPrimaryLabelPlacement->setCurrentIndex(ui->cboPrimaryLabelPlacement->findData( primaryLabelPlacementRaw ));
+        ui->cboSecondLabelPlacement->setCurrentIndex(ui->cboSecondLabelPlacement->findData(QString::number(session_->scaleConfig->secondaryLabelPlacement)) );
+
+        ui->cboPrimaryApplierRotation->setCurrentIndex( ui->cboPrimaryApplierRotation->findData(QString::number(session_->scaleConfig->primaryLabelRotation)) );
+        ui->cboSecondApplierRotation->setCurrentIndex( ui->cboSecondApplierRotation->findData(QString::number(session_->scaleConfig->secondaryLabelRotation)) );
+
+        LOG_INFO("cameFromLabelPlacementView end", NULL);
+
+        LOG_INFO("cameFromLabelPlacementView end", NULL);
+    }
     // FT-902: refresh plu info
     else if ( currentPLUData->itemNumber().toInt() > ProductType::PRODUCTTYPE_UNKNOWN )
     {
         session_->send(ProductDev, ProductRead, currentPLUData->itemNumber());
-
     }
 
 
@@ -451,7 +445,7 @@ superChangeProductAllFields::superChangeProductAllFields(SessionMainWindow *main
         ui->cb3ProductionPlanningType->setEnabled( false );
     }
 
-    LOG_INFO("Constructor END", NULL);
+    LOG_INFO("Constructor end", NULL);
 }
 
 int superChangeProductAllFields::indexOfFontName(QString fontName)
@@ -721,17 +715,6 @@ void superChangeProductAllFields::onPlacementViewClicked()
     if(session_->isPrepack())
     {
         goingToLabelPlacementView = true;
-
-        if( supervisorMode_ )
-        {
-            // save the currentProduct into the ScaleConfig values
-            session_->scaleConfig->primaryLabelPlacement   = currentPLUData->primaryLabelPlacement();
-            session_->scaleConfig->secondaryLabelPlacement = currentPLUData->secondLabelPlacement();
-            session_->scaleConfig->primaryLabelRotation    = currentPLUData->primaryLabelRotation();
-            session_->scaleConfig->secondaryLabelRotation  = currentPLUData->secondLabelRotation();
-            supervisorMode_->setCameFromChangeProductAllFields( true );
-        }
-
         mainWindow_->switchToModeScreen<SupervisorMode, superLabelPlacementView>();
     }
 }
@@ -969,83 +952,9 @@ void superChangeProductAllFields::onShortListEditorDoneClicked(bool didAddRecord
 
 void superChangeProductAllFields::onPrimaryPlacementChanged(int newIndex)
 {
-	LOG_CLASS_INFO( "superChangeProductAllFields", "onPrimaryPlacementChanged" );
     Q_UNUSED( newIndex );
-    
-	ui->cboPrimaryLabelPlacement->blockSignals( true );
-    ui->cboSecondLabelPlacement->blockSignals( true );
 
-    // Check what the DOM values are coming in
-    LOG_DEBUG( "onPrimaryPlacementChanged() walking in currentPLUData->primaryLabelPlacementRaw() is: %s", qPrintable(currentPLUData->primaryLabelPlacementRaw()) );
-    LOG_DEBUG( "onPrimaryPlacementChanged() walking in currentPLUData->secondaryLabelPlacementRaw() is: %s", qPrintable(currentPLUData->secondLabelPlacementRaw()) );
-
-    // update the primary DOM
-    int test_priLabLoc =  ui->cboPrimaryLabelPlacement->currentData().toInt();    
-    currentPLUData->primaryLabelPlacementRaw() = QString::number(test_priLabLoc);
-
-	// saved the data after changing the primary, a change forces the secondary to update the available options - so repopulate secondary based on primary
     populateSecondaryPlacementComboBox();
-
-	// ok so we repopulated the fields, now set the secondary back to what it was
-    int primaryData  = currentPLUData->primaryLabelPlacement();
-    //int secondaryData = currentPLUData->secondLabelPlacement();
-
-    // ok lets reset the secondary now
-    if ( primaryData == NONE )
-    {
-        // The Primary to NONE so leave secondary alone - do not reset DOM
-        ui->cboSecondLabelPlacement->setCurrentIndex( ui->cboSecondLabelPlacement->findData( currentPLUData->secondLabelPlacementRaw() ) );
-    }
-    else if( primaryData >= UPPER_RIGHT )
-    {
-        // if we have Left or Right of Primary, and we move from Top LEft to top Right, we might be creating a weird edge case, so test is, and fix it
-        // Otherwise leave where it is and force operator to update secondary
-        int primaryIndex = currentPLUData->primaryLabelPlacement();
-        int secondIndex  = currentPLUData->secondLabelPlacement();
-
-        // These are both cases where the new primary index, eliminates the existing secondary as unselectable. So autoswith it with the move across
-        if ( ( primaryIndex == UPPER_RIGHT ) && ( secondIndex == RIGHT_OF_PRIMARY) )
-        {
-            currentPLUData->secondLabelPlacementRaw() = QString::number(LEFT_OF_PRIMARY);
-            ui->cboSecondLabelPlacement->setCurrentIndex( ui->cboSecondLabelPlacement->findData( currentPLUData->secondLabelPlacementRaw() ) );
-        }
-        else if ( ( primaryIndex == UPPER_LEFT ) && ( secondIndex == LEFT_OF_PRIMARY ) )
-        {
-            currentPLUData->secondLabelPlacementRaw() = QString::number(RIGHT_OF_PRIMARY);
-            ui->cboSecondLabelPlacement->setCurrentIndex( ui->cboSecondLabelPlacement->findData( currentPLUData->secondLabelPlacementRaw() ) );
-        }
-        else
-        {
-            ui->cboSecondLabelPlacement->setCurrentIndex( ui->cboSecondLabelPlacement->findData( currentPLUData->secondLabelPlacementRaw() ) );                         // fail safe but it should never be used
-        }
-    }
-    else
-    {
-        // Did NOT find index in combo, so index -1, so set and bail
-        ui->cboSecondLabelPlacement->setCurrentIndex( currentPLUData->secondLabelPlacement() );
-
-    }
-
-    ui->cboPrimaryLabelPlacement->blockSignals( false );
-    ui->cboSecondLabelPlacement->blockSignals( false );
-}
-
-void superChangeProductAllFields::onSecondPlacementChanged(int newIndex)
-{
-	Q_UNUSED( newIndex );
-
-    // onComboBox Changed
-    int test_secLabLoc =  ui->cboSecondLabelPlacement->currentData().toInt();
-    currentPLUData->secondLabelPlacementRaw() = QString::number(test_secLabLoc);
-}
-
-void superChangeProductAllFields::onThirdPlacementChanged(int newIndex)
-{
-    Q_UNUSED( newIndex );
-
-    // onComboBox Changed
-    int test_triLabLoc =  ui->cboThirdLabelPlacement->currentData().toInt();
-    currentPLUData->thirdLabelPlacementRaw() = QString::number(test_triLabLoc);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1272,10 +1181,8 @@ void superChangeProductAllFields::saveEntireProduct()
     //if(!goingToMarqueeScreen)
     {
         saveTabData(tabToSave);                                         // need to update and save the current tab before saving entire record.
-        if( supervisorMode_->cameFromLabelPlacementView() )
-            return;
 
-        if( (!cameFromCreate && previousPLUItemNumber.toInt() > 0 ) )
+        if(!cameFromCreate && previousPLUItemNumber.toInt() > 0)
         {
             unitSeparator = currencyData->unitSeparator();
 
@@ -1567,6 +1474,12 @@ void superChangeProductAllFields::saveEntireProduct()
             }
             //qDebug() << "SAVING is: " << msg;
 
+            // for debugging
+            //int cboPriLabelPlacementData = ui->cboPrimaryLabelPlacement->findData( currentPLUData->primaryLabelPlacementRaw() );
+            //int cboSecLabelPlacementData = ui->cboSecondLabelPlacement->findData(currentPLUData->secondLabelPlacementRaw());
+            //QString primaryLabelPlacementRaw = currentPLUData->primaryLabelPlacementRaw();
+            //QString secondaryLabelPlacementRaw = currentPLUData->secondLabelPlacementRaw();
+            
             msg.append(currentPLUData->primaryLabelPlacementRaw() + ","); /*  primaryLabelPlacement()  (58);} */
             msg.append(currentPLUData->secondLabelPlacementRaw() + ","); /*  secondLabelPlacement()  (59);} */
             msg.append(currentPLUData->thirdLabelPlacementRaw() + ","); /*  thirdLabelPlacement()  (60);} */
@@ -1616,7 +1529,7 @@ void superChangeProductAllFields::saveEntireProduct()
             }
 
             /*  forcedPoundsFor()  (64);}*/
-            if(ui->chkbox2PoundsForPricingForcedPrice && ui->chkbox2PoundsForPricingForcedPrice->isChecked())
+            if(ui->chkbox2PoundsForPricingForcedPrice->isChecked())
             {
                 msg.append("1,");
             }
@@ -1624,6 +1537,7 @@ void superChangeProductAllFields::saveEntireProduct()
             {
                 msg.append("0,");
             }
+
             /*  sellByDate()  (65);} */
             //msg.append("\"" + currentPLUData->sellByDateRaw() + "\",");
             msg.append(",");
@@ -1951,30 +1865,31 @@ void superChangeProductAllFields::SaveLabeling()
     currentPLUData->secondLabelRotationRaw() = (ui->cboSecondApplierRotation->itemData( ui->cboSecondApplierRotation->currentIndex() )).toString();
     currentPLUData->thirdLabelRotationRaw() = (ui->cboThirdApplierRotation->itemData( ui->cboThirdApplierRotation->currentIndex() )).toString();
 
+    //    Label placement
+    //currentPLUData->primaryLabelPlacementRaw() = (ui->cboPrimaryLabelPlacement->itemData( ui->cboPrimaryLabelPlacement->currentIndex() )).toString();
+    //currentPLUData->secondLabelPlacementRaw() = (ui->cboSecondLabelPlacement->itemData( ui->cboSecondLabelPlacement->currentIndex() )).toString();
+    //currentPLUData->thirdLabelPlacementRaw() = (ui->cboThirdLabelPlacement->itemData( ui->cboThirdLabelPlacement->currentIndex() )).toString();
+
+    currentPLUData->primaryLabelPlacementRaw() = ui->cboPrimaryLabelPlacement->itemData( ui->cboPrimaryLabelPlacement->currentIndex() ).toString();
+    if( currentPLUData->secondLabelType() > 0 )
+    {
+        currentPLUData->secondLabelPlacementRaw() = ui->cboSecondLabelPlacement->itemData( ui->cboSecondLabelPlacement->currentIndex() ).toString();
+    }
+    else
+    {
+        // if there is no 2nd label type, then default it to the system default
+        currentPLUData->secondLabelPlacementRaw() = QString::number( 2 );
+    }
+    currentPLUData->thirdLabelPlacementRaw() = (ui->cboThirdLabelPlacement->itemData( ui->cboThirdLabelPlacement->currentIndex() )).toString();
+
+    // debug
+    //QString primaryLabelPlacementRaw = currentPLUData->primaryLabelPlacementRaw();
+    //QString secondaryLabelPlacementRaw = currentPLUData->secondLabelPlacementRaw();
+
     //    Wrapper intake
     currentPLUData->intakeMode() = (ui->cboIntakeMode->itemData( ui->cboIntakeMode->currentIndex() )).toString();
 
-    if( supervisorMode_->cameFromLabelPlacementView() )
-    {
-        // if coming from the UI App, we just need these rotations, not really the whole structure, just do single field writes and exit
-
-        QString msg;        // plu,offset,newVak,oldVal
-        msg = currentPLUData->itemNumber() + "," + QString::number( Product::fieldOffsetLabelPlacement1 ) + "," + currentPLUData->primaryLabelPlacementRaw() + "," + "2";
-        session_->send(ProductDev, ProductWriteSingleField, msg);           // writesinglefield 101,16
-        session_->send(ProductDev, ProductSave);
-
-        msg = currentPLUData->itemNumber() + "," + QString::number( Product::fieldOffsetLabelPlacement2 ) + "," + currentPLUData->secondLabelPlacementRaw() + "," + "2";
-        session_->send(ProductDev, ProductWriteSingleField, msg);           // writesinglefield 101,16
-        session_->send(ProductDev, ProductSave);
-
-        msg = currentPLUData->itemNumber() + "," + QString::number( Product::fieldOffsetLabelRotation1 ) + "," + currentPLUData->primaryLabelRotationRaw() + "," + "0";
-        session_->send(ProductDev, ProductWriteSingleField, msg);           // writesinglefield 101,16
-        session_->send(ProductDev, ProductSave);
-
-        msg = currentPLUData->itemNumber() + "," + QString::number( Product::fieldOffsetLabelRotation2 ) + "," + currentPLUData->secondLabelRotationRaw() + "," + "0";
-        session_->send(ProductDev, ProductWriteSingleField, msg);           // writesinglefield 101,16
-        session_->send(ProductDev, ProductSave);
-    }
+    //    Security label - We'll check it before we save the product.
 }
 
 void superChangeProductAllFields::SaveTexts()
@@ -2578,7 +2493,7 @@ void superChangeProductAllFields::initialize()
         governFields(0,false);
         switchToMainTab = true;
         previousPLUItemNumber = "0";
-        LOG_DEBUG( "NO PLU and itemNumber %s", currentPLUData->itemNumber().toLatin1().constData() );
+        LOG_DEBUG( "NO number %s", currentPLUData->itemNumber().toLatin1().constData() );
     }
     else
     {
@@ -2591,7 +2506,7 @@ void superChangeProductAllFields::initialize()
         governFields(0,true);
         previousPLUItemNumber = ui->leProductNumber->text();
         switchToMainTab = false;
-        LOG_DEBUG( "YES PLU and itemNumber %s", currentPLUData->itemNumber().toLatin1().constData() );
+        LOG_DEBUG( "YES number %s", currentPLUData->itemNumber().toLatin1().constData() );
     }
 
 
@@ -2667,7 +2582,7 @@ void superChangeProductAllFields::initialize()
     ui->lblTare->setText( lblTare );
 
     //////////////////////////////////
-    // TAB 2 - Pricing
+    // TAB 3 - Pricing
     //////////////////////////////////
     this->loadPricingTab(currentPLUData->productType());
 
@@ -2812,12 +2727,6 @@ void superChangeProductAllFields::initialize()
     // All of the validators were moved to realInitialize() 11-27-2018
 
     //  Add the Prepack fields to the Labeling tab
-    ui->cboPrimaryApplierRotation->blockSignals( true );            // dont want these firing off save message SIGNALS
-    ui->cboSecondApplierRotation->blockSignals( true );
-    ui->cboThirdApplierRotation->blockSignals( true );
-    ui->cboPrimaryLabelPlacement->blockSignals( true );
-    ui->cboSecondLabelPlacement->blockSignals( true );
-    ui->cboThirdLabelPlacement->blockSignals( true );
 
     setupWrapperAndApplierFields();
 
@@ -2826,35 +2735,28 @@ void superChangeProductAllFields::initialize()
     ui->cboThirdApplierRotation->setCurrentIndex(ui->cboThirdApplierRotation->findData(currentPLUData->thirdLabelRotationRaw()));
 
     QString primaryLabelPlacementRaw = currentPLUData->primaryLabelPlacementRaw();
-    QString secondyLabelPlacementRaw = currentPLUData->secondLabelPlacementRaw();
-    QString thirdyLabelPlacementRaw  = currentPLUData->thirdLabelPlacementRaw();
-
-    if( ( primaryLabelPlacementRaw.length() == 0 ) || ( primaryLabelPlacementRaw.toInt() > 2 ) )
+    if( primaryLabelPlacementRaw.length() == 0 )                // IF BLANK
         primaryLabelPlacementRaw = "2";                         // SET to SYS DEF - USER DATA = 2
-
-    if( secondyLabelPlacementRaw.length() == 0 )                // IF BLANK
-        secondyLabelPlacementRaw = "2";                         // SET to SYS DEF - USER DATA = 2
-
-    if( thirdyLabelPlacementRaw.length() == 0 )                 // IF BLANK
-        thirdyLabelPlacementRaw = "2";                          // SET to SYS DEF - USER DATA = 2
+    else if( primaryLabelPlacementRaw.toInt() == 0 )            // IF UPPER RIGHT
+        primaryLabelPlacementRaw = "0";                         // SET TO UPPER RIGHT - USER DATA 0
+    else if( primaryLabelPlacementRaw.toInt() == 1 )            // IF UPPER LEFT
+        primaryLabelPlacementRaw = "1";                         // SET UPPER LEFT
+    else if( primaryLabelPlacementRaw.toInt() == 2 )            // IF NONE OPTION
+        primaryLabelPlacementRaw = "2";                         // SET to SYS DEF - USER DATA = 2
+    else if ( primaryLabelPlacementRaw.toInt() > 2 )            // THESE are P1 values from slide in slide out systems. Obsolete now
+        primaryLabelPlacementRaw = "0";                         // SET TO UPPER RIGHT - USER DATA 0 - DB needs updated.
 
     ui->cboPrimaryLabelPlacement->setCurrentIndex(ui->cboPrimaryLabelPlacement->findData( primaryLabelPlacementRaw ));
-    ui->cboSecondLabelPlacement->setCurrentIndex( ui->cboSecondLabelPlacement->findData( secondyLabelPlacementRaw ));
-    ui->cboThirdLabelPlacement->setCurrentIndex(ui->cboThirdLabelPlacement->findData(thirdyLabelPlacementRaw ));
 
-    ui->cboPrimaryApplierRotation->blockSignals( false );        // ok its safe now
-    ui->cboSecondApplierRotation->blockSignals( false );
-    ui->cboThirdApplierRotation->blockSignals( false );
-    ui->cboPrimaryLabelPlacement->blockSignals( false );
-    ui->cboSecondLabelPlacement->blockSignals( false );
-    ui->cboThirdLabelPlacement->blockSignals( false );
-
-    //int cbo2ndCount = ui->cboSecondLabelPlacement->count();
-    for( int j = 0; j < 9; j++)
+    if( currentPLUData->secondLabelType() > 0 )
     {
-        LOG_DEBUG( "initialize() - cboSecondLabelPlacement  findData[%d]: %d", j, ui->cboSecondLabelPlacement->findData( QString::number(j) ));
-
+        ui->cboSecondLabelPlacement->setCurrentIndex(ui->cboSecondLabelPlacement->findData(currentPLUData->secondLabelPlacementRaw()));
     }
+    else
+    {
+       ui->cboSecondLabelPlacement->setCurrentIndex( 2 );
+    }
+    ui->cboThirdLabelPlacement->setCurrentIndex(ui->cboThirdLabelPlacement->findData(currentPLUData->thirdLabelPlacementRaw()));
 
     ui->cboIntakeMode->setCurrentIndex(ui->cboIntakeMode->findData(currentPLUData->intakeMode()));
 
@@ -4114,54 +4016,11 @@ void superChangeProductAllFields::translate()
     if( shortListEditor_ )
         shortListEditor_->translate();
 
-    ui->cboPrimaryLabelPlacement->blockSignals( true );
-    ui->cboSecondLabelPlacement->blockSignals( true );
-    ui->cboThirdLabelPlacement->blockSignals( true );
-
     ui->cboPrimaryLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
     ui->cboPrimaryLabelPlacement->setItemText(1, tr("Upper Right"));
     ui->cboPrimaryLabelPlacement->setItemText(2, tr("Upper Left"));
-
-    int primaryIndex = currentPLUData->primaryLabelPlacement();
-    switch( primaryIndex )
-    {
-        case upperRight:
-        {
-            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));
-            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Left"));
-            ui->cboSecondLabelPlacement->setItemText(2, tr("Lower Right"));
-            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Left"));
-            ui->cboSecondLabelPlacement->setItemText(4, tr("Left of Primary"));
-            ui->cboSecondLabelPlacement->setItemText(5, tr("Below Primary"));
-            break;
-        }
-        case upperLeft:
-        {
-            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));
-            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Right"));
-            ui->cboSecondLabelPlacement->setItemText(2, tr("Lower Right"));
-            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Left"));
-            ui->cboSecondLabelPlacement->setItemText(4, tr("Right of Primary"));
-            ui->cboSecondLabelPlacement->setItemText(5, tr("Below Primary"));
-            break;
-        }
-        default:
-        {
-            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));
-            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Right"));
-            ui->cboSecondLabelPlacement->setItemText(2, tr("Upper Left"));
-            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Right"));
-            ui->cboSecondLabelPlacement->setItemText(4, tr("Lower Left"));
-            ui->cboSecondLabelPlacement->setItemText(5, tr("Right of Primary"));
-            ui->cboSecondLabelPlacement->setItemText(6, tr("Left of Primary"));
-            ui->cboSecondLabelPlacement->setItemText(7, tr("Below Primary"));
-            break;
-        }
-    }
-
-    ui->cboPrimaryLabelPlacement->blockSignals( false );
-    ui->cboSecondLabelPlacement->blockSignals( false );
-    ui->cboThirdLabelPlacement->blockSignals( false );
+    //ui->cboPrimaryLabelPlacement->setItemText(3, tr("Lower Right"));
+    //ui->cboPrimaryLabelPlacement->setItemText(4, tr("Lower Left"));
 
     ui->cboThirdLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
     ui->cboThirdLabelPlacement->setItemText(1, tr("Upper Right"));
@@ -7328,8 +7187,22 @@ void superChangeProductAllFields::setupWrapperAndApplierFields()
     ui->cboPrimaryLabelPlacement->addItem(tr("System default"), "2");    //    Make first in list in case of no applier.
     ui->cboPrimaryLabelPlacement->addItem(tr("Upper Right"), "0");
     ui->cboPrimaryLabelPlacement->addItem(tr("Upper Left"), "1");
+    //ui->cboPrimaryLabelPlacement->addItem(tr("Lower Right"), "3");
+    //ui->cboPrimaryLabelPlacement->addItem(tr("Lower Left"), "4");
 
     populateSecondaryPlacementComboBox();
+/*
+    ui->cboSecondLabelPlacement->clear();
+    ui->cboSecondLabelPlacement->addItem(tr("System default"), "2");    //    Make first in list in case of no applier.
+    ui->cboSecondLabelPlacement->addItem(tr("Upper Right"), "0");
+    ui->cboSecondLabelPlacement->addItem(tr("Upper Left"), "1");
+    ui->cboSecondLabelPlacement->addItem(tr("Lower Right"), "3");
+    ui->cboSecondLabelPlacement->addItem(tr("Lower Left"), "4");
+    ui->cboSecondLabelPlacement->addItem(tr("Right of Primary"), "5");
+    ui->cboSecondLabelPlacement->addItem(tr("Left of Primary"), "6");
+    ui->cboSecondLabelPlacement->addItem(tr("Above Primary"), "7");
+    ui->cboSecondLabelPlacement->addItem(tr("Below Primary"), "8");
+*/
 
     ui->cboThirdLabelPlacement->clear();
     ui->cboThirdLabelPlacement->addItem(tr("System default"), "2");    //    Make first in list in case of no applier.
@@ -7367,11 +7240,11 @@ void superChangeProductAllFields::doxygenImpactAndRegressionTestingComments()
 // Here we are preventing the user from putting the secondary position as one of those conflicting positions
 void superChangeProductAllFields::populateSecondaryPlacementComboBox()
 {
-    int primaryIndex = currentPLUData->primaryLabelPlacement();
-
+    int primaryIndex = ui->cboPrimaryLabelPlacement->currentData().toInt();
 
     // need to check if secondary is not in a conflicting position, if its not then we dont need to set the secondary to system default
-
+    int currentSecondaryIndex = ui->cboSecondLabelPlacement->currentIndex();
+    int currentSecondaryData = ui->cboSecondLabelPlacement->currentData().toInt();
     switch( primaryIndex )
     {
         case upperRight:
@@ -7383,6 +7256,18 @@ void superChangeProductAllFields::populateSecondaryPlacementComboBox()
             ui->cboSecondLabelPlacement->addItem(tr("Lower Left"), "4");
             ui->cboSecondLabelPlacement->addItem(tr("Left of Primary"), "6");
             ui->cboSecondLabelPlacement->addItem(tr("Below Primary"), "8");
+
+            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
+            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Left"));
+            ui->cboSecondLabelPlacement->setItemText(2, tr("Lower Right"));
+            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Left"));
+            ui->cboSecondLabelPlacement->setItemText(4, tr("Left of Primary"));
+            ui->cboSecondLabelPlacement->setItemText(5, tr("Below Primary"));
+
+            if( currentSecondaryData != upperRight && currentSecondaryData != rightOfPrimary && currentSecondaryData != abovePrimary )
+            {
+                ui->cboSecondLabelPlacement->setCurrentIndex( currentSecondaryIndex );
+            }
             break;
         }
         case upperLeft:
@@ -7394,21 +7279,68 @@ void superChangeProductAllFields::populateSecondaryPlacementComboBox()
             ui->cboSecondLabelPlacement->addItem(tr("Lower Left"), "4");
             ui->cboSecondLabelPlacement->addItem(tr("Right of Primary"), "5");
             ui->cboSecondLabelPlacement->addItem(tr("Below Primary"), "8");
+
+            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
+            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Right"));
+            ui->cboSecondLabelPlacement->setItemText(2, tr("Lower Right"));
+            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Left"));
+            ui->cboSecondLabelPlacement->setItemText(4, tr("Right of Primary"));
+            ui->cboSecondLabelPlacement->setItemText(5, tr("Below Primary"));
+
+            if( currentSecondaryData != upperLeft && currentSecondaryData != leftOfPrimary && currentSecondaryData != abovePrimary )
+            {
+                ui->cboSecondLabelPlacement->setCurrentIndex( currentSecondaryIndex );
+            }
             break;
         }
-        default:
+/* No longer a valid option 02-17-2023
+        case lowerRight:
+        {
+            ui->cboSecondLabelPlacement->clear();
+            ui->cboSecondLabelPlacement->addItem(tr("System default"), "2");    //    Make first in list in case of no applier.
+            ui->cboSecondLabelPlacement->addItem(tr("Upper Right"), "0");
+            ui->cboSecondLabelPlacement->addItem(tr("Upper Left"), "1");
+            ui->cboSecondLabelPlacement->addItem(tr("Lower Left"), "4");
+            ui->cboSecondLabelPlacement->addItem(tr("Left of Primary"), "6");
+            ui->cboSecondLabelPlacement->addItem(tr("Above Primary"), "7");
+
+            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
+            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Right"));
+            ui->cboSecondLabelPlacement->setItemText(2, tr("Upper Left"));
+            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Left"));
+            ui->cboSecondLabelPlacement->setItemText(4, tr("Left of Primary"));
+            ui->cboSecondLabelPlacement->setItemText(5, tr("Above Primary"));
+
+            if( currentSecondaryData != lowerRight && currentSecondaryData != rightOfPrimary && currentSecondaryData != belowPrimary )
+            {
+                ui->cboSecondLabelPlacement->setCurrentIndex( currentSecondaryIndex );
+            }
+            break;
+        }
+        case lowerLeft:
         {
             ui->cboSecondLabelPlacement->clear();
             ui->cboSecondLabelPlacement->addItem(tr("System default"), "2");    //    Make first in list in case of no applier.
             ui->cboSecondLabelPlacement->addItem(tr("Upper Right"), "0");
             ui->cboSecondLabelPlacement->addItem(tr("Upper Left"), "1");
             ui->cboSecondLabelPlacement->addItem(tr("Lower Right"), "3");
-            ui->cboSecondLabelPlacement->addItem(tr("Lower Left"), "4");
             ui->cboSecondLabelPlacement->addItem(tr("Right of Primary"), "5");
-            ui->cboSecondLabelPlacement->addItem(tr("Left of Primary"), "6");
-            ui->cboSecondLabelPlacement->addItem(tr("Below Primary"), "8");
+            ui->cboSecondLabelPlacement->addItem(tr("Above Primary"), "7");
+
+            ui->cboSecondLabelPlacement->setItemText(0, tr("System default"));    //    Make first in list in case of no applier.
+            ui->cboSecondLabelPlacement->setItemText(1, tr("Upper Right"));
+            ui->cboSecondLabelPlacement->setItemText(2, tr("Upper Left"));
+            ui->cboSecondLabelPlacement->setItemText(3, tr("Lower Right"));
+            ui->cboSecondLabelPlacement->setItemText(4, tr("Right of Primary"));
+            ui->cboSecondLabelPlacement->setItemText(5, tr("Above Primary"));
+
+            if( currentSecondaryData != lowerLeft && currentSecondaryData != leftOfPrimary && currentSecondaryData != belowPrimary )
+            {
+                ui->cboSecondLabelPlacement->setCurrentIndex( currentSecondaryIndex );
+            }
             break;
         }
+*/
     }
 }
 

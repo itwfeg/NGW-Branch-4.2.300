@@ -728,13 +728,6 @@ void CfgAll::initFieldList()
 		evolFieldList.push_back(fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag);
 
 		evolFieldList.push_back(fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight);
-		evolFieldList.push_back(fieldOffsetCfgFieldExclusions);
-
-		// Intentionally/explicitly commented out.  We don't want to pass this to another scale; it's setting has nothing to do with the label stock in this scale vs another scale.
-		// evolFieldList.push_back(fieldOffsetCfgEnableRfidPrinting);
-		evolFieldList.push_back(fieldOffsetCfgMaxPERfidVoidLabels);
-		evolFieldList.push_back(fieldOffsetCfgRfidEncodeMethod);
-		evolFieldList.push_back(fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled);
 
 		ConfigurationTags configurationTags((FieldOffsetsList *)&evolFieldList);
 	}
@@ -1401,11 +1394,6 @@ void CfgAll::initFieldList()
 		synchronizationList.push_back(fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag);
 
 		synchronizationList.push_back(fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight);
-		synchronizationList.push_back(fieldOffsetCfgFieldExclusions);
-
-		synchronizationList.push_back(fieldOffsetCfgMaxPERfidVoidLabels);
-		synchronizationList.push_back(fieldOffsetCfgRfidEncodeMethod);
-		synchronizationList.push_back(fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled);
 
 		ConfigurationTags configurationTags((FieldOffsetsList *)&synchronizationList);
 	}
@@ -2064,12 +2052,6 @@ void CfgAll::initFieldList()
 		dbIndependentList.push_back(fieldOffsetCfgIgnoreVendorAndProductNumTagsWhenUpcNumTag);
 
 		dbIndependentList.push_back(fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight);
-		dbIndependentList.push_back(fieldOffsetCfgFieldExclusions);
-
-		dbIndependentList.push_back(fieldOffsetCfgEnableRfidPrinting);
-		dbIndependentList.push_back(fieldOffsetCfgMaxPERfidVoidLabels);
-		dbIndependentList.push_back(fieldOffsetCfgRfidEncodeMethod);
-		dbIndependentList.push_back(fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled);
 
 		ConfigurationTags configurationTags((FieldOffsetsList *)&dbIndependentList);
 	}

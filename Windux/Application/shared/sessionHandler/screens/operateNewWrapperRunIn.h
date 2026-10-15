@@ -17,7 +17,6 @@ class MadpEvolWrapperMotorProfile;
 class QLabel;
 class QPushButton;
 class QTimer;
-class MadpInternalConfig;
 
 namespace Ui {
 class operateNewWrapperRunIn;
@@ -68,22 +67,10 @@ private Q_SLOTS:
     /// Slot for timer timeout.
     void onTimerTimeout();
 
-    /// SLOT on returning to Timings
-    void onBackToTimings();
-
     // SOF-4217
     void generateRunInReport();
 
 protected:
-
-     /* Handle screen changing.
-     *
-     * This method is called before the screen is changed to something new. If for some reason the
-     * screen should not be unloaded and destroyed then a value of @c false should be returned.
-     *
-     * @returns  @c true to unload screen, @c false to keep screen resident
-     */
-    virtual bool onScreenChanging();
 
     /**
      * Handle a session message.
@@ -134,10 +121,8 @@ private:
 
     QPushButton *lblCycleCountsTitle_;
     QPushButton *cycleCounts_;
-
-    bool    screenLoaded_;
-    long    runinCycleCounter_;
-    long    msgCounter_;
+    long     runinCycleCounter_;
+    long     msgCounter_;
 
     QTimer *saveCycleCountsTimer_;
     QTimer *fakeCycleTimer_;

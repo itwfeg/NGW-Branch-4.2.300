@@ -197,7 +197,6 @@ CPP_SRCS := \
     HobTokenizer.cpp \
     HobTokenizerBar.cpp \
     HobTokenizerCSV.cpp \
-    HobTokenizerTSV.cpp \
     HobTokenizerUS.cpp \
     HobTokenTagged.cpp \
     HourlyTotal.cpp \

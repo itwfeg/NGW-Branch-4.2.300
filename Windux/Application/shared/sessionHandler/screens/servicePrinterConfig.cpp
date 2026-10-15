@@ -31,7 +31,6 @@ static const int EPP2Printer  = 5;          // Newest Atmel EPP Printer which is
 static const int UsbPrinter   = 6;          // The APC Printer is the normal everyday printer for the HT scales as a primary printer.
 static const int NetPrinter   = 7;          // Newest Atmel EPP Printer which is becoming the newer standard.
 static const int SSKPrinter   = 12;         // New free standing self service scale printer
-
 static const QString SelfService    = "1";  // Newest Atmel EPP Printer which is becoming the newer standard.
 static const QString AccessWrapper  = "2";  // Access Wrapper
 static const QString CounterScale   = "3";  // Newest Atmel EPP Printer which is becoming the newer standard.
@@ -66,48 +65,46 @@ servicePrinterConfig::servicePrinterConfig(SessionMainWindow *mainWindow, ModeWi
     //---------------------------------------------------------
     // Set the connection for when the Printer dropdown changes
     //---------------------------------------------------------
-    connect(ui->cbPrinterSelection, SIGNAL( currentIndexChanged(int) ), this, SLOT( printerChanged(int) ) );
+    connect(ui->cbPrinterSelection, SIGNAL( currentIndexChanged(int) ), this, SLOT( PrinterChanged(int) ) );
 
     //------------------------------------------------------------------
     // Set the connections for when a one of the setup fields is changed.
     // These all call the same method to set a property that indicates
     // something in the setup changed and the data needs to be saved.
     //------------------------------------------------------------------
-    connect( ui->cbPrintContrast,            SIGNAL( currentIndexChanged(int) ), this,   SLOT( setupChanged() ) );
-    connect( ui->txtVerticalPrintPosition,   SIGNAL( editingFinished() ),        this,   SLOT( setupChanged() ) );
-    connect( ui->cbLabelWidth,               SIGNAL( currentIndexChanged(int) ), this,   SLOT( setupChanged() ) );
-    connect( ui->txtHorizontalPrintPosition, SIGNAL( editingFinished() ),        this,   SLOT( setupChanged() ) );
-    connect( ui->txtContinuousExpelPosition, SIGNAL( editingFinished() ),        this,   SLOT( setupChanged() ) );
-    connect( ui->cboMediaSensorType,         SIGNAL( currentIndexChanged(int) ), this,   SLOT( setupChanged() ) );
+    connect( ui->cbPrintContrast, SIGNAL( currentIndexChanged(int) ), this, SLOT( SetupChanged() ) );
+    connect( ui->txtVerticalPrintPosition, SIGNAL( editingFinished() ), this, SLOT( SetupChanged() ) );
+    connect( ui->cbLabelWidth, SIGNAL( currentIndexChanged(int) ), this, SLOT( SetupChanged() ) );
+    connect( ui->txtHorizontalPrintPosition, SIGNAL( editingFinished() ), this, SLOT( SetupChanged() ) );
+    connect( ui->txtContinuousExpelPosition, SIGNAL( editingFinished() ), this, SLOT( SetupChanged() ) );
 
     //---------------------------------------------------
     // Set connection for when Test Label Pattern changes
     //---------------------------------------------------
-    connect( ui->cbTestLabelPattern, SIGNAL( currentIndexChanged(int) ), this, SLOT( updateTestPatternLabel(int) ) );
+    connect( ui->cbTestLabelPattern, SIGNAL( currentIndexChanged(int) ), this, SLOT( UpdateTestPatternLabel(int) ) );
 
     //---------------------------------------
     // Set connections for the action buttons
     //---------------------------------------
-    connect( ui->btnPrintOne, SIGNAL( clicked() ), this, SLOT( printSingleTestLabel() ) );
-    connect( ui->btnPrintMultiple, SIGNAL( clicked() ), this, SLOT( printMultipleTestLabels() ) );
-    connect( ui->btnStopMultiple, SIGNAL( clicked() ), this, SLOT( stopMultipleTestLabels() ) );
-    connect( ui->btnCalibrateMediaSensor, SIGNAL( clicked() ), this, SLOT( calibrateMediaSensor() ) );
-    connect( ui->btnCalibrateLabelTakenSensor, SIGNAL( clicked() ), this, SLOT( calibrateLabelTakenSensor() ) );
-    connect( ui->btnAdvanceStock, SIGNAL( clicked() ), this, SLOT( advanceLabelStock() ) );
-    connect( ui->btnCalibShootThrough, SIGNAL( clicked() ), this, SLOT( calibrateShootThrough() ) );
+    connect( ui->btnPrintOne, SIGNAL( clicked() ), this, SLOT( PrintSingleTestLabel() ) );
+    connect( ui->btnPrintMultiple, SIGNAL( clicked() ), this, SLOT( PrintMultipleTestLabels() ) );
+    connect( ui->btnStopMultiple, SIGNAL( clicked() ), this, SLOT( StopMultipleTestLabels() ) );
+    connect( ui->btnCalibrateMediaSensor, SIGNAL( clicked() ), this, SLOT( CalibrateMediaSensor() ) );
+    connect( ui->btnCalibrateLabelTakenSensor, SIGNAL( clicked() ), this, SLOT( CalibrateLabelTakenSensor() ) );
+    connect( ui->btnAdvanceStock, SIGNAL( clicked() ), this, SLOT( AdvanceLabelStock() ) );
+    connect( ui->btnCalibShootThrough, SIGNAL( clicked() ), this, SLOT( CalibrateShootThrough() ) );
 
     //---------------------------------------------------
     // Set the connection for the Printer Settings button
     //---------------------------------------------------
     // FT-636
-    connect( ui->btnOperatorPrinterSettings, SIGNAL( clicked() ), this, SLOT( printerSettings() ) );
+    connect( ui->btnOperatorPrinterSettings, SIGNAL( clicked() ), this, SLOT( PrinterSettings() ) );
 
     // SOF-3853: Find out if a Cutter is attached
     cutterAttached_ = false;
     session_->send( Printer, PrReqCutterStatus );
 
     printheadDisengaged_ = false;
-    isShootThruSensor_ = 0;
 
     // Get the info for the Primary printer
     initPrinterValues("0");
@@ -236,10 +233,6 @@ void servicePrinterConfig::initialize()
     ui->cbTestLabelPattern->addItem( tr( "Vertical Lines" ),  4 );
     ui->cbTestLabelPattern->addItem( tr( "High Power" ),      5 );
 
-    // Media Sensor Type
-    ui->cboMediaSensorType->addItem( tr( "Reflective" ), 0 );
-    ui->cboMediaSensorType->addItem( tr( "Shoot thru" ), 1 );
-
     //HA-138: This variable wasn't initialized
     currentTestLabel = (ui->cbTestLabelPattern->itemData( ui->cbTestLabelPattern->currentIndex() )).toString();
 
@@ -289,7 +282,7 @@ void servicePrinterConfig::initialize()
     }
 }
 
-void servicePrinterConfig::hideAllFields()
+void servicePrinterConfig::HideAllFields()
 {
     ui->lblPrintContrast->hide();
     ui->cbPrintContrast->hide();
@@ -299,9 +292,6 @@ void servicePrinterConfig::hideAllFields()
 
     ui->lblLabelWidth->hide();
     ui->cbLabelWidth->hide();
-
-    ui->lblMediaSensorType->hide();
-    ui->cboMediaSensorType->hide();
 
     ui->lblHorizontalPrintPosition->hide();
     ui->txtHorizontalPrintPosition->hide();
@@ -337,7 +327,7 @@ void servicePrinterConfig::hideAllFields()
     ui->btnOperatorPrinterSettings->hide();
 }
 
-void servicePrinterConfig::showAllFields()
+void servicePrinterConfig::ShowAllFields()
 {
     ui->lblPrintContrast->show();
     ui->cbPrintContrast->show();
@@ -347,17 +337,6 @@ void servicePrinterConfig::showAllFields()
 
     ui->lblLabelWidth->show();
     ui->cbLabelWidth->show();
-
-    if( isSTEppPrinter() )
-    {
-        ui->lblMediaSensorType->show();
-        ui->cboMediaSensorType->show();
-    }
-    else
-    {
-        ui->lblMediaSensorType->hide();
-        ui->cboMediaSensorType->hide();     // should of already been hidden
-    }
 
     ui->lblHorizontalPrintPosition->show();
     ui->txtHorizontalPrintPosition->show();
@@ -405,12 +384,11 @@ void servicePrinterConfig::showAllFields()
 //----------------------------------------------------------------
 void servicePrinterConfig::initPrinterValues(QString printerType)
 {
-    hideAllFields();
+    HideAllFields();
 
-    labelWidthEnabledEnabled(printerType);
+    LabelWidthEnabledEnabled(printerType);
 
     currentPrinter = printerType;
-    slaValue = "0";
 
     //--------------------------
     // Request a Printer Inquiry
@@ -426,15 +404,12 @@ void servicePrinterConfig::initPrinterValues(QString printerType)
     // Printer Sensor ON for current printer
     //--------------------------------------
     session_->send( Printer, PrSensorsTracking, currentPrinter + ",1" );
-
-    // Get the attached printers
-    session_->send( System, SysReqPeripheralList );                     //11, 101 - Request current peripheral list
 }
 
 //------------------------------------------------------------------
 // Determines if the Label Width dropdown should be enabled/disabled
 //------------------------------------------------------------------
-void servicePrinterConfig::labelWidthEnabledEnabled( QString /*printerType*/ )
+void servicePrinterConfig::LabelWidthEnabledEnabled( QString /*printerType*/ )
 {
     if( isFirstPrinterEpp() || isEppPrinterAttached(2) || isEppPrinterAttached(3) )
     {
@@ -448,9 +423,9 @@ void servicePrinterConfig::labelWidthEnabledEnabled( QString /*printerType*/ )
 
 bool servicePrinterConfig::onScreenChanging()
 {
-    clearMessages();
+    ClearMessages();
 
-    saveDataOnExit();
+    SaveDataOnExit();
 
     return _Mybase::onScreenChanging();
 }
@@ -569,10 +544,6 @@ void servicePrinterConfig::onSessionMessage( const SessionMessage& msg )
             // Label Width
             ui->cbLabelWidth->setCurrentIndex( ui->cbLabelWidth->findData( m.labelWidth() ) );
 
-            // media sensor type
-            ui->cboMediaSensorType->setCurrentIndex( m.mediaSensorType() );
-            isShootThruSensor_ = m.mediaSensorType();
-
             // Vertical Print Position
             ui->txtVerticalPrintPosition->setText( m.vertPrintPositionRaw() );
 
@@ -585,13 +556,11 @@ void servicePrinterConfig::onSessionMessage( const SessionMessage& msg )
                 ui->txtContinuousExpelPosition->setText( m.expelPositionRaw() );
             }
 
-            slaValue = m.slaEjectLineRaw();             // save for later in case we need it.
-
             // Test Label
-//            updateTestPatternLabel(m.testLabel().toInt());	//	This does not exist in DomPrinterConfigRead. Defaults to Checkerboard.
+//            UpdateTestPatternLabel(m.testLabel().toInt());	//	This does not exist in DomPrinterConfigRead. Defaults to Checkerboard.
 //            currentTestLabel = m.testLabel();
 
-            showAllFields();
+            ShowAllFields();
 
             bSetupChanged = false;
         }
@@ -777,28 +746,13 @@ void servicePrinterConfig::onSessionMessage( const SessionMessage& msg )
             }
         }
     }
-
-    if (( System == msg[0].toInt() ) && ( SysPeripheralList == msg[1].toInt() ))
-    {    
-        if( isSTEppPrinter() )
-        {
-            ui->lblMediaSensorType->show();
-            ui->cboMediaSensorType->show();
-        }
-        else
-        {
-            ui->lblMediaSensorType->hide();
-            ui->cboMediaSensorType->hide();     // should of already been hidden
-        }
-    }
 }
-
 
 //------------------------------------------------------
 // Update property indicating that the setup has changed
 // and needs to be saved
 //------------------------------------------------------
-void servicePrinterConfig::setupChanged()
+void servicePrinterConfig::SetupChanged()
 {
     bSetupChanged = true;
 }
@@ -806,9 +760,9 @@ void servicePrinterConfig::setupChanged()
 //-----------------------------------------------
 // Slot for when the Printer selection is changed
 //-----------------------------------------------
-void servicePrinterConfig::printerChanged(int index)
+void servicePrinterConfig::PrinterChanged(int index)
 {
-    clearMessages();
+    ClearMessages();
 
 //    initPrinterValues((ui->cbPrinterSelection->itemData(ui->cbPrinterSelection->currentIndex())).toString());
 
@@ -826,7 +780,7 @@ void servicePrinterConfig::printerChanged(int index)
 //---------------------------------------------------------
 // Slot for when the Test Label Pattern dropdown is changed
 //---------------------------------------------------------
-void servicePrinterConfig::updateTestPatternLabel(int index)
+void servicePrinterConfig::UpdateTestPatternLabel(int index)
 {
     currentTestLabel = (ui->cbTestLabelPattern->itemData( index )).toString();
 }
@@ -834,11 +788,11 @@ void servicePrinterConfig::updateTestPatternLabel(int index)
 //--------------------------------------
 // Slot for printing a single test label
 //--------------------------------------
-void servicePrinterConfig::printSingleTestLabel()
+void servicePrinterConfig::PrintSingleTestLabel()
 {
     QString param;
 
-    saveDataOnExit();
+    SaveDataOnExit();
 
     param = currentPrinter + "," + currentTestLabel + ",0";
     session_->send( Printer, PrTestLabel, param );
@@ -847,11 +801,11 @@ void servicePrinterConfig::printSingleTestLabel()
 //---------------------------------------
 // Slot for printing multiple test labels
 //---------------------------------------
-void servicePrinterConfig::printMultipleTestLabels()
+void servicePrinterConfig::PrintMultipleTestLabels()
 {
     QString param;
 
-    saveDataOnExit();
+    SaveDataOnExit();
 
     param = currentPrinter + "," + currentTestLabel + ",1";
     session_->send( Printer, PrTestLabel, param );
@@ -860,7 +814,7 @@ void servicePrinterConfig::printMultipleTestLabels()
 //-------------------------------------------------------
 // Slot for stopping the printing of multiple test labels
 //-------------------------------------------------------
-void servicePrinterConfig::stopMultipleTestLabels()
+void servicePrinterConfig::StopMultipleTestLabels()
 {
     QString param;
 
@@ -871,7 +825,7 @@ void servicePrinterConfig::stopMultipleTestLabels()
 //--------------------------------------
 // Slot for Calibrating the Media sensor
 //--------------------------------------
-void servicePrinterConfig::calibrateMediaSensor()
+void servicePrinterConfig::CalibrateMediaSensor()
 {
     QString param;
 
@@ -882,7 +836,7 @@ void servicePrinterConfig::calibrateMediaSensor()
 //--------------------------------------------
 // Slot for Calibrating the Label Taken sensor
 //--------------------------------------------
-void servicePrinterConfig::calibrateLabelTakenSensor()
+void servicePrinterConfig::CalibrateLabelTakenSensor()
 {
     QString param;
 
@@ -893,7 +847,7 @@ void servicePrinterConfig::calibrateLabelTakenSensor()
 //-----------------------------------
 // Slot for Advancing the Label Stock
 //-----------------------------------
-void servicePrinterConfig::advanceLabelStock()
+void servicePrinterConfig::AdvanceLabelStock()
 {
     session_->send( Printer, PrReqAdvLabelStock, currentPrinter );
 }
@@ -902,7 +856,7 @@ void servicePrinterConfig::advanceLabelStock()
 // Slot for Calibrating Shoot Through (Gap) Sensor
 //------------------------------------------------
 
-void servicePrinterConfig::calibrateShootThrough()
+void servicePrinterConfig::CalibrateShootThrough()
 {
     LOG_CLASS_INFO("servicePrinterConfig", "CalibrateShootThrough");
 
@@ -929,7 +883,7 @@ void servicePrinterConfig::calibrateShootThrough()
 // Slot for when the Printer Settings button is clicked
 //-----------------------------------------------------
 // FT-636
-void servicePrinterConfig::printerSettings()
+void servicePrinterConfig::PrinterSettings()
 {
     PrinterSettingsDialog *dialog = new PrinterSettingsDialog( mainWindow_ );
 
@@ -950,7 +904,7 @@ void servicePrinterConfig::sendCalibrationNext()
 //-------------------------------------------------------------------
 // Build up the string containing the setting and update the database
 //-------------------------------------------------------------------
-void servicePrinterConfig::saveDataOnExit()
+void servicePrinterConfig::SaveDataOnExit()
 {
     if (bSetupChanged)
     {
@@ -962,14 +916,8 @@ void servicePrinterConfig::saveDataOnExit()
         param += "," + ui->txtHorizontalPrintPosition->text();
         param += ",\"" + ( ui->cbLabelWidth->itemData( ( ui->cbLabelWidth->currentIndex() ) ) ).toString() + "\"";
 
-        if(session_->isPrepack())
-            param += ",";                   // no idea why we dont send this if a wrapper.  Maybe EPPs cant change their expel position????? Or do it diff???
-        else
+        if(!session_->isPrepack())
             param += "," + ui->txtContinuousExpelPosition->text();
-
-        param += "," +  QString::number(ui->cboMediaSensorType->currentIndex() );
-
-        //param += "," + slaValue;            // Never used on this screen even tho in msg. I dont know. Future use?
 
         session_->send( Printer, PrConfig, param);
 
@@ -980,7 +928,7 @@ void servicePrinterConfig::saveDataOnExit()
 //------------------------------------------------------------------------------
 // Send messages to turn off sensor tracking and turn off continuous test labels
 //------------------------------------------------------------------------------
-void servicePrinterConfig::clearMessages()
+void servicePrinterConfig::ClearMessages()
 {
     QString param;
 
@@ -988,18 +936,7 @@ void servicePrinterConfig::clearMessages()
     param = currentPrinter + ",0";
     session_->send( Printer, PrSensorsTracking, param );
 
-    stopMultipleTestLabels();
-}
-
-bool servicePrinterConfig::isSTEppPrinter()
-{
-    MadpPeripheralList *periphSettings = &session_->scaleConfig->peripheralList;
-
-    // want to use this better, stronger, test, but not sure yet if it follows thru
-    if( ( periphSettings->firstPrinter() == PrinterKind::fieldOffsetSTEPPPrinter ) || ( periphSettings->secondPrinter() == PrinterKind::fieldOffsetSTEPPPrinter ) )
-        return true;
-    else
-        return false;
+    StopMultipleTestLabels();
 }
 
 bool servicePrinterConfig::isFirstPrinterEpp()
@@ -1064,13 +1001,13 @@ bool servicePrinterConfig::isUsbPrinterAttached(int printerLocation)
 
 bool servicePrinterConfig::isSSKPrinterAttached()
 {
-    //LOG_CLASS_INFO("servicePrinterSensors", "isSSKPrinterAttached");
+    LOG_CLASS_INFO("servicePrinterSensors", "isSSKPrinterAttached");
 
     MadpPeripheralList *periphList = &session_->scaleConfig->peripheralList;
 
     bool isAttached = false;
 
-    //LOG_INFO("firstPrinter() = %d", periphList->firstPrinter());
+    LOG_INFO("firstPrinter() = %d", periphList->firstPrinter());
     if (periphList->firstPrinter() == SSKPrinter)
     {
         isAttached = true;

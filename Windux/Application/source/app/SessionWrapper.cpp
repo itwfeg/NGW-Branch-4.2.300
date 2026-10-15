@@ -85,7 +85,6 @@
 #include "GenericHfcObject.h"
 
 #include "FpmManager.h"
-#include "FpmEvent.h"
 
 #ifndef returnToLater
 #include "HfcWrapperSensors.h"
@@ -142,16 +141,9 @@ void Session::handleWrapperMessage(SessionMessage *msg)
 
 					//	Register for the WrapperSystem SysUsbWrStatus or SysStatus message
 					if (peripheralManager && peripheralManager->getCurrentList().isEvolutionWrapperAttached())
-					{
-						Debug::trace("Session.WrSystem", "registering SysUsbWrStatus event");
 						registerEvent(WrapperSystem, SysUsbWrStatus, false);
-					}
 					else
-					{
-						Debug::trace("Session.WrSystem", "registering SysStatus event");
-						registerEvent(WrapperSystem, SysStatus, false);
-					}
-						
+						registerEvent(WrapperSystem, SysStatus,false );
 					//  Not much to do here with a Wrapper System Request Status message except pass it on.
 					//  But first, change the format from Browser to Internal.
 					msg->setFormatType(InternalFormat);
@@ -210,19 +202,13 @@ void Session::handleWrapperMessage(SessionMessage *msg)
 							for ( unsigned int i = 0; i < status->getNodeCount(); i++ )
 							{
 								const EvolWrapperNode& node( status->getNode( i ) );
-								const EvolWrapperNode::EvolWrapperVersions appVersions( node.getAppFlash() );
-								const EvolWrapperNode::EvolWrapperVersions bootVersions( node.getBootFlash() );
+								const EvolWrapperNode::EvolWrapperVersions versions( node.getAppFlash() );
 
-								std::string appSw;
-								std::string bootSw;
-								appSw += util_string::inttostring( appVersions.getMajorRevision() );
-								appSw += ".";
-								appSw += util_string::inttostring( appVersions.getMinorRevision() );
-								bootSw += util_string::inttostring( bootVersions.getMajorRevision() );
-								bootSw += ".";
-								bootSw += util_string::inttostring( bootVersions.getMinorRevision() );
+								std::string sw;
+								sw += util_string::inttostring( versions.getMajorRevision() );
+								sw += ".";
+								sw += util_string::inttostring( versions.getMinorRevision() );
 
-								std::string appAndBootSw = appSw + " | " + bootSw;
 								const std::string hw( "unknown" );
 
 	                            const HfcPeripheralList list( pm->getCurrentList() );
@@ -231,8 +217,8 @@ void Session::handleWrapperMessage(SessionMessage *msg)
 								status->show();
 
 #if defined ( __linux__ )
-								Debug::trace("Session", "node " + util_string::inttostring( node.getNodeId() ) + " versions: appAndBootSw " + appAndBootSw + ", hw " + hw);
-								hobart_cust_hook_update_peripheral_version( WrapperSystem, node.getNodeId(), list.getWrapper(), appAndBootSw.c_str(), hw.c_str() );
+								Debug::trace("Session", "node " + util_string::inttostring( node.getNodeId() ) + " versions: sw " + sw + ", hw " + hw);
+								hobart_cust_hook_update_peripheral_version( WrapperSystem, node.getNodeId(), list.getWrapper(), sw.c_str(), hw.c_str() );
 #endif
 							}
 						}
@@ -1566,14 +1552,14 @@ void Session::handleWrapperMessage(SessionMessage *msg)
 				case WrEvolAutoDetectTrayType:			// What's the tray type for this tray?
 				case WrEvolAutoConfigTrayType:			// Configure a new tray type
 				case WrEvolCreateTrayType:				// Create a tray type
-				case WrEvolChangeTrayTypePrecedence:	// Change precedence on a tray type
-				case WrEvolWriteTrayType:				// Update a tray type
+				case WrEvolChangeTrayTypePrecedence:	  // Change precedence on a tray type
+				case WrEvolWriteTrayType:				 // Update a tray type
 				case WrEvolDeleteTrayType:				// Delete a tray type
-				case WrEvolReadWrapBox:				    // Read a wrap box
-				case WrEvolWriteWrapBox:			    // Update a wrap box
-				case WrEvolPrintWrapBox:			    // Print a wrap box settings
-				case WrEvolCancelWrapBoxChanges:		// Cancel Wrap Box changes
-				case WrEvolDoneWrapBox:				    // Ended viewing/updating a wrap box
+				case WrEvolReadWrapBox:				   // Read a wrap box
+				case WrEvolWriteWrapBox:				  // Update a wrap box
+				case WrEvolPrintWrapBox:				  // Print a wrap box settings
+				case WrEvolCancelWrapBoxChanges:		  // Cancel Wrap Box changes
+				case WrEvolDoneWrapBox:				   // Ended viewing/updating a wrap box
 				case WrEvolReadHeightBox:				 // Load a height box
 				case WrEvolWriteHeightBox:				// Update a height box
 				case WrEvolRenameHeightBox:			   // Change the height of a height box
@@ -1587,10 +1573,9 @@ void Session::handleWrapperMessage(SessionMessage *msg)
 				case WrEvolSetMinTrayDims:
 				case WrEvolSetMaxTrayDims:
 				case WrEvolSetMinMaxTrayDims:
-				case WrEvolUnlockPackageTimings:
 				{
 					if (traceOn)
-						Debug::trace("SessionWrapper", msgDebug + HobString("Msg for the evolWrapperTimingsManager_") );
+						Debug::trace("SessionWrapper", msgDebug + HobString("Msg for the evolWrapperTimingsManager_"));
 
 					if ( !evolWrapperTimingsManager_ )
 					{
@@ -2801,14 +2786,6 @@ void Session::sendWrapperWrReqStatusMsg()
 	send(&request, Messenger::DEST_RTC);
 }
 
-void Session::sendWrapperPrintersLabelCounts()
-{
-	SessionMessage response(MfgTestDev, RequestPrinterLabelCount);
-	response.setFormatType(InternalFormat);
-
-	send(&response, Messenger::DEST_RTC);
-	Debug::trace("SessionWrapper", "Sending MfgTestDev message to RTC");
-}
 
 void Session::setWrapperSealerBeltPower(bool turnOn, WrapperKind wrKind)
 {
@@ -3135,15 +3112,10 @@ void Session::sendWrapperDataToHook(MtdNGWWrapperData* wrapperFlashData)
 		return;
 	}
 
-	Debug::trace("SessionWrapper.sendWrapperDataToHook", "Processing hook actions for MtdNGWWrapperData object (cycle count and printer(s) label count(s) data).");
+	Debug::trace("SessionWrapper.sendWrapperDataToHook", "Processing hook actions for MtdNGWWrapperData object (cycle count data).");
 
-	std::string data(std::string("SendWrapperData-cycleCounts-"));
-	data.append(std::to_string(wrapperFlashData->getCycleCounts()));
-	data.append(std::string("-primaryPrinterLabelCount-"));
-	data.append(std::to_string(wrapperFlashData->getPrimaryPrinterCounts()));
-	data.append(std::string("-secondaryPrinterLabelCount-"));
-	data.append(std::to_string(wrapperFlashData->getSecondaryPrinterCounts()));
+	std::string data(std::string("SendWrapperData-cycleCounts-").append(std::to_string(wrapperFlashData->getCycleCounts())));
 	performHookAction(data.c_str());
 
-	Debug::trace("SessionWrapper.sendWrapperDataToHook", "Finished processing hook actions for MtdNGWWrapperData object (cycle count and printer(s) label count(s) data).");
+	Debug::trace("SessionWrapper.sendWrapperDataToHook", "Finished processing hook actions for MtdNGWWrapperData object (cycle count data).");
 }

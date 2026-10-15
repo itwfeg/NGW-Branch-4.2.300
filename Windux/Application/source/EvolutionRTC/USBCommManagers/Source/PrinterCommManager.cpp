@@ -102,10 +102,6 @@ PrinterCommManager::PrinterCommManager(USBD_NODE_ID node_id, SUsbDescriptors * d
 	{
 		this->prKind = EscPrinter;
 	}
-	else if (UsbManager::getInstance()->getProductId(node_id) == HOBART_XPE_ST_PRINTER_ID)
-	{
-		this->prKind = Epp3Printer;
-	}
 
 	nodeId = node_id;
 	myPrinterType = FirstPrinter;
@@ -215,9 +211,6 @@ void PrinterCommManager::processEvent( Util::CSmartPtr< EvolMessageWrapper> & ms
 
 void PrinterCommManager::processUsbMessage( std::string & msg, CUsbPipe::EvolPipeType UNUSED(pipe_type) )
 {
-	// I think messages from Firmware come into here, at least PrinterMessages do
-	//Debug::trace("PrinterCommManager", "processUsbMessage() - INCOMING usb messages (along with receivedPrinterMessage())");
-
 	UNREFERENCED_PARAMETER(pipe_type);
 
 	const char * ptr = msg.c_str();
@@ -248,10 +241,6 @@ void PrinterCommManager::processUsbMessage( std::string & msg, CUsbPipe::EvolPip
 
 bool PrinterCommManager::handlePrinterEvent(PrEvent prEventType, const char *buffer)
 {
-	// These are printer messages that are sent to the Firmware - with the sendUsbInterruptMessage() sending it across the Pipe
-	//Debug::trace("PrinterComm.Message.Out", "PrinterCommManager::handlePrinterEvent() START - maybe see PrConfig with prEventType: " + Integer::toString(prEventType) );	
-	//Debug::trace("PrinterComm.Message.Out", "PrinterCommManager::handlePrinterEvent() These are the Printer Messages that are sent to the Firmware");
-
 	char str[512];
 	DWORD result = OK;
 	bool is_custom_code = false;
@@ -265,7 +254,7 @@ bool PrinterCommManager::handlePrinterEvent(PrEvent prEventType, const char *buf
 	{
 		case PrConfig:
 			{
-				Debug::trace("PrinterComm.Message.Out", "PrinterCommManager::handlePrinterEvent() SEND PrConfig (7,1)");			// I DONT SEE THIS	
+				Debug::trace("PrinterComm.Message.Out", "PrConfig");	
 
 				PrinterConfiguration prConfig(buffer);
 				PrConfigMsg prConfigMsg;
@@ -297,15 +286,6 @@ bool PrinterCommManager::handlePrinterEvent(PrEvent prEventType, const char *buf
 				prConfigMsg.prConfiguration.mediaSensorType = (UINT16)((MediaSensorType) htons((u_short)prConfig.getMediaSensorType()));
 				prConfigMsg.prConfiguration.slaEjectLine = htons(prConfig.getSLAEjectLine());
 				prConfigMsg.prConfiguration.printPosition = htons(prConfig.getPrintPositionAbsolute());
-
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printerType: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.printerType)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.getLabelWidth: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.labelWidth)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.mediaSensorAdjustment: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.mediaSensorAdjustment)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.outOfMediaCount: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.outOfMediaCount)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printContrast: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.printContrast)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.mediaSensorType: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.mediaSensorType)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.slaEjectLine: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.slaEjectLine)));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printPosition: ") + HobString(Integer::toString(prConfigMsg.prConfiguration.printPosition)));
 
 				evolHeader.setDestinationLogicalAddress(USBEvolHeader::EVOL_PRINTER);
 				evolHeader.setMessageLength(sizeof(prConfigMsg));
@@ -638,7 +618,7 @@ bool PrinterCommManager::handlePrinterEvent(PrEvent prEventType, const char *buf
 			break;
 		case PrReqInquire:	
 			{
-				Debug::trace("PrinterComm.Message.Out", "PrinterCommManager::handlePrinterEvent() case PrReqInquire (7,22) - now where does it go? Firmware?");	
+				Debug::trace("PrinterComm.Message.Out", "PrReqInquire");	
 
 				PrGenericMsg genMsg;
 				memset((char *) &genMsg, 0, sizeof(genMsg));
@@ -994,7 +974,6 @@ bool PrinterCommManager::handleSysEvent(SysEvent sysEventType, const char *buffe
 
 void PrinterCommManager::receivedPrinterMessage(unsigned char * printerMess)
 {
-	//Debug::trace("PrinterCommManager", "receivedPrinterMessage() INCOMING Printer messages (along with processUsbMessags())");
 
 	USBEvolHeader usbEvolHeader((char *)printerMess, true);
 
@@ -1158,8 +1137,6 @@ void PrinterCommManager::receivedPrinterSysMessage(SysGenericMsg *genMsg, UINT16
 
 void PrinterCommManager::receivedPrinterDevMessage(PrGenericMsg *genMsg, UINT16 peripheralAddress, UINT16 UNUSED(logicalAddress))
 {
-	//Debug::trace("PrinterCommManager", "receivedPrinterDevMessage() START - FROM receivedPrinterMessage() or processUsbMessage() FROM the Firmware");
-
 	UNREFERENCED_PARAMETER(logicalAddress);
 
 	switch (genMsg->prEvent)
@@ -1230,7 +1207,7 @@ void PrinterCommManager::receivedPrinterDevMessage(PrGenericMsg *genMsg, UINT16 
 		break;
 		case PrInquire:
 		{	
-			Debug::trace("PrinterComm.Message.In", "PrinterCommManager::receivedPrinterDevMessage() case PrInquire (7,2) to UI from FW");	
+			Debug::trace("PrinterComm.Message.In", "PrInquire");	
 
 			PrInquireMsg *inquireMsg = (PrInquireMsg *) genMsg;
 
@@ -1243,13 +1220,13 @@ void PrinterCommManager::receivedPrinterDevMessage(PrGenericMsg *genMsg, UINT16 
 				prInquire.setPrinterType((PrinterType) inquireMsg->prConfiguration.printerType);
 				prInquire.setLabelWidth((LabelWidth) inquireMsg->prConfiguration.labelWidth);
 				prInquire.setMediaSensorAdjustment(inquireMsg->prConfiguration.mediaSensorAdjustment);
-				prInquire.setOutOfMediaCount(inquireMsg->prConfiguration.outOfMediaCount);				// Immutable!! Set to 200 on Ultima
-				prInquire.setPrintContrast(ntohs(inquireMsg->prConfiguration.printContrast));			// "Print Contrast" on Ultima Configuration.
+				prInquire.setOutOfMediaCount(inquireMsg->prConfiguration.outOfMediaCount);		// Immutable!! Set to 200 on Ultima
+				prInquire.setPrintContrast(ntohs(inquireMsg->prConfiguration.printContrast));	// "Print Contrast" on Ultima Configuration.
 				prInquire.setConfigWord0(ntohs(inquireMsg->prConfiguration.configWord0));				// Used on "European" labels
-				prInquire.setConfigWord1(ntohs(inquireMsg->prConfiguration.configWord1));				// Used on "European" labels
-				prInquire.setConfigWord2(ntohs(inquireMsg->prConfiguration.configWord2));				// Used on "European" labels
-				prInquire.setConfigWord3(ntohs(inquireMsg->prConfiguration.configWord3));				// "Expel Position" on Ultima Configuration.
-				prInquire.setConfigWord4(ntohs(inquireMsg->prConfiguration.configWord4));				// Used on "European" labels
+				prInquire.setConfigWord1(ntohs(inquireMsg->prConfiguration.configWord1));			// Used on "European" labels
+				prInquire.setConfigWord2(ntohs(inquireMsg->prConfiguration.configWord2));		// Used on "European" labels
+				prInquire.setConfigWord3(ntohs(inquireMsg->prConfiguration.configWord3));	// "Expel Position" on Ultima Configuration.
+				prInquire.setConfigWord4(ntohs(inquireMsg->prConfiguration.configWord4));			// Used on "European" labels
 				prInquire.setConfigWord5(ntohs(inquireMsg->prConfiguration.configWord5));
 				prInquire.setConfigWord6(ntohs(inquireMsg->prConfiguration.configWord6));
 				prInquire.setConfigWord7(ntohs(inquireMsg->prConfiguration.configWord7));
@@ -1262,15 +1239,6 @@ void PrinterCommManager::receivedPrinterDevMessage(PrGenericMsg *genMsg, UINT16 
 				prInquire.setMediaSensorType((MediaSensorType) ntohs(inquireMsg->prConfiguration.mediaSensorType));
 				prInquire.setSLAEjectLine(ntohs(inquireMsg->prConfiguration.slaEjectLine));
 				prInquire.setPrintPositionAbsolute(ntohs(inquireMsg->prConfiguration.printPosition));
-
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printerType: ")				+ HobString(Integer::toString(prInquire.getPrinterType() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.getLabelWidth: ")			+ HobString(Integer::toString(prInquire.getLabelWidth() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.mediaSensorAdjustment: ")	+ HobString(Integer::toString(prInquire.getMediaSensorAdjustment() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.outOfMediaCount: ")			+ HobString(Integer::toString(prInquire.getOutOfMediaCount() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printContrast: ")			+ HobString(Integer::toString(prInquire.getPrintContrast() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.mediaSensorType: ")			+ HobString(Integer::toString(prInquire.getMediaSensorType() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.slaEjectLine: ")				+ HobString(Integer::toString(prInquire.getSLAEjectLine() )));
-				//Debug::trace("PrinterCommManager.PrConfig", HobString("PrinterCommManager::handlePrinterEvent PrConfig.printPosition: ")			+ HobString(Integer::toString(prInquire.getPrintPositionAbsolute() )));
 
 				const char *pWiMsg = prInquire.serialize();
 				int mLength = prInquire.getSerializedLength();

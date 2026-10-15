@@ -5,7 +5,7 @@
 #include "PrinterTeachTable.h"
 #include "EssPrinterTeachTable.h"
 #include "EvolPrinterTeachTable.h"
-#include "StEppPrinterTeachTable.h"
+
 #include "PrinterWakeup.h"
 #include "PrinterConfiguration.h"
 #include "PrinterInquire.h"
@@ -139,11 +139,6 @@
 
 #include "OnlineOrderProduct.h"
 
-#include <HfcResponse.h>
-#include <Messages/RebootMessage.h>
-
-#include <HobartCustomerHook.h>
-
 //SOF-5482
 #include <HfcAccessKeyActivation.h>
 #include <AccessKeys.h>
@@ -157,8 +152,6 @@
 #ifdef _WIN32
 #include "minwindef.h"
 #endif
-
-#include "epcrfid.h"
 
 using namespace std;
 
@@ -245,7 +238,6 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 	this->prKind = prKind;
 	this->lastDotStatus = ALL_DOTS_GOOD;
 	
-	rfidModuleInit = false;
 	transferSize = transferSize_;
 	initialDotWearComplete = false;
 	wasDotWearEnabled = Configuration::getInstance()->isDotWearEnabled();
@@ -253,29 +245,9 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 
 	pRS485Manager = NULL;
 
-	renderingRFIDVoidLabelType = false;
-	needToReimageRFIDVoidLabelType = false;
-	printerStatePriorToRenderingRFIDVoidLabelType = PrinterReadyToPrint;  // initialize it to a valid value
-	//Debug::trace("PrinterManager.rfid", printerTraceString + " ctor() - needToReimageRFIDVoidLabelType: " + booltostring(needToReimageRFIDVoidLabelType));
-	//Debug::trace("PrinterManager.rfid", printerTraceString + " ctor() - renderingRFIDVoidLabelType: " + booltostring(renderingRFIDVoidLabelType));
-
-	if ( printerType == FirstPrinter )
-	{
-		if(rfidModuleInit == false)
-		{
-			Debug::trace("PrinterManager.rfid", "rfidModuleInit true timer started");
-
-			rfidModuleInit = true;
-
-			rfidQryTime = 1000;
-
-			createTimer(rfidQryTime, rfidQryTimer, true);
-		}
-	}
-
 	if (prKind == EppPrinter)
 	{
-		Debug::trace("PrinterManager.new", printerTraceString + " NEW EvolPrinterTeachTable() instance and EPP2 Commands");
+		Debug::trace("PrinterManager.new", printerTraceString + " Selecting EppPrinter");
 		this->pMyTeachTable = EvolPrinterTeachTable::getInstance();
 		printLabelCentered = true;
 		getLabelWidthFromStatus = false;
@@ -283,18 +255,8 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 	//Alex Zavala's fix for Epp2 missing teach tables
 	else if (prKind == Epp2Printer)
 	{
-		Debug::trace("PrinterManager.new", printerTraceString + "PrinterManager::CTOR() - NEW EvolPrinterTeachTable() instance and EPP2 Commands");
+		Debug::trace("PrinterManager.new", printerTraceString + " Selecting Epp2Printer");
 		this->pMyTeachTable = EvolPrinterTeachTable::getInstance();
-		this->pMyTeachTable->show();
-		printLabelCentered = true;
-		getLabelWidthFromStatus = false;
-		virtualPrintingEnabled = false;
-	}
-	else if (prKind == Epp3Printer)
-	{
-		Debug::trace("PrinterManager.new", printerTraceString + "PrinterManager::CTOR() - NEW StEppPrinterTeachTable instance and EPP3 Commands");
-		this->pMyTeachTable = StEppPrinterTeachTable::getInstance();
-		this->pMyTeachTable->show();
 		printLabelCentered = true;
 		getLabelWidthFromStatus = false;
 		virtualPrintingEnabled = false;
@@ -374,7 +336,7 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 	Debug::trace("PrinterManager.PrinterReset", printerTraceString + " resetPrinter: " + HobString(Bool::toString(resetPrinter)));
 
 	enableSizing = true;
-	Debug::trace("PrinterTeachTable", printerTraceString + " enableSizing: " + HobString(Bool::toString(enableSizing)));
+	Debug::trace("PrinterManager.PrinterSize", printerTraceString + " enableSizing: " + HobString(Bool::toString(enableSizing)));
 	printerAdvancing = false;
 	Debug::trace("PrinterManager.PrinterAdvance", printerTraceString + " printerAdvancing: " + HobString(Bool::toString(printerAdvancing)));
 
@@ -570,7 +532,7 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 	registerEvent(Printer, PrCutterEnabled);
 	registerEvent(Printer, PrCutterDisabled);
 	
-	if ( (prKind == Epp2Printer) || (prKind == EppPrinter) || (prKind == Epp3Printer) ) {
+	if ( (prKind == Epp2Printer) || (prKind == EppPrinter) ) {
 		registerEvent(LabelApplier, LaSetup);
 	}
 	
@@ -590,10 +552,6 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 		registerEvent(Printer, PrEjectCut);
 
 		registerEvent(Printer, PrReqTestCassette );
-		registerEvent(Printer, PrRfidTestRequest);
-		registerEvent(Printer, PrRfidCalRequest);
-		registerEvent(Printer, PrRfidUpgradeRequest);
-		registerEvent(Printer, PrRfidQryRequest);
 		registerEvent(Printer, PrCutterBitDflt);
 		registerEvent(Printer, PrResetTeach);				//SOF-3847 3848
 		registerEvent(OperationMode, OpModeManualWeigh);	//SOF-3847 3848
@@ -651,10 +609,6 @@ PrinterManager::PrinterManager(Hobart::CEvolMsgReceiver *pMyPrinter,
 		registerEvent( Printer, PrCutterCut);
 		registerEvent(Printer, PrEjectCut);
 		registerEvent(Printer, PrReqTestCassette );
-		registerEvent(Printer, PrRfidTestRequest);
-		registerEvent(Printer, PrRfidCalRequest);
-		registerEvent(Printer, PrRfidUpgradeRequest);
-		registerEvent(Printer, PrRfidQryRequest);
 		registerEvent(Printer, PrCutterBitDflt);
 		registerEvent(Printer, PrResetTeach);				//SOF-3847 3848
 		registerEvent(OperationMode, OpModeManualWeigh);	//SOF-3847 3848
@@ -1296,233 +1250,208 @@ DWORD PrinterManager::Run()
 
 				if (printerBusy() == false)
 				{
-					if (!imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel] && stockLoaded.getLength() > 0 &&
-						!needToReimageRFIDVoidLabelType && !renderingRFIDVoidLabelType /*&& pConfig->toBoolCfg(fieldOffsetCfgEnableRfidPrinting)*/)
+					if (takeLabelError == true && takeLabelTime != 0)
 					{
-						needToReimageRFIDVoidLabelType = true;
-						//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel] is null - setting needToReimageRFIDVoidLabelType: " + booltostring(needToReimageRFIDVoidLabelType));
+						Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and takeLabelError == true");
+
+						takeLabelError = false;
+						
+						PrinterStatus prStatus(lastStatusMsg);
+
+						prStatus.setTakeLabelError();
+//	PTR 1471 - Don't need 2 identical Take label messages for 1 error.			prStatus.setLabelTakenError(); // to generate a beep!!
+
+						dispatchEvent(&prStatus);
+
+						lastStatusMsg.setTakeLabelError(); // make sure it is on!!
+					} else if( takeLabelError == true && noCutOption ) {
+
+						takeLabelError = false;
+						
+						PrinterStatus prStatus(lastStatusMsg);
+
+						prStatus.setTakeLabelError();
+
+						dispatchEvent(&prStatus);
+
+						lastStatusMsg.setTakeLabelError(); // make sure it is on!!
+
 					}
 
-					if ((needToReimageRFIDVoidLabelType || renderingRFIDVoidLabelType) && !pCurrentProductTransaction && !pCurrentProduct)
+					// try to print the next label
+					if( sendTestLabel == true ) 
 					{
-						//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - printer is not busy - needToReimageRFIDVoidLabelType: " + booltostring(needToReimageRFIDVoidLabelType));
-						//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - printer is not busy - renderingRFIDVoidLabelType: " + booltostring(renderingRFIDVoidLabelType));
-						if (needToReimageRFIDVoidLabelType)
+						Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and sendTestLabel == true");
+
+						currentVirtuallyPrintingLabelNum = MaxPrinterTypes;
+						
+						if (printerState == PrinterPriorityError)
 						{
-							//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - needToReimageRFIDVoidLabelType, so calling reimageRFIDVoidLabelType()");
-							needToReimageRFIDVoidLabelType = false;
-							//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - resetting needToReimageRFIDVoidLabelType: " + booltostring(needToReimageRFIDVoidLabelType));
-							reimageRFIDVoidLabelType();
+							cancelTimer( continuousLabelTimerExpired );
+							teachPrinter(printerMode);
+							printerState = PrinterReadyToPreImage;
+							Debug::trace("PrinterManager.StateMachine", printerTraceString + " PrinterReadyToPreImage");
 						}
-						//else
-							//Debug::trace("PrinterManager.rfid", printerTraceString + " Run() - renderingRFIDVoidLabelType, so waiting until reimageRFIDVoidLabelType() is finished");
+						else if (printerState == PrinterLabelIsReady || printerState == PrinterReadyToXfer)
+						{
+							if (testLabelType == PrVoidLabel)
+							{
+								printingVoidLabel = true;
+							}
+							else
+								testLabelPrintInProgress = true;//at this time we stop new label data from being created.
+
+							emptyProductTransactionQ(false);
+
+							if (pCurrentProductTransaction != NULL)
+							{
+								// Kill the currently printing label
+								dispatchLabelComplete(pCurrentProductTransaction, currentTransNum, false);
+								pCurrentProductTransaction = NULL;
+								currentPackId = 0;
+							}
+
+							if (sendTestLabel == true)
+							{
+								Debug::trace("PrinterManager.PrinterReset", printerTraceString + " resetPrinter0");
+								sendPrinterReset(1);
+								emptyCommandQ();
+
+								printTestLabel();
+							}
+						}
+
+						sendTestLabel = false;
 					}
-					else
+
+					else if (((printerState == PrinterReadyToPrint) || (printerState == PrinterReadyToPreImage)) && (myRendererSessionId != 0))
 					{
+						//Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and printerState == PrinterReadyToPrint || printerState == PrinterReadyToPreImage");
 
-						if (takeLabelError == true && takeLabelTime != 0)
+						// look at the next productTransaction
+						productTransactionId  prodPackId;
+
+						peekProductTransactionQ(&prodPackId);
+
+						ProductTransaction *pNextProductTransaction = prodPackId.pProductTransaction;
+						if (pNextProductTransaction)
 						{
-							Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and takeLabelError == true");
-
-							takeLabelError = false;
-
-							PrinterStatus prStatus(lastStatusMsg);
-
-							prStatus.setTakeLabelError();
-							//	PTR 1471 - Don't need 2 identical Take label messages for 1 error.			prStatus.setLabelTakenError(); // to generate a beep!!
-
-							dispatchEvent(&prStatus);
-
-							lastStatusMsg.setTakeLabelError(); // make sure it is on!!
-						}
-						else if (takeLabelError == true && noCutOption) {
-
-							takeLabelError = false;
-
-							PrinterStatus prStatus(lastStatusMsg);
-
-							prStatus.setTakeLabelError();
-
-							dispatchEvent(&prStatus);
-
-							lastStatusMsg.setTakeLabelError(); // make sure it is on!!
-
-						}
-
-						// try to print the next label
-						if (sendTestLabel == true)
-						{
-							Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and sendTestLabel == true");
-
-							currentVirtuallyPrintingLabelNum = MaxPrinterTypes;
-
-							if (printerState == PrinterPriorityError)
+							Product *pNextProduct = pNextProductTransaction->getProduct();
+							if (pNextProduct)
 							{
-								cancelTimer(continuousLabelTimerExpired);
-								teachPrinter(printerMode);
-								printerState = PrinterReadyToPreImage;
-								Debug::trace("PrinterManager.StateMachine", printerTraceString + " PrinterReadyToPreImage");
-							}
-							else if (printerState == PrinterLabelIsReady || printerState == PrinterReadyToXfer)
-							{
-								if (testLabelType == PrVoidLabel)
-								{
-									printingVoidLabel = true;
-								}
-								else
-									testLabelPrintInProgress = true;//at this time we stop new label data from being created.
+								LabelType *pNextLabel = pNextProduct->getLabelType((short)myPrinterType);
 
-								emptyProductTransactionQ(false);
+								Debug::trace("PrinterManager.Product", printerTraceString + " printerState: " + HobString(Integer::toString( printerState)));
 
-								if (pCurrentProductTransaction != NULL)
-								{
-									// Kill the currently printing label
-									dispatchLabelComplete(pCurrentProductTransaction, currentTransNum, false);
-									pCurrentProductTransaction = NULL;
-									currentPackId = 0;
-								}
-
-								if (sendTestLabel == true)
-								{
-									Debug::trace("PrinterManager.PrinterReset", printerTraceString + " resetPrinter0");
-									sendPrinterReset(1);
-									emptyCommandQ();
-
-									printTestLabel();
-								}
-							}
-
-							sendTestLabel = false;
-						}
-
-						else if (((printerState == PrinterReadyToPrint) || (printerState == PrinterReadyToPreImage)) && (myRendererSessionId != 0))
-						{
-							//Debug::trace("PrinterManager", printerTraceString + " Run() - printer is not busy and printerState == PrinterReadyToPrint || printerState == PrinterReadyToPreImage");
-
-							// look at the next productTransaction
-							productTransactionId  prodPackId;
-
-							peekProductTransactionQ(&prodPackId);
-
-							ProductTransaction* pNextProductTransaction = prodPackId.pProductTransaction;
-							if (pNextProductTransaction)
-							{
-								Product* pNextProduct = pNextProductTransaction->getProduct();
-								if (pNextProduct)
-								{
-									LabelType* pNextLabel = pNextProduct->getLabelType((short)myPrinterType);
-
-									Debug::trace("PrinterManager.Product", printerTraceString + " printerState: " + HobString(Integer::toString(printerState)));
-
-									// Is it a new Product
-									if (pCurrentProduct && (pNextProduct->getProductNum() == pCurrentProduct->getProductNum()) &&
-										(virtualPrintingEnabled || (pCurrentLabel != NULL && pNextLabel == pCurrentLabel)) &&
+								// Is it a new Product
+								if (pCurrentProduct && (pNextProduct->getProductNum() == pCurrentProduct->getProductNum()) &&
+										( virtualPrintingEnabled || (pCurrentLabel != NULL && pNextLabel == pCurrentLabel) ) &&
 										!pNextProductTransaction->doForcePreImage())
+								{
+									pCurrentProductTransaction = pNextProductTransaction;
+									Debug::trace("PrinterManager.Product", printerTraceString + " PostImaging Product Transaction: " + HobString(Hex::toString((long long) pCurrentProductTransaction)));
+
+									productTransactionId tempProdPackId;
+
+									popProductTransactionQ(&tempProdPackId);
+
+									currentPackId = tempProdPackId.packId;
+									currentTransNum = tempProdPackId.transactionNum;
+
+									// start postimaging all labels for the transaction - post image all of them consecutively
+									printerState = PrinterPostImaging;
+									Debug::trace("PrinterManager.StateMachine", printerTraceString + " PrinterPostImaging");
+
+
+									bool moreLabelsToPostImage = false;
+									PrinterType labelNumToPostImage = myPrinterType;
+									if (virtualPrintingEnabled)
 									{
-										pCurrentProductTransaction = pNextProductTransaction;
-										Debug::trace("PrinterManager.Product", printerTraceString + " PostImaging Product Transaction: " + HobString(Hex::toString((long long)pCurrentProductTransaction)));
+										moreLabelsToPostImage = true;
+										labelNumToPostImage = FirstPrinter;
+									}
 
-										productTransactionId tempProdPackId;
-
-										popProductTransactionQ(&tempProdPackId);
-
-										currentPackId = tempProdPackId.packId;
-										currentTransNum = tempProdPackId.transactionNum;
-
-										// start postimaging all labels for the transaction - post image all of them consecutively
-										printerState = PrinterPostImaging;
-										Debug::trace("PrinterManager.StateMachine", printerTraceString + " PrinterPostImaging");
-
-
-										bool moreLabelsToPostImage = false;
-										PrinterType labelNumToPostImage = myPrinterType;
-										if (virtualPrintingEnabled)
+									do
+									{
+										if (imageControlBlock[labelNumToPostImage])
 										{
-											moreLabelsToPostImage = true;
-											labelNumToPostImage = FirstPrinter;
-										}
+											imageControlBlock[labelNumToPostImage]->setImageFlags(PostImage);
+											updateFormPostImageFields(*imageControlBlock[labelNumToPostImage]);
 
-										do
-										{
-											if (imageControlBlock[labelNumToPostImage])
+											if (Configuration::getInstance()->toBoolCfgI(fieldOffsetCfgISaveLabel))
 											{
-												imageControlBlock[labelNumToPostImage]->setImageFlags(PostImage);
-												updateFormPostImageFields(*imageControlBlock[labelNumToPostImage]);
-
-												if (Configuration::getInstance()->toBoolCfgI(fieldOffsetCfgISaveLabel))
-												{
-													static int filenameStringCounter = 0;
-													std::string filenameString;
+												static int filenameStringCounter = 0;
+												std::string filenameString;
 
 #if defined(PAL_WIN32_RUN)
-													filenameString = string("C:\\Program Files\\Hobart\\LabelImage");
+												filenameString = string("C:\\Program Files\\Hobart\\LabelImage");
 #else
-													filenameString = string("/etc/hobart/LabelImage");
+												filenameString = string("/etc/hobart/LabelImage");
 #endif
-													filenameString.append(inttostring(++filenameStringCounter)).append(".bmp");
+												filenameString.append(inttostring(++filenameStringCounter)).append(".bmp");
 
-													Debug::trace("RendererManager.saveLabel", "Before post imaging, PrinterManager set filename to save label to file: " + filenameString);
-													imageControlBlock[labelNumToPostImage]->setSaveToFilenameString(filenameString);
-												}
-
-
-												RendererSetSource rdSetSource(this, myRendererSessionId, (UINT8*)imageControlBlock[labelNumToPostImage]);
-												const char* pCC = rdSetSource.serialize();
-												int mLength = rdSetSource.getSerializedLength();
-												pMyRenderer->send(pCC, mLength);
-
-												RendererSetDestination rdSetDestination(this, myRendererSessionId, (UINT8*)bitMap[labelNumToPostImage]->getBitMapBase());
-												pCC = rdSetDestination.serialize();
-												mLength = rdSetDestination.getSerializedLength();
-												pMyRenderer->send(pCC, mLength);
-
-												RendererRequestRendering rdReqRendering(this, myRendererSessionId);
-												pCC = rdReqRendering.serialize();
-												mLength = rdReqRendering.getSerializedLength();
-												pMyRenderer->send(pCC, mLength);
+												Debug::trace("RendererManager.saveLabel", "Before post imaging, PrinterManager set filename to save label to file: " + filenameString);
+												imageControlBlock[labelNumToPostImage]->setSaveToFilenameString(filenameString);
 											}
 
-											if (moreLabelsToPostImage)
+
+											RendererSetSource rdSetSource(this, myRendererSessionId, (UINT8 *) imageControlBlock[labelNumToPostImage]);
+											const char *pCC = rdSetSource.serialize();
+											int mLength = rdSetSource.getSerializedLength();
+											pMyRenderer->send(pCC, mLength);
+
+											RendererSetDestination rdSetDestination(this, myRendererSessionId, (UINT8 *) bitMap[labelNumToPostImage]->getBitMapBase());
+											pCC = rdSetDestination.serialize();
+											mLength = rdSetDestination.getSerializedLength();
+											pMyRenderer->send(pCC, mLength);
+
+											RendererRequestRendering rdReqRendering(this, myRendererSessionId);
+											pCC = rdReqRendering.serialize();
+											mLength = rdReqRendering.getSerializedLength();
+											pMyRenderer->send(pCC, mLength);
+										}
+
+										if (moreLabelsToPostImage)
+										{
+											while ( labelNumToPostImage < MaxPrinterTypes )
 											{
-												while (labelNumToPostImage < MaxPrinterTypes)
-												{
-													short i = (short)labelNumToPostImage;
-													i++;
-													labelNumToPostImage = (PrinterType)i;
-													if (labelNumToPostImage >= MaxPrinterTypes)
-														moreLabelsToPostImage = false;
-													else if (isLabelToBePrinted(labelNumToPostImage))
-														break;
-												}
+												short i = (short)labelNumToPostImage;
+												i++;
+												labelNumToPostImage = (PrinterType)i;
+												if ( labelNumToPostImage >= MaxPrinterTypes )
+													moreLabelsToPostImage = false;
+												else if ( isLabelToBePrinted(labelNumToPostImage) )
+													break;
 											}
+										}
 
-										} while (moreLabelsToPostImage);
-										Debug::trace("PrinterManager", "No more labels to Post image");
-									}
-									else
-									{
-										currentProductSmartPtr = prodPackId.productSmartPtr;
-										pCurrentProduct = pNextProduct;  // or could use currentProductSmartPtr.get(), but they should be the same!
-										Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " pCurrentProduct: " + HobString(Hex::toString((long long)pCurrentProduct)));
-										preImageLabel();
-										pNextProductTransaction->setForcePreImage(false);
-									}
+									} while (moreLabelsToPostImage);
+									Debug::trace("PrinterManager", "No more labels to Post image");
+								}
+								else
+								{
+									currentProductSmartPtr = prodPackId.productSmartPtr;
+									pCurrentProduct = pNextProduct;  // or could use currentProductSmartPtr.get(), but they should be the same!
+									Debug::trace("PrinterManager.PrinterImaging",  printerTraceString + " pCurrentProduct: " + HobString(Hex::toString((long long) pCurrentProduct)));
+									preImageLabel();
+									pNextProductTransaction->setForcePreImage(false);
 								}
 							}
 						}
-						// SOF-4727
-						//if (((printerState == PrinterUnsized) && (enableSizing == true) && initialDotWearComplete)
-						if ((printerState == PrinterUnsized) &&
-							(enableSizing == true) &&
-							initialDotWearComplete && !printerCalibrating &&
-							(pConfig->isConserveContinuousStockByNotSizingEnabled() == false))
-						{
-							Debug::trace("PrinterTeachTable", " Run() - printer is not busy and printerState == //SOF-5355 hack hack!! && enableSizing == true");
-							//SOF-5184
-							//if(!( isCutterInstalled && !lastCutterStatusMsg.getInterlock() && isCutterEnabled ) ){
-								// tell printer to size its label!!
-								//delay 500ms to allow for cutter to close
-							if (isCutterEnabled && isCutterInstalled)
+					}
+					// SOF-4727
+					//if (((printerState == PrinterUnsized) && (enableSizing == true) && initialDotWearComplete)
+					if ( (printerState == PrinterUnsized) && 
+					      (enableSizing == true) && 
+						  initialDotWearComplete && !printerCalibrating &&
+						  (pConfig->isConserveContinuousStockByNotSizingEnabled() == false) )
+					{
+						Debug::trace("PrinterManager.PrinterSize", " Run() - printer is not busy and printerState == //SOF-5355 hack hack!! && enableSizing == true");
+						//SOF-5184
+						//if(!( isCutterInstalled && !lastCutterStatusMsg.getInterlock() && isCutterEnabled ) ){
+							// tell printer to size its label!!
+							//delay 500ms to allow for cutter to close
+							if(isCutterEnabled && isCutterInstalled)
 								PAL_absclass::PAL_sleep(500);					// not allowed on windows
 							queueCommand(SizeCommand, PrNoSecurityLabel, PrNoIndirection, 0x0);
 
@@ -1536,13 +1465,12 @@ DWORD PrinterManager::Run()
 							lastStatusMsg.setLabelSizing(); // make sure it is on!!
 
 							pCurrentProduct = NULL;
-							Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " pCurrentProduct: " + HobString(Hex::toString((long long)pCurrentProduct)));
+							Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " pCurrentProduct: " + HobString(Hex::toString((long long) pCurrentProduct)));
 							currentProductSmartPtr = Util::CSmartPtr<Product>();
 
 							labelPresent = false;
 							Debug::trace("PrinterManager.LabelMissing", printerTraceString + " labelPresent");
-							//}
-						}
+						//}
 					}
 				}
 
@@ -1605,148 +1533,6 @@ void PrinterManager::processEvent( Util::CSmartPtr< EvolMessageWrapper> & msg )
 void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffer, UINT16 bufSize)
 {
 	Debug::trace("PrinterManager","handlePrinterMessage() prEvent = " + Integer::toString(prEvent));
-	
-	/*
-	if (prEvent == PrRfidQryRequest)
-	{
-		if(rfidModuleInit == false)
-		{
-			Debug::trace("PrinterManager.rfid", "rfidModuleInit true timer started");
-
-			rfidModuleInit = true;
-
-			rfidQryTime = 1000;
-
-			createTimer(rfidQryTime, rfidQryTimer, true);
-		}
-		else if(rfidModuleInit == true)
-		{
-			Debug::trace("PrinterManager.rfid", "rfidModuleInit false timer canceled");
-
-			//rfidModuleInit = false;
-
-			//cancelTimer(rfidQryTimer);
-		} 
-	}
-	*/
-	if (prEvent == PrRfidTestRequest)
-	{
-		bool tagWritten = false;
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		cancelTimer(rfidQryTimer);
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			FpmManager *pSerialFlash( FpmManager::getInstance() );
-
-			const std::string style( pSerialFlash->getMFGSystemStyle() );
-
-			if( style == "EPCP" )
-			{
-				rfidProductType = "PCP";
-			}
-			else
-			{
-				rfidProductType = "NGW";
-			}
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("EPC|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-		
-		if(resultCode == 0)
-		{
-			tagWritten = true;
-		}
-		else
-		{
-			tagWritten = false;
-		}
-
-		createTimer(rfidQryTime, rfidQryTimer, true);
-
-		PrinterGeneric result(tagWritten ? PrRfidTestPassed : PrRfidTestFailed, this, FirstPrinter);
-		dispatchEvent(&result);
-
-		return;
-	}
-
-	if (prEvent == PrRfidCalRequest)
-	{
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		cancelTimer(rfidQryTimer);
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			rfidProductType = "EPP";
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("CRP|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-		
-		rfidCalTime = 5000; 
-		createTimer(rfidCalTime, rfidCalTimer, true);
-
-		return;
-	}
-
-	if (prEvent == PrRfidUpgradeRequest)
-	{
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		cancelTimer(rfidQryTimer);
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			FpmManager *pSerialFlash( FpmManager::getInstance() );
-
-			const std::string style( pSerialFlash->getMFGSystemStyle() );
-
-			if( style == "EPCP" )
-			{
-				rfidProductType = "PCP";
-			}
-			else
-			{
-				rfidProductType = "NGW";
-			}
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("UPG|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-
-		rfidUpgTime = 5000; 
-		createTimer(rfidUpgTime, rfidUpgTimer, true);
-
-		return;
-	}
-
 	if (prEvent == PrReqPrinterType)
 	{
 		Debug::trace("PrinterManager.PrinterType", printerTraceString + " PrReqPrinterType");
@@ -1811,7 +1597,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 						PrinterConfiguration prConfig(recvBuffer);
 
 						if (isTracing)
-						    prConfig.show();
+							prConfig.show();
 
 						// don't allow label width changes for counter scales via PrConfig, since they get the label width from the PrStatus when sizing, and from PrSensors
 						if (isTracing)
@@ -2422,7 +2208,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 					    OpModeEvent mEvent = RealTimeController::getInstance()->getCurrentOpModeEvent();
 					    if ((mEvent != OpModeProductionEntry))
 					    {
-						    if( ( prKind != EppPrinter ) && ( prKind != Epp2Printer ) && (prKind != Epp3Printer) )
+						    if( ( prKind != EppPrinter ) && ( prKind != Epp2Printer ) )
 						    {		
 							    if (printerState == PrinterTakingLabel && isDieCutloaded()) {
 								    takeLabelTime = ticksPerSecond / 2;
@@ -2473,7 +2259,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 
 							kpcPrinterIgnoreMultipleLabelTakenMessages = true;
 						//SOF-3560
-						if ( ( ApcPrinter == prKind ) || ( USBPrinter == prKind ) || ( Epp2Printer == prKind ) || ( Epp3Printer == prKind ) || ( FakePrinter == prKind ) ){
+						if ( ( ApcPrinter == prKind ) || ( USBPrinter == prKind ) || ( Epp2Printer == prKind ) || ( FakePrinter == prKind ) ){
 							kpcPrinterIgnoreMultipleLabelTakenMessages = true;
 						}
 
@@ -2623,14 +2409,12 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 									  //											printing additional labels until label has been picked.
 									  //											This only applies to FSSS. 
 										OpModeEvent mEvent = RealTimeController::getInstance()->getCurrentOpModeEvent();										
-										if ( ( prKind == SSKPCPrinter ) && 
-											  ( Configuration::getInstance()->isSelfServiceScale() || mEvent == OpModeProductionEntry ) )
-										{
+										if( ( prKind == SSKPCPrinter ) && ( ( Configuration::getInstance()->isSelfServiceScale() ) || 
+																												( mEvent == OpModeProductionEntry ) ) ) {
 											Debug::trace("PrinterManager.StateMachine", "Wait to dispatch label complete");
-											if ( printerStatus.isLabelTaken() )
+											if( printerStatus.isLabelTaken() )
 											{													
-												if (pCurrentProductTransaction)
-												{
+												if (pCurrentProductTransaction) {
 													const_cast<ProductTransaction *>(pCurrentProductTransaction)->incrementNumOfLabelsPrinted();
 													Debug::trace("PrinterManager.StateMachine", "Number printed: " + Integer::toString(const_cast<ProductTransaction *>(pCurrentProductTransaction)->getNumOfLabelsPrinted()) );											
 												}
@@ -2639,37 +2423,24 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 												dispatchLabelComplete(pCurrentProductTransaction, currentTransNum, true);
 												pCurrentProductTransaction = NULL;
 												currentPackId = 0;
-											}
-											else
-											{
+											} else {
 												Debug::trace("PrinterManager.TakeLabelTime", "printerState: " + Integer::toString(printerState));
-												if( mEvent == OpModeProductionEntry && isDieCutloaded() && !printerStatus.isLabelTaken() && takeLabelTime == 0 )
-												{
+												if( mEvent == OpModeProductionEntry && isDieCutloaded() && !printerStatus.isLabelTaken() && takeLabelTime == 0 ) {
 													takeLabelTime = ticksPerSecond / 2;
 													Debug::trace("PrinterManager.TakeLabelTime", "createTimer: 2ab");
 													createTimer(takeLabelTime, takeLabelTimerExpired, true);
 												}												
 											}
-										} 
-										else
-										{	
-											Debug::trace("PrinterManager.rfid", "!SSKPCPrinter or !selfserve and !ProductionEntry");
-											if ( pCurrentProductTransaction )
-											{
-												Debug::trace("PrinterManager.rfid", string("pCurrentProductTransaction:") + ptrtostring(pCurrentProductTransaction));
-												if ( pCurrentProductTransaction->isRfidVoidLabelPrinted() )
-													Debug::trace("PrinterManager.rfid", "printed RFID Void label - didn't increment labels printed: " + inttostring(pCurrentProductTransaction->getNumOfLabelsPrinted()));
-												else
-												{
-													const_cast<ProductTransaction*>(pCurrentProductTransaction)->incrementNumOfLabelsPrinted();
-													Debug::trace("PrinterManager.StateMachine", "Number printed: " + Integer::toString(const_cast<ProductTransaction*>(pCurrentProductTransaction)->getNumOfLabelsPrinted()));
+										} else {	
+												if (pCurrentProductTransaction) {
+													const_cast<ProductTransaction *>(pCurrentProductTransaction)->incrementNumOfLabelsPrinted();
+													Debug::trace("PrinterManager.StateMachine", "Number printed: " + Integer::toString(const_cast<ProductTransaction *>(pCurrentProductTransaction)->getNumOfLabelsPrinted()) );											
 												}
-											}
 																							
-											Debug::trace("PrinterManager.StateMachine", "Dispatching label complete");
-											dispatchLabelComplete(pCurrentProductTransaction, currentTransNum, true);
-											pCurrentProductTransaction = NULL;
-											currentPackId = 0;											
+												Debug::trace("PrinterManager.StateMachine", "Dispatching label complete");
+												dispatchLabelComplete(pCurrentProductTransaction, currentTransNum, true);
+												pCurrentProductTransaction = NULL;
+												currentPackId = 0;											
 										}
 
 										if( ( isCombinedVirtualPrint() ) && ( ( printerMode == ContinuousLabelHeadCombined  ) || 
@@ -2782,14 +2553,14 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 						
 						if (printerState == PrinterTryingToSize)
 						{
-							bool isTracingSize = Debug::isTracing("PrinterTeachTable");
+							bool isTracingSize = Debug::isTracing("PrinterManager.PrinterSize");
 							printerStatus.show();
 							if (isTracingSize)
-								Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - entering block for PrinterTryingToSize");
+								Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - entering block for PrinterTryingToSize");
 							if (printerStatus.isSizeCmdComplete() == true)
 							{
 								if (isTracingSize)
-									Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - isSizeCmdComplete() == true");
+									Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - isSizeCmdComplete() == true");
 								executingCommand = false;
 								Debug::trace("PrinterManager.CMD","(8)executingCommand: " + Integer::toString(executingCommand));
 								printerStatus.clearLabelSizing();
@@ -2820,10 +2591,10 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 
 								if (isTracingSize)
 								{
-									Debug::trace("PrinterTeachTable", printerTraceString + " Size Command Completed");
-									Debug::trace("PrinterTeachTable", printerTraceString + " Actual Size: " + HobString(Integer::toString(actualSize)));
-									Debug::trace("PrinterTeachTable", printerTraceString +  " Measured Size: " + HobString(Integer::toString(measuredSize)));
-									Debug::trace("PrinterTeachTable", printerTraceString + " printerMode: " + HobString(Integer::toString(printerMode)));
+									Debug::trace("PrinterManager.PrinterSize", printerTraceString + " Size Command Completed");
+									Debug::trace("PrinterManager.PrinterSize", printerTraceString + " Actual Size: " + HobString(Integer::toString(actualSize)));
+									Debug::trace("PrinterManager.PrinterSize", printerTraceString +  " Measured Size: " + HobString(Integer::toString(measuredSize)));
+									Debug::trace("PrinterManager.PrinterSize", printerTraceString + " printerMode: " + HobString(Integer::toString(printerMode)));
 								}
 
 								if (actualSize > 0)
@@ -2831,7 +2602,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 									// Sized a die-cut label
 
 									if (isTracingSize)
-										Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - actualSize > 0");
+										Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - actualSize > 0");
 
 									if (measuredSize > 0)
 									{
@@ -2857,7 +2628,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 										}
 				
 										if (isTracingSize)
-											Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - measuredSize > 0");
+											Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - measuredSize > 0");
 										if (printHeelFirst == true)
 										{
 											if( prKind != SSKPCPrinter ) {
@@ -2886,19 +2657,19 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 											printerStockMetrics.setLabelLengthInLines(actualSize);
 										}
 
-										teachPrinter(printerMode);		// FAILS #5
+										teachPrinter(printerMode);
 									}
 								}
 								else
 								{
 									if (isTracingSize)
-										Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - actualSize = 0");
+										Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - actualSize = 0");
 									if ( !printerStatus.isOutOfMedia() | !printerStatus.isOutOfStock() )
 									{
 										// Length determined to be 0, but not out of media, so assume is continuous stock.
 
 										if (isTracingSize)
-											Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - Length determined to be 0, but not out of media, so assume is continuous stock");
+											Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - Length determined to be 0, but not out of media, so assume is continuous stock");
 
 										usingContinuousStock = true;
 
@@ -2967,7 +2738,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 									else
 									{
 										if (isTracingSize)
-											Debug::trace("PrinterTeachTable", printerTraceString + " handling PrStatus - calling setLabelSizingFailed()");
+											Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrStatus - calling setLabelSizingFailed()");
 										printerStatus.setLabelSizingFailed();
 									}
 									
@@ -3030,12 +2801,6 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 								LabelWidth printerStatusLabelWidth = ( !getLabelWidthFromStatus ) ? labelWidth : ( ( printerStatus.isNarrowLabel() ) ? NarrowLabel : WideLabel );
 								printerConfig.setLabelWidth(printerStatusLabelWidth);
 								checkLabelWidth(printerStatusLabelWidth);
-
-								if ( printerStatus.isSizeCmdComplete() && pConfig->toBoolCfg(fieldOffsetCfgEnableRfidPrinting) )
-								{
-									//Debug::trace("PrinterManager.rfid", printerTraceString + " printerStatus.isSizeCmdComplete() - setting needToReimageRFIDVoidLabelType: " + booltostring(needToReimageRFIDVoidLabelType));
-									needToReimageRFIDVoidLabelType = true;
-								}
 
 								if (newProductSmartPtr.get())
 								{
@@ -3192,7 +2957,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 					Debug::trace("PrinterManager.Message", printerTraceString + " PrSizing");
 					PrinterSizing prSizing(recvBuffer);
 
-					if (Debug::isTracing("PrinterTeachTable") == true)
+					if (Debug::isTracing("PrinterManager.PrinterSize") == true)
 					{
 						prSizing.show();
 					}
@@ -3321,7 +3086,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 
 					printerStockMetrics.show();
 					dispatchEvent(&printerStockMetrics);
-					Debug::trace("PrinterTeachTable", printerTraceString + " Dispatched printerStockMetrics -- PrReqStockMetrics");
+					Debug::trace("PrinterManager.PrinterSize", printerTraceString + " Dispatched printerStockMetrics -- PrReqStockMetrics");
 				}
 				break;
 				case PrSensorsTracking:
@@ -3613,7 +3378,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 
 						printerStockMetrics.show();
 						dispatchEvent(&printerStockMetrics);
-						Debug::trace("PrinterTeachTable", printerTraceString + " Dispatched printerStockMetrics -- PrNewPrinterType");
+						Debug::trace("PrinterManager.PrinterSize", printerTraceString + " Dispatched printerStockMetrics -- PrNewPrinterType");
 					}
 
 					sendPrinterType();
@@ -4067,12 +3832,12 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 				case PrReqLabelSizing:
 				{
 					// Need to check if this message is even for this PrinterManager
-					Debug::trace("PrinterTeachTable", printerTraceString + " handling PrReqLabelSizing");
+					Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrReqLabelSizing");
 
 					PrinterGeneric prReqLabelSizing(recvBuffer);
 					if ( prReqLabelSizing.getPrinterType() == myPrinterType )
 					{
-						Debug::trace("PrinterTeachTable", printerTraceString + " handling PrReqLabelSizing for my printer" + inttostring(myPrinterType));
+						Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrReqLabelSizing for my printer" + inttostring(myPrinterType));
 
 						// SOF-1798 - The cause of the crash was that the label was being rendered, due to the change in label stock when
 						// going from opted-in continuous labels, to die cut labels when pressing the "Size Labels" button on the Size Labels
@@ -4097,7 +3862,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 						printerState = PrinterUnsized;
 						enableSizing = true;
 
-						Debug::trace("PrinterTeachTable", printerTraceString + " handling PrReqLabelSizing - taught printer to size normally");
+						Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrReqLabelSizing - taught printer to size normally");
 					}
 					break;
 				}
@@ -4109,7 +3874,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 					PrinterGeneric prUseContinuousStock(recvBuffer);
 					if ( prUseContinuousStock.getPrinterType() == myPrinterType && myPrinterType == FirstPrinter )
 					{
-						Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock for my printer and is printer 1");
+						Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock for my printer and is printer 1");
 
 						usingContinuousStock = true;
 						
@@ -4155,7 +3920,7 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 
 						if (pMyPrinter != NULL)
 						{
-							Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock - continuous - actualSize:=" + inttostring(actualSize) + "   measuredSize:=" + inttostring(measuredSize));	
+							Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock - continuous - actualSize:=" + inttostring(actualSize) + "   measuredSize:=" + inttostring(measuredSize));	
 							PrinterNomSize prNomSize(this, myPrinterType, actualSize, measuredSize);
 							Debug::trace("PrinterManager.handleContinuous", " sending prNomSize");
 							const char *pCC = prNomSize.serialize();
@@ -4171,12 +3936,12 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 							Debug::trace("PrinterManager.handleContinuous", " teachPrinter()");
 							Debug::trace("PrinterManager.Teach","15 mode: " + Integer::toString(printerMode) );						
 							teachPrinter(printerMode);
-							Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock - taught printer to size for continuous");
+							Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock - taught printer to size for continuous");
 
 							stockLoaded.setLength(actualSize);
 							stockLoaded.setWidth(labelWidth);
 							stockLoaded.setSkew(0);
-							Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock - setStockLoaded vals - length:" + inttostring(actualSize) + "   width:" + inttostring(labelWidth));	
+							Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock - setStockLoaded vals - length:" + inttostring(actualSize) + "   width:" + inttostring(labelWidth));	
 						} else {
 							if( ( prKind == KPCPrinter ) && ( !isCutterInstalled ) ) {
 								if (pMyTeachTable)
@@ -4206,17 +3971,17 @@ void PrinterManager::handlePrinterMessage(PrEvent prEvent, const char *recvBuffe
 //							}
 //						}
 
-						Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock - end");
+						Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock - end");
 
 						//dispatchEvent(&printerStockMetrics);
-						//Debug::trace("PrinterTeachTable", printerTraceString + " handling PrUseContinuousStock - dispatched printerStockMetrics");
+						//Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrUseContinuousStock - dispatched printerStockMetrics");
 					}
 					break;
 				}
 
 				case PrSetupForNormalSizing:
 				{
-					Debug::trace("PrinterTeachTable", printerTraceString + " handling PrSetupForNormalSizing");
+					Debug::trace("PrinterManager.PrinterSize", printerTraceString + " handling PrSetupForNormalSizing");
 
 					// If we are set for continuous stock, we don't size labels, so we have to reprogram the teach table to size labels.
 					// So just re-teach the sizing command in case we are set for continuous.
@@ -4854,8 +4619,7 @@ void PrinterManager::handleRendererMessage(RdEvent rdEvent, const char *recvBuff
 {
 	switch ( rdEvent )
 	{
-	case RdSessionId: 
-	{
+	case RdSessionId: {
 		Debug::trace("PrinterManager.Renderer", printerTraceString + " RdSessionId");
 		RendererSessionId rendererSessionId(recvBuffer);
 
@@ -4867,8 +4631,7 @@ void PrinterManager::handleRendererMessage(RdEvent rdEvent, const char *recvBuff
 		Debug::trace("PrinterManager.Renderer", printerTraceString + " RdRenderStart");
 		break;
 
-	case RdRenderComplete: 
-	{
+	case RdRenderComplete: {
 		Debug::trace("PrinterManager.Renderer", printerTraceString + " RdRenderComplete");
 		RendererRenderComplete renderComplete(recvBuffer);
 
@@ -4888,41 +4651,31 @@ void PrinterManager::handleRendererMessage(RdEvent rdEvent, const char *recvBuff
 		// --------------------------------------------------------------------
 		if ( PrinterPreImaging == printerState )
 		{
-			if (renderingRFIDVoidLabelType)
+			bool preImagingFinished( true );
+
+			if ( virtualPrintingEnabled )
 			{
-				Debug::trace("PrinterManager.rfid", printerTraceString + " renderingRFIDVoidLabelType preImagingFinished finished");
-				renderingRFIDVoidLabelType = false;
-				printerState = printerStatePriorToRenderingRFIDVoidLabelType;
-				//printerState = PrinterReadyToPrint;  // PrinterReadyToPrint
-				Debug::trace("PrinterManager.rfid", printerTraceString + " renderingRFIDVoidLabelType = false, printerState = " + inttostring(printerState));
+				for ( int i = 0; i < MaxPrinterTypes; ++i )
+					if (( imageControlBlock[i] ) && ( 0 != imageControlBlock[i]->getImageFlags() ))
+						preImagingFinished = false;
+			}
+
+			if ( preImagingFinished )
+			{
+				printerState = PrinterReadyToPrint;
+				//SOF-
+				if( ( takeLabelTime ) && ( ( printerMode == ContinuousLabelHeelCombined ) ||
+				   ( printerMode == ContinuousLabelHeadCombined ) ) ){
+					takeLabelTime = 0;
+				}
+				Debug::trace("PrinterManager.StateMachine", printerTraceString + " 6) PrinterReadyToPrint  takeLabelTime: " + Integer::toString(takeLabelTime));
 			}
 			else
 			{
-				bool preImagingFinished(true);
-
-				if (virtualPrintingEnabled)
-				{
-					for (int i = 0; i < MaxPrinterTypes; ++i)
-						if ((imageControlBlock[i]) && (0 != imageControlBlock[i]->getImageFlags()))
-							preImagingFinished = false;
-				}
-
-				if (preImagingFinished)
-				{
-					printerState = PrinterReadyToPrint;
-					//SOF-
-					if ((takeLabelTime) && ((printerMode == ContinuousLabelHeelCombined) ||
-						(printerMode == ContinuousLabelHeadCombined))) {
-						takeLabelTime = 0;
-					}
-					Debug::trace("PrinterManager.StateMachine", printerTraceString + " 6) PrinterReadyToPrint  takeLabelTime: " + Integer::toString(takeLabelTime));
-				}
-				else
-				{
-					// We still have other label types that need imaged for this product/transaction.  We're not done rendering yet.
-					Debug::trace("PrinterManager.StateMachine", printerTraceString + " not switching state yet, in handling RdRenderComplete");
-				}
+				// We still have other label types that need imaged for this product/transaction.  We're not done rendering yet.
+				Debug::trace("PrinterManager.StateMachine", printerTraceString + " not switching state yet, in handling RdRenderComplete");
 			}
+
 		}
 
 		// --------------------------------------------------------------------
@@ -5500,306 +5253,17 @@ bool PrinterManager::isCombinedVirtualPrint()
 	return result;		
 }
 
-
-void PrinterManager::reimageRFIDVoidLabelType()
-{
-	/*
-	if (!Configuration::getInstance()->toBoolCfg(fieldOffsetCfgEnableRfidPrinting))
-	{
-		Debug::trace("PrinterManager.rfid", "RFID is NOT enabled, so no need for call to PrinterManager::reimageRFIDVoidLabelType()");
-		return;
-	}
-	*/
-
-	//Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - starting");
-
-	/*  Commented out so we can reimage the void label, after sizing
-	if (imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel])
-	{
-		Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel] already set up: " + ptrtostring(imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel]));
-		return;
-	}
-	*/
-
-	LabelType* rfidVoidLabelType = pConfig->getRFIDVoidLabelType();
-	//Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - label from getRFIDVoidLabelType: " + ptrtostring(rfidVoidLabelType));
-
-	if (rfidVoidLabelType && rfidVoidLabelType->getErrorCode() == RECORD_OK)
-	{
-		rfidVoidLabelType->show();
-
-		//if (rfidVoidLabelType->getLabelStockDescriptor() && rfidVoidLabelType->getLabelStockDescriptor()->getWidthDots() <= stockLoaded.getWidthDots())
-			//Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - rfidVoidLabelType->getLabelStockDescriptor()->getWidthDots() <= stockLoaded.getWidthDots()");
-
-		emptyIndirectGraphics();
-		emptyEmbeddedLabelBitMaps();
-		if (imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel])
-		{
-			delete imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel];
-			imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel] = 0;
-		}
-
-		//Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - before preImageALabel()");
-		//Debug::trace("PrinterManager.rfid", printerTraceString + " renderingRFIDVoidLabelType set to true");
-		renderingRFIDVoidLabelType = true;
-		printerStatePriorToRenderingRFIDVoidLabelType = printerState;
-		preImageALabel(rfidVoidLabelType, ExtraPrinter_UsedForRFIDVoidLabel);
-
-		//Debug::trace("PrinterManager.rfid", "reimageRFIDVoidLabelType() - imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel] set up: " + ptrtostring(imageControlBlock[ExtraPrinter_UsedForRFIDVoidLabel]));
-	}
-}
-
-bool PrinterManager::checkIfRfidTagWritten(PrinterType labelNumToPrint)
-{
-	const bool tracing(Debug::isTracing("PrinterManager.rfid"));
-
-	cancelTimer(rfidQryTimer);
-	
-	// If RFID printing is not enabled, ignore errors and pretend the operation was successful
-	if (!pConfig->toBoolCfg(fieldOffsetCfgEnableRfidPrinting) &&
-		pConfig->toBoolCfg(fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled)) {
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "RFID is NOT enabled, so ignoring return code from writing the tag");
-		return true;
-	}
-
-	if (!pCurrentProductTransaction)
-	{
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "No pCurrentProductTransaction, so no tag write/early return");
-
-		return true;
-	}
-		
-
-	pCurrentProductTransaction->setOperatorRFID("");
-	pCurrentProductTransaction->setRfidVoidLabelPrinted(false);
-
-	if (labelNumToPrint >= MaxPrinterTypes)
-	{
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", string("labelNumToPrint passed in, ") + inttostring(labelNumToPrint) + ", doesn't need a RFID tag, so no tag needs to be written");
-		return true;
-	}
-	if (!pCurrentProductTransaction || !pCurrentProductTransaction->getProduct())
-	{
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "No pCurrentProductTransaction or no Product, so no tag needs to be written");
-		return true;
-	}
-
-	HobString sellByDate;
-
-	if ((pCurrentProduct->getLabelBeingPrinted() == Product::PRINTING_NEW_EXPIRATION_LABEL) ||
-		(pCurrentProduct->getLabelBeingPrinted() == Product::PRINTING_EXISTING_EXPIRATION_LABEL))
-	{
-		sellByDate = (pCurrentProductTransaction->getExpirationLabelDateTime()).formatDate(FormatDate_YYMMDD_NoDelimiter);
-		pCurrentProductTransaction->setTotalPrice(0);
-		pCurrentProductTransaction->buildBarcodeStrings();
-
-		Debug::trace("PrinterManager.rfid", "RFID Expiration label - creating new barcode data to send to the apphook");
-	}
-	else
-	{
-		sellByDate = (pCurrentProductTransaction->getShelfLife()).formatDate(FormatDate_YYMMDD_NoDelimiter);
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", string("sellByDate: ") + sellByDate);
-	}
-
-	LabelType* labelType = pCurrentProductTransaction->getProduct()->getLabelType(labelNumToPrint);
-	BarCodeNumber bcn(pCurrentProductTransaction->getBarCodeNum());
-	BarcodeType bcType = static_cast<BarcodeType>(bcn.getBarcodeType());
-	HobString barcodeString = bcn.getBarcodeString(static_cast<BarcodeType>(bcn.getBarcodeType()));
-
-	if (tracing)
-		Debug::trace("PrinterManager.rfid", "Barcode string: " + barcodeString);
-
-	if (!barcodeString.size())
-	{
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "No barcodeString for pCurrentProductTransaction, so no tag needs to be written");
-		return true;
-	}
-
-	string base("0000000000");
-	string storeIdStr;
-	string scaleIdStr;
-	string transIdStr;
-	string transLabelNumStr;
-	string rfidProductType = "EPP";
-
-	Debug::trace("PrinterManager.rfid", "debug placeholder: ");
-
-	if (Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) == "1")
-	{
-		storeIdStr = base + Configuration::getInstance()->toStringCfg(fieldOffsetCfgStoreId);
-		storeIdStr = storeIdStr.substr(storeIdStr.length() - 4);
-
-		scaleIdStr = base + Configuration::getInstance()->toStringCfg(fieldOffsetCfgAccumItemsScaleId);
-		scaleIdStr = scaleIdStr.substr(scaleIdStr.length() - 1);
-
-		transIdStr = base + longtostring(pCurrentProductTransaction->getTransactionId());
-		transIdStr = transIdStr.substr(transIdStr.length() - 4);
-
-		transLabelNumStr = base + inttostring(pCurrentProductTransaction->getNumOfLabelsPrinted());
-		transLabelNumStr = transLabelNumStr.substr(transLabelNumStr.length() - 2);
-	}
-	else
-	{
-		storeIdStr = Configuration::getInstance()->toStringCfg(fieldOffsetCfgStoreId);
-		scaleIdStr = Configuration::getInstance()->toStringCfg(fieldOffsetCfgAccumItemsScaleId);
-		transIdStr = longtostring(pCurrentProductTransaction->getTransactionId());
-		transLabelNumStr = inttostring(pCurrentProductTransaction->getNumOfLabelsPrinted());
-	}
-
-	// This is to prevent issues when calculating the EPC
-	if (transIdStr == "-1") {
-		transIdStr = "0";
-	}
-
-	/*
-	if (tracing)
-		Debug::trace("PrinterManager.rfid", string("Calling generateEpcRfid with: ") + storeIdStr + " , " + scaleIdStr + " , " + transIdStr + " , " + transLabelNumStr);
-	string serialNumString( storeIdStr + scaleIdStr + transIdStr + transLabelNumStr );
-	*/
-
-	//SOF-6963 - QR Codes fail printer - We no longer need this code anymore becuase it is done in the hook
-	// Plus this code prevents printing anything besides UPC and maybe EANs but nothing 2D, no QR, etc.
-	/*
-	string epcRfidString;
-	//epcRfidString = generateEpcRfid( barcodeString, serialNumString );
-
-	unsigned char epcRfidBuffer[12];
-	generateEpcRfid( barcodeString, serialNumString, epcRfidBuffer);
-
-	for (int i=0; i < 12; i++)
-		epcRfidString.append( Hex::toString(epcRfidBuffer[i] ) );
-
-	if (tracing)
-		Debug::trace("PrinterManager.rfid", string("Result from generateEpcRfid: ") + epcRfidString);
-	*/
-
-	// Modify the action string to include barcodeString, sell by date, store ID, scale ID, transaction ID, and the transaction label number
-	HobString action("EPC|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + barcodeString + "|" + sellByDate + "|" + storeIdStr + "|" + scaleIdStr + "|" + transIdStr + "|" + transLabelNumStr + "|" + rfidProductType);
-	if (tracing)
-		Debug::trace("PrinterManager.rfid", "Calling hobart_cust_hook_custom_action to write rfid tag - action: " + action);
-
-	//const char *asdf = action.c_str();
-
-	int resultCode = 42;  // just initialize to some value (that won't be returned)
-	char rcexBuffer[256] = { 0 };
-
-#if defined(__linux__)
-	if (bcType == UPCA || bcType == EAN13) {
-		if (tracing) {
-			Debug::trace("PrinterManager.rfid", "UPCA/EAN13 barcode detected so calling custom action");
-		}
-		
-		// The reason for this is because currently the apphook only supports UPCA barcodes since that is all Walmart currently uses for RFID		
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-	}
-	else {
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "NonUPCA barcode detected so skipping custom action");
-		return true;
-	}
-#else
-	resultCode = 0;
-#endif
-
-	createTimer(rfidQryTime, rfidQryTimer, true);
-
-	if (tracing)
-		Debug::trace("PrinterManager.rfid", string("Result Code of writing to rfid tag: ") + std::to_string(resultCode) + " - RFID tag" + ((resultCode) ? " NOT" : "") + " written successfully");
-
-	// Only save the EPC tag to the transaction record if the tag was written successfully.
-	// Handle RFID tag writing result
-	if (resultCode == 0) {
-		// RFID tag writing successful, set the OperatorRFID to the value from rcexBuffer
-		pCurrentProductTransaction->setOperatorRFID(rcexBuffer);
-	}
-	else if (resultCode != -1) {
-		// RFID tag writing failed, and it's not a unrecognized custom action
-		if (pConfig->toBoolCfg(fieldOffsetCfgEnableRfidPrinting)) {
-			pCurrentProductTransaction->setRfidVoidLabelPrinted(true);
-			RFIDLabelCount_++;
-			if (resultCode == 3) {
-				UIDialogMsg dialog(this, ProductDev, ProductErrRFIDWriteFail, HfcResponse::RESPONSESTYLE_OK, false);
-				dispatchEvent(&dialog);
-				dialog.show();
-				Debug::trace("PrinterManager.rfid", "RFID tag writing failed with error code " + std::to_string(resultCode) + ": RFID write failure");
-			}
-			else {
-				// The board error dialog was sometimes getting displayed from other errors that are not necessarily a board error so we will only display the basic error for now
-				UIDialogMsg dialog(this, ProductDev, ProductErrRFIDWriteFail, HfcResponse::RESPONSESTYLE_OK, false);
-				//UIDialogMsg dialog(this, ProductDev, ProductErrRFIDWriteFail, HfcResponse::RESPONSESTYLE_OK, false);
-				dispatchEvent(&dialog);
-				dialog.show();
-				Debug::trace("PrinterManager.rfid", "RFID tag writing failed with error code " + std::to_string(resultCode) + ": RFID write failure");
-			}
-		}
-	}
-
-	// If RFID printing is not enabled, ignore errors and pretend the operation was successful
-	if (!pConfig->toBoolCfg(fieldOffsetCfgEnableRfidPrinting)) {
-		if (tracing)
-			Debug::trace("PrinterManager.rfid", "RFID is NOT enabled, so ignoring return code from writing the tag");
-		return true;
-	}
-
-	return (resultCode == 0);
-}
-
-
 void PrinterManager::startPrintingLabel( PrinterType labelNumToPrint )
 {
 	const bool tracing( Debug::isTracing( "PrinterManager.PrinterImaging" ) );
 
+	ImageControl *ic;
+
 	// Download and print the label here!!
 	if ( !pMyPrinter )
 		return;
-
-	ImageControl *ic = 0;
-
-	bool rfidCheck = true;
-
-	if ( myPrinterType == FirstPrinter )
-	{
-		Debug::trace("PrinterManager.rfid", "checkIfRfidTagWritten called on firstPrinter");
-
-		rfidCheck = checkIfRfidTagWritten(labelNumToPrint);
-	}
-	else
-	{
-		Debug::trace("PrinterManager.rfid", "checkIfRfidTagWritten SKIPPED on !firstPrinter");
-	}
-
-	if (rfidCheck == false)
-	{
-		Debug::trace("PrinterManager.rfid", "RFID tag not written successfully; printing VOID label");
-
-		labelNumToPrint = ExtraPrinter_UsedForRFIDVoidLabel;
-		// Initial try of printing the VoidLabel known to the PrinterManager; it was working, but printing garbage
-		//testLabelType = PrVoidLabel;
-		//sendTestLabel = true;
-		//printTestLabel();
-	}
-	else
-	{
-		Debug::trace("PrinterManager.rfid", "RFID tag written successfully or is disabled; printing regular label");
-	}
-
-	ic = imageControlBlock[labelNumToPrint];
-
-	if (tracing)
-		Debug::trace("PrinterManager.PrinterImaging", "startPrintingLabel() - imageControlBlock used is: " + ptrtostring(ic));
-
-	if (!ic)
-	{
-		if (tracing)
-			Debug::trace("PrinterManager.PrinterImaging", "startPrintingLabel() - imageControlBlock is NULL for printerNum: " + inttostring(labelNumToPrint));
+	else if ( !(ic = imageControlBlock[labelNumToPrint]) )
 		return;
-	}
 
 	// Flush the printer
 	sendPrinterEnableTakeup();
@@ -5850,14 +5314,12 @@ void PrinterManager::startPrintingLabel( PrinterType labelNumToPrint )
 
 	if ( printHeelFirst )
 	{
-		if (tracing)
-			Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " print heel first");
+		Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " print heel first");
 		labelData = (UINT16 *) ( (long long) pDestinationData + (long long) labelDataSize);
 	}
 	else
 	{
-		if (tracing)
-			Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " print normal");
+		Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " print normal");
 		labelData = pDestinationData;
 	}
 
@@ -5869,8 +5331,7 @@ void PrinterManager::startPrintingLabel( PrinterType labelNumToPrint )
 		{
 			unsigned char *buffer( new unsigned char[labelDataSize] );
 
-			if (tracing)
-				Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " adjusting label margins");
+			Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " adjusting label margins");
 
 			// keep track of buffer
 			const size_t index( labelBufferIndex_ % NUM_LABEL_BUFFERS );
@@ -5908,8 +5369,7 @@ void PrinterManager::startPrintingLabel( PrinterType labelNumToPrint )
 		sendLabelData();
 	}
 #else
-	if (tracing)
-		Debug::trace("PrinterManager.PrinterImaging", "==> " + printerTraceString + " send label data <==");
+	Debug::trace("PrinterManager.PrinterImaging", "==> " + printerTraceString + " send label data <==");
 	sendLabelData();
 #endif
 }
@@ -6303,16 +5763,6 @@ void PrinterManager::CopyLabelStockDescriptor( PrinterType whichPrinter )
 		printer4Descriptor.setLabelOrientationDegrees(stockLoaded.getLabelOrientationDegrees());
 		printer4Descriptor.setSkew(stockLoaded.getSkew());
 	}
-	else if (whichPrinter == ExtraPrinter_UsedForRFIDVoidLabel)
-	{
-		printer5Descriptor.setLength(stockLoaded.getLength());
-		printer5Descriptor.setOriginalWidthDots(stockLoaded.getOriginalWidthDots());
-		printer5Descriptor.setWidthDots(stockLoaded.getWidthDots());
-		printer5Descriptor.setWidth(stockLoaded.getWidth());
-		printer5Descriptor.setLabelOrientation(stockLoaded.getLabelOrientation());
-		printer5Descriptor.setLabelOrientationDegrees(stockLoaded.getLabelOrientationDegrees());
-		printer5Descriptor.setSkew(stockLoaded.getSkew());
-	}
 }
 
 bool PrinterManager::preImageALabel(LabelType *pCurrentLabel, PrinterType whichPrinter)
@@ -6393,8 +5843,6 @@ bool PrinterManager::preImageALabel(LabelType *pCurrentLabel, PrinterType whichP
 			imageControlBlock[whichPrinter] = new ImageControl(pCurrentLabel->getFormsList(), &printer3Descriptor);		
 		else if (whichPrinter == ExtraPrinter_UsedForSelfServeScreenBarcodeLabel)
 			imageControlBlock[whichPrinter] = new ImageControl(pCurrentLabel->getFormsList(), &printer4Descriptor);
-		else if (whichPrinter == ExtraPrinter_UsedForRFIDVoidLabel)
-			imageControlBlock[whichPrinter] = new ImageControl(pCurrentLabel->getFormsList(), &printer5Descriptor);
 
 		if (isTracing)
 			Debug::trace("PrinterManager.PrinterImaging", printerTraceString + " Created new imageControlBlock " + ptrtostring(imageControlBlock[whichPrinter]));
@@ -6736,8 +6184,8 @@ void PrinterManager::maskCommand(UINT8 sensorMask, UINT8 sensor2Mask, UINT8 user
 
 void PrinterManager::teachPrinter(PrinterModeType mode, UINT8 sensorMask, UINT8 sensor2Mask, UINT8 userMask)
 {
-	Debug::trace("PrinterManager.teachPrinter", printerTraceString + " Teaching Printer - mode: " + HobString(Integer::toString((UINT32) mode)));
-	Debug::trace("PrinterManager.teachPrinter", "PrinterMode: " + Integer::toString(mode));	
+	Debug::trace("PrinterManager.StateMachine", printerTraceString + " Teaching Printer - mode: " + HobString(Integer::toString((UINT32) mode)));
+	Debug::trace("PrinterManager.PrintMode", "PrinterMode: " + Integer::toString(mode));	
 	maskCommand(sensorMask, sensor2Mask, userMask);
 	//	maskCommand(LabelTakenBit, OutOfDataBuffersBit, TakingBit);
 
@@ -6761,15 +6209,13 @@ void PrinterManager::teachCommand(PrinterCommandType command, PrinterModeType mo
 {
 	if ((pMyPrinter != NULL) && (pMyTeachTable != NULL))
 	{
-		//Debug::trace("PrinterManager.teachCommand", "PrinterManager::teachCommand() - mode: " + HobString(Integer::toString((UINT32)mode)));
-		//Debug::trace("PrinterManager.teachCommand", "PrinterManager::teachCommand() command: " + Integer::toString(command));
-
 		PrinterTeach printerTeach(this, myPrinterType, command, pMyTeachTable->getCommandOperationList(command, mode));
+		Debug::trace("PrinterManager.cutter", "Teach Command: "+ Integer::toString(command) +" num of entries " + Integer::toString(printerTeach.getNumEntries()));
 		printerTeach.show();
-		const char* pCC = printerTeach.serialize();
+		const char *pCC = printerTeach.serialize();
 		int mLength = printerTeach.getSerializedLength();
 
-		pMyPrinter->send(pCC, mLength);	
+		pMyPrinter->send(pCC, mLength);
 	}
 }
 
@@ -7452,186 +6898,6 @@ void PrinterManager::timeoutProcess( __int32 timer_id )
 				}
 				break;
 		}
-	}
-	else if ( timer_id == rfidQryTimer )
-	{
-		Debug::trace("PrinterManager.rfidQryTimer", " rfidQryTimer callback hit");
-		
-		bool qryDone = false;
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			FpmManager *pSerialFlash( FpmManager::getInstance() );
-
-			const std::string style( pSerialFlash->getMFGSystemStyle() );
-
-			if( style == "EPCP" )
-			{
-				rfidProductType = "PCP";
-			}
-			else
-			{
-				rfidProductType = "NGW";
-			}
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("QRY|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		Debug::trace("PrinterManager.rfidQryTimer", " calling QRY custom action");
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-
-		Debug::trace("PrinterManager.rfidQryTimer", " rfidQryTimer result code = " + std::to_string(resultCode));
-		
-		if(resultCode == 1)
-		{
-			Debug::trace("PrinterManager.rfidQryTimer", " rfidQryTimer qryDone = busy");
-
-			PrinterGeneric result(PrRfidQryBusy, this, FirstPrinter);
-			dispatchEvent(&result);
-		}
-		else if(resultCode == 2)
-		{
-			Debug::trace("PrinterManager.rfidQryTimer", " rfidQryTimer qryDone = true");
-
-			PrinterGeneric result(PrRfidQryPassed, this, FirstPrinter);
-			dispatchEvent(&result);
-		}	
-		else if(resultCode == 3 || resultCode == 0)
-		{
-			Debug::trace("PrinterManager.rfidQryTimer", " rfidQryTimer qryDone = failed");
-
-			PrinterGeneric result(PrRfidQryFailed, this, FirstPrinter);
-			dispatchEvent(&result);
-		}
-	}
-	else if ( timer_id == rfidCalTimer )
-	{
-		Debug::trace("PrinterManager.rfid", " rfidCalTimer callback hit");
-		
-		bool calDone = false;
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			FpmManager *pSerialFlash( FpmManager::getInstance() );
-
-			const std::string style( pSerialFlash->getMFGSystemStyle() );
-
-			if( style == "EPCP" )
-			{
-				rfidProductType = "PCP";
-			}
-			else
-			{
-				rfidProductType = "NGW";
-			}
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("STS|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-
-		Debug::trace("PrinterManager.rfid", " rfidCalTimer result code = " + std::to_string(resultCode));
-		
-		if(resultCode == 1)
-		{
-			Debug::trace("PrinterManager.rfid", " rfidCalTimer calDone = false");
-		}
-		else
-		{
-			Debug::trace("PrinterManager.rfid", " rfidCalTimer calDone = true");
-
-			cancelTimer(rfidCalTimer);
-
-			if(resultCode == 2)
-			{
-				calDone = true;
-				createTimer(rfidQryTime, rfidQryTimer, true);
-			}
-			else
-			{
-				calDone = false;
-			}
-
-			PrinterGeneric result(calDone ? PrRfidCalPassed : PrRfidCalFailed, this, FirstPrinter);
-			dispatchEvent(&result);
-		}	
-	}
-	else if ( timer_id == rfidUpgTimer )
-	{
-		Debug::trace("PrinterManager.rfid", " rfidUpgTimer callback hit");
-		
-		bool upgDone = false;
-		int resultCode = 1; 
-		char rcexBuffer[256] = { 0 };
-
-		string rfidProductType = "";
-
-		if(isWrapperPrinter())
-		{
-			FpmManager *pSerialFlash( FpmManager::getInstance() );
-
-			const std::string style( pSerialFlash->getMFGSystemStyle() );
-
-			if( style == "EPCP" )
-			{
-				rfidProductType = "PCP";
-			}
-			else
-			{
-				rfidProductType = "NGW";
-			}
-		}
-		else
-		{
-			rfidProductType = "GTX";
-		}		
-
-		HobString action("STS|" + Configuration::getInstance()->toStringCfg(fieldOffsetCfgRfidEncodeMethod) + "|" + "200000000004" + "|" + "260916" + "|" + "0" + "|" + "1" + "|" + "2" + "|" + "0" + "|" + rfidProductType);
-
-		hobart_cust_hook_custom_action(action.c_str(), &resultCode, rcexBuffer, sizeof(rcexBuffer));
-
-		Debug::trace("PrinterManager.rfid", " rfidUpgTimer result code = " + std::to_string(resultCode));
-		
-		if(resultCode == 1)
-		{
-			Debug::trace("PrinterManager.rfid", " rfidUpgTimer upgDone = false");
-		}
-		else
-		{
-			Debug::trace("PrinterManager.rfid", " rfidUpgTimer upgDone = true");
-
-			cancelTimer(rfidUpgTimer);
-
-			if(resultCode == 2)
-			{
-				upgDone = true;
-				createTimer(rfidQryTime, rfidQryTimer, true);
-			}
-			else
-			{
-				upgDone = false;
-			}
-
-			PrinterGeneric result(upgDone ? PrRfidUpgradePassed : PrRfidUpgradeFailed, this, FirstPrinter);
-			dispatchEvent(&result);
-		}	
 	}
 	else if ( timer_id == sensorTimerExpired )
 	{
@@ -10833,7 +10099,7 @@ void PrinterManager::clearLabelDimensions()
 
 	printerStockMetrics.show();
 	dispatchEvent(&printerStockMetrics);
-	Debug::trace("PrinterTeachTable", printerTraceString + " clearLabelDimensions() - Dispatched printerStockMetrics");
+	Debug::trace("PrinterManager.PrinterSize", printerTraceString + " clearLabelDimensions() - Dispatched printerStockMetrics");
 }
 
 void PrinterManager::checkLabelWidth(LabelWidth printerStatusLabelWidth)
@@ -10956,7 +10222,7 @@ int PrinterManager::testPrinter(int i)
 
 bool PrinterManager::isWrapperPrinter() const
 {
-	return ( (prKind == EppPrinter) || (prKind == Epp2Printer) || (prKind == Epp3Printer) ) ? true : false;
+	return ( (prKind == EppPrinter) || (prKind == Epp2Printer)) ? true : false;
 }
 
 bool PrinterManager::isCounterScalePrinter() const

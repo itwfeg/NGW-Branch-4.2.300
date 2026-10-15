@@ -61,19 +61,7 @@ public:
         fieldOffsetKPCPrinter,		//    Support new CAN KPC (Weigher / Printer) New Kinetis Printer is the normal everyday printer for the HT scales as a primary printer.
         fieldOffsetARKPrinterOnly,  // 10 Supports new CAN printer only
         fieldOffsetKPPPrinter,		//    Supports new CAN prepack printer
-        fieldOffsetSSKPrinter,      // New freestanding self service printer
-        fieldOffsetSTEPPPrinter     // Supports new printer with Shoot Through Sensor
-    };
-};
-
-class LabelSensorType
-{
-public:
-    // from Printer.h - usage: PrinterKind::EppPrinter
-    enum SensorTypeOffsets
-    {
-        fieldOffsetReflective = 0,   //  0
-        fieldOffsetShootThru         //	  Standalone EPP Printer, but we are running out of parts for it, moving to EPP2. Supports the EPP2 printer (without the LSMN board)
+        fieldOffsetSSKPrinter       // New freestanding self service printer
     };
 };
 
@@ -384,18 +372,6 @@ public:
     };
 };
 
-class TimingsTestState
-{
-public:
-    // from scaleModel.h
-    enum TimingsTestStateOffsets
-    {
-        Test_Not_Performed = 0,
-        Test_Failed,
-        Test_Passed,
-        TimingsTestState_endOfTimingsTestState
-    };
-};
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// ERRORS  ////////////////////////////////
@@ -523,15 +499,9 @@ public:
         PritnerErrLabelCutterTimedOut,
         PrinterErrProductionEntryInterlockOpen,
         PrinterErrLowStock,                 // 7035
-        PrinterErrOutOfStock,
+        PrinterErrOutOfStock,               // 7036
         PrinterErrFSSLabelCutterInterlockOpen,
         PrinterErrFSSLabelDoorInterlockOpen,
-		PrinterErrHeadUpForSecondEpp,
-		PrinterErrUnknownFirstPrinterError,	// 7040
-		PrinterErrUnknownSecondPrinterError,
-		PrinterErrUnknownWrapperPrinterError,
-        PrinterErrFirmwareUpgradeUpdate,
-        PrinterErrFirmwareUpgradeReboot,    // 7044
 
         ssPrinterErrCommLoss            = PrinterErrCommLoss + SELF_SERVE_ERROR_OFFSET,
         ssPrinterErrManagerDeleted      = PrinterErrManagerDeleted + SELF_SERVE_ERROR_OFFSET,
@@ -632,10 +602,7 @@ public:
         SessionDevOnlineOrderingEnabled,
         SessionDevWillNotDisableExtraDay,
         SessionDevSecLabelEnableToggleStatus,       // 65
-
-        SessionDevRfidPrintingEnabled,
-        SessionDevRfidPrintingDisabled,
-
+        
         SessionDevErrorLastEror
     };
 };

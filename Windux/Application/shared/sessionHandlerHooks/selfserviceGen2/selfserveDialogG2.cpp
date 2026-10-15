@@ -854,9 +854,6 @@ QString selfserveDialogG2::getErrorText()
            return tr("Self Service initialization and loading sequence.\n\nPlease wait ...." );
         case 100057:
            return tr("The Search feature has been intentionally disabled." );
-	    // Application has enums for 58-65.  Wonder what the message are????
-		case 100066:
-           return tr("Upgrading EPP Firmware.\n\nPlease reboot the system to complete the upgrade." );
 
         // Product Errors
         case ProductDevError::ProductErr:

@@ -14,15 +14,20 @@ export PYTHONPATH="${workingdirectory}/Application/shared/sessionHandler/python"
 # Set SVN path accordingly for each repository.
 # Used to create the SVN tag for the build.
 
+#svnDirOs="fastrack-os-linux/trunk/"
+#svnDirScaleManagement="fastrack-hte/trunk/"
+# Make sure svnDirWindux does not have "Windux" at the
+#    end so that its tag will be created properly
+#svnDirWindux="fastrack/branches/branch-4.2.100-ElevatorUI/"
+#svnDirMultimedia="fastrack-multimedia/trunk/"
 #---------------------------------------------------
-# REDO THESE for each branch
-svnDirOs="fastrack-os-linux/branch-4.2.300/"
-svnDirScaleManagement="fastrack-hte/branch-4.2.300/"
-# Make sure svnDirWindux does not have "Windux" at the end
-svnDirWindux="fastrack/branches/branch-4.2.300/"
+# REDO THESE
+svnDirOs="fastrack-os-linux/branch-4.2.0-5.2.0/"
+svnDirScaleManagement="fastrack-hte/branch-4.2.0-5.2.0/"
+# Make sure svnDirWindux does not have "Windux" at the
+#    end so that its tag will be created properly
+svnDirWindux="fastrack/branches/branch-4.2.100-ElevatorUI/"
 svnDirMultimedia="fastrack-multimedia/trunk/"
-copiedRfsDir=/mnt/builds/ht/branch-4.2.300/Os/embedded
-copiedOsDir=/mnt/builds/ht/branch-4.2.300/Os/
 #---------------------------------------------------
 
 year=`date +"%Y"`
@@ -37,7 +42,7 @@ seconds=`date +"%S"`
 # a release to be tested
 # do not bump major, minor release number until ready for production or after
 # production
-releaseid="4.2.309"
+releaseid="5.2.100"
 releasetag="${releaseid}-${month}${day}${year}_${hour}${minute}${seconds}"
 
 # NOTE:
@@ -74,16 +79,14 @@ basetarball="hti-linux-core-4.1.300-12142021_140708.tgz"
 
 # SOF-670: Generate KPC firmware 
 #PrinterFW-WeigherFW X.X.X-X.X.X
+#kpcAppFirmwareVer="10.1.14-10.1.1"
 kpcAppFirmwareVer="10.1.16-10.1.1"
 # X.X.X
+#kpcBootFirmwareVer="0.0.8"
 kpcBootFirmwareVer="0.0.10"
 
-# SOF-7645: Generate EPP3 Shoot-Thru firmware
-# 5.0.0 is first shoot through version. Included in version 4.2.307+.  
-epp3PrinterFirmwareVer="5.0.0"
-buildEpp3PrinterFirmware="n"
-
 # Free Standing scale firmware
+# fsssAppFirmwareVer="0.0.29-11.1.0"
 # fsssAppFirmwareVer=0.0.44-11.1.0 - update to 1.0.0 for 5.2.100 release
 fsssAppFirmwareVer="1.0.0-11.1.0"
 # X.X.X - NOT USED FOR NOW: Use KPC Bootloader
@@ -96,18 +99,17 @@ hfpdFirmwareVer="1.10"
 wrapperWeigherFirmwareVer="1.5"
 
 # SOF-1275: Automatically generate wrapper firmware
-#1P Firmware
-wrapperFirmwareVer="10.32"
+#wrapperFirmwareVer="10.17"
+wrapperFirmwareVer="10.22"
 cameraFirmwareVer="9.1"
 buildWrapperFirmware="n"
 includeClearTraySupport="n"
 
-# SOF-4509: Need to also generate wrapper firmware for NGW 2nd-Label-Applier, including the sensor formerly known as the TOF firmware
-#2P Firmware
-wrapperFirmwareVerNGW2p="11.52"
-cameraFirmwareVerNGW2p="9.4"
-tofAppFirmwareNGW2pVer="1.0.7"
-tofBootFirmwareNGW2pVer="1.0.0"
+# SOF-4509: Need to also generate wrapper firmware for NGW 2nd-Label-Applier, including TOF firmware
+wrapperFirmwareVerNGW2p="11.32"
+cameraFirmwareVerNGW2p="9.2"
+tofAppFirmwareNGW2pVer="0.0.89"
+tofBootFirmwareNGW2pVer="0.0.85"
 buildWrapperFirmwareNGW2p="n"
 
 servicekeyrequired="y"
@@ -120,7 +122,6 @@ cleanImages="y"
 svnupdate="y"
 
 buildOs="n"
-copyOs="n"
 buildOsKernel="n"
 buildOsUboot="n"
 buildOsRecovery="n"
@@ -155,53 +156,8 @@ OSRevisionFrom="1723"
 #   The OS revision number of the head (current release you are making)
 OSRevisionHead="1822"
 
-#########################################################################################
-# get the u-boot version from the u-boot makefile
-#uboot_version=`python getUbootVersion.py ${workingdirectory}/../Os/embedded/timesys/itw-boundary/Hobart-Uboot/Makefile`
-#if [ "$uboot_version" = "None" ]; then
-#    echo "Can not compute uboot version number from Makefile"
-#    exit 1
-#fi
-#
-# create uboot version file
-#rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/uboot-version.txt
-#echo "${uboot_version}" >  ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/uboot-version.txt
-#
-# create bitmap splash with u-boot version string in it
-#rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
-##python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} ${workingdirectory} /../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
-#echo "python genVersionBitmap.py --rotate 0 3.7.13 u-version.bmp"
-## python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 3.7.13 u-version.bmp --worked
-##python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} u-version.bmp --worked
-##python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} ${workingdirectory}/u-version.bmp -- NOPE
-##python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} ${workingdirectory} /../u-version.bmp -- NOPE
-#python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
-#
-#if [ $? -ne 0 ]; then
-#    echo "Uboot version bitmap did not get created"
-#    exit 1
-#fi
-#
-#echo ${copiedDir}
-#cp -R ${copiedDir}/rfsOverlays ${workingdirectory}/../Os/embedded/
-#echo "create rfsOverlays"
-#exit 1
-#########################################################################################
-
 # Set this for customer build
 customerSpecificFeature="${workingdirectory}/3RDPartySoftware/walmart/hti-linux-feature-wm_rmt_prnt-${releasetag}.package.tgz"
-
-if [ "$copyOs" = "y" ]; then
-	echo "stealing another project Os directory because I cant build mine anymore"
-	if [ -d ../Os ]; then
-		echo "Os directory EXISTS so I dont need to steal another one"
-	else
-		echo "Os directory is MISSING so I need to steal another one"
-		cp -R ${copiedOsDir} ${workingdirectory}/../
-	fi
-fi
-
-echo "Got Os if it was missing"
 
 if [ "$svnupdate" = "y" ]; then
     # NOTE: You need to check out Os, ScaleManagement, and Windux under same directory
@@ -215,7 +171,9 @@ if [ "$svnupdate" = "y" ]; then
         # Force kernel and uboot builds when RFS build
         buildOsKernel="y"
         buildOsUboot="y"
-	fi
+
+    fi
+
     svn update
     mkdir -p ../Os/embedded/timesys/itw-boundary
 
@@ -285,9 +243,6 @@ fi
 
 cd ${workingdirectory}
 
-#########################################################################################
-
-
 # get the u-boot version from the u-boot makefile
 uboot_version=`python getUbootVersion.py ${workingdirectory}/../Os/embedded/timesys/itw-boundary/Hobart-Uboot/Makefile`
 if [ "$uboot_version" = "None" ]; then
@@ -298,45 +253,38 @@ fi
 # create uboot version file
 rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/uboot-version.txt
 echo "${uboot_version}" >  ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/uboot-version.txt
-#
- create bitmap splash with u-boot version string in it
+
+# create bitmap splash with u-boot version string in it
 rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
-echo "python genVersionBitmap.py --rotate 0 3.7.13 u-version.bmp"
-
-python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 0 ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
-
+python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/u-version.bmp
 if [ $? -ne 0 ]; then
     echo "Uboot version bitmap did not get created"
     exit 1
-else
-	echo "Successfully created uboot_version image"
 fi
 
-#########################################################################################
-
 # create rotated bitmap splash with u-boot version string in it for slicer
-#rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/slicer/u-version.bmp
-#python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 270 ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/slicer/u-version.bmp
-#if [ $? -ne 0 ]; then
-#    echo Uboot version bitmap did not get created (rotated)
-#    exit 1
-#fi
+rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/slicer/u-version.bmp
+python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py --rotate 270 ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/slicer/u-version.bmp
+if [ $? -ne 0 ]; then
+    echo "Uboot version bitmap did not get created (rotated)"
+    exit 1
+fi
 
 # create rotated bitmap splash with u-boot version string in it for corona psu
-#rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/coronaPsu/u-version.bmp
-#python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/coronaPsu/u-version.bmp
-#if [ $? -ne 0 ]; then
-#    echo "Uboot version bitmap did not get created"
-#    exit 1
-#fi
+rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/coronaPsu/u-version.bmp
+python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/coronaPsu/u-version.bmp
+if [ $? -ne 0 ]; then
+    echo "Uboot version bitmap did not get created"
+    exit 1
+fi
 
 # create rotated bitmap splash with u-boot version string in it for tdcc
-#rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/tdcc/u-version.bmp
-#python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/tdcc/u-version.bmp
-#if [ $? -ne 0 ]; then
-#    echo "Uboot version bitmap did not get created"
-#    exit 1
-#fi
+rm -f ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/tdcc/u-version.bmp
+python ${workingdirectory}/Application/shared/sessionHandler/python/genVersionBitmap.py ${uboot_version} ${workingdirectory}/../Os/embedded/rfsOverlays/hobart/uboot/tdcc/u-version.bmp
+if [ $? -ne 0 ]; then
+    echo "Uboot version bitmap did not get created"
+    exit 1
+fi
 
 # Generate/Update ScaleManagement backend dependency list
 if [ -d ../ScaleManagement ]; then
@@ -398,12 +346,6 @@ if [ "$build" = "y" ]; then
             fi
         fi
 
-        # SOF-7645: Generate EPP3 Shoot-Thru firmware
-        if [ "$buildEpp3PrinterFirmware" = "y" ]; then
-            echo "I build this in my VM using Confluence instructions and I never plan on building the EPP3 firmware (package it, sign it) here."
-            echo "In the future if I need to pkg it, this is where I would add the code. Already built and checked into SVN /CustomInstallers."
-        fi
-
         # SOF-4509: Generate Wrapper Firmware upgrade file for NGW 2nd-Label-Applier
         if [ "$buildWrapperFirmwareNGW2p" = "y" ]; then
 
@@ -442,8 +384,6 @@ if [ "$build" = "y" ]; then
         # Tag FSSS firmware
         svn copy ${svnrepo}/peripherals/FSSS-KPC-Firmware-Files/App/${fsssAppFirmwareVer} ${svnrepo}/peripherals/tags/FSSS-KPC-Firmware-Files_App_${fsssAppFirmwareVer}-hte-${releasetag} -m "Release FSSS-KPC-Firmware-Files_App_${fsssAppFirmwareVer}-hte-${releasetag} - release tagged"
         svn copy ${svnrepo}/peripherals/FSSS-KPC-Firmware-Files/Boot/${fsssBootFirmwareVer} ${svnrepo}/peripherals/tags/FSSS-KPC-Firmware-Files_Boot_${fsssBootFirmwareVer}-hte-${releasetag} -m "Release FSSS-KPC-Firmware-Files_Boot_${fsssBootFirmwareVer}-hte-${releasetag} - release tagged"        
-        # Tag Epp3 firmware - this is only for the source.bin. Dont use that. Grab the tar.tgz version instead
-        # svn copy ${svnrepo}/peripherals/trunk/Access-Shoot-Through/App/${epp3PrinterFirmwareVer} ${svnrepo}/peripherals/tags/EPP-Firmware-Files_App_${epp3PrinterFirmwareVer}-hte-${releasetag} -m "Release EPP-Firmware-Files_App_${epp3PrinterFirmwareVer}-hte-${releasetag} - release tagged"
         # tag Hands Free Firmware
         svn copy ${svnrepo}/peripherals/HFPD-Firmware-Files/Application/${hfpdFirmwareVer} ${svnrepo}/peripherals/tags/HFPD-Firmware-Files_Application_${hfpdFirmwareVer}-hte-${releasetag} -m "Release HFPD-Firmware-Files_App_${hfpdFirmwareVer}-hte-${releasetag} - release tagged"
         # SOF-4447: Tag Weigher firmware for the Wrapper
@@ -761,10 +701,8 @@ if [ "$build" = "y" ]; then
         echo "Building application binaries"
         ./massiveClean.sh
         # build binaries
-        #make clean
-		#BUILD_TYPE=debug make		# build with debug turned on for EVERYTHING
-		BUILD_TYPE=make
-		
+        make clean
+
         # remove the binaries just for posterity
         rm -f ./Application/operatorInterface/scaleui/scaleui
         rm -f ./Application/operatorInterface/videoPlayer/videoPlayer
@@ -811,8 +749,7 @@ if [ "$build" = "y" ]; then
            [ ! -x ./Application/operatorInterface/dwconfig/dwconfig ] || [ ! -x ./Application/operatorInterface/autocalibrationrig/autocalibrationrig ] || \
            [ ! -x ./Application/operatorInterface/dwconfig/dwconfig ] || [ ! -x ./Application/operatorInterface/weighercalib/weighercalib ] || \
            [ ! -x ./Application/operatorInterface/scaleModelChoice/scaleModelChoice ] || [ ! -x ./Application/HobartHandsFree/daemon/hfpdd ] || \
-           [ ! -x ./Application/HobartHandsFree/ui/hfpdui ] || [ ! -x ./Application/output/libHobartCustomerHook.so ] || \
-           [ ! -f ./Application/rfid-control/output/libHobartCustomerHookRfid.so ]
+           [ ! -x ./Application/HobartHandsFree/ui/hfpdui ] || [ ! -x ./Application/output/libHobartCustomerHook.so ]
         then
 
             echo "Application did not build correctly, build terminated"
@@ -877,10 +814,6 @@ if [ "$build" = "y" ]; then
                 echo " ... hook did not build"
             fi
 
-            if [ ! -f ./Application/rfid-control/output/libHobartCustomerHookRfid.so ]; then
-                echo " ... RFID hook did not build"
-            fi
-
             exit 1
         fi
 
@@ -936,9 +869,6 @@ if [ "$build" = "y" ]; then
 
         cd ${workingdirectory}/../Windux/Application/HobartHandsFree
         ./make-debian.sh &
-
-        #cd ${workingdirectory}/../Windux/Application/rfid-control
-        #./make-debian.sh armhf &
 
         # build 3rd party packages
         echo "Building 3rd Party packages (Stage 1)"
@@ -1209,13 +1139,6 @@ if [ ! -d ${liveRfs}/lib/firmware/fsss ]; then
     mkdir -p ${liveRfs}/lib/firmware/fsss/boot
 fi
 
-# EPP3 Shoot Through Sensor Printer - TEST ON 4.2.307
-# chobart_d and installUpgrade.py does this now.
-#if [ ! -d ${liveRfs}/lib/firmware/epp ]; then   
-#    mkdir -p ${liveRfs}/lib/firmware/epp
-#    mkdir -p ${recoveryRfs}/lib/firmware/epp
-#fi
-
 if [ ! -d ${liveRfs}/lib/firmware/hfpd ]; then
     mkdir -p ${liveRfs}/lib/firmware/hfpd
 fi
@@ -1309,15 +1232,10 @@ svn export ${svnrepo}/peripherals/branches/branch-BCM-PJR301-WeigherSeparation/P
 svn export ${svnrepo}/peripherals/branches/branch-FPC-ARA-Cutter/Project/FLASH/Exe/Fpc2_108.bin ${target}${liveRfs}/lib/firmware/fpc/sourceFPC2.bin
 # SOF-4449 Allow weigher firmware on wrapper to be upgraded on first boot
 svn export "${svnrepo}/peripherals/trunk/Access USB Weigher/Executables/WeigherBinary/v${wrapperWeigherFirmwareVer}/source.bin" ${target}${liveRfs}/lib/firmware/weigher/XPEWeigher.bin
-# Support Shoot Thru Sensor on EPP (STEpp now Epp3)
-# This is for the source.bin directly - we want to use the .tar.tgz signed version instead
-# svn export ${svnrepo}/peripherals/trunk/Access-Shoot-Through/App/${epp3PrinterFirmwareVer}/source.bin ${target}${liveRfs}/lib/firmware/epp/source.bin
 
 # ACR-53
 $cpcmd ${target}${liveRfs}/lib/firmware/apc/sourceFPC.bin ${tempDir}/.
 $cpcmd ${target}${liveRfs}/lib/firmware/fpc/sourceFPC2.bin ${tempDir}/.
-# This is for the source.bin directly - we want to use the .tar.tgz signed version instead
-#$cpcmd ${target}${liveRfs}/lib/firmware/epp/source.bin ${tempDir}/.
 
 # export Kpc Application and Bootloader
 # SOF-670: Generate KPC firmware 
@@ -1334,10 +1252,6 @@ svn export ${svnrepo}/peripherals/HFPD-Firmware-Files/Application/${hfpdFirmware
 # Copy to tempDir so that the app gets bundled in the fpc upgrade
 $cpcmd ${target}${liveRfs}/lib/firmware/kpc/app/sourceKPCApp.bin ${tempDir}/.
 $cpcmd ${target}${liveRfs}/lib/firmware/fsss/app/sourceFsssApp.bin ${tempDir}/.
-# tested on 4.2.307
-# This is for the source.bin directly - we want to use the .tar.tgz signed version instead
-#$cpcmd ${target}${liveRfs}/lib/firmware/epp/app/source.bin ${tempDir}/.
-#$cpcmd ${target}${liveRfs}/etc/hobart/vmTmp/source.bin ${tempDir}/.
 
 # SOF-4447 Need to include Wrapper weigher firmware in the FPC upgrade
 $cpcmd ${target}${liveRfs}/lib/firmware/weigher/XPEWeigher.bin ${tempDir}/.
@@ -1372,9 +1286,6 @@ $cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/htseries-any-
 $cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/htseries-any-ngw2p-$wrapperFirmwareVerNGW2p.0-release.package.tgz ${target}${liveRfs}/root/firmware/.
 # Remove wrapper firmware for old models
 #$cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/htseries-any-aws3-8.36.0-release.package.tgz ${target}${liveRfs}/root/firmware/.
-# SOF-7645: Generate EPP3 Shoot-Thru firmware
-$cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/htseries-epp3prn-$epp3PrinterFirmwareVer.package.tgz ${target}${liveRfs}/root/firmware/.
-
 # SOF-3055: Restore wrapper firmware for older models
 $cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/hte-aws-10.50.0-release.package.tgz ${target}${liveRfs}/root/firmware/.
 $cpcmd ${workingdirectory}/CustomInstallers/featureWrapperFirmware/hte-ews-5.50.0-release.package.tgz ${target}${liveRfs}/root/firmware/.
@@ -1448,27 +1359,11 @@ $cpcmd -p ./3RDPartySoftware/chilkat/chilkat-9.5.0-armv7l-linux/lib/libchilkat-9
 $cpcmd -p ./3RDPartySoftware/chilkat/chilkat-9.5.0-armv7l-linux/lib/libchilkat-9.5.0.so ${target}${application}/usr/lib/.
 
 echo "Installing customer hooks"
-$cpcmd -p ./Application/output/libHobartCustomerHook.so ${target}${liveRfs}/usr/lib/libHobartCustomerHook.so
-$cpcmd -p ./Application/output/libHobartCustomerHook.so ${target}${application}/usr/lib/libHobartCustomerHook.so
+$cpcmd -p ./Application/output/libHobartCustomerHook.so ${target}${liveRfs}/usr/lib/libHobartCustomerHookEmpty.so
+$cpcmd -p ./Application/output/libHobartCustomerHook.so ${target}${application}/usr/lib/libHobartCustomerHookEmpty.so
 
-echo "Installing RFID customer hook"
-$cpcmd -p ./Application/rfid-control/output/libHobartCustomerHookRfid.so ${target}${liveRfs}/usr/lib/.
-$cpcmd -p ./Application/rfid-control/output/libHobartCustomerHookRfid.so ${target}${application}/usr/lib/.
-
-echo "Installing RFID hook configuration"
-$shcmd "mkdir -p ${liveRfs}/usr/share/rfid-hook"
-$shcmd "mkdir -p ${application}/usr/share/rfid-hook"
-$cpcmd -p ./Application/rfid-control/rfid-hook/* ${target}${liveRfs}/usr/share/rfid-hook/.
-$cpcmd -p ./Application/rfid-control/rfid-hook/* ${target}${application}/usr/share/rfid-hook/.
-
-echo "Installing hook manager configuration"
-$shcmd "mkdir -p ${liveRfs}/usr/share/hook-manager"
-$shcmd "mkdir -p ${application}/usr/share/hook-manager"
-$cpcmd -p ./Application/HobartCustomerHook/hook-manager/* ${target}${liveRfs}/usr/share/hook-manager/.
-$cpcmd -p ./Application/HobartCustomerHook/hook-manager/* ${target}${application}/usr/share/hook-manager/.
-
-#ln -s ./libHobartCustomerHook.so ${target}${liveRfs}/usr/lib/libHobartCustomerHook.so
-#ln -s ./libHobartCustomerHook.so ${target}${application}/usr/lib/libHobartCustomerHook.so
+ln -s ./libHobartCustomerHookEmpty.so ${target}${liveRfs}/usr/lib/libHobartCustomerHook.so
+ln -s ./libHobartCustomerHookEmpty.so ${target}${application}/usr/lib/libHobartCustomerHook.so
 
 echo "Installing HYDRA"
 $cpcmd -p ./Application/hydra/events/libevents.so.1.0.0 ${target}${liveRfs}/usr/lib/libevents.so.1.0.0

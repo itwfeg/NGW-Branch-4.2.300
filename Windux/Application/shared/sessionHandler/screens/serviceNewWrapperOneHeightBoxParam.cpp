@@ -679,8 +679,7 @@ void serviceNewWrapperOneHeightBoxParam::buildTable(const SessionMessage& msg)
     const bool isAWS = (evolWrapperSystemInformation->awsModelNumber() < DomEvolWrapperSystemInformation::reducedTimingModels);
 
     WrapParameter::wrTimingsFieldType fieldType = wrTimingsData_->wrapParameterList.at(currentParam)->getType();
-    int minVal = 0;
-    int maxVal = 0;
+    int minVal, maxVal;
 
     for (j = 0; j < existingCount; j++)
     {

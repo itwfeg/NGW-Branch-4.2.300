@@ -22,10 +22,8 @@
 #include "RemotePrintTemplateRequest.h"
 
 #include "HobTokenizerCSV.h"
-#include "HobTokenizerTSV.h"
 #include "HobTokenizerUS.h"		
 #include "HobTokenTagged.h"
-#include "HobList.h"
 
 #include "Configuration.h"
 #include "SessionManager.h"
@@ -55,6 +53,7 @@
 
 #include "MemShow.h"
 
+
 #include "Special.h"
 #include "Category.h"
 
@@ -69,8 +68,6 @@
 #include "Bool.h"
 #include "Hex.h"
 #include "math.h"
-#include <string>
-#include <map>
 
 using namespace std;
 
@@ -1009,9 +1006,6 @@ void Product::init()
 	printingRemoteLabel = false;
 	//reversed = false;
 	hookBeforePrint_ = hookAfterPrint_ = false;
-
-	productTagsToDrop["l2"] = static_cast<int>(fieldOffsetLabelTypeNum2);
-	productTagsToDrop["l3"] = static_cast<int>(fieldOffsetLabelTypeNum3);
 
 	initFieldLists();
 }
@@ -4551,7 +4545,7 @@ bool Product::updateField(int fieldOffset, const HobString &newValue, bool links
 		case fieldOffsetOnlineOrderingLabelTypeNum3:
 		{
 			if (Debug::isTracing("Product.LabelType"))
-				Debug::trace("Product.LabelType", string("updateField() - fieldOffset: ") + inttostring(fieldOffset) + " is being updated with value: " + newValue);
+				Debug::trace("Product.LabelType", string("updateField() - fieldOffset: ") + inttostring(fieldOffset) + "is being updated with value: " + newValue);
 			bool labelTypeNumValid = true;
 			HobRecordNum newLabelTypeNum = Long::valueOf(newValue);
 			if (newLabelTypeNum <= 0)
@@ -5024,30 +5018,12 @@ void Product::updateRecord(Product *newData, AbstractSession *session, bool link
 	if (!newData)
 		return;
 
-	if (Debug::isTracing("Product.updateRecord"))
-		Debug::trace("Product.updateRecord", string("updateRecord() - passed in num ") + longtostring(newData->getProductNum()) + string("  passed in DeptNum ") + longtostring(newData->getDeptNum()));
-
-	////////////////////////////////////////////////// START DUMP TAGS ///////////////////////////////////////////////////////////////////
-
-	if (session && session->isCommSession())
+	if (Debug::isTracing("Product"))
 	{
-		// 1. GET input string containing key-value pairs separated by vertical bar | and keys/values separated by a colon :.						
-		std::string exclusionStr = HobTokenizerTSV::getExclusionString();														// RETURNS: 89:l2,l3|B9:pp,SM,bd
-
-		// 2. Finally - get the tags we need to dump, if they exist where 89 = RT89, Products Function code
-		std::vector<std::string> droplist =  HobTokenizerTSV::getRTsMappedToTags(exclusionStr, "89");							// RETURNS vector of tags to drop:  [l2],[l3]
-
-		if (droplist.size() > 0)
-		{
-			for (const std::string& tag : droplist)
-			{
-				int tagOffset = HobTokenizerTSV::performTagDrop(productTagsToDrop, tag);
-				if (tagOffset > 0)
-					newData->setReceived(tagOffset, false);		// to drop the tag, just set the isReceived flag to false - just means we didnt recieve any data for this field (even tho we did)
-			}
-		}
+		Debug::trace("Product", string("updateRecord() - this num ") + longtostring(productNum) + string("  this DeptNum ") + longtostring(deptNum));
+		Debug::trace("Product", string("updateRecord() - passed in num ") + longtostring(newData->getProductNum()) + string("  passed in DeptNum ") + longtostring(newData->getDeptNum()));
 	}
-	
+
 	// Need to set the deptNum first; it's needed when updating some of the other fields below (product number for one).
 	// Since its fieldOffset is later in the list, it would be set too late.
 	if ( newData->isReceived(fieldOffsetProductDeptNum) )
@@ -5318,23 +5294,9 @@ void Product::updateRecord(Product *newData, AbstractSession *session, bool link
 				// We can still receive them via comm / backup / restore, in which case, we still need to deal with them.
 				// We still handle them appropriately; the calls to getLabelTypeNum(...) and setLabelTypeNum(...) map them to fieldOffsetDefaultLabelTypeNum1/2/3.
 				case fieldOffsetLabelTypeNum1:		// PRIMARY LABEL TYPE NUMBER
-				{
-					//Debug::trace("Product.updateRecord", string("updateRecord() - fieldOffset:") + " fieldOffsetLabelTypeNum1 is being updated to new value: " + longtostring(newData->getLabelTypeNum(loopCnt)));
-					setLabelTypeNum(loopCnt, newData->getLabelTypeNum(loopCnt));
-					break;
-				}
 				case fieldOffsetLabelTypeNum2:		// SECONDARY LABEL TYPE NUMBER
-				{
-					//Debug::trace("Product.updateRecord", string("updateRecord() - fieldOffset:") + " fieldOffsetLabelTypeNum2 is being updated to new value: " + longtostring(newData->getLabelTypeNum(loopCnt)));
-					setLabelTypeNum(loopCnt, newData->getLabelTypeNum(loopCnt));
-					break;
-				}
 				case fieldOffsetLabelTypeNum3:		// THIRD LABEL TYPE	NUMBER
-				{
-					//Debug::trace("Product.updateRecord", string("updateRecord() - fieldOffset:") + " fieldOffsetLabelTypeNum3 is being updated to new value: " + longtostring(newData->getLabelTypeNum(loopCnt)));
-					setLabelTypeNum(loopCnt, newData->getLabelTypeNum(loopCnt));
-					break;
-				}
+
 				case fieldOffsetDefaultLabelTypeNum1:
 				case fieldOffsetDefaultLabelTypeNum2:
 				case fieldOffsetDefaultLabelTypeNum3:

@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#if 1
+#if 0
 #define DEBUG_FIRMWARE_UPGRADE
 #endif
 
@@ -45,7 +45,6 @@ std::string SoftwareSystem::dataTypeName("SoftwareSystem");
 #define APC_ZIP_SOURCE_FILE "source.bin"
 #define EPP_ZIP_SOURCE_FILE "source.bin"
 #define EPP2_ZIP_SOURCE_FILE "source.bin"
-#define EPP3_ZIP_SOURCE_FILE "source.bin"
 #define EZWEIGHER_ZIP_SOURCE_FILE "Weigher.hex"
 #define ARMWEIGHER_ZIP_SOURCE_FILE "source.bin"
 #define AWS_WRAPPER_ZIP_SOURCE_FILES "source.bin" //all wrapper source files
@@ -928,49 +927,6 @@ bool SoftwareSystem::requestPeripheralUpgrade(PeripheralRequestCodeUpdate *pUSBM
 				}		
 			}
 			break;
-
-			case HobVersion::Epp3PrinterSW:
-			{
-				Debug::trace("SoftwareSystem.upgrade", HobString("requestPeripheralUpgrade: Epp3PrinterSW peripheral request."));
-
-				if (pCurComponent)
-				{
-					util_filesystem::File armEppSrcZip(pPath, "EPP3Prn.zip");
-
-					if (!armEppSrcZip.exists())
-						break;
-
-					util_filesystem::Directory vmTmpDir("");
-
-					HobComplexVersion::getExtractionDir(newVerType, vmTmpDir, 0);
-
-					if (!vmTmpDir.exists())
-						vmTmpDir.create();
-
-					Hobart::CZip::unZipSingleFile(armEppSrcZip.getFullPath().c_str(), EPP3_ZIP_SOURCE_FILE, vmTmpDir.getFullPath().c_str());
-
-					util_filesystem::File firmSourceFile(vmTmpDir.getFullPath(), EPP3_ZIP_SOURCE_FILE);
-
-					if (firmSourceFile.exists())
-					{
-						Debug::trace("SoftwareSystem.upgrade", HobString("requestPeripheralUpgrade:found software component create response message."));
-						*pReplyMsg = new PeripheralCodeUpdate(pUSBMsg->getNodeId(), res, *pCurComponent);
-					}
-					else
-					{
-						//if the source does not exist, we still need to responed to the updaters request
-						Debug::trace("SoftwareSystem.upgrade", HobString("requestPeripheralUpgrade:create response message with null component."));
-						*pReplyMsg = new PeripheralCodeUpdate(pUSBMsg->getNodeId(), res, HobComplexVersion());
-					}
-				}
-				else
-				{
-					Debug::trace("SoftwareSystem.upgrade", HobString("requestPeripheralUpgrade:create response message with null component."));
-					*pReplyMsg = new PeripheralCodeUpdate(pUSBMsg->getNodeId(), res, HobComplexVersion());
-				}
-			}
-			break;
-
 			case HobVersion::Aws2WeigherSW:
 			{
 				Debug::trace("SoftwareSystem.upgrade", HobString("requestPeripheralUpgrade: Aws2WeigherSW peripheral request."));
@@ -1492,7 +1448,6 @@ STATUS SoftwareSystem::flashSystem(VersionManager::ComponentList * /* pHardwareM
 			case HobVersion::UsbWeigher15KgSW:
 			case HobVersion::EppPrinterSW:
 			case HobVersion::Epp2PrinterSW:			/* Alex Zavala's change for XPE version */
-			case HobVersion::Epp3PrinterSW:
 			case HobVersion::EssPrinterSW:
 			case HobVersion::EscPrinterSW:
 			case HobVersion::EssPrnBootCodeSW:
@@ -1500,7 +1455,7 @@ STATUS SoftwareSystem::flashSystem(VersionManager::ComponentList * /* pHardwareM
 			case HobVersion::EppPrnBootCodeSW:
 			case HobVersion::EppPrnFlashUpdateSW:
 			case HobVersion::Epp2PrnBootCodeSW:		/* Alex Zavala's change for XPE version */
-			case HobVersion::Epp2PrnFlashUpdateSW:	/* Alex Zavala's change for XPE version */		
+			case HobVersion::Epp2PrnFlashUpdateSW:	/* Alex Zavala's change for XPE version */
 			case HobVersion::EscPrnBootCodeSW:
 			case HobVersion::EscPrnFlashUpdateSW:
 			case HobVersion::WRMasterNVDataSW:

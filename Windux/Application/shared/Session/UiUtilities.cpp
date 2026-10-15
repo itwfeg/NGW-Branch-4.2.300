@@ -28,7 +28,6 @@
     \  Bugs\Issues: None
  */
 UiUtilities::UiUtilities( Session *session ) :
-    isPlaying(false),
     session_( session ),
     scaleConfig_( session->scaleConfig ),
     madpScaleConfig( scaleConfig_->scaleConfig ),
@@ -37,7 +36,7 @@ UiUtilities::UiUtilities( Session *session ) :
     peripheralList( scaleConfig_->peripheralList ),
     currentPLU( scaleConfig_->currentPLU ),
     defaultCurrentPLU( scaleConfig_->defaultCurrentPLU ),
-    wrTimingsTestResults(scaleConfig_->wrTimingsTestResults),
+    isPlaying(false),
     specialCharacter(""),
     noChecks(0)
 {

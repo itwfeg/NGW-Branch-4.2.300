@@ -32,7 +32,6 @@ SupervisorMode::SupervisorMode( ScreenWidget *screen, SessionMainWindow *parent 
     cameFromProductNutritionEditor_ = false;
     cameFromLabelPlacementView_ = false;
     cameFromProductDefaults_ = false;
-    cameFromChangeProductAllFields_ = false;
 
     initialize();
 }
@@ -46,7 +45,6 @@ SupervisorMode::SupervisorMode( SessionMainWindow *parent ) :
     cameFromProductNutritionEditor_ = false;
     cameFromLabelPlacementView_ = false;
     cameFromProductDefaults_ = false;
-    cameFromChangeProductAllFields_ = false;
 
     initialize();
 }
@@ -128,12 +126,6 @@ void SupervisorMode::setCameFromProductDefaults(bool productDefaultsVisit)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-void SupervisorMode::setCameFromChangeProductAllFields(bool allFieldsVisit)
-{
-    cameFromChangeProductAllFields_ = allFieldsVisit;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 bool SupervisorMode::cameFromProductMarqueeEditor()
 {
     return cameFromProductMarqueeEditor_;
@@ -155,12 +147,6 @@ bool SupervisorMode::cameFromLabelPlacementView()
 bool SupervisorMode::cameFromProductDefaults()
 {
     return cameFromProductDefaults_;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-bool SupervisorMode::cameFromChangeProductAllFields()
-{
-    return cameFromChangeProductAllFields_;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,5 +178,4 @@ void SupervisorMode::initialize()
     setCameFromProductNutritionEditor(false);
     setCameFromLabelPlacementView(false);
     setCameFromProductDefaults(false);
-    setCameFromChangeProductAllFields(false);
 }

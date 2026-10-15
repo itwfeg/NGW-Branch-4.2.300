@@ -98,14 +98,12 @@ class HobVersion
 			ApcWeigherSW,
 			TofSW,
 			TofBootloader,
-			SSPrinterHW,
+            SSPrinterHW,
 			SSPrinterSW,
 			FSSPrinterHW,
 			FSSPrinterSW,
 			FSSBootloaderSW,
-			Epp3PrinterHW,		// EPP3 Shoot-thru HW
-			Epp3PrinterSW,		// EPP3 Shoot-thru SW
-			EndOfComponents     //This is not a real component, just a marker of the end of the list.
+			EndOfComponents //This is not a real component, just a marker of the end of the list. it must always be there
 		}   VersionType_t;
 
 		HobVersion();

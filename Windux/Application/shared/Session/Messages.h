@@ -29,19 +29,6 @@ class DomNewWrapperAllTrays;
 // All of the following structs came as forms from mainAppletDataPage.asp
 
 // Global Variables about everything (250,250). Many of these were once standalone global vars and I pulled them into here.
-class MadpWrapperTimingsTestResults
-{
-public:
-    int testFilmLoadProperly;
-    int testFilmRollerClean;
-    int testFilmRollerTensioned;
-    int	testGripperFilmSelectorHeight;
-    int	testGripperSlideBlocks;
-    int	testElevatorHeight;
-    int	testBrakeGap;
-    int	testBrakeTorque;
-};
-
 class MadpInternalConfig
 {
 public:
@@ -115,17 +102,8 @@ public:
     bool isOkToLookUpPlu;                       // we can look up a plu on two printer system bc we have printed any previous plu
     bool poppedRezero;                          // did we pop a rezero dialog before looking up the PLU?
     int  isOkDroppedPLU;                        // the plu we could not look up becuase we didnt receive a product complete yet
-    bool isTimingsActive;                       // if we are hopping around from the Timings Screen to the different Tests Screen
-    bool returningFromTabs;
-    int runInTestState;
-    int actuatorTestState;
-    int priVertPrintPosition;
-    int secVertPrintPosition;
-    QString runInFailures;
-    QString actuatorFailures;
-    QString runInSensorFailures;
-    QString actuatorSensorFailures;
     QVector<QString> printerCycleCounts;        // What are the cycle counts of the printers on wrappers
+
 };
 
 class MadpCutTestPlu
@@ -243,28 +221,29 @@ public:
     } wrTimingsFieldType_et;
 
     typedef enum heightBoxParameters
-    {                                // enum   order displayed
-        PERCENT_STRETCH_CLAMP_ON,       // 0  - 1
-        KNIFE_HEIGHT,					// 01 no longer used
-        CLAMP_HEIGHT,                   // 02 - 2 NGW2=Side to Side wrap tension
-        DISTANCE,						// 03 - 7
-        FORCE_OUTSIDE_ELEVATOR,         // 04 - 9 on NGW this is leading edge label offset - Now the Secondary label offset
-        GRIPPER_ADJUST,                 // 05 - 4 NGW2=Front to Back wrap tension
-        FRONT_UF_ADJUST,                // 06 - 8 on NGW this is trailing edge label offset - Now the Primary label offset
-        WRAP_SPEED,						// 07 - 11
-        DISCHARGE_SPEED,				// 08 - 12
-        SIDE_UF_ADJUST,					// 09 - 3
-        HEIGHT_RESTRICT,                // 10 - 6
-        SIDE_UF_RETURN,                 // 11 no longer used = 0
-        UNUSED_12,                      // 12 no longer used = 0
-        SIDE_CLAMP_GAP,                 // 13 no longer used = 0
-        FILM_ROLL_TO_USE,				// 14 - 14
-        REAR_UF_TRIP_DELAY,             // 15 - 5
-        BRAKE_TIMING,					// 16 - 13
-        OUTSIDE_GRIPPER_RELEASE,        // 17 no longer used = 0
-        INSIDE_GRIPPER_RELEASE,         // 18 no longer used = 0
-        PRIMARY_LABEL_VERT_OFFSET,		// 19 no longer used
-        SECONDARY_LABEL_VERT_OFFSET     // 20 - 10
+    {
+        PERCENT_STRETCH_CLAMP_ON,       //	0
+        KNIFE_HEIGHT,
+        CLAMP_HEIGHT,                   //  2: NGW2=Side to Side wrap tension
+        DISTANCE,
+        FORCE_OUTSIDE_ELEVATOR,         //  on NGW this is leading edge label offset - Now the Secondary label offset
+        GRIPPER_ADJUST,                 //	5: NGW2=Front to Back wrap tension
+        FRONT_UF_ADJUST,                //  on NGW this is trailing edge label  offset - Now the Primary label offset
+        WRAP_SPEED,
+        DISCHARGE_SPEED,
+        SIDE_UF_ADJUST,
+        HEIGHT_RESTRICT,                //	10
+        SIDE_UF_RETURN,                 // no longer used = 0
+        UNUSED_12,                      // no longer used = 0
+        SIDE_CLAMP_GAP,                 // no longer used = 0
+        FILM_ROLL_TO_USE,
+        REAR_UF_TRIP_DELAY,             //	15
+        BRAKE_TIMING,
+        OUTSIDE_GRIPPER_RELEASE,        // no longer used = 0
+        INSIDE_GRIPPER_RELEASE,         // no longer used = 0
+        //LEADING_EDGE_OFFSET,          // value put in FRONT_UF_ADJUST. The App does not have this so deleting it here
+        PRIMARY_LABEL_VERT_OFFSET,
+        SECONDARY_LABEL_VERT_OFFSET     // 20
 
     } heightBoxParameters_et;
 
@@ -295,7 +274,7 @@ private:
     QString             increase;
 };
 
-//	This class will take care of the variables we used to pass between the wrapper timings pages.
+//	This class will take care of the ASP variables we used to pass between the wrapper timings pages.
 class WrapperTimingsData
 {
 public:
@@ -332,6 +311,7 @@ public:
     DomNewWrapperAllTrays	*trayList;
     QList<WrapParameter*>	wrapParameterList;
 };
+
 
 //======================== START NUMBERED MESSAGES AND CLASSES =========================================
 //======================================================================================================
@@ -852,8 +832,7 @@ public:
     DEFINE_FIELD( int, horizPrintPosition, setHorizPrintPosition, horizPrintPositionRaw, 5 )
     QString& labelWidth() {return _Mybase::operator [] (6);}
     DEFINE_FIELD( int, expelPosition, setExpelPosition, expelPositionRaw, 7 )
-    DEFINE_FIELD( int, mediaSensorType, setMediaSensorType, mediaSensorTypeRaw, 8 )
-    DEFINE_FIELD( int, slaEjectLine, setSlaEjectLine, slaEjectLineRaw, 9 )
+    DEFINE_FIELD( int, slaEjectLine, setSlaEjectLine, slaEjectLineRaw, 8 )
 };
 
 // FORM (7,8)
@@ -1163,6 +1142,117 @@ public:
     QString& softwareVersion() {return _Mybase::operator [] (8);}
     QString& hardwareVersion() {return _Mybase::operator [] (9);}
 };
+
+// FORM (9,2)	Not supported in Windux or Fastrack
+//class DomUltimaWrapperConfig : public SessionMessageMap<Wrapper,WrInquire>
+//{
+//    typedef DomUltimaWrapperConfig _Myt;
+//    typedef SessionMessageMap<Wrapper,WrInquire> _Mybase;
+//public:
+//    DomUltimaWrapperConfig() : _Mybase() {}
+//    DomUltimaWrapperConfig( const SessionMessage& rhs ) : _Mybase( rhs ) {}
+//    DomUltimaWrapperConfig( const _Myt& rhs ) : _Mybase( rhs ) {}
+//    virtual ~DomUltimaWrapperConfig() {}
+//
+//    QString& configType() {return _Mybase::operator [] (2);}
+//    QString& pauseTimeout() {return _Mybase::operator [] (3);}
+//    QString& idleTimeout() {return _Mybase::operator [] (4);}
+//    QString& filmTension() {return _Mybase::operator [] (5);}
+//    QString& packWidth() {return _Mybase::operator [] (6);}
+//    QString& packageGrandTotal() {return _Mybase::operator [] (7);}
+//    QString& totalCycles() {return _Mybase::operator [] (8);}
+//    QString& totalElevatorCollapse() {return _Mybase::operator [] (9);}
+//    QString& totalIntakeJam() {return _Mybase::operator [] (10);}
+//    QString& totalLengthJam() {return _Mybase::operator [] (11);}
+//    QString& totalWidthJam() {return _Mybase::operator [] (12);}
+//    QString& totalOpenCover() {return _Mybase::operator [] (13);}
+//    QString& totalSealerBeltOpen() {return _Mybase::operator [] (14);}
+//    QString& totalTooTall() {return _Mybase::operator [] (15);}
+//    QString& totalPusherHomeError() {return _Mybase::operator [] (16);}
+//    QString& totalFilmPullError() {return _Mybase::operator [] (17);}
+//    QString& enableCelsius() {return _Mybase::operator [] (18);}
+//    QString& enableWideFilmTest() {return _Mybase::operator [] (19);}
+//    QString& enableNarrowFilmTest() {return _Mybase::operator [] (20);}
+//    QString& heaterEnable() {return _Mybase::operator [] (21);}
+//    QString& heaterSetting() {return _Mybase::operator [] (22);}
+//    QString& packageLengthAdjustment() {return _Mybase::operator [] (23);}
+//    QString& packageWidthAdjustment() {return _Mybase::operator [] (24);}
+//    QString& totalConfigErrors() {return _Mybase::operator [] (25);}
+//    QString& packCodeTotals() {return _Mybase::operator [] (26);}
+//};
+
+// (9,4)	Not supported in Windux or Fastrack							// existed in all 3 DOMs, so I deleted the Super and Service versions
+//class DomUltimaWrapperStatus : public SessionMessageMap<Wrapper,WrStatus>
+//{
+//    typedef DomUltimaWrapperStatus _Myt;
+//    typedef SessionMessageMap<Wrapper,WrStatus> _Mybase;
+//public:
+//    DomUltimaWrapperStatus() : _Mybase() {}
+//    DomUltimaWrapperStatus( const SessionMessage& rhs ) : _Mybase( rhs ) {}
+//    DomUltimaWrapperStatus( const _Myt& rhs ) : _Mybase( rhs ) {}
+//    virtual ~DomUltimaWrapperStatus() {}
+//
+//    QString& filmWidth() {return _Mybase::operator [] (2);}
+//    QString& filmTension() {return _Mybase::operator [] (3);}
+//    QString& sealerBeltPower() {return _Mybase::operator [] (4);}
+//    QString& beltSetting() {return _Mybase::operator [] (5);}
+//    QString& beltTemperature() {return _Mybase::operator [] (6);}
+//    QString& wrapperRate() {return _Mybase::operator [] (7);}
+//    QString& mainMotorOn() {return _Mybase::operator [] (8);}
+//};
+
+// FORM (9,15)	Not supported in Windux or Fastrack
+//class DomWrapperSensors : public SessionMessageMap<Wrapper,WrErrorHistory>
+//{
+//    typedef DomWrapperSensors _Myt;
+//    typedef SessionMessageMap<Wrapper,WrErrorHistory> _Mybase;
+//public:
+//    DomWrapperSensors() : _Mybase() {}
+//    DomWrapperSensors( const SessionMessage& rhs ) : _Mybase( rhs ) {}
+//    DomWrapperSensors( const _Myt& rhs ) : _Mybase( rhs ) {}
+//    virtual ~DomWrapperSensors() {}
+//
+//    QString& heaterReading() {return _Mybase::operator [] (2);}
+//    QString& encoderCount() {return _Mybase::operator [] (3);}
+//    QString& intakeCount() {return _Mybase::operator [] (4);}
+//    QString& stopSwitch() {return _Mybase::operator [] (5);}
+//    QString& startSwitch() {return _Mybase::operator [] (6);}
+//    QString& pkgLengthSwitch() {return _Mybase::operator [] (7);}
+//    QString& pkgSenseSwitch() {return _Mybase::operator [] (8);}
+//    QString& pkgWidthSwitch() {return _Mybase::operator [] (9);}
+//    QString& pusherHomeSwitch() {return _Mybase::operator [] (10);}
+//    QString& pkgJamSwitch() {return _Mybase::operator [] (11);}
+//    QString& wideFilmSwitch() {return _Mybase::operator [] (12);}
+//    QString& narrowFilmSwitch() {return _Mybase::operator [] (13);}
+//    QString& slideBlockState() {return _Mybase::operator [] (14);}
+//    QString& heaterState() {return _Mybase::operator [] (15);}
+//    QString& compressorState() {return _Mybase::operator [] (16);}
+//    QString& mainMotorState() {return _Mybase::operator [] (17);}
+//    QString& dischargeMotorState() {return _Mybase::operator [] (18);}
+//    QString& filmLengthState() {return _Mybase::operator [] (19);}
+//    QString& filmWidthState() {return _Mybase::operator [] (20);}
+//    QString& knifeState() {return _Mybase::operator [] (21);}
+//    QString& leftSideClampState() {return _Mybase::operator [] (22);}
+//    QString& rightSideClampState() {return _Mybase::operator [] (23);}
+//    QString& gripperState() {return _Mybase::operator [] (24);}
+//};
+
+// FORM (9,18)
+//class DomWrapperRecentErrors : public SessionMessageMap<Wrapper,WrErrorHistory>
+//{
+//    typedef DomWrapperRecentErrors _Myt;
+//    typedef SessionMessageMap<Wrapper,WrErrorHistory> _Mybase;
+//public:
+//    DomWrapperRecentErrors() : _Mybase() {}
+//    DomWrapperRecentErrors( const SessionMessage& rhs ) : _Mybase( rhs ) {}
+//    DomWrapperRecentErrors( const _Myt& rhs ) : _Mybase( rhs ) {}
+//    virtual ~DomWrapperRecentErrors() {}
+//
+//    QString& numOfItems() {return _Mybase::operator [] (2);}
+//    QString& recentErrList() {return _Mybase::operator [] (3);}
+//    QString& numOfPackCodes() {return _Mybase::operator [] (4);}
+//    QString& packCodeList() {return _Mybase::operator [] (5);}
+// };
 
 // (9,51)														// existed in all 3 DOMs, so I deleted the Super and Service versions
 class DomEvolWrapperStatus : public SessionMessageMap<Wrapper,WrEvolStatus>
@@ -1509,16 +1599,13 @@ public:
         AWS2RL = 8,                                 ///< AWS with a Wide Elevator only, right to left
         AWS2LR = 9,                                 ///< AWS with a Wide Elevator only, left to right
         AWS3RL = 10,                                ///< AWS Enhanced, Two roll, right to left
-        // reducedTimingModels = AWS3RL,
         AWS3LR = 11,                                ///< AWS Enhanced, Two roll, left to right
         AWS3BRL = 12,                               ///< AWS Enhanced, Single roll, right to left
         AWS3BLR = 13,                               ///< AWS Enhanced, Single roll, left to right
-        //nextGenModels =  START HERE
         AWS4RL = 14,                                ///< AWS NGW Small Footprint, Two roll, right to left
         AWS4LR = 15,                                ///< AWS NGW Small Footprint, Two roll, left to right
         AWS4BRL = 16,                               ///< AWS NGW Small Footprint, Single roll, right to left
         AWS4BLR = 17,                               ///< AWS NGW Small Footprint, Single roll, left to right
-        // NGWs start here
         NGS1BRL = 18,                               ///< NGS Small Footprint, Basic Wrapper, Single roll, right to left (PJR-145 NGW Wrap-Only)
         NGS1BLR = 19,                               ///< NGS Small Footprint, Basic Wrapper, Single roll, left to right (PJR-145 NGW Wrap-Only)
         NGW2_C_RL = 20,                             ///< NGW, Double roll, Full-CAN, Right to Left
@@ -1528,8 +1615,7 @@ public:
         endWrapperModels,
 
         reducedTimingModels = AWS3RL,
-        nextGenModels = AWS4RL,
-        NGW_MODELS = NGS1BRL
+        nextGenModels = AWS4RL
     };
 
     DomEvolWrapperSystemInformation() : _Mybase() {}
@@ -2141,16 +2227,15 @@ public:
     /// Printer types.
     enum printerType
     {
-        ptNone  = 0,                                 ///< None.
-        ptEPP   = 1,                                  ///< EPP2 Evolution Prepack Printer (without the LSMN board)
-        ptESS   = 2,                                  ///< Evolution Self Service (Not supported)
-        ptESC   = 3,                                  ///< Evolution Service Counter (Not supported)
-        ptAPC   = 4,                                  ///< Service counter printer
-        ptEPP2  = 5,                                  ///< EPP3 Evolution Prepack Printer (Atmel-based SAM-BA device)
-        ptEPP4  = 6,                                  ///< EPP4 Evolution CAN Prepack Printer (Atmel-based SAM-BA device)
-        ptKPC   = 9,                                  ///< Service counter printer ARK board
-        ptFSSS  = 12,                                 ///< Free Standing Self-Serve
-        ptEPPST = 13                                  ///< EPP Shoot Thru
+        ptNone = 0,                                 ///< None.
+        ptEPP = 1,                                  ///< EPP2 Evolution Prepack Printer (without the LSMN board)
+        ptESS = 2,                                  ///< Evolution Self Service (Not supported)
+        ptESC = 3,                                  ///< Evolution Service Counter (Not supported)
+        ptAPC = 4,                                  ///< Service counter printer
+        ptEPP2 = 5,                                 ///< EPP3 Evolution Prepack Printer (Atmel-based SAM-BA device)
+        ptEPP4 = 6,                                 ///< EPP4 Evolution CAN Prepack Printer (Atmel-based SAM-BA device)
+        ptKPC  = 9,									///< Service counter printer ARK board
+        ptFSSS = 12									///< Free Standing Self-Serve
     };
 
     /// Label applier types.

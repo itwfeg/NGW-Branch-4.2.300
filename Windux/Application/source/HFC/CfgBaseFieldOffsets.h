@@ -857,12 +857,6 @@ typedef enum CfgFieldOffsets
 	fieldOffsetBarcodeOffsetFromLeftOver99, 
 
 	fieldOffsetAllowKeyboardNetWeightItemAsRandomWeight,
-	fieldOffsetCfgFieldExclusions,
-
-	fieldOffsetCfgEnableRfidPrinting,
-	fieldOffsetCfgMaxPERfidVoidLabels,
-	fieldOffsetCfgRfidEncodeMethod,
-	fieldOffsetCfgIgnoreRFIDWhenHardwarePresentButRFIDIsDisabled,
 
 	endCfgFieldOffsets,                                 // END
 
@@ -1417,8 +1411,6 @@ typedef enum CfgFieldOffsets
 	fieldOffsetSelfServeTimeout,
 	fieldOffsetCfgBarcodeFormatToUseOffline,
     fieldOffsetCfgBarcodeRequestTimeout,
-
-	fieldOffsetCfgIRFIDVoidLabelTypeNumber,
 
 	//fieldOffsetCfgI
 	endCfgInternalFieldOffsets

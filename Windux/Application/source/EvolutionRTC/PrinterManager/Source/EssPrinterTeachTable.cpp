@@ -31,9 +31,9 @@ EssPrinterTeachTable::EssPrinterTeachTable()
 #endif
 
 	// Specific Printer Command Lists
-	Debug::trace("EssPrinterTeachTable", "Creating ESS command list");
+	Debug::trace("EssPrinterTeachTable", "Creating command list");
 	createCommandList();
-	Debug::trace("EssPrinterTeachTable", "Creating ESS teach tables");
+	Debug::trace("EssPrinterTeachTable", "Creating teach tables");
 	createTeachTable();
 }
 

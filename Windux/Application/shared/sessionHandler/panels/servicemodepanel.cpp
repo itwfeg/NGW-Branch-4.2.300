@@ -62,9 +62,9 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-const bool TURN_ON_SERVICE_MENU = false;
-const bool TURN_ON_WRAPPER_MENU = false;
-const bool TURN_ON_LABEL_APPLIER_MENU = false;
+const bool TURN_ON_SERVICE_MENU = true;
+const bool TURN_ON_WRAPPER_MENU = true;
+const bool TURN_ON_LABEL_APPLIER_MENU = true;
 
 /// Renderer traits type.
 typedef hobart::serviceModePanelBackgroundWidget rendererTraitsType;

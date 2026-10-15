@@ -327,8 +327,7 @@ void FlashkeyEditor::translate()
     setComboBoxItemTextFromData( action_, Action_ToggleExtraShelfLifeDay,            tr( "Toggle Extra Sell By Day" ) );
     setComboBoxItemTextFromData( action_, Action_OverrideWrapperCameraDimensions,    tr( "Override Wrapper Camera Dimensions" ) );
 	setComboBoxItemTextFromData( action_, Action_Toggle2ndLabelEnable,               tr( "2nd Label Enable/Disable" ) );
-    setComboBoxItemTextFromData( action_, Action_ChangeDepartment,                   tr( "Change Department" ) );
-    setComboBoxItemTextFromData( action_, Action_ToggleRfidPrinting,                 tr( "Toggle RFID Printing" ) );
+    setComboBoxItemTextFromData(action_ , Action_ChangeDepartment,                   tr( "Change Department" ) );
 
     // NOTE:
     // anything added here needs to be added to the combo also (translated); see above
@@ -386,7 +385,6 @@ void FlashkeyEditor::translate()
     actions_[Action_OverrideWrapperCameraDimensions] = "Override Wrapper Camera Dimensions";
 	actions_[Action_Toggle2ndLabelEnable] = "2nd Label is Enable/Disable";
     actions_[Action_ChangeDepartment] = "Change Department";
-    actions_[Action_ToggleRfidPrinting] = "Toggle RFID Printing";
 
     setActionParamLabelText();
 
@@ -2389,7 +2387,6 @@ void FlashkeyEditor::initialize()
         action_->addItem( "", QVariant( QString::number( Action_SelectAnyProduct ) ) );
         action_->addItem( "", QVariant( QString::number( Action_PrintRunTotals ) ) );
         action_->addItem( "", QVariant( QString::number( Action_ToggleMode ) ) );
-        action_->addItem( "", QVariant( QString::number( Action_ToggleRfidPrinting ) ) );
 
         // SOF-3840
         // This is allowed in scale too

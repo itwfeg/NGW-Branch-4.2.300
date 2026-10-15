@@ -540,7 +540,6 @@
     <ClCompile Include="Messages\WriteTransactionGroupMessage.cpp" />
     <ClCompile Include="devices\HfcPrinterTest.cpp" />
     <ClCompile Include="devices\HfcLabelPrintingCounts.cpp" />
-    <ClCompile Include="HobTokenizerTSV.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractGraphicManager.h" />
@@ -1142,7 +1141,6 @@
     <ClInclude Include="Messages\WriteTransactionGroupMessage.h" />
     <ClInclude Include="devices\HfcPrinterTest.h" />
     <ClInclude Include="devices\HfcLabelPrintingCounts.h" />
-    <ClInclude Include="HobTokenizerTSV.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

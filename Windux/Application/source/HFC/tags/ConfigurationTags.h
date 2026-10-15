@@ -1257,13 +1257,6 @@ class ConfigurationTags : public Tags
 		static const std::string barcodeOffsetFromLeftOver99;
 
 		static const std::string allowKeyboardNetWeightItemAsRandomWeight;
-		static const std::string fieldExclusions;
-
-		static const std::string enableRfidPrinting;
-		static const std::string maxPERfidVoidLabels;
-		static const std::string rfidEncodeMethod;
-		static const std::string rfidIgnore;
-
 
 	protected:
 		const TagsList &getMyTagsList() const;

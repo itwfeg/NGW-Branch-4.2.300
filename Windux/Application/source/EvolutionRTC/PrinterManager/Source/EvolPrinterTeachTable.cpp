@@ -29,10 +29,7 @@ EvolPrinterTeachTable::EvolPrinterTeachTable()
 #endif
 
 	// Specific Printer Command Lists
-	Debug::trace("EvolPrinterTeachTable", "EvolPrinterTeachTable::CTOR() Creating Evol EPP command list CALL createCommandList()");
 	createCommandList();
-
-	Debug::trace("EvolPrinterTeachTable", "EvolPrinterTeachTable::CTOR() Creating Evol EPP teach tables call createTeachTable()");
 	createTeachTable();
 }
 

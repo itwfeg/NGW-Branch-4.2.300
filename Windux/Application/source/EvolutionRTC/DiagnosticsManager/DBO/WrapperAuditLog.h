@@ -54,7 +54,6 @@ struct WrapperAuditLogRow
 
 	static const int Timings_Reset = 0;
 	static const int Timings_Modified = 1;
-	static const int Timings_Unlocked = 2;
 
 	static const int Film_RollWidthModified = 0;
 	static const int Film_RollChanged = 1;
@@ -103,7 +102,6 @@ public:
 
 	/// Timestamp type.
 	typedef typename row::timestamp_type timestamp_type;
-	// WINNT - typedef row::timestamp_type timestamp_type;
 
 	// ========================================================================
 	// CTOR / DTOR

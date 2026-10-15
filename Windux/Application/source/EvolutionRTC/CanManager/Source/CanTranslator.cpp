@@ -1802,8 +1802,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             break;
         }
         case PrConfig: {
-            //Debug::trace("CanTranslator.PrConfig", "CanTranslator::translatePrinterEvent() PrConfig (7,1):  Got a PrConfig message in CanTranslator");
-
             PrinterConfiguration prConfig(recvBuffer);
             
             canMsg.can_id = pCanLibrary->getPrinterCobID(prEvent, type);
@@ -1816,14 +1814,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.data[5] = prConfig.getOutOfMediaCount();
             canMsg.data[6] = getMsbFromShort((unsigned short)prConfig.getPrintContrast());
             canMsg.data[7] = getLsbFromShort((unsigned short)prConfig.getPrintContrast());
-
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigType(): " + Integer::toString(prConfig.getConfigType()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getPrinterType(): " + Integer::toString(prConfig.getPrinterType()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getLabelWidth(): " + Integer::toString(prConfig.getLabelWidth()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getMediaSensorAdjustment(): " + Integer::toString(prConfig.getMediaSensorAdjustment()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getOutOfMediaCount()): " + Integer::toString(prConfig.getOutOfMediaCount()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getPrintContrast(): " + Integer::toString(prConfig.getPrintContrast()));
-
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -1840,12 +1830,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.data[5] = getLsbFromShort((unsigned short)prConfig.getConfigWord2());
             canMsg.data[6] = getMsbFromShort((unsigned short)prConfig.getConfigWord3());
             canMsg.data[7] = getLsbFromShort((unsigned short)prConfig.getConfigWord3());
-
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord0(): " + Integer::toString(prConfig.getConfigWord0()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord1(): " + Integer::toString(prConfig.getConfigWord1()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord2(): " + Integer::toString(prConfig.getConfigWord2()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord3(): " + Integer::toString(prConfig.getConfigWord3()));
-
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -1862,12 +1846,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.data[5] = getLsbFromShort((unsigned short)prConfig.getConfigWord6());
             canMsg.data[6] = getMsbFromShort((unsigned short)prConfig.getConfigWord7());
             canMsg.data[7] = getLsbFromShort((unsigned short)prConfig.getConfigWord7());
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord4(): " + Integer::toString(prConfig.getConfigWord4()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord5(): " + Integer::toString(prConfig.getConfigWord5()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord6(): " + Integer::toString(prConfig.getConfigWord6()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord7(): " + Integer::toString(prConfig.getConfigWord7()));
-
-
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -1884,10 +1862,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.data[5] = getLsbFromShort((unsigned short)prConfig.getConfigWord10());
             canMsg.data[6] = getMsbFromShort((unsigned short)prConfig.getConfigWord11());
             canMsg.data[7] = getLsbFromShort((unsigned short)prConfig.getConfigWord11());
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord8(): " + Integer::toString(prConfig.getConfigWord8() ));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord9(): " + Integer::toString(prConfig.getConfigWord9()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord10(): " + Integer::toString(prConfig.getConfigWord10()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord11(): " + Integer::toString(prConfig.getConfigWord11()));
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -1904,12 +1878,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.data[5] = getLsbFromShort((unsigned short)prConfig.getMediaSensorType());
             canMsg.data[6] = getMsbFromShort((unsigned short)prConfig.getSLAEjectLine());
             canMsg.data[7] = getLsbFromShort((unsigned short)prConfig.getSLAEjectLine());
-
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord12(): " + Integer::toString(prConfig.getConfigWord12()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getConfigWord13(): " + Integer::toString(prConfig.getConfigWord13()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getMediaSensorType(): " + Integer::toString(prConfig.getSLAEjectLine()));
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getSLAEjectLine(): " + Integer::toString(prConfig.getSLAEjectLine()));
-
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -1920,9 +1888,6 @@ void CanTranslator::translatePrinterEvent(PrEvent prEvent, const char *recvBuffe
             canMsg.can_dlc = 2;
             canMsg.data[0] = getMsbFromShort((unsigned short)prConfig.getPrintPositionAbsolute());
             canMsg.data[1] = getLsbFromShort((unsigned short)prConfig.getPrintPositionAbsolute());
-
-            //Debug::trace("CanTranslator.PrConfig", "translatePrinterEvent() prConfig.getPrintPositionAbsolute(): " + Integer::toString(prConfig.getPrintPositionAbsolute()));
-
             if(canMsg.can_id != 0) {
             	pCanManager->send( &canMsg );
             } else {
@@ -3952,7 +3917,6 @@ void CanTranslator::translatePrinterCanMsg(const CanMsg *pCanMsg) {
             }
             case PrInquire: {
                 Debug::trace("CanTranslator.Message", "translatePrinterCanMsg(): PrInquire");
-                //Debug::trace("CanTranslator.Message", "CanTranslator::translatePrinterCanMsg() PrInquire (7,2):  Got a PrConfig message in CanTranslator");
                 PrinterInquire prInquire(this, (PrinterType)printerPosition); // use default constructor
 
                 prInquire.setConfigType( (PrConfigType)charToShort( pCanMsg->msgData[0], pCanMsg->msgData[1] ) );
@@ -3982,13 +3946,6 @@ void CanTranslator::translatePrinterCanMsg(const CanMsg *pCanMsg) {
                 prInquire.setSLAEjectLine( charToShort( pCanMsg->msgData[38], pCanMsg->msgData[39] ) );
                 prInquire.setPrintPositionAbsolute( charToShort( pCanMsg->msgData[40], pCanMsg->msgData[41] ) );
 
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getPritnerType(): " + Integer::toString((PrinterType)pCanMsg->msgData[2] ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getLabelWidth(): " + Integer::toString((LabelWidth)pCanMsg->msgData[3] ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getMediaSensorAdjustment(): " + Integer::toString(pCanMsg->msgData[4] ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getOutOfMediaCount(): " + Integer::toString(pCanMsg->msgData[5] ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getPrintContrast(): " + Integer::toString(prInquire.getPrintContrast() ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getMediaSensorType(): " + Integer::toString(prInquire.getMediaSensorType() ));
-                //Debug::trace("CanTranslator.Message", "translatePrinterCanMsg() prInquire.getSLAEjectLine(): " + Integer::toString(prInquire.getSLAEjectLine() ));
                 
                 prInquire.show();
                 sendPrinterMessage(&prInquire);

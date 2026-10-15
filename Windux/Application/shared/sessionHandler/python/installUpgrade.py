@@ -320,9 +320,13 @@ def installPrePackDeviceNGW(upgradeFile, machine='ngw', isNGW2P=False):
         source = "source.bin"
         version= "version.ini"
 
-        tmpDir = "/lib/firmware/tmp/"
-        destination = "/lib/firmware/hobart/" + machine + "/wrapper/"
-        
+        if os.name == 'posix':
+            tmpDir = "/lib/firmware/tmp/"
+            destination = "/lib/firmware/hobart/" + machine + "/wrapper/"
+        elif os.name == 'nt':
+            tmpDir = os.path.join("C:\\", "Program Files", "Hobart", "tmp")
+            destination = os.path.join("C:\\", "Program Files", "Hobart", machine.upper(),  "Wrapper")
+
         #make the temporary dir to extract the tarball to
         if os.path.exists(tmpDir):
             shutil.rmtree(tmpDir)
@@ -336,6 +340,7 @@ def installPrePackDeviceNGW(upgradeFile, machine='ngw', isNGW2P=False):
             cmd.append("-C")
             cmd.append(tmpDir)
             exitCode, stdout, stderr =shellCommand.execute(cmd)
+
 
             node = ""
             node = tmpDir + "node1/" + source
@@ -513,89 +518,8 @@ def installPrePackDeviceNGW(upgradeFile, machine='ngw', isNGW2P=False):
         logging.exception(e)
         return 1
 
-def installPrePackDeviceEPP(upgradeFile, printer):
-    logging.info("installPrePackDeviceEPP: start")
-    print("installPrePackDeviceEPP: start")
-    exitCode = 2002
-
-    try:
-        source = "source.bin"   
-        destination  = "/lib/firmware/" + printer
-        upgradeRoot  = "/etc/hobart/"
-        tmpDir       = "vmTmp/"
-        upgradeDir   = "Epp3Printer"
-
-        logging.info("installPrePackDeviceEPP create destination dir: %s" % destination)
-        print("installPrePackDeviceEPP create destination dir: %s" % destination)
-
-        if os.path.exists(destination):
-            shutil.rmtree(destination)
-        os.makedirs(destination)
-        print("installPrePackDeviceEPP Just deleted and remade directory destination: %s" % destination)
-
-        if os.path.exists(destination):
-            logging.info("installPrePackDeviceEPP destination CREATED: %s" % destination)
-            print("installPrePackDeviceEPP destination CREATED: %s" % destination)
-        else:
-            logging.info("installPrePackDeviceEPP destination dir NOT CREATED: " ) 
-            print("installPrePackDeviceEPP destination dir NOT CREATED: ")      
-
-        # get ready and untar the file I think
-        cmd = []
-        cmd.append("/bin/tar")
-        cmd.append("xvzf")
-        cmd.append(upgradeFile)
-        cmd.append("-C")
-        cmd.append(destination)
-        exitCode, stdout, stderr =shellCommand.execute(cmd)
-        logging.info("installPrePackDeviceEPP untar upgrade file: %s" % upgradeFile)
-        logging.info("installPrePackDeviceEPP and put it in the /destination (go check what is there): %s" % destination)
-        print("installPrePackDeviceEPP untar upgrade file: %s" % upgradeFile)
-        print("installPrePackDeviceEPP and put it in /destination (go check what is there): %s" % destination)
-
-        source = "source.bin"
-        destination  = "/lib/firmware/" + printer
-        upgradeRoot  = "/etc/hobart/"
-        tmpDir       = "vmTmp/"
-        upgradeDir   = "Epp3Printer/"
-
-        if os.path.exists(upgradeRoot):
-            print("installPrePackDeviceEPP etc/hobart/ exists. It better LoL")
-            if not os.path.exists(upgradeRoot + tmpDir):
-                os.makedirs(upgradeRoot + tmpDir)
-                print("installPrePackDeviceEPP Had to create vmTmp dir: %s" % upgradeRoot + tmpDir)
-            else:
-                print("installPrePackDeviceEPP Hey vmTmp was already created: %s" % upgradeRoot + tmpDir)
-            
-            if not os.path.exists(upgradeRoot + tmpDir + upgradeDir):
-                os.makedirs(upgradeRoot + tmpDir + upgradeDir)
-                print("installPrePackDeviceEPP Had to create EPP3 dir: %s" % upgradeRoot + tmpDir + upgradeDir)
-            else:
-                print("installPrePackDeviceEPP Hey EPP3 was already created: %s" % upgradeRoot + tmpDir + upgradeDir)
-            
-            # copy the correct binary to the firmware folder and download directory
-            print("installPrePackDeviceEPP What file are we copying: %s" % destination + "/" + source)
-            print("installPrePackDeviceEPP Where are we copying: %s" % upgradeRoot + tmpDir + upgradeDir + source)
-
-            cmd = []
-            cmd.append("/bin/cp")
-            cmd.append(destination + "/" + source)
-            cmd.append(upgradeRoot + tmpDir + upgradeDir + source)
-            exitCode, stdout, stderr = shellCommand.execute(cmd)
-                
-            # ok my everything should be all set up now, lets copy it over
-
-
-        logging.info("installPrePackDeviceEPP: done")
-        return exitCode
-
-    except Exception as e:
-        logging.info("installPrePackDeviceNGW: failed!")
-        print("installPrePackDeviceNGW: failed!")
-        logging.exception(e)
-        return 1
-
 def installLicense(licenseFile, language, serverHost=None, username=None, password=None, uploadFolder=None):
+
     # See if the USB drive mounted contains a feature license key and if so activate license
     try:
         serialNumber = None
@@ -975,8 +899,6 @@ def saveRestoreCronJobs(restoreScriptFile, restorePath):
 
 def installUpgrade(upgradeFilename, serverHost=None,  username=None,  password=None,  uploadFolder=None, removeUpgrade=False):
     logging.info("installUpgrade with file: %s" % upgradeFilename)
-    print("installUpgrade with file: %s" % upgradeFilename)
-
     return installUpgradeNonTerminating(upgradeFilename,serverHost,username,password,uploadFolder,removeUpgrade)
 
 
@@ -1599,8 +1521,6 @@ def enoughFreeSpaceToInstall(upgradeSize, partition):
 
 def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=None,  password=None,  uploadFolder=None, removeUpgrade=False):
     logging.info("installUpgradeNonTerminating: start")
-    print("installUpgradeNonTerminating: start")
-
     if os.name == 'posix':
 
         dbBackupInPlace = deviceType.is_device_type("/", "scale") or deviceType.is_device_type("/", "ngw")
@@ -1610,8 +1530,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
 
     # if specified upgrade filename exists
     if os.path.isfile(upgradeFilename):
-        
-        print("installUpgradeNonTerminating upgrade file exists so isFile then upgrade: %s" % upgradeFilename)
 
         # get current scale language
         language = languageSettings.currentLanguage()
@@ -1628,7 +1546,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
         AWS3_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.AWS3_UPGRADE_FILENAME_REGEX))
         NGW_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.NGW_UPGRADE_FILENAME_REGEX))
         NGW2P_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.NGW2P_UPGRADE_FILENAME_REGEX))
-        EPP3_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.EPP3_UPGRADE_FILENAME_REGEX))
         NGS_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.NGS_UPGRADE_FILENAME_REGEX))
         EWS_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.EWS_UPGRADE_FILENAME_REGEX))
         CLA_UPGRADE_REGEX_COMPILED = re.compile(regexPattern % (installFilePatterns.CLA_UPGRADE_FILENAME_REGEX))
@@ -1704,13 +1621,9 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                 os.makedirs(os.path.join(recovery,'bios'))
                 
         logging.info("installUpgradeNonTerminating: got files")
-        print("installUpgradeNonTerminating: got files")
 
         # check filename to see if we need to check checksum of file
         fileComponents = os.path.splitext(os.path.basename(upgradeFilename))
-        logging.info("installUpgradeNonTerminating with upgradeFilename: %s" % upgradeFilename)
-        print("installUpgradeNonTerminating with upgradeFilename: %s" % upgradeFilename)
-
         packagePath = ''
         # make sure there is a basename and extension in filename
         if len(fileComponents) == 2:
@@ -1720,10 +1633,8 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
 
                 # create folder for package extraction
                 packagePath = upgradeFilename.replace('.package.tgz','')
-                logging.info("installUpgradeNonTerminating create packagePath: %s" % packagePath)
                 try:
                     if os.path.isdir(packagePath):
-                        logging.info("installUpgradeNonTerminating if packagePath is a directory")
                         shutil.rmtree(packagePath)
                     os.makedirs(packagePath)
                 except Exception as e:
@@ -1734,8 +1645,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
 
                 # extract package
                 if 0 < len(packagePath) and os.path.isdir(packagePath):
-                    logging.info("installUpgradeNonTerminating start unpacking with packagePath: %s" % packagePath)
-
                     if language == 'spanish':
                         message = "Desembalaje de archivo ..."
                     elif language == 'french':
@@ -1745,16 +1654,13 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
 
                     exitCode,  mbId1 = show_message(message=message)
                     logging.info("installUpgradeNonTerminating: %s" % message)
-                    print("installUpgradeNonTerminating: %s" % message)
 
                     try:
                         tar = tarfile.open(upgradeFilename, 'r')
                         tar.extractall(packagePath)
                         logging.info("installUpgradeNonTerminating: tarball extracted")
-                        print("installUpgradeNonTerminating: tarball extracted")
                     except Exception as e:
                         logging.info("installUpgradeNonTerminating: failed to extract tarball!")
-                        print("installUpgradeNonTerminating: failed to extract tarball!")
                         logging.exception(e)
                         pass
 
@@ -1768,7 +1674,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                         upgradeFilename = filename
 
             logging.info("installUpgradeNonTerminating: checking file...")
-            print("installUpgradeNonTerminating: checking file...")
 
             # if a license file is not being installed must check md5 of file
             if fileComponents[1] != '.lic':
@@ -1791,14 +1696,11 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                     message = "Checking integrity of upgrade file..."
 
                 logging.info("installUpgradeNonTerminating: %s" % message)
-                print("installUpgradeNonTerminating: %s" % message)
                 exitCode,  mbId1 = show_message(message=message)
 
                 # file is signed with certificate
                 if os.path.exists(upgradeFilename+'.crt') and os.path.exists(upgradeFilename+'.signed'):
                     logging.info("installUpgradeNonTerminating: verifying signed/cert")
-                    print("installUpgradeNonTerminating: verifying signed/cert")
-
                     validateScript = ''
                     exitCode = -1
 
@@ -1816,7 +1718,7 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                         exitCode, stdout, stderr = shellCommand.execute(cmd)
 
                     print(exitCode)
-                    
+
                     # check expired certificate
                     if exitCode == 3 or exitCode == 4 or exitCode == 5:
                         messageBox.destroy(mbId1)
@@ -1896,18 +1798,10 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                 message = "Firmware filename has no extension, installation aborted."
                 
             logging.info("installUpgradeNonTerminating: %s" % message)
-            print("installUpgradeNonTerminating: %s" % message)
-
             exitCode,  mbId = show_message(message=message, timer=5)
             cleanupPackageUpgradeSource(removeUpgrade, upgradeFilename)
             return
 
-        awsShortName = "hte-aws"
-        claShortName = "hte-cla"
-        ewsShortName = "hte-ews"
-        ngwShortName = "htseries-any-ngw"
-        eppShortName = "htseries-epp3prn"
-                        
         # if upgrade file is core a complete scale app/OS upgrade then
         if CORE_UPGRADE_REGEX_COMPILED.match(upgradeFilename) or CORE_UPGRADE_OLD_REGEX_COMPILED.match(upgradeFilename) or PATCH_UPGRADE_REGEX_COMPILED.match(upgradeFilename):
             logging.info("installUpgradeNonTerminating: core/app/OS upgrade file")
@@ -2753,23 +2647,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
             # if told to remove the source upgrade
             cleanupPackageUpgradeSource(removeUpgrade, upgradeFilename)
             return exitCode
-        # wasnt having luck with this. Maybe bc Im running it from commandLine. Maybe reverse it back when its called from Supervisor Mode.
-        # elif EPP3_UPGRADE_REGEX_COMPILED.match(upgradeFilename):
-        elif eppShortName in upgradeFilename:
-
-            # SOF-4509: NGW with 2nd Label Applier
-            if language == "spanish":
-                message = "Actualización de la EPP3\n\nCopiando actualización desde dispositivo fuente..."
-            elif language == "french":
-                message = "mise á niveau de EPP3\n\nCopie de la mise á niveau á partir du dispositif source..."
-            else:
-                message = "EPP3 Upgrade for Label Applier\n\nCopying Upgrade from Source Device..."
-            exitCode,  mbId = show_message(message, timer=5)
-            exitCode = installPrePackDeviceEPP( upgradeFilename, 'epp3' )
-            # if told to remove the source upgrade
-            cleanupPackageUpgradeSource(removeUpgrade, upgradeFilename)
-            return exitCode
-        
         elif NGS_UPGRADE_REGEX_COMPILED.match(upgradeFilename):
             logging.info("installUpgradeNonTerminating: NGS upgrade")
             if language == "spanish":
@@ -2884,7 +2761,6 @@ def installUpgradeNonTerminating(upgradeFilename, serverHost=None,  username=Non
                 message = "Unrecognized upgrade file, check filename."
 
             logging.info("installUpgradeNonTerminating: unknown upgrade, ignoring")
-            print("installUpgradeNonTerminating: unknown upgrade, ignoring")
             exitCode,  mbId = show_message(message=message, timer=5)
 
     else:

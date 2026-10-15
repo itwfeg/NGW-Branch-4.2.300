@@ -49,7 +49,6 @@ target_sources(WrapperManager PRIVATE
   Include/EvolWrapperRequestPackageTimings.h
   Include/EvolWrapperReqUIModel.h
   Include/EvolWrapperResetDefaultPackageTimings.h
-  Include/EvolWrapperUnlockPackageTimings.h
   Include/EvolWrapperSaveCycleCount.h
   Include/EvolWrapperSensors.h
   Include/EvolWrapperSettings.h
@@ -211,7 +210,6 @@ target_sources(WrapperManager PRIVATE
   Messages/EvolWrapperRequestPackageTimings.cpp
   Messages/EvolWrapperReqUIModel.cpp
   Messages/EvolWrapperResetDefaultPackageTimings.cpp
-  Messages/EvolWrapperUnlockPackageTimings.cpp
   Messages/EvolWrapperSaveCycleCount.cpp
   Messages/EvolWrapperSensors.cpp
   Messages/EvolWrapperSettings.cpp

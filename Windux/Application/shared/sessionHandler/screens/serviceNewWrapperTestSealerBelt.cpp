@@ -61,30 +61,15 @@ void serviceNewWrapperTestSealerBelt::initialize()
 
     ui->cboxSealerBeltPower->addItem(tr("Off"));
     ui->cboxSealerBeltPower->addItem(tr("On"));
-
-    scaleConfigData = &session_->scaleConfig->scaleConfig;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 QString serviceNewWrapperTestSealerBelt::temperatureScale() const
 {
-    bool isCelsius( false );
-    if( scaleConfigData->isScaleMetric() )
-        isCelsius = true;
+    static const bool isCelsius( false );
 
     return (isCelsius ? QString::fromUtf8( "°C" ) : QString::fromUtf8( "°F" ));
 }
-
-QString serviceNewWrapperTestSealerBelt::temperatureValue(int val) const
-{
-    QString returnVal = QString::number(val);
-
-    if( scaleConfigData->isScaleMetric() )
-        returnVal = QString::number( (val - 32) * 5/9 );
-
-    return (returnVal);
-}
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 serviceNewWrapperTestSealerBelt::~serviceNewWrapperTestSealerBelt()
@@ -142,7 +127,7 @@ void serviceNewWrapperTestSealerBelt::setBeltPower(int power)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void serviceNewWrapperTestSealerBelt::setBeltSetting(int setting)
 {
-    ui->lblBeltSettingTemperature->setText( temperatureValue(setting) );
+    ui->lblBeltSettingTemperature->setText( QString::number(setting) );
     ui->lblBeltSettingTemperatureScale->setText( temperatureScale() );
 }
 

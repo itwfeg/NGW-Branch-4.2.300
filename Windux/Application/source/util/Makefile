@@ -34,7 +34,7 @@ C_SRCS := \
     miniunz.c \
     minizip.c \
     unzip.c \
-    zip.c
+    zip.c \
 
 CPP_SRCS := \
     CHobartTimer.cpp \
@@ -49,7 +49,6 @@ CPP_SRCS := \
     SimpleTimer.cpp \
     TimerContainer.cpp \
     Trace.cpp \
-    epcrfid.cpp
 
 INC_DIRS := \
     -I$(HOBART_APP)/PAL \

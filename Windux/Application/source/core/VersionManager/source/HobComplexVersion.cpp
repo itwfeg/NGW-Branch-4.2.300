@@ -218,11 +218,6 @@ void HobComplexVersion::getSoftPath(HobVersion::VersionType vt, std::string& pat
 			fileName = "EPP2Prn.zip";
 		}
 		break;
-		case HobVersion::Epp3PrinterSW:
-		{
-			fileName = "EPP3Prn.zip";
-		}
-		break;
 		case HobVersion::EscPrinterSW:
 		{
 			fileName = "ESCPrn.zip";
@@ -509,12 +504,6 @@ void HobComplexVersion::getTempDir(HobVersion::VersionType vt, util_filesystem::
 			vmTmpFiles.appendPath("EPP2prn");
 		}
 		break;
-		/* Tom Fink's version for XPE version */
-		case HobVersion::Epp3PrinterSW:
-		{
-			vmTmpFiles.appendPath("EPP3prn");
-		}
-		break;
 		case HobVersion::EscPrinterSW:
 		{
 			vmTmpFiles.appendPath("ESCprn");
@@ -556,7 +545,7 @@ void HobComplexVersion::getTempDir(HobVersion::VersionType vt, util_filesystem::
 		{
 			vmTmpFiles.appendPath("EPP2FLUD");
 		}
-		break;;
+		break;
 		case HobVersion::EscPrnFlashUpdateSW:
 		{
 			vmTmpFiles.appendPath("ESCFLUD");
@@ -868,17 +857,6 @@ void HobComplexVersion::getExtractionDir(HobVersion::VersionType vt, Directory& 
 		}
 		break;
 		/************************************** END OF XPE PRINTER CODE ********************************************/
-		/* Alex Zavala XPE version code*/
-		/************************************** BEGINNING OF EPP3 PRINTER CODE ********************************************/
-		case HobVersion::Epp3PrinterSW:
-		{
-			vmTmpFiles.appendPath("Epp3Printer");
-		}
-		break;
-		/************************************** END OF XPE PRINTER CODE ********************************************/
-		/* Alex Zavala XPE version code*/
-		/************************************** BEGINNING OF ST XPE PRINTER CODE ********************************************/
-
 		//NOTE: Ess and Esc printers never went into production. support is not needed -- ats / tf		
 		case HobVersion::EssPrinterSW:
 		case HobVersion::EppPrinterSW:
@@ -1296,11 +1274,6 @@ HobVersion::VersionType HobComplexVersion::getHardwareTypeForSoftwareType(HobVer
 			return HobVersion::Epp2PrinterHW;
 		}
 		break;
-		case HobVersion::Epp3PrinterSW:	// EPP2 Shoot thru support (EPP3)
-		{
-			return HobVersion::Epp3PrinterHW;
-		}
-		break;
 		case HobVersion::EscPrinterSW:
 		{
 			return HobVersion::EscPrinterHW;
@@ -1452,11 +1425,6 @@ HobVersion::VersionType HobComplexVersion::getCorrespondingSoftTypeFromHardType(
 		case Epp2PrinterHW:	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
 		{
 			return Epp2PrinterSW;
-			break;
-		}
-		case Epp3PrinterHW:	// EPP3 shoot thru
-		{
-			return Epp3PrinterSW;
 			break;
 		}
 		case EscPrinterHW:

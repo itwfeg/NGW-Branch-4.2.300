@@ -8,7 +8,6 @@
 #include <logmanager.h>
 
 #include "printersettingsdialog.h"
-#include "ScaleClasses.h"
 
 #include "../sessionmainwindow.h"
 
@@ -322,31 +321,27 @@ void PrinterSettingsDialog::initialize()
     currentPrinter_->setObjectName( "currentPrinter" );
     currentPrinter_->setStyleSheet(comboBoxStyle);
 
-    int printer1 = peripheralList->firstPrinter();
-    int printer2 = peripheralList->secondPrinter();
-    int printer3 = peripheralList->thirdPrinter();
-
-    // Original: If the first printer is an EPP or EPP2 printer, this is for Access/NGW. For HT, this is APC printer as firstPrinter
-    if ( ( PrinterKind::fieldOffsetEppPrinter == printer1 ) || ( PrinterKind::fieldOffsetEpp2Printer == printer1 ) ||
-         ( PrinterKind::fieldOffsetSTEPPPrinter == printer1) )
+    // Original: If the first printer is an EPP or EPP2 printer, this is for Access. For HT, this is APC printer as firstPrinter
+    if (( EPPPrinter == peripheralList->firstPrinter() || ( EPP2Printer == peripheralList->firstPrinter() )))
         currentPrinter_->addItem( "Primary", QVariant( 0 ) );
     //else as a standalone APC HT printer, with no EPPs, etc, the printer is not even shown which is why there is no code here
 
     // NEW: Only add Primary as a printer on HT scale if and only if we have extra EPPs attached in one of the slots
-    if ( (   ( ApcPrinter == printer1 )  || ( KpcPrinter  == printer1 ) || ( SSKPrinter == printer1 ) ) &&
-         ( ( ( EPPPrinter == printer2 )  || ( EPP2Printer == printer2 ) || ( PrinterKind::fieldOffsetSTEPPPrinter == printer2 ) ) ||
-           ( ( EPPPrinter == printer3 )  || ( EPP2Printer == printer3 ) || ( PrinterKind::fieldOffsetSTEPPPrinter == printer3 ) )  ) )
+    if ( ( (( ApcPrinter == peripheralList->firstPrinter() ) || ( KpcPrinter == peripheralList->firstPrinter() ) ||
+            ( SSKPrinter == peripheralList->firstPrinter() ) ) && (( EPPPrinter == peripheralList->secondPrinter()  || 
+              EPP2Printer == peripheralList->secondPrinter() ) || ( EPPPrinter == peripheralList->thirdPrinter() || 
+              EPP2Printer == peripheralList->thirdPrinter() ))) )
         currentPrinter_->addItem( "Primary", QVariant( 0 ) );
 
-    if( ( EPPPrinter == printer2 ) || ( EPP2Printer == printer2 ) || ( PrinterKind::fieldOffsetSTEPPPrinter == printer2 ) )
+    if (( EPPPrinter == peripheralList->secondPrinter() || ( EPP2Printer == peripheralList->secondPrinter() )))
     {
         if ( CounterScale == scaleConfig->scaleModel() )
-            currentPrinter_->addItem( "EPP", QVariant( 1 ) );           // 2nd Printer: Only add if we have an HT and EPP/EPP2/STEPP as 2nd printer
+            currentPrinter_->addItem( "EPP", QVariant( 1 ) );           // 2nd Printer: Only add if we have an HT and EPP/EPP2 as 2nd printer
         else
             currentPrinter_->addItem( "Second", QVariant( 1 ) );        // Original - add this if EPP printer on Access, but for HT we add EPP. Could this be the same as both?
     }
 
-    if ( ( EPPPrinter == printer3 ) || ( EPP2Printer == printer3 ) || ( PrinterKind::fieldOffsetSTEPPPrinter == printer3 ) )
+    if (( EPPPrinter == peripheralList->thirdPrinter() || ( EPP2Printer == peripheralList->thirdPrinter() )))
     {
         if ( CounterScale == scaleConfig->scaleModel() )
             currentPrinter_->addItem( "EPP", QVariant( 2 ) );           // 2nd Pritner: Only add if we have an HT and EPP/EPP2 as 2nd printer

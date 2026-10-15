@@ -1538,33 +1538,6 @@ bool DiagnosticsDB::clearAllWrapperBoxes()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-bool DiagnosticsDB::createUnlockTimings()
-{
-	const util::Timestamp now(util::Timestamp::now());
-
-	bool result(true);
-
-	dbo::WrapperAuditLog wrapperAuditLog(db_);
-
-	result = wrapperAuditLog.create(
-		now,
-		dbo::WrapperAuditLogRow::Info,
-		dbo::WrapperAuditLogRow::Timings,
-		dbo::WrapperAuditLogRow::Timings_Unlocked,
-		"Wrapper Timings Unlocked.");
-
-	if (!result)
-	{
-		TRACE("failed to save Unlock Timings report into audit log!");
-		return false;
-	}
-	else
-		TRACE("Save Unlock Timings report into audit log!");
-
-	return true;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 bool DiagnosticsDB::updateFilmStatus( unsigned int upperFilmWidth, unsigned int lowerFilmWidth )
 {
 	dbo::Config config( db_ );

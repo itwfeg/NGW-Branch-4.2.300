@@ -48,10 +48,6 @@ PrinterSystemConfiguration::PrinterSystemConfiguration(Hobart::CEvolMsgReceiver 
 	{
 		hardwareVersion.setVersionType(HobVersion::Epp2PrinterHW);	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
 	}
-	else if (prKind == Epp3Printer)
-	{
-		hardwareVersion.setVersionType(HobVersion::Epp3PrinterHW);	// Shoot Thru EPP Printing Device 
-	}
 	else if (prKind == EssPrinter)
 	{
 		hardwareVersion.setVersionType(HobVersion::EssPrinterHW);
@@ -286,7 +282,6 @@ void PrinterSystemConfiguration::setHardwareVersion(const HobVersion &hardwareVe
 {
 	if (((hardwareVersion.getVersionType() == HobVersion::EppPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EppPrinterSW)) ||
 	     ((hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
-		((hardwareVersion.getVersionType() == HobVersion::Epp3PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp3PrinterSW)) ||
 		((hardwareVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EssPrinterSW)))
 	{
 		this->hardwareVersion.setMajorRevision(hardwareVersion.getMajorRevision());

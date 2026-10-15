@@ -13,75 +13,49 @@ std::string PrinterTeachTable::dataTypeName("PrinterTeachTable");
 const CommandIdleOperation		PrinterTeachTable::idleOp;
 const CommandPrintOperation		PrinterTeachTable::printLabelOp(IndirectCommandData, PrRam0, HeadFirst);
 const CommandPrintOperation		PrinterTeachTable::reversePrintLabelOp(IndirectCommandData, PrRam0, HeelFirst);
-// End Generic
-
-const CommandTestOperation 		PrinterTeachTable::abortSizeTestOp(BitsEqual, SyncBarBit, SyncBarBit, 0, 0, ContinueExecution, AbortExecution);
-const CommandStepOperation 		PrinterTeachTable::adjustLabelBackOp(DirectCommandData, (PrinterIndirection)-10);
-const CommandStepOperation 		PrinterTeachTable::adjustLabelUpOp(DirectCommandData, (PrinterIndirection)10);
-const CommandStepOperation 		PrinterTeachTable::advanceLabelOp(IndirectCommandData, PrRam1);
-const CommandStepOperation 		PrinterTeachTable::backupLabelOp(IndirectCommandData, PrConfigWord4);
-const CommandTestOperation		PrinterTeachTable::checkStockOp(BitsNotEqual, OutOfMediaBit, OutOfMediaBit, 0, 0, ContinueExecution, AbortExecution);
-const CommandStatusOperation	PrinterTeachTable::clearTakingOp(ClearBits, TakingBit);
-const CommandOperation			PrinterTeachTable::cutOp(CutDirective);
-const CommandStepOperation 		PrinterTeachTable::cutterEjectLabelOp(IndirectCommandData, PrConfigWord5);
-const CommandStepOperation 		PrinterTeachTable::cutterEjectShootLabelOp(IndirectCommandData, PrConfigWord3);
-//const CommandStepOperation 	PrinterTeachTable::cutterEjectShootLabelOp(DirectCommandData, (PrinterIndirection) 150);
-const CommandCounterOperation	PrinterTeachTable::disableCounterOp(DisableCounter);
+// advance the label until it is synced.
+const CommandStepUntilOperation PrinterTeachTable::syncLabelOp(DirectCommandData, (PrinterIndirection) 2312, BitsEqual,
+															  MotorForwardBit | SynchedBit, MotorForwardBit | SynchedBit);
+// Finds trailing edge of label or leading edge of black bar - gap
+const CommandStepUntilOperation PrinterTeachTable::syncBarOp(DirectCommandData, (PrinterIndirection) 2312, BitsEqual,
+															MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
+															MotorForwardBit | SyncBarBit | SyncBarEdgeBit);
+const CommandStepUntilOperation PrinterTeachTable::findLabel2000Op(DirectCommandData, (PrinterIndirection) 3000, BitsEqual,
+																  LabelTakenBit, 0);
 const CommandStepOperation 		PrinterTeachTable::ejectLabelOp(IndirectCommandData, PrConfigWord3);
-const CommandStepOperation 		PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection)55);
-//const CommandStepOperation 	PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection) 75);
-//const CommandStepOperation 	PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection) 35);
-const CommandCounterOperation	PrinterTeachTable::enableCounterOp(EnableCounter);
-const CommandStepUntilOperation PrinterTeachTable::findLabel2000Op(DirectCommandData, (PrinterIndirection) 3000, BitsEqual, LabelTakenBit, 0);
-
-const CommandTestOperation 		PrinterTeachTable::jammedLabelTestOp(BitsEqual, MotorForwardBit | SynchedBit, MotorForwardBit | SynchedBit,
-	                                                                 0, MediaJammedBit, ContinueExecution, AbortExecution);
-const CommandTestOperation 		PrinterTeachTable::jammedLabelTestOp0(BitsEqual, MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
-	                                                                  MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
-	                                                                  0, MediaJammedBit, ContinueExecution, AbortExecution);
-
-const CommandTestOperation 		PrinterTeachTable::missingLabelTestOp(BitsEqual, LabelTakenBit, LabelTakenBit, LabelMissingBit, 0, ContinueExecution, ContinueExecution);
-const CommandStepOperation 		PrinterTeachTable::peelLabelOp(IndirectCommandData, PrConfigWord0);
-const CommandCounterOperation 	PrinterTeachTable::resetCounterOp(ResetCounter);
+//const CommandStepOperation 		PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection) 75);
+//const CommandStepOperation 		PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection) 35);
+const CommandStepOperation 		PrinterTeachTable::ejectShootOp(DirectCommandData, (PrinterIndirection) 55);
+const CommandStepOperation 		PrinterTeachTable::backupLabelOp(IndirectCommandData, PrConfigWord4);
+const CommandStepOperation 		PrinterTeachTable::advanceLabelOp(IndirectCommandData, PrRam1);
 const CommandStepOperation 		PrinterTeachTable::retractLabelOp(IndirectCommandData, PrRam2);
 const CommandStepOperation 		PrinterTeachTable::retractShootLabelOp(DirectCommandData, (PrinterIndirection) -100);	//SOF-5307 -150 //SOF-5089 	-75
-const CommandStatusOperation	PrinterTeachTable::setTakingOp(SetBits, TakingBit);
+const CommandStepOperation 		PrinterTeachTable::cutterEjectLabelOp(IndirectCommandData, PrConfigWord5);
+//const CommandStepOperation 		PrinterTeachTable::cutterEjectShootLabelOp(DirectCommandData, (PrinterIndirection) 150);
+const CommandStepOperation 		PrinterTeachTable::cutterEjectShootLabelOp(IndirectCommandData, PrConfigWord3);
 const CommandStepOperation		PrinterTeachTable::startLabelOp(DirectCommandData, (PrinterIndirection) 11);
-
-// Finds trailing edge of label or leading edge of black bar - gap
-const CommandStepUntilOperation PrinterTeachTable::syncBarOp(DirectCommandData, (PrinterIndirection)2312, BitsEqual,
-	                                                         MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
-	                                                         MotorForwardBit | SyncBarBit | SyncBarEdgeBit);
-// advance the label until it is synced.
-const CommandStepUntilOperation PrinterTeachTable::syncLabelOp(DirectCommandData, (PrinterIndirection)2312, BitsEqual,
-	                                                           MotorForwardBit | SynchedBit, MotorForwardBit | SynchedBit);
-
+const CommandStepOperation 		PrinterTeachTable::adjustLabelUpOp(DirectCommandData, (PrinterIndirection) 10);
+const CommandStepOperation 		PrinterTeachTable::adjustLabelBackOp(DirectCommandData, (PrinterIndirection) -10);
+const CommandStepOperation 		PrinterTeachTable::peelLabelOp(IndirectCommandData, PrConfigWord0);
 const CommandWaitUntilOperation PrinterTeachTable::takeLabelOp(BitsEqual, LabelTakenBit, LabelTakenBit);
 const CommandWaitOperation 		PrinterTeachTable::waitLabelOp(DirectCommandData, (PrinterIndirection) 50);
 const CommandWaitOperation 		PrinterTeachTable::waitShootLabelOp(DirectCommandData, (PrinterIndirection) 300);
-
-/* New Shoot-Thru Command operations */
-const CommandStepUntilOperation PrinterTeachTable::syncLabelSTandReflecOp(DirectCommandData, (PrinterIndirection)2313, BitsEqual,
-	                                                                      MotorForwardBit | SynchedBit, MotorForwardBit | SynchedBit);			// 1 new class var on existing Command
-//const CommandStepUntilOperation PrinterTeachTable::ejectLabelOp(IndirectCommandData, PrConfigWord3);											// 2 NEW - but I found same exact one up above. QUESTION??? 
-const CommandStepOperation      PrinterTeachTable::retractSTLabelOp(IndirectCommandData, PrConfigWord2);										// 3 NEW - but same one above. DID USE CONFIG_2 QUESTION???  ADDED ST
-const CommandStepUntilOperation	PrinterTeachTable::detectLabelOp(DirectCommandData, (PrinterIndirection)3000, BitsEqual, LabelTakenBit, 0);		// * Xtra 1 - had to create
-                                                                                                                                                // 4 is just using #1 again
-const CommandTestOperation      PrinterTeachTable::abortIfNotSynchronizedOp(BitsEqual, MotorForwardBit | SynchedBit,
-	                                                                                   MotorForwardBit | SynchedBit, 
-	                                                                                   0, MediaJammedBit, ContinueExecution, AbortExecution);	// * Xtra 2 - new class var on existing Command
-
-const CommandStepOperation	    PrinterTeachTable::findPrintPositionMinusEjectOp(IndirectCommandData, PrRam15);									// 5 new class var - used RAM15
-
-const CommandStepUntilOperation	PrinterTeachTable::syncBarSTandReflecOp(DirectCommandData, (PrinterIndirection)2313, BitsEqual,
-	                                                                    MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
-	                                                                    MotorForwardBit | SyncBarBit | SyncBarEdgeBit);							// 6 new class var on existing Command
-
-const CommandCounterOperation	PrinterTeachTable::enableCounterAutoDisableOp(EnableCounterAutoDisable);										// 7 new class var on existing Command
-																																				// 8 is just using #6 again
-
-
-	                                                                 			
+const CommandTestOperation 		PrinterTeachTable::abortSizeTestOp(BitsEqual, SyncBarBit, SyncBarBit, 0, 0, ContinueExecution, AbortExecution);
+const CommandTestOperation 		PrinterTeachTable::missingLabelTestOp(BitsEqual, LabelTakenBit, LabelTakenBit,
+																	 LabelMissingBit, 0, ContinueExecution, ContinueExecution);
+const CommandTestOperation 		PrinterTeachTable::jammedLabelTestOp(BitsEqual, MotorForwardBit | SynchedBit, MotorForwardBit | SynchedBit,
+																	0, MediaJammedBit, ContinueExecution, AbortExecution);
+const CommandTestOperation 		PrinterTeachTable::jammedLabelTestOp0(BitsEqual, MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
+																	 MotorForwardBit | SyncBarBit | SyncBarEdgeBit,
+																	 0, MediaJammedBit, ContinueExecution, AbortExecution);
+const CommandTestOperation		PrinterTeachTable::checkStockOp(BitsNotEqual, OutOfMediaBit, OutOfMediaBit, 0, 0,
+															   ContinueExecution, AbortExecution);
+const CommandCounterOperation 	PrinterTeachTable::resetCounterOp(ResetCounter);
+const CommandCounterOperation	PrinterTeachTable::enableCounterOp(EnableCounter);
+const CommandCounterOperation	PrinterTeachTable::disableCounterOp(DisableCounter);
+const CommandStatusOperation	PrinterTeachTable::setTakingOp(SetBits, TakingBit);
+const CommandStatusOperation	PrinterTeachTable::clearTakingOp(ClearBits, TakingBit);
+const CommandOperation			PrinterTeachTable::cutOp(CutDirective);
 
 PrinterTeachTable::PrinterTeachTable()
 {
@@ -106,15 +80,11 @@ PrinterTeachTable::~PrinterTeachTable()
 
 UINT16 PrinterTeachTable::getNumEntries()
 {
-	//Debug::trace("PrinterTeachTable", "getNumEntries() - ops.vector.size: " + HobString(Integer::toString(ops.size())));
 	return (UINT16)ops.size();
 }
 
 void PrinterTeachTable::addTeachTableEntry(CommandOperationList *ops, PrinterCommandType command, PrinterModeType mode)
 {
-	//Debug::trace("PrinterTeachTable", "PrinterTeachTable::addTeachTableEntry() - mode: " + HobString(Integer::toString((UINT32)mode)));
-	//Debug::trace("PrinterTeachTable", "PrinterTeachTable::addTeachTableEntry() command: " + Integer::toString(command));
-	
 	this->ops.push_back(ops);
 	this->command.push_back(command);
 	this->mode.push_back(mode);
@@ -122,10 +92,6 @@ void PrinterTeachTable::addTeachTableEntry(CommandOperationList *ops, PrinterCom
 
 CommandOperationList *PrinterTeachTable::getCommandOperationList(PrinterCommandType command, PrinterModeType mode)
 {
-	//Debug::trace("PrinterTeachTable", "PrinterTeachTable::getCommandOperationList() - mode: " + HobString(Integer::toString((UINT32)mode)));
-	//Debug::trace("PrinterTeachTable", "PrinterTeachTable::getCommandOperationList() command: " + Integer::toString(command));
-	
-
 	CommandOperationList *rv = NULL;
 	int i = 0;
 	int size = (int)ops.size();
@@ -185,6 +151,7 @@ void PrinterTeachTable::createCommandList()
 	createContinuousPrintHead();
 	createContinuousPrintHeel();
 
+	//Debug::trace("PrinterTeachTable.Cutter"," createCommandList creating cut tables");
 	createContinuousPrintHeadCut();
 	createContinuousPrintHeelCut();
 	createContinuousShootPrintHeelCut();
@@ -203,70 +170,6 @@ void PrinterTeachTable::createCommandList()
 	createCalibrateSync();
 
 	createSpeedKeyPrintMode();
-}
-
-void PrinterTeachTable::createSTEppCommandList()
-{
-	createGenericAdvance();
-	createGenericSize();
-	//createGTGenericSize();
-	createGenericFind();
-	createGenericPrintHead();
-	createGenericEject();
-	createGenericSync();
-	createGenericFindwoLabelTaken();
-
-	createDieCutSize();
-	createDieCutPrintHead();
-	createDieCutShootHead();
-	createDieCutPrintHeel();
-	createDieCutShootHeel();
-	createDieCutSync();
-	createDieCutEject();
-
-	createDieCutStreamPrintHead();
-	createDieCutShootStreamPrintHead();
-	createDieCutStreamPrintHeel();
-	createDieCutShootStreamPrintHeel();
-	createDieCutStreamSync();
-	createDieCutStreamEject();
-	createDieCutStreamBackup();
-
-	createListingPrintHead();
-	createListingPrintHeel();
-	createListingPrintHeadCut();
-	createListingPrintHeelCut();
-	createListingPrintCombinedHead();
-	createListingPrintCombinedHeel();
-	createListingSync();
-	createListingEject();
-
-	createContinuousPrintHead();
-	createContinuousPrintHeel();
-
-	createContinuousPrintHeadCut();
-	createContinuousPrintHeelCut();
-	createContinuousShootPrintHeelCut();
-	createContinuousPrintCombinedHead();
-	createContinuousPrintCombinedHeel();
-
-	createContinuousSync();
-	createContinuousEject();
-	createContinuousSize();
-
-	createCalibrateSize();
-	createCalibrateFind();
-	createCalibratePrint();
-	createCalibrateEject();
-	createCalibrateSync();
-
-	createSpeedKeyPrintMode();
-
-	// NEW shoot-thru createCommands
-	Debug::trace("PrinterTeachTable.createSTEppCommandList", "PrinterTeachTable::createSTEppCommandList() create master ST list now create 3 new ones");
-	createSTEppPrintWithExpel();			// #4
-	createSTEppFindSTandReflective();		// #7
-	createSTEppSizeSTandReflective();		// #8
 }
 
 void PrinterTeachTable::createGenericAdvance()
@@ -287,29 +190,6 @@ void PrinterTeachTable::createGenericSize()
 
 	// See createDieCutPrintHead() for explanation
 	if( pConfig_ && !pConfig_->isOpModeStreamingLabelTestEnabled())
-	{
-		genericSize.push_back(&takeLabelOp);
-	}
-
-	genericSize.push_back(&syncBarOp);
-	genericSize.push_back(&disableCounterOp);
-	genericSize.push_back(&jammedLabelTestOp0);
-	genericSize.push_back(&checkStockOp);
-	genericSize.push_back(&idleOp);
-}
-
-void PrinterTeachTable::createGTGenericSize()
-{
-	genericSize.push_back(&disableCounterOp);
-	genericSize.push_back(&resetCounterOp);
-	genericSize.push_back(&syncBarOp);
-	genericSize.push_back(&checkStockOp);
-	genericSize.push_back(&abortSizeTestOp);
-	genericSize.push_back(&enableCounterAutoDisableOp);
-	genericSize.push_back(&peelLabelOp);
-
-	// See createDieCutPrintHead() for explanation
-	if (pConfig_ && !pConfig_->isOpModeStreamingLabelTestEnabled())
 	{
 		genericSize.push_back(&takeLabelOp);
 	}
@@ -777,74 +657,51 @@ void PrinterTeachTable::createSpeedKeyPrintMode()
 	speedKeyPrintMode.push_back(&idleOp);
 }
 
-void PrinterTeachTable::createSTEppPrintWithExpel()					/* #4 */
-{
-	// NEW shoot-thru createCommands
-	printSTWithExpel.push_back(&reversePrintLabelOp);				// NOTES said this is not new (see new above) - but named 'printLabelHeelFirstOp' which does NOT EXIST.
-	printSTWithExpel.push_back(&syncLabelSTandReflecOp);			// #1: NEW class var - used existing class CommandStepUntilOperation
-	printSTWithExpel.push_back(&ejectLabelOp);						// #2: NEW class var - NOTES said this was NEW - but I found one named exactly this
-	printSTWithExpel.push_back(&missingLabelTestOp);
-	printSTWithExpel.push_back(&setTakingOp);
-	printSTWithExpel.push_back(&takeLabelOp);
-	printSTWithExpel.push_back(&clearTakingOp);
-	printSTWithExpel.push_back(&retractSTLabelOp);					// #3: NEW class var - NOTES said new but found one VERY SIMILAR but differnt arg config passed in so I made new one
-	printSTWithExpel.push_back(&idleOp);
-}
-
-void PrinterTeachTable::createSTEppFindSTandReflective()			/* #7 */
-{
-	// NEW shoot-thru createCommands
-	findSTandReflective.push_back(&detectLabelOp);					// Xtra 2: I MADE this but NOTES says it already exists - WHAT COULD IT BE?  
-	findSTandReflective.push_back(&checkStockOp);					
-	findSTandReflective.push_back(&missingLabelTestOp);				
-	findSTandReflective.push_back(&syncLabelSTandReflecOp);			// #4: new class var - DEFINED ABOVE
-	findSTandReflective.push_back(&abortIfNotSynchronizedOp);		// Xtra 3: I MADE this but notes says it already exists. WHAT COULD IT BE?
-	findSTandReflective.push_back(&checkStockOp);					
-	findSTandReflective.push_back(&takeLabelOp);
-	findSTandReflective.push_back(&findPrintPositionMinusEjectOp);	// 5: new class var - used existing NEW
-	findSTandReflective.push_back(&idleOp);							
-}
-
-void PrinterTeachTable::createSTEppSizeSTandReflective()			/* #8 */
-{
-	// NEW shoot-thru createCommands
-	sizeSTandReflective.push_back(&disableCounterOp);				
-	sizeSTandReflective.push_back(&resetCounterOp);					
-	sizeSTandReflective.push_back(&syncBarSTandReflecOp);			// #6: new class var - used existing class CommandStepUntilOperation
-	sizeSTandReflective.push_back(&checkStockOp);					
-	sizeSTandReflective.push_back(&abortSizeTestOp);				
-	sizeSTandReflective.push_back(&enableCounterAutoDisableOp);		// #7 new class var - used existing class CommandCounterOperation
-	sizeSTandReflective.push_back(&peelLabelOp);					
-	sizeSTandReflective.push_back(&takeLabelOp);					
-	sizeSTandReflective.push_back(&syncBarSTandReflecOp);			// #8 new class var - used #6 above
-	sizeSTandReflective.push_back(&disableCounterOp);				
-	sizeSTandReflective.push_back(&jammedLabelTestOp);				
-	sizeSTandReflective.push_back(&checkStockOp);					
-	sizeSTandReflective.push_back(&idleOp);							
-}
-
 // SOF-1593 - user needs to opt-in for saving continuous label stock - Needed to be able to recreate the teach tables, particulary for the size command.
 void PrinterTeachTable::recreateTeachTable()
 {
+	bool isTracing = Debug::isTracing("PrinterManager.PrinterSize");
+
+	if (isTracing)
+	{
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - begin");
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - ops size " + inttostring(ops.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - command size " + inttostring(command.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - mode size " + inttostring(mode.size()));
+	}
+
 	ops.clear();
 	command.clear();
 	mode.clear();
 
+	if (isTracing)
+	{
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 2ops size " + inttostring(ops.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 2command size " + inttostring(command.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 2mode size " + inttostring(mode.size()));
+	}
+
 	createTeachTable();
+
+	if (isTracing)
+	{
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 3ops size " + inttostring(ops.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 3command size " + inttostring(command.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - 3mode size " + inttostring(mode.size()));
+		Debug::trace("PrinterManager.PrinterSize", "recreateTeachTable() - end");
+	}
 }
 
 void PrinterTeachTable::createTeachTable()
 {
 	// printerMode = UnsizedLabel
-	Debug::trace("PrinterTeachTable", "PrinterTeachTable::createTeachTable() - Create Original Teach Tables");
-
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, UnsizedLabel);
-	addTeachTableEntry(&genericPrintHead, PrintCommand, UnsizedLabel);
-	addTeachTableEntry(&genericEject, EjectCommand, UnsizedLabel);
-	addTeachTableEntry(&genericSync, SyncCommand, UnsizedLabel);
-	addTeachTableEntry(&genericFind, FindCommand, UnsizedLabel);
-	addTeachTableEntry(&genericSize, SizeCommand, UnsizedLabel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, UnsizedLabel);
+	addTeachTableEntry(&genericAdvance,			AdvanceCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericPrintHead,		PrintCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericEject,			EjectCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericSync,			SyncCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericFind,			FindCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericSize,			SizeCommand,	UnsizedLabel);
+	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	UnsizedLabel);
 
 	// printerMode = ContinuousLabelHead
 	addTeachTableEntry(&genericAdvance,			AdvanceCommand, ContinuousLabelHead);
@@ -853,9 +710,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHead);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHead);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHead genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHead);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHead continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHead);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHead);
 
 	// printerMode = ContinuousLabelHeel
@@ -865,9 +728,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHeel);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHeel);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHeel);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeel);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHeel);
 
 	// printerMode = ContinuousLabelHeelCut
@@ -877,9 +746,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHeelCut);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHeelCut);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHeelCut);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeelCut);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHeelCut);
 
 
@@ -890,9 +765,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousShootLabelHeelCut);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousShootLabelHeelCut);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousShootLabelHeelCut);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousShootLabelHeelCut);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousShootLabelHeelCut);
 
 	// printerMode = ContinuousLabelHeadCut
@@ -902,9 +783,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHeadCut);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHeadCut);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHeadCut);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeadCut);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHeadCut);
 
 	// printerMode = ContinuousStreamHead
@@ -938,9 +825,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHeadCombined);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHeadCombined);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeadCombined genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHeadCombined);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeadCombined continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeadCombined);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHeadCombined);
 
 
@@ -951,9 +844,15 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&continuousSync,			SyncCommand,	ContinuousLabelHeelCombined);
 	addTeachTableEntry(&genericFind,			FindCommand,	ContinuousLabelHeelCombined);
 	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeelCombined genericSize");
 		addTeachTableEntry(&genericSize, SizeCommand, ContinuousLabelHeelCombined);
+	}
 	else
+	{
+		Debug::trace("PrinterManager.PrinterSize", "createTeachTable() - ContinuousLabelHeel continuousSize");
 		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeelCombined);
+	}
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	ContinuousLabelHeelCombined);
 
 
@@ -987,6 +886,7 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&dieCutEject,			EjectCommand,	DieCutLabelHead);
 	addTeachTableEntry(&dieCutSync,				SyncCommand,	DieCutLabelHead);
 	addTeachTableEntry(&genericFind,			FindCommand,	DieCutLabelHead);
+	//addTeachTableEntry(&dieCutSize,			SizeCommand,	DieCutLabelHead);
 	addTeachTableEntry(&genericSize,			SizeCommand,	DieCutLabelHead);
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	DieCutLabelHead);
 
@@ -1005,6 +905,7 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&dieCutSync,				SyncCommand,	DieCutLabelHeel);
 	addTeachTableEntry(&dieCutEject,			EjectCommand,	DieCutLabelHeel);
 	addTeachTableEntry(&genericFind,			FindCommand,	DieCutLabelHeel);
+	//addTeachTableEntry(&dieCutSize,			SizeCommand,	DieCutLabelHeel);
 	addTeachTableEntry(&genericSize,			SizeCommand,	DieCutLabelHeel);
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	DieCutLabelHeel);
 
@@ -1023,6 +924,7 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&dieCutStreamEject,		EjectCommand,	DieCutStreamHead);
 	addTeachTableEntry(&dieCutStreamSync,		SyncCommand,	DieCutStreamHead);
 	addTeachTableEntry(&genericFind,			FindCommand,	DieCutStreamHead);
+	//addTeachTableEntry(&dieCutSize,			SizeCommand,	DieCutStreamHead);
 	addTeachTableEntry(&genericSize,			SizeCommand,	DieCutStreamHead);
 	addTeachTableEntry(&dieCutStreamBackup,		BackupCommand,	DieCutStreamHead);
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	DieCutStreamHead);
@@ -1033,6 +935,7 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&dieCutStreamEject,		EjectCommand,	DieCutShootStreamHead);
 	addTeachTableEntry(&dieCutStreamSync,		SyncCommand,	DieCutShootStreamHead);
 	addTeachTableEntry(&genericFind,			FindCommand,	DieCutShootStreamHead);
+	//addTeachTableEntry(&dieCutSize,			SizeCommand,	DieCutShootStreamHead);
 	addTeachTableEntry(&genericSize,			SizeCommand,	DieCutShootStreamHead);
 	addTeachTableEntry(&dieCutStreamBackup,		BackupCommand,	DieCutShootStreamHead);
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	DieCutShootStreamHead);
@@ -1044,13 +947,14 @@ void PrinterTeachTable::createTeachTable()
 	addTeachTableEntry(&dieCutStreamEject,		EjectCommand,	DieCutStreamHeel);
 	addTeachTableEntry(&dieCutStreamSync,		SyncCommand,	DieCutStreamHeel);
 	addTeachTableEntry(&genericFind,			FindCommand,	DieCutStreamHeel);
+	//addTeachTableEntry(&dieCutSize,			SizeCommand,	DieCutStreamHeel);
 	addTeachTableEntry(&genericSize,			SizeCommand,	DieCutStreamHeel);
 	addTeachTableEntry(&dieCutStreamBackup,		BackupCommand,	DieCutStreamHeel);
 	addTeachTableEntry(&genericFindwoLabelTaken,	FindwoLabelTakenCommand,	DieCutStreamHeel);
 
 
 	// printerMode = DieCutShootStreamHeel
-	addTeachTableEntry(&genericAdvance,			AdvanceCommand,	DieCutShootStreamHeel);			// STEpp
+	addTeachTableEntry(&genericAdvance,			AdvanceCommand,	DieCutShootStreamHeel);
 	addTeachTableEntry(&dieCutShootStreamPrintHeel,	PrintCommand,	DieCutShootStreamHeel);
 	addTeachTableEntry(&dieCutStreamEject,		EjectCommand,	DieCutShootStreamHeel);
 	addTeachTableEntry(&dieCutStreamSync,		SyncCommand,	DieCutShootStreamHeel);
@@ -1061,7 +965,7 @@ void PrinterTeachTable::createTeachTable()
 
 
 	// printerMode = PrinterCalibration
-	addTeachTableEntry(&genericAdvance,			AdvanceCommand,	PrinterCalibration);		// STEpp BLOCK
+	addTeachTableEntry(&genericAdvance,			AdvanceCommand,	PrinterCalibration);
 	addTeachTableEntry(&calibratePrint,			PrintCommand,	PrinterCalibration);
 	addTeachTableEntry(&calibrateEject,			EjectCommand,	PrinterCalibration);
 	addTeachTableEntry(&calibrateSync,			SyncCommand,	PrinterCalibration);
@@ -1071,264 +975,6 @@ void PrinterTeachTable::createTeachTable()
 	// printerMode = SpeedKeyPrint
 	addTeachTableEntry(&speedKeyPrintMode,		PrintCommand,	SpeedKeyPrint);
 }
-// NEW shoot-thru teach table commands - substituted new Print,Find,Size commands
-void PrinterTeachTable::createSTEppTeachTable()
-{
-	Debug::trace("PrinterTeachTable", "PrinterTeachTable::createSTEppTeachTable() - Create NEW ST Teach Tables" );
-
-	// printerMode = UnsizedLabel
-	addTeachTableEntry(&genericAdvance,			 AdvanceCommand,		  UnsizedLabel);	// mode = 0
-	addTeachTableEntry(&printSTWithExpel,		 PrintCommand,			  UnsizedLabel);	// #4 - WAS genericPrint
-	addTeachTableEntry(&genericEject,			 EjectCommand,			  UnsizedLabel);
-	addTeachTableEntry(&genericSync,			 SyncCommand,			  UnsizedLabel);
-	addTeachTableEntry(&findSTandReflective,	 FindCommand,			  UnsizedLabel);	 // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective,	 SizeCommand,			  UnsizedLabel);	 // #8  - WAS genericSize
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, UnsizedLabel);
-
-	// printerMode = DieCutShootStreamHeel
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutShootStreamHeel);
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutShootStreamHeel);				// #4 - WAS genericPrint
-	addTeachTableEntry(&dieCutStreamEject, EjectCommand, DieCutShootStreamHeel);
-	addTeachTableEntry(&dieCutStreamSync, SyncCommand, DieCutShootStreamHeel);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutShootStreamHeel);			// #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutShootStreamHeel);			// #8  - WAS genericSize
-	addTeachTableEntry(&dieCutStreamBackup, BackupCommand, DieCutShootStreamHeel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutShootStreamHeel);
-
-
-	// printerMode = ContinuousLabelHead
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHead);								// mode = 1							
-	addTeachTableEntry(&continuousPrintHead, PrintCommand, ContinuousLabelHead);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHead);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHead);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHead);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHead);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHead);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHead);
-
-	// printerMode = ContinuousLabelHeel
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHeel);								// mode = 2
-	addTeachTableEntry(&continuousPrintHeel, PrintCommand, ContinuousLabelHeel);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHeel);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHeel);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHeel);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHeel);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHeel);
-
-	// printerMode = ContinuousLabelHeelCut
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHeelCut);							// mode = 13
-	addTeachTableEntry(&continuousPrintHeelCut, PrintCommand, ContinuousLabelHeelCut);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHeelCut);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHeelCut);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHeelCut);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHeelCut);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeelCut);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHeelCut);
-
-
-	// printerMode = ContinuousShootLabelHeelCut
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousShootLabelHeelCut);
-	addTeachTableEntry(&continuousShootPrintHeelCut, PrintCommand, ContinuousShootLabelHeelCut);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousShootLabelHeelCut);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousShootLabelHeelCut);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousShootLabelHeelCut);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousShootLabelHeelCut);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousShootLabelHeelCut);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousShootLabelHeelCut);
-
-	// printerMode = ContinuousLabelHeadCut
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHeadCut);
-	addTeachTableEntry(&continuousPrintHeadCut, PrintCommand, ContinuousLabelHeadCut);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHeadCut);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHeadCut);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHeadCut);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHeadCut);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeadCut);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHeadCut);
-
-	// printerMode = ContinuousStreamHead
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousStreamHead);
-	addTeachTableEntry(&listingPrintHead, PrintCommand, ContinuousStreamHead);
-	addTeachTableEntry(&listingEject, EjectCommand, ContinuousStreamHead);
-	addTeachTableEntry(&listingSync, SyncCommand, ContinuousStreamHead);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousStreamHead);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousStreamHead);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousStreamHead);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousStreamHead);
-
-	// printerMode = ContinuousStreamHeadCut
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousStreamHeadCut);
-	addTeachTableEntry(&listingPrintHeadCut, PrintCommand, ContinuousStreamHeadCut);
-	addTeachTableEntry(&listingEject, EjectCommand, ContinuousStreamHeadCut);
-	addTeachTableEntry(&listingSync, SyncCommand, ContinuousStreamHeadCut);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousStreamHeadCut);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousStreamHeadCut);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousStreamHeadCut);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousStreamHeadCut);
-
-	// printerMode = ContinuousLabelHeadCombined
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHeadCombined);
-	addTeachTableEntry(&continuousPrintCombinedHead, PrintCommand, ContinuousLabelHeadCombined);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHeadCombined);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHeadCombined);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHeadCombined);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHeadCombined);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeadCombined);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHeadCombined);
-
-
-	// printerMode = ContinuousLabelHeelCombined
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousLabelHeelCombined);
-	addTeachTableEntry(&continuousPrintCombinedHeel, PrintCommand, ContinuousLabelHeelCombined);
-	addTeachTableEntry(&continuousEject, EjectCommand, ContinuousLabelHeelCombined);
-	addTeachTableEntry(&continuousSync, SyncCommand, ContinuousLabelHeelCombined);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousLabelHeelCombined);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousLabelHeelCombined);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousLabelHeelCombined);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousLabelHeelCombined);
-
-
-	// printerMode = ContinuousStreamHeel
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousStreamHeel);
-	addTeachTableEntry(&listingPrintHeel, PrintCommand, ContinuousStreamHeel);
-	addTeachTableEntry(&listingEject, EjectCommand, ContinuousStreamHeel);
-	addTeachTableEntry(&listingSync, SyncCommand, ContinuousStreamHeel);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousStreamHeel);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousStreamHeel);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousStreamHeel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousStreamHeel);
-
-	//printerMode = ContinuousStreamHeelCut
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, ContinuousStreamHeelCut);
-	addTeachTableEntry(&listingPrintHeelCut, PrintCommand, ContinuousStreamHeelCut);
-	addTeachTableEntry(&listingEject, EjectCommand, ContinuousStreamHeelCut);
-	addTeachTableEntry(&listingSync, SyncCommand, ContinuousStreamHeelCut);
-	addTeachTableEntry(&genericFind, FindCommand, ContinuousStreamHeelCut);
-	if (!pConfig_ || !pConfig_->isConserveContinuousStockByNotSizingEnabled())
-		addTeachTableEntry(&sizeSTandReflective, SizeCommand, ContinuousStreamHeelCut);
-	else
-		addTeachTableEntry(&continuousSize, SizeCommand, ContinuousStreamHeelCut);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, ContinuousStreamHeelCut);
-
-	// =============================================== BEGIN DIE CUT ============================================================
-	// printerMode = DieCutLabelHead
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutLabelHead);
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutLabelHead);			// #4 - WAS dieCutPrintHead
-	addTeachTableEntry(&dieCutEject, EjectCommand, DieCutLabelHead);
-	addTeachTableEntry(&dieCutSync, SyncCommand, DieCutLabelHead);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutLabelHead);		    // #7 - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutLabelHead);			// #8 - WAS genericSize
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutLabelHead);
-
-	// printerMode = DieCutShootHead
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutShootHead);
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutShootHead);          // #4 - WAS dieCutShootPrintHead
-	addTeachTableEntry(&dieCutEject, EjectCommand, DieCutShootHead);
-	addTeachTableEntry(&dieCutSync, SyncCommand, DieCutShootHead);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutShootHead);        // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutShootHead);        // #8  - WAS genericSize
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutShootHead);
-
-	// printerMode = DieCutLabelHeel
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutLabelHeel);		// 6,3								// DieCutLabelHeel
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutLabelHeel);		// #4 - 6,4 - WAS dieCutPrintHeel		- has 9 commands versus 8 for regualr generic print
-	addTeachTableEntry(&dieCutSync, SyncCommand, DieCutLabelHeel);
-	addTeachTableEntry(&dieCutEject, EjectCommand, DieCutLabelHeel);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutLabelHeel);	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutLabelHeel);		// #8  - WAS genericSize
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutLabelHeel);
-
-	// printerMode = DieCutShootHeel
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutShootHeel);
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutShootHeel);		    // #4
-	addTeachTableEntry(&dieCutSync, SyncCommand, DieCutShootHeel);
-	addTeachTableEntry(&dieCutEject, EjectCommand, DieCutShootHeel);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutShootHeel);   	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutShootHeel);		    // #8  - WAS genericSize
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutShootHeel);
-
-	// printerMode = DieCutStreamHead
-	addTeachTableEntry(&genericAdvance, AdvanceCommand, DieCutStreamHead);
-	addTeachTableEntry(&printSTWithExpel, PrintCommand, DieCutStreamHead);		    // #4
-	addTeachTableEntry(&dieCutStreamEject, EjectCommand, DieCutStreamHead);
-	addTeachTableEntry(&dieCutStreamSync, SyncCommand, DieCutStreamHead);
-	addTeachTableEntry(&findSTandReflective, FindCommand, DieCutStreamHead);	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand, DieCutStreamHead);		// #8  - WAS genericSize
-	addTeachTableEntry(&dieCutStreamBackup, BackupCommand, DieCutStreamHead);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutStreamHead);
-
-	// printerMode = DieCutShootStreamHead
-	addTeachTableEntry(&genericAdvance,         AdvanceCommand, DieCutShootStreamHead);
-	addTeachTableEntry(&printSTWithExpel,        PrintCommand, DieCutShootStreamHead);			// #4
-	addTeachTableEntry(&dieCutStreamEject,       EjectCommand, DieCutShootStreamHead);
-	addTeachTableEntry(&dieCutStreamSync,        SyncCommand, DieCutShootStreamHead);
-	addTeachTableEntry(&findSTandReflective,     FindCommand, DieCutShootStreamHead);	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective,     SizeCommand, DieCutShootStreamHead);		// #8  - WAS genericSize
-	addTeachTableEntry(&dieCutStreamBackup,      BackupCommand, DieCutShootStreamHead);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutShootStreamHead);
-
-
-	// printerMode = DieCutStreamHeel
-	addTeachTableEntry(&genericAdvance,			 AdvanceCommand, DieCutStreamHeel);
-	addTeachTableEntry(&printSTWithExpel,		 PrintCommand,   DieCutStreamHeel);			// #4
-	addTeachTableEntry(&dieCutStreamEject,		 EjectCommand,   DieCutStreamHeel);
-	addTeachTableEntry(&dieCutStreamSync,		 SyncCommand,    DieCutStreamHeel);
-	addTeachTableEntry(&findSTandReflective,	 FindCommand,    DieCutStreamHeel);	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective,	 SizeCommand,    DieCutStreamHeel);		// #8  - WAS genericSize
-	addTeachTableEntry(&dieCutStreamBackup,		 BackupCommand,				DieCutStreamHeel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand,	 DieCutStreamHeel);
-
-	// printerMode = DieCutShootStreamHeel
-	addTeachTableEntry(&genericAdvance,			 AdvanceCommand,	      DieCutShootStreamHeel);
-	addTeachTableEntry(&printSTWithExpel,		 PrintCommand,            DieCutShootStreamHeel);		// #4
-	addTeachTableEntry(&dieCutStreamEject,		 EjectCommand,		      DieCutShootStreamHeel);
-	addTeachTableEntry(&dieCutStreamSync,		 SyncCommand,		      DieCutShootStreamHeel);
-	addTeachTableEntry(&findSTandReflective,	 FindCommand,             DieCutShootStreamHeel);	    // #7  - WAS genericFind
-	addTeachTableEntry(&sizeSTandReflective,	 SizeCommand,             DieCutShootStreamHeel);		// #8  - WAS genericSize
-	addTeachTableEntry(&dieCutStreamBackup,		 BackupCommand,		      DieCutShootStreamHeel);
-	addTeachTableEntry(&genericFindwoLabelTaken, FindwoLabelTakenCommand, DieCutShootStreamHeel);
-
-
-	// printerMode = PrinterCalibration
-	//addTeachTableEntry(&genericAdvance, AdvanceCommand, PrinterCalibration);
-	//addTeachTableEntry(&calibratePrint, PrintCommand,   PrinterCalibration);
-	//addTeachTableEntry(&calibrateEject, EjectCommand,   PrinterCalibration);
-	//addTeachTableEntry(&calibrateSync,  SyncCommand,    PrinterCalibration);
-	//addTeachTableEntry(&calibrateFind,  FindCommand,    PrinterCalibration);
-	//addTeachTableEntry(&calibrateSize,  SizeCommand,    PrinterCalibration);
-
-	// Tom says this works fine, but this is the only other 2 step print command
-	addTeachTableEntry(&genericAdvance,      AdvanceCommand, PrinterCalibration);
-	addTeachTableEntry(&printSTWithExpel,    PrintCommand,   PrinterCalibration);
-	addTeachTableEntry(&calibrateEject,      EjectCommand,   PrinterCalibration);
-	addTeachTableEntry(&calibrateSync,       SyncCommand,    PrinterCalibration);
-	addTeachTableEntry(&findSTandReflective, FindCommand,    PrinterCalibration);
-	addTeachTableEntry(&sizeSTandReflective, SizeCommand,    PrinterCalibration);
-
-	// printerMode = SpeedKeyPrint
-	addTeachTableEntry(&speedKeyPrintMode, PrintCommand, SpeedKeyPrint);
-}
 
 void PrinterTeachTable::show(){
 	int i = 0;
@@ -1336,9 +982,9 @@ void PrinterTeachTable::show(){
 	Debug::trace("PrinterTeachTable", "show():");
 	while ((i < size))
 	{
-		Debug::trace("PrinterTeachTable", "PrinterTeachTable::show() - Command: " + Integer::toString(this->command[i]));
-		Debug::trace("PrinterTeachTable", "PrinterTeachTable::show() - Mode: " + Integer::toString(this->mode[i]));
-		//Debug::trace("PrinterTeachTable", "PrinterTeachTable::show() - Ops: ");
+		Debug::trace("PrinterTeachTable", "Command: " + Integer::toString(this->command[i]));
+		Debug::trace("PrinterTeachTable", "Mode: " + Integer::toString(this->mode[i]));
+		Debug::trace("PrinterTeachTable", "Ops: ");
 		ops[i]->show();
 		i++;
 	}

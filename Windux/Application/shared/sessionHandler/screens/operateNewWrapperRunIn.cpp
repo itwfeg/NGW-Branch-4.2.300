@@ -27,15 +27,11 @@
 #include <Messages.h>
 #include <ScaleConfiguration.h>
 #include <UiUtilities.h>
-#include <ScaleClasses.h>
-
-#include "serviceNewWrapperSetTimings.h"
-#include "serviceNewWrapperEditBox.h"
 
 #include "../dialogs/messageboxdialog.h"
 
-const static bool TESTING = false;
-static const bool DEMO_ALL_GOOD_MODE = false;
+const static bool   TESTING = false;
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -44,8 +40,7 @@ static const bool DEMO_ALL_GOOD_MODE = false;
 /////////////////////////////////////////////////////////////////////////////////////
 operateNewWrapperRunIn::operateNewWrapperRunIn(SessionMainWindow *mainWindow, ModeWidget *parent) :
     _Mybase( mainWindow, parent ),
-    ui(new Ui::operateNewWrapperRunIn),
-    screenLoaded_( false )
+    ui(new Ui::operateNewWrapperRunIn)
 {
     ui->setupUi(this);
     scaleScreen();
@@ -55,7 +50,6 @@ operateNewWrapperRunIn::operateNewWrapperRunIn(SessionMainWindow *mainWindow, Mo
     initialize();
 
     translate();
-    screenLoaded_ = true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,15 +151,15 @@ void operateNewWrapperRunIn::initialize()
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowCloseEvent][0]            =  20; // Gripper Narrow CLOSE
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowCloseEvent][1]            =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenEvent][0]             =  65; // Gripper Narrow OPEN
-    validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenEvent][1]             =  95;
+    validateRange_[DomEvolWrapperEventCapture::GripperNarrowOpenEvent][1]             =  85;
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftCloseEvent][0]          =  20; // Gripper Wide Left CLOSE
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftCloseEvent][1]          =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenEvent][0]           =  75; // Gripper Wide Left OPEN
-    validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenEvent][1]           = 110;
+    validateRange_[DomEvolWrapperEventCapture::GripperWideLeftOpenEvent][1]           = 105;
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightCloseEvent][0]         =  20; // Gripper Wide Right CLOSE
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightCloseEvent][1]         =  40;
     validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenEvent][0]          =  75; // Gripper Wide Right OPEN
-    validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenEvent][1]          = 110;
+    validateRange_[DomEvolWrapperEventCapture::GripperWideRightOpenEvent][1]          = 105;
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftCloseEvent][0]            =  40; // Side Clamp Left CLOSE
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftCloseEvent][1]            =  70;
     validateRange_[DomEvolWrapperEventCapture::SideClampLeftOpenEvent][0]             = 120; // Side Clamp Left OPEN
@@ -174,9 +168,9 @@ void operateNewWrapperRunIn::initialize()
     validateRange_[DomEvolWrapperEventCapture::SideClampRightCloseEvent][1]           =  70;
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenEvent][0]            = 120; // Side Clamp Right OPEN
     validateRange_[DomEvolWrapperEventCapture::SideClampRightOpenEvent][1]            = 160;
-    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][0]                        = 200; // Wand UP - 400->200 updated 04-13-2026
-    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][1]                        = 325; // Wand UP - 525->325 updated 04-13-2026
-    validateRange_[DomEvolWrapperEventCapture::WandDownEvent][0]                      = 625; // Wand DOWN 675->625 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][0]                        = 400; // Wand UP
+    validateRange_[DomEvolWrapperEventCapture::WandUpEvent][1]                        = 525;
+    validateRange_[DomEvolWrapperEventCapture::WandDownEvent][0]                      = 675; // Wand DOWN
     validateRange_[DomEvolWrapperEventCapture::WandDownEvent][1]                      = 775;
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpEvent][0]                = 300; // Film Selector UP
     validateRange_[DomEvolWrapperEventCapture::FilmSelectorUpEvent][1]                = 400;
@@ -188,8 +182,8 @@ void operateNewWrapperRunIn::initialize()
     validateRange_[DomEvolWrapperEventCapture::RegulatedPressureReadingEvent][1]      =  55;
     validateRange_[DomEvolWrapperEventCapture::ApplierVacuumReadingEvent][0]          =   4; // Vacuum
     validateRange_[DomEvolWrapperEventCapture::ApplierVacuumReadingEvent][1]          =  30;
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][0]               =  60; // Applier Hand 120->60 04-14-2026
-    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][1]               = 220; // Applier Hand 200->220 04-14-2026
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][0]               = 120; // Applier Hand
+    validateRange_[DomEvolWrapperEventCapture::ApplierHandHomeEvent][1]               = 200;
     // not displayed on this screen
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingEvent][0]          = 198; // Main AC Input Voltage
     validateRange_[DomEvolWrapperEventCapture::MainACVoltageReadingEvent][1]          = 242;
@@ -227,13 +221,10 @@ void operateNewWrapperRunIn::initialize()
     saveCycleCountsTimer_->setInterval( 60000 );
     saveCycleCountsTimer_->setSingleShot( false );
 
-    connect( saveCycleCountsTimer_, SIGNAL(timeout()),        SLOT( onTimerTimeout()) );
+    connect( saveCycleCountsTimer_, SIGNAL(timeout()), SLOT( onTimerTimeout()) );
 
-    connect( ui->butPrintReport,    SIGNAL(clicked()),  this, SLOT( generateRunInReport() ) );
+    connect( ui->butPrintReport, SIGNAL(clicked()), this, SLOT( generateRunInReport() ) );
     saveCycleCountsTimer_->start();
-
-    connect( ui->butBackToTimings, SIGNAL(clicked()),   this, SLOT(onBackToTimings()));
-    ui->butBackToTimings->setVisible( false );
 
     if( TESTING )
     {
@@ -246,16 +237,8 @@ void operateNewWrapperRunIn::initialize()
         fakeCycleTimer_->start();
     }
 
-    // by default, we are going to say we passed the Run In Tests - up until we dont
-    session_->scaleConfig->internalConfig.runInTestState = TimingsTestState::Test_Passed;
-    session_->scaleConfig->internalConfig.runInFailures = "";
-    session_->scaleConfig->internalConfig.runInSensorFailures = "";
-
     // SOF-4216
-    if( session_->scaleConfig->internalConfig.isTimingsActive )
-        ui->butBackToTimings->setVisible( true );
-    else
-        checkForLimitCycles();              // dont need to check this if we came from Timings - but otherwise check it
+    checkForLimitCycles();
 }
 
 // SOF-4216
@@ -320,16 +303,10 @@ void operateNewWrapperRunIn::highlight(QLabel* label, int status)
         highlightGreen(label);
         break;
     case 1:
-        if( DEMO_ALL_GOOD_MODE )
-            highlightGreen(label);
-        else
-            highlightYellow(label);
+        highlightYellow(label);
         break;
     case 2:
-        if( DEMO_ALL_GOOD_MODE )
-            highlightGreen(label);
-        else
-            highlightRed(label);
+        highlightRed(label);
         break;
     default:
         break;
@@ -345,28 +322,16 @@ void operateNewWrapperRunIn::highlightGreen(QLabel* label)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void operateNewWrapperRunIn::highlightYellow(QLabel* label)
 {
-    if( DEMO_ALL_GOOD_MODE )
-        highlightGreen(label);
-    else
-        label->setStyleSheet("background-color: yellow; border-radius: 10px;");
+    label->setStyleSheet("background-color: yellow; border-radius: 10px;");
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void operateNewWrapperRunIn::highlightRed(QLabel* label)
 {
-    if( DEMO_ALL_GOOD_MODE )
-        highlightGreen(label);
-    else
-    {
-        LOG_CLASS_INFO( "operateNewWrapperRunIn", "highlightRed" );
-        LOG_DEBUG("highlightRed() Flip RunInTest red - is this being called?", NULL );
-
-        // Kraig - what if we have network connectivity on and field turns red then we wont see it.  Flip it magneto/fuchsia instead
-        label->setStyleSheet("background-color: red ; border-radius: 10px;");       // background-color:rgb(255,0,0) ff0000
-
-        // all tests were good, by default, until we get a FAILED status.  Not a warning, but FAILED, and we flip this flag
-        session_->scaleConfig->internalConfig.runInTestState = TimingsTestState::Test_Failed;
-    }
+    // Kraig suggestion - what if we have network connectivity turned on and a field turns red
+    // then we wont see it.  Flip it magneto/fuchsia
+    //label->setStyleSheet("background-color: red; border-radius: 10px;");
+    label->setStyleSheet("background-color: fuchsia ; border-radius: 10px;");       // background-color:rgb(255,0,255) ff00ff
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -421,16 +386,6 @@ void operateNewWrapperRunIn::updateValues(MadpEvolWrapperMotorProfile msg)
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-bool operateNewWrapperRunIn::onScreenChanging()
-{
-    // cannot leave this screen until test complete
-   if ( session_->scaleConfig->internalConfig.isTimingsActive )
-        return false;
-
-    return _Mybase::onScreenChanging();
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void operateNewWrapperRunIn::onSessionMessage( const SessionMessage& msg )
 {
@@ -447,7 +402,7 @@ void operateNewWrapperRunIn::onSessionMessage( const SessionMessage& msg )
     }
 
     // event capture
-    else if ( ( Wrapper == device )  && ( WrEvolEventCapture == event ) )
+    else if ( Wrapper == device  && WrEvolEventCapture == event )
     {
         DomEvolWrapperEventCapture m( msg );
 
@@ -468,7 +423,7 @@ void operateNewWrapperRunIn::onSessionMessage( const SessionMessage& msg )
         }
     }
     // handle cycle counts
-    else if ( ( Wrapper == device )  &&  ( WrEvolPackageDesc == event ) )
+    else if ( Wrapper == device  &&  WrEvolPackageDesc == event )
     {
         // just receiving the msg increments it
 
@@ -562,18 +517,6 @@ void operateNewWrapperRunIn::onSessionMessage( const SessionMessage& msg )
             }
         }
     }
-    else if ( ( Error == device )  && ( Wrapper == event )   )
-    {
-        QString code( msg[2] );
-
-        if( session_->scaleConfig->internalConfig.runInFailures.length() > 0 )
-            session_->scaleConfig->internalConfig.runInFailures.append(",");                    // format: 9522,9572,####,...
-
-        if( !session_->scaleConfig->internalConfig.runInFailures.contains(code) )
-            session_->scaleConfig->internalConfig.runInFailures.append(code);                   // only add new code if not already listed
-
-        //LOG_DEBUG("onSessionMessage() added to failures: %s", qPrintable( session_->scaleConfig->internalConfig.runInFailures ) );
-    }
 }
 
 void operateNewWrapperRunIn::readCycleCountsFromFile()
@@ -635,9 +578,6 @@ void operateNewWrapperRunIn::saveCycleCountsToFile()
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void operateNewWrapperRunIn::outOfRangeLabel(int index, int curValue, QLabel *checkLabel )
 {
-    LOG_CLASS_INFO( "operateNewWrapperRunIn", "outOfRangeLabel" );
-    LOG_DEBUG("operaterRunIn::outOfRangeLabel() START", NULL );
-
     // I was exiting based on this condition, but if it was previously red (which we wont know)
     // then we need to turn it back green again so if else it.
 
@@ -648,7 +588,7 @@ void operateNewWrapperRunIn::outOfRangeLabel(int index, int curValue, QLabel *ch
 
     // If it's not in the current range, which lets you exit this method - it must INVALID
 
-    modifyPaletteBackground redBackground( QColor( 255, 0, 0 ) ); // cant use red bc network connectivity
+    modifyPaletteBackground redBackground( QColor( 255, 0, 255 ) ); // cant use red bc network connectivity
     //modifyPaletteBackground whiteBackground( hobart::colorPalette::white );
     modifyPaletteBackground whiteBackground( hobart::colorPalette::green );
 
@@ -660,38 +600,13 @@ void operateNewWrapperRunIn::outOfRangeLabel(int index, int curValue, QLabel *ch
 
     if( good_reading )
     {
-        LOG_DEBUG("operaterRunIn::outOfRangeLabel() good_reading", NULL );
         whiteBackground( checkLabel );
         blackForeground( checkLabel );
     }
     else
     {
-        if( !screenLoaded_ )
-            return;
-
-        LOG_DEBUG("operaterRunIn::outOfRangeLabel() bad_reading", NULL );
-        session_->scaleConfig->internalConfig.runInTestState = TimingsTestState::Test_Failed;
-
-        QString indexStr = QString::number(index);
-        if( !session_->scaleConfig->internalConfig.runInSensorFailures.contains(indexStr) )
-        {
-            if( session_->scaleConfig->internalConfig.runInSensorFailures.length() > 0 )
-                session_->scaleConfig->internalConfig.runInSensorFailures.append(",");              // format: 9522,9572,####,...
-
-            session_->scaleConfig->internalConfig.runInSensorFailures.append(indexStr);                 // only add new code if not already listed
-        }
-
-        //LOG_DEBUG("onSessionMessage() added to failures: %s", qPrintable( session_->scaleConfig->internalConfig.runInSensorFailures ) );
-        if( DEMO_ALL_GOOD_MODE )
-        {
-            whiteBackground( checkLabel );
-            blackForeground( checkLabel );
-        }
-        else
-        {
-            redBackground( checkLabel );
-            whiteForeground( checkLabel );
-        }
+        redBackground( checkLabel );
+        whiteForeground( checkLabel );
     }
 }
 
@@ -806,15 +721,12 @@ void operateNewWrapperRunIn::inRangeByTenLabel(int index, bool curVal)
     if( l_minus_r < 10 && l_minus_r > -10)
         return;
 
-    if( DEMO_ALL_GOOD_MODE )
-        return;
-
     QLabel *leftLabel( valueLabels_[leftIndex] );
     QLabel *rightLabel( valueLabels_[rightIndex] );
 
     // If the 2 values are not within 10, which lets you exit this method - it must INVALID
 
-    modifyPaletteBackground redBackground( QColor( 255, 0, 0 ) );     // cant use red due to network connectivity
+    modifyPaletteBackground redBackground( QColor( 255, 0, 255 ) );     // cant use red due to network connectivity
     modifyPaletteForeground whiteForeground( modifyPaletteForeground::createPalette( hobart::colorPalette::white ) );
 
     leftLabel->setAutoFillBackground( true );
@@ -836,31 +748,6 @@ void operateNewWrapperRunIn::onCycleCountsClicked()
     runinCycleCounter_ = 0;
 
     updateCycleCounterText("0");
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-void operateNewWrapperRunIn::onBackToTimings()
-{
-    LOG_CLASS_INFO( "operateNewWrapperRunIn", "onBackToTimings" );
-    LOG_DEBUG("onBackToTimings() START", NULL );
-
-    // stop run in
-    session_->send( Wrapper, WrEvolReqSystemReset );    // 9,190 ... this will stop Run-in with System Reset
-
-    // stop actuators
-    session_->send( Wrapper, WrEvolTest, "28,0" );      // CycleActuatorsTest, Stop (0)
-
-    // lets you leave the screen
-    session_->scaleConfig->internalConfig.isTimingsActive = false;      // by setting this false, it allows us to leave and return to Timings
-
-    // goto Wrapper timings
-    mainWindow_->switchToModeScreen<ServiceMode, serviceNewWrapperSetTimings>();
-
-    //LOG_DEBUG("onBackToTimings() what are my failures: %s", qPrintable( session_->scaleConfig->internalConfig.runInFailures ) );
-    //LOG_DEBUG("onBackToTimings() what are my sensor failures: %s", qPrintable( session_->scaleConfig->internalConfig.runInSensorFailures ) );
-
-    // TODO - Need to report back pass or fail
-    LOG_DEBUG("onBackToTimings() END", NULL );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1160,9 +1047,9 @@ void operateNewWrapperRunIn::createFakeData()
     outOfRangeLabel(DomEvolWrapperEventCapture::SideClampRightOpenEvent, 152, label10);
     inRangeByTenLabel( DomEvolWrapperEventCapture::SideClampRightOpenEvent );
 
-    wandUp_->setText("273");
+    wandUp_->setText("465");
     QLabel *label14( valueLabels_[DomEvolWrapperEventCapture::WandUpEvent] );
-    outOfRangeLabel(DomEvolWrapperEventCapture::WandUpEvent, 273, label14);
+    outOfRangeLabel(DomEvolWrapperEventCapture::WandUpEvent, 465, label14);
 
     wandDown_->setText("704");
     QLabel *label30( valueLabels_[DomEvolWrapperEventCapture::WandDownEvent] );
@@ -1204,7 +1091,7 @@ void operateNewWrapperRunIn::createFakeData()
     currentTimings_[DomEvolWrapperEventCapture::SideClampLeftOpenEvent] = "127";
     currentTimings_[DomEvolWrapperEventCapture::SideClampRightCloseEvent] = "67";
     currentTimings_[DomEvolWrapperEventCapture::SideClampRightOpenEvent] = "152";
-    currentTimings_[DomEvolWrapperEventCapture::WandUpEvent] = "273";
+    currentTimings_[DomEvolWrapperEventCapture::WandUpEvent] = "465";
     currentTimings_[DomEvolWrapperEventCapture::WandDownEvent] = "704";
     currentTimings_[DomEvolWrapperEventCapture::FilmSelectorUpEvent] = "381";
     currentTimings_[DomEvolWrapperEventCapture::FilmSelectorDownEvent] = "154";

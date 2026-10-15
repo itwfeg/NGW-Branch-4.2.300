@@ -49,7 +49,6 @@
 #include "EvolWrapperCycle.h"
 #include "EvolWrapperPackageTimingsPointer.h"
 #include "EvolWrapperResetDefaultPackageTimings.h"
-#include "EvolWrapperUnlockPackageTimings.h"
 #include "EvolWrapperTrayNames.h"
 #include "EvolWrapperCameraScan.h"
 #include "EvolWrapperSystemStatus.h"
@@ -1366,18 +1365,6 @@ void WrapperManager::handleWrapperEvent(WrEvent wrEvent, const char *recvBuffer)
 			}
 			break;
 		}
-		case WrEvolUnlockPackageTimings:
-		{
-			Debug::trace("WrapperManager.Message", "WrEvolUnlockPackageTimings");
-			if (!fullBrightCan_) {
-				EvolWrapperUnlockPackageTimings unlockTimings(recvBuffer);
-				unlockTimings.setSourceObject(this);
-
-				const char* pCC = unlockTimings.serialize();
-				pMyWrapper->send(pCC, unlockTimings.getSerializedLength());
-			}
-			break;
-		}
 		case WrEvolSavePackageTimingsComplete:
 		{
 			Debug::trace("WrapperManager.Message", "WrEvolSavePackageTimingsComplete");
@@ -2478,7 +2465,6 @@ void WrapperManager::registerOperationalEvents()
 	registerEvent(Wrapper, WrEvolRequestPackageTimings);
 	registerEvent(Wrapper, WrEvolSavePackageTimings);
 	registerEvent(Wrapper, WrEvolResetDefaultPackageTimings);
-	registerEvent(Wrapper, WrEvolUnlockPackageTimings);
 
 	registerEvent(WrapperSystem, SysConfig);
 	registerEvent(WrapperSystem, SysReqStatus);

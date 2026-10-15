@@ -551,7 +551,7 @@ void VersionManager::handleUSBRequestUpdate(const char *recvBuffer)
 		// basically if the firmware binary resides in a particular directory, then it needs to be burned to the FPC.
 		// if this isn't the APC/FPC, then use the old way of checking if the firmware needs to be flashed,
 		// by using version.ini and checking for a difference between what's on the device and what is in the file system.
-		if ( ( newVerType == HobVersion::ApcPrinterSW ) || ( newVerType == HobVersion::FpcPrinterSW ) || ( newVerType == HobVersion::Epp3PrinterSW ))
+		if ( ( newVerType == HobVersion::ApcPrinterSW ) || ( newVerType == HobVersion::FpcPrinterSW ) )
 		{
 			Directory directoryFromWhereFirmwareGetsBurnedToDevice("");
 			HobComplexVersion::getExtractionDir(newVerType, directoryFromWhereFirmwareGetsBurnedToDevice, 0); // the last parameter isn't used, but has to be supplied

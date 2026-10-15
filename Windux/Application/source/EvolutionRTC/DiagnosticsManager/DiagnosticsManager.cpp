@@ -57,7 +57,6 @@
 #include <EvolWrapperPackageTimings.h>
 #include <EvolWrapperPackageTimingsPointer.h>
 #include <EvolWrapperResetDefaultPackageTimings.h>
-#include <EvolWrapperUnlockPackageTimings.h>
 #include <EvolWrapperSettings.h>
 #include <EvolWrapperSystemStatus.h>
 #include <EvolWrapperWrap.h>
@@ -1437,16 +1436,6 @@ void DiagnosticsManager::handleMessage( EvolWrapperResetDefaultPackageTimings &m
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 template <>
-void DiagnosticsManager::handleMessage(EvolWrapperUnlockPackageTimings &msg)
-{
-	TRACE("Unlock the Service wrapper package timings!");
-
-	if (!db_->createUnlockTimings())
-		TRACE("Error unlocking timings");
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-template <>
 void DiagnosticsManager::handleMessage( EvolWrapperPackageTimingsPointer &msg )
 {
 	const bool tracing( ISTRACING );
@@ -1917,8 +1906,6 @@ void DiagnosticsManager::processEvent( Util::CSmartPtr<EvolMessageWrapper> &msg 
     		handleMessageT<EvolWrapperInquire>( msg->Data() );
     	else if ( WrEvolResetDefaultPackageTimings == event )
     		handleMessageT<EvolWrapperResetDefaultPackageTimings>( msg->Data() );
-		else if (WrEvolUnlockPackageTimings == event)
-			handleMessageT<EvolWrapperUnlockPackageTimings>(msg->Data());
     	else if ( WrEvolSavePackageTimings == event )
     		handleMessageT<EvolWrapperPackageTimingsPointer>( msg->Data() );
     	else if ( WrEvolSettings == event )
@@ -2072,7 +2059,6 @@ void DiagnosticsManager::initialize()
 	registerEvent( Wrapper, WrEvolEventCapture );
 	registerEvent( Wrapper, WrEvolInquire );
 	registerEvent( Wrapper, WrEvolResetDefaultPackageTimings );
-	registerEvent (Wrapper, WrEvolUnlockPackageTimings);
 	registerEvent( Wrapper, WrEvolSavePackageTimings );
 	registerEvent( Wrapper, WrEvolSettings );
 	registerEvent( Wrapper, WrEvolStatus );

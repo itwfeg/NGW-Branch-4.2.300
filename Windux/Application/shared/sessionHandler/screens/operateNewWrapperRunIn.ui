@@ -1373,8 +1373,8 @@ Up     Down</string>
     <rect>
      <x>40</x>
      <y>530</y>
-     <width>451</width>
-     <height>51</height>
+     <width>741</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -1390,9 +1390,6 @@ Up     Down</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="lblCycleCountsTitle">
@@ -1486,48 +1483,6 @@ background-color: rgb(211, 211, 211);</string>
     <string>Print Report</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="butBackToTimings">
-   <property name="geometry">
-    <rect>
-     <x>590</x>
-     <y>536</y>
-     <width>190</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>190</width>
-     <height>41</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>800</width>
-     <height>526</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(211, 211, 211);</string>
-   </property>
-   <property name="text">
-    <string>Back to Timings</string>
-   </property>
-  </widget>
   <zorder>lblPrimary</zorder>
   <zorder>lblSecondary</zorder>
   <zorder>lblBelt</zorder>
@@ -1585,7 +1540,6 @@ background-color: rgb(211, 211, 211);</string>
   <zorder>lblCycleCountsTitle</zorder>
   <zorder>cycleCounts</zorder>
   <zorder>butPrintReport</zorder>
-  <zorder>butBackToTimings</zorder>
  </widget>
  <resources/>
  <connections/>

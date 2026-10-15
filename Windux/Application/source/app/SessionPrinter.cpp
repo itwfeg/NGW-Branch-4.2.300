@@ -53,7 +53,6 @@
 #include "HfcPrinterTestCassette.h"
 #include "HfcPrinterGapCalStatus.h"
 #include "HfcPrinterTest.h"
-#include "PrinterSystemRequestStatus.h"
 
 #include "HfcILASpeed.h"
 #include "HfcILARequestSpeed.h"
@@ -615,19 +614,6 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 					HfcPrinterSystemStatus *prSysStatus = dynamic_cast<HfcPrinterSystemStatus *> (msg->getHfcObject());
 					if (prSysStatus)
 					{
-						// send version info to hte apphook
-						if (getCurrentModeOp() == OP_SENDWRAPPERDATATOAPPHOOK)
-						{
-							Debug::trace("SessionPrinter.PrinterSystemStatus", "Sending HfcPrinterSystemStatus object to hook.");
-
-							sendWrapperDataToHook( prSysStatus->getPrinterType(), prSysStatus->getSoftwareVersion().getRevMajMinStr() );
-							hasProcessedPrSystemMsg = true;
-
-							Debug::trace("SessionPrinter.PrinterSystemStatus", "Finished sending HfcPrinterSystemStatus object to hook.");
-
-							break;
-						}
-
 						// Need to save the FPC version to the Config table in the database.  We always update it with the latest version set in this message received.
 
 						prSysStatus->show();
@@ -900,7 +886,7 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 
 				case PrReqInquire:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,22) handling PrReqInquire"));
+					Debug::trace("Session", getName() + HobString(" - handling PrReqInquire"));
 //					configurationManager->handleMessage(msg);
 
 					if (msg == (SessionMessage *)NULL)
@@ -926,35 +912,35 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 
 				case PrInquire:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,2) handling PrInquire"));
+					Debug::trace("Session", getName() + HobString(" - handling PrInquire"));
 					configurationManager->handleMessage(msg);
 				}
 				break;
 
 				case PrConfig:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,1) handling PrConfig"));
+					Debug::trace("Session", getName() + HobString(" - handling PrConfig"));
 					configurationManager->handleMessage(msg);
 				}
 				break;
 
 				case PrRestorePrinterSettings:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,155) handling PrRestorePrinterSettings"));
+					Debug::trace("Session", getName() + HobString(" - handling PrRestorePrinterSettings"));
 					configurationManager->handleMessage(msg);
 				}
 				break;
 
 				case PrReqInfo:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,100) handling PrReqInfo"));
+					Debug::trace("Session", getName() + HobString(" - handling PrReqInfo"));
 					configurationManager->handleMessage(msg);
 				}
 					break;
 
 				case PrPrintheadPower:
 				{
-					Debug::trace("PrinterManager.PrinterSensors", getName() + HobString(" - (7,9) handling PrPrintheadPower"));
+					Debug::trace("PrinterManager.PrinterSensors", getName() + HobString(" - handling PrPrintheadPower"));
 
 					msg->setFormatType(BrowserFormat);
 					send(msg, Messenger::DEST_UI);
@@ -1143,14 +1129,14 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 
 				case PrInfo:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,101) handling PrInfo"));
+					Debug::trace("Session", getName() + HobString(" - handling PrInfo"));
 					configurationManager->handleMessage(msg);
 				}
 					break;
 
 				case PrSaveInfo:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,102) handling PrSaveInfo"));
+					Debug::trace("Session", getName() + HobString(" - handling PrSaveInfo"));
 					configurationManager->handleMessage(msg);
 				}
 					break;
@@ -1262,7 +1248,8 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 
 				case PrTestLabel:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", std::string("case PrTestLabel: ") );
+					Debug::trace("Session", getName() + HobString(" - handling PrTestLabel"));
+
 					HfcPrinterPrintTestLabel *testLabel = dynamic_cast<HfcPrinterPrintTestLabel *> (msg->getHfcObject());
 					if (testLabel)
 					{
@@ -1315,7 +1302,7 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 
 				case PrStockMetrics:
 				{
-					Debug::trace("SessionPrinter.handlePrinterMessage", getName() + HobString(" - (7,41) handling PrStockMetrics"));
+					Debug::trace("Session", getName() + HobString(" - handling PrStockMetrics"));
 				 	HfcPrinterStockMetrics *prStockMetricsMsg = dynamic_cast<HfcPrinterStockMetrics *> (msg->getHfcObject());
 
 					if (prStockMetricsMsg != NULL)
@@ -2130,128 +2117,6 @@ void Session::handlePrinterMessage(SessionMessage *msg)
 					}
 					break;
 				}
-				case PrRfidTestRequest:
-				{
-					PrinterGeneric request(PrRfidTestRequest, this, FirstPrinter);
-					registerEvent(Printer, PrRfidTestPassed);
-					registerEvent(Printer, PrRfidTestFailed);
-					dispatchEvent(&request);
-					break;
-				}
-				case PrRfidTestPassed:
-				case PrRfidTestFailed:
-				{
-					const bool passed = msg->getEventType() == PrRfidTestPassed;
-					SessionMessage response(Printer, passed ? PrRfidTestPassed : PrRfidTestFailed);
-					response.setFormatType(BrowserFormat);
-					deregisterEvent(Printer, PrRfidTestPassed);
-					deregisterEvent(Printer, PrRfidTestFailed);
-					send(&response, Messenger::DEST_UI);
-					break;
-				}
-				case PrRfidCalRequest:
-				{
-					PrinterGeneric request(PrRfidCalRequest, this, FirstPrinter);
-					registerEvent(Printer, PrRfidCalPassed);
-					registerEvent(Printer, PrRfidCalFailed);
-					dispatchEvent(&request);
-					break;
-				}
-				case PrRfidCalPassed:
-				case PrRfidCalFailed:
-				{
-					const bool passed = msg->getEventType() == PrRfidCalPassed;
-					SessionMessage response(Printer, passed ? PrRfidCalPassed : PrRfidCalFailed);
-					response.setFormatType(BrowserFormat);
-					deregisterEvent(Printer, PrRfidCalPassed);
-					deregisterEvent(Printer, PrRfidCalFailed);
-					send(&response, Messenger::DEST_UI);
-					break;
-				}
-				case PrRfidUpgradeRequest:
-				{
-					PrinterGeneric request(PrRfidUpgradeRequest, this, FirstPrinter);
-					registerEvent(Printer, PrRfidUpgradePassed);
-					registerEvent(Printer, PrRfidUpgradeFailed);
-					dispatchEvent(&request);
-					break;
-				}
-				case PrRfidUpgradePassed:
-				case PrRfidUpgradeFailed:
-				{
-					const bool passed = msg->getEventType() == PrRfidUpgradePassed;
-					SessionMessage response(Printer, passed ? PrRfidUpgradePassed : PrRfidUpgradeFailed);
-					response.setFormatType(BrowserFormat);
-					deregisterEvent(Printer, PrRfidUpgradePassed);
-					deregisterEvent(Printer, PrRfidUpgradeFailed);
-					send(&response, Messenger::DEST_UI);
-					break;
-				}
-				case PrRfidQryRequest:
-				{
-					Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryRequest"));
-
-					static bool qryInit = false;
-
-					if(qryInit == false)
-					{
-						Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryRequest register"));
-
-						qryInit = true;
-						PrinterGeneric request(PrRfidQryRequest, this, FirstPrinter);
-						registerEvent(Printer, PrRfidQryBusy);
-						registerEvent(Printer, PrRfidQryPassed);
-						registerEvent(Printer, PrRfidQryFailed);
-						dispatchEvent(&request);
-					}
-					else
-					{
-						Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryRequest deregister"));
-
-						qryInit = false;
-						PrinterGeneric request(PrRfidQryRequest, this, FirstPrinter);
-						deregisterEvent(Printer, PrRfidQryBusy);
-						deregisterEvent(Printer, PrRfidQryPassed);
-						deregisterEvent(Printer, PrRfidQryFailed);
-						dispatchEvent(&request);
-					}
-					
-					break;
-				}
-				case PrRfidQryBusy:
-				case PrRfidQryPassed:
-				case PrRfidQryFailed:
-				{
-					Debug::trace("SessionPrinter.rfid", std::string("handlePrinterMsg"));
-
-					const int passed = msg->getEventType();
-
-					if(passed == PrRfidQryBusy)
-					{
-						Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryBusy"));
-						SessionMessage response(Printer, PrRfidQryBusy);
-						response.setFormatType(BrowserFormat);
-						send(&response, Messenger::DEST_UI);
-					}
-					else if(passed == PrRfidQryPassed)
-					{
-						Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryPassed"));
-
-						SessionMessage response(Printer, PrRfidQryPassed);
-						response.setFormatType(BrowserFormat);
-						send(&response, Messenger::DEST_UI);
-					}
-					else
-					{
-						Debug::trace("SessionPrinter.rfid", std::string("PrRfidQryFailed"));
-
-						SessionMessage response(Printer, PrRfidQryFailed);
-						response.setFormatType(BrowserFormat);
-						send(&response, Messenger::DEST_UI);
-					}
-
-					break;
-				}
 				case PrCutterBitDflt:
 				{
 					Debug::trace("SessionPrinter.handlePrinterMessage", std::string("PrCutterBitDflt"));
@@ -2457,38 +2322,4 @@ bool Session::handlePrCalib( SessionMessage *msg )
 	}
 
 	return true;
-}
-
-void Session::sendPrinterSysReqStatusMsgs(Session *session)
-{
-	EvolMessage *printer1(new PrinterSystemRequestStatus(session, FirstPrinter));
-	send(printer1, Messenger::DEST_RTC);
-
-	EvolMessage *printer2(new PrinterSystemRequestStatus(session, SecondPrinter));
-	send(printer2, Messenger::DEST_RTC);
-}
-
-void Session::sendWrapperDataToHook(int printerType, std::string softwareVersion)
-{
-	if (softwareVersion.empty())
-	{
-		Debug::trace("SessionPrinter.sendWrapperDataToHook", "Recieved an empty printer software version string. Aborting hook action.");
-		return;
-	}
-
-	Debug::trace("SessionPrinter.sendWrapperDataToHook", "Processing hook actions for printer software version string (printer version data).");
-
-	std::string primarySecondary;
-	if (printerType == FirstPrinter)
-	{
-		primarySecondary = "primary";
-	} else if (printerType == SecondPrinter)
-	{
-		primarySecondary = "secondary";
-	}
-
-	std::string data(std::string("SendWrapperData-").append(primarySecondary).append(std::string("PrinterVersion-")).append(softwareVersion));
-	performHookAction(data.c_str());
-
-	Debug::trace("SessionPrinter.sendWrapperDataToHook", "Finished processing hook actions for printer software version string (printer version data).");
 }

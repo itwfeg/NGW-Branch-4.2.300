@@ -177,8 +177,8 @@ void NumericSystemStatus::setHardwareVersion(UINT8 major, UINT8 minor)
 void NumericSystemStatus::setHardwareVersion(const HobVersion &hardwareVersion)
 {
 	if (((hardwareVersion.getVersionType() == HobVersion::EppPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EppPrinterSW)) ||
-	     ((hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)		
-		 ((hardwareVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EssPrinterSW)))
+	     ((hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::Epp2PrinterSW)) ||	// EPP Printing Device (Atmel-based SAM-BA device) (haberrc)
+		((hardwareVersion.getVersionType() == HobVersion::EssPrinterSW) && (this->hardwareVersion.getVersionType() == HobVersion::EssPrinterSW)))
 	{
 		this->hardwareVersion.setMajorRevision(hardwareVersion.getMajorRevision());
 		this->hardwareVersion.setMinorRevision(hardwareVersion.getMinorRevision());

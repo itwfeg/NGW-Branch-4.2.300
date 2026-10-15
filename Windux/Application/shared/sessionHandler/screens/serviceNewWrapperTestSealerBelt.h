@@ -17,7 +17,6 @@
 class DomCurrentPLU;
 class DomEvolWrapperConfig;
 class DomEvolWrapperStatus;
-class MadpScaleConfig;
 
 namespace Ui {
 class serviceNewWrapperTestSealerBelt;
@@ -115,12 +114,6 @@ protected:
      */
     virtual QString temperatureScale() const;
 
-    /// Retrieve temperature scale.
-    /**
-     * @return  temperature given metricness of scale
-     */
-    virtual QString temperatureValue(int val) const;
-
 private:
     Ui::serviceNewWrapperTestSealerBelt *ui;
 
@@ -169,8 +162,5 @@ private:
 
     //true/false when the filmSensorTest is on/off
     bool sensorTestIsRunning;
-
-    //Access ScaleConfig properties
-    MadpScaleConfig *scaleConfigData;
 };
 #endif // SERVICENEWWRAPPERTESTSEALERBELT_H

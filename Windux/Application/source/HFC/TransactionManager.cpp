@@ -488,19 +488,10 @@ Util::CSmartPtr<Transaction> TransactionManager::createVoidingTransaction(Util::
 	voidingTransaction->setCOOLTrackingText(transaction->getCOOLTrackingText());
 	// old values are not assigned, need to look at the original transaction
 
-	// Mod for saving RFID label print, EPC coded data, to transaction's opRFID field
-	// If this is already set, such as when printing an RFID label, then use that one instead of any RFID tag for the Operator.
-	voidingTransaction->setOperatorRFID(transaction->getOperatorRFID());
-
 	if ( oper )
 	{
 		voidingTransaction->setOperatorId(oper->getOpNum());
-
-		// Mod for saving RFID label print to transaction's opRFID field
-		// If this is already set, such as when printing an RFID label, then use that one instead of any RFID for the Operator.
-		if (transaction->getOperatorRFID().empty())
-			voidingTransaction->setOperatorRFID(oper->getOpRFID());
-
+		voidingTransaction->setOperatorRFID(oper->getOpRFID());
 		voidingTransaction->setOperatorName(oper->getOpName());
 		// the void transaction does not change anything (no operator changes), simply voids the other transaction
 	}
@@ -920,16 +911,13 @@ Util::CSmartPtr<Transaction> TransactionManager::createTransaction(const edb::DB
 				}
 			}
 
-			// Mod for saving RFID label print to transaction's opRFID field
-			// Commenting out the checking if the operator ID in the transaction record isn't null.  We can always just
-			// return this data if it is set when some comm package, or anyone, wants to read transactions!!
-			//if ( !dbTransactionRec->isOperatorIDNull() )
-			//{
+			if ( !dbTransactionRec->isOperatorIDNull() )
+			{
 				transaction->setOperatorId(dbTransactionRec->getOperatorID());
 				transaction->setOperatorRFID(dbTransactionRec->getOperatorRFID());
 				transaction->setOperatorName(dbTransactionRec->getOperatorName());
 				transaction->setOperatorChangeType(dbTransactionRec->getOperatorChangeType());
-			//}
+			}
 
 			transaction->setErrorCode(RECORD_OK);
 
@@ -1288,19 +1276,16 @@ void TransactionManager::saveTransaction(Transaction* transaction)
 		}
 
 		//Debug::trace("TransactionManager", "transaction->getOperatorId(): " + transaction->getOperatorId() );
-
-		// Mod for saving RFID label print to transaction's opRFID field
-		// Using this field to store the label's RFID data.
-		if (transaction->getOperatorRFID().size())
-			dbTransaction->setOperatorRFID(transaction->getOperatorRFID());
-		else
-			dbTransaction->setOperatorRFIDNull();
-
-		if (transaction->getOperatorId().size())
+		if ( transaction->getOperatorId().size() )
 		{
 			//Debug::trace("TransactionManager", "dbTransaction->getOperatorId() before setting operator: " + dbTransaction->getOperatorID());
 			dbTransaction->setOperatorID(transaction->getOperatorId());
 			Debug::trace("TransactionManager", "dbTransaction->getOperatorId() after setting operator: " + dbTransaction->getOperatorID());
+
+			if ( transaction->getOperatorRFID().size() )
+				dbTransaction->setOperatorRFID(transaction->getOperatorRFID());
+			else
+				dbTransaction->setOperatorRFIDNull();
 
 			Debug::trace("TransactionManager", "transaction->getOperatorName() " + transaction->getOperatorName());
 			//Debug::trace("TransactionManager", "transaction->getOperatorName().size(): " + util_string::inttostring(transaction->getOperatorName().size()));
@@ -1333,6 +1318,7 @@ void TransactionManager::saveTransaction(Transaction* transaction)
 			Debug::trace("TransactionManager", "ELSE SET ALL of dbTransaction to NULL ");
 
 			dbTransaction->setOperatorIDNull();
+			dbTransaction->setOperatorRFIDNull();
 			dbTransaction->setOperatorNameNull();
 		}
 

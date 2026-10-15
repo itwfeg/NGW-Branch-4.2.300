@@ -9,14 +9,12 @@
 
 #include <vector>
 #include <list>
-#include <map>
 
 #include "evolution.h"
 #include "HfcObject.h"
 #include "ProductDevEvent.h"
 #include "ProductText.h"
 #include "HobDateTime.h"
-#include "HobList.h"
 #include "BarCodeNumber.h"
 #include "Tare.h"
 #include "WrapperIntakeMode.h"
@@ -24,6 +22,7 @@
 #include "Weigher.h"
 #include "OpModeEvent.h"
 #include "CCriticalSection.h"
+
 
 class Dept;
 class Class;
@@ -971,8 +970,6 @@ class Product : public HfcObject
 		 */
 		Nutrifacts *nutrifacts;
 
-		// a ProductTag like l2 maps to the enum represented by its fieldOffset
-		std::map<std::string, int> productTagsToDrop;
 
 		std::vector<ProductText *> productTexts_;
 

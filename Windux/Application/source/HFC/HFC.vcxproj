@@ -356,7 +356,6 @@
     <ClCompile Include="HobTokenizer.cpp" />
     <ClCompile Include="HobTokenizerBar.cpp" />
     <ClCompile Include="HobTokenizerCSV.cpp" />
-    <ClCompile Include="HobTokenizerTSV.cpp" />
     <ClCompile Include="HobTokenizerUS.cpp" />
     <ClCompile Include="HobTokenTagged.cpp" />
     <ClCompile Include="HourlyTotal.cpp" />
@@ -914,7 +913,6 @@
     <ClInclude Include="HobTokenizerBar.h" />
     <ClInclude Include="HobTokenizerCSV.h" />
     <ClInclude Include="HobTokenizerUS.h" />
-    <ClInclude Include="HobTokenizerTSV.h" />
     <ClInclude Include="HobTokenTagged.h" />
     <ClInclude Include="HourlyTotal.h" />
     <ClInclude Include="HourlyTotalManager.h" />

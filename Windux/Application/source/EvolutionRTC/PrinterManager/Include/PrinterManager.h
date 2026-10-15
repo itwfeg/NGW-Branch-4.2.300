@@ -139,11 +139,6 @@ class PrinterManager : public Hobart::CEvolMsgReceiver, public Hobart::CHobartTi
 		PrinterStateType trackSensors;
 
 		ULONG printheadPowerTime;
-		
-		ULONG rfidCalTime;
-		ULONG rfidUpgTime;
-		ULONG rfidQryTime;
-		bool rfidModuleInit;
 
 		ULONG continuousLabelTime;
 
@@ -299,7 +294,6 @@ class PrinterManager : public Hobart::CEvolMsgReceiver, public Hobart::CHobartTi
 		LabelStockDescriptor printer2Descriptor;
 		LabelStockDescriptor printer3Descriptor;
 		LabelStockDescriptor printer4Descriptor;  // added for ExtraPrinter_UsedForSelfServeScreenBarcodeLabel,  PJR-383
-		LabelStockDescriptor printer5Descriptor;  // added for ExtraPrinter_UsedForRFIDVoidLabel
 
 		BitMap *bitMap[NewMaxPrinterTypes];  // using NewMaxPrinterTypes for ExtraPrinter_UsedForSelfServeScreenBarcodeLabel,  PJR-383
 		BitMap *rotatedBitMap[MaxPrinterTypes];
@@ -333,8 +327,6 @@ class PrinterManager : public Hobart::CEvolMsgReceiver, public Hobart::CHobartTi
 		ULONG previousPrinterCounts_;
 		ULONG printerCounts_;
 		ULONG codeCheckerFrequency_ = 100;
-		ULONG previousRFIDLabelCount_;
-		ULONG RFIDLabelCount_;
 
 		unsigned char *labelBuffer_[NUM_LABEL_BUFFERS];
 		size_t labelBufferIndex_;
@@ -347,14 +339,6 @@ class PrinterManager : public Hobart::CEvolMsgReceiver, public Hobart::CHobartTi
 		bool agentAttached_;
 #endif
 		bool mfgKey_;	//SOF-5482
-
-
-		bool needToReimageRFIDVoidLabelType;
-		bool renderingRFIDVoidLabelType;
-		PrinterState printerStatePriorToRenderingRFIDVoidLabelType;
-		void reimageRFIDVoidLabelType();
-		bool checkIfRfidTagWritten(PrinterType labelNumToPrint);
-
 
 		PrinterManager();
 
@@ -472,10 +456,7 @@ class PrinterManager : public Hobart::CEvolMsgReceiver, public Hobart::CHobartTi
 			labelStatisticsTimer,
 			testLabelTimerTimeout,
 			statisticsTimer,
-			PrinterTests,
-			rfidCalTimer,
-			rfidUpgTimer,
-			rfidQryTimer		
+			PrinterTests		
 		};
 
 		bool labelsToBePrinted[MaxPrinterTypes];

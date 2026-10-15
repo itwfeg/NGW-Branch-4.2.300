@@ -121,7 +121,6 @@ public:
     DomEvolWrapperSystemInformation evolWrapperSystemInformation;
     DomNormalScaleOperation normalScaleOperation;
     DomPluSupport pluSupport;
-    DomPrinterConfigRead printerConfigRead;
     DomPrinterStockMetrics printerStockMetrics;
     DomPrWriteAllExternalPrinter allExternalPrinters;
     DomStoreInformation storeInfo;
@@ -145,7 +144,6 @@ public:
     MadpForcedFieldFlags forcedFieldFlags;
     MadpFrequentShopper frequentShopper;
     MadpInternalConfig internalConfig;                       // has to be declared after the struct
-    MadpWrapperTimingsTestResults wrTimingsTestResults;
     MadpNetworkConnectivity networkConnectivity;
     MadpOperatorCanModify operatorCanModify;
     MadpOperatorDisplayFields operatorDisplayFields;
@@ -198,11 +196,21 @@ public:
 
     int wrapperPrinterCount;
 
-    // why do we have these?                    // use these for both the changeProduct and ProductDefaults
-    int primaryLabelPlacement;                  // save local data (plu or defaultPLU) data to them just b4
-    int secondaryLabelPlacement;                // going to LabelView - and then when returning from label
-    int primaryLabelRotation;                   // view - save back to LOCAL.  Now if on LabelView screen
-    int secondaryLabelRotation;                 // and we encounter None value - go get Defaults from Config
+    int primaryLabelPlacement;
+    int secondaryLabelPlacement;
+    int primaryLabelRotation;
+    int secondaryLabelRotation;
+
+    int primaryLabelPlacementDefault;
+    int secondaryLabelPlacementDefault;
+    int primaryLabelRotationDefault;
+    int secondaryLabelRotationDefault;
+
+    int primaryPlacementSystem;
+    int secondaryPlacementSystem;
+
+    int primaryDefaultLabelType;
+    int secondaryDefaultLabelType;
 
     QString loggedOperatorId;                   // The id for the current operator id
     QString loggedOperatorName;                 // The name of the logged in operator

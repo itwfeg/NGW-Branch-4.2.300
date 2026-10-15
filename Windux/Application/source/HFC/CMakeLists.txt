@@ -233,7 +233,6 @@ target_sources(HFC PRIVATE
   HobTokenizer.cpp
   HobTokenizerBar.cpp
   HobTokenizerCSV.cpp
-  HobTokenizerTSV.cpp
   HobTokenizerUS.cpp
   HobTokenTagged.cpp
   HourlyTotal.cpp

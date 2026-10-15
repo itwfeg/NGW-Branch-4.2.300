@@ -51,7 +51,6 @@ class EvolWrapperTimingsManager;
 
 #include "../HFC/devices/HfcEvolWrapperControl.h"
 #include "../HFC/devices/HfcEvolWrapperStatus.h"
-#include "../EvolutionRTC/WrapperManager/Include/EvolWrapperSystemStatus.h"
 #include "../core/MtdNGWWrapperData.h"
 
 #include <thread>
@@ -305,8 +304,6 @@ class Session : public DBSession, public Hobart::CHobartTimer
         void sendWrapperDataToHook(HfcEvolWrapperControl* wrapperConfig);
         void sendWrapperDataToHook(HfcEvolWrapperStatus* wrapperStatus);
         void sendWrapperDataToHook(MtdNGWWrapperData* wrapperFlashData);
-        void sendWrapperDataToHook(EvolWrapperSystemStatus* nodeStatus);
-        void sendWrapperDataToHook(int printerType, std::string softwareVersions);
 
 		Util::CSmartPtr<AllCat3AuditTrailRecords> getCurrentAllCat3AuditTrailRecords() const { return currentAllCat3AuditTrailRecords; }
 		void handleReadCat3AuditTrail();
@@ -593,8 +590,6 @@ class Session : public DBSession, public Hobart::CHobartTimer
         void initAutoConfigSize();
 //	No longer used.        void sendPackCodeToUI(WrPackCode thisPackCode);
         void sendWrapperWrReqStatusMsg();
-        void sendWrapperPrintersLabelCounts();
-        void sendPrinterSysReqStatusMsgs(Session *session);
 
         void handleRFIDMessage(SessionMessage *msg);
         bool skipRFIDLoginAndNotifyUIofRFIDInput;
@@ -685,7 +680,6 @@ class Session : public DBSession, public Hobart::CHobartTimer
 
         // For some HTe Enterprise app hook-related code
         bool hasProcessedWrStatusMsg;
-        bool hasProcessedPrSystemMsg;
 
         static int splitString( const std::string& s, std::vector<std::string>& result, char delim );
         static int splitString( const std::string& s, HobList& result, char delim );

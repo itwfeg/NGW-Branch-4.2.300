@@ -30,7 +30,6 @@ target_sources(PrinterManager PRIVATE
   Include/CommandWaitUntilOperation.h
   Include/EssPrinterTeachTable.h
   Include/EvolPrinterTeachTable.h
-  Include/StEppPrinterTeachTable.h
   Include/FreePrinterManager.h
   Include/PrinterAdvanceLabelStock.h
   Include/PrinterCommand.h
@@ -207,7 +206,6 @@ target_sources(PrinterManager PRIVATE
   Source/CommandOperationList.cpp
   Source/EssPrinterTeachTable.cpp
   Source/EvolPrinterTeachTable.cpp
-  Source/StEppPrinterTeachTable.cpp
   Source/PrinterManager.cpp
   Source/PrinterManagerUnit.cpp
   Source/PrinterTeachTable.cpp

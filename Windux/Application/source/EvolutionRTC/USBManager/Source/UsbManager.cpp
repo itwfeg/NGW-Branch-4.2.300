@@ -133,7 +133,7 @@ const USHORT UsbManager::CodeUpdaterPids[] =
     HOBART_ESC_PRINTER_ID_CU,
     HOBART_APC_PRINTER_ID_CU,
     HOBART_XPE_WEIGHER_ID_CU,
-	HOBART_XPE_PRINTER_ID_CU
+	HOBART_XPE_PRINTER_ID_CU	//Alex Zavala 7/31
 };
 
 // List PIDs for supported/managed devices. If the device's PID is not 
@@ -159,8 +159,7 @@ const USHORT UsbManager::ManagedDevicePids[] =
     HOBART_XPE_WEIGHER_ID_CU,
     HOBART_FASTRACK_FPC,
     OLD_HOBART_EVO_PRINTER_ID,
-    HOBART_CLA_ID,
-    HOBART_XPE_ST_PRINTER_ID
+    HOBART_CLA_ID
 };
 
 // List of PIDs for devices based on a Cypress EZ-USB device. 
@@ -510,7 +509,7 @@ bool UsbManager::AttachDevice( USBD_NODE_ID nodeId )
     if (Debug::isTracing("UsbManager.Attach"))
     {
         Debug::trace("UsbManager.Attach",
-                HobString("START AttachDevice: node: ") + HobString(Hex::toString((long long)nodeId)) +
+                HobString("AttachDevice: node: ") + HobString(Hex::toString((long long)nodeId)) +
                 HobString(" idVendor: ") + HobString(Hex::toString( (USHORT)vid)) +
                 HobString(" idProduct: ") + HobString(Hex::toString( (USHORT)pid)) +
                 HobString(" bcdDevice: ") + HobString(Hex::toString( (USHORT)bcdDevice)) );
@@ -544,16 +543,6 @@ bool UsbManager::AttachDevice( USBD_NODE_ID nodeId )
 		MessageLogger::logMessage(MessageLogger::InfoLog, "AttachDevice:  Hobart USB EPP2 Printer Attached. node = "  + Hex::toString((long long)nodeId));
         RealTimeController::getInstance()->USBPrinterAttached(nodeId, bcdDevice, Epp2Printer);
         HobVersion printerHardwareVersion(HobVersion::Epp2PrinterHW, majorVersion, minorVersion);
-        UsbAddComponent addComponent(nodeId, printerHardwareVersion);
-        dispatchEvent(&addComponent);
-        bResult = true;
-    }
-    else if (pid == HOBART_XPE_ST_PRINTER_ID)
-    {
-        Debug::trace("UsbManager.Attach", "USBMgr::AttachDevice() - Hobart USB EPP Shoot Thru Printer");
-        MessageLogger::logMessage(MessageLogger::InfoLog, "AttachDevice:  Hobart USB EPP Shoot Thru Printer. node = " + Hex::toString((long long)nodeId));
-        RealTimeController::getInstance()->USBPrinterAttached(nodeId, bcdDevice, Epp3Printer);
-        HobVersion printerHardwareVersion(HobVersion::Epp3PrinterHW, majorVersion, minorVersion);
         UsbAddComponent addComponent(nodeId, printerHardwareVersion);
         dispatchEvent(&addComponent);
         bResult = true;

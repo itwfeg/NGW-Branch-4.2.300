@@ -3402,7 +3402,7 @@ LabelLengthLines PrinterStockMetrics::getActualLabelLengthLines(UINT16 numLinesM
 	if (numLinesMeasured == 0)
 		return rv;
 
-	if( prKind == EppPrinter || prKind == Epp2Printer || prKind == Epp3Printer )
+	if( prKind == EppPrinter || prKind == Epp2Printer)
 	{
 		//------------------------
 		// HT-171: Changes for EPP

@@ -170,6 +170,7 @@ IUsbCodeUpdater* IUsbCodeUpdater::UpdaterFactory(USBD_NODE_ID nodeId)
 					ver.setVersionType( HobVersion::Epp2PrinterHW );
 					pUpdater = new XPEPrinterCodeUpdater(nodeId,pid);*/
                     break;
+
                 case HOBART_ESS_PRINTER_ID_CU:
                     Debug::trace("IUsbCodeUpdater", "UpdaterFactory: HOBART_ESS_PRINTER_ID_CU");
                     // TODO: add updater class for ESS_PRINTER_ID_CU

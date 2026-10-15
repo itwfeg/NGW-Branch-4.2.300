@@ -789,7 +789,7 @@ void ProductManager::handleMessage(SessionMessage *msg)
 						{
 							if (mySession && mySession->isCommSession())
 							{
-								Debug::trace("ProductManager.Product", "handleMessage() case ProductRestore: is Comm Session so don't accept the Current (MRU) COOL.");
+								Debug::trace("Product", "ProductRestore: is Comm Session so don't accept the Current (MRU) COOL.");
 								msgProduct->setReceived(Product::fieldOffsetProdCoolTextNum, false);
 							}					
 						}
@@ -4400,7 +4400,7 @@ void ProductManager::handleProductRestore(SessionMessage *msg)
 
 		if (usedProduct)
 		{
-			usedProduct->updateRecord(restoreProduct, mySession);
+			usedProduct->updateRecord(restoreProduct);
 
 			if (usedProduct->getCategory() && usedProduct->getCategory()->getCategoryNum() != RECORD_NOT_FOUND)
 				usedProduct->getCategory()->saveRecord();
@@ -4604,8 +4604,6 @@ void ProductManager::handleProductWriteSingleFieldMessage(SessionMessage *msg)
 	if (!productUpdate || ( productUpdate->getRecordNum() != currentProduct->getProductNum() && s->getCurrentMode() != OpModeBuildAMeal ) )
 		return;
 
-	
-
 	HobString origValueString = productUpdate->getFieldOrigValue();
 	HobString newValueString = productUpdate->getFieldNewValue();
 	short field = productUpdate->getFieldCode();
@@ -4616,8 +4614,6 @@ void ProductManager::handleProductWriteSingleFieldMessage(SessionMessage *msg)
 	 * has changed when the PRINT key was pressed and the Session sent the browser the message to send
 	 * over any field that was updated before the label is printed.  If this is the case, go ahead and print.
 	 */
-
-	
 
 	bool isInOperateMode    = ( s->isInOperateMode() ) ? true : false;
 	bool isInSupervisorMode = ( s->isInSupervisor() ) ?  true : false;
@@ -5562,17 +5558,9 @@ void ProductManager::handleProductWriteSingleFieldMessage(SessionMessage *msg)
 			{
 				// With Fastrack, the UI is the one that is keeping what page it is on,
 				// so we are using the WriteSingleField message to tell the app to print.
-
-				bool isRFIDWriteFailMessageRemoved = s->getResponseMessageManager()->removeMessage(ErrProductDev, ProductErrRFIDWriteFail, HfcResponse::RESPONSESTYLE_OK);
-
-				if ( field > 0 || (field == 0 &&   (productUpdate->isShouldAlsoPrint() || isRFIDWriteFailMessageRemoved  )            ) )
+				if ( field > 0 || (field == 0 && productUpdate->isShouldAlsoPrint()) )
 				{
 					Debug::trace("ProductManager", "printKeyWasPressed and UI responded that printing is OK, so call handleProductPrintKey2");
-
-					if(isRFIDWriteFailMessageRemoved)
-					{
-						s->getResponseMessageManager()->addMessage(ErrProductDev, ProductErrRFIDWriteFail, HfcResponse::RESPONSESTYLE_OK);
-					}
 
 					handleProductPrintKey2();
 				}
@@ -5599,7 +5587,7 @@ void ProductManager::handleProductWriteSingleFieldMessage(SessionMessage *msg)
 								}
 							}
 						}
-						
+
 				}
 			}
 			else if ( productUpdate->isShouldAlsoPrint() )
@@ -7487,8 +7475,6 @@ int ProductManager::handleRemotePrintStartPrinting()
 
 	bool ignoreWeigherStatus = (currentProduct && !(currentProduct->isRandomWeight() || currentProduct->isByCountWithWeight())) ? true : false;
 
-	mgrContainer_->getTransactionManager()->commitTransaction(transaction);
-
 	HfcProductUpdateMsg hpum(mySession, transaction, ignoreWeigherStatus);
 	mySession->send(&hpum, Messenger::DEST_RTC);
 
@@ -8309,12 +8295,12 @@ void ProductManager::handlePackageComplete(HfcProductPackageCompleteMsg * packag
 	if ( s->isInOperateMode() && s->isPrimarySession() )
 	{
 		trans->updateTransactionTotalValues();
-		if (Configuration::getInstance()->toBoolCfg(fieldOffsetCfgCollectingTransactions) &&
-			(s->getCurrentMode() == OpModeProductionEntry || prod->isPrintingInProductionEntryMode()))
+		if ( Configuration::getInstance()->toBoolCfg(fieldOffsetCfgCollectingTransactions) &&
+				(s->getCurrentMode() == OpModeProductionEntry || prod->isPrintingInProductionEntryMode()) )
 		{
 			hfc::TransactionManager* transManager = mgrContainer_->getTransactionManager();
 
-			if (transManager)
+			if ( transManager )
 				transManager->handleSaveTransaction(transManager->createProductionEntryTransaction(trans).get());
 		}
 	}
@@ -8972,21 +8958,7 @@ void ProductManager::handleRemoteProductComplete(HfcProductCompleteMsg *productC
 	if (s && s->isInOperateMode() && mySession->isPrimarySession())
 	{
 		if (productCompleteMsg->isPrintOk() || (trans->getNumOfLabelsToPrint() > 0 && trans->getNumOfLabelsPrinted() > 0))
-		{
-			if (isPrintingRemoteLabel())
-				trans->setNumberPackages(1);
 			trans->updateTransactionTotalValues();   // Update Transaction.
-		}
-
-		if (Configuration::getInstance()->toBoolCfg(fieldOffsetCfgCollectingTransactions))
-		{
-			hfc::TransactionManager* transManager = mgrContainer_->getTransactionManager();
-			if (transManager)
-			{
-				Debug::trace("ProductManager.handleRemoteProductComplete", " Saving remote Product Transaction: " + ptrtostring(trans));
-				mgrContainer_->getTransactionManager()->handleSaveTransaction(trans);
-			}
-		}
 
 		if (productCompleteMsg->getEventType() != ProductIncomplete)
 			prod->completeTransaction(trans);

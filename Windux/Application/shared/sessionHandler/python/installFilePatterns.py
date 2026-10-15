@@ -162,8 +162,6 @@ NGS_UPGRADE_FILENAME_REGEX = "htseries-any-ngs-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
 NGW_UPGRADE_FILENAME_REGEX = "htseries-any-ngw-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
 NGW2P_UPGRADE_FILENAME_REGEX = "htseries-any-ngw2p-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
 
-EPP3_UPGRADE_FILENAME_REGEX = "htseries-epp3prn-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
-
 AWS3_UPGRADE_OLD_FILENAME_REGEX = "hte-aws3-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
 AWS3_UPGRADE_FILENAME_REGEX = "htseries-any-aws3-[0-9]+\.[0-9]+\.[0-9]+-.*\.tgz"
 

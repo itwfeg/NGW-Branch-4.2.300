@@ -159,6 +159,7 @@ CANPrinterManager::CANPrinterManager( Hobart::CEvolMsgReceiver *pTranslator_, Pr
 		pMyTeachTable = EvolPrinterTeachTable::getInstance();
 		printLabelCentered = true;
 		labelWidthStatus = false;
+
 	} else {
 		Debug::trace("CANPrinterManager.Error", " Error unsupported Printer type: " + Integer::toString( prKind ));
 		pMyTeachTable = NULL;

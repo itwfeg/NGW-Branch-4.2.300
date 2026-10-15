@@ -88,14 +88,14 @@ const char *PrinterTeach::serialize() const
 
 void PrinterTeach::show()
 {
-	Debug::trace("PrinterTeach", "PrinterTeach::show() printerCommandType: " + Integer::toString(printerCommandType)); 
-	Debug::trace("PrinterTeach", "PrinterTeach::show() numEntries: " + Integer::toString(getNumEntries())); 
+	Debug::trace("PrinterTeach", "printerCommandType: " + Integer::toString(printerCommandType)); 
+	Debug::trace("PrinterTeach", "numEntries: " + Integer::toString(getNumEntries())); 
 	ops->show();
 }
 
 UINT16 PrinterTeach::getNumEntries()
 {
-	return (UINT16)ops->size();	
+	return (UINT16) ops->size();
 }
 
 PrinterCommandType PrinterTeach::getPrinterCommandType()

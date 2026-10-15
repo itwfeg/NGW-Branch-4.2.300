@@ -597,9 +597,6 @@ class CfgInternal : public HfcObject
 		static const std::string BARCODEFORMATTOUSEOFFLINE;
 		static const std::string BARCODEREQUESTTIMEOUT;
 
-		static const std::string RFIDVOIDLABELTYPENUMBER;
-
-
 	private:
 
 		mutable Util::CSmartCriticalSection  cfgICS_;

@@ -337,13 +337,7 @@
 		ProductErrExtraDayTimeIsZero,
 		ProductErrExtraDayAlreadyEnabled,
 		ProductErrSaveWithDoneButtonOnly,
-		ProductDevWaitForLabelToPrintOn2P,					// 101179	
-
-		ProductErrRFIDWriteFail = 101200,
-		ProductNoSupportRecord,
-		ProductErrRFIDBoardFail,
-		ProductCOOLTextNone,
-
+		ProductDevWaitForLabelToPrintOn2P,					// 101179						
         ProductErrPrintLastError
 	}   ProductDevError_t;
 
